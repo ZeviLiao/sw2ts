@@ -1,0 +1,12 @@
+{
+  "dependencies": {
+    "@tanstack/react-query": "^4.29.7",
+    "axios": "^1.4.0",
+    "react": "^18.2.0",
+    "react-query-swagger": "^15.8.2",
+    "swagger-js-codegen": "^1.13.0"
+  },
+  "devDependencies": {
+    "openapi-typescript-codegen": "^0.24.0"
+  }
+}

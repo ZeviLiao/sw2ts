@@ -1,0 +1,9 @@
+npx swagger-typescript-api -p ./spec-api.json -o ./src -n myApi.ts
+
+
+
+npx openapi --input ./swagger.json --output ./generated
+
+
+
+npx react-query-swagger /tanstack /input:swagger.json /output:src/api/axios-client.ts /template:Axios
