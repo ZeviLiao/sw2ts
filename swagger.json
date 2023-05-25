@@ -4582,8 +4582,8 @@
                     "description": "Title"
                   },
                   "ReferredToBy": {
-                    "maximum": 32767,
-                    "minimum": 1,
+                    "maximum": 1,
+                    "minimum": 0,
                     "type": "integer",
                     "description": "ReferredToBy",
                     "format": "int32"
@@ -4751,7 +4751,7 @@
                     "description": "Title"
                   },
                   "ReferredToBy": {
-                    "maximum": 32767,
+                    "maximum": 1,
                     "minimum": 0,
                     "type": "integer",
                     "description": "ReferredToBy",
@@ -7792,7 +7792,7 @@
         "tags": [
           "Options"
         ],
-        "summary": "Get language options",
+        "summary": "Get games options",
         "responses": {
           "default": {
             "description": "Error",
@@ -11497,7 +11497,7 @@
         "summary": "Get users",
         "parameters": [
           {
-            "name": "Filters.UserName",
+            "name": "UserName",
             "in": "query",
             "style": "form",
             "schema": {
@@ -11507,7 +11507,7 @@
             }
           },
           {
-            "name": "Filters.UserTypeId",
+            "name": "UserTypeId",
             "in": "query",
             "style": "form",
             "schema": {
@@ -11518,21 +11518,7 @@
             }
           },
           {
-            "name": "Filters.FrontEndIds",
-            "in": "query",
-            "style": "form",
-            "schema": {
-              "maximum": 32767,
-              "minimum": 1,
-              "type": "array",
-              "items": {
-                "type": "integer",
-                "format": "int32"
-              }
-            }
-          },
-          {
-            "name": "Filters.Groups",
+            "name": "FrontEndIds",
             "in": "query",
             "style": "form",
             "schema": {
@@ -11544,7 +11530,19 @@
             }
           },
           {
-            "name": "Filters.Roles",
+            "name": "Groups",
+            "in": "query",
+            "style": "form",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "integer",
+                "format": "int32"
+              }
+            }
+          },
+          {
+            "name": "Roles",
             "in": "query",
             "style": "form",
             "schema": {
@@ -11603,12 +11601,12 @@
                 "required": [
                   "Email",
                   "Password",
-                  "UserName",
+                  "Username",
                   "UserTypeId"
                 ],
                 "type": "object",
                 "properties": {
-                  "UserName": {
+                  "Username": {
                     "maxLength": 20,
                     "minLength": 1,
                     "type": "string"
@@ -11683,7 +11681,7 @@
                 }
               },
               "encoding": {
-                "UserName": {
+                "Username": {
                   "style": "form"
                 },
                 "Email": {
@@ -11808,7 +11806,7 @@
                     "type": "integer",
                     "format": "int32"
                   },
-                  "UserName": {
+                  "Username": {
                     "maxLength": 20,
                     "minLength": 1,
                     "type": "string"
@@ -11889,7 +11887,7 @@
                 "UserId": {
                   "style": "form"
                 },
-                "UserName": {
+                "Username": {
                   "style": "form"
                 },
                 "Email": {
@@ -20999,6 +20997,11 @@
           "userName": {
             "type": "string",
             "description": "User name",
+            "nullable": true
+          },
+          "userTypeName": {
+            "type": "string",
+            "description": "User Type Name",
             "nullable": true
           }
         },

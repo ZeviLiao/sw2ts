@@ -3548,6 +3548,8 @@ export interface GroupUserListItem {
   userId?: number;
   /** User name */
   userName?: string | null;
+  /** User Type Name */
+  userTypeName?: string | null;
 }
 
 export interface Int16Item {
@@ -7688,8 +7690,8 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
         /**
          * ReferredToBy
          * @format int32
-         * @min 1
-         * @max 32767
+         * @min 0
+         * @max 1
          */
         ReferredToBy: number;
         /**
@@ -7785,7 +7787,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
          * ReferredToBy
          * @format int32
          * @min 0
-         * @max 32767
+         * @max 1
          */
         ReferredToBy: number;
         /**
@@ -9544,7 +9546,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      *
      * @tags Options
      * @name V4OptionsGamesList
-     * @summary Get language options
+     * @summary Get games options
      * @request GET:/api/v4/options/games
      * @secure
      */
@@ -11625,20 +11627,16 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
          * @minLength 1
          * @maxLength 20
          */
-        "Filters.UserName"?: string;
+        UserName?: string;
         /**
          * @format int32
          * @min 1
          * @max 32767
          */
-        "Filters.UserTypeId"?: number;
-        /**
-         * @min 1
-         * @max 32767
-         */
-        "Filters.FrontEndIds"?: number[];
-        "Filters.Groups"?: number[];
-        "Filters.Roles"?: number[];
+        UserTypeId?: number;
+        FrontEndIds?: number[];
+        Groups?: number[];
+        Roles?: number[];
         /**
          * @format int32
          * @min 1
@@ -11677,7 +11675,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
          * @minLength 1
          * @maxLength 20
          */
-        UserName: string;
+        Username: string;
         /**
          * @minLength 1
          * @maxLength 60
@@ -11778,7 +11776,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
          * @minLength 1
          * @maxLength 20
          */
-        UserName?: string;
+        Username?: string;
         /**
          * @format email
          * @minLength 1
