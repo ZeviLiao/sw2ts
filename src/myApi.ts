@@ -33,6 +33,34 @@ export interface AddBroadcastTalentRespApiRespBase {
   data?: AddBroadcastTalentResp;
 }
 
+export type AddChildMediaItemResp = object;
+
+export interface AddChildMediaItemRespApiRespBase {
+  ret?: EnumRet;
+  msg?: string | null;
+  traceId?: string | null;
+  data?: AddChildMediaItemResp;
+}
+
+export interface AddChildPlayerRegistrationsReq {
+  /** Registrations */
+  registrations: ChildPlayerRegistration[];
+}
+
+export type AddChildResp = object;
+
+export interface AddChildRespApiRespBase {
+  ret?: EnumRet;
+  msg?: string | null;
+  traceId?: string | null;
+  data?: AddChildResp;
+}
+
+export interface AddChildTeamRegistrationsReq {
+  /** Registrations */
+  registrations: ChildTeamRegistration[];
+}
+
 export type AddFileResp = object;
 
 export interface AddFileRespApiRespBase {
@@ -117,6 +145,13 @@ export interface AddGameRegionResp {
    * @format int32
    */
   regionId: number;
+}
+
+export interface AddGameRegionRespApiRespBase {
+  ret?: EnumRet;
+  msg?: string | null;
+  traceId?: string | null;
+  data?: AddGameRegionResp;
 }
 
 export interface AddGameResp {
@@ -474,6 +509,31 @@ export interface AddPageRespApiRespBase {
   data?: AddPageResp;
 }
 
+export interface AddParentBroadcastTalentsReq {
+  /**
+   * Broadcast talent id
+   * @format int32
+   * @min 1
+   * @max 2147483647
+   */
+  broadcastTalentId?: number;
+}
+
+export interface AddParentResp {
+  /**
+   * Parent tournament id
+   * @format int32
+   */
+  parentId?: number;
+}
+
+export interface AddParentRespApiRespBase {
+  ret?: EnumRet;
+  msg?: string | null;
+  traceId?: string | null;
+  data?: AddParentResp;
+}
+
 export type AddPlayerMediaItemResp = object;
 
 export interface AddPlayerMediaItemRespApiRespBase {
@@ -680,6 +740,12 @@ export interface ApiLogListItem {
   recordedAt?: number;
 }
 
+export interface ApiRespBase {
+  ret?: EnumRet;
+  msg?: string | null;
+  traceId?: string | null;
+}
+
 export interface ArticleDetail {
   /**
    * Article Id
@@ -869,6 +935,7 @@ export interface BroadcastTalentGame {
   id?: number | null;
   name?: string | null;
   urlSafeName?: string | null;
+  iconUrl?: string | null;
 }
 
 export interface BroadcastTalentLanguage {
@@ -894,6 +961,111 @@ export interface ByteItem {
   /** @format int32 */
   id?: number;
   name?: string | null;
+}
+
+export interface ChildEarningListItem {
+  /**
+   * Child tournament id
+   * @format int32
+   */
+  childId?: number;
+  /** Child tournament name */
+  childName?: string | null;
+  prizePoolStatus?: EnumPrizePoolStatus;
+  prizePoolCurrency?: EnumCurrency;
+  /** Prize pool currency name */
+  prizePoolCurrencyName?: string | null;
+  /**
+   * Prize pool
+   * @format double
+   */
+  prizePool?: number | null;
+  /**
+   * Prize pool usd
+   * @format double
+   */
+  prizePoolUsd?: number | null;
+}
+
+export interface ChildPlayerRegistration {
+  /**
+   * Player id
+   * @format int32
+   * @min 1
+   * @max 2147483647
+   */
+  playerId: number;
+  /** Is reserved */
+  isReserved: boolean;
+}
+
+export interface ChildRegistrationTeamListItem {
+  /**
+   * Register id
+   * @format int32
+   */
+  registerId?: number;
+  /** Team name */
+  teamName?: string | null;
+  /** Team tag */
+  teamTag?: string | null;
+  /** Player names */
+  playerNames?: string[] | null;
+  /** Has opp */
+  hasOpp?: boolean;
+  /** Is reserved */
+  isReserved?: boolean;
+  /**
+   * Registered at
+   * @format int64
+   */
+  registeredAt?: number;
+  /** Can register */
+  canUnregister?: boolean;
+}
+
+export interface ChildRegistrationTeamListItemGetChildRegistrationsResp {
+  /**
+   * Parent id
+   * @format int32
+   */
+  parentId?: number;
+  /**
+   * Child id
+   * @format int32
+   */
+  childId?: number;
+  /** Parent name */
+  parentName?: string | null;
+  /** Stage name */
+  stageName?: string | null;
+  /** Child name */
+  childName?: string | null;
+  /** @format int32 */
+  gameId?: number;
+  /** Registrations */
+  registrations?: ChildRegistrationTeamListItem[] | null;
+}
+
+export interface ChildRegistrationTeamListItemGetChildRegistrationsRespApiRespBase {
+  ret?: EnumRet;
+  msg?: string | null;
+  traceId?: string | null;
+  data?: ChildRegistrationTeamListItemGetChildRegistrationsResp;
+}
+
+export interface ChildTeamRegistration {
+  /**
+   * Team id
+   * @format int32
+   * @min 1
+   * @max 2147483647
+   */
+  teamId: number;
+  /** Is reserved */
+  isReserved: boolean;
+  /** Player ids */
+  playerIds?: number[] | null;
 }
 
 export interface CountryOption {
@@ -954,6 +1126,29 @@ export interface DelBroadcastTalentRespApiRespBase {
   msg?: string | null;
   traceId?: string | null;
   data?: DelBroadcastTalentResp;
+}
+
+export type DelChildMediaItemResp = object;
+
+export interface DelChildMediaItemRespApiRespBase {
+  ret?: EnumRet;
+  msg?: string | null;
+  traceId?: string | null;
+  data?: DelChildMediaItemResp;
+}
+
+export interface DelChildReq {
+  /** Is force to delete */
+  isForce?: boolean | null;
+}
+
+export type DelChildResp = object;
+
+export interface DelChildRespApiRespBase {
+  ret?: EnumRet;
+  msg?: string | null;
+  traceId?: string | null;
+  data?: DelChildResp;
 }
 
 export type DelFileResp = object;
@@ -1041,6 +1236,13 @@ export interface DelGameRegionResp {
    * @format int32
    */
   regionId: number;
+}
+
+export interface DelGameRegionRespApiRespBase {
+  ret?: EnumRet;
+  msg?: string | null;
+  traceId?: string | null;
+  data?: DelGameRegionResp;
 }
 
 export interface DelGameResp {
@@ -1284,6 +1486,67 @@ export interface DelVenueRespApiRespBase {
   data?: DelVenueResp;
 }
 
+export interface DeleteParentReq {
+  /** Is force to delete */
+  isForce?: boolean | null;
+}
+
+export interface DeleteParentResp {
+  /**
+   * Parent tournament id
+   * @format int32
+   */
+  parentId?: number;
+}
+
+export interface DeleteParentRespApiRespBase {
+  ret?: EnumRet;
+  msg?: string | null;
+  traceId?: string | null;
+  data?: DeleteParentResp;
+}
+
+export interface EarningListItem {
+  /**
+   * Parent tournament id
+   * @format int32
+   */
+  parentId?: number;
+  /** Parent tournament name */
+  name?: string | null;
+  /** Parent tournament url */
+  url?: string | null;
+  /** Frontend name */
+  frontendName?: string | null;
+  /** Frontend short name */
+  feName?: string | null;
+  /** Game name */
+  gameName?: string | null;
+  /** Game icon url */
+  gameIconUrl?: string | null;
+  prizePoolCurrency?: EnumCurrency;
+  /** Prize pool currency name */
+  prizePoolCurrencyName?: string | null;
+  /**
+   * Prize pool
+   * @format double
+   */
+  prizePool?: number | null;
+  /**
+   * Prize pool usd
+   * @format double
+   */
+  prizePoolUsd?: number | null;
+  prizePoolStatus?: EnumPrizePoolStatus;
+  /** Prize pool status name */
+  prizePoolStatusName?: string | null;
+  /**
+   * Starting at
+   * @format int64
+   */
+  startingAt?: number;
+}
+
 /** @format int32 */
 export enum EnumArticleState {
   Value1 = 1,
@@ -1300,13 +1563,50 @@ export enum EnumArticleType {
 }
 
 /** @format int32 */
-export enum EnumBroadcastTalentType {
+export enum EnumChildTournament {
+  Value1 = 1,
+  Value2 = 2,
+  Value3 = 3,
+}
+
+/** @format int32 */
+export enum EnumCurrency {
   Value1 = 1,
   Value2 = 2,
   Value3 = 3,
   Value4 = 4,
   Value5 = 5,
-  Value99 = 99,
+  Value6 = 6,
+  Value7 = 7,
+  Value8 = 8,
+  Value9 = 9,
+  Value10 = 10,
+  Value11 = 11,
+  Value12 = 12,
+  Value13 = 13,
+  Value14 = 14,
+  Value15 = 15,
+  Value16 = 16,
+  Value17 = 17,
+  Value18 = 18,
+  Value19 = 19,
+  Value20 = 20,
+  Value21 = 21,
+  Value22 = 22,
+  Value23 = 23,
+  Value24 = 24,
+  Value25 = 25,
+  Value26 = 26,
+  Value27 = 27,
+  Value28 = 28,
+  Value29 = 29,
+}
+
+/** @format int32 */
+export enum EnumEarningPrizeStatus {
+  Value1 = 1,
+  Value2 = 2,
+  Value3 = 3,
 }
 
 /** @format int32 */
@@ -1330,6 +1630,20 @@ export enum EnumGender {
 }
 
 /** @format int32 */
+export enum EnumParentTournamentState {
+  Value1 = 1,
+  Value2 = 2,
+  Value3 = 3,
+  Value4 = 4,
+  Value5 = 5,
+}
+
+/** @format int32 */
+export enum EnumParentTournamentType {
+  Value1 = 1,
+}
+
+/** @format int32 */
 export enum EnumPlatform {
   Value1 = 1,
   Value10 = 10,
@@ -1338,10 +1652,31 @@ export enum EnumPlatform {
 }
 
 /** @format int32 */
+export enum EnumPointsAwarded {
+  Value0 = 0,
+  Value1 = 1,
+  Value2 = 2,
+  Value3 = 3,
+  Value4 = 4,
+}
+
+/** @format int32 */
+export enum EnumPrizePoolStatus {
+  Value0 = 0,
+  Value1 = 1,
+  Value2 = 2,
+  Value3 = 3,
+  Value4 = 4,
+  Value5 = 5,
+}
+
+/** @format int32 */
 export enum EnumRet {
   Value0 = 0,
   Value10001 = 10001,
   Value10002 = 10002,
+  Value10003 = 10003,
+  Value10004 = 10004,
   Value20000 = 20000,
   Value20001 = 20001,
   Value20002 = 20002,
@@ -1375,6 +1710,9 @@ export enum EnumRet {
   Value20030 = 20030,
   Value20031 = 20031,
   Value20032 = 20032,
+  Value20033 = 20033,
+  Value20034 = 20034,
+  Value20035 = 20035,
   Value29999 = 29999,
   Value30000 = 30000,
   Value30001 = 30001,
@@ -1403,6 +1741,14 @@ export enum EnumState {
   Value0 = 0,
   Value1 = 1,
   Value2 = 2,
+}
+
+/** @format int32 */
+export enum EnumTournamentStatus {
+  Value0 = 0,
+  Value1 = 1,
+  Value2 = 2,
+  Value3 = 3,
 }
 
 export interface FolderDetail {
@@ -1507,6 +1853,8 @@ export interface GameListItem {
   id?: number;
   /** Game name */
   name?: string | null;
+  /** Game url safe name */
+  urlSafeName?: string | null;
   /** Has player rankings */
   hasPlayerRankings?: boolean;
   /** Has team rankings */
@@ -1623,8 +1971,6 @@ export interface GetBroadcastTalentResp {
   firstName?: string | null;
   lastName?: string | null;
   /** @format int32 */
-  type?: number;
-  /** @format int32 */
   gender?: number;
   isActive?: boolean | null;
   about?: string | null;
@@ -1636,6 +1982,7 @@ export interface GetBroadcastTalentResp {
   socialTwitter?: string | null;
   socialYoutube?: string | null;
   website?: string | null;
+  roles?: Int16Item[] | null;
   primaryGame?: BroadcastTalentGame;
   country?: BroadcastTalentCountry;
   language?: BroadcastTalentLanguage;
@@ -1650,6 +1997,17 @@ export interface GetBroadcastTalentRespApiRespBase {
   data?: GetBroadcastTalentResp;
 }
 
+export interface GetBroadcastTalentRoleOptionsResp {
+  roles?: Int16Item[] | null;
+}
+
+export interface GetBroadcastTalentRoleOptionsRespApiRespBase {
+  ret?: EnumRet;
+  msg?: string | null;
+  traceId?: string | null;
+  data?: GetBroadcastTalentRoleOptionsResp;
+}
+
 export interface GetBroadcastTalents {
   /** @format int32 */
   id?: number;
@@ -1658,10 +2016,9 @@ export interface GetBroadcastTalents {
   lastName?: string | null;
   urlSafeName?: string | null;
   /** @format int32 */
-  type?: number;
-  /** @format int32 */
   gender?: number;
   isActive?: boolean;
+  roles?: string[] | null;
   primaryGame?: BroadcastTalentGame;
   country?: BroadcastTalentCountry;
   language?: BroadcastTalentLanguage;
@@ -1677,6 +2034,266 @@ export interface GetBroadcastTalentsRespApiRespBase {
   msg?: string | null;
   traceId?: string | null;
   data?: GetBroadcastTalentsResp;
+}
+
+export interface GetChildDetailResp {
+  /** @format int32 */
+  childId?: number;
+  childName?: string | null;
+  childUrlSafeName?: string | null;
+  childType?: EnumChildTournament;
+  /** @format int32 */
+  gameId?: number;
+  gameName?: string | null;
+  childStatus?: EnumTournamentStatus;
+  /** @format int64 */
+  childStartAt?: number | null;
+  childIsHidden?: boolean;
+  childIsLan?: boolean;
+  /** @format int32 */
+  childVenueId?: number | null;
+  childVenueName?: string | null;
+  prizePoolStatus?: EnumPrizePoolStatus;
+  /** @format double */
+  prizePool?: number | null;
+  prizePoolCurrency?: EnumCurrency;
+  /** @format double */
+  prizePoolUsd?: number | null;
+  /** @format int32 */
+  teamSize?: number;
+  /** @format int32 */
+  qualifyParticipants?: number | null;
+  /** @format int32 */
+  rounds?: number | null;
+  pointAwarded?: EnumPointsAwarded;
+  /** @format int32 */
+  pointsWin?: number | null;
+  /** @format int32 */
+  pointsDraw?: number | null;
+  allowMatchGameDraw?: boolean | null;
+  /** @format int32 */
+  childCreatorId?: number;
+  childCreatorName?: string | null;
+  /** @format int64 */
+  childCreatedAt?: number;
+  /** @format int64 */
+  childUpdatedAt?: number;
+  /** @format int32 */
+  parentId?: number;
+  parentName?: string | null;
+  parentUrlSafeName?: string | null;
+  parentType?: EnumParentTournamentType;
+  parentStatus?: EnumTournamentStatus;
+  /** @format int64 */
+  parentStartAt?: number | null;
+  parentIsHidden?: boolean;
+  parentIsLan?: boolean;
+  /** @format int32 */
+  parentVenueId?: number | null;
+  parentVenueName?: string | null;
+  description?: string | null;
+  isFeatured?: boolean;
+  /** @format int32 */
+  parentCreatorId?: number;
+  parentCreatorName?: string | null;
+  /** @format int64 */
+  parentCreatedAt?: number;
+  /** @format int64 */
+  parentUpdatedAt?: number;
+}
+
+export interface GetChildDetailRespApiRespBase {
+  ret?: EnumRet;
+  msg?: string | null;
+  traceId?: string | null;
+  data?: GetChildDetailResp;
+}
+
+export interface GetChildEarningPrizePoolResp {
+  /**
+   * Child id
+   * @format int32
+   */
+  childId?: number;
+  /** Parent tournament name */
+  parentName?: string | null;
+  /** Stage name */
+  stageName?: string | null;
+  /** Child tournament name */
+  childName?: string | null;
+  /** Game name */
+  gameName?: string | null;
+  /**
+   * Team size
+   * @format int32
+   */
+  teamSize?: number;
+  prizePoolCurrency?: EnumCurrency;
+  /** Prize pool currency name */
+  prizePoolCurrencyName?: string | null;
+  /**
+   * Prize pool
+   * @format double
+   */
+  prizePool?: number | null;
+  /**
+   * Prize pool usd
+   * @format double
+   */
+  prizePoolUsd?: number | null;
+  /** Prize placement */
+  prizePlacements?: PrizePlacement[] | null;
+}
+
+export interface GetChildEarningPrizePoolRespApiRespBase {
+  ret?: EnumRet;
+  msg?: string | null;
+  traceId?: string | null;
+  data?: GetChildEarningPrizePoolResp;
+}
+
+export interface GetChildEarningsResp {
+  /** Child earnings */
+  stages?: StagingEarningListItem[] | null;
+}
+
+export interface GetChildEarningsRespApiRespBase {
+  ret?: EnumRet;
+  msg?: string | null;
+  traceId?: string | null;
+  data?: GetChildEarningsResp;
+}
+
+export interface GetChildMediaItem {
+  /** @format int32 */
+  parentId?: number;
+  /** @format int32 */
+  childId?: number;
+  /** @format int32 */
+  mediaItemId?: number;
+  title?: string | null;
+  type?: string | null;
+  urlSafeTitle?: string | null;
+  /** @format int32 */
+  viewCount?: number;
+}
+
+export interface GetChildMediaItemsResp {
+  mediaItems?: GetChildMediaItem[] | null;
+  paging?: PagingRespBase;
+}
+
+export interface GetChildMediaItemsRespApiRespBase {
+  ret?: EnumRet;
+  msg?: string | null;
+  traceId?: string | null;
+  data?: GetChildMediaItemsResp;
+}
+
+export interface GetChildTeamRegistrationResp {
+  /**
+   * Parent id
+   * @format int32
+   */
+  parentId?: number;
+  /**
+   * Child id
+   * @format int32
+   */
+  childId?: number;
+  /**
+   * Register id
+   * @format int32
+   */
+  registerId?: number;
+  /**
+   * Team id
+   * @format int32
+   */
+  teamId?: number;
+  /** Team name */
+  teamName?: string | null;
+  /** Is reserved */
+  isReserved?: boolean;
+  /** Players */
+  players?: Int32CheckItem[] | null;
+}
+
+export interface GetChildTeamRegistrationRespApiRespBase {
+  ret?: EnumRet;
+  msg?: string | null;
+  traceId?: string | null;
+  data?: GetChildTeamRegistrationResp;
+}
+
+export interface GetChildTournamentResp {
+  /**
+   * Child tournament id
+   * @format int32
+   */
+  childTournamentId?: number;
+  /**
+   * Parent tournament id
+   * @format int32
+   */
+  parentTournamentId?: number;
+  type?: EnumChildTournament;
+  /**
+   * Stage id
+   * @format int32
+   */
+  stageId?: number;
+  /** Child tournament name */
+  name?: string | null;
+  /** Is lan */
+  isLan?: boolean;
+  /**
+   * Venue id
+   * @format int32
+   */
+  venueId?: number | null;
+  /** Is hidden */
+  isHidden?: boolean;
+  prizePoolStatus?: EnumPrizePoolStatus;
+  prizePoolCurrency?: EnumCurrency;
+  /**
+   * Prize pool
+   * @format double
+   */
+  prizePool?: number | null;
+  /**
+   * prize pool USD
+   * @format double
+   */
+  prizePoolUsd?: number | null;
+  /**
+   * Qualify participants
+   * @format int32
+   */
+  qualifyParticipants?: number | null;
+  status?: EnumTournamentStatus;
+  /**
+   * Ranking Importance
+   * @format double
+   */
+  rankingImportance?: number;
+  /**
+   * Grid Id
+   * @format int32
+   */
+  gridId?: number | null;
+  /**
+   * Start at
+   * @format int64
+   */
+  startingAt?: number | null;
+}
+
+export interface GetChildTournamentRespApiRespBase {
+  ret?: EnumRet;
+  msg?: string | null;
+  traceId?: string | null;
+  data?: GetChildTournamentResp;
 }
 
 export interface GetContactTypesResp {
@@ -1725,6 +2342,32 @@ export interface GetCrewFoldersRespApiRespBase {
   msg?: string | null;
   traceId?: string | null;
   data?: GetCrewFoldersResp;
+}
+
+export interface GetCurrentExchangeRateResp {
+  /**
+   * Exchange rate
+   * @format double
+   */
+  exchangeRate?: number;
+  /**
+   * Usd amount
+   * @format double
+   */
+  usdAmount?: number;
+}
+
+export interface GetEarningsResp {
+  /** Earnings */
+  earnings: EarningListItem[];
+  paging: PagingRespBase;
+}
+
+export interface GetEarningsRespApiRespBase {
+  ret?: EnumRet;
+  msg?: string | null;
+  traceId?: string | null;
+  data?: GetEarningsResp;
 }
 
 export interface GetFrontendLocaleOptionsResp {
@@ -1841,6 +2484,18 @@ export interface GetFuncsRespApiRespBase {
   data?: GetFuncsResp;
 }
 
+export interface GetFuzzyBroadcastTalentsResp {
+  /** Fuzzy broadcast talents */
+  fuzzyBroadcastTalents?: Int32Item[] | null;
+}
+
+export interface GetFuzzyBroadcastTalentsRespApiRespBase {
+  ret?: EnumRet;
+  msg?: string | null;
+  traceId?: string | null;
+  data?: GetFuzzyBroadcastTalentsResp;
+}
+
 export interface GetFuzzyFoldersResp {
   folders?: FuzzyFolderDetail[] | null;
 }
@@ -1874,6 +2529,18 @@ export interface GetFuzzyGamesRespApiRespBase {
   data?: GetFuzzyGamesResp;
 }
 
+export interface GetFuzzyMapsResp {
+  /** Fuzzy sponsors */
+  fuzzyMaps?: Int16Item[] | null;
+}
+
+export interface GetFuzzyMapsRespApiRespBase {
+  ret?: EnumRet;
+  msg?: string | null;
+  traceId?: string | null;
+  data?: GetFuzzyMapsResp;
+}
+
 export interface GetFuzzyMediaStreamsResp {
   fuzzyMediaItems?: Int32Item[] | null;
 }
@@ -1897,6 +2564,7 @@ export interface GetFuzzyMediaVideosRespApiRespBase {
 }
 
 export interface GetFuzzyPlayersResp {
+  /** Fuzzy players */
   fuzzyPlayers?: Int32Item[] | null;
 }
 
@@ -1905,6 +2573,18 @@ export interface GetFuzzyPlayersRespApiRespBase {
   msg?: string | null;
   traceId?: string | null;
   data?: GetFuzzyPlayersResp;
+}
+
+export interface GetFuzzySponsorsResp {
+  /** Fuzzy sponsors */
+  fuzzySponsors?: Int16Item[] | null;
+}
+
+export interface GetFuzzySponsorsRespApiRespBase {
+  ret?: EnumRet;
+  msg?: string | null;
+  traceId?: string | null;
+  data?: GetFuzzySponsorsResp;
 }
 
 export interface GetFuzzyTeamsResp {
@@ -1950,6 +2630,17 @@ export interface GetFuzzyUsersRespApiRespBase {
   msg?: string | null;
   traceId?: string | null;
   data?: GetFuzzyUsersResp;
+}
+
+export interface GetFuzzyVenuesResp {
+  fuzzyVenues?: Int32Item[] | null;
+}
+
+export interface GetFuzzyVenuesRespApiRespBase {
+  ret?: EnumRet;
+  msg?: string | null;
+  traceId?: string | null;
+  data?: GetFuzzyVenuesResp;
 }
 
 export interface GetGameAccountDetail {
@@ -2022,8 +2713,20 @@ export interface GetGameRegionResp {
    * @minLength 1
    */
   regionName: string;
+  /**
+   * GameId
+   * @format int32
+   */
+  gameId?: number;
   /** Countries */
   countries: Int16Item[];
+}
+
+export interface GetGameRegionRespApiRespBase {
+  ret?: EnumRet;
+  msg?: string | null;
+  traceId?: string | null;
+  data?: GetGameRegionResp;
 }
 
 export interface GetGameRegionTranslationResp {
@@ -2041,10 +2744,24 @@ export interface GetGameRegionTranslationResp {
   translations: Translation[];
 }
 
+export interface GetGameRegionTranslationRespApiRespBase {
+  ret?: EnumRet;
+  msg?: string | null;
+  traceId?: string | null;
+  data?: GetGameRegionTranslationResp;
+}
+
 export interface GetGameRegionsResp {
   /** Game regions */
   gameRegions?: GameRegionListItem[] | null;
   paging?: PagingRespBase;
+}
+
+export interface GetGameRegionsRespApiRespBase {
+  ret?: EnumRet;
+  msg?: string | null;
+  traceId?: string | null;
+  data?: GetGameRegionsResp;
 }
 
 export interface GetGameResp {
@@ -2142,6 +2859,39 @@ export interface GetGgCodeInfoRespApiRespBase {
   data?: GetGgCodeInfoResp;
 }
 
+export interface GetGridMatchesResp {
+  /** @format int32 */
+  id?: number;
+  tournamentName?: string | null;
+  opponent1Name?: string | null;
+  opponent2Name?: string | null;
+  gameName?: string | null;
+  /** @format int32 */
+  gamesPerMatchSet?: number;
+  /** @format int64 */
+  dateTime?: number;
+}
+
+export interface GetGridMatchesRespListApiRespBase {
+  ret?: EnumRet;
+  msg?: string | null;
+  traceId?: string | null;
+  data?: GetGridMatchesResp[] | null;
+}
+
+export interface GetGridTournamentsResp {
+  /** @format int32 */
+  id?: number;
+  name?: string | null;
+}
+
+export interface GetGridTournamentsRespListApiRespBase {
+  ret?: EnumRet;
+  msg?: string | null;
+  traceId?: string | null;
+  data?: GetGridTournamentsResp[] | null;
+}
+
 export interface GetGroupBlankPermissionsResp {
   /** Frontend permissions */
   frontendPermissions?: Int16Item[] | null;
@@ -2230,13 +2980,6 @@ export interface GetHero {
   id?: number;
   /** Hero Name */
   name?: string | null;
-  /**
-   * Referred To By
-   * @format int32
-   */
-  referredToBy?: number;
-  /** Title */
-  title?: string | null;
   gameName?: string | null;
   translations?: GetHeroesTranslation[] | null;
 }
@@ -2257,12 +3000,7 @@ export interface GetHeroResp {
   /** @format int32 */
   gameId?: number;
   name?: string | null;
-  title?: string | null;
-  /** @format int32 */
-  referredToBy?: number;
-  tagline?: string | null;
   description?: string | null;
-  imageFileName?: string | null;
   iconFileName?: string | null;
 }
 
@@ -2328,6 +3066,7 @@ export interface GetHeroesTranslation {
 }
 
 export interface GetLanguagesResp {
+  /** Language options */
   languageOptions?: LanguageOption[] | null;
 }
 
@@ -2648,6 +3387,55 @@ export interface GetOneSignalAppsRespApiRespBase {
   data?: GetOneSignalAppsResp;
 }
 
+export interface GetOpponentsItem {
+  /** @format int32 */
+  id?: number;
+  /** @format int32 */
+  placement?: number | null;
+  /** @format int32 */
+  registrationId?: number;
+  name?: string | null;
+  /** @format int32 */
+  pointAdjustment?: number;
+  /**
+   * Game/Match count
+   * @format int32
+   */
+  count?: number;
+  /** @format int32 */
+  winCount?: number;
+  /** @format int32 */
+  drawCount?: number;
+  /** @format int32 */
+  lossCount?: number;
+  /**
+   * not include points adjustment
+   * @format int32
+   */
+  points?: number;
+  /**
+   * PointsAdjustment + Points
+   * @format int32
+   */
+  totalPoints?: number;
+}
+
+export interface GetOpponentsResp {
+  /** @format int32 */
+  parentTournamentId?: number;
+  /** @format int32 */
+  childTournamentId?: number;
+  pointsAwarded?: EnumPointsAwarded;
+  opponents?: GetOpponentsItem[] | null;
+}
+
+export interface GetOpponentsRespApiRespBase {
+  ret?: EnumRet;
+  msg?: string | null;
+  traceId?: string | null;
+  data?: GetOpponentsResp;
+}
+
 export interface GetPageResp {
   /**
    * Page id
@@ -2694,6 +3482,191 @@ export interface GetPagesRespApiRespBase {
   data?: GetPagesResp;
 }
 
+export interface GetParentBroadcastTalentsResp {
+  /**
+   * Parent tournament id
+   * @format int32
+   */
+  parentId: number;
+  /** Parent tournament name */
+  parentName?: string | null;
+  /** Broadcast talents */
+  broadcastTalents: ParentBroadcastTalentListItem[];
+  paging: PagingRespBase;
+}
+
+export interface GetParentBroadcastTalentsRespApiRespBase {
+  ret?: EnumRet;
+  msg?: string | null;
+  traceId?: string | null;
+  data?: GetParentBroadcastTalentsResp;
+}
+
+export interface GetParentDetailResp {
+  parentDetail?: ParentTournamentDetail;
+  /** Stage details */
+  stageDetails?: ParentStageDetail[] | null;
+}
+
+export interface GetParentDetailRespApiRespBase {
+  ret?: EnumRet;
+  msg?: string | null;
+  traceId?: string | null;
+  data?: GetParentDetailResp;
+}
+
+export interface GetParentResp {
+  parentDetail?: ParentTournamentEditDetail;
+  /** Parent tournament sponsors */
+  sponsors?: Int16OrderItem[] | null;
+  /** Parent tournament maps */
+  maps?: Int16Item[] | null;
+}
+
+export interface GetParentRespApiRespBase {
+  ret?: EnumRet;
+  msg?: string | null;
+  traceId?: string | null;
+  data?: GetParentResp;
+}
+
+export interface GetParentStage {
+  /**
+   * Stage Id
+   * @format int32
+   */
+  stageId?: number;
+  /**
+   * Stage Order
+   * @format int32
+   */
+  order?: number;
+  /** Stage Name */
+  stageName?: string | null;
+  /** Stage UrlSafeName */
+  urlSafeName?: string | null;
+  /** Child tournaments */
+  childTournaments?: GetParentStageChild[] | null;
+}
+
+export interface GetParentStageChild {
+  /**
+   * Child tournament Id
+   * @format int32
+   */
+  childId?: number;
+  /** Child tournament Name */
+  childName?: string | null;
+  /** Child tournament UrlSafeName */
+  childUrlSafeName?: string | null;
+  childType?: EnumChildTournament;
+  /** Child tournament type name */
+  childTypeName?: string | null;
+  /**
+   * Child tournament starting datetime
+   * @format int64
+   */
+  startAt?: number | null;
+  /**
+   * Child tournament ranking importance
+   * @format double
+   */
+  ranking?: number;
+  childStatus?: EnumTournamentStatus;
+  /** Child status name */
+  childStatusName?: string | null;
+  /** Group Embed Url */
+  groupEmbedUrl?: string | null;
+}
+
+export interface GetParentStagesForEditResp {
+  /**
+   * Parent id
+   * @format int32
+   */
+  parentId?: number;
+  /** Parent name */
+  parentName?: string | null;
+  /** Stages */
+  stages?: Int32OrderItem[] | null;
+}
+
+export interface GetParentStagesForEditRespApiRespBase {
+  ret?: EnumRet;
+  msg?: string | null;
+  traceId?: string | null;
+  data?: GetParentStagesForEditResp;
+}
+
+export interface GetParentStagesResp {
+  /**
+   * Parent tournament id
+   * @format int32
+   */
+  parentId?: number;
+  /** Parent tournament name */
+  parentName?: string | null;
+  /**
+   * FrontEndId
+   * @format int32
+   */
+  frontEndId?: number | null;
+  /** Frontend short name */
+  feName?: string | null;
+  /** Parent tournament UrlSafeName */
+  parentUrlSafeName?: string | null;
+  parentStatus?: EnumTournamentStatus;
+  /** Parent tournament name */
+  parentStatusName?: string | null;
+  /**
+   * GameId
+   * @format int32
+   */
+  gameId?: number;
+  /** Game Name */
+  gameName?: string | null;
+  /** Game icon url */
+  gameIconUrl?: string | null;
+  /** Game UrlSafeName */
+  gameUrlSafeName?: string | null;
+  /** The GRID field is only displayed to the user when the parent tournament game = CSGO, Valorant or Dota 2 */
+  showGridDataProvider?: boolean;
+  /** Stages */
+  stages?: GetParentStage[] | null;
+}
+
+export interface GetParentStagesRespApiRespBase {
+  ret?: EnumRet;
+  msg?: string | null;
+  traceId?: string | null;
+  data?: GetParentStagesResp;
+}
+
+export interface GetParentTournamentStateOptionsResp {
+  /** Tournament state options */
+  states?: Int16Item[] | null;
+}
+
+export interface GetParentTournamentStateOptionsRespApiRespBase {
+  ret?: EnumRet;
+  msg?: string | null;
+  traceId?: string | null;
+  data?: GetParentTournamentStateOptionsResp;
+}
+
+export interface GetParentsResp {
+  /** Parent tournaments */
+  parents?: ParentTournamentListItem[] | null;
+  paging?: PagingRespBase;
+}
+
+export interface GetParentsRespApiRespBase {
+  ret?: EnumRet;
+  msg?: string | null;
+  traceId?: string | null;
+  data?: GetParentsResp;
+}
+
 export interface GetPlayerMediaItems {
   /** @format int32 */
   playerId?: number;
@@ -2730,7 +3703,7 @@ export interface GetPlayerResp {
   gender?: EnumGender;
   genderName?: string | null;
   /** @format date */
-  dateOfBirth?: string;
+  dateOfBirth?: string | null;
   /** @format int32 */
   countryId?: number | null;
   country?: string | null;
@@ -2764,10 +3737,14 @@ export interface GetPlayersDetail {
   /** @format int32 */
   primaryGameId?: number | null;
   primaryGame?: string | null;
+  teamNames?: string[] | null;
+  primaryGameIconUrl?: string | null;
   primaryGameUrlSafeName?: string | null;
   isActive?: boolean;
   /** @format int64 */
   createdAt?: number;
+  /** Url */
+  url?: string | null;
 }
 
 export interface GetPlayersResp {
@@ -2780,6 +3757,31 @@ export interface GetPlayersRespApiRespBase {
   msg?: string | null;
   traceId?: string | null;
   data?: GetPlayersResp;
+}
+
+export interface GetPointsAwardedOptionsResp {
+  /** @format int32 */
+  id?: number;
+  name?: string | null;
+}
+
+export interface GetPointsAwardedOptionsRespListApiRespBase {
+  ret?: EnumRet;
+  msg?: string | null;
+  traceId?: string | null;
+  data?: GetPointsAwardedOptionsResp[] | null;
+}
+
+export interface GetPrizePoolStatusOptionsResp {
+  /** Prize pool status */
+  prizePoolStatus: Int16Item[];
+}
+
+export interface GetPrizePoolStatusOptionsRespApiRespBase {
+  ret?: EnumRet;
+  msg?: string | null;
+  traceId?: string | null;
+  data?: GetPrizePoolStatusOptionsResp;
 }
 
 export interface GetRoleBlankPermissionsResp {
@@ -2836,6 +3838,8 @@ export interface GetRoleResp {
   remark: string;
   /** Role frontend permissions */
   frontendPermissions: Int16Item[];
+  /** Group frontend permissions */
+  groupFrontendPermissions?: Int16Item[] | null;
   /** Role backoffice permissions */
   backofficePermissions: SimpleBackOfficePermissionItem[];
 }
@@ -2881,11 +3885,11 @@ export interface GetServerOptionsResp {
   isFrozen?: boolean;
 }
 
-export interface GetServerOptionsRespApiRespBase {
+export interface GetServerOptionsRespListApiRespBase {
   ret?: EnumRet;
   msg?: string | null;
   traceId?: string | null;
-  data?: GetServerOptionsResp;
+  data?: GetServerOptionsResp[] | null;
 }
 
 export interface GetServerResp {
@@ -3214,6 +4218,18 @@ export interface GetTeamPlayer {
   position?: string | null;
 }
 
+export interface GetTeamPlayerOptionsResp {
+  /** Players */
+  players?: Int32Item[] | null;
+}
+
+export interface GetTeamPlayerOptionsRespApiRespBase {
+  ret?: EnumRet;
+  msg?: string | null;
+  traceId?: string | null;
+  data?: GetTeamPlayerOptionsResp;
+}
+
 export interface GetTeamPlayerResp {
   /** @format int32 */
   teamPlayerId?: number;
@@ -3286,6 +4302,7 @@ export interface GetTeamsDetail {
   /** @format int32 */
   teamId?: number;
   teamName?: string | null;
+  teamUrlSafeName?: string | null;
   teamTag?: string | null;
   /** @format int32 */
   countryId?: number | null;
@@ -3300,6 +4317,7 @@ export interface GetTeamsDetail {
   updatedAt?: number | null;
   /** @format int32 */
   updatedBy?: number | null;
+  url?: string | null;
 }
 
 export interface GetTeamsResp {
@@ -3338,16 +4356,18 @@ export interface GetUserForPlayerRespApiRespBase {
   data?: GetUserForPlayerResp;
 }
 
-export interface GetUserFrontEnd {
-  /** @format int32 */
-  frontendId?: number;
-  name?: string | null;
+export interface GetUserPermissionsResp {
+  /** Groups */
+  groups?: string[] | null;
+  /** Roles */
+  roles?: string[] | null;
 }
 
-export interface GetUserGroup {
-  /** @format int32 */
-  groupId?: number;
-  name?: string | null;
+export interface GetUserPermissionsRespApiRespBase {
+  ret?: EnumRet;
+  msg?: string | null;
+  traceId?: string | null;
+  data?: GetUserPermissionsResp;
 }
 
 export interface GetUserResp {
@@ -3360,9 +4380,6 @@ export interface GetUserResp {
   email?: string | null;
   city?: string | null;
   /** @format int32 */
-  userTypeId?: number | null;
-  userType?: string | null;
-  /** @format int32 */
   countryId?: number | null;
   countryName?: string | null;
   /** @format date */
@@ -3370,9 +4387,6 @@ export interface GetUserResp {
   gender?: EnumGender;
   aboutMe?: string | null;
   avatarImagePath?: string | null;
-  userGroups?: GetUserGroup[] | null;
-  userRoles?: GetUserRole[] | null;
-  userFrontEnds?: GetUserFrontEnd[] | null;
 }
 
 export interface GetUserRespApiRespBase {
@@ -3380,12 +4394,6 @@ export interface GetUserRespApiRespBase {
   msg?: string | null;
   traceId?: string | null;
   data?: GetUserResp;
-}
-
-export interface GetUserRole {
-  /** @format int32 */
-  roleId?: number;
-  name?: string | null;
 }
 
 export interface GetUserSessionResp {
@@ -3401,24 +4409,33 @@ export interface GetUserSessionRespApiRespBase {
   data?: GetUserSessionResp;
 }
 
-export interface GetUserTypeOptionsResp {
-  userTypeOptions?: UserType[] | null;
-}
-
-export interface GetUserTypeOptionsRespApiRespBase {
-  ret?: EnumRet;
-  msg?: string | null;
-  traceId?: string | null;
-  data?: GetUserTypeOptionsResp;
-}
-
 export interface GetUsers {
-  /** @format int32 */
+  /**
+   * User id
+   * @format int32
+   */
   userId?: number;
+  /** Username */
   userName?: string | null;
-  /** @format int64 */
-  updatedAt?: number;
+  /** Email */
+  email?: string | null;
+  /**
+   * Updated at
+   * @format int64
+   */
+  updatedAt?: number | null;
+  /** Updated username */
   updatedUserName?: string | null;
+  /**
+   * Registered at
+   * @format int64
+   */
+  registeredAt?: number | null;
+  /**
+   * Registration completed at
+   * @format int64
+   */
+  registrationCompletedAt?: number | null;
 }
 
 export interface GetUsersByGroupResp {
@@ -3446,6 +4463,7 @@ export interface GetUsersByRoleRespApiRespBase {
 }
 
 export interface GetUsersResp {
+  /** Users */
   users?: GetUsers[] | null;
   paging?: PagingRespBase;
 }
@@ -3494,6 +4512,7 @@ export interface GetVenues {
 }
 
 export interface GetVenuesResp {
+  /** /Venues */
   venues?: GetVenues[] | null;
   paging?: PagingRespBase;
 }
@@ -3548,8 +4567,6 @@ export interface GroupUserListItem {
   userId?: number;
   /** User name */
   userName?: string | null;
-  /** User Type Name */
-  userTypeName?: string | null;
 }
 
 export interface Int16Item {
@@ -3565,10 +4582,41 @@ export interface Int16ItemWithSubItem {
   subItems?: Int16Item[] | null;
 }
 
+export interface Int16OrderItem {
+  /** @format int32 */
+  id: number;
+  /** @format int32 */
+  order: number;
+  /**
+   * @minLength 1
+   * @maxLength 80
+   */
+  name: string;
+}
+
+export interface Int32CheckItem {
+  /** @format int32 */
+  id?: number;
+  name?: string | null;
+  checked?: boolean;
+}
+
 export interface Int32Item {
   /** @format int32 */
   id?: number;
   name?: string | null;
+}
+
+export interface Int32OrderItem {
+  /** @format int32 */
+  id: number;
+  /** @format int32 */
+  order: number;
+  /**
+   * @minLength 1
+   * @maxLength 80
+   */
+  name: string;
 }
 
 export interface Int32StringDictionaryApiRespBase {
@@ -3709,6 +4757,67 @@ export interface ModBroadcastTalentRespApiRespBase {
   msg?: string | null;
   traceId?: string | null;
   data?: ModBroadcastTalentResp;
+}
+
+export interface ModChildEarningPrizePoolReq {
+  prizePoolCurrency: EnumCurrency;
+  /**
+   * Exchange rate
+   * @format double
+   */
+  exchangeRate: number;
+  /**
+   * Prize pool
+   * @format double
+   */
+  prizePool: number;
+  /**
+   * Prize pool usd
+   * @format double
+   */
+  prizePoolUsd: number;
+  /** Prize placement */
+  prizePlacements?: ModPrizePlacement[] | null;
+}
+
+export interface ModChildEarningPrizePoolStatusReq {
+  status: EnumEarningPrizeStatus;
+}
+
+export interface ModChildEarningPrizePoolStatusResp {
+  /**
+   * Child id
+   * @format int32
+   */
+  childId?: number;
+}
+
+export interface ModChildEarningPrizePoolStatusRespApiRespBase {
+  ret?: EnumRet;
+  msg?: string | null;
+  traceId?: string | null;
+  data?: ModChildEarningPrizePoolStatusResp;
+}
+
+export interface ModChildPlayerRegistrationReq {
+  /** Is reserved */
+  isReserved: boolean;
+}
+
+export type ModChildResp = object;
+
+export interface ModChildRespApiRespBase {
+  ret?: EnumRet;
+  msg?: string | null;
+  traceId?: string | null;
+  data?: ModChildResp;
+}
+
+export interface ModChildTeamRegistrationReq {
+  /** Is reserved */
+  isReserved: boolean;
+  /** Player ids */
+  playerIds?: number[] | null;
 }
 
 export interface ModFileResp {
@@ -3852,6 +4961,13 @@ export interface ModGameRegionResp {
    * @format int32
    */
   regionId: number;
+}
+
+export interface ModGameRegionRespApiRespBase {
+  ret?: EnumRet;
+  msg?: string | null;
+  traceId?: string | null;
+  data?: ModGameRegionResp;
 }
 
 export interface ModGameRegionTranslationReq {
@@ -4364,6 +5480,24 @@ export interface ModOneSignalAppRespApiRespBase {
   data?: ModOneSignalAppResp;
 }
 
+export interface ModOpponentsItem {
+  /** @format int32 */
+  id?: number;
+  /** @format int32 */
+  placement?: number;
+  /** @format int32 */
+  pointAdjustment?: number;
+}
+
+export type ModOpponentsResp = object;
+
+export interface ModOpponentsRespApiRespBase {
+  ret?: EnumRet;
+  msg?: string | null;
+  traceId?: string | null;
+  data?: ModOpponentsResp;
+}
+
 export interface ModPageReq {
   /**
    * Page id
@@ -4412,6 +5546,32 @@ export interface ModPageRespApiRespBase {
   data?: ModPageResp;
 }
 
+export interface ModParentResp {
+  /** @format int32 */
+  parentId?: number;
+}
+
+export interface ModParentRespApiRespBase {
+  ret?: EnumRet;
+  msg?: string | null;
+  traceId?: string | null;
+  data?: ModParentResp;
+}
+
+export interface ModParentStageReq {
+  /**
+   * Stage name
+   * @minLength 1
+   * @maxLength 80
+   */
+  name?: string | null;
+}
+
+export interface ModParentStagesReq {
+  /** Stages */
+  stages?: Int32OrderItem[] | null;
+}
+
 export type ModPlayerResp = object;
 
 export interface ModPlayerRespApiRespBase {
@@ -4419,6 +5579,38 @@ export interface ModPlayerRespApiRespBase {
   msg?: string | null;
   traceId?: string | null;
   data?: ModPlayerResp;
+}
+
+export interface ModPrizePlacement {
+  /**
+   * Id
+   * Unknown: -1
+   * Know: > 0
+   * @format int32
+   */
+  id?: number;
+  /**
+   * Placement from
+   * @format int32
+   */
+  placementFrom?: number;
+  /**
+   * Placement to
+   * @format int32
+   */
+  placementTo?: number;
+  /**
+   * Prize amount
+   * @format double
+   */
+  prizeAmount?: number;
+  /**
+   * Team id
+   * @format int32
+   */
+  teamId?: number;
+  /** Player ids */
+  playerIds?: number[] | null;
 }
 
 export interface ModRoleReq {
@@ -4726,6 +5918,86 @@ export interface PagingRespBase {
   totalRows: number;
 }
 
+export interface ParentBroadcastTalentListItem {
+  /**
+   * Broadcast talent id
+   * @format int32
+   */
+  broadcastTalentId?: number;
+  /** Name (NickName) */
+  name?: string | null;
+  /** First name */
+  firstName?: string | null;
+  /** Last name */
+  lastName?: string | null;
+  /** Roles */
+  roles?: string[] | null;
+  /** Country */
+  country?: string | null;
+  /** Language */
+  language?: string | null;
+}
+
+export interface ParentChildDetail {
+  /**
+   * Child id
+   * @format int32
+   */
+  childId?: number | null;
+  /**
+   * Child name
+   * @minLength 1
+   */
+  childName: string;
+  childType: EnumChildTournament;
+  /**
+   * Child type name
+   * @minLength 1
+   */
+  childTypeName: string;
+  /**
+   * Child status name
+   * @minLength 1
+   */
+  childStatusName: string;
+  /**
+   * Starting at
+   * @format int64
+   */
+  startingAt: number;
+  /** Is hidden */
+  isHidden: boolean;
+  /** Is lan */
+  isLan: boolean;
+  /**
+   * Venue id
+   * @format int32
+   */
+  venueId?: number | null;
+  /** Venue name */
+  venueName?: string | null;
+  /**
+   * Ranking importance
+   * @format double
+   */
+  rankingImportance: number;
+  /**
+   * Creator
+   * @minLength 1
+   */
+  creator: string;
+  /**
+   * Created at
+   * @format int64
+   */
+  createdAt: number;
+  /**
+   * Updated at
+   * @format int64
+   */
+  updatedAt: number;
+}
+
 export interface ParentFolder {
   /**
    * Folder Id
@@ -4741,6 +6013,227 @@ export interface ParentFolder {
   name?: string | null;
   /** Folder path */
   path?: string | null;
+}
+
+export interface ParentStageDetail {
+  /**
+   * Stage id
+   * @format int32
+   */
+  stageId: number;
+  /**
+   * Stage name
+   * @minLength 1
+   */
+  stageName: string;
+  /** Child details */
+  childDetails: ParentChildDetail[];
+}
+
+export interface ParentTournamentDetail {
+  /**
+   * Parent tournament id
+   * @format int32
+   */
+  parentId: number;
+  /**
+   * Parent tournament name
+   * @minLength 1
+   */
+  name: string;
+  /** Type name */
+  typeName?: string | null;
+  /**
+   * Game name
+   * @minLength 1
+   */
+  gameName: string;
+  status?: EnumTournamentStatus;
+  /** Status name */
+  statusName?: string | null;
+  /**
+   * Starting at
+   * @format int64
+   */
+  startingAt: number;
+  /** Has description */
+  hasDescription: boolean;
+  /** Is featured */
+  isFeatured: boolean;
+  /** Is hidden */
+  isHidden: boolean;
+  /** Is lan */
+  isLan: boolean;
+  /**
+   * Venue id
+   * @format int32
+   */
+  venueId?: number | null;
+  /** Venue name */
+  venueName?: string | null;
+  /** Has prize pool */
+  hasPrizePool: boolean;
+  /** Has sponsor */
+  hasSponsor: boolean;
+  /** Has map pool */
+  hasMapPool: boolean;
+  /**
+   * Frontend name
+   * @minLength 1
+   */
+  frontendName: string;
+  /** Has image */
+  hasImage: boolean;
+  /**
+   * Creator
+   * @minLength 1
+   */
+  creator: string;
+  /**
+   * Created at
+   * @format int64
+   */
+  createdAt: number;
+  /**
+   * Updated at
+   * @format int64
+   */
+  updatedAt: number;
+  /**
+   * Team size
+   * @format int32
+   */
+  teamSize: number;
+  /** Is player based */
+  isPlayerBased: boolean;
+}
+
+export interface ParentTournamentEditDetail {
+  /**
+   * Parent tournament id
+   * @format int32
+   */
+  parentId: number;
+  /**
+   * Type name
+   * @minLength 1
+   */
+  typeName: string;
+  /**
+   * Frontend id
+   * @format int32
+   */
+  frontendId?: number | null;
+  /**
+   * Parent tournament name
+   * @minLength 1
+   */
+  name: string;
+  /**
+   * Parent tournament name
+   * @minLength 1
+   */
+  description: string;
+  /**
+   * Starting at
+   * @format int64
+   */
+  startingAt: number;
+  /** Is hidden */
+  isHidden: boolean;
+  /** Is lan */
+  isLan: boolean;
+  /**
+   * Venue id
+   * @format int32
+   */
+  venueId?: number | null;
+  /** Venue name */
+  venueName?: string | null;
+  /** Is featured */
+  isFeatured: boolean;
+  /** Image url */
+  imageUrl?: string | null;
+}
+
+export interface ParentTournamentListItem {
+  /**
+   * Tournament id
+   * @format int32
+   */
+  parentId: number;
+  /**
+   * Frontend Name
+   * @minLength 1
+   */
+  feName: string;
+  /**
+   * Game icon url
+   * @minLength 1
+   */
+  gameIconUrl: string;
+  /**
+   * Parent tournament name
+   * @minLength 1
+   */
+  name: string;
+  /**
+   * Parent tournament url in frontend
+   * @minLength 1
+   */
+  url: string;
+  /**
+   * Creator
+   * @minLength 1
+   */
+  creator: string;
+  /**
+   * Starting at
+   * @format int64
+   */
+  startingAt: number;
+  status?: EnumTournamentStatus;
+  /**
+   * Status name
+   * @minLength 1
+   */
+  statusName: string;
+  /** Has sponsor */
+  hasSponsor: boolean;
+  /** Has venue */
+  hasVenue: boolean;
+}
+
+export interface PrizePlacement {
+  /**
+   * Id
+   * @format int32
+   */
+  id?: number;
+  /**
+   * Placement from
+   * @format int32
+   */
+  placementFrom?: number;
+  /**
+   * Placement to
+   * @format int32
+   */
+  placementTo?: number;
+  /**
+   * Prize amount
+   * @format double
+   */
+  prizeAmount?: number;
+  /**
+   * Team id
+   * @format int32
+   */
+  teamId?: number;
+  /** Team name */
+  teamName?: string | null;
+  /** Player items */
+  playerItems?: Int32Item[] | null;
 }
 
 export interface RelatedQuickPoll {
@@ -4808,8 +6301,6 @@ export interface RoleUserListItem {
   userId?: number;
   /** User name */
   userName?: string | null;
-  /** User Type Name */
-  userTypeName?: string | null;
 }
 
 export interface SimpleBackOfficePermissionItem {
@@ -4834,6 +6325,32 @@ export interface SiteSection {
   id?: number;
   /** Site section name */
   name?: string | null;
+}
+
+export interface StagingEarningListItem {
+  /**
+   * Stage id
+   * @format int32
+   */
+  stageId?: number;
+  /** Stage name */
+  stageName?: string | null;
+  /**
+   * Stage order
+   * @format int32
+   */
+  order?: number;
+  /** Child earnings */
+  childEarnings?: ChildEarningListItem[] | null;
+}
+
+export type StartTournamentResp = object;
+
+export interface StartTournamentRespApiRespBase {
+  ret?: EnumRet;
+  msg?: string | null;
+  traceId?: string | null;
+  data?: StartTournamentResp;
 }
 
 export interface SystemLogDetail {
@@ -4954,12 +6471,6 @@ export interface UnAssignRoleRespApiRespBase {
 export interface UserProfile {
   userName?: string | null;
   avatarImage?: string | null;
-}
-
-export interface UserType {
-  /** @format int32 */
-  id?: number;
-  name?: string | null;
 }
 
 export type QueryParamsType = Record<string | number, any>;
@@ -5565,6 +7076,41 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags BroadcastTalents
+     * @name V4BroadcasttalentsFuzzyList
+     * @summary Get fuzzy broadcast talents
+     * @request GET:/api/v4/broadcasttalents/fuzzy
+     * @secure
+     */
+    v4BroadcasttalentsFuzzyList: (
+      query: {
+        /**
+         * Prefix
+         * @minLength 0
+         * @maxLength 30
+         */
+        FuzzyPrefix: string;
+        /**
+         * Max count
+         * @format int32
+         * @min 10
+         * @max 100
+         */
+        MaxCount?: number;
+      },
+      params: RequestParams = {},
+    ) =>
+      this.request<any, GetFuzzyBroadcastTalentsRespApiRespBase>({
+        path: `/api/v4/broadcasttalents/fuzzy`,
+        method: "GET",
+        query: query,
+        secure: true,
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags BroadcastTalents
      * @name V4BroadcasttalentsList
      * @summary Get broadcast talents by condition
      * @request GET:/api/v4/broadcasttalents
@@ -5671,7 +7217,6 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
          * @max 32767
          */
         LanguageId: number;
-        Type: EnumBroadcastTalentType;
         /** IsActive */
         IsActive: boolean;
         /**
@@ -5748,6 +7293,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
          * @maxLength 100
          */
         Youtube?: string;
+        /**
+         * Role type ids
+         * Type (Host=1/Commentator=2/Analyst=3/Observer=4/Interviewer=5/Other=99)
+         */
+        RoleTypeIds: number[];
       },
       params: RequestParams = {},
     ) =>
@@ -5828,7 +7378,6 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
          * @max 32767
          */
         LanguageId: number;
-        Type: EnumBroadcastTalentType;
         /** IsActive */
         IsActive: boolean;
         /**
@@ -5905,6 +7454,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
          * @maxLength 100
          */
         Youtube?: string;
+        /**
+         * Role type ids
+         * Type (Host=1/Commentator=2/Analyst=3/Observer=4/Interviewer=5/Other=99)
+         */
+        RoleTypeIds: number[];
       },
       params: RequestParams = {},
     ) =>
@@ -6018,6 +7572,206 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
         path: `/api/v4/broadcasttalents/${broadcastid}/media-items/${mediaitemid}`,
         method: "DELETE",
         secure: true,
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Currency
+     * @name V4CurrencyCurrentExchangeRateList
+     * @summary Get current exchange rate
+     * @request GET:/api/v4/currency/current-exchange-rate
+     * @secure
+     */
+    v4CurrencyCurrentExchangeRateList: (
+      query?: {
+        /**
+         * Currency
+         * USD = 1,
+         * EUR = 2,
+         * CNY = 3,
+         * RUB = 4,
+         * GBP = 5,
+         * PHP = 6,
+         * AUD = 7,
+         * BGN = 8,
+         * BRL = 9,
+         * CAD = 10,
+         * CZK = 11,
+         * DKK = 12,
+         * HKD = 13,
+         * HUF = 14,
+         * IDR = 15,
+         * ILS = 16,
+         * INR = 17,
+         * KRW = 18,
+         * MXN = 19,
+         * MYR = 20,
+         * NZD = 21,
+         * PLN = 22,
+         * RON = 23,
+         * SEK = 24,
+         * SGD = 25,
+         * THB = 26,
+         * TRY = 27,
+         * ZAR = 28,
+         * JPY = 29,
+         */
+        Currency?: EnumCurrency;
+        /**
+         * Amount
+         * @format double
+         */
+        Amount?: number;
+      },
+      params: RequestParams = {},
+    ) =>
+      this.request<any, GetCurrentExchangeRateResp>({
+        path: `/api/v4/currency/current-exchange-rate`,
+        method: "GET",
+        query: query,
+        secure: true,
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Earnings
+     * @name V4EarningsList
+     * @summary Get earnings
+     * @request GET:/api/v4/earnings
+     * @secure
+     */
+    v4EarningsList: (
+      query?: {
+        /**
+         * Parent tournament id
+         * @format int32
+         * @min 1
+         * @max 2147483647
+         */
+        ParentId?: number;
+        /**
+         * Parent tournament name
+         * @minLength 1
+         * @maxLength 80
+         */
+        Name?: string;
+        /**
+         * Game id
+         * @format int32
+         * @min 1
+         * @max 32767
+         */
+        GameId?: number;
+        /**
+         * Prize pool status
+         * NoPrizePool = 0,
+         * NoPrizePoolLogged = 1,
+         * NoStructureDefined = 2,
+         * NoWinnersBacklogged = 3,
+         * MissingWinners = 4,
+         * Complete = 5,
+         */
+        PrizePoolStatus?: EnumPrizePoolStatus;
+        /**
+         * @format int32
+         * @min 1
+         * @max 2147483647
+         */
+        PageNo?: number;
+        /**
+         * @format int32
+         * @min 1
+         * @max 100
+         */
+        PageSize?: number;
+      },
+      params: RequestParams = {},
+    ) =>
+      this.request<any, GetEarningsRespApiRespBase>({
+        path: `/api/v4/earnings`,
+        method: "GET",
+        query: query,
+        secure: true,
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Earnings
+     * @name V4EarningsDetail
+     * @summary Get child earnings by parent
+     * @request GET:/api/v4/earnings/{id}
+     * @secure
+     */
+    v4EarningsDetail: (id: number, params: RequestParams = {}) =>
+      this.request<any, GetChildEarningsRespApiRespBase>({
+        path: `/api/v4/earnings/${id}`,
+        method: "GET",
+        secure: true,
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Earnings
+     * @name V4EarningsChildDetail
+     * @summary Get child earning prize pool
+     * @request GET:/api/v4/earnings/child/{id}
+     * @secure
+     */
+    v4EarningsChildDetail: (id: number, params: RequestParams = {}) =>
+      this.request<any, GetChildEarningPrizePoolRespApiRespBase>({
+        path: `/api/v4/earnings/child/${id}`,
+        method: "GET",
+        secure: true,
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Earnings
+     * @name V4EarningsChildPartialUpdate
+     * @summary Modify child prize pool
+     * @request PATCH:/api/v4/earnings/child/{id}
+     * @secure
+     */
+    v4EarningsChildPartialUpdate: (id: number, data: ModChildEarningPrizePoolReq, params: RequestParams = {}) =>
+      this.request<any, ApiRespBase>({
+        path: `/api/v4/earnings/child/${id}`,
+        method: "PATCH",
+        body: data,
+        secure: true,
+        type: ContentType.Json,
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Earnings
+     * @name V4EarningsChildStatusPartialUpdate
+     * @summary Modify child prize pool status
+     * @request PATCH:/api/v4/earnings/child/{id}/status
+     * @secure
+     */
+    v4EarningsChildStatusPartialUpdate: (
+      id: number,
+      data: ModChildEarningPrizePoolStatusReq,
+      params: RequestParams = {},
+    ) =>
+      this.request<any, ModChildEarningPrizePoolStatusRespApiRespBase>({
+        path: `/api/v4/earnings/child/${id}/status`,
+        method: "PATCH",
+        body: data,
+        secure: true,
+        type: ContentType.Json,
         ...params,
       }),
 
@@ -6716,7 +8470,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       },
       params: RequestParams = {},
     ) =>
-      this.request<any, GetGameRegionsResp>({
+      this.request<any, GetGameRegionsRespApiRespBase>({
         path: `/api/v4/game-regions`,
         method: "GET",
         query: query,
@@ -6734,7 +8488,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @secure
      */
     v4GameRegionsCreate: (data: AddGameRegionReq, params: RequestParams = {}) =>
-      this.request<any, AddGameRegionResp>({
+      this.request<any, AddGameRegionRespApiRespBase>({
         path: `/api/v4/game-regions`,
         method: "POST",
         body: data,
@@ -6753,7 +8507,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @secure
      */
     v4GameRegionsDetail: (id: number, params: RequestParams = {}) =>
-      this.request<any, GetGameRegionResp>({
+      this.request<any, GetGameRegionRespApiRespBase>({
         path: `/api/v4/game-regions/${id}`,
         method: "GET",
         secure: true,
@@ -6770,7 +8524,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @secure
      */
     v4GameRegionsPartialUpdate: (id: number, data: ModGameRegionReq, params: RequestParams = {}) =>
-      this.request<any, ModGameRegionResp>({
+      this.request<any, ModGameRegionRespApiRespBase>({
         path: `/api/v4/game-regions/${id}`,
         method: "PATCH",
         body: data,
@@ -6789,7 +8543,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @secure
      */
     v4GameRegionsDelete: (id: number, params: RequestParams = {}) =>
-      this.request<any, DelGameRegionResp>({
+      this.request<any, DelGameRegionRespApiRespBase>({
         path: `/api/v4/game-regions/${id}`,
         method: "DELETE",
         secure: true,
@@ -6806,7 +8560,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @secure
      */
     v4GameRegionsTranslationsDetail: (id: number, params: RequestParams = {}) =>
-      this.request<any, GetGameRegionTranslationResp>({
+      this.request<any, GetGameRegionTranslationRespApiRespBase>({
         path: `/api/v4/game-regions/${id}/translations`,
         method: "GET",
         secure: true,
@@ -7682,35 +9436,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
          */
         GameId: number;
         /**
-         * Title
-         * @minLength 0
-         * @maxLength 25
-         */
-        Title: string;
-        /**
-         * ReferredToBy
-         * @format int32
-         * @min 0
-         * @max 1
-         */
-        ReferredToBy: number;
-        /**
-         * Tagline
-         * @minLength 0
-         * @maxLength 100
-         */
-        Tagline: string;
-        /**
          * Description
          * @minLength 0
          * @maxLength 10000
          */
         Description: string;
-        /**
-         * Image file
-         * @format binary
-         */
-        ImageFile?: File;
         /**
          * Icon file
          * @format binary
@@ -7778,35 +9508,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
          */
         GameId: number;
         /**
-         * Title
-         * @minLength 0
-         * @maxLength 25
-         */
-        Title: string;
-        /**
-         * ReferredToBy
-         * @format int32
-         * @min 0
-         * @max 1
-         */
-        ReferredToBy: number;
-        /**
-         * Tagline
-         * @minLength 0
-         * @maxLength 100
-         */
-        Tagline: string;
-        /**
          * Description
          * @minLength 0
          * @maxLength 10000
          */
         Description: string;
-        /**
-         * Image file
-         * @format binary
-         */
-        ImageFile?: File;
         /**
          * Icon file
          * @format binary
@@ -8329,6 +10035,48 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
         body: data,
         secure: true,
         type: ContentType.Json,
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Maps
+     * @name V4MapsFuzzyList
+     * @summary Get fuzzy maps
+     * @request GET:/api/v4/maps/fuzzy
+     * @secure
+     */
+    v4MapsFuzzyList: (
+      query: {
+        /**
+         * Game id
+         * @format int32
+         * @min 1
+         * @max 32767
+         */
+        GameId?: number;
+        /**
+         * Fuzzy prefix
+         * @minLength 1
+         * @maxLength 50
+         */
+        FuzzyPrefix: string;
+        /**
+         * Max count
+         * @format int32
+         * @min 10
+         * @max 100
+         */
+        MaxCount?: number;
+      },
+      params: RequestParams = {},
+    ) =>
+      this.request<any, GetFuzzyMapsRespApiRespBase>({
+        path: `/api/v4/maps/fuzzy`,
+        method: "GET",
+        query: query,
+        secure: true,
         ...params,
       }),
 
@@ -9454,23 +11202,6 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Options
-     * @name V4OptionsUserTypesList
-     * @summary Get user type options
-     * @request GET:/api/v4/options/user-types
-     * @secure
-     */
-    v4OptionsUserTypesList: (params: RequestParams = {}) =>
-      this.request<any, GetUserTypeOptionsRespApiRespBase>({
-        path: `/api/v4/options/user-types`,
-        method: "GET",
-        secure: true,
-        ...params,
-      }),
-
-    /**
-     * No description
-     *
-     * @tags Options
      * @name V4OptionsGendersList
      * @summary Get gender options
      * @request GET:/api/v4/options/genders
@@ -9562,6 +11293,23 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Options
+     * @name V4OptionsBroadcastTalentRolesList
+     * @summary Get broadcast talent roles options
+     * @request GET:/api/v4/options/broadcast-talent-roles
+     * @secure
+     */
+    v4OptionsBroadcastTalentRolesList: (params: RequestParams = {}) =>
+      this.request<any, GetBroadcastTalentRoleOptionsRespApiRespBase>({
+        path: `/api/v4/options/broadcast-talent-roles`,
+        method: "GET",
+        secure: true,
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Options
      * @name V4OptionsServersList
      * @summary Get servers(locations) options
      * @request GET:/api/v4/options/servers
@@ -9574,10 +11322,78 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       },
       params: RequestParams = {},
     ) =>
-      this.request<any, GetServerOptionsRespApiRespBase>({
+      this.request<any, GetServerOptionsRespListApiRespBase>({
         path: `/api/v4/options/servers`,
         method: "GET",
         query: query,
+        secure: true,
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Options
+     * @name V4OptionsTournamentPointsAwardedList
+     * @summary Get tournament points awarded options
+     * @request GET:/api/v4/options/tournament/points-awarded
+     * @secure
+     */
+    v4OptionsTournamentPointsAwardedList: (params: RequestParams = {}) =>
+      this.request<any, GetPointsAwardedOptionsRespListApiRespBase>({
+        path: `/api/v4/options/tournament/points-awarded`,
+        method: "GET",
+        secure: true,
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Options
+     * @name V4OptionsEarningPrizePoolStatusList
+     * @summary Get earning prize pool status
+     * @request GET:/api/v4/options/earning-prize-pool-status
+     * @secure
+     */
+    v4OptionsEarningPrizePoolStatusList: (params: RequestParams = {}) =>
+      this.request<any, GetPrizePoolStatusOptionsRespApiRespBase>({
+        path: `/api/v4/options/earning-prize-pool-status`,
+        method: "GET",
+        secure: true,
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Options
+     * @name V4OptionsCurrenciesList
+     * @summary Get currency options
+     * @request GET:/api/v4/options/currencies
+     * @secure
+     */
+    v4OptionsCurrenciesList: (params: RequestParams = {}) =>
+      this.request<any, GetPrizePoolStatusOptionsRespApiRespBase>({
+        path: `/api/v4/options/currencies`,
+        method: "GET",
+        secure: true,
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Options
+     * @name V4OptionsTournamentStatesList
+     * @summary Get tournament state options
+     * @request GET:/api/v4/options/tournament-states
+     * @secure
+     */
+    v4OptionsTournamentStatesList: (params: RequestParams = {}) =>
+      this.request<any, GetParentTournamentStateOptionsRespApiRespBase>({
+        path: `/api/v4/options/tournament-states`,
+        method: "GET",
         secure: true,
         ...params,
       }),
@@ -9829,69 +11645,85 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     v4PlayersCreate: (
       data: {
         /**
+         * User id
          * @format int32
          * @min 1
          * @max 2147483647
          */
         UserId?: number;
+        /** Is active */
         IsActive: boolean;
         /**
+         * Nickname
          * @minLength 0
          * @maxLength 30
          */
         NickName: string;
         /**
+         * Firstname
          * @minLength 0
          * @maxLength 50
          */
         FirstName?: string;
         /**
+         * Lastname
          * @minLength 0
          * @maxLength 50
          */
         LastName?: string;
         Gender: EnumGender;
         /**
+         * Date of birth
          * ex:2022-12-01
          * @format date
          */
         DateOfBirth?: string;
         /**
+         * Country id
          * @format int32
          * @min 1
          * @max 32767
          */
         CountryId: number;
         /**
+         * Initial rating
          * @format int32
          * @min 1
          * @max 32767
          */
-        InitialRating: number;
+        InitialRating?: number;
         /**
+         * Primary game id
          * @format int32
          * @min 1
          * @max 32767
          */
         PrimaryGameId?: number;
-        /** @format binary */
+        /**
+         * Image
+         * @format binary
+         */
         Image?: File;
         /**
+         * Description
          * @minLength 0
          * @maxLength 5000
          */
         Descriptions?: string;
         /**
+         * Facebook
          * @minLength 0
          * @maxLength 100
          */
         FaceBook?: string;
         /**
+         * Twitter
          * @minLength 0
          * @maxLength 100
          */
         Twitter?: string;
         /**
+         * Youtube
          * @minLength 0
          * @maxLength 100
          */
@@ -9938,71 +11770,90 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       id: number,
       data: {
         /**
+         * Player id
          * @format int32
          * @min 1
          * @max 2147483647
          */
         PlayerId: number;
         /**
+         * User id
          * @format int32
          * @min 1
          * @max 2147483647
          */
         UserId?: number;
+        /** Is active */
         IsActive: boolean;
         /**
+         * Nickname
          * @minLength 0
          * @maxLength 30
          */
         NickName: string;
         /**
+         * Firstname
          * @minLength 0
          * @maxLength 50
          */
         FirstName?: string;
         /**
+         * Lastname
          * @minLength 0
          * @maxLength 50
          */
         LastName?: string;
         Gender: EnumGender;
         /**
+         * Date of birth
          * ex:2022-12-01
          * @format date
          */
         DateOfBirth?: string;
         /**
+         * Country id
          * @format int32
          * @min 1
          * @max 32767
          */
         CountryId: number;
         /**
+         * Primary game id
          * @format int32
          * @min 1
          * @max 32767
          */
         PrimaryGameId?: number;
-        /** @format binary */
+        /**
+         * Image
+         * @format binary
+         */
         Image?: File;
-        /** if IsRemoveImage = true will remove Image and set ImageFilePath = null */
+        /**
+         * is remove image
+         * if IsRemoveImage = true will remove Image and set ImageFilePath = null
+         */
         IsRemoveImage?: boolean;
         /**
+         * Descriptions
          * @minLength 0
          * @maxLength 5000
          */
         Descriptions?: string;
         /**
+         * Facebook
          * @minLength 0
          * @maxLength 100
          */
         FaceBook?: string;
         /**
+         * Twitter
          * @minLength 0
          * @maxLength 100
          */
         Twitter?: string;
         /**
+         * Youtube
          * @minLength 0
          * @maxLength 100
          */
@@ -10048,11 +11899,13 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     v4PlayersFuzzyList: (
       query: {
         /**
+         * Fuzzy prefix
          * @minLength 0
          * @maxLength 30
          */
         FuzzyPrefix: string;
         /**
+         * Max count
          * @format int32
          * @min 10
          * @max 100
@@ -10945,6 +12798,41 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     /**
      * No description
      *
+     * @tags Sponsors
+     * @name V4SponsorsFuzzyList
+     * @summary Get fuzzy sponsors
+     * @request GET:/api/v4/sponsors/fuzzy
+     * @secure
+     */
+    v4SponsorsFuzzyList: (
+      query: {
+        /**
+         * Fuzzy prefix
+         * @minLength 0
+         * @maxLength 30
+         */
+        FuzzyPrefix: string;
+        /**
+         * Max count
+         * @format int32
+         * @min 10
+         * @max 100
+         */
+        MaxCount?: number;
+      },
+      params: RequestParams = {},
+    ) =>
+      this.request<any, GetFuzzySponsorsRespApiRespBase>({
+        path: `/api/v4/sponsors/fuzzy`,
+        method: "GET",
+        query: query,
+        secure: true,
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
      * @tags Teams
      * @name V4TeamsList
      * @summary Get teams
@@ -11066,7 +12954,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
          * @max 32767
          */
         InitialRating?: number;
-        ExcludeRankings?: boolean;
+        ExcludeRankings: boolean;
         /**
          * @minLength 0
          * @maxLength 100
@@ -11160,7 +13048,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
          * @max 2147483647
          */
         ManageId?: number;
-        ExcludedRankings?: boolean;
+        ExcludedRankings: boolean;
         /** @format binary */
         Image?: File;
         /** if IsRemoveImage = true will remove Image and set ImageFilePath = null */
@@ -11401,6 +13289,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
          * @max 100
          */
         MaxCount?: number;
+        /**
+         * Game id
+         * @format int32
+         */
+        GameId?: number;
       },
       params: RequestParams = {},
     ) =>
@@ -11408,6 +13301,23 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
         path: `/api/v4/teams/fuzzy`,
         method: "GET",
         query: query,
+        secure: true,
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Teams
+     * @name V4TeamsTeamPlayerOptionsDetail
+     * @summary Get team player options for tournament registrations
+     * @request GET:/api/v4/teams/{teamId}/team-player-options
+     * @secure
+     */
+    v4TeamsTeamPlayerOptionsDetail: (teamId: number, params: RequestParams = {}) =>
+      this.request<any, GetTeamPlayerOptionsRespApiRespBase>({
+        path: `/api/v4/teams/${teamId}/team-player-options`,
+        method: "GET",
         secure: true,
         ...params,
       }),
@@ -11584,7 +13494,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      *
      * @tags Tournaments
      * @name V4TournamentsFuzzyList
-     * @summary Get fuzzy users
+     * @summary Get fuzzy tournaments
      * @request GET:/api/v4/tournaments/fuzzy
      * @secure
      */
@@ -11615,6 +13525,1223 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     /**
      * No description
      *
+     * @tags Tournaments
+     * @name V4TournamentsParentsBroadcastTalentsDetail
+     * @summary Get parent tournament broadcast talents
+     * @request GET:/api/v4/tournaments/parents/{parentId}/broadcast-talents
+     * @secure
+     */
+    v4TournamentsParentsBroadcastTalentsDetail: (
+      parentId: number,
+      query?: {
+        /**
+         * @format int32
+         * @min 1
+         * @max 2147483647
+         */
+        PageNo?: number;
+        /**
+         * @format int32
+         * @min 1
+         * @max 100
+         */
+        PageSize?: number;
+      },
+      params: RequestParams = {},
+    ) =>
+      this.request<any, GetParentBroadcastTalentsRespApiRespBase>({
+        path: `/api/v4/tournaments/parents/${parentId}/broadcast-talents`,
+        method: "GET",
+        query: query,
+        secure: true,
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Tournaments
+     * @name V4TournamentsParentsBroadcastTalentsCreate
+     * @summary Add parent tournament broadcast talent
+     * @request POST:/api/v4/tournaments/parents/{parentId}/broadcast-talents
+     * @secure
+     */
+    v4TournamentsParentsBroadcastTalentsCreate: (
+      parentId: number,
+      data: AddParentBroadcastTalentsReq,
+      params: RequestParams = {},
+    ) =>
+      this.request<any, ApiRespBase>({
+        path: `/api/v4/tournaments/parents/${parentId}/broadcast-talents`,
+        method: "POST",
+        body: data,
+        secure: true,
+        type: ContentType.Json,
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Tournaments
+     * @name V4TournamentsParentsBroadcastTalentsDelete
+     * @summary Delete parent tournament broadcast talents
+     * @request DELETE:/api/v4/tournaments/parents/{parentId}/broadcast-talents/{broadcastTalentId}
+     * @secure
+     */
+    v4TournamentsParentsBroadcastTalentsDelete: (
+      parentId: number,
+      broadcastTalentId: number,
+      params: RequestParams = {},
+    ) =>
+      this.request<any, ApiRespBase>({
+        path: `/api/v4/tournaments/parents/${parentId}/broadcast-talents/${broadcastTalentId}`,
+        method: "DELETE",
+        secure: true,
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Tournaments
+     * @name V4TournamentsParentsStagesChildrenCreate
+     * @summary Add child tournament
+     * @request POST:/api/v4/tournaments/parents/{parentid}/stages/{stageid}/children
+     * @secure
+     */
+    v4TournamentsParentsStagesChildrenCreate: (
+      parentid: number,
+      stageid: number,
+      data: {
+        Type: EnumChildTournament;
+        /**
+         * Child tournament name
+         * @minLength 0
+         * @maxLength 80
+         */
+        Name: string;
+        /**
+         * Starting At
+         * @format int64
+         */
+        StartAt?: number;
+        /** IsHidden */
+        IsHidden: boolean;
+        /** IsLan */
+        IsLan: boolean;
+        /**
+         * ValueId
+         * @format int32
+         * @min 1
+         * @max 2147483647
+         */
+        VenueId?: number;
+        /**
+         * Qualify Participants
+         * @format int32
+         * @min 0
+         * @max 32767
+         */
+        QualifyParticipants?: number;
+        /**
+         * Ranking Importance
+         * @format double
+         * @min 0
+         * @max 1
+         */
+        RankingImportance: number;
+        PrizePoolStatus: EnumPrizePoolStatus;
+        PrizePoolCurrency?: EnumCurrency;
+        /**
+         * PrizePool
+         * @format double
+         * @min 0.01
+         * @max 7.922816251426434e+28
+         */
+        PrizePool?: number;
+        /**
+         * Exchange Rate
+         * @format double
+         * @min 0.001
+         * @max 100000
+         */
+        ExchangeRate?: number;
+        /**
+         * PrizePool Usd
+         * @format double
+         * @min 0.01
+         * @max 7.922816251426434e+28
+         */
+        PrizePoolUsd?: number;
+        /**
+         * Grid Id
+         * @format int32
+         * @min 0
+         * @max 2147483647
+         */
+        GridId?: number;
+        /**
+         * Rounds
+         * @format int32
+         * @min 1
+         * @max 32767
+         */
+        Rounds?: number;
+        PointsAwarded?: EnumPointsAwarded;
+        /**
+         * Points for win
+         * @format int32
+         * @min 0
+         * @max 32767
+         */
+        PointsWin?: number;
+        /**
+         * Points for draw
+         * @format int32
+         * @min 0
+         * @max 32767
+         */
+        PointsDraw?: number;
+      },
+      params: RequestParams = {},
+    ) =>
+      this.request<any, AddChildRespApiRespBase>({
+        path: `/api/v4/tournaments/parents/${parentid}/stages/${stageid}/children`,
+        method: "POST",
+        body: data,
+        secure: true,
+        type: ContentType.FormData,
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Tournaments
+     * @name V4TournamentsParentsChildrenDetail
+     * @summary Get child tournament for edit
+     * @request GET:/api/v4/tournaments/parents/{parentid}/children/{childid}
+     * @secure
+     */
+    v4TournamentsParentsChildrenDetail: (parentid: number, childid: number, params: RequestParams = {}) =>
+      this.request<any, GetChildTournamentRespApiRespBase>({
+        path: `/api/v4/tournaments/parents/${parentid}/children/${childid}`,
+        method: "GET",
+        secure: true,
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Tournaments
+     * @name V4TournamentsParentsChildrenPartialUpdate
+     * @summary Modify child tournament
+     * @request PATCH:/api/v4/tournaments/parents/{parentid}/children/{childid}
+     * @secure
+     */
+    v4TournamentsParentsChildrenPartialUpdate: (
+      parentid: number,
+      childid: number,
+      data: {
+        /**
+         * Child tournament name
+         * @minLength 0
+         * @maxLength 80
+         */
+        Name: string;
+        /**
+         * Starting At
+         * @format int64
+         */
+        StartAt?: number;
+        /** IsHidden */
+        IsHidden: boolean;
+        /** IsLan */
+        IsLan: boolean;
+        /**
+         * ValueId
+         * @format int32
+         * @min 1
+         * @max 2147483647
+         */
+        VenueId?: number;
+        /**
+         * Qualify Participants
+         * @format int32
+         * @min 0
+         * @max 32767
+         */
+        QualifyParticipants?: number;
+        /**
+         * Ranking Importance
+         * @format double
+         * @min 0
+         * @max 1
+         */
+        RankingImportance: number;
+        PrizePoolStatus: EnumPrizePoolStatus;
+        PrizePoolCurrency?: EnumCurrency;
+        /**
+         * PrizePool
+         * @format double
+         * @min 0.01
+         * @max 7.922816251426434e+28
+         */
+        PrizePool?: number;
+        /**
+         * Exchange Rate
+         * @format double
+         * @min 0.001
+         * @max 100000
+         */
+        ExchangeRate?: number;
+        /**
+         * PrizePool Usd
+         * @format double
+         * @min 0.01
+         * @max 7.922816251426434e+28
+         */
+        PrizePoolUsd?: number;
+        /**
+         * Grid Id
+         * @format int32
+         * @min 0
+         * @max 2147483647
+         */
+        GridId?: number;
+      },
+      params: RequestParams = {},
+    ) =>
+      this.request<any, ModChildRespApiRespBase>({
+        path: `/api/v4/tournaments/parents/${parentid}/children/${childid}`,
+        method: "PATCH",
+        body: data,
+        secure: true,
+        type: ContentType.FormData,
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Tournaments
+     * @name V4TournamentsParentsChildrenDelete
+     * @summary Delete child tournaments
+     * @request DELETE:/api/v4/tournaments/parents/{parentid}/children/{childid}
+     * @secure
+     */
+    v4TournamentsParentsChildrenDelete: (
+      parentid: number,
+      childid: number,
+      data: DelChildReq,
+      params: RequestParams = {},
+    ) =>
+      this.request<any, DelChildRespApiRespBase>({
+        path: `/api/v4/tournaments/parents/${parentid}/children/${childid}`,
+        method: "DELETE",
+        body: data,
+        secure: true,
+        type: ContentType.Json,
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Tournaments
+     * @name V4TournamentsParentsChildrenDetailDetail
+     * @summary Get child tournament for detail
+     * @request GET:/api/v4/tournaments/parents/{parentid}/children/{childid}/detail
+     * @secure
+     */
+    v4TournamentsParentsChildrenDetailDetail: (parentid: number, childid: number, params: RequestParams = {}) =>
+      this.request<any, GetChildDetailRespApiRespBase>({
+        path: `/api/v4/tournaments/parents/${parentid}/children/${childid}/detail`,
+        method: "GET",
+        secure: true,
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Tournaments
+     * @name V4TournamentsParentsChildrenStartTournamentPartialUpdate
+     * @summary start child tournament
+     * @request PATCH:/api/v4/tournaments/parents/{parentid}/children/{childid}/start-tournament
+     * @secure
+     */
+    v4TournamentsParentsChildrenStartTournamentPartialUpdate: (
+      parentid: number,
+      childid: number,
+      params: RequestParams = {},
+    ) =>
+      this.request<any, StartTournamentRespApiRespBase>({
+        path: `/api/v4/tournaments/parents/${parentid}/children/${childid}/start-tournament`,
+        method: "PATCH",
+        secure: true,
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Tournaments
+     * @name V4TournamentsDataProvidersGridTournamentsList
+     * @summary Get grid tournaments
+     * @request GET:/api/v4/tournaments/data-providers/grid/tournaments
+     * @secure
+     */
+    v4TournamentsDataProvidersGridTournamentsList: (
+      query: {
+        /**
+         * Game Id
+         * @format int32
+         * @min 1
+         * @max 32767
+         */
+        GameId?: number;
+        /**
+         * Date from
+         * @format int64
+         * @min 0
+         */
+        DateFrom: number;
+        /**
+         * Date to
+         * @format int64
+         * @min 0
+         */
+        DateTo: number;
+      },
+      params: RequestParams = {},
+    ) =>
+      this.request<any, GetGridTournamentsRespListApiRespBase>({
+        path: `/api/v4/tournaments/data-providers/grid/tournaments`,
+        method: "GET",
+        query: query,
+        secure: true,
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Tournaments
+     * @name V4TournamentsDataProvidersGridMatchesList
+     * @summary Get grid matches
+     * @request GET:/api/v4/tournaments/data-providers/grid/matches
+     * @secure
+     */
+    v4TournamentsDataProvidersGridMatchesList: (
+      query: {
+        /**
+         * Game Id
+         * @format int32
+         * @min 1
+         * @max 2147483647
+         */
+        ChildTournamentId: number;
+        /**
+         * Date from
+         * @format int64
+         * @min 0
+         */
+        DateFrom: number;
+        /**
+         * Date to
+         * @format int64
+         * @min 0
+         */
+        DateTo: number;
+      },
+      params: RequestParams = {},
+    ) =>
+      this.request<any, GetGridMatchesRespListApiRespBase>({
+        path: `/api/v4/tournaments/data-providers/grid/matches`,
+        method: "GET",
+        query: query,
+        secure: true,
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Tournaments
+     * @name V4TournamentsParentsChildrenMediaItemsDetail
+     * @summary Get child tournament Media items
+     * @request GET:/api/v4/tournaments/parents/{parentid}/children/{childid}/media-items
+     * @secure
+     */
+    v4TournamentsParentsChildrenMediaItemsDetail: (
+      parentid: number,
+      childid: number,
+      query?: {
+        /**
+         * @format int32
+         * @min 1
+         * @max 2147483647
+         */
+        PageNo?: number;
+        /**
+         * @format int32
+         * @min 1
+         * @max 100
+         */
+        PageSize?: number;
+      },
+      params: RequestParams = {},
+    ) =>
+      this.request<any, GetChildMediaItemsRespApiRespBase>({
+        path: `/api/v4/tournaments/parents/${parentid}/children/${childid}/media-items`,
+        method: "GET",
+        query: query,
+        secure: true,
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Tournaments
+     * @name V4TournamentsParentsChildrenMediaItemsCreate
+     * @summary Add child tournament new Media items
+     * @request POST:/api/v4/tournaments/parents/{parentid}/children/{childid}/media-items
+     * @secure
+     */
+    v4TournamentsParentsChildrenMediaItemsCreate: (
+      parentid: number,
+      childid: number,
+      query: {
+        /** Media item Ids */
+        MediaItems: number[];
+      },
+      params: RequestParams = {},
+    ) =>
+      this.request<any, AddChildMediaItemRespApiRespBase>({
+        path: `/api/v4/tournaments/parents/${parentid}/children/${childid}/media-items`,
+        method: "POST",
+        query: query,
+        secure: true,
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Tournaments
+     * @name V4TournamentsParentsChildrenMediaItemsDelete
+     * @summary Delete child tournament Media item
+     * @request DELETE:/api/v4/tournaments/parents/{parentid}/children/{childid}/media-items/{mediaitemid}
+     * @secure
+     */
+    v4TournamentsParentsChildrenMediaItemsDelete: (
+      parentid: number,
+      childid: number,
+      mediaitemid: number,
+      params: RequestParams = {},
+    ) =>
+      this.request<any, DelChildMediaItemRespApiRespBase>({
+        path: `/api/v4/tournaments/parents/${parentid}/children/${childid}/media-items/${mediaitemid}`,
+        method: "DELETE",
+        secure: true,
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Tournaments
+     * @name V4TournamentsParentsChildrenOpponentsDetail
+     * @summary Get child tournament opponents
+     * @request GET:/api/v4/tournaments/parents/{parentid}/children/{childid}/opponents
+     * @secure
+     */
+    v4TournamentsParentsChildrenOpponentsDetail: (parentid: number, childid: number, params: RequestParams = {}) =>
+      this.request<any, GetOpponentsRespApiRespBase>({
+        path: `/api/v4/tournaments/parents/${parentid}/children/${childid}/opponents`,
+        method: "GET",
+        secure: true,
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Tournaments
+     * @name V4TournamentsParentsChildrenOpponentsPartialUpdate
+     * @summary Modify child tournament opponents
+     * @request PATCH:/api/v4/tournaments/parents/{parentid}/children/{childid}/opponents
+     * @secure
+     */
+    v4TournamentsParentsChildrenOpponentsPartialUpdate: (
+      parentid: number,
+      childid: number,
+      data: {
+        Opponents?: ModOpponentsItem[];
+      },
+      params: RequestParams = {},
+    ) =>
+      this.request<any, ModOpponentsRespApiRespBase>({
+        path: `/api/v4/tournaments/parents/${parentid}/children/${childid}/opponents`,
+        method: "PATCH",
+        body: data,
+        secure: true,
+        type: ContentType.FormData,
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Tournaments
+     * @name V4TournamentsParentsList
+     * @summary Get parent tournaments
+     * @request GET:/api/v4/tournaments/parents
+     * @secure
+     */
+    v4TournamentsParentsList: (
+      query?: {
+        /**
+         * Parent tournament name
+         * @minLength 1
+         * @maxLength 80
+         */
+        Name?: string;
+        /**
+         * Game id
+         * @format int32
+         * @min 1
+         * @max 32767
+         */
+        GameId?: number;
+        /**
+         * Frontend id
+         * @format int32
+         * @min 1
+         * @max 32767
+         */
+        FrontendId?: number;
+        /** Is hidden */
+        IsHidden?: boolean;
+        /** Is lan */
+        IsLan?: boolean;
+        /**
+         * Venue country id
+         * @format int32
+         */
+        VenueCountryId?: number;
+        /**
+         * Venue id
+         * @format int32
+         */
+        VenueId?: number;
+        /**
+         * Parent tournament id
+         * @format int32
+         */
+        ParentId?: number;
+        /**
+         * Created from
+         * @format int64
+         */
+        CreatedFrom?: number;
+        /**
+         * Created to
+         * @format int64
+         */
+        CreatedTo?: number;
+        /**
+         * Starting from
+         * @format int64
+         */
+        StartingFrom?: number;
+        /**
+         * Starting to
+         * @format int64
+         */
+        StartingTo?: number;
+        /**
+         * Created user id
+         * @format int32
+         */
+        CreatedUserId?: number;
+        /**
+         * Map id
+         * @format int32
+         */
+        MapId?: number;
+        /**
+         * Sponsor id
+         * @format int32
+         */
+        SponsorId?: number;
+        /**
+         * State
+         * Live = 1
+         * Upcoming = 2
+         * Completed = 3
+         * Canceled = 4
+         * Featured = 5
+         */
+        State?: EnumParentTournamentState;
+        /**
+         * @format int32
+         * @min 1
+         * @max 2147483647
+         */
+        PageNo?: number;
+        /**
+         * @format int32
+         * @min 1
+         * @max 100
+         */
+        PageSize?: number;
+      },
+      params: RequestParams = {},
+    ) =>
+      this.request<any, GetParentsRespApiRespBase>({
+        path: `/api/v4/tournaments/parents`,
+        method: "GET",
+        query: query,
+        secure: true,
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Tournaments
+     * @name V4TournamentsParentsCreate
+     * @summary Add parent tournament
+     * @request POST:/api/v4/tournaments/parents
+     * @secure
+     */
+    v4TournamentsParentsCreate: (
+      data: {
+        /**
+         * Game id
+         * @format int32
+         * @min 1
+         * @max 32767
+         */
+        GameId: number;
+        /**
+         * Frontend id
+         * @format int32
+         * @min 1
+         * @max 32767
+         */
+        FrontendId?: number;
+        /**
+         * Team size
+         * @format int32
+         * @min 1
+         * @max 32767
+         */
+        TeamSize: number;
+        /** Is player based */
+        IsPlayerBased: boolean;
+        /** Is featured */
+        IsFeatured: boolean;
+        /** Is hidden */
+        IsHidden: boolean;
+        /**
+         * Start at
+         * @format int64
+         * @min 0
+         */
+        StartingAt: number;
+        /** Is lan */
+        IsLan: boolean;
+        /**
+         * Venue id
+         * @format int32
+         * @min 1
+         * @max 2147483647
+         */
+        VenueId?: number;
+        /**
+         * Tournament name
+         * @minLength 1
+         * @maxLength 80
+         */
+        Name: string;
+        /**
+         * Description
+         * @minLength 1
+         * @maxLength 4096
+         */
+        Description: string;
+        /** Sponsor ids */
+        SponsorIds: number[];
+        /** Map ids */
+        MapIds: number[];
+        /**
+         * Image file
+         * @format binary
+         */
+        ImageFile?: File;
+      },
+      params: RequestParams = {},
+    ) =>
+      this.request<any, AddParentRespApiRespBase>({
+        path: `/api/v4/tournaments/parents`,
+        method: "POST",
+        body: data,
+        secure: true,
+        type: ContentType.FormData,
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Tournaments
+     * @name V4TournamentsParentsDetail
+     * @summary Get parent tournament for edit
+     * @request GET:/api/v4/tournaments/parents/{parentId}
+     * @secure
+     */
+    v4TournamentsParentsDetail: (parentId: number, params: RequestParams = {}) =>
+      this.request<any, GetParentRespApiRespBase>({
+        path: `/api/v4/tournaments/parents/${parentId}`,
+        method: "GET",
+        secure: true,
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Tournaments
+     * @name V4TournamentsParentsPartialUpdate
+     * @summary Modify parent tournament
+     * @request PATCH:/api/v4/tournaments/parents/{parentId}
+     * @secure
+     */
+    v4TournamentsParentsPartialUpdate: (
+      parentId: number,
+      data: {
+        /**
+         * Parent tournament id
+         * @format int32
+         * @min 1
+         * @max 2147483647
+         */
+        ParentId: number;
+        /**
+         * Frontend id
+         * null: ALL
+         * @format int32
+         * @min 1
+         * @max 32767
+         */
+        FrontendId?: number;
+        /** Is featured */
+        IsFeatured: boolean;
+        /** Is hidden */
+        IsHidden: boolean;
+        /**
+         * Start at
+         * @format int64
+         * @min 0
+         */
+        StartingAt: number;
+        /** Is lan */
+        IsLan: boolean;
+        /**
+         * Venue id
+         * @format int32
+         * @min 1
+         * @max 2147483647
+         */
+        VenueId?: number;
+        /**
+         * Parent tournament name
+         * @minLength 1
+         * @maxLength 80
+         */
+        Name: string;
+        /**
+         * Description
+         * @minLength 1
+         * @maxLength 4096
+         */
+        Description: string;
+        /**
+         * Sponsor ids
+         * [] is clear all
+         */
+        SponsorIds: number[];
+        /**
+         * Map ids
+         * [] is clear all
+         */
+        MapIds: number[];
+        /**
+         * Image file
+         * @format binary
+         */
+        ImageFile?: File;
+      },
+      params: RequestParams = {},
+    ) =>
+      this.request<any, ModParentRespApiRespBase>({
+        path: `/api/v4/tournaments/parents/${parentId}`,
+        method: "PATCH",
+        body: data,
+        secure: true,
+        type: ContentType.FormData,
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Tournaments
+     * @name V4TournamentsParentsDelete
+     * @summary Delete parent tournaments
+     * @request DELETE:/api/v4/tournaments/parents/{parentId}
+     * @secure
+     */
+    v4TournamentsParentsDelete: (parentId: number, data: DeleteParentReq, params: RequestParams = {}) =>
+      this.request<any, DeleteParentRespApiRespBase>({
+        path: `/api/v4/tournaments/parents/${parentId}`,
+        method: "DELETE",
+        body: data,
+        secure: true,
+        type: ContentType.Json,
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Tournaments
+     * @name V4TournamentsParentsDetailDetail
+     * @summary Get parent tournament for detail
+     * @request GET:/api/v4/tournaments/parents/{parentId}/detail
+     * @secure
+     */
+    v4TournamentsParentsDetailDetail: (parentId: number, params: RequestParams = {}) =>
+      this.request<any, GetParentDetailRespApiRespBase>({
+        path: `/api/v4/tournaments/parents/${parentId}/detail`,
+        method: "GET",
+        secure: true,
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Tournaments
+     * @name V4TournamentsParentsChildrenTeamRegistrationsDetail
+     * @summary Get child team registrations
+     * @request GET:/api/v4/tournaments/parents/{parentId}/children/{childId}/team-registrations
+     * @secure
+     */
+    v4TournamentsParentsChildrenTeamRegistrationsDetail: (
+      parentId: number,
+      childId: number,
+      params: RequestParams = {},
+    ) =>
+      this.request<any, ChildRegistrationTeamListItemGetChildRegistrationsRespApiRespBase>({
+        path: `/api/v4/tournaments/parents/${parentId}/children/${childId}/team-registrations`,
+        method: "GET",
+        secure: true,
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Tournaments
+     * @name V4TournamentsParentsChildrenTeamRegistrationsCreate
+     * @summary Add child team registrations
+     * @request POST:/api/v4/tournaments/parents/{parentId}/children/{childId}/team-registrations
+     * @secure
+     */
+    v4TournamentsParentsChildrenTeamRegistrationsCreate: (
+      parentId: number,
+      childId: number,
+      data: AddChildTeamRegistrationsReq,
+      params: RequestParams = {},
+    ) =>
+      this.request<any, ApiRespBase>({
+        path: `/api/v4/tournaments/parents/${parentId}/children/${childId}/team-registrations`,
+        method: "POST",
+        body: data,
+        secure: true,
+        type: ContentType.Json,
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Tournaments
+     * @name V4TournamentsParentsChildrenTeamRegistrationsDetail2
+     * @summary Get child team registration
+     * @request GET:/api/v4/tournaments/parents/{parentId}/children/{childId}/team-registrations/{registerId}
+     * @originalName v4TournamentsParentsChildrenTeamRegistrationsDetail
+     * @duplicate
+     * @secure
+     */
+    v4TournamentsParentsChildrenTeamRegistrationsDetail2: (
+      parentId: number,
+      childId: number,
+      registerId: number,
+      params: RequestParams = {},
+    ) =>
+      this.request<any, GetChildTeamRegistrationRespApiRespBase>({
+        path: `/api/v4/tournaments/parents/${parentId}/children/${childId}/team-registrations/${registerId}`,
+        method: "GET",
+        secure: true,
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Tournaments
+     * @name V4TournamentsParentsChildrenTeamRegistrationsPartialUpdate
+     * @summary Modify child team registration
+     * @request PATCH:/api/v4/tournaments/parents/{parentId}/children/{childId}/team-registrations/{registerId}
+     * @secure
+     */
+    v4TournamentsParentsChildrenTeamRegistrationsPartialUpdate: (
+      parentId: number,
+      childId: number,
+      registerId: number,
+      data: ModChildTeamRegistrationReq,
+      params: RequestParams = {},
+    ) =>
+      this.request<any, ApiRespBase>({
+        path: `/api/v4/tournaments/parents/${parentId}/children/${childId}/team-registrations/${registerId}`,
+        method: "PATCH",
+        body: data,
+        secure: true,
+        type: ContentType.Json,
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Tournaments
+     * @name V4TournamentsParentsChildrenTeamRegistrationsDelete
+     * @summary Delete child team registration
+     * @request DELETE:/api/v4/tournaments/parents/{parentId}/children/{childId}/team-registrations/{registerId}
+     * @secure
+     */
+    v4TournamentsParentsChildrenTeamRegistrationsDelete: (
+      parentId: number,
+      childId: number,
+      registerId: number,
+      params: RequestParams = {},
+    ) =>
+      this.request<any, ApiRespBase>({
+        path: `/api/v4/tournaments/parents/${parentId}/children/${childId}/team-registrations/${registerId}`,
+        method: "DELETE",
+        secure: true,
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Tournaments
+     * @name V4TournamentsParentsChildrenPlayerRegistrationsDetail
+     * @summary Get child player registrations
+     * @request GET:/api/v4/tournaments/parents/{parentId}/children/{childId}/player-registrations
+     * @secure
+     */
+    v4TournamentsParentsChildrenPlayerRegistrationsDetail: (
+      parentId: number,
+      childId: number,
+      params: RequestParams = {},
+    ) =>
+      this.request<any, ChildRegistrationTeamListItemGetChildRegistrationsRespApiRespBase>({
+        path: `/api/v4/tournaments/parents/${parentId}/children/${childId}/player-registrations`,
+        method: "GET",
+        secure: true,
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Tournaments
+     * @name V4TournamentsParentsChildrenPlayerRegistrationsCreate
+     * @summary Add child player registrations
+     * @request POST:/api/v4/tournaments/parents/{parentId}/children/{childId}/player-registrations
+     * @secure
+     */
+    v4TournamentsParentsChildrenPlayerRegistrationsCreate: (
+      parentId: number,
+      childId: number,
+      data: AddChildPlayerRegistrationsReq,
+      params: RequestParams = {},
+    ) =>
+      this.request<any, ApiRespBase>({
+        path: `/api/v4/tournaments/parents/${parentId}/children/${childId}/player-registrations`,
+        method: "POST",
+        body: data,
+        secure: true,
+        type: ContentType.Json,
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Tournaments
+     * @name V4TournamentsParentsChildrenPlayerRegistrationsPartialUpdate
+     * @summary Modify child player registration
+     * @request PATCH:/api/v4/tournaments/parents/{parentId}/children/{childId}/player-registrations/{registerId}
+     * @secure
+     */
+    v4TournamentsParentsChildrenPlayerRegistrationsPartialUpdate: (
+      parentId: number,
+      childId: number,
+      registerId: number,
+      data: ModChildPlayerRegistrationReq,
+      params: RequestParams = {},
+    ) =>
+      this.request<any, ApiRespBase>({
+        path: `/api/v4/tournaments/parents/${parentId}/children/${childId}/player-registrations/${registerId}`,
+        method: "PATCH",
+        body: data,
+        secure: true,
+        type: ContentType.Json,
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Tournaments
+     * @name V4TournamentsParentsChildrenPlayerRegistrationsDelete
+     * @summary Delete child player registration
+     * @request DELETE:/api/v4/tournaments/parents/{parentId}/children/{childId}/player-registrations/{registerId}
+     * @secure
+     */
+    v4TournamentsParentsChildrenPlayerRegistrationsDelete: (
+      parentId: number,
+      childId: number,
+      registerId: number,
+      params: RequestParams = {},
+    ) =>
+      this.request<any, ApiRespBase>({
+        path: `/api/v4/tournaments/parents/${parentId}/children/${childId}/player-registrations/${registerId}`,
+        method: "DELETE",
+        secure: true,
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Tournaments
+     * @name V4TournamentsParentsStagesDetail
+     * @summary Get parent stages
+     * @request GET:/api/v4/tournaments/parents/{parentId}/stages
+     * @secure
+     */
+    v4TournamentsParentsStagesDetail: (parentId: number, params: RequestParams = {}) =>
+      this.request<any, GetParentStagesRespApiRespBase>({
+        path: `/api/v4/tournaments/parents/${parentId}/stages`,
+        method: "GET",
+        secure: true,
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Tournaments
+     * @name V4TournamentsParentsStagesPartialUpdate
+     * @summary Modify parent stages
+     * @request PATCH:/api/v4/tournaments/parents/{parentId}/stages
+     * @secure
+     */
+    v4TournamentsParentsStagesPartialUpdate: (parentId: number, data: ModParentStagesReq, params: RequestParams = {}) =>
+      this.request<any, ApiRespBase>({
+        path: `/api/v4/tournaments/parents/${parentId}/stages`,
+        method: "PATCH",
+        body: data,
+        secure: true,
+        type: ContentType.Json,
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Tournaments
+     * @name V4TournamentsParentsStagesForEditDetail
+     * @summary Get parent stages for edit
+     * @request GET:/api/v4/tournaments/parents/{parentId}/stages-for-edit
+     * @secure
+     */
+    v4TournamentsParentsStagesForEditDetail: (parentId: number, params: RequestParams = {}) =>
+      this.request<any, GetParentStagesForEditRespApiRespBase>({
+        path: `/api/v4/tournaments/parents/${parentId}/stages-for-edit`,
+        method: "GET",
+        secure: true,
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Tournaments
+     * @name V4TournamentsParentsStagesPartialUpdate2
+     * @summary Modify parent stage
+     * @request PATCH:/api/v4/tournaments/parents/{parentId}/stages/{stageId}
+     * @originalName v4TournamentsParentsStagesPartialUpdate
+     * @duplicate
+     * @secure
+     */
+    v4TournamentsParentsStagesPartialUpdate2: (
+      parentId: number,
+      stageId: number,
+      data: ModParentStageReq,
+      params: RequestParams = {},
+    ) =>
+      this.request<any, ApiRespBase>({
+        path: `/api/v4/tournaments/parents/${parentId}/stages/${stageId}`,
+        method: "PATCH",
+        body: data,
+        secure: true,
+        type: ContentType.Json,
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Tournaments
+     * @name V4TournamentsParentsStagesDelete
+     * @summary Delete parent stage
+     * @request DELETE:/api/v4/tournaments/parents/{parentId}/stages/{stageId}
+     * @secure
+     */
+    v4TournamentsParentsStagesDelete: (parentId: number, stageId: number, params: RequestParams = {}) =>
+      this.request<any, ApiRespBase>({
+        path: `/api/v4/tournaments/parents/${parentId}/stages/${stageId}`,
+        method: "DELETE",
+        secure: true,
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
      * @tags Users
      * @name V4UsersList
      * @summary Get users
@@ -11624,19 +14751,24 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     v4UsersList: (
       query?: {
         /**
+         * Username
          * @minLength 1
          * @maxLength 20
          */
         UserName?: string;
         /**
+         * User id
          * @format int32
          * @min 1
-         * @max 32767
+         * @max 2147483647
          */
-        UserTypeId?: number;
-        FrontEndIds?: number[];
-        Groups?: number[];
-        Roles?: number[];
+        UserId?: number;
+        /**
+         * Email
+         * @minLength 1
+         * @maxLength 60
+         */
+        Email?: string;
         /**
          * @format int32
          * @min 1
@@ -11672,58 +14804,64 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     v4UsersCreate: (
       data: {
         /**
+         * Username
          * @minLength 1
          * @maxLength 20
          */
         Username: string;
         /**
+         * Email
          * @minLength 1
          * @maxLength 60
          */
         Email: string;
         /**
+         * Password
          * @minLength 8
          * @maxLength 72
          */
         Password: string;
         /**
+         * Lastname
          * @minLength 1
          * @maxLength 50
          */
         LastName?: string;
         /**
+         * Firstname
          * @minLength 1
          * @maxLength 50
          */
         FirstName?: string;
-        /**
-         * @format int32
-         * @min 1
-         * @max 32767
-         */
-        UserTypeId: number;
-        GroupIds?: number[];
-        RoleIds?: number[];
         Gender?: EnumGender;
-        /** @format date */
+        /**
+         * Date of birth
+         * @format date
+         */
         DateOfBirth?: string;
         /**
+         * City
          * @minLength 1
          * @maxLength 255
          */
         City?: string;
         /**
+         * Country id
          * @format int32
          * @min 1
          * @max 32767
          */
         CountryId?: number;
         /**
+         * About me
          * @minLength 1
          * @maxLength 500
          */
         AboutMe?: string;
-        /** @format binary */
+        /**
+         * Avatar image
+         * @format binary
+         */
         AvatarImage?: File;
       },
       params: RequestParams = {},
@@ -11767,67 +14905,72 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       id: number,
       data: {
         /**
+         * User id
          * @format int32
          * @min 1
          * @max 2147483647
          */
         UserId: number;
         /**
+         * Username
          * @minLength 1
          * @maxLength 20
          */
         Username?: string;
         /**
+         * Email
          * @format email
          * @minLength 1
          * @maxLength 60
          */
         Email?: string;
         /**
+         * Password
          * @minLength 8
          * @maxLength 72
          */
         Password?: string;
         /**
+         * Lastname
          * @minLength 1
          * @maxLength 50
          */
         LastName?: string;
         /**
+         * Firstname
          * @minLength 1
          * @maxLength 50
          */
         FirstName?: string;
-        /**
-         * @format int32
-         * @min 1
-         * @max 32767
-         */
-        UserTypeId?: number;
-        /** 未變更帶null，變更後帶完整資料 */
-        GroupIds?: number[];
-        /** 未變更帶null，變更後帶完整資料 */
-        RoleIds?: number[];
         Gender?: EnumGender;
-        /** @format date */
+        /**
+         * Date of birth
+         * @format date
+         */
         DateOfBirth?: string;
         /**
+         * City
          * @minLength 1
          * @maxLength 255
          */
         City?: string;
         /**
+         * Country id
          * @format int32
          * @min 1
          * @max 32767
          */
         CountryId?: number;
         /**
+         * About me
          * @minLength 1
          * @maxLength 500
          */
         AboutMe?: string;
-        /** @format binary */
+        /**
+         * Avatar image
+         * @format binary
+         */
         AvatarImage?: File;
       },
       params: RequestParams = {},
@@ -11854,6 +14997,23 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       this.request<any, DelUserRespApiRespBase>({
         path: `/api/v4/users/${id}`,
         method: "DELETE",
+        secure: true,
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Users
+     * @name V4UsersPermissionsDetail
+     * @summary Get User permissions
+     * @request GET:/api/v4/users/{id}/permissions
+     * @secure
+     */
+    v4UsersPermissionsDetail: (id: number, params: RequestParams = {}) =>
+      this.request<any, GetUserPermissionsRespApiRespBase>({
+        path: `/api/v4/users/${id}/permissions`,
+        method: "GET",
         secure: true,
         ...params,
       }),
@@ -12111,6 +15271,39 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       this.request<any, DelVenueRespApiRespBase>({
         path: `/api/v4/venues/${id}`,
         method: "DELETE",
+        secure: true,
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Venues
+     * @name V4VenuesFuzzyList
+     * @summary Get fuzzy venue
+     * @request GET:/api/v4/venues/fuzzy
+     * @secure
+     */
+    v4VenuesFuzzyList: (
+      query: {
+        /**
+         * @minLength 0
+         * @maxLength 30
+         */
+        FuzzyPrefix: string;
+        /**
+         * @format int32
+         * @min 10
+         * @max 100
+         */
+        MaxCount?: number;
+      },
+      params: RequestParams = {},
+    ) =>
+      this.request<any, GetFuzzyVenuesRespApiRespBase>({
+        path: `/api/v4/venues/fuzzy`,
+        method: "GET",
+        query: query,
         secure: true,
         ...params,
       }),
