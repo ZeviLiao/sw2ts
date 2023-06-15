@@ -223,6 +223,18 @@ export interface AddMapRespApiRespBase {
   data?: AddMapResp;
 }
 
+export interface AddMediaItemsReq {
+  /**
+   * Broadcast Talent Id
+   * @format int32
+   * @min 1
+   * @max 2147483647
+   */
+  broadcastTalentId: number;
+  /** Media item Ids */
+  mediaItems: number[];
+}
+
 export type AddMediaItemsResp = object;
 
 export interface AddMediaItemsRespApiRespBase {
@@ -635,6 +647,24 @@ export interface AddStreamRespApiRespBase {
   msg?: string | null;
   traceId?: string | null;
   data?: AddStreamResp;
+}
+
+export interface AddTeamPlayerReq {
+  /**
+   * Player Id
+   * @format int32
+   * @min 1
+   * @max 2147483647
+   */
+  playerId?: number;
+  /**
+   * Joined At
+   * @format int64
+   * @min 0
+   */
+  joinedAt?: number;
+  /** IsHidden */
+  isHidden?: boolean;
 }
 
 export type AddTeamPlayerResp = object;
@@ -2530,7 +2560,7 @@ export interface GetFuzzyGamesRespApiRespBase {
 }
 
 export interface GetFuzzyMapsResp {
-  /** Fuzzy sponsors */
+  /** Fuzzy maps */
   fuzzyMaps?: Int16Item[] | null;
 }
 
@@ -4317,6 +4347,7 @@ export interface GetTeamsDetail {
   updatedAt?: number | null;
   /** @format int32 */
   updatedBy?: number | null;
+  username?: string | null;
   url?: string | null;
 }
 
@@ -4573,6 +4604,13 @@ export interface Int16Item {
   /** @format int32 */
   id?: number;
   name?: string | null;
+}
+
+export interface Int16ItemListApiRespBase {
+  ret?: EnumRet;
+  msg?: string | null;
+  traceId?: string | null;
+  data?: Int16Item[] | null;
 }
 
 export interface Int16ItemWithSubItem {
@@ -5562,7 +5600,7 @@ export interface ModParentStageReq {
   /**
    * Stage name
    * @minLength 1
-   * @maxLength 80
+   * @maxLength 100
    */
   name?: string | null;
 }
@@ -5745,6 +5783,37 @@ export interface ModStreamTag {
    * @maxLength 25
    */
   name?: string | null;
+}
+
+export interface ModTeamPlayerReq {
+  /**
+   * TeamPlayerId
+   * @format int32
+   * @min 1
+   * @max 2147483647
+   */
+  teamPlayerId: number;
+  /**
+   * TeamId
+   * @format int32
+   * @min 1
+   * @max 2147483647
+   */
+  teamId: number;
+  /**
+   * JoinDate
+   * @format int64
+   * @min 1
+   */
+  joinDate: number;
+  /**
+   * LeaveDate
+   * @format int64
+   * @min 1
+   */
+  leaveDate?: number | null;
+  /** IsHidden */
+  isHidden: boolean;
 }
 
 export type ModTeamPlayerResp = object;
@@ -7536,25 +7605,13 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request POST:/api/v4/broadcasttalents/media-items
      * @secure
      */
-    v4BroadcasttalentsMediaItemsCreate: (
-      query: {
-        /**
-         * Broadcast Talent Id
-         * @format int32
-         * @min 1
-         * @max 2147483647
-         */
-        BroadcastTalentId: number;
-        /** Media item Ids */
-        MediaItems: number[];
-      },
-      params: RequestParams = {},
-    ) =>
+    v4BroadcasttalentsMediaItemsCreate: (data: AddMediaItemsReq, params: RequestParams = {}) =>
       this.request<any, AddMediaItemsRespApiRespBase>({
         path: `/api/v4/broadcasttalents/media-items`,
         method: "POST",
-        query: query,
+        body: data,
         secure: true,
+        type: ContentType.Json,
         ...params,
       }),
 
@@ -10839,6 +10896,35 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     /**
      * No description
      *
+     * @tags Modes
+     * @name V4ModesOptionsList
+     * @summary Get modes options
+     * @request GET:/api/v4/modes/options
+     * @secure
+     */
+    v4ModesOptionsList: (
+      query: {
+        /**
+         * Game id
+         * @format int32
+         * @min 1
+         * @max 32767
+         */
+        GameId: number;
+      },
+      params: RequestParams = {},
+    ) =>
+      this.request<any, Int16ItemListApiRespBase>({
+        path: `/api/v4/modes/options`,
+        method: "GET",
+        query: query,
+        secure: true,
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
      * @tags NotificationTemplates
      * @name V4MessagingNotificationTemplatesList
      * @summary Get Notification Templates
@@ -11393,6 +11479,23 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     v4OptionsTournamentStatesList: (params: RequestParams = {}) =>
       this.request<any, GetParentTournamentStateOptionsRespApiRespBase>({
         path: `/api/v4/options/tournament-states`,
+        method: "GET",
+        secure: true,
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Options
+     * @name V4OptionsGameResultsList
+     * @summary Get game result options
+     * @request GET:/api/v4/options/game-results
+     * @secure
+     */
+    v4OptionsGameResultsList: (params: RequestParams = {}) =>
+      this.request<any, Int16ItemListApiRespBase>({
+        path: `/api/v4/options/game-results`,
         method: "GET",
         secure: true,
         ...params,
@@ -13158,23 +13261,13 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request POST:/api/v4/teams/{teamid}/team-players
      * @secure
      */
-    v4TeamsTeamPlayersCreate: (
-      teamid: number,
-      data: {
-        /** @format int32 */
-        PlayerId?: number;
-        /** @format int64 */
-        JoinedAt?: number;
-        IsHidden?: boolean;
-      },
-      params: RequestParams = {},
-    ) =>
+    v4TeamsTeamPlayersCreate: (teamid: number, data: AddTeamPlayerReq, params: RequestParams = {}) =>
       this.request<any, AddTeamPlayerRespApiRespBase>({
         path: `/api/v4/teams/${teamid}/team-players`,
         method: "POST",
         body: data,
         secure: true,
-        type: ContentType.FormData,
+        type: ContentType.Json,
         ...params,
       }),
 
@@ -13209,36 +13302,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     v4TeamsTeamPlayersPartialUpdate: (
       teamid: number,
       teamplayerid: number,
-      data: {
-        /**
-         * TeamPlayerId
-         * @format int32
-         * @min 1
-         * @max 2147483647
-         */
-        TeamPlayerId: number;
-        /**
-         * TeamId
-         * @format int32
-         * @min 1
-         * @max 2147483647
-         */
-        TeamId: number;
-        /**
-         * JoinDate
-         * @format int64
-         * @min 1
-         */
-        JoinDate: number;
-        /**
-         * LeaveDate
-         * @format int64
-         * @min 1
-         */
-        LeaveDate?: number;
-        /** IsHidden */
-        IsHidden: boolean;
-      },
+      data: ModTeamPlayerReq,
       params: RequestParams = {},
     ) =>
       this.request<any, ModTeamPlayerRespApiRespBase>({
@@ -13246,7 +13310,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
         method: "PATCH",
         body: data,
         secure: true,
-        type: ContentType.FormData,
+        type: ContentType.Json,
         ...params,
       }),
 
@@ -13348,143 +13412,22 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     /**
      * No description
      *
-     * @tags Tournaments
-     * @name V4TournamentsGameAccountsList
-     * @summary Get GameAccounts
-     * @request GET:/api/v4/tournaments/game-accounts
+     * @tags Tools
+     * @name ToolsConvertTournamentDataPartialUpdate
+     * @summary Convert tournament data
+     * @request PATCH:/api/tools/convert-tournament-data
      * @secure
      */
-    v4TournamentsGameAccountsList: (
-      query: {
-        /**
-         * PlayerId
-         * @format int32
-         * @min 1
-         * @max 2147483647
-         */
-        PlayerId: number;
-        /**
-         * @format int32
-         * @min 1
-         * @max 2147483647
-         */
-        PageNo?: number;
-        /**
-         * @format int32
-         * @min 1
-         * @max 100
-         */
-        PageSize?: number;
+    toolsConvertTournamentDataPartialUpdate: (
+      query?: {
+        "api-version"?: string;
       },
       params: RequestParams = {},
     ) =>
-      this.request<any, GetGameAccountsRespApiRespBase>({
-        path: `/api/v4/tournaments/game-accounts`,
-        method: "GET",
-        query: query,
-        secure: true,
-        ...params,
-      }),
-
-    /**
-     * No description
-     *
-     * @tags Tournaments
-     * @name V4TournamentsGameAccountsCreate
-     * @summary Add GameAccount
-     * @request POST:/api/v4/tournaments/game-accounts
-     * @secure
-     */
-    v4TournamentsGameAccountsCreate: (
-      data: {
-        /**
-         * PlayerId
-         * @format int32
-         * @min 1
-         * @max 2147483647
-         */
-        PlayerId: number;
-        /**
-         * GameId
-         * @format int32
-         * @min 1
-         * @max 32767
-         */
-        GameId: number;
-        /**
-         * Server Id
-         * @format int32
-         * @min 1
-         * @max 2147483647
-         */
-        ServerId?: number;
-        /**
-         * GameAccount Name
-         * @minLength 0
-         * @maxLength 50
-         */
-        GameAccountName: string;
-      },
-      params: RequestParams = {},
-    ) =>
-      this.request<any, AddGameAccountRespApiRespBase>({
-        path: `/api/v4/tournaments/game-accounts`,
-        method: "POST",
-        body: data,
-        secure: true,
-        type: ContentType.FormData,
-        ...params,
-      }),
-
-    /**
-     * No description
-     *
-     * @tags Tournaments
-     * @name V4TournamentsGameAccountsDetail
-     * @summary Get GameAccount
-     * @request GET:/api/v4/tournaments/game-accounts/{id}
-     * @secure
-     */
-    v4TournamentsGameAccountsDetail: (id: number, params: RequestParams = {}) =>
-      this.request<any, GetGameAccountRespApiRespBase>({
-        path: `/api/v4/tournaments/game-accounts/${id}`,
-        method: "GET",
-        secure: true,
-        ...params,
-      }),
-
-    /**
-     * No description
-     *
-     * @tags Tournaments
-     * @name V4TournamentsGameAccountsPartialUpdate
-     * @summary Modify GameAccount
-     * @request PATCH:/api/v4/tournaments/game-accounts/{id}
-     * @secure
-     */
-    v4TournamentsGameAccountsPartialUpdate: (id: number, data: ModGameAccountReq, params: RequestParams = {}) =>
-      this.request<any, ModGameAccountRespApiRespBase>({
-        path: `/api/v4/tournaments/game-accounts/${id}`,
+      this.request<void, any>({
+        path: `/api/tools/convert-tournament-data`,
         method: "PATCH",
-        body: data,
-        secure: true,
-        type: ContentType.Json,
-        ...params,
-      }),
-
-    /**
-     * No description
-     *
-     * @tags Tournaments
-     * @name V4TournamentsGameAccountsDelete
-     * @summary Delete GameAccount
-     * @request DELETE:/api/v4/tournaments/game-accounts/{id}
-     * @secure
-     */
-    v4TournamentsGameAccountsDelete: (id: number, params: RequestParams = {}) =>
-      this.request<any, DelGameAccountRespApiRespBase>({
-        path: `/api/v4/tournaments/game-accounts/${id}`,
-        method: "DELETE",
+        query: query,
         secure: true,
         ...params,
       }),
@@ -14055,6 +13998,150 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Tournaments
+     * @name V4TournamentsGameAccountsList
+     * @summary Get GameAccounts
+     * @request GET:/api/v4/tournaments/game-accounts
+     * @secure
+     */
+    v4TournamentsGameAccountsList: (
+      query: {
+        /**
+         * PlayerId
+         * @format int32
+         * @min 1
+         * @max 2147483647
+         */
+        PlayerId: number;
+        /**
+         * @format int32
+         * @min 1
+         * @max 2147483647
+         */
+        PageNo?: number;
+        /**
+         * @format int32
+         * @min 1
+         * @max 100
+         */
+        PageSize?: number;
+      },
+      params: RequestParams = {},
+    ) =>
+      this.request<any, GetGameAccountsRespApiRespBase>({
+        path: `/api/v4/tournaments/game-accounts`,
+        method: "GET",
+        query: query,
+        secure: true,
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Tournaments
+     * @name V4TournamentsGameAccountsCreate
+     * @summary Add GameAccount
+     * @request POST:/api/v4/tournaments/game-accounts
+     * @secure
+     */
+    v4TournamentsGameAccountsCreate: (
+      data: {
+        /**
+         * PlayerId
+         * @format int32
+         * @min 1
+         * @max 2147483647
+         */
+        PlayerId: number;
+        /**
+         * GameId
+         * @format int32
+         * @min 1
+         * @max 32767
+         */
+        GameId: number;
+        /**
+         * Server Id
+         * @format int32
+         * @min 1
+         * @max 2147483647
+         */
+        ServerId?: number;
+        /**
+         * GameAccount Name
+         * @minLength 0
+         * @maxLength 50
+         */
+        GameAccountName: string;
+      },
+      params: RequestParams = {},
+    ) =>
+      this.request<any, AddGameAccountRespApiRespBase>({
+        path: `/api/v4/tournaments/game-accounts`,
+        method: "POST",
+        body: data,
+        secure: true,
+        type: ContentType.FormData,
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Tournaments
+     * @name V4TournamentsGameAccountsDetail
+     * @summary Get GameAccount
+     * @request GET:/api/v4/tournaments/game-accounts/{id}
+     * @secure
+     */
+    v4TournamentsGameAccountsDetail: (id: number, params: RequestParams = {}) =>
+      this.request<any, GetGameAccountRespApiRespBase>({
+        path: `/api/v4/tournaments/game-accounts/${id}`,
+        method: "GET",
+        secure: true,
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Tournaments
+     * @name V4TournamentsGameAccountsPartialUpdate
+     * @summary Modify GameAccount
+     * @request PATCH:/api/v4/tournaments/game-accounts/{id}
+     * @secure
+     */
+    v4TournamentsGameAccountsPartialUpdate: (id: number, data: ModGameAccountReq, params: RequestParams = {}) =>
+      this.request<any, ModGameAccountRespApiRespBase>({
+        path: `/api/v4/tournaments/game-accounts/${id}`,
+        method: "PATCH",
+        body: data,
+        secure: true,
+        type: ContentType.Json,
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Tournaments
+     * @name V4TournamentsGameAccountsDelete
+     * @summary Delete GameAccount
+     * @request DELETE:/api/v4/tournaments/game-accounts/{id}
+     * @secure
+     */
+    v4TournamentsGameAccountsDelete: (id: number, params: RequestParams = {}) =>
+      this.request<any, DelGameAccountRespApiRespBase>({
+        path: `/api/v4/tournaments/game-accounts/${id}`,
+        method: "DELETE",
+        secure: true,
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Tournaments
      * @name V4TournamentsParentsChildrenOpponentsDetail
      * @summary Get child tournament opponents
      * @request GET:/api/v4/tournaments/parents/{parentid}/children/{childid}/opponents
@@ -14091,6 +14178,23 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
         body: data,
         secure: true,
         type: ContentType.FormData,
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Tournaments
+     * @name V4TournamentsParentsChildTypesDetail
+     * @summary get child tournament types by parent tournament
+     * @request GET:/api/v4/tournaments/parents/{parentId}/child-types
+     * @secure
+     */
+    v4TournamentsParentsChildTypesDetail: (parentId: number, params: RequestParams = {}) =>
+      this.request<any, Int16ItemListApiRespBase>({
+        path: `/api/v4/tournaments/parents/${parentId}/child-types`,
+        method: "GET",
+        secure: true,
         ...params,
       }),
 

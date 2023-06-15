@@ -1587,35 +1587,26 @@
           "BroadcastTalents"
         ],
         "summary": "Add broadcast talent new Media items",
-        "parameters": [
-          {
-            "name": "BroadcastTalentId",
-            "in": "query",
-            "description": "Broadcast Talent Id",
-            "required": true,
-            "style": "form",
-            "schema": {
-              "maximum": 2147483647,
-              "minimum": 1,
-              "type": "integer",
-              "format": "int32"
-            }
-          },
-          {
-            "name": "MediaItems",
-            "in": "query",
-            "description": "Media item Ids",
-            "required": true,
-            "style": "form",
-            "schema": {
-              "type": "array",
-              "items": {
-                "type": "integer",
-                "format": "int32"
+        "requestBody": {
+          "description": "Request",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AddMediaItemsReq"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AddMediaItemsReq"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/AddMediaItemsReq"
               }
             }
           }
-        ],
+        },
         "responses": {
           "default": {
             "description": "Error",
@@ -7436,6 +7427,41 @@
         }
       }
     },
+    "/api/v4/modes/options": {
+      "get": {
+        "tags": [
+          "Modes"
+        ],
+        "summary": "Get modes options",
+        "parameters": [
+          {
+            "name": "GameId",
+            "in": "query",
+            "description": "Game id",
+            "required": true,
+            "style": "form",
+            "schema": {
+              "maximum": 32767,
+              "minimum": 1,
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Int16ItemListApiRespBase"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/v4/messaging-notification-templates": {
       "get": {
         "tags": [
@@ -8246,6 +8272,26 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/GetParentTournamentStateOptionsRespApiRespBase"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v4/options/game-results": {
+      "get": {
+        "tags": [
+          "Options"
+        ],
+        "summary": "Get game result options",
+        "responses": {
+          "default": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Int16ItemListApiRespBase"
                 }
               }
             }
@@ -11371,34 +11417,21 @@
           }
         ],
         "requestBody": {
+          "description": "Request",
           "content": {
-            "multipart/form-data": {
+            "application/json": {
               "schema": {
-                "type": "object",
-                "properties": {
-                  "PlayerId": {
-                    "type": "integer",
-                    "format": "int32"
-                  },
-                  "JoinedAt": {
-                    "type": "integer",
-                    "format": "int64"
-                  },
-                  "IsHidden": {
-                    "type": "boolean"
-                  }
-                }
-              },
-              "encoding": {
-                "PlayerId": {
-                  "style": "form"
-                },
-                "JoinedAt": {
-                  "style": "form"
-                },
-                "IsHidden": {
-                  "style": "form"
-                }
+                "$ref": "#/components/schemas/AddTeamPlayerReq"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AddTeamPlayerReq"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/AddTeamPlayerReq"
               }
             }
           }
@@ -11498,65 +11531,21 @@
           }
         ],
         "requestBody": {
+          "description": "Request",
           "content": {
-            "multipart/form-data": {
+            "application/json": {
               "schema": {
-                "required": [
-                  "IsHidden",
-                  "JoinDate",
-                  "TeamId",
-                  "TeamPlayerId"
-                ],
-                "type": "object",
-                "properties": {
-                  "TeamPlayerId": {
-                    "maximum": 2147483647,
-                    "minimum": 1,
-                    "type": "integer",
-                    "description": "TeamPlayerId",
-                    "format": "int32"
-                  },
-                  "TeamId": {
-                    "maximum": 2147483647,
-                    "minimum": 1,
-                    "type": "integer",
-                    "description": "TeamId",
-                    "format": "int32"
-                  },
-                  "JoinDate": {
-                    "minimum": 1,
-                    "type": "integer",
-                    "description": "JoinDate",
-                    "format": "int64"
-                  },
-                  "LeaveDate": {
-                    "minimum": 1,
-                    "type": "integer",
-                    "description": "LeaveDate",
-                    "format": "int64"
-                  },
-                  "IsHidden": {
-                    "type": "boolean",
-                    "description": "IsHidden"
-                  }
-                }
-              },
-              "encoding": {
-                "TeamPlayerId": {
-                  "style": "form"
-                },
-                "TeamId": {
-                  "style": "form"
-                },
-                "JoinDate": {
-                  "style": "form"
-                },
-                "LeaveDate": {
-                  "style": "form"
-                },
-                "IsHidden": {
-                  "style": "form"
-                }
+                "$ref": "#/components/schemas/ModTeamPlayerReq"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ModTeamPlayerReq"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ModTeamPlayerReq"
               }
             }
           }
@@ -11731,249 +11720,25 @@
         }
       }
     },
-    "/api/v4/tournaments/game-accounts": {
-      "get": {
-        "tags": [
-          "Tournaments"
-        ],
-        "summary": "Get GameAccounts",
-        "parameters": [
-          {
-            "name": "PlayerId",
-            "in": "query",
-            "description": "PlayerId",
-            "required": true,
-            "style": "form",
-            "schema": {
-              "maximum": 2147483647,
-              "minimum": 1,
-              "type": "integer",
-              "format": "int32"
-            }
-          },
-          {
-            "name": "PageNo",
-            "in": "query",
-            "style": "form",
-            "schema": {
-              "maximum": 2147483647,
-              "minimum": 1,
-              "type": "integer",
-              "format": "int32"
-            }
-          },
-          {
-            "name": "PageSize",
-            "in": "query",
-            "style": "form",
-            "schema": {
-              "maximum": 100,
-              "minimum": 1,
-              "type": "integer",
-              "format": "int32"
-            }
-          }
-        ],
-        "responses": {
-          "default": {
-            "description": "Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/GetGameAccountsRespApiRespBase"
-                }
-              }
-            }
-          }
-        }
-      },
-      "post": {
-        "tags": [
-          "Tournaments"
-        ],
-        "summary": "Add GameAccount",
-        "requestBody": {
-          "content": {
-            "multipart/form-data": {
-              "schema": {
-                "required": [
-                  "GameAccountName",
-                  "GameId",
-                  "PlayerId"
-                ],
-                "type": "object",
-                "properties": {
-                  "PlayerId": {
-                    "maximum": 2147483647,
-                    "minimum": 1,
-                    "type": "integer",
-                    "description": "PlayerId",
-                    "format": "int32"
-                  },
-                  "GameId": {
-                    "maximum": 32767,
-                    "minimum": 1,
-                    "type": "integer",
-                    "description": "GameId",
-                    "format": "int32"
-                  },
-                  "ServerId": {
-                    "maximum": 2147483647,
-                    "minimum": 1,
-                    "type": "integer",
-                    "description": "Server Id",
-                    "format": "int32"
-                  },
-                  "GameAccountName": {
-                    "maxLength": 50,
-                    "minLength": 0,
-                    "type": "string",
-                    "description": "GameAccount Name"
-                  }
-                }
-              },
-              "encoding": {
-                "PlayerId": {
-                  "style": "form"
-                },
-                "GameId": {
-                  "style": "form"
-                },
-                "ServerId": {
-                  "style": "form"
-                },
-                "GameAccountName": {
-                  "style": "form"
-                }
-              }
-            }
-          }
-        },
-        "responses": {
-          "default": {
-            "description": "Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/AddGameAccountRespApiRespBase"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/v4/tournaments/game-accounts/{id}": {
-      "get": {
-        "tags": [
-          "Tournaments"
-        ],
-        "summary": "Get GameAccount",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "description": "GameAccountId",
-            "required": true,
-            "style": "simple",
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            }
-          }
-        ],
-        "responses": {
-          "default": {
-            "description": "Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/GetGameAccountRespApiRespBase"
-                }
-              }
-            }
-          }
-        }
-      },
+    "/api/tools/convert-tournament-data": {
       "patch": {
         "tags": [
-          "Tournaments"
+          "Tools"
         ],
-        "summary": "Modify GameAccount",
+        "summary": "Convert tournament data",
         "parameters": [
           {
-            "name": "id",
-            "in": "path",
-            "description": "PlayerId",
-            "required": true,
-            "style": "simple",
+            "name": "api-version",
+            "in": "query",
+            "style": "form",
             "schema": {
-              "type": "integer",
-              "format": "int32"
-            }
-          }
-        ],
-        "requestBody": {
-          "description": "Request",
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/ModGameAccountReq"
-              }
-            },
-            "text/json": {
-              "schema": {
-                "$ref": "#/components/schemas/ModGameAccountReq"
-              }
-            },
-            "application/*+json": {
-              "schema": {
-                "$ref": "#/components/schemas/ModGameAccountReq"
-              }
-            }
-          }
-        },
-        "responses": {
-          "default": {
-            "description": "Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ModGameAccountRespApiRespBase"
-                }
-              }
-            }
-          }
-        }
-      },
-      "delete": {
-        "tags": [
-          "Tournaments"
-        ],
-        "summary": "Delete GameAccount",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "description": "GameAccountId",
-            "required": true,
-            "style": "simple",
-            "schema": {
-              "type": "integer",
-              "format": "int32"
+              "type": "string"
             }
           }
         ],
         "responses": {
-          "default": {
-            "description": "Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/DelGameAccountRespApiRespBase"
-                }
-              }
-            }
+          "200": {
+            "description": "Success"
           }
         }
       }
@@ -13055,6 +12820,253 @@
         }
       }
     },
+    "/api/v4/tournaments/game-accounts": {
+      "get": {
+        "tags": [
+          "Tournaments"
+        ],
+        "summary": "Get GameAccounts",
+        "parameters": [
+          {
+            "name": "PlayerId",
+            "in": "query",
+            "description": "PlayerId",
+            "required": true,
+            "style": "form",
+            "schema": {
+              "maximum": 2147483647,
+              "minimum": 1,
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "PageNo",
+            "in": "query",
+            "style": "form",
+            "schema": {
+              "maximum": 2147483647,
+              "minimum": 1,
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "PageSize",
+            "in": "query",
+            "style": "form",
+            "schema": {
+              "maximum": 100,
+              "minimum": 1,
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetGameAccountsRespApiRespBase"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Tournaments"
+        ],
+        "summary": "Add GameAccount",
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "required": [
+                  "GameAccountName",
+                  "GameId",
+                  "PlayerId"
+                ],
+                "type": "object",
+                "properties": {
+                  "PlayerId": {
+                    "maximum": 2147483647,
+                    "minimum": 1,
+                    "type": "integer",
+                    "description": "PlayerId",
+                    "format": "int32"
+                  },
+                  "GameId": {
+                    "maximum": 32767,
+                    "minimum": 1,
+                    "type": "integer",
+                    "description": "GameId",
+                    "format": "int32"
+                  },
+                  "ServerId": {
+                    "maximum": 2147483647,
+                    "minimum": 1,
+                    "type": "integer",
+                    "description": "Server Id",
+                    "format": "int32"
+                  },
+                  "GameAccountName": {
+                    "maxLength": 50,
+                    "minLength": 0,
+                    "type": "string",
+                    "description": "GameAccount Name"
+                  }
+                }
+              },
+              "encoding": {
+                "PlayerId": {
+                  "style": "form"
+                },
+                "GameId": {
+                  "style": "form"
+                },
+                "ServerId": {
+                  "style": "form"
+                },
+                "GameAccountName": {
+                  "style": "form"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "default": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AddGameAccountRespApiRespBase"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v4/tournaments/game-accounts/{id}": {
+      "get": {
+        "tags": [
+          "Tournaments"
+        ],
+        "summary": "Get GameAccount",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "GameAccountId",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetGameAccountRespApiRespBase"
+                }
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Tournaments"
+        ],
+        "summary": "Modify GameAccount",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "PlayerId",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Request",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ModGameAccountReq"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ModGameAccountReq"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ModGameAccountReq"
+              }
+            }
+          }
+        },
+        "responses": {
+          "default": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ModGameAccountRespApiRespBase"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Tournaments"
+        ],
+        "summary": "Delete GameAccount",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "GameAccountId",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DelGameAccountRespApiRespBase"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/v4/tournaments/parents/{parentid}/children/{childid}/opponents": {
       "get": {
         "tags": [
@@ -13156,6 +13168,39 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ModOpponentsRespApiRespBase"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v4/tournaments/parents/{parentId}/child-types": {
+      "get": {
+        "tags": [
+          "Tournaments"
+        ],
+        "summary": "get child tournament types by parent tournament",
+        "parameters": [
+          {
+            "name": "parentId",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Int16ItemListApiRespBase"
                 }
               }
             }
@@ -15989,6 +16034,31 @@
         },
         "additionalProperties": false
       },
+      "AddMediaItemsReq": {
+        "required": [
+          "broadcastTalentId",
+          "mediaItems"
+        ],
+        "type": "object",
+        "properties": {
+          "broadcastTalentId": {
+            "maximum": 2147483647,
+            "minimum": 1,
+            "type": "integer",
+            "description": "Broadcast Talent Id",
+            "format": "int32"
+          },
+          "mediaItems": {
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "description": "Media item Ids"
+          }
+        },
+        "additionalProperties": false
+      },
       "AddMediaItemsResp": {
         "type": "object",
         "additionalProperties": false
@@ -16773,6 +16843,29 @@
           },
           "data": {
             "$ref": "#/components/schemas/AddStreamResp"
+          }
+        },
+        "additionalProperties": false
+      },
+      "AddTeamPlayerReq": {
+        "type": "object",
+        "properties": {
+          "playerId": {
+            "maximum": 2147483647,
+            "minimum": 1,
+            "type": "integer",
+            "description": "Player Id",
+            "format": "int32"
+          },
+          "joinedAt": {
+            "minimum": 0,
+            "type": "integer",
+            "description": "Joined At",
+            "format": "int64"
+          },
+          "isHidden": {
+            "type": "boolean",
+            "description": "IsHidden"
           }
         },
         "additionalProperties": false
@@ -20938,7 +21031,7 @@
             "items": {
               "$ref": "#/components/schemas/Int16Item"
             },
-            "description": "Fuzzy sponsors",
+            "description": "Fuzzy maps",
             "nullable": true
           }
         },
@@ -25674,6 +25767,10 @@
             "format": "int32",
             "nullable": true
           },
+          "username": {
+            "type": "string",
+            "nullable": true
+          },
           "url": {
             "type": "string",
             "nullable": true
@@ -26350,6 +26447,31 @@
           },
           "name": {
             "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "Int16ItemListApiRespBase": {
+        "type": "object",
+        "properties": {
+          "ret": {
+            "$ref": "#/components/schemas/EnumRet"
+          },
+          "msg": {
+            "type": "string",
+            "nullable": true
+          },
+          "traceId": {
+            "type": "string",
+            "nullable": true,
+            "readOnly": true
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Int16Item"
+            },
             "nullable": true
           }
         },
@@ -28178,7 +28300,7 @@
         "type": "object",
         "properties": {
           "name": {
-            "maxLength": 80,
+            "maxLength": 100,
             "minLength": 1,
             "type": "string",
             "description": "Stage name",
@@ -28545,6 +28667,49 @@
             "type": "string",
             "description": "Media Item Name",
             "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ModTeamPlayerReq": {
+        "required": [
+          "isHidden",
+          "joinDate",
+          "teamId",
+          "teamPlayerId"
+        ],
+        "type": "object",
+        "properties": {
+          "teamPlayerId": {
+            "maximum": 2147483647,
+            "minimum": 1,
+            "type": "integer",
+            "description": "TeamPlayerId",
+            "format": "int32"
+          },
+          "teamId": {
+            "maximum": 2147483647,
+            "minimum": 1,
+            "type": "integer",
+            "description": "TeamId",
+            "format": "int32"
+          },
+          "joinDate": {
+            "minimum": 1,
+            "type": "integer",
+            "description": "JoinDate",
+            "format": "int64"
+          },
+          "leaveDate": {
+            "minimum": 1,
+            "type": "integer",
+            "description": "LeaveDate",
+            "format": "int64",
+            "nullable": true
+          },
+          "isHidden": {
+            "type": "boolean",
+            "description": "IsHidden"
           }
         },
         "additionalProperties": false
