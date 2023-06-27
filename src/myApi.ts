@@ -1185,6 +1185,62 @@ export interface ChildPlayerRegistration {
   isReserved: boolean;
 }
 
+export interface ChildRegistrationPlayerListItem {
+  /**
+   * Register id
+   * @format int32
+   */
+  registerId?: number;
+  /**
+   * Player id
+   * @format int32
+   */
+  playerId?: number;
+  /** Player name */
+  playerName?: string | null;
+  /** Has opp */
+  hasOpp?: boolean;
+  /** Is reserved */
+  isReserved?: boolean;
+  /**
+   * Registered at
+   * @format int64
+   */
+  registeredAt?: number;
+  /** Can register */
+  canUnregister?: boolean;
+}
+
+export interface ChildRegistrationPlayerListItemGetChildRegistrationsResp {
+  /**
+   * Parent id
+   * @format int32
+   */
+  parentId?: number;
+  /**
+   * Child id
+   * @format int32
+   */
+  childId?: number;
+  /** Parent name */
+  parentName?: string | null;
+  /** Stage name */
+  stageName?: string | null;
+  /** Child name */
+  childName?: string | null;
+  /** @format int32 */
+  gameId?: number;
+  /** Registrations */
+  registrations?: ChildRegistrationPlayerListItem[] | null;
+}
+
+export interface ChildRegistrationPlayerListItemGetChildRegistrationsRespApiRespBase {
+  ret?: EnumRet;
+  msg?: string | null;
+  traceId?: string | null;
+  data?: ChildRegistrationPlayerListItemGetChildRegistrationsResp;
+}
+
 export interface ChildRegistrationTeamListItem {
   /**
    * Register id
@@ -1932,6 +1988,8 @@ export enum EnumRet {
   Value20033 = 20033,
   Value20034 = 20034,
   Value20035 = 20035,
+  Value20036 = 20036,
+  Value20037 = 20037,
   Value29999 = 29999,
   Value30000 = 30000,
   Value30001 = 30001,
@@ -2570,6 +2628,18 @@ export interface GetCrewFoldersRespApiRespBase {
   msg?: string | null;
   traceId?: string | null;
   data?: GetCrewFoldersResp;
+}
+
+export interface GetCurrencyOptionsResp {
+  /** Currencies */
+  currencies?: Int16Item[] | null;
+}
+
+export interface GetCurrencyOptionsRespApiRespBase {
+  ret?: EnumRet;
+  msg?: string | null;
+  traceId?: string | null;
+  data?: GetCurrencyOptionsResp;
 }
 
 export interface GetCurrentExchangeRateResp {
@@ -5131,7 +5201,7 @@ export interface ModChildEarningPrizePoolReq {
    */
   prizePoolUsd: number;
   /** Prize placement */
-  prizePlacements?: ModPrizePlacement[] | null;
+  prizePlacements?: ModPrizePoolPlacement[] | null;
 }
 
 export interface ModChildEarningPrizePoolStatusReq {
@@ -6112,36 +6182,47 @@ export interface ModPlayerRespApiRespBase {
   data?: ModPlayerResp;
 }
 
-export interface ModPrizePlacement {
+export interface ModPrizePoolDistribution {
   /**
-   * Id
-   * Unknown: -1
-   * Know: > 0
+   * Id (Distribution id)
+   * Id = 0 -> Add new
    * @format int32
    */
   id?: number;
   /**
+   * Team id
+   * @format int32
+   */
+  teamId?: number | null;
+  /** Player ids */
+  playerIds?: number[] | null;
+}
+
+export interface ModPrizePoolPlacement {
+  /**
+   * Placement id
+   * Unknown: -1
+   * Know: > 0
+   * @format int32
+   */
+  placementId: number;
+  /**
    * Placement from
    * @format int32
    */
-  placementFrom?: number;
+  placementFrom: number;
   /**
    * Placement to
    * @format int32
    */
-  placementTo?: number;
+  placementTo: number;
   /**
    * Prize amount
    * @format double
    */
-  prizeAmount?: number;
-  /**
-   * Team id
-   * @format int32
-   */
-  teamId?: number;
-  /** Player ids */
-  playerIds?: number[] | null;
+  prizeAmount: number;
+  /** Distributions */
+  distributions?: ModPrizePoolDistribution[] | null;
 }
 
 export interface ModReplaceOpponents {
@@ -6755,6 +6836,11 @@ export interface ParentTournamentEditDetail {
    */
   parentId: number;
   /**
+   * Game id
+   * @format int32
+   */
+  gameId?: number;
+  /**
    * Type name
    * @minLength 1
    */
@@ -6849,7 +6935,7 @@ export interface PrizePlacement {
    * Id
    * @format int32
    */
-  id?: number;
+  placementId?: number;
   /**
    * Placement from
    * @format int32
@@ -6865,11 +6951,21 @@ export interface PrizePlacement {
    * @format double
    */
   prizeAmount?: number;
+  /** Distributions */
+  distributions?: PrizePoolDistributionListItem[] | null;
+}
+
+export interface PrizePoolDistributionListItem {
+  /**
+   * Id (Distribution id)
+   * @format int32
+   */
+  id?: number;
   /**
    * Team id
    * @format int32
    */
-  teamId?: number;
+  teamId?: number | null;
   /** Team name */
   teamName?: string | null;
   /** Player items */
@@ -8349,12 +8445,12 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @tags Earnings
      * @name V4EarningsDetail
      * @summary Get child earnings by parent
-     * @request GET:/api/v4/earnings/{id}
+     * @request GET:/api/v4/earnings/{parentId}
      * @secure
      */
-    v4EarningsDetail: (id: number, params: RequestParams = {}) =>
+    v4EarningsDetail: (parentId: number, params: RequestParams = {}) =>
       this.request<any, GetChildEarningsRespApiRespBase>({
-        path: `/api/v4/earnings/${id}`,
+        path: `/api/v4/earnings/${parentId}`,
         method: "GET",
         secure: true,
         ...params,
@@ -8366,12 +8462,12 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @tags Earnings
      * @name V4EarningsChildDetail
      * @summary Get child earning prize pool
-     * @request GET:/api/v4/earnings/child/{id}
+     * @request GET:/api/v4/earnings/child/{childId}
      * @secure
      */
-    v4EarningsChildDetail: (id: number, params: RequestParams = {}) =>
+    v4EarningsChildDetail: (childId: number, params: RequestParams = {}) =>
       this.request<any, GetChildEarningPrizePoolRespApiRespBase>({
-        path: `/api/v4/earnings/child/${id}`,
+        path: `/api/v4/earnings/child/${childId}`,
         method: "GET",
         secure: true,
         ...params,
@@ -8383,12 +8479,12 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @tags Earnings
      * @name V4EarningsChildPartialUpdate
      * @summary Modify child prize pool
-     * @request PATCH:/api/v4/earnings/child/{id}
+     * @request PATCH:/api/v4/earnings/child/{childId}
      * @secure
      */
-    v4EarningsChildPartialUpdate: (id: number, data: ModChildEarningPrizePoolReq, params: RequestParams = {}) =>
+    v4EarningsChildPartialUpdate: (childId: number, data: ModChildEarningPrizePoolReq, params: RequestParams = {}) =>
       this.request<any, ApiRespBase>({
-        path: `/api/v4/earnings/child/${id}`,
+        path: `/api/v4/earnings/child/${childId}`,
         method: "PATCH",
         body: data,
         secure: true,
@@ -8402,16 +8498,16 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @tags Earnings
      * @name V4EarningsChildStatusPartialUpdate
      * @summary Modify child prize pool status
-     * @request PATCH:/api/v4/earnings/child/{id}/status
+     * @request PATCH:/api/v4/earnings/child/{childId}/status
      * @secure
      */
     v4EarningsChildStatusPartialUpdate: (
-      id: number,
+      childId: number,
       data: ModChildEarningPrizePoolStatusReq,
       params: RequestParams = {},
     ) =>
       this.request<any, ModChildEarningPrizePoolStatusRespApiRespBase>({
-        path: `/api/v4/earnings/child/${id}/status`,
+        path: `/api/v4/earnings/child/${childId}/status`,
         method: "PATCH",
         body: data,
         secure: true,
@@ -12047,7 +12143,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @secure
      */
     v4OptionsCurrenciesList: (params: RequestParams = {}) =>
-      this.request<any, GetPrizePoolStatusOptionsRespApiRespBase>({
+      this.request<any, GetCurrencyOptionsRespApiRespBase>({
         path: `/api/v4/options/currencies`,
         method: "GET",
         secure: true,
@@ -14792,7 +14888,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      *
      * @tags Tournaments
      * @name V4TournamentsParentsChildTypesDetail
-     * @summary get child tournament types by parent tournament
+     * @summary Get child tournament types by parent tournament
      * @request GET:/api/v4/tournaments/parents/{parentId}/child-types
      * @secure
      */
@@ -14800,6 +14896,42 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       this.request<any, Int16ItemListApiRespBase>({
         path: `/api/v4/tournaments/parents/${parentId}/child-types`,
         method: "GET",
+        secure: true,
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Tournaments
+     * @name V4TournamentsParentsGameMapsDetail
+     * @summary Get game maps by parent tournament
+     * @request GET:/api/v4/tournaments/parents/{parentId}/game-maps
+     * @secure
+     */
+    v4TournamentsParentsGameMapsDetail: (
+      parentId: number,
+      query: {
+        /**
+         * Fuzzy prefix
+         * @minLength 1
+         * @maxLength 50
+         */
+        FuzzyPrefix: string;
+        /**
+         * Max count
+         * @format int32
+         * @min 10
+         * @max 100
+         */
+        MaxCount?: number;
+      },
+      params: RequestParams = {},
+    ) =>
+      this.request<any, Int16ItemListApiRespBase>({
+        path: `/api/v4/tournaments/parents/${parentId}/game-maps`,
+        method: "GET",
+        query: query,
         secure: true,
         ...params,
       }),
@@ -14987,9 +15119,9 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
          */
         Description: string;
         /** Sponsor ids */
-        SponsorIds: number[];
+        SponsorIds: string;
         /** Map ids */
-        MapIds: number[];
+        MapIds: string;
         /**
          * Image file
          * @format binary
@@ -15082,16 +15214,10 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
          * @maxLength 4096
          */
         Description: string;
-        /**
-         * Sponsor ids
-         * [] is clear all
-         */
-        SponsorIds: number[];
-        /**
-         * Map ids
-         * [] is clear all
-         */
-        MapIds: number[];
+        /** Sponsor ids */
+        SponsorIds: string;
+        /** Map ids */
+        MapIds: string;
         /**
          * Image file
          * @format binary
@@ -15275,7 +15401,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       childId: number,
       params: RequestParams = {},
     ) =>
-      this.request<any, ChildRegistrationTeamListItemGetChildRegistrationsRespApiRespBase>({
+      this.request<any, ChildRegistrationPlayerListItemGetChildRegistrationsRespApiRespBase>({
         path: `/api/v4/tournaments/parents/${parentId}/children/${childId}/player-registrations`,
         method: "GET",
         secure: true,

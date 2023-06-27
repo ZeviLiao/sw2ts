@@ -1798,7 +1798,7 @@
         }
       }
     },
-    "/api/v4/earnings/{id}": {
+    "/api/v4/earnings/{parentId}": {
       "get": {
         "tags": [
           "Earnings"
@@ -1806,9 +1806,9 @@
         "summary": "Get child earnings by parent",
         "parameters": [
           {
-            "name": "id",
+            "name": "parentId",
             "in": "path",
-            "description": "Parent tournament id",
+            "description": "",
             "required": true,
             "style": "simple",
             "schema": {
@@ -1831,7 +1831,7 @@
         }
       }
     },
-    "/api/v4/earnings/child/{id}": {
+    "/api/v4/earnings/child/{childId}": {
       "get": {
         "tags": [
           "Earnings"
@@ -1839,9 +1839,9 @@
         "summary": "Get child earning prize pool",
         "parameters": [
           {
-            "name": "id",
+            "name": "childId",
             "in": "path",
-            "description": "Child tournament id",
+            "description": "",
             "required": true,
             "style": "simple",
             "schema": {
@@ -1870,9 +1870,9 @@
         "summary": "Modify child prize pool",
         "parameters": [
           {
-            "name": "id",
+            "name": "childId",
             "in": "path",
-            "description": "Child tournament id",
+            "description": "",
             "required": true,
             "style": "simple",
             "schema": {
@@ -1915,7 +1915,7 @@
         }
       }
     },
-    "/api/v4/earnings/child/{id}/status": {
+    "/api/v4/earnings/child/{childId}/status": {
       "patch": {
         "tags": [
           "Earnings"
@@ -1923,9 +1923,9 @@
         "summary": "Modify child prize pool status",
         "parameters": [
           {
-            "name": "id",
+            "name": "childId",
             "in": "path",
-            "description": "Child tournament id",
+            "description": "",
             "required": true,
             "style": "simple",
             "schema": {
@@ -8251,7 +8251,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/GetPrizePoolStatusOptionsRespApiRespBase"
+                  "$ref": "#/components/schemas/GetCurrencyOptionsRespApiRespBase"
                 }
               }
             }
@@ -13306,7 +13306,7 @@
         "tags": [
           "Tournaments"
         ],
-        "summary": "get child tournament types by parent tournament",
+        "summary": "Get child tournament types by parent tournament",
         "parameters": [
           {
             "name": "parentId",
@@ -13315,6 +13315,63 @@
             "required": true,
             "style": "simple",
             "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Int16ItemListApiRespBase"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v4/tournaments/parents/{parentId}/game-maps": {
+      "get": {
+        "tags": [
+          "Tournaments"
+        ],
+        "summary": "Get game maps by parent tournament",
+        "parameters": [
+          {
+            "name": "parentId",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "FuzzyPrefix",
+            "in": "query",
+            "description": "Fuzzy prefix",
+            "required": true,
+            "style": "form",
+            "schema": {
+              "maxLength": 50,
+              "minLength": 1,
+              "type": "string"
+            }
+          },
+          {
+            "name": "MaxCount",
+            "in": "query",
+            "description": "Max count",
+            "style": "form",
+            "schema": {
+              "maximum": 100,
+              "minimum": 10,
               "type": "integer",
               "format": "int32"
             }
@@ -13626,19 +13683,11 @@
                     "description": "Description"
                   },
                   "SponsorIds": {
-                    "type": "array",
-                    "items": {
-                      "type": "integer",
-                      "format": "int32"
-                    },
+                    "type": "string",
                     "description": "Sponsor ids"
                   },
                   "MapIds": {
-                    "type": "array",
-                    "items": {
-                      "type": "integer",
-                      "format": "int32"
-                    },
+                    "type": "string",
                     "description": "Map ids"
                   },
                   "ImageFile": {
@@ -13828,20 +13877,12 @@
                     "description": "Description"
                   },
                   "SponsorIds": {
-                    "type": "array",
-                    "items": {
-                      "type": "integer",
-                      "format": "int32"
-                    },
-                    "description": "Sponsor ids\r\n[] is clear all"
+                    "type": "string",
+                    "description": "Sponsor ids"
                   },
                   "MapIds": {
-                    "type": "array",
-                    "items": {
-                      "type": "integer",
-                      "format": "int32"
-                    },
-                    "description": "Map ids\r\n[] is clear all"
+                    "type": "string",
+                    "description": "Map ids"
                   },
                   "ImageFile": {
                     "type": "string",
@@ -14309,7 +14350,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ChildRegistrationTeamListItemGetChildRegistrationsRespApiRespBase"
+                  "$ref": "#/components/schemas/ChildRegistrationPlayerListItemGetChildRegistrationsRespApiRespBase"
                 }
               }
             }
@@ -18311,6 +18352,108 @@
         },
         "additionalProperties": false
       },
+      "ChildRegistrationPlayerListItem": {
+        "type": "object",
+        "properties": {
+          "registerId": {
+            "type": "integer",
+            "description": "Register id",
+            "format": "int32"
+          },
+          "playerId": {
+            "type": "integer",
+            "description": "Player id",
+            "format": "int32"
+          },
+          "playerName": {
+            "type": "string",
+            "description": "Player name",
+            "nullable": true
+          },
+          "hasOpp": {
+            "type": "boolean",
+            "description": "Has opp"
+          },
+          "isReserved": {
+            "type": "boolean",
+            "description": "Is reserved"
+          },
+          "registeredAt": {
+            "type": "integer",
+            "description": "Registered at",
+            "format": "int64"
+          },
+          "canUnregister": {
+            "type": "boolean",
+            "description": "Can register"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ChildRegistrationPlayerListItemGetChildRegistrationsResp": {
+        "type": "object",
+        "properties": {
+          "parentId": {
+            "type": "integer",
+            "description": "Parent id",
+            "format": "int32"
+          },
+          "childId": {
+            "type": "integer",
+            "description": "Child id",
+            "format": "int32"
+          },
+          "parentName": {
+            "type": "string",
+            "description": "Parent name",
+            "nullable": true
+          },
+          "stageName": {
+            "type": "string",
+            "description": "Stage name",
+            "nullable": true
+          },
+          "childName": {
+            "type": "string",
+            "description": "Child name",
+            "nullable": true
+          },
+          "gameId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "registrations": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ChildRegistrationPlayerListItem"
+            },
+            "description": "Registrations",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ChildRegistrationPlayerListItemGetChildRegistrationsRespApiRespBase": {
+        "type": "object",
+        "properties": {
+          "ret": {
+            "$ref": "#/components/schemas/EnumRet"
+          },
+          "msg": {
+            "type": "string",
+            "nullable": true
+          },
+          "traceId": {
+            "type": "string",
+            "nullable": true,
+            "readOnly": true
+          },
+          "data": {
+            "$ref": "#/components/schemas/ChildRegistrationPlayerListItemGetChildRegistrationsResp"
+          }
+        },
+        "additionalProperties": false
+      },
       "ChildRegistrationTeamListItem": {
         "type": "object",
         "properties": {
@@ -19866,6 +20009,8 @@
           20033,
           20034,
           20035,
+          20036,
+          20037,
           29999,
           30000,
           30001,
@@ -21317,6 +21462,41 @@
           },
           "data": {
             "$ref": "#/components/schemas/GetCrewFoldersResp"
+          }
+        },
+        "additionalProperties": false
+      },
+      "GetCurrencyOptionsResp": {
+        "type": "object",
+        "properties": {
+          "currencies": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Int16Item"
+            },
+            "description": "Currencies",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "GetCurrencyOptionsRespApiRespBase": {
+        "type": "object",
+        "properties": {
+          "ret": {
+            "$ref": "#/components/schemas/EnumRet"
+          },
+          "msg": {
+            "type": "string",
+            "nullable": true
+          },
+          "traceId": {
+            "type": "string",
+            "nullable": true,
+            "readOnly": true
+          },
+          "data": {
+            "$ref": "#/components/schemas/GetCurrencyOptionsResp"
           }
         },
         "additionalProperties": false
@@ -27942,7 +28122,7 @@
           "prizePlacements": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/ModPrizePlacement"
+              "$ref": "#/components/schemas/ModPrizePoolPlacement"
             },
             "description": "Prize placement",
             "nullable": true
@@ -29713,12 +29893,44 @@
         },
         "additionalProperties": false
       },
-      "ModPrizePlacement": {
+      "ModPrizePoolDistribution": {
         "type": "object",
         "properties": {
           "id": {
             "type": "integer",
-            "description": "Id\r\nUnknown: -1\r\nKnow: > 0",
+            "description": "Id (Distribution id)\r\nId = 0 -> Add new",
+            "format": "int32"
+          },
+          "teamId": {
+            "type": "integer",
+            "description": "Team id",
+            "format": "int32",
+            "nullable": true
+          },
+          "playerIds": {
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "description": "Player ids",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ModPrizePoolPlacement": {
+        "required": [
+          "placementFrom",
+          "placementId",
+          "placementTo",
+          "prizeAmount"
+        ],
+        "type": "object",
+        "properties": {
+          "placementId": {
+            "type": "integer",
+            "description": "Placement id\r\nUnknown: -1\r\nKnow: > 0",
             "format": "int32"
           },
           "placementFrom": {
@@ -29736,18 +29948,12 @@
             "description": "Prize amount",
             "format": "double"
           },
-          "teamId": {
-            "type": "integer",
-            "description": "Team id",
-            "format": "int32"
-          },
-          "playerIds": {
+          "distributions": {
             "type": "array",
             "items": {
-              "type": "integer",
-              "format": "int32"
+              "$ref": "#/components/schemas/ModPrizePoolDistribution"
             },
-            "description": "Player ids",
+            "description": "Distributions",
             "nullable": true
           }
         },
@@ -30960,6 +31166,11 @@
             "description": "Parent tournament id",
             "format": "int32"
           },
+          "gameId": {
+            "type": "integer",
+            "description": "Game id",
+            "format": "int32"
+          },
           "typeName": {
             "minLength": 1,
             "type": "string",
@@ -31092,7 +31303,7 @@
       "PrizePlacement": {
         "type": "object",
         "properties": {
-          "id": {
+          "placementId": {
             "type": "integer",
             "description": "Id",
             "format": "int32"
@@ -31112,10 +31323,30 @@
             "description": "Prize amount",
             "format": "double"
           },
+          "distributions": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PrizePoolDistributionListItem"
+            },
+            "description": "Distributions",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "PrizePoolDistributionListItem": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "Id (Distribution id)",
+            "format": "int32"
+          },
           "teamId": {
             "type": "integer",
             "description": "Team id",
-            "format": "int32"
+            "format": "int32",
+            "nullable": true
           },
           "teamName": {
             "type": "string",
