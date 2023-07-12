@@ -14,22 +14,26 @@ export interface AddArticleResp {
    * Article id
    * @format int32
    */
-  articleId?: number;
+  articleId: number;
 }
 
 export interface AddArticleRespApiRespBase {
-  ret?: EnumRet;
-  msg?: string | null;
-  traceId?: string | null;
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
   data?: AddArticleResp;
 }
 
 export type AddBroadcastTalentResp = object;
 
 export interface AddBroadcastTalentRespApiRespBase {
-  ret?: EnumRet;
-  msg?: string | null;
-  traceId?: string | null;
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
   data?: AddBroadcastTalentResp;
 }
 
@@ -41,9 +45,11 @@ export interface AddChildMediaItemReq {
 export type AddChildMediaItemResp = object;
 
 export interface AddChildMediaItemRespApiRespBase {
-  ret?: EnumRet;
-  msg?: string | null;
-  traceId?: string | null;
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
   data?: AddChildMediaItemResp;
 }
 
@@ -142,14 +148,23 @@ export interface AddChildReq {
    * @max 32767
    */
   pointsDraw?: number | null;
+  /**
+   * Game Mode Id
+   * @format int32
+   * @min 1
+   * @max 32767
+   */
+  gameModeId?: number | null;
 }
 
 export type AddChildResp = object;
 
 export interface AddChildRespApiRespBase {
-  ret?: EnumRet;
-  msg?: string | null;
-  traceId?: string | null;
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
   data?: AddChildResp;
 }
 
@@ -161,22 +176,27 @@ export interface AddChildTeamRegistrationsReq {
 export type AddFileResp = object;
 
 export interface AddFileRespApiRespBase {
-  ret?: EnumRet;
-  msg?: string | null;
-  traceId?: string | null;
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
   data?: AddFileResp;
 }
 
 export interface AddFolderResp {
   /** @format int32 */
-  id?: number;
-  name?: string | null;
+  id: number;
+  /** @minLength 1 */
+  name: string;
 }
 
 export interface AddFolderRespApiRespBase {
-  ret?: EnumRet;
-  msg?: string | null;
-  traceId?: string | null;
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
   data?: AddFolderResp;
 }
 
@@ -188,9 +208,11 @@ export interface AddFrontendSiteSectionsReq {
 export type AddFrontendSiteSectionsResp = object;
 
 export interface AddFrontendSiteSectionsRespApiRespBase {
-  ret?: EnumRet;
-  msg?: string | null;
-  traceId?: string | null;
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
   data?: AddFrontendSiteSectionsResp;
 }
 
@@ -199,22 +221,26 @@ export interface AddFuncResp {
    * Backoffice func id
    * @format int32
    */
-  funcId?: number;
+  funcId: number;
 }
 
 export interface AddFuncRespApiRespBase {
-  ret?: EnumRet;
-  msg?: string | null;
-  traceId?: string | null;
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
   data?: AddFuncResp;
 }
 
 export type AddGameAccountResp = object;
 
 export interface AddGameAccountRespApiRespBase {
-  ret?: EnumRet;
-  msg?: string | null;
-  traceId?: string | null;
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
   data?: AddGameAccountResp;
 }
 
@@ -245,9 +271,11 @@ export interface AddGameRegionResp {
 }
 
 export interface AddGameRegionRespApiRespBase {
-  ret?: EnumRet;
-  msg?: string | null;
-  traceId?: string | null;
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
   data?: AddGameRegionResp;
 }
 
@@ -256,13 +284,15 @@ export interface AddGameResp {
    * Game id
    * @format int32
    */
-  gameId?: number;
+  gameId: number;
 }
 
 export interface AddGameRespApiRespBase {
-  ret?: EnumRet;
-  msg?: string | null;
-  traceId?: string | null;
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
   data?: AddGameResp;
 }
 
@@ -292,31 +322,37 @@ export interface AddGroupResp {
    * Group id
    * @format int32
    */
-  groupId?: number | null;
+  groupId: number;
 }
 
 export interface AddGroupRespApiRespBase {
-  ret?: EnumRet;
-  msg?: string | null;
-  traceId?: string | null;
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
   data?: AddGroupResp;
 }
 
 export type AddHeroResp = object;
 
 export interface AddHeroRespApiRespBase {
-  ret?: EnumRet;
-  msg?: string | null;
-  traceId?: string | null;
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
   data?: AddHeroResp;
 }
 
 export type AddMapResp = object;
 
 export interface AddMapRespApiRespBase {
-  ret?: EnumRet;
-  msg?: string | null;
-  traceId?: string | null;
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
   data?: AddMapResp;
 }
 
@@ -333,9 +369,11 @@ export interface AddMatchReq {
 export type AddMatchResp = object;
 
 export interface AddMatchRespApiRespBase {
-  ret?: EnumRet;
-  msg?: string | null;
-  traceId?: string | null;
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
   data?: AddMatchResp;
 }
 
@@ -354,9 +392,11 @@ export interface AddMediaItemsReq {
 export type AddMediaItemsResp = object;
 
 export interface AddMediaItemsRespApiRespBase {
-  ret?: EnumRet;
-  msg?: string | null;
-  traceId?: string | null;
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
   data?: AddMediaItemsResp;
 }
 
@@ -416,9 +456,11 @@ export interface AddMediaVodResp {
 }
 
 export interface AddMediaVodRespApiRespBase {
-  ret?: EnumRet;
-  msg?: string | null;
-  traceId?: string | null;
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
   data?: AddMediaVodResp;
 }
 
@@ -447,9 +489,11 @@ export interface AddModeReq {
 export type AddModeResp = object;
 
 export interface AddModeRespApiRespBase {
-  ret?: EnumRet;
-  msg?: string | null;
-  traceId?: string | null;
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
   data?: AddModeResp;
 }
 
@@ -500,13 +544,15 @@ export interface AddNotificationTemplateResp {
    * Notification Template Id
    * @format int32
    */
-  notificationTemplateId?: number;
+  notificationTemplateId: number;
 }
 
 export interface AddNotificationTemplateRespApiRespBase {
-  ret?: EnumRet;
-  msg?: string | null;
-  traceId?: string | null;
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
   data?: AddNotificationTemplateResp;
 }
 
@@ -584,13 +630,15 @@ export interface AddOneSignalAppResp {
    * One Signal App Id
    * @format int32
    */
-  oneSignalAppId?: number;
+  oneSignalAppId: number;
 }
 
 export interface AddOneSignalAppRespApiRespBase {
-  ret?: EnumRet;
-  msg?: string | null;
-  traceId?: string | null;
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
   data?: AddOneSignalAppResp;
 }
 
@@ -627,13 +675,15 @@ export interface AddPageResp {
    * Page id
    * @format int32
    */
-  pageId?: number;
+  pageId: number;
 }
 
 export interface AddPageRespApiRespBase {
-  ret?: EnumRet;
-  msg?: string | null;
-  traceId?: string | null;
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
   data?: AddPageResp;
 }
 
@@ -644,7 +694,7 @@ export interface AddParentBroadcastTalentsReq {
    * @min 1
    * @max 2147483647
    */
-  broadcastTalentId?: number;
+  broadcastTalentId: number;
 }
 
 export interface AddParentResp {
@@ -652,31 +702,37 @@ export interface AddParentResp {
    * Parent tournament id
    * @format int32
    */
-  parentId?: number;
+  parentId: number;
 }
 
 export interface AddParentRespApiRespBase {
-  ret?: EnumRet;
-  msg?: string | null;
-  traceId?: string | null;
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
   data?: AddParentResp;
 }
 
 export type AddPlayerMediaItemResp = object;
 
 export interface AddPlayerMediaItemRespApiRespBase {
-  ret?: EnumRet;
-  msg?: string | null;
-  traceId?: string | null;
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
   data?: AddPlayerMediaItemResp;
 }
 
 export type AddPlayerResp = object;
 
 export interface AddPlayerRespApiRespBase {
-  ret?: EnumRet;
-  msg?: string | null;
-  traceId?: string | null;
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
   data?: AddPlayerResp;
 }
 
@@ -711,9 +767,11 @@ export interface AddRoleReq {
 export type AddRoleResp = object;
 
 export interface AddRoleRespApiRespBase {
-  ret?: EnumRet;
-  msg?: string | null;
-  traceId?: string | null;
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
   data?: AddRoleResp;
 }
 
@@ -751,57 +809,72 @@ export interface AddRoundReq {
 export type AddRoundResp = object;
 
 export interface AddRoundRespApiRespBase {
-  ret?: EnumRet;
-  msg?: string | null;
-  traceId?: string | null;
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
   data?: AddRoundResp;
 }
 
 export type AddServerResp = object;
 
 export interface AddServerRespApiRespBase {
-  ret?: EnumRet;
-  msg?: string | null;
-  traceId?: string | null;
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
   data?: AddServerResp;
 }
 
 export type AddSideResp = object;
 
 export interface AddSideRespApiRespBase {
-  ret?: EnumRet;
-  msg?: string | null;
-  traceId?: string | null;
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
   data?: AddSideResp;
 }
 
 export interface AddSiteSectionsResp {
-  /** @format int32 */
-  id?: number | null;
+  /**
+   * Site section id
+   * @format int32
+   */
+  id: number;
 }
 
 export interface AddSiteSectionsRespApiRespBase {
-  ret?: EnumRet;
-  msg?: string | null;
-  traceId?: string | null;
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
   data?: AddSiteSectionsResp;
 }
 
 export type AddSponsorResp = object;
 
 export interface AddSponsorRespApiRespBase {
-  ret?: EnumRet;
-  msg?: string | null;
-  traceId?: string | null;
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
   data?: AddSponsorResp;
 }
 
 export type AddStreamResp = object;
 
 export interface AddStreamRespApiRespBase {
-  ret?: EnumRet;
-  msg?: string | null;
-  traceId?: string | null;
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
   data?: AddStreamResp;
 }
 
@@ -826,60 +899,125 @@ export interface AddTeamPlayerReq {
 export type AddTeamPlayerResp = object;
 
 export interface AddTeamPlayerRespApiRespBase {
-  ret?: EnumRet;
-  msg?: string | null;
-  traceId?: string | null;
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
   data?: AddTeamPlayerResp;
 }
 
 export type AddTeamResp = object;
 
 export interface AddTeamRespApiRespBase {
-  ret?: EnumRet;
-  msg?: string | null;
-  traceId?: string | null;
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
   data?: AddTeamResp;
 }
 
 export type AddUserResp = object;
 
 export interface AddUserRespApiRespBase {
-  ret?: EnumRet;
-  msg?: string | null;
-  traceId?: string | null;
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
   data?: AddUserResp;
 }
 
 export type AddVenueResp = object;
 
 export interface AddVenueRespApiRespBase {
-  ret?: EnumRet;
-  msg?: string | null;
-  traceId?: string | null;
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
   data?: AddVenueResp;
 }
 
 export interface ApiLogDetail {
-  /** @format int64 */
-  id?: number;
-  traceId?: string | null;
-  ip?: string | null;
-  scheme?: string | null;
-  host?: string | null;
-  path?: string | null;
-  method?: string | null;
-  prefix?: string | null;
-  serverName?: string | null;
-  requestHeaders?: string | null;
-  requestContent?: string | null;
-  responseHeaders?: string | null;
-  responseContent?: string | null;
-  /** @format int32 */
-  responseCode?: number;
-  /** @format int32 */
-  executeTimeMs?: number;
-  /** @format int64 */
-  recordedAt?: number;
+  /**
+   * Id
+   * @format int64
+   */
+  id: number;
+  /**
+   * Trace id
+   * @minLength 1
+   */
+  traceId: string;
+  /**
+   * IP
+   * @minLength 1
+   */
+  ip: string;
+  /**
+   * Scheme
+   * @minLength 1
+   */
+  scheme: string;
+  /**
+   * Host
+   * @minLength 1
+   */
+  host: string;
+  /**
+   * Path
+   * @minLength 1
+   */
+  path: string;
+  /**
+   * Method
+   * @minLength 1
+   */
+  method: string;
+  /**
+   * Prefix
+   * @minLength 1
+   */
+  prefix: string;
+  /**
+   * Server name
+   * @minLength 1
+   */
+  serverName: string;
+  /**
+   * Request headers
+   * @minLength 1
+   */
+  requestHeaders: string;
+  /**
+   * Request content
+   * @minLength 1
+   */
+  requestContent: string;
+  /**
+   * Response headers
+   * @minLength 1
+   */
+  responseHeaders: string;
+  /** @minLength 1 */
+  responseContent: string;
+  /**
+   * Response code
+   * @format int32
+   */
+  responseCode: number;
+  /**
+   * Execute time ms
+   * @format int32
+   */
+  executeTimeMs: number;
+  /**
+   * Recorded at
+   * @format int64
+   */
+  recordedAt: number;
 }
 
 export interface ApiLogListItem {
@@ -887,49 +1025,75 @@ export interface ApiLogListItem {
    * Id
    * @format int64
    */
-  id?: number;
-  /** Trace Id */
-  traceId?: string | null;
-  /** Ip Address */
-  ip?: string | null;
-  /** Scheme */
-  scheme?: string | null;
-  /** Host */
-  host?: string | null;
-  /** Path */
-  path?: string | null;
-  /** Method */
-  method?: string | null;
-  /** Prefix */
-  prefix?: string | null;
-  /** Server Name */
-  serverName?: string | null;
+  id: number;
+  /**
+   * Trace Id
+   * @minLength 1
+   */
+  traceId: string;
+  /**
+   * Ip Address
+   * @minLength 1
+   */
+  ip: string;
+  /**
+   * Scheme
+   * @minLength 1
+   */
+  scheme: string;
+  /**
+   * Host
+   * @minLength 1
+   */
+  host: string;
+  /**
+   * Path
+   * @minLength 1
+   */
+  path: string;
+  /**
+   * Method
+   * @minLength 1
+   */
+  method: string;
+  /**
+   * Prefix
+   * @minLength 1
+   */
+  prefix: string;
+  /**
+   * Server Name
+   * @minLength 1
+   */
+  serverName: string;
   /**
    * Response Status Code
    * @format int32
    */
-  responseCode?: number;
+  responseCode: number;
   /**
    * Response Length
    * @format int32
    */
-  responseLen?: number;
+  responseLen: number;
   /**
    * Execute Time MilliSeconds
    * @format int32
    */
-  executeTimeMs?: number;
+  executeTimeMs: number;
   /**
    * Record at
    * @format int64
    */
-  recordedAt?: number;
+  recordedAt: number;
 }
 
 export interface ApiRespBase {
-  ret?: EnumRet;
-  msg?: string | null;
-  traceId?: string | null;
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
 }
 
 export interface ArticleDetail {
@@ -1024,8 +1188,11 @@ export interface ArticleListItem {
    * @minLength 1
    */
   title: string;
-  /** Article url */
-  url?: string | null;
+  /**
+   * Article url
+   * @minLength 1
+   */
+  url: string;
   /** Published state */
   isPublished: boolean;
   /** Proofread state */
@@ -1074,13 +1241,15 @@ export interface AssignGroupReq {
 
 export interface AssignGroupResp {
   /** Add users */
-  addUsers?: Int32Item[] | null;
+  addUsers: Int32Item[];
 }
 
 export interface AssignGroupRespApiRespBase {
-  ret?: EnumRet;
-  msg?: string | null;
-  traceId?: string | null;
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
   data?: AssignGroupResp;
 }
 
@@ -1098,55 +1267,72 @@ export interface AssignRoleReq {
 
 export interface AssignRoleResp {
   /** Assign users */
-  addUsers?: Int32Item[] | null;
+  addUsers: Int32Item[];
 }
 
 export interface AssignRoleRespApiRespBase {
-  ret?: EnumRet;
-  msg?: string | null;
-  traceId?: string | null;
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
   data?: AssignRoleResp;
 }
 
 export interface BroadcastTalentCountry {
   /** @format int32 */
-  id?: number;
-  name?: string | null;
-  code?: string | null;
+  id: number;
+  /** @minLength 1 */
+  name: string;
+  /** @minLength 1 */
+  code: string;
   flagImageUrl?: string | null;
 }
 
 export interface BroadcastTalentGame {
   /** @format int32 */
-  id?: number | null;
-  name?: string | null;
-  urlSafeName?: string | null;
+  id: number;
+  /** @minLength 1 */
+  name: string;
+  /** @minLength 1 */
+  urlSafeName: string;
   iconUrl?: string | null;
 }
 
 export interface BroadcastTalentLanguage {
   /** @format int32 */
-  id?: number;
-  name?: string | null;
-  code?: string | null;
+  id: number;
+  /** @minLength 1 */
+  name: string;
+  /** @minLength 1 */
+  code: string;
 }
 
 export interface BroadcastTalentPlayer {
   /** @format int32 */
-  id?: number;
-  name?: string | null;
+  id: number;
+  /** @minLength 1 */
+  name: string;
 }
 
 export interface BroadcastTalentStream {
-  /** @format int32 */
-  id?: number;
-  title?: string | null;
+  /**
+   * Id
+   * @format int32
+   */
+  id: number;
+  /**
+   * Title
+   * @minLength 1
+   */
+  title: string;
 }
 
 export interface ByteItem {
   /** @format int32 */
-  id?: number;
-  name?: string | null;
+  id: number;
+  /** @minLength 1 */
+  name: string;
 }
 
 export interface ChildEarningListItem {
@@ -1154,10 +1340,13 @@ export interface ChildEarningListItem {
    * Child tournament id
    * @format int32
    */
-  childId?: number;
-  /** Child tournament name */
-  childName?: string | null;
-  prizePoolStatus?: EnumPrizePoolStatus;
+  childId: number;
+  /**
+   * Child tournament name
+   * @minLength 1
+   */
+  childName: string;
+  prizePoolStatus: EnumPrizePoolStatus;
   prizePoolCurrency?: EnumCurrency;
   /** Prize pool currency name */
   prizePoolCurrencyName?: string | null;
@@ -1190,25 +1379,28 @@ export interface ChildRegistrationPlayerListItem {
    * Register id
    * @format int32
    */
-  registerId?: number;
+  registerId: number;
   /**
    * Player id
    * @format int32
    */
-  playerId?: number;
-  /** Player name */
-  playerName?: string | null;
+  playerId: number;
+  /**
+   * Player name
+   * @minLength 1
+   */
+  playerName: string;
   /** Has opp */
-  hasOpp?: boolean;
+  hasOpp: boolean;
   /** Is reserved */
-  isReserved?: boolean;
+  isReserved: boolean;
   /**
    * Registered at
    * @format int64
    */
-  registeredAt?: number;
+  registeredAt: number;
   /** Can register */
-  canUnregister?: boolean;
+  canUnregister: boolean;
 }
 
 export interface ChildRegistrationPlayerListItemGetChildRegistrationsResp {
@@ -1235,9 +1427,11 @@ export interface ChildRegistrationPlayerListItemGetChildRegistrationsResp {
 }
 
 export interface ChildRegistrationPlayerListItemGetChildRegistrationsRespApiRespBase {
-  ret?: EnumRet;
-  msg?: string | null;
-  traceId?: string | null;
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
   data?: ChildRegistrationPlayerListItemGetChildRegistrationsResp;
 }
 
@@ -1246,24 +1440,30 @@ export interface ChildRegistrationTeamListItem {
    * Register id
    * @format int32
    */
-  registerId?: number;
-  /** Team name */
-  teamName?: string | null;
-  /** Team tag */
-  teamTag?: string | null;
+  registerId: number;
+  /**
+   * Team name
+   * @minLength 1
+   */
+  teamName: string;
+  /**
+   * Team tag
+   * @minLength 1
+   */
+  teamTag: string;
   /** Player names */
-  playerNames?: string[] | null;
+  playerNames: string[];
   /** Has opp */
-  hasOpp?: boolean;
+  hasOpp: boolean;
   /** Is reserved */
-  isReserved?: boolean;
+  isReserved: boolean;
   /**
    * Registered at
    * @format int64
    */
-  registeredAt?: number;
+  registeredAt: number;
   /** Can register */
-  canUnregister?: boolean;
+  canUnregister: boolean;
 }
 
 export interface ChildRegistrationTeamListItemGetChildRegistrationsResp {
@@ -1290,9 +1490,11 @@ export interface ChildRegistrationTeamListItemGetChildRegistrationsResp {
 }
 
 export interface ChildRegistrationTeamListItemGetChildRegistrationsRespApiRespBase {
-  ret?: EnumRet;
-  msg?: string | null;
-  traceId?: string | null;
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
   data?: ChildRegistrationTeamListItemGetChildRegistrationsResp;
 }
 
@@ -1315,11 +1517,17 @@ export interface CountryOption {
    * Country id
    * @format int32
    */
-  id?: number;
-  /** Country name */
-  name?: string | null;
-  /** Country code */
-  code?: string | null;
+  id: number;
+  /**
+   * Country name
+   * @minLength 1
+   */
+  name: string;
+  /**
+   * Country code
+   * @minLength 1
+   */
+  code: string;
   /** Flag image url */
   flagImageUrl?: string | null;
 }
@@ -1329,53 +1537,95 @@ export interface CrewFile {
    * File Id
    * @format int32
    */
-  id?: number;
-  name?: string | null;
-  url?: string | null;
-  /** @format int64 */
-  uploadedAt?: number;
-  /** @format int32 */
-  size?: number;
-  mineType?: string | null;
-  /** @format int32 */
-  folderId?: number;
-  /** @format int32 */
-  userId?: number;
-  userName?: string | null;
-  url_Safe_UserName?: string | null;
-  path?: string | null;
+  id: number;
+  /**
+   * Name
+   * @minLength 1
+   */
+  name: string;
+  /**
+   * Url
+   * @minLength 1
+   */
+  url: string;
+  /**
+   * Uploaded at
+   * @format int64
+   */
+  uploadedAt: number;
+  /**
+   * Size
+   * @format int32
+   */
+  size: number;
+  /**
+   * Mine type
+   * @minLength 1
+   */
+  mineType: string;
+  /**
+   * Folder id
+   * @format int32
+   */
+  folderId: number;
+  /**
+   * User id
+   * @format int32
+   */
+  userId: number;
+  /**
+   * Username
+   * @minLength 1
+   */
+  userName: string;
+  /**
+   * Url safe name
+   * @minLength 1
+   */
+  url_Safe_UserName: string;
+  /**
+   * Path
+   * @minLength 1
+   */
+  path: string;
 }
 
 export interface DelArticleResp {
   /**
-   * Backoffice func id
+   * Article id
    * @format int32
    */
-  funcId?: number;
+  articleId: number;
 }
 
 export interface DelArticleRespApiRespBase {
-  ret?: EnumRet;
-  msg?: string | null;
-  traceId?: string | null;
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
   data?: DelArticleResp;
 }
 
 export type DelBroadcastTalentResp = object;
 
 export interface DelBroadcastTalentRespApiRespBase {
-  ret?: EnumRet;
-  msg?: string | null;
-  traceId?: string | null;
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
   data?: DelBroadcastTalentResp;
 }
 
 export type DelChildMediaItemResp = object;
 
 export interface DelChildMediaItemRespApiRespBase {
-  ret?: EnumRet;
-  msg?: string | null;
-  traceId?: string | null;
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
   data?: DelChildMediaItemResp;
 }
 
@@ -1387,27 +1637,33 @@ export interface DelChildReq {
 export type DelChildResp = object;
 
 export interface DelChildRespApiRespBase {
-  ret?: EnumRet;
-  msg?: string | null;
-  traceId?: string | null;
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
   data?: DelChildResp;
 }
 
 export type DelFileResp = object;
 
 export interface DelFileRespApiRespBase {
-  ret?: EnumRet;
-  msg?: string | null;
-  traceId?: string | null;
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
   data?: DelFileResp;
 }
 
 export type DelFolderResp = object;
 
 export interface DelFolderRespApiRespBase {
-  ret?: EnumRet;
-  msg?: string | null;
-  traceId?: string | null;
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
   data?: DelFolderResp;
 }
 
@@ -1433,18 +1689,20 @@ export interface DelFrontendSiteSectionResp {
    * Frontend id
    * @format int32
    */
-  frontendId?: number;
+  frontendId: number;
   /**
    * Site section id
    * @format int32
    */
-  siteSectionId?: number;
+  siteSectionId: number;
 }
 
 export interface DelFrontendSiteSectionRespApiRespBase {
-  ret?: EnumRet;
-  msg?: string | null;
-  traceId?: string | null;
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
   data?: DelFrontendSiteSectionResp;
 }
 
@@ -1453,22 +1711,26 @@ export interface DelFuncResp {
    * Backoffice func id
    * @format int32
    */
-  funcId?: number;
+  funcId: number;
 }
 
 export interface DelFuncRespApiRespBase {
-  ret?: EnumRet;
-  msg?: string | null;
-  traceId?: string | null;
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
   data?: DelFuncResp;
 }
 
 export type DelGameAccountResp = object;
 
 export interface DelGameAccountRespApiRespBase {
-  ret?: EnumRet;
-  msg?: string | null;
-  traceId?: string | null;
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
   data?: DelGameAccountResp;
 }
 
@@ -1481,9 +1743,11 @@ export interface DelGameRegionResp {
 }
 
 export interface DelGameRegionRespApiRespBase {
-  ret?: EnumRet;
-  msg?: string | null;
-  traceId?: string | null;
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
   data?: DelGameRegionResp;
 }
 
@@ -1492,13 +1756,15 @@ export interface DelGameResp {
    * Game id
    * @format int32
    */
-  gameId?: number;
+  gameId: number;
 }
 
 export interface DelGameRespApiRespBase {
-  ret?: EnumRet;
-  msg?: string | null;
-  traceId?: string | null;
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
   data?: DelGameResp;
 }
 
@@ -1507,49 +1773,59 @@ export interface DelGroupResp {
    * Group id
    * @format int32
    */
-  groupId?: number | null;
+  groupId: number;
 }
 
 export interface DelGroupRespApiRespBase {
-  ret?: EnumRet;
-  msg?: string | null;
-  traceId?: string | null;
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
   data?: DelGroupResp;
 }
 
 export type DelHeroResp = object;
 
 export interface DelHeroRespApiRespBase {
-  ret?: EnumRet;
-  msg?: string | null;
-  traceId?: string | null;
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
   data?: DelHeroResp;
 }
 
 export type DelMapResp = object;
 
 export interface DelMapRespApiRespBase {
-  ret?: EnumRet;
-  msg?: string | null;
-  traceId?: string | null;
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
   data?: DelMapResp;
 }
 
 export type DelMatchResp = object;
 
 export interface DelMatchRespApiRespBase {
-  ret?: EnumRet;
-  msg?: string | null;
-  traceId?: string | null;
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
   data?: DelMatchResp;
 }
 
 export type DelMediaItemResp = object;
 
 export interface DelMediaItemRespApiRespBase {
-  ret?: EnumRet;
-  msg?: string | null;
-  traceId?: string | null;
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
   data?: DelMediaItemResp;
 }
 
@@ -1562,18 +1838,22 @@ export interface DelMediaVodResp {
 }
 
 export interface DelMediaVodRespApiRespBase {
-  ret?: EnumRet;
-  msg?: string | null;
-  traceId?: string | null;
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
   data?: DelMediaVodResp;
 }
 
 export type DelModeResp = object;
 
 export interface DelModeRespApiRespBase {
-  ret?: EnumRet;
-  msg?: string | null;
-  traceId?: string | null;
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
   data?: DelModeResp;
 }
 
@@ -1582,13 +1862,15 @@ export interface DelNotificationTemplateResp {
    * Notification Template Id
    * @format int32
    */
-  notificationTemplateId?: number;
+  notificationTemplateId: number;
 }
 
 export interface DelNotificationTemplateRespApiRespBase {
-  ret?: EnumRet;
-  msg?: string | null;
-  traceId?: string | null;
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
   data?: DelNotificationTemplateResp;
 }
 
@@ -1597,13 +1879,15 @@ export interface DelOneSignalAppResp {
    * One Signal App Id
    * @format int32
    */
-  oneSignalAppId?: number;
+  oneSignalAppId: number;
 }
 
 export interface DelOneSignalAppRespApiRespBase {
-  ret?: EnumRet;
-  msg?: string | null;
-  traceId?: string | null;
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
   data?: DelOneSignalAppResp;
 }
 
@@ -1613,40 +1897,48 @@ export interface DelPageReq {
 
 export interface DelPageResp {
   /** Page id */
-  pageId?: number[] | null;
+  pageId: number[];
 }
 
 export interface DelPageRespApiRespBase {
-  ret?: EnumRet;
-  msg?: string | null;
-  traceId?: string | null;
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
   data?: DelPageResp;
 }
 
 export type DelPlayerMediaItemResp = object;
 
 export interface DelPlayerMediaItemRespApiRespBase {
-  ret?: EnumRet;
-  msg?: string | null;
-  traceId?: string | null;
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
   data?: DelPlayerMediaItemResp;
 }
 
 export type DelPlayerResp = object;
 
 export interface DelPlayerRespApiRespBase {
-  ret?: EnumRet;
-  msg?: string | null;
-  traceId?: string | null;
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
   data?: DelPlayerResp;
 }
 
 export type DelReplaceOpponentsResp = object;
 
 export interface DelReplaceOpponentsRespApiRespBase {
-  ret?: EnumRet;
-  msg?: string | null;
-  traceId?: string | null;
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
   data?: DelReplaceOpponentsResp;
 }
 
@@ -1655,103 +1947,125 @@ export interface DelRoleResp {
    * Role id
    * @format int32
    */
-  roleId?: number | null;
+  roleId: number;
 }
 
 export interface DelRoleRespApiRespBase {
-  ret?: EnumRet;
-  msg?: string | null;
-  traceId?: string | null;
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
   data?: DelRoleResp;
 }
 
 export type DelRoundResp = object;
 
 export interface DelRoundRespApiRespBase {
-  ret?: EnumRet;
-  msg?: string | null;
-  traceId?: string | null;
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
   data?: DelRoundResp;
 }
 
 export type DelServerResp = object;
 
 export interface DelServerRespApiRespBase {
-  ret?: EnumRet;
-  msg?: string | null;
-  traceId?: string | null;
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
   data?: DelServerResp;
 }
 
 export type DelSideResp = object;
 
 export interface DelSideRespApiRespBase {
-  ret?: EnumRet;
-  msg?: string | null;
-  traceId?: string | null;
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
   data?: DelSideResp;
 }
 
 export type DelSiteSectionsResp = object;
 
 export interface DelSiteSectionsRespApiRespBase {
-  ret?: EnumRet;
-  msg?: string | null;
-  traceId?: string | null;
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
   data?: DelSiteSectionsResp;
 }
 
 export type DelSponsorResp = object;
 
 export interface DelSponsorRespApiRespBase {
-  ret?: EnumRet;
-  msg?: string | null;
-  traceId?: string | null;
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
   data?: DelSponsorResp;
 }
 
 export type DelStreamResp = object;
 
 export interface DelStreamRespApiRespBase {
-  ret?: EnumRet;
-  msg?: string | null;
-  traceId?: string | null;
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
   data?: DelStreamResp;
 }
 
 export type DelTeamPlayerResp = object;
 
 export interface DelTeamPlayerRespApiRespBase {
-  ret?: EnumRet;
-  msg?: string | null;
-  traceId?: string | null;
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
   data?: DelTeamPlayerResp;
 }
 
 export type DelTeamResp = object;
 
 export interface DelTeamRespApiRespBase {
-  ret?: EnumRet;
-  msg?: string | null;
-  traceId?: string | null;
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
   data?: DelTeamResp;
 }
 
 export type DelUserResp = object;
 
 export interface DelUserRespApiRespBase {
-  ret?: EnumRet;
-  msg?: string | null;
-  traceId?: string | null;
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
   data?: DelUserResp;
 }
 
 export type DelVenueResp = object;
 
 export interface DelVenueRespApiRespBase {
-  ret?: EnumRet;
-  msg?: string | null;
-  traceId?: string | null;
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
   data?: DelVenueResp;
 }
 
@@ -1765,13 +2079,15 @@ export interface DeleteParentResp {
    * Parent tournament id
    * @format int32
    */
-  parentId?: number;
+  parentId: number;
 }
 
 export interface DeleteParentRespApiRespBase {
-  ret?: EnumRet;
-  msg?: string | null;
-  traceId?: string | null;
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
   data?: DeleteParentResp;
 }
 
@@ -1780,19 +2096,37 @@ export interface EarningListItem {
    * Parent tournament id
    * @format int32
    */
-  parentId?: number;
-  /** Parent tournament name */
-  name?: string | null;
-  /** Parent tournament url */
-  url?: string | null;
-  /** Frontend name */
-  frontendName?: string | null;
-  /** Frontend short name */
-  feName?: string | null;
-  /** Game name */
-  gameName?: string | null;
-  /** Game icon url */
-  gameIconUrl?: string | null;
+  parentId: number;
+  /**
+   * Parent tournament name
+   * @minLength 1
+   */
+  name: string;
+  /**
+   * Parent tournament url
+   * @minLength 1
+   */
+  url: string;
+  /**
+   * Frontend name
+   * @minLength 1
+   */
+  frontendName: string;
+  /**
+   * Frontend short name
+   * @minLength 1
+   */
+  feName: string;
+  /**
+   * Game name
+   * @minLength 1
+   */
+  gameName: string;
+  /**
+   * Game icon url
+   * @minLength 1
+   */
+  gameIconUrl: string;
   prizePoolCurrency?: EnumCurrency;
   /** Prize pool currency name */
   prizePoolCurrencyName?: string | null;
@@ -1806,235 +2140,255 @@ export interface EarningListItem {
    * @format double
    */
   prizePoolUsd?: number | null;
-  prizePoolStatus?: EnumPrizePoolStatus;
-  /** Prize pool status name */
-  prizePoolStatusName?: string | null;
+  prizePoolStatus: EnumPrizePoolStatus;
+  /**
+   * Prize pool status name
+   * @minLength 1
+   */
+  prizePoolStatusName: string;
   /**
    * Starting at
    * @format int64
    */
-  startingAt?: number;
+  startingAt?: number | null;
 }
 
 /** @format int32 */
 export enum EnumArticleState {
-  Value1 = 1,
-  Value2 = 2,
-  Value3 = 3,
-  Value4 = 4,
+  Published = 1,
+  Unpublished = 2,
+  Deleted = 3,
+  Featured = 4,
 }
 
 /** @format int32 */
 export enum EnumArticleType {
-  Value1 = 1,
-  Value2 = 2,
-  Value3 = 3,
+  News = 1,
+  Feature = 2,
+  Guide = 3,
 }
 
 /** @format int32 */
 export enum EnumChildTournament {
-  Value1 = 1,
-  Value2 = 2,
-  Value3 = 3,
+  Group = 1,
+  Knockout = 2,
+  BattleRoyale = 3,
 }
 
 /** @format int32 */
 export enum EnumCurrency {
-  Value1 = 1,
-  Value2 = 2,
-  Value3 = 3,
-  Value4 = 4,
-  Value5 = 5,
-  Value6 = 6,
-  Value7 = 7,
-  Value8 = 8,
-  Value9 = 9,
-  Value10 = 10,
-  Value11 = 11,
-  Value12 = 12,
-  Value13 = 13,
-  Value14 = 14,
-  Value15 = 15,
-  Value16 = 16,
-  Value17 = 17,
-  Value18 = 18,
-  Value19 = 19,
-  Value20 = 20,
-  Value21 = 21,
-  Value22 = 22,
-  Value23 = 23,
-  Value24 = 24,
-  Value25 = 25,
-  Value26 = 26,
-  Value27 = 27,
-  Value28 = 28,
-  Value29 = 29,
+  USD = 1,
+  EUR = 2,
+  CNY = 3,
+  RUB = 4,
+  GBP = 5,
+  PHP = 6,
+  AUD = 7,
+  BGN = 8,
+  BRL = 9,
+  CAD = 10,
+  CZK = 11,
+  DKK = 12,
+  HKD = 13,
+  HUF = 14,
+  IDR = 15,
+  ILS = 16,
+  INR = 17,
+  KRW = 18,
+  MXN = 19,
+  MYR = 20,
+  NZD = 21,
+  PLN = 22,
+  RON = 23,
+  SEK = 24,
+  SGD = 25,
+  THB = 26,
+  TRY = 27,
+  ZAR = 28,
+  JPY = 29,
 }
 
 /** @format int32 */
 export enum EnumEarningPrizeStatus {
-  Value1 = 1,
-  Value2 = 2,
-  Value3 = 3,
+  Enable = 1,
+  Disable = 2,
+  Delete = 3,
 }
 
 /** @format int32 */
 export enum EnumFieldSort {
-  Value0 = 0,
-  Value1 = 1,
+  Asc = 0,
+  Desc = 1,
 }
 
 /** @format int32 */
 export enum EnumFuncType {
-  Value1 = 1,
-  Value2 = 2,
+  Main = 1,
+  Button = 2,
+}
+
+/** @format int32 */
+export enum EnumGameDraftType {
+  Ban = 0,
+  Pick = 1,
+}
+
+/** @format int32 */
+export enum EnumGameResult {
+  Win = 0,
+  Draw = 1,
+  Forfeit = 2,
+  Disq = 3,
 }
 
 /** @format int32 */
 export enum EnumGender {
-  Value0 = 0,
-  Value1 = 1,
-  Value2 = 2,
-  Value3 = 3,
+  None = 0,
+  Male = 1,
+  Female = 2,
+  OtherUnspecified = 3,
 }
 
 /** @format int32 */
 export enum EnumMapSelection {
-  Value0 = 0,
-  Value1 = 1,
+  Specified = 0,
+  UserSelected = 1,
 }
 
 /** @format int32 */
 export enum EnumParentTournamentState {
-  Value1 = 1,
-  Value2 = 2,
-  Value3 = 3,
-  Value4 = 4,
-  Value5 = 5,
+  Live = 1,
+  Upcoming = 2,
+  Completed = 3,
+  Canceled = 4,
+  Featured = 5,
 }
 
 /** @format int32 */
 export enum EnumParentTournamentType {
-  Value1 = 1,
+  MultiStage = 1,
 }
 
 /** @format int32 */
 export enum EnumPlatform {
-  Value1 = 1,
-  Value10 = 10,
-  Value11 = 11,
-  Value99 = 99,
+  PLATFORM_TWITCHTV = 1,
+  PLATFORM_YOUTUBE_CHANNEL = 10,
+  PLATFORM_YOUTUBE_STREAM = 11,
+  PLATFORM_OTHER = 99,
 }
 
 /** @format int32 */
 export enum EnumPointsAwarded {
-  Value0 = 0,
-  Value1 = 1,
-  Value2 = 2,
-  Value3 = 3,
-  Value4 = 4,
+  PerGame = 0,
+  PerMatch = 1,
+  PerGameFull = 2,
+  ByResultFull = 3,
+  ByResult = 4,
 }
 
 /** @format int32 */
 export enum EnumPrizePoolStatus {
-  Value0 = 0,
-  Value1 = 1,
-  Value2 = 2,
-  Value3 = 3,
-  Value4 = 4,
-  Value5 = 5,
+  NoPrizePool = 0,
+  NoPrizePoolLogged = 1,
+  NoStructureDefined = 2,
+  NoWinnersBacklogged = 3,
+  MissingWinners = 4,
+  Complete = 5,
 }
 
 /** @format int32 */
 export enum EnumRet {
-  Value0 = 0,
-  Value10001 = 10001,
-  Value10002 = 10002,
-  Value10003 = 10003,
-  Value10004 = 10004,
-  Value20000 = 20000,
-  Value20001 = 20001,
-  Value20002 = 20002,
-  Value20003 = 20003,
-  Value20004 = 20004,
-  Value20005 = 20005,
-  Value20006 = 20006,
-  Value20007 = 20007,
-  Value20008 = 20008,
-  Value20009 = 20009,
-  Value20010 = 20010,
-  Value20011 = 20011,
-  Value20012 = 20012,
-  Value20013 = 20013,
-  Value20014 = 20014,
-  Value20015 = 20015,
-  Value20016 = 20016,
-  Value20017 = 20017,
-  Value20018 = 20018,
-  Value20019 = 20019,
-  Value20020 = 20020,
-  Value20021 = 20021,
-  Value20022 = 20022,
-  Value20023 = 20023,
-  Value20024 = 20024,
-  Value20025 = 20025,
-  Value20026 = 20026,
-  Value20027 = 20027,
-  Value20028 = 20028,
-  Value20029 = 20029,
-  Value20030 = 20030,
-  Value20031 = 20031,
-  Value20032 = 20032,
-  Value20033 = 20033,
-  Value20034 = 20034,
-  Value20035 = 20035,
-  Value20036 = 20036,
-  Value20037 = 20037,
-  Value29999 = 29999,
-  Value30000 = 30000,
-  Value30001 = 30001,
-  Value30002 = 30002,
-  Value30003 = 30003,
-  Value30004 = 30004,
-  Value30005 = 30005,
-  Value39999 = 39999,
-  Value40000 = 40000,
-  Value40001 = 40001,
-  Value40999 = 40999,
-  Value50000 = 50000,
-  Value50001 = 50001,
-  Value50002 = 50002,
-  Value50003 = 50003,
-  Value50004 = 50004,
-  Value50005 = 50005,
-  Value59999 = 59999,
-  Value60000 = 60000,
-  Value60001 = 60001,
-  Value69999 = 69999,
+  Success = 0,
+  Unauthorized = 10001,
+  PermissionDenied = 10002,
+  InvalidAuthorizationToken = 10003,
+  AuthorizationTokenExpired = 10004,
+  InvalidParamsErrorStart = 20000,
+  InvalidParams = 20001,
+  NameRepeated = 20002,
+  Using = 20003,
+  InvalidWebhookEvent = 20004,
+  FileSizeIsZero = 20005,
+  FileSizeTooBig = 20006,
+  ExtensionInvalid = 20007,
+  DimensionsTooSmall = 20008,
+  DimensionsTooBig = 20009,
+  NotImage = 20010,
+  AspectRatioIsWrong = 20011,
+  FileNotExist = 20012,
+  UploadTypeNotExist = 20013,
+  FolderNotExist = 20014,
+  ParentFolderNotExist = 20015,
+  ContentTypeInvalid = 20016,
+  MissingHeaders = 20017,
+  UserIdExist = 20018,
+  EmailExist = 20019,
+  Exist = 20020,
+  StateLimit = 20021,
+  MaximumOfTags = 20022,
+  StreamIdExist = 20023,
+  PlayerIdExit = 20024,
+  PersonalStreamIdExit = 20025,
+  MediaItemIdExit = 20026,
+  FanClubAlreadyMember = 20027,
+  OtherPlatformRequiresStreamUrl = 20028,
+  TagMaxCharacters = 20029,
+  PlatformRequiresStreamId = 20030,
+  TournamentsGameAccountInvalidNameFormat = 20031,
+  TournamentsGameAccountAlreadyExists = 20032,
+  HasForbiddenPermissionParams = 20033,
+  InvalidPermissionParams = 20034,
+  NoContestant = 20035,
+  PrizePoolNotMathStructure = 20036,
+  PrizePoolDistributionNotMatchPlacement = 20037,
+  PasswordIncorrect = 20038,
+  InvalidParamsErrorEnd = 29999,
+  NotFoundErrorsStart = 30000,
+  NotExist = 30001,
+  UserNotExist = 30002,
+  PlayerNotFound = 30003,
+  TeamNotFound = 30004,
+  ChannelDoesNotExist = 30005,
+  NotFoundErrorsEnd = 39999,
+  ConflictErrorsStart = 40000,
+  UsersUserAlreadyDeleted = 40001,
+  ConflictErrorsEnd = 40999,
+  ServerErrorsStart = 50000,
+  Exception = 50001,
+  Fail = 50002,
+  DeleteFail = 50003,
+  GetJwtKeyFail = 50004,
+  InternalServerError = 50005,
+  ServerErrorsEnd = 59999,
+  ForbiddenErrorsStart = 60000,
+  Disallow = 60001,
+  ForbiddenErrorsEnd = 69999,
 }
 
 /** @format int32 */
 export enum EnumRoundType {
-  Value0 = 0,
-  Value1 = 1,
-  Value2 = 2,
-  Value3 = 3,
-  Value4 = 4,
+  Normal = 0,
+  UpperBracket = 1,
+  LowerBracket = 2,
+  Tiebreaker = 3,
+  ThirdPlacePlayoff = 4,
+  EmptyUpperBracket = 5,
+  EmptyLowerBracket = 6,
 }
 
 /** @format int32 */
 export enum EnumState {
-  Value0 = 0,
-  Value1 = 1,
-  Value2 = 2,
+  Disabled = 0,
+  Enabled = 1,
+  Deleted = 2,
 }
 
 /** @format int32 */
 export enum EnumTournamentStatus {
-  Value0 = 0,
-  Value1 = 1,
-  Value2 = 2,
-  Value3 = 3,
+  Upcoming = 0,
+  Live = 1,
+  Canceled = 2,
+  Completed = 3,
 }
 
 export interface FolderDetail {
@@ -2042,11 +2396,14 @@ export interface FolderDetail {
    * Folder id
    * @format int32
    */
-  id?: number;
+  id: number;
   /** Folder name */
   name?: string | null;
-  /** Folder path */
-  path?: string | null;
+  /**
+   * Folder path
+   * @minLength 1
+   */
+  path: string;
 }
 
 export interface FrontendSiteSection {
@@ -2079,14 +2436,17 @@ export interface FrontendSiteSectionListItem {
    * Frontend id
    * @format int32
    */
-  frontendId?: number;
+  frontendId: number;
   /**
    * Site section id
    * @format int32
    */
-  siteSectionId?: number;
-  /** Site section name */
-  name?: string | null;
+  siteSectionId: number;
+  /**
+   * Site section name
+   * @minLength 1
+   */
+  name: string;
   /** Game name */
   gameName?: string | null;
 }
@@ -2096,39 +2456,58 @@ export interface FuncItem {
    * Backoffice func id
    * @format int32
    */
-  funcId?: number;
+  funcId: number;
   /**
    * Parent id
    * @format int32
    */
-  parentId?: number;
-  /** Func name */
-  name?: string | null;
-  /** Func code */
-  code?: string | null;
-  type?: EnumFuncType;
-  /** Func type name */
-  typeName?: string | null;
+  parentId: number;
+  /**
+   * Func name
+   * @minLength 1
+   */
+  name: string;
+  /**
+   * Func code
+   * @minLength 1
+   */
+  code: string;
+  type: EnumFuncType;
+  /**
+   * Func type name
+   * @minLength 1
+   */
+  typeName: string;
   /**
    * Func position
    * @format int32
    */
-  position?: number;
-  state?: EnumState;
-  /** State name */
-  stateName?: string | null;
-  /** Func url */
-  url?: string | null;
-  /** Func icon */
-  icon?: string | null;
+  position: number;
+  state: EnumState;
+  /**
+   * State name
+   * @minLength 1
+   */
+  stateName: string;
+  /**
+   * Func url
+   * @minLength 1
+   */
+  url: string;
+  /**
+   * Func icon
+   * @minLength 1
+   */
+  icon: string;
   /** Sub funcs */
-  subFuncs?: FuncItem[] | null;
+  subFuncs: FuncItem[];
 }
 
 export interface FuzzyFolderDetail {
   /** @format int32 */
-  id?: number;
-  path?: string | null;
+  id: number;
+  /** @minLength 1 */
+  path: string;
 }
 
 export interface GameListItem {
@@ -2136,28 +2515,37 @@ export interface GameListItem {
    * Game id
    * @format int32
    */
-  id?: number;
-  /** Game name */
-  name?: string | null;
-  /** Game url safe name */
-  urlSafeName?: string | null;
+  id: number;
+  /**
+   * Game name
+   * @minLength 1
+   */
+  name: string;
+  /**
+   * Game url safe name
+   * @minLength 1
+   */
+  urlSafeName: string;
   /** Has player rankings */
-  hasPlayerRankings?: boolean;
+  hasPlayerRankings: boolean;
   /** Has team rankings */
-  hasTeamRankings?: boolean;
+  hasTeamRankings: boolean;
   /** Has streams */
-  hasStreams?: boolean;
+  hasStreams: boolean;
   /**
    * Grid id
    * @format int32
    */
   gridId?: number | null;
   /** Is legacy */
-  isLegacy?: boolean;
-  /** Icon image url */
-  iconImageUrl?: string | null;
+  isLegacy: boolean;
+  /**
+   * Icon image url
+   * @minLength 1
+   */
+  iconImageUrl: string;
   /** Translation */
-  translations?: Translation[] | null;
+  translations: Translation[];
 }
 
 export interface GameRegionListItem {
@@ -2180,218 +2568,488 @@ export interface GameRegionListItem {
   translations: Translation[];
 }
 
+export interface GameResultBattleRoyalePlayer {
+  /** @format int32 */
+  playerId?: number;
+  /** @format int32 */
+  kills?: number | null;
+}
+
+export interface GameResultDraft {
+  /**
+   * sorting no
+   * @format int32
+   */
+  number: number;
+  type: EnumGameDraftType;
+  /**
+   * Team/opponent id
+   * @format int32
+   */
+  registrationId: number;
+  /**
+   * Game hero id
+   * @format int32
+   */
+  heroId: number;
+  /**
+   * Player Id
+   * @format int32
+   */
+  playerId: number;
+}
+
+export interface GameResultRoundSet {
+  /**
+   * sorting no
+   * @format int32
+   */
+  number?: number;
+  /** Is over time */
+  isOverTime?: boolean;
+  /**
+   * Sides [CS:GO 0:Team1->CT/Team2->T, 1: Team2->CT/Team1->T], [Valorant 0:Team1->A/Team2->D, 1:Team2->A/Team1->D]
+   * @format int32
+   */
+  sides?: number;
+  /**
+   * Team 1 score
+   * @format int32
+   */
+  team1Score?: number;
+  /**
+   * Team 2 score
+   * @format int32
+   */
+  team2Score?: number;
+}
+
 export interface GenderOption {
   /** @format int32 */
-  id?: number;
-  name?: string | null;
+  id: number;
+  /** @minLength 1 */
+  name: string;
 }
 
 export interface GetApiLogResp {
-  log?: ApiLogDetail;
+  log: ApiLogDetail;
 }
 
 export interface GetApiLogRespApiRespBase {
-  ret?: EnumRet;
-  msg?: string | null;
-  traceId?: string | null;
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
   data?: GetApiLogResp;
 }
 
 export interface GetApiLogsResp {
   /** Api Logs */
-  logs?: ApiLogListItem[] | null;
-  paging?: PagingRespBase;
+  logs: ApiLogListItem[];
+  paging: PagingRespBase;
 }
 
 export interface GetApiLogsRespApiRespBase {
-  ret?: EnumRet;
-  msg?: string | null;
-  traceId?: string | null;
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
   data?: GetApiLogsResp;
 }
 
 export interface GetArticleResp {
-  articleDetail?: ArticleDetail;
-  players?: Int32Item[] | null;
-  teams?: Int32Item[] | null;
-  tournaments?: Int32Item[] | null;
-  quickPoll?: RelatedQuickPoll;
-  siteSections?: Int16Item[] | null;
+  articleDetail: ArticleDetail;
+  /** Players */
+  players: Int32Item[];
+  /** Teams */
+  teams: Int32Item[];
+  /** Tournaments */
+  tournaments: Int32Item[];
+  quickPoll: RelatedQuickPoll;
+  /** Site sections */
+  siteSections: Int16Item[];
 }
 
 export interface GetArticleRespApiRespBase {
-  ret?: EnumRet;
-  msg?: string | null;
-  traceId?: string | null;
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
   data?: GetArticleResp;
 }
 
 export interface GetArticleTypesResp {
-  types?: Int16ItemWithSubItem[] | null;
+  /** Types */
+  types: Int16ItemWithSubItem[];
 }
 
 export interface GetArticleTypesRespApiRespBase {
-  ret?: EnumRet;
-  msg?: string | null;
-  traceId?: string | null;
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
   data?: GetArticleTypesResp;
 }
 
 export interface GetArticlesResp {
   /** Articles */
-  articles?: ArticleListItem[] | null;
-  paging?: PagingRespBase;
+  articles: ArticleListItem[];
+  paging: PagingRespBase;
 }
 
 export interface GetArticlesRespApiRespBase {
-  ret?: EnumRet;
-  msg?: string | null;
-  traceId?: string | null;
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
   data?: GetArticlesResp;
 }
 
-export interface GetBroadcastTalentResp {
+export interface GetBrResultDetailResp {
+  isPlayerBased: boolean;
   /** @format int32 */
-  id?: number;
+  pointsPerKill: number;
+  /** @format int32 */
+  registrationId: number;
   name?: string | null;
-  firstName?: string | null;
-  lastName?: string | null;
   /** @format int32 */
-  gender?: number;
-  isActive?: boolean | null;
+  placement?: number | null;
+  /** @format int32 */
+  placementPoints?: number | null;
+  /** @format int32 */
+  kills?: number | null;
+  /** @format int32 */
+  killPoints?: number | null;
+  /** @format int32 */
+  pointsAddition?: number | null;
+  /** @format int32 */
+  pointsDeduction?: number | null;
+  /** @format int32 */
+  totalPoints?: number | null;
+  players?: GetBrResultPlayer[] | null;
+}
+
+export interface GetBrResultDetailRespApiRespBase {
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
+  data?: GetBrResultDetailResp;
+}
+
+export interface GetBrResultPlayer {
+  /** @format int32 */
+  playerId?: number;
+  name?: string | null;
+  /** @format int32 */
+  kills?: number | null;
+}
+
+export interface GetBroadcastTalentResp {
+  /**
+   * Broadcast talent id
+   * @format int32
+   */
+  id: number;
+  /**
+   * Name
+   * @minLength 1
+   */
+  name: string;
+  /** First name */
+  firstName?: string | null;
+  /** Last name */
+  lastName?: string | null;
+  /**
+   * Gender
+   * @format int32
+   */
+  gender: number;
+  /** Is active */
+  isActive: boolean;
+  /** About */
   about?: string | null;
-  /** @format date */
+  /**
+   * Date of birth
+   * @format date
+   */
   dateOfBirth?: string | null;
+  /** Header image path */
   headerImagePath?: string | null;
+  /** Image pth */
   imagePath?: string | null;
+  /** Social facebook */
   socialFacebook?: string | null;
+  /** Social twitter */
   socialTwitter?: string | null;
+  /** Social youtube */
   socialYoutube?: string | null;
+  /** Web site */
   website?: string | null;
-  roles?: Int16Item[] | null;
-  primaryGame?: BroadcastTalentGame;
-  country?: BroadcastTalentCountry;
-  language?: BroadcastTalentLanguage;
-  player?: BroadcastTalentPlayer;
-  personalStream?: BroadcastTalentStream;
+  /** Roles */
+  roles: Int16Item[];
+  primaryGame: BroadcastTalentGame;
+  country: BroadcastTalentCountry;
+  language: BroadcastTalentLanguage;
+  player: BroadcastTalentPlayer;
+  personalStream: BroadcastTalentStream;
 }
 
 export interface GetBroadcastTalentRespApiRespBase {
-  ret?: EnumRet;
-  msg?: string | null;
-  traceId?: string | null;
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
   data?: GetBroadcastTalentResp;
 }
 
 export interface GetBroadcastTalentRoleOptionsResp {
-  roles?: Int16Item[] | null;
+  /** Roles */
+  roles: Int16Item[];
 }
 
 export interface GetBroadcastTalentRoleOptionsRespApiRespBase {
-  ret?: EnumRet;
-  msg?: string | null;
-  traceId?: string | null;
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
   data?: GetBroadcastTalentRoleOptionsResp;
 }
 
 export interface GetBroadcastTalents {
-  /** @format int32 */
-  id?: number;
-  name?: string | null;
+  /**
+   * Broadcast talent id
+   * @format int32
+   */
+  id: number;
+  /**
+   * Name
+   * @minLength 1
+   */
+  name: string;
+  /** First name */
   firstName?: string | null;
+  /** Last name */
   lastName?: string | null;
-  urlSafeName?: string | null;
-  /** @format int32 */
-  gender?: number;
-  isActive?: boolean;
-  url?: string | null;
-  roles?: string[] | null;
-  primaryGame?: BroadcastTalentGame;
-  country?: BroadcastTalentCountry;
-  language?: BroadcastTalentLanguage;
+  /**
+   * Url safe name
+   * @minLength 1
+   */
+  urlSafeName: string;
+  /**
+   * Gender
+   * @format int32
+   */
+  gender: number;
+  /** Is active */
+  isActive: boolean;
+  /**
+   * Url
+   * @minLength 1
+   */
+  url: string;
+  /** Roles */
+  roles: string[];
+  primaryGame: BroadcastTalentGame;
+  country: BroadcastTalentCountry;
+  language: BroadcastTalentLanguage;
 }
 
 export interface GetBroadcastTalentsResp {
-  broadcastTalents?: GetBroadcastTalents[] | null;
-  paging?: PagingRespBase;
+  /** Broadcast talents */
+  broadcastTalents: GetBroadcastTalents[];
+  paging: PagingRespBase;
 }
 
 export interface GetBroadcastTalentsRespApiRespBase {
-  ret?: EnumRet;
-  msg?: string | null;
-  traceId?: string | null;
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
   data?: GetBroadcastTalentsResp;
 }
 
 export interface GetChildDetailResp {
-  /** @format int32 */
-  childId?: number;
-  childName?: string | null;
-  childUrlSafeName?: string | null;
-  childType?: EnumChildTournament;
-  /** @format int32 */
-  gameId?: number;
-  gameName?: string | null;
-  childStatus?: EnumTournamentStatus;
-  /** @format int64 */
-  childStartAt?: number | null;
-  childIsHidden?: boolean;
-  childIsLan?: boolean;
-  /** @format int32 */
+  /**
+   * Child tournament id
+   * @format int32
+   */
+  childId: number;
+  /**
+   * Child name
+   * @minLength 1
+   */
+  childName: string;
+  /**
+   * Child url safe name
+   * @minLength 1
+   */
+  childUrlSafeName: string;
+  childType: EnumChildTournament;
+  /**
+   * Game id
+   * @format int32
+   */
+  gameId: number;
+  /**
+   * Game name
+   * @minLength 1
+   */
+  gameName: string;
+  childStatus: EnumTournamentStatus;
+  /**
+   * Child start at
+   * @format int64
+   */
+  childStartAt: number;
+  /** Child is hidden */
+  childIsHidden: boolean;
+  /** Child is lan */
+  childIsLan: boolean;
+  /**
+   * Child venue id
+   * @format int32
+   */
   childVenueId?: number | null;
+  /** Child venue name */
   childVenueName?: string | null;
-  prizePoolStatus?: EnumPrizePoolStatus;
-  /** @format double */
+  prizePoolStatus: EnumPrizePoolStatus;
+  /**
+   * Prize pool
+   * @format double
+   */
   prizePool?: number | null;
   prizePoolCurrency?: EnumCurrency;
-  /** @format double */
+  /**
+   * Prize pool usd
+   * @format double
+   */
   prizePoolUsd?: number | null;
-  /** @format int32 */
-  teamSize?: number;
-  /** @format int32 */
+  /**
+   * Team size
+   * @format int32
+   */
+  teamSize: number;
+  /**
+   * Qualify participants
+   * @format int32
+   */
   qualifyParticipants?: number | null;
-  /** @format int32 */
+  /**
+   * Rounds
+   * @format int32
+   */
   rounds?: number | null;
   pointAwarded?: EnumPointsAwarded;
-  /** @format int32 */
+  /**
+   * Points win
+   * @format int32
+   */
   pointsWin?: number | null;
-  /** @format int32 */
+  /**
+   * Points draw
+   * @format int32
+   */
   pointsDraw?: number | null;
-  /** @format int32 */
-  childCreatorId?: number;
-  childCreatorName?: string | null;
-  /** @format int64 */
-  childCreatedAt?: number;
-  /** @format int64 */
-  childUpdatedAt?: number;
-  /** @format int32 */
-  parentId?: number;
-  parentName?: string | null;
-  parentUrlSafeName?: string | null;
-  parentType?: EnumParentTournamentType;
-  parentStatus?: EnumTournamentStatus;
-  /** @format int64 */
-  parentStartAt?: number | null;
-  parentIsHidden?: boolean;
-  parentIsLan?: boolean;
-  /** @format int32 */
+  /**
+   * Child creator id
+   * @format int32
+   */
+  childCreatorId: number;
+  /**
+   * Child creator name
+   * @minLength 1
+   */
+  childCreatorName: string;
+  /**
+   * Ranking importance
+   * @format double
+   */
+  rankingImportance: number;
+  /**
+   * Child created at
+   * @format int64
+   */
+  childCreatedAt: number;
+  /**
+   * Child updated at
+   * @format int64
+   */
+  childUpdatedAt: number;
+  /**
+   * Parent tournament id
+   * @format int32
+   */
+  parentId: number;
+  /**
+   * Parent tournament name
+   * @minLength 1
+   */
+  parentName: string;
+  /**
+   * Parent tournament url safe name
+   * @minLength 1
+   */
+  parentUrlSafeName: string;
+  parentType: EnumParentTournamentType;
+  parentStatus: EnumTournamentStatus;
+  /**
+   * Parent tournament start at
+   * @format int64
+   */
+  parentStartAt: number;
+  /** Parent tournament is hidden */
+  parentIsHidden: boolean;
+  /** Parent tournament is lan */
+  parentIsLan: boolean;
+  /**
+   * Parent tournament venue id
+   * @format int32
+   */
   parentVenueId?: number | null;
+  /** Parent venue name */
   parentVenueName?: string | null;
+  /** Description */
   description?: string | null;
-  isFeatured?: boolean;
-  /** @format int32 */
-  parentCreatorId?: number;
-  parentCreatorName?: string | null;
-  /** @format int64 */
-  parentCreatedAt?: number;
-  /** @format int64 */
-  parentUpdatedAt?: number;
+  /** Parent tournament is featured */
+  isFeatured: boolean;
+  /**
+   * Parent tournament creator id
+   * @format int32
+   */
+  parentCreatorId: number;
+  /**
+   * Parent tournament creator name
+   * @minLength 1
+   */
+  parentCreatorName: string;
+  /**
+   * Parent tournament created at
+   * @format int64
+   */
+  parentCreatedAt: number;
+  /**
+   * Parent tournament updated at
+   * @format int64
+   */
+  parentUpdatedAt: number;
 }
 
 export interface GetChildDetailRespApiRespBase {
-  ret?: EnumRet;
-  msg?: string | null;
-  traceId?: string | null;
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
   data?: GetChildDetailResp;
 }
 
@@ -2400,20 +3058,32 @@ export interface GetChildEarningPrizePoolResp {
    * Child id
    * @format int32
    */
-  childId?: number;
-  /** Parent tournament name */
-  parentName?: string | null;
-  /** Stage name */
-  stageName?: string | null;
-  /** Child tournament name */
-  childName?: string | null;
-  /** Game name */
-  gameName?: string | null;
+  childId: number;
+  /**
+   * Parent tournament name
+   * @minLength 1
+   */
+  parentName: string;
+  /**
+   * Stage name
+   * @minLength 1
+   */
+  stageName: string;
+  /**
+   * Child tournament name
+   * @minLength 1
+   */
+  childName: string;
+  /**
+   * Game name
+   * @minLength 1
+   */
+  gameName: string;
   /**
    * Team size
    * @format int32
    */
-  teamSize?: number;
+  teamSize: number;
   prizePoolCurrency?: EnumCurrency;
   /** Prize pool currency name */
   prizePoolCurrencyName?: string | null;
@@ -2427,52 +3097,78 @@ export interface GetChildEarningPrizePoolResp {
    * @format double
    */
   prizePoolUsd?: number | null;
+  /**
+   * Exchange rate
+   * @format double
+   */
+  exchangeRate?: number | null;
+  /**
+   * Is player based
+   * true: player based
+   * false: team based
+   */
+  isPlayerBased: boolean;
   /** Prize placement */
   prizePlacements?: PrizePlacement[] | null;
 }
 
 export interface GetChildEarningPrizePoolRespApiRespBase {
-  ret?: EnumRet;
-  msg?: string | null;
-  traceId?: string | null;
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
   data?: GetChildEarningPrizePoolResp;
 }
 
 export interface GetChildEarningsResp {
   /** Child earnings */
-  stages?: StagingEarningListItem[] | null;
+  stages: StagingEarningListItem[];
 }
 
 export interface GetChildEarningsRespApiRespBase {
-  ret?: EnumRet;
-  msg?: string | null;
-  traceId?: string | null;
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
   data?: GetChildEarningsResp;
 }
 
 export interface GetChildMediaItem {
   /** @format int32 */
-  parentId?: number;
+  parentId: number;
   /** @format int32 */
-  childId?: number;
+  childId: number;
   /** @format int32 */
-  mediaItemId?: number;
-  title?: string | null;
-  type?: string | null;
-  urlSafeTitle?: string | null;
+  mediaItemId: number;
+  /** @minLength 1 */
+  title: string;
+  /** @minLength 1 */
+  type: string;
+  /** @minLength 1 */
+  urlSafeTitle: string;
   /** @format int32 */
-  viewCount?: number;
+  viewCount: number;
 }
 
 export interface GetChildMediaItemsResp {
-  mediaItems?: GetChildMediaItem[] | null;
-  paging?: PagingRespBase;
+  /** @minLength 1 */
+  parentTournamentName: string;
+  /** @minLength 1 */
+  stageName: string;
+  /** @minLength 1 */
+  childTournamentName: string;
+  mediaItems: GetChildMediaItem[];
+  paging: PagingRespBase;
 }
 
 export interface GetChildMediaItemsRespApiRespBase {
-  ret?: EnumRet;
-  msg?: string | null;
-  traceId?: string | null;
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
   data?: GetChildMediaItemsResp;
 }
 
@@ -2481,34 +3177,39 @@ export interface GetChildTeamRegistrationResp {
    * Parent id
    * @format int32
    */
-  parentId?: number;
+  parentId: number;
   /**
    * Child id
    * @format int32
    */
-  childId?: number;
+  childId: number;
   /**
    * Register id
    * @format int32
    */
-  registerId?: number;
+  registerId: number;
   /**
    * Team id
    * @format int32
    */
-  teamId?: number;
-  /** Team name */
-  teamName?: string | null;
+  teamId: number;
+  /**
+   * Team name
+   * @minLength 1
+   */
+  teamName: string;
   /** Is reserved */
-  isReserved?: boolean;
+  isReserved: boolean;
   /** Players */
-  players?: Int32CheckItem[] | null;
+  players: Int32CheckItem[];
 }
 
 export interface GetChildTeamRegistrationRespApiRespBase {
-  ret?: EnumRet;
-  msg?: string | null;
-  traceId?: string | null;
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
   data?: GetChildTeamRegistrationResp;
 }
 
@@ -2517,36 +3218,46 @@ export interface GetChildTournamentResp {
    * Child tournament id
    * @format int32
    */
-  childTournamentId?: number;
+  childTournamentId: number;
   /**
    * Parent tournament id
    * @format int32
    */
-  parentTournamentId?: number;
-  type?: EnumChildTournament;
+  parentTournamentId: number;
+  type: EnumChildTournament;
   /**
    * Stage id
    * @format int32
    */
-  stageId?: number;
-  /** Child tournament name */
-  name?: string | null;
+  stageId: number;
+  /**
+   * Child tournament name
+   * @minLength 1
+   */
+  name: string;
   /** Is lan */
-  isLan?: boolean;
+  isLan: boolean;
   /**
    * Venue id
    * @format int32
    */
   venueId?: number | null;
+  /** VenueName */
+  venueName?: string | null;
   /** Is hidden */
-  isHidden?: boolean;
-  prizePoolStatus?: EnumPrizePoolStatus;
+  isHidden: boolean;
+  prizePoolStatus: EnumPrizePoolStatus;
   prizePoolCurrency?: EnumCurrency;
   /**
    * Prize pool
    * @format double
    */
   prizePool?: number | null;
+  /**
+   * Exchange Rate
+   * @format double
+   */
+  exchangeRate?: number | null;
   /**
    * prize pool USD
    * @format double
@@ -2557,12 +3268,12 @@ export interface GetChildTournamentResp {
    * @format int32
    */
   qualifyParticipants?: number | null;
-  status?: EnumTournamentStatus;
+  status: EnumTournamentStatus;
   /**
    * Ranking Importance
    * @format double
    */
-  rankingImportance?: number;
+  rankingImportance: number;
   /**
    * Grid Id
    * @format int32
@@ -2572,73 +3283,109 @@ export interface GetChildTournamentResp {
    * Start at
    * @format int64
    */
-  startingAt?: number | null;
+  startingAt: number;
+  /**
+   * Rounds
+   * @format int32
+   */
+  rounds?: number | null;
+  pointsAwarded?: EnumPointsAwarded;
+  /**
+   * Points for win
+   * @format int32
+   */
+  pointsWin?: number | null;
+  /**
+   * Points for draw
+   * @format int32
+   */
+  pointsDraw?: number | null;
+  /**
+   * Game Mode Id
+   * @format int32
+   */
+  gameModeId?: number | null;
 }
 
 export interface GetChildTournamentRespApiRespBase {
-  ret?: EnumRet;
-  msg?: string | null;
-  traceId?: string | null;
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
   data?: GetChildTournamentResp;
 }
 
 export interface GetContactTypesResp {
   /** Contact types */
-  contactTypes?: ByteItem[] | null;
+  contactTypes: ByteItem[];
 }
 
 export interface GetContactTypesRespApiRespBase {
-  ret?: EnumRet;
-  msg?: string | null;
-  traceId?: string | null;
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
   data?: GetContactTypesResp;
 }
 
 export interface GetCountryOptionsResp {
-  countries?: CountryOption[] | null;
+  /** Countries */
+  countries: CountryOption[];
 }
 
 export interface GetCountryOptionsRespApiRespBase {
-  ret?: EnumRet;
-  msg?: string | null;
-  traceId?: string | null;
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
   data?: GetCountryOptionsResp;
 }
 
 export interface GetCrewFilesResp {
-  files?: CrewFile[] | null;
-  paging?: PagingRespBase;
+  files: CrewFile[];
+  paging: PagingRespBase;
 }
 
 export interface GetCrewFilesRespApiRespBase {
-  ret?: EnumRet;
-  msg?: string | null;
-  traceId?: string | null;
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
   data?: GetCrewFilesResp;
 }
 
 export interface GetCrewFoldersResp {
-  parent?: ParentFolder[] | null;
-  folders?: FolderDetail[] | null;
-  paging?: PagingRespBase;
+  /** Parent */
+  parent: ParentFolder[];
+  /** Folders */
+  folders: FolderDetail[];
+  paging: PagingRespBase;
 }
 
 export interface GetCrewFoldersRespApiRespBase {
-  ret?: EnumRet;
-  msg?: string | null;
-  traceId?: string | null;
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
   data?: GetCrewFoldersResp;
 }
 
 export interface GetCurrencyOptionsResp {
   /** Currencies */
-  currencies?: Int16Item[] | null;
+  currencies: Int16Item[];
 }
 
 export interface GetCurrencyOptionsRespApiRespBase {
-  ret?: EnumRet;
-  msg?: string | null;
-  traceId?: string | null;
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
   data?: GetCurrencyOptionsResp;
 }
 
@@ -2647,12 +3394,12 @@ export interface GetCurrentExchangeRateResp {
    * Exchange rate
    * @format double
    */
-  exchangeRate?: number;
+  exchangeRate: number;
   /**
    * Usd amount
    * @format double
    */
-  usdAmount?: number;
+  usdAmount: number;
 }
 
 export interface GetEarningsResp {
@@ -2662,55 +3409,67 @@ export interface GetEarningsResp {
 }
 
 export interface GetEarningsRespApiRespBase {
-  ret?: EnumRet;
-  msg?: string | null;
-  traceId?: string | null;
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
   data?: GetEarningsResp;
 }
 
 export interface GetFrontendLocaleOptionsResp {
-  localeOptions?: Record<string, Int16Item[]>;
+  /** Locale options */
+  localeOptions: Record<string, Int16Item[]>;
 }
 
 export interface GetFrontendLocaleOptionsRespApiRespBase {
-  ret?: EnumRet;
-  msg?: string | null;
-  traceId?: string | null;
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
   data?: GetFrontendLocaleOptionsResp;
 }
 
 export interface GetFrontendOptionsResp {
-  frontendOptions?: Int16Item[] | null;
+  /** Frontend options */
+  frontendOptions: Int16Item[];
 }
 
 export interface GetFrontendOptionsRespApiRespBase {
-  ret?: EnumRet;
-  msg?: string | null;
-  traceId?: string | null;
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
   data?: GetFrontendOptionsResp;
 }
 
 export interface GetFrontendSiteSectionsResp {
   /** Frontend site sections */
-  frontendSiteSections?: FrontendSiteSectionListItem[] | null;
+  frontendSiteSections: FrontendSiteSectionListItem[];
 }
 
 export interface GetFrontendSiteSectionsRespApiRespBase {
-  ret?: EnumRet;
-  msg?: string | null;
-  traceId?: string | null;
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
   data?: GetFrontendSiteSectionsResp;
 }
 
 export interface GetFuncOptionsResp {
   /** Func options */
-  funcOptions?: UInt16Item[] | null;
+  funcOptions: UInt16Item[];
 }
 
 export interface GetFuncOptionsRespApiRespBase {
-  ret?: EnumRet;
-  msg?: string | null;
-  traceId?: string | null;
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
   data?: GetFuncOptionsResp;
 }
 
@@ -2719,284 +3478,437 @@ export interface GetFuncResp {
    * Func id
    * @format int32
    */
-  funcId?: number;
-  /** Func name */
-  name?: string | null;
-  /** Func code */
-  code?: string | null;
-  type?: EnumFuncType;
-  /** Type name */
-  typeName?: string | null;
+  funcId: number;
+  /**
+   * Func name
+   * @minLength 1
+   */
+  name: string;
+  /**
+   * Func code
+   * @minLength 1
+   */
+  code: string;
+  type: EnumFuncType;
+  /**
+   * Type name
+   * @minLength 1
+   */
+  typeName: string;
   /**
    * Func position
    * @format int32
    */
-  position?: number;
-  state?: EnumState;
-  /** State name */
-  stateName?: string | null;
-  /** Func url */
-  url?: string | null;
-  /** Func icon */
-  icon?: string | null;
+  position: number;
+  state: EnumState;
+  /**
+   * State name
+   * @minLength 1
+   */
+  stateName: string;
+  /**
+   * Func url
+   * @minLength 1
+   */
+  url: string;
+  /**
+   * Func icon
+   * @minLength 1
+   */
+  icon: string;
   /**
    * Created At
    * @format int64
    */
-  createdAt?: number;
+  createdAt: number;
   /**
    * Updated At
    * @format int64
    */
-  updatedAt?: number;
+  updatedAt: number;
 }
 
 export interface GetFuncRespApiRespBase {
-  ret?: EnumRet;
-  msg?: string | null;
-  traceId?: string | null;
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
   data?: GetFuncResp;
 }
 
 export interface GetFuncTypesResp {
   /** Func types */
-  funcTypes?: ByteItem[] | null;
+  funcTypes: ByteItem[];
 }
 
 export interface GetFuncTypesRespApiRespBase {
-  ret?: EnumRet;
-  msg?: string | null;
-  traceId?: string | null;
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
   data?: GetFuncTypesResp;
 }
 
 export interface GetFuncsResp {
   /** Funcs */
-  funcs?: FuncItem[] | null;
+  funcs: FuncItem[];
 }
 
 export interface GetFuncsRespApiRespBase {
-  ret?: EnumRet;
-  msg?: string | null;
-  traceId?: string | null;
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
   data?: GetFuncsResp;
 }
 
 export interface GetFuzzyBroadcastTalentsResp {
   /** Fuzzy broadcast talents */
-  fuzzyBroadcastTalents?: Int32Item[] | null;
+  fuzzyBroadcastTalents: Int32Item[];
 }
 
 export interface GetFuzzyBroadcastTalentsRespApiRespBase {
-  ret?: EnumRet;
-  msg?: string | null;
-  traceId?: string | null;
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
   data?: GetFuzzyBroadcastTalentsResp;
 }
 
 export interface GetFuzzyFoldersResp {
-  folders?: FuzzyFolderDetail[] | null;
+  folders: FuzzyFolderDetail[];
 }
 
 export interface GetFuzzyFoldersRespApiRespBase {
-  ret?: EnumRet;
-  msg?: string | null;
-  traceId?: string | null;
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
   data?: GetFuzzyFoldersResp;
 }
 
 export interface GetFuzzyGameRaceResp {
-  fuzzyGames?: Int32Item[] | null;
+  /** Fuzzy game races */
+  fuzzyGames: Int32Item[];
 }
 
 export interface GetFuzzyGameRaceRespApiRespBase {
-  ret?: EnumRet;
-  msg?: string | null;
-  traceId?: string | null;
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
   data?: GetFuzzyGameRaceResp;
 }
 
 export interface GetFuzzyGamesResp {
-  fuzzyGames?: Int32Item[] | null;
+  /** Fuzzy games */
+  fuzzyGames: Int32Item[];
 }
 
 export interface GetFuzzyGamesRespApiRespBase {
-  ret?: EnumRet;
-  msg?: string | null;
-  traceId?: string | null;
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
   data?: GetFuzzyGamesResp;
 }
 
 export interface GetFuzzyMapsResp {
   /** Fuzzy maps */
-  fuzzyMaps?: Int16Item[] | null;
+  fuzzyMaps: Int16Item[];
 }
 
 export interface GetFuzzyMapsRespApiRespBase {
-  ret?: EnumRet;
-  msg?: string | null;
-  traceId?: string | null;
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
   data?: GetFuzzyMapsResp;
 }
 
 export interface GetFuzzyMediaStreamsResp {
-  fuzzyMediaItems?: Int32Item[] | null;
+  fuzzyMediaItems: Int32Item[];
 }
 
 export interface GetFuzzyMediaStreamsRespApiRespBase {
-  ret?: EnumRet;
-  msg?: string | null;
-  traceId?: string | null;
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
   data?: GetFuzzyMediaStreamsResp;
 }
 
 export interface GetFuzzyMediaVideosResp {
-  fuzzyMediaItems?: Int32Item[] | null;
+  fuzzyMediaItems: Int32Item[];
 }
 
 export interface GetFuzzyMediaVideosRespApiRespBase {
-  ret?: EnumRet;
-  msg?: string | null;
-  traceId?: string | null;
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
   data?: GetFuzzyMediaVideosResp;
 }
 
 export interface GetFuzzyPlayersResp {
   /** Fuzzy players */
-  fuzzyPlayers?: Int32Item[] | null;
+  fuzzyPlayers: Int32Item[];
 }
 
 export interface GetFuzzyPlayersRespApiRespBase {
-  ret?: EnumRet;
-  msg?: string | null;
-  traceId?: string | null;
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
   data?: GetFuzzyPlayersResp;
 }
 
 export interface GetFuzzySponsorsResp {
   /** Fuzzy sponsors */
-  fuzzySponsors?: Int16Item[] | null;
+  fuzzySponsors: Int16Item[];
 }
 
 export interface GetFuzzySponsorsRespApiRespBase {
-  ret?: EnumRet;
-  msg?: string | null;
-  traceId?: string | null;
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
   data?: GetFuzzySponsorsResp;
 }
 
 export interface GetFuzzyTeamsResp {
-  fuzzyTeams?: Int32Item[] | null;
+  /** Fuzzy teams */
+  fuzzyTeams: Int32Item[];
 }
 
 export interface GetFuzzyTeamsRespApiRespBase {
-  ret?: EnumRet;
-  msg?: string | null;
-  traceId?: string | null;
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
   data?: GetFuzzyTeamsResp;
 }
 
 export interface GetFuzzyTournamentsResp {
+  /** Fuzzy tournaments */
   fuzzyTournaments?: Int32Item[] | null;
 }
 
 export interface GetFuzzyTournamentsRespApiRespBase {
-  ret?: EnumRet;
-  msg?: string | null;
-  traceId?: string | null;
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
   data?: GetFuzzyTournamentsResp;
 }
 
 export interface GetFuzzyUsersByGroupResp {
   /** Fuzzy users */
-  users?: GroupUserListItem[] | null;
+  users: GroupUserListItem[];
 }
 
 export interface GetFuzzyUsersByGroupRespApiRespBase {
-  ret?: EnumRet;
-  msg?: string | null;
-  traceId?: string | null;
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
   data?: GetFuzzyUsersByGroupResp;
 }
 
 export interface GetFuzzyUsersResp {
-  fuzzyUsers?: Int32Item[] | null;
+  /** Fuzzy users */
+  fuzzyUsers: Int32Item[];
 }
 
 export interface GetFuzzyUsersRespApiRespBase {
-  ret?: EnumRet;
-  msg?: string | null;
-  traceId?: string | null;
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
   data?: GetFuzzyUsersResp;
 }
 
 export interface GetFuzzyVenuesResp {
-  fuzzyVenues?: Int32Item[] | null;
+  /** Fuzzy venues */
+  fuzzyVenues: Int32Item[];
 }
 
 export interface GetFuzzyVenuesRespApiRespBase {
-  ret?: EnumRet;
-  msg?: string | null;
-  traceId?: string | null;
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
   data?: GetFuzzyVenuesResp;
 }
 
 export interface GetGameAccountDetail {
-  /** @format int32 */
-  gameAccountId?: number;
-  /** @format int32 */
-  playerId?: number;
-  gameAccountName?: string | null;
-  /** @format int32 */
-  gameId?: number;
-  gameName?: string | null;
-  gameUrlSafeName?: string | null;
-  /** @format int32 */
-  serverId?: number;
-  serverName?: string | null;
-  isDeleted?: boolean;
+  /**
+   * Game account id
+   * @format int32
+   */
+  gameAccountId: number;
+  /**
+   * Player id
+   * @format int32
+   */
+  playerId: number;
+  /**
+   * Game account name
+   * @minLength 1
+   */
+  gameAccountName: string;
+  /**
+   * Game id
+   * @format int32
+   */
+  gameId: number;
+  /**
+   * Game name
+   * @minLength 1
+   */
+  gameName: string;
+  /**
+   * Game url safe name
+   * @minLength 1
+   */
+  gameUrlSafeName: string;
+  /**
+   * Server id
+   * @format int32
+   */
+  serverId: number;
+  /**
+   * Server name
+   * @minLength 1
+   */
+  serverName: string;
+  /** Is delete */
+  isDeleted: boolean;
 }
 
 export interface GetGameAccountResp {
-  /** @format int32 */
-  gameAccountId?: number;
-  /** @format int32 */
-  playerId?: number;
-  gameAccountName?: string | null;
-  /** @format int32 */
-  gameId?: number;
+  /**
+   * Game account id
+   * @format int32
+   */
+  gameAccountId: number;
+  /**
+   * Player id
+   * @format int32
+   */
+  playerId: number;
+  /**
+   * Game account name
+   * @minLength 1
+   */
+  gameAccountName: string;
+  /**
+   * Game id
+   * @format int32
+   */
+  gameId: number;
   /** @format int32 */
   serverId?: number | null;
 }
 
 export interface GetGameAccountRespApiRespBase {
-  ret?: EnumRet;
-  msg?: string | null;
-  traceId?: string | null;
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
   data?: GetGameAccountResp;
 }
 
 export interface GetGameAccountsResp {
-  gameAccounts?: GetGameAccountDetail[] | null;
-  paging?: PagingRespBase;
+  /** Game accounts */
+  gameAccounts: GetGameAccountDetail[];
+  paging: PagingRespBase;
 }
 
 export interface GetGameAccountsRespApiRespBase {
-  ret?: EnumRet;
-  msg?: string | null;
-  traceId?: string | null;
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
   data?: GetGameAccountsResp;
+}
+
+export interface GetGameDraftResp {
+  /** Team options */
+  teamOptions: Int32Item[];
+  /** Hero options */
+  heroOptions: Int32Item[];
+  /** Team1 player options */
+  team1PlayerOptions: Int32Item[];
+  /** Team2 player options */
+  team2PlayerOptions: Int32Item[];
+  /** Draft items */
+  draftItems: GameResultDraft[];
+}
+
+export interface GetGameDraftRespApiRespBase {
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
+  data?: GetGameDraftResp;
+}
+
+export interface GetGameOpponent {
+  /**
+   * Registration Id
+   * @format int32
+   */
+  registrationId?: number | null;
+  /** Team Name */
+  name?: string | null;
+  /**
+   * Score
+   * @format int32
+   */
+  score?: number | null;
+  /**
+   * Games side id
+   * @format int32
+   */
+  gameSideId?: number | null;
+  /** current players on the team */
+  lineup?: Int32Item[] | null;
+  /** stand ins players */
+  standIns?: Int32Item[] | null;
 }
 
 export interface GetGameOptionsResp {
   /** Games */
-  games?: Int16Item[] | null;
+  games: Int16Item[];
 }
 
 export interface GetGameOptionsRespApiRespBase {
-  ret?: EnumRet;
-  msg?: string | null;
-  traceId?: string | null;
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
   data?: GetGameOptionsResp;
 }
 
@@ -3015,15 +3927,17 @@ export interface GetGameRegionResp {
    * GameId
    * @format int32
    */
-  gameId?: number;
+  gameId: number;
   /** Countries */
   countries: Int16Item[];
 }
 
 export interface GetGameRegionRespApiRespBase {
-  ret?: EnumRet;
-  msg?: string | null;
-  traceId?: string | null;
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
   data?: GetGameRegionResp;
 }
 
@@ -3043,22 +3957,26 @@ export interface GetGameRegionTranslationResp {
 }
 
 export interface GetGameRegionTranslationRespApiRespBase {
-  ret?: EnumRet;
-  msg?: string | null;
-  traceId?: string | null;
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
   data?: GetGameRegionTranslationResp;
 }
 
 export interface GetGameRegionsResp {
   /** Game regions */
-  gameRegions?: GameRegionListItem[] | null;
-  paging?: PagingRespBase;
+  gameRegions: GameRegionListItem[];
+  paging: PagingRespBase;
 }
 
 export interface GetGameRegionsRespApiRespBase {
-  ret?: EnumRet;
-  msg?: string | null;
-  traceId?: string | null;
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
   data?: GetGameRegionsResp;
 }
 
@@ -3067,15 +3985,18 @@ export interface GetGameResp {
    * Game id
    * @format int32
    */
-  id?: number;
-  /** Game name */
-  name?: string | null;
+  id: number;
+  /**
+   * Game name
+   * @minLength 1
+   */
+  name: string;
   /** Has player rankings */
-  hasPlayerRankings?: boolean;
+  hasPlayerRankings: boolean;
   /** Has team rankings */
-  hasTeamRankings?: boolean;
+  hasTeamRankings: boolean;
   /** Has streams */
-  hasStreams?: boolean;
+  hasStreams: boolean;
   /**
    * Grid id
    * @format int32
@@ -3094,125 +4015,152 @@ export interface GetGameResp {
   /** Game icon image url */
   iconImageUrl?: string | null;
   /** Is legacy */
-  isLegacy?: boolean;
+  isLegacy: boolean;
   /**
    * Replay count
    * @format int32
    */
-  replayCount?: number;
+  replayCount: number;
   /**
    * Recommended replay count
    * @format int32
    */
-  recommendedReplayCount?: number;
+  recommendedReplayCount: number;
 }
 
 export interface GetGameRespApiRespBase {
-  ret?: EnumRet;
-  msg?: string | null;
-  traceId?: string | null;
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
   data?: GetGameResp;
 }
 
 export interface GetGamesResp {
   /** Games */
-  games?: GameListItem[] | null;
-  paging?: PagingRespBase;
+  games: GameListItem[];
+  paging: PagingRespBase;
 }
 
 export interface GetGamesRespApiRespBase {
-  ret?: EnumRet;
-  msg?: string | null;
-  traceId?: string | null;
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
   data?: GetGamesResp;
 }
 
 export interface GetGenderOptionsResp {
-  genders?: GenderOption[] | null;
+  /** Gender */
+  genders: GenderOption[];
 }
 
 export interface GetGenderOptionsRespApiRespBase {
-  ret?: EnumRet;
-  msg?: string | null;
-  traceId?: string | null;
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
   data?: GetGenderOptionsResp;
 }
 
 export interface GetGgCodeInfoResp {
-  type?: string | null;
-  version?: string | null;
-  providerName?: string | null;
-  providerUrl?: string | null;
+  /** @minLength 1 */
+  type: string;
+  /** @minLength 1 */
+  version: string;
+  /** @minLength 1 */
+  providerName: string;
+  /** @minLength 1 */
+  providerUrl: string;
   /** @format int32 */
-  width?: number;
+  width: number;
   /** @format int32 */
-  height?: number;
-  html?: string | null;
+  height: number;
+  /** @minLength 1 */
+  html: string;
 }
 
 export interface GetGgCodeInfoRespApiRespBase {
-  ret?: EnumRet;
-  msg?: string | null;
-  traceId?: string | null;
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
   data?: GetGgCodeInfoResp;
 }
 
 export interface GetGridMatchesResp {
   /** @format int32 */
-  id?: number;
-  tournamentName?: string | null;
-  opponent1Name?: string | null;
-  opponent2Name?: string | null;
-  gameName?: string | null;
+  id: number;
+  /** @minLength 1 */
+  tournamentName: string;
+  /** @minLength 1 */
+  opponent1Name: string;
+  /** @minLength 1 */
+  opponent2Name: string;
+  /** @minLength 1 */
+  gameName: string;
   /** @format int32 */
-  gamesPerMatchSet?: number;
+  gamesPerMatchSet: number;
   /** @format int64 */
-  dateTime?: number;
+  dateTime: number;
 }
 
 export interface GetGridMatchesRespListApiRespBase {
-  ret?: EnumRet;
-  msg?: string | null;
-  traceId?: string | null;
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
   data?: GetGridMatchesResp[] | null;
 }
 
 export interface GetGridTournamentsResp {
   /** @format int32 */
-  id?: number;
-  name?: string | null;
+  id: number;
+  /** @minLength 1 */
+  name: string;
 }
 
 export interface GetGridTournamentsRespListApiRespBase {
-  ret?: EnumRet;
-  msg?: string | null;
-  traceId?: string | null;
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
   data?: GetGridTournamentsResp[] | null;
 }
 
 export interface GetGroupBlankPermissionsResp {
   /** Frontend permissions */
-  frontendPermissions?: Int16Item[] | null;
+  frontendPermissions: Int16Item[];
   /** Backoffice permissions */
-  backofficePermissions?: SimpleBackOfficePermissionItem[] | null;
+  backofficePermissions: SimpleBackOfficePermissionItem[];
 }
 
 export interface GetGroupBlankPermissionsRespApiRespBase {
-  ret?: EnumRet;
-  msg?: string | null;
-  traceId?: string | null;
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
   data?: GetGroupBlankPermissionsResp;
 }
 
 export interface GetGroupOptionsResp {
   /** Groups */
-  groups?: UInt32Item[] | null;
+  groups: UInt32Item[];
 }
 
 export interface GetGroupOptionsRespApiRespBase {
-  ret?: EnumRet;
-  msg?: string | null;
-  traceId?: string | null;
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
   data?: GetGroupOptionsResp;
 }
 
@@ -3239,34 +4187,40 @@ export interface GetGroupResp {
 }
 
 export interface GetGroupRespApiRespBase {
-  ret?: EnumRet;
-  msg?: string | null;
-  traceId?: string | null;
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
   data?: GetGroupResp;
 }
 
 export interface GetGroupTemplatesResp {
   /** Templates */
-  templates?: GroupTemplate[] | null;
+  templates: GroupTemplate[];
 }
 
 export interface GetGroupTemplatesRespApiRespBase {
-  ret?: EnumRet;
-  msg?: string | null;
-  traceId?: string | null;
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
   data?: GetGroupTemplatesResp;
 }
 
 export interface GetGroupsResp {
   /** Groups */
-  groups?: GroupListItem[] | null;
-  paging?: PagingRespBase;
+  groups: GroupListItem[];
+  paging: PagingRespBase;
 }
 
 export interface GetGroupsRespApiRespBase {
-  ret?: EnumRet;
-  msg?: string | null;
-  traceId?: string | null;
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
   data?: GetGroupsResp;
 }
 
@@ -3275,18 +4229,28 @@ export interface GetHero {
    * Hero Id
    * @format int32
    */
-  id?: number;
-  /** Hero Name */
-  name?: string | null;
-  gameName?: string | null;
-  translations?: GetHeroesTranslation[] | null;
+  id: number;
+  /**
+   * Hero Name
+   * @minLength 1
+   */
+  name: string;
+  /**
+   * Game name
+   * @minLength 1
+   */
+  gameName: string;
+  /** Translations */
+  translations: GetHeroesTranslation[];
 }
 
 export interface GetHeroLocale {
   /** @format int32 */
-  id?: number;
-  bcp47Identifier?: string | null;
-  displayName?: string | null;
+  id: number;
+  /** @minLength 1 */
+  bcp47Identifier: string;
+  /** @minLength 1 */
+  displayName: string;
 }
 
 export interface GetHeroResp {
@@ -3294,31 +4258,56 @@ export interface GetHeroResp {
    * Hero Id
    * @format int32
    */
-  id?: number;
-  /** @format int32 */
-  gameId?: number;
-  name?: string | null;
-  description?: string | null;
+  id: number;
+  /**
+   * Game id
+   * @format int32
+   */
+  gameId: number;
+  /**
+   * Name
+   * @minLength 1
+   */
+  name: string;
+  /**
+   * Description
+   * @minLength 1
+   */
+  description: string;
+  /** Icon file name */
   iconFileName?: string | null;
 }
 
 export interface GetHeroRespApiRespBase {
-  ret?: EnumRet;
-  msg?: string | null;
-  traceId?: string | null;
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
   data?: GetHeroResp;
 }
 
 export interface GetHeroTranslation {
-  name?: string | null;
-  /** Title */
-  title?: string | null;
-  /** Tagline */
-  tagline?: string | null;
-  /** Description */
-  description?: string | null;
-  status?: string | null;
-  locale?: GetHeroLocale;
+  /** @minLength 1 */
+  name: string;
+  /**
+   * Title
+   * @minLength 1
+   */
+  title: string;
+  /**
+   * Tagline
+   * @minLength 1
+   */
+  tagline: string;
+  /**
+   * Description
+   * @minLength 1
+   */
+  description: string;
+  /** @minLength 1 */
+  status: string;
+  locale: GetHeroLocale;
 }
 
 export interface GetHeroTranslationsResp {
@@ -3326,65 +4315,102 @@ export interface GetHeroTranslationsResp {
    * Hero Id
    * @format int32
    */
-  id?: number;
-  /** Hero Name */
-  name?: string | null;
-  /** Title */
-  title?: string | null;
-  /** Tagline */
-  tagline?: string | null;
-  /** Description */
-  description?: string | null;
-  translations?: GetHeroTranslation[] | null;
+  id: number;
+  /**
+   * Hero Name
+   * @minLength 1
+   */
+  name: string;
+  /**
+   * Title
+   * @minLength 1
+   */
+  title: string;
+  /**
+   * Tagline
+   * @minLength 1
+   */
+  tagline: string;
+  /**
+   * Description
+   * @minLength 1
+   */
+  description: string;
+  translations: GetHeroTranslation[];
 }
 
 export interface GetHeroTranslationsRespApiRespBase {
-  ret?: EnumRet;
-  msg?: string | null;
-  traceId?: string | null;
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
   data?: GetHeroTranslationsResp;
 }
 
 export interface GetHeroesResp {
-  heroes?: GetHero[] | null;
-  paging?: PagingRespBase;
+  /** Heroes */
+  heroes: GetHero[];
+  paging: PagingRespBase;
 }
 
 export interface GetHeroesRespApiRespBase {
-  ret?: EnumRet;
-  msg?: string | null;
-  traceId?: string | null;
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
   data?: GetHeroesResp;
 }
 
 export interface GetHeroesTranslation {
-  name?: string | null;
-  status?: string | null;
-  locale?: GetHeroLocale;
+  /** @minLength 1 */
+  name: string;
+  /** @minLength 1 */
+  status: string;
+  locale: GetHeroLocale;
 }
 
 export interface GetLanguagesResp {
   /** Language options */
-  languageOptions?: LanguageOption[] | null;
+  languageOptions: LanguageOption[];
 }
 
 export interface GetLanguagesRespApiRespBase {
-  ret?: EnumRet;
-  msg?: string | null;
-  traceId?: string | null;
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
   data?: GetLanguagesResp;
 }
 
 export interface GetLocaleOptionsResp {
   /** Locales */
-  locales?: Int16Item[] | null;
+  locales: Int16Item[];
 }
 
 export interface GetLocaleOptionsRespApiRespBase {
-  ret?: EnumRet;
-  msg?: string | null;
-  traceId?: string | null;
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
   data?: GetLocaleOptionsResp;
+}
+
+export interface GetLogLevelsResp {
+  /** Log Levels */
+  logLevels: ByteItem[];
+}
+
+export interface GetLogLevelsRespApiRespBase {
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
+  data?: GetLogLevelsResp;
 }
 
 export interface GetMap {
@@ -3392,17 +4418,37 @@ export interface GetMap {
    * Map Id
    * @format int32
    */
-  id?: number;
-  name?: string | null;
-  gameName?: string | null;
-  translations?: GetMapTranslation[] | null;
+  id: number;
+  /**
+   * Name
+   * @minLength 1
+   */
+  name: string;
+  /**
+   * Game name
+   * @minLength 1
+   */
+  gameName: string;
+  /** Translations */
+  translations: GetMapTranslation[];
 }
 
 export interface GetMapLocale {
-  /** @format int32 */
-  id?: number;
-  bcp47Identifier?: string | null;
-  displayName?: string | null;
+  /**
+   * Id
+   * @format int32
+   */
+  id: number;
+  /**
+   * Bcp47Identifier
+   * @minLength 1
+   */
+  bcp47Identifier: string;
+  /**
+   * Display name
+   * @minLength 1
+   */
+  displayName: string;
 }
 
 export interface GetMapResp {
@@ -3410,50 +4456,159 @@ export interface GetMapResp {
    * Map Id
    * @format int32
    */
-  id?: number;
-  /** @format int32 */
-  gameId?: number;
-  name?: string | null;
+  id: number;
+  /**
+   * Game id
+   * @format int32
+   */
+  gameId: number;
+  /**
+   * Name
+   * @minLength 1
+   */
+  name: string;
+  /** Image file name */
   imageFileName?: string | null;
 }
 
 export interface GetMapRespApiRespBase {
-  ret?: EnumRet;
-  msg?: string | null;
-  traceId?: string | null;
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
   data?: GetMapResp;
 }
 
 export interface GetMapTranslation {
-  name?: string | null;
-  status?: string | null;
-  locale?: GetMapLocale;
+  /**
+   * Name
+   * @minLength 1
+   */
+  name: string;
+  /**
+   * Status
+   * @minLength 1
+   */
+  status: string;
+  locale: GetMapLocale;
 }
 
 export interface GetMapTranslationsResp {
-  /** @format int32 */
-  id?: number;
-  name?: string | null;
+  /**
+   * Id
+   * @format int32
+   */
+  id: number;
+  /**
+   * Name
+   * @minLength 1
+   */
+  name: string;
+  /** Translations */
   translations?: GetMapTranslation[] | null;
 }
 
 export interface GetMapTranslationsRespApiRespBase {
-  ret?: EnumRet;
-  msg?: string | null;
-  traceId?: string | null;
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
   data?: GetMapTranslationsResp;
 }
 
 export interface GetMapsResp {
-  maps?: GetMap[] | null;
-  paging?: PagingRespBase;
+  /** Maps */
+  maps: GetMap[];
+  paging: PagingRespBase;
 }
 
 export interface GetMapsRespApiRespBase {
-  ret?: EnumRet;
-  msg?: string | null;
-  traceId?: string | null;
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
   data?: GetMapsResp;
+}
+
+export interface GetMatchGameBrResultItem {
+  /** @format int32 */
+  placement?: number | null;
+  /** @format int32 */
+  registrationId?: number;
+  name?: string | null;
+  withResult?: boolean;
+}
+
+export interface GetMatchGameBrResults {
+  /** @format int32 */
+  pointsPerKill?: number;
+  oppnents?: GetMatchGameBrResultItem[] | null;
+}
+
+export interface GetMatchGameResp {
+  /**
+   * Match game id
+   * @format int32
+   */
+  matchGameId: number;
+  tournamentType: EnumChildTournament;
+  /**
+   * Game id
+   * @format int32
+   */
+  gameId: number;
+  /** Opponent options */
+  opponentOptions: Int32Item[];
+  /**
+   * Winner
+   * @format int32
+   */
+  winner?: number | null;
+  result?: EnumGameResult;
+  /**
+   * Map id
+   * @format int32
+   */
+  mapId?: number | null;
+  /** Vods */
+  vods: Int32Item[];
+  team1?: GetGameOpponent;
+  team2?: GetGameOpponent;
+  brResults?: GetMatchGameBrResults;
+}
+
+export interface GetMatchGameRespApiRespBase {
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
+  data?: GetMatchGameResp;
+}
+
+export interface GetMatchGamesResp {
+  /** Round options */
+  roundOptions: Int32Item[];
+  childTournamentType: EnumChildTournament;
+  /**
+   * Game id
+   * @format int32
+   */
+  gameId: number;
+  /** Matches */
+  matches: MatchGames[];
+}
+
+export interface GetMatchGamesRespApiRespBase {
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
+  data?: GetMatchGamesResp;
 }
 
 export interface GetMatchesOpponent {
@@ -3461,7 +4616,7 @@ export interface GetMatchesOpponent {
    * child tournament matches opponents Id
    * @format int32
    */
-  id?: number;
+  id: number;
   /**
    * Registration Id
    * @format int32
@@ -3477,14 +4632,14 @@ export interface GetMatchesOpponent {
 
 export interface GetMatchesResp {
   /** @format int32 */
-  id?: number;
+  id: number;
   /** @format int32 */
-  number?: number;
-  urlSafeName?: string | null;
-  opponents?: GetMatchesOpponent[] | null;
+  number: number;
+  hyperlink?: string | null;
+  opponents: GetMatchesOpponent[];
   /** @format int64 */
-  startingAt?: number | null;
-  streams?: Int32Item[] | null;
+  startingAt: number;
+  streams: Int32Item[];
   /** @format int32 */
   gamesPerMatch?: number | null;
   /** @format int32 */
@@ -3494,39 +4649,64 @@ export interface GetMatchesResp {
 }
 
 export interface GetMatchesRespListApiRespBase {
-  ret?: EnumRet;
-  msg?: string | null;
-  traceId?: string | null;
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
   data?: GetMatchesResp[] | null;
 }
 
 export interface GetMediaItems {
-  /** @format int32 */
-  broadcastTalentId?: number;
-  /** @format int32 */
-  mediaItemId?: number;
-  title?: string | null;
-  type?: string | null;
-  urlSafeTitle?: string | null;
-  /** @format int32 */
-  viewCount?: number;
+  /**
+   * Broadcast talent id
+   * @format int32
+   */
+  broadcastTalentId: number;
+  /**
+   * Media item id
+   * @format int32
+   */
+  mediaItemId: number;
+  /**
+   * Title
+   * @minLength 1
+   */
+  title: string;
+  /**
+   * Type
+   * @minLength 1
+   */
+  type: string;
+  /**
+   * Url safe name
+   * @minLength 1
+   */
+  urlSafeTitle: string;
+  /**
+   * View count
+   * @format int32
+   */
+  viewCount: number;
 }
 
 export interface GetMediaItemsResp {
-  mediaItems?: GetMediaItems[] | null;
-  paging?: PagingRespBase;
+  mediaItems: GetMediaItems[];
+  paging: PagingRespBase;
 }
 
 export interface GetMediaItemsRespApiRespBase {
-  ret?: EnumRet;
-  msg?: string | null;
-  traceId?: string | null;
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
   data?: GetMediaItemsResp;
 }
 
 export interface GetMediaVodHostOptionsResp {
   /** Hosts */
-  hosts?: Int16Item[] | null;
+  hosts: Int16Item[];
 }
 
 export interface GetMediaVodResp {
@@ -3565,34 +4745,38 @@ export interface GetMediaVodResp {
   /** Description */
   description?: string | null;
   /** Tags */
-  tags?: Int32Item[] | null;
+  tags: Int32Item[];
   /** Is in game */
   isInGame: boolean;
   /** Is featured */
   isFeatured: boolean;
   /** Related players */
-  players?: Int32Item[] | null;
+  players: Int32Item[];
   /** Related teams */
-  teams?: Int32Item[] | null;
+  teams: Int32Item[];
 }
 
 export interface GetMediaVodRespApiRespBase {
-  ret?: EnumRet;
-  msg?: string | null;
-  traceId?: string | null;
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
   data?: GetMediaVodResp;
 }
 
 export interface GetMediaVodsResp {
   /** Vods */
-  vods?: MediaVodListItem[] | null;
-  paging?: PagingRespBase;
+  vods: MediaVodListItem[];
+  paging: PagingRespBase;
 }
 
 export interface GetMediaVodsRespApiRespBase {
-  ret?: EnumRet;
-  msg?: string | null;
-  traceId?: string | null;
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
   data?: GetMediaVodsResp;
 }
 
@@ -3601,11 +4785,21 @@ export interface GetMode {
    * Mode Id
    * @format int32
    */
-  id?: number;
-  name?: string | null;
+  id: number;
+  /**
+   * Name
+   * @minLength 1
+   */
+  name: string;
+  /** Abbreviation */
   abbreviation?: string | null;
-  gameName?: string | null;
-  translations?: GetModeTranslation[] | null;
+  /**
+   * Game name
+   * @minLength 1
+   */
+  gameName: string;
+  /** Translations */
+  translations: GetModeTranslation[];
 }
 
 export interface GetModeLocale {
@@ -3620,161 +4814,240 @@ export interface GetModeResp {
    * Mode Id
    * @format int32
    */
-  id?: number;
-  /** @format int32 */
-  gameId?: number;
-  name?: string | null;
+  id: number;
+  /**
+   * Game id
+   * @format int32
+   */
+  gameId: number;
+  /**
+   * Name
+   * @minLength 1
+   */
+  name: string;
+  /** Abbreviation */
   abbreviation?: string | null;
 }
 
 export interface GetModeRespApiRespBase {
-  ret?: EnumRet;
-  msg?: string | null;
-  traceId?: string | null;
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
   data?: GetModeResp;
 }
 
 export interface GetModeTranslation {
-  name?: string | null;
-  abbreviation?: string | null;
-  status?: string | null;
-  locale?: GetModeLocale;
+  /** @minLength 1 */
+  name: string;
+  /** @minLength 1 */
+  abbreviation: string;
+  /** @minLength 1 */
+  status: string;
+  locale: GetModeLocale;
 }
 
 export interface GetModeTranslationsResp {
   /** @format int32 */
-  id?: number;
-  name?: string | null;
-  abbreviation?: string | null;
-  translations?: GetModeTranslation[] | null;
+  id: number;
+  /** @minLength 1 */
+  name: string;
+  /** @minLength 1 */
+  abbreviation: string;
+  translations: GetModeTranslation[];
 }
 
 export interface GetModeTranslationsRespApiRespBase {
-  ret?: EnumRet;
-  msg?: string | null;
-  traceId?: string | null;
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
   data?: GetModeTranslationsResp;
 }
 
 export interface GetModesResp {
-  modes?: GetMode[] | null;
-  paging?: PagingRespBase;
+  /** Modes */
+  modes: GetMode[];
+  paging: PagingRespBase;
 }
 
 export interface GetModesRespApiRespBase {
-  ret?: EnumRet;
-  msg?: string | null;
-  traceId?: string | null;
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
   data?: GetModesResp;
 }
 
 export interface GetNotificationTemplateResp {
-  detail?: NotificationTemplateDetail;
-  arguments?: NotificationTemplateArgument[] | null;
+  detail: NotificationTemplateDetail;
+  arguments: NotificationTemplateArgument[];
 }
 
 export interface GetNotificationTemplateRespApiRespBase {
-  ret?: EnumRet;
-  msg?: string | null;
-  traceId?: string | null;
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
   data?: GetNotificationTemplateResp;
 }
 
 export interface GetNotificationTemplatesResp {
   /** Notification Templates */
-  notificationTemplates?: NotificationTemplateListItem[] | null;
+  notificationTemplates: NotificationTemplateListItem[];
   paging?: PagingRespBase;
 }
 
 export interface GetNotificationTemplatesRespApiRespBase {
-  ret?: EnumRet;
-  msg?: string | null;
-  traceId?: string | null;
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
   data?: GetNotificationTemplatesResp;
 }
 
 export interface GetNotificationTypeOptionsResp {
   /** Notification Type Options */
-  notificationTypeOptions?: Int16Item[] | null;
+  notificationTypeOptions: Int16Item[];
 }
 
 export interface GetNotificationTypeOptionsRespApiRespBase {
-  ret?: EnumRet;
-  msg?: string | null;
-  traceId?: string | null;
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
   data?: GetNotificationTypeOptionsResp;
 }
 
 export interface GetOneSignalAppResp {
-  oneSignalAppDetail?: OneSignalAppListItem;
+  oneSignalAppDetail: OneSignalAppListItem;
 }
 
 export interface GetOneSignalAppRespApiRespBase {
-  ret?: EnumRet;
-  msg?: string | null;
-  traceId?: string | null;
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
   data?: GetOneSignalAppResp;
 }
 
 export interface GetOneSignalAppsResp {
   /** Messaging One Signal Apps */
-  onesignalApps?: OneSignalAppListItem[] | null;
-  paging?: PagingRespBase;
+  onesignalApps: OneSignalAppListItem[];
+  paging: PagingRespBase;
 }
 
 export interface GetOneSignalAppsRespApiRespBase {
-  ret?: EnumRet;
-  msg?: string | null;
-  traceId?: string | null;
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
   data?: GetOneSignalAppsResp;
 }
 
 export interface GetOpponentsItem {
-  /** @format int32 */
-  id?: number;
-  /** @format int32 */
+  /**
+   * Id
+   * @format int32
+   */
+  id: number;
+  /**
+   * Placement
+   * @format int32
+   */
   placement?: number | null;
-  /** @format int32 */
-  registrationId?: number;
-  name?: string | null;
-  /** @format int32 */
-  pointAdjustment?: number;
+  /**
+   * Registration id
+   * @format int32
+   */
+  registrationId: number;
+  /**
+   * Name
+   * @minLength 1
+   */
+  name: string;
+  /**
+   * Point adjustment
+   * @format int32
+   */
+  pointAdjustment: number;
   /**
    * Game/Match count
    * @format int32
    */
-  count?: number;
-  /** @format int32 */
-  winCount?: number;
-  /** @format int32 */
-  drawCount?: number;
-  /** @format int32 */
-  lossCount?: number;
+  count: number;
+  /**
+   * Win count
+   * @format int32
+   */
+  winCount: number;
+  /**
+   * Draw count
+   * @format int32
+   */
+  drawCount: number;
+  /**
+   * Loss count
+   * @format int32
+   */
+  lossCount: number;
   /**
    * not include points adjustment
    * @format int32
    */
-  points?: number;
+  points: number;
   /**
    * PointsAdjustment + Points
    * @format int32
    */
-  totalPoints?: number;
+  totalPoints: number;
 }
 
 export interface GetOpponentsResp {
-  /** @format int32 */
-  parentTournamentId?: number;
-  /** @format int32 */
-  childTournamentId?: number;
+  /**
+   * Parent tournament id
+   * @format int32
+   */
+  parentTournamentId: number;
+  /**
+   * Child tournament id
+   * @format int32
+   */
+  childTournamentId: number;
+  /**
+   * Parent tournament name
+   * @minLength 1
+   */
+  parentTournamentName: string;
+  /**
+   * Stage name
+   * @minLength 1
+   */
+  stageName: string;
+  /**
+   * Child tournament name
+   * @minLength 1
+   */
+  childTournamentName: string;
   pointsAwarded?: EnumPointsAwarded;
-  opponents?: GetOpponentsItem[] | null;
+  /** Opponents */
+  opponents: GetOpponentsItem[];
 }
 
 export interface GetOpponentsRespApiRespBase {
-  ret?: EnumRet;
-  msg?: string | null;
-  traceId?: string | null;
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
   data?: GetOpponentsResp;
 }
 
@@ -3783,44 +5056,57 @@ export interface GetPageResp {
    * Page id
    * @format int32
    */
-  pageId?: number;
+  pageId: number;
   /**
    * Frontend id
    * @format int32
    */
-  frontendId?: number;
-  /** Title */
-  title?: string | null;
-  /** Content */
-  content?: string | null;
-  /** Extra css */
-  extraCss?: string | null;
+  frontendId: number;
+  /**
+   * Title
+   * @minLength 1
+   */
+  title: string;
+  /**
+   * Content
+   * @minLength 1
+   */
+  content: string;
+  /**
+   * Extra css
+   * @minLength 1
+   */
+  extraCss: string;
   /**
    * Time spent
    * @format int32
    */
-  timeSpent?: number;
+  timeSpent: number;
   /** Comments enabled */
-  commentsEnabled?: boolean;
+  commentsEnabled: boolean;
 }
 
 export interface GetPageRespApiRespBase {
-  ret?: EnumRet;
-  msg?: string | null;
-  traceId?: string | null;
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
   data?: GetPageResp;
 }
 
 export interface GetPagesResp {
   /** Pages */
-  pages?: PageListItem[] | null;
-  paging?: PagingRespBase;
+  pages: PageListItem[];
+  paging: PagingRespBase;
 }
 
 export interface GetPagesRespApiRespBase {
-  ret?: EnumRet;
-  msg?: string | null;
-  traceId?: string | null;
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
   data?: GetPagesResp;
 }
 
@@ -3830,45 +5116,54 @@ export interface GetParentBroadcastTalentsResp {
    * @format int32
    */
   parentId: number;
-  /** Parent tournament name */
-  parentName?: string | null;
+  /**
+   * Parent tournament name
+   * @minLength 1
+   */
+  parentName: string;
   /** Broadcast talents */
   broadcastTalents: ParentBroadcastTalentListItem[];
   paging: PagingRespBase;
 }
 
 export interface GetParentBroadcastTalentsRespApiRespBase {
-  ret?: EnumRet;
-  msg?: string | null;
-  traceId?: string | null;
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
   data?: GetParentBroadcastTalentsResp;
 }
 
 export interface GetParentDetailResp {
-  parentDetail?: ParentTournamentDetail;
+  parentDetail: ParentTournamentDetail;
   /** Stage details */
-  stageDetails?: ParentStageDetail[] | null;
+  stageDetails: ParentStageDetail[];
 }
 
 export interface GetParentDetailRespApiRespBase {
-  ret?: EnumRet;
-  msg?: string | null;
-  traceId?: string | null;
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
   data?: GetParentDetailResp;
 }
 
 export interface GetParentResp {
-  parentDetail?: ParentTournamentEditDetail;
+  parentDetail: ParentTournamentEditDetail;
   /** Parent tournament sponsors */
-  sponsors?: Int16OrderItem[] | null;
+  sponsors: Int16OrderItem[];
   /** Parent tournament maps */
-  maps?: Int16Item[] | null;
+  maps: Int16Item[];
 }
 
 export interface GetParentRespApiRespBase {
-  ret?: EnumRet;
-  msg?: string | null;
-  traceId?: string | null;
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
   data?: GetParentResp;
 }
 
@@ -3877,18 +5172,24 @@ export interface GetParentStage {
    * Stage Id
    * @format int32
    */
-  stageId?: number;
+  stageId: number;
   /**
    * Stage Order
    * @format int32
    */
-  order?: number;
-  /** Stage Name */
-  stageName?: string | null;
-  /** Stage UrlSafeName */
-  urlSafeName?: string | null;
+  order: number;
+  /**
+   * Stage Name
+   * @minLength 1
+   */
+  stageName: string;
+  /**
+   * Stage UrlSafeName
+   * @minLength 1
+   */
+  urlSafeName: string;
   /** Child tournaments */
-  childTournaments?: GetParentStageChild[] | null;
+  childTournaments: GetParentStageChild[];
 }
 
 export interface GetParentStageChild {
@@ -3896,29 +5197,46 @@ export interface GetParentStageChild {
    * Child tournament Id
    * @format int32
    */
-  childId?: number;
-  /** Child tournament Name */
-  childName?: string | null;
-  /** Child tournament UrlSafeName */
-  childUrlSafeName?: string | null;
-  childType?: EnumChildTournament;
-  /** Child tournament type name */
-  childTypeName?: string | null;
+  childId: number;
+  /**
+   * Child tournament Name
+   * @minLength 1
+   */
+  childName: string;
+  /**
+   * Child tournament UrlSafeName
+   * @minLength 1
+   */
+  childUrlSafeName: string;
+  childType: EnumChildTournament;
+  /**
+   * Child tournament type name
+   * @minLength 1
+   */
+  childTypeName: string;
   /**
    * Child tournament starting datetime
    * @format int64
    */
-  startAt?: number | null;
+  startAt: number;
   /**
    * Child tournament ranking importance
    * @format double
    */
-  ranking?: number;
-  childStatus?: EnumTournamentStatus;
-  /** Child status name */
-  childStatusName?: string | null;
-  /** Group Embed Url */
-  groupEmbedUrl?: string | null;
+  ranking: number;
+  childStatus: EnumTournamentStatus;
+  /**
+   * Child status name
+   * @minLength 1
+   */
+  childStatusName: string;
+  /**
+   * Group Embed Url
+   * @minLength 1
+   */
+  groupEmbedUrl: string;
+  /** Has started */
+  hasStarted: boolean;
 }
 
 export interface GetParentStagesForEditResp {
@@ -3926,17 +5244,22 @@ export interface GetParentStagesForEditResp {
    * Parent id
    * @format int32
    */
-  parentId?: number;
-  /** Parent name */
-  parentName?: string | null;
+  parentId: number;
+  /**
+   * Parent name
+   * @minLength 1
+   */
+  parentName: string;
   /** Stages */
-  stages?: Int32OrderItem[] | null;
+  stages: Int32OrderItem[];
 }
 
 export interface GetParentStagesForEditRespApiRespBase {
-  ret?: EnumRet;
-  msg?: string | null;
-  traceId?: string | null;
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
   data?: GetParentStagesForEditResp;
 }
 
@@ -3945,172 +5268,332 @@ export interface GetParentStagesResp {
    * Parent tournament id
    * @format int32
    */
-  parentId?: number;
-  /** Parent tournament name */
-  parentName?: string | null;
+  parentId: number;
+  /**
+   * Parent tournament name
+   * @minLength 1
+   */
+  parentName: string;
   /**
    * FrontEndId
    * @format int32
    */
   frontEndId?: number | null;
-  /** Frontend short name */
-  feName?: string | null;
-  /** Parent tournament UrlSafeName */
-  parentUrlSafeName?: string | null;
-  parentStatus?: EnumTournamentStatus;
-  /** Parent tournament name */
-  parentStatusName?: string | null;
+  /**
+   * Frontend short name
+   * @minLength 1
+   */
+  feName: string;
+  /**
+   * Parent tournament UrlSafeName
+   * @minLength 1
+   */
+  parentUrlSafeName: string;
+  parentStatus: EnumTournamentStatus;
+  /**
+   * Parent tournament name
+   * @minLength 1
+   */
+  parentStatusName: string;
   /**
    * GameId
    * @format int32
    */
-  gameId?: number;
-  /** Game Name */
-  gameName?: string | null;
-  /** Game icon url */
-  gameIconUrl?: string | null;
-  /** Game UrlSafeName */
-  gameUrlSafeName?: string | null;
+  gameId: number;
+  /**
+   * Game Name
+   * @minLength 1
+   */
+  gameName: string;
+  /**
+   * Game icon url
+   * @minLength 1
+   */
+  gameIconUrl: string;
+  /**
+   * Game UrlSafeName
+   * @minLength 1
+   */
+  gameUrlSafeName: string;
   /** The GRID field is only displayed to the user when the parent tournament game = CSGO, Valorant or Dota 2 */
-  showGridDataProvider?: boolean;
+  showGridDataProvider: boolean;
+  /** Is Player Base */
+  isPlayerBase: boolean;
   /** Stages */
-  stages?: GetParentStage[] | null;
+  stages: GetParentStage[];
 }
 
 export interface GetParentStagesRespApiRespBase {
-  ret?: EnumRet;
-  msg?: string | null;
-  traceId?: string | null;
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
   data?: GetParentStagesResp;
 }
 
 export interface GetParentTournamentStateOptionsResp {
   /** Tournament state options */
-  states?: Int16Item[] | null;
+  states: Int16Item[];
 }
 
 export interface GetParentTournamentStateOptionsRespApiRespBase {
-  ret?: EnumRet;
-  msg?: string | null;
-  traceId?: string | null;
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
   data?: GetParentTournamentStateOptionsResp;
 }
 
 export interface GetParentsResp {
   /** Parent tournaments */
-  parents?: ParentTournamentListItem[] | null;
-  paging?: PagingRespBase;
+  parents: ParentTournamentListItem[];
+  paging: PagingRespBase;
 }
 
 export interface GetParentsRespApiRespBase {
-  ret?: EnumRet;
-  msg?: string | null;
-  traceId?: string | null;
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
   data?: GetParentsResp;
 }
 
 export interface GetPlayerMediaItems {
-  /** @format int32 */
-  playerId?: number;
-  /** @format int32 */
-  mediaItemId?: number;
-  title?: string | null;
-  type?: string | null;
-  urlSafeTitle?: string | null;
-  /** @format int32 */
-  viewCount?: number;
+  /**
+   * Player id
+   * @format int32
+   */
+  playerId: number;
+  /**
+   * Media item id
+   * @format int32
+   */
+  mediaItemId: number;
+  /**
+   * Title
+   * @minLength 1
+   */
+  title: string;
+  /**
+   * Type
+   * @minLength 1
+   */
+  type: string;
+  /**
+   * Url safe name
+   * @minLength 1
+   */
+  urlSafeTitle: string;
+  /**
+   * View count
+   * @format int32
+   */
+  viewCount: number;
 }
 
 export interface GetPlayerMediaItemsResp {
-  mediaItems?: GetPlayerMediaItems[] | null;
-  paging?: PagingRespBase;
+  /** Media items */
+  mediaItems: GetPlayerMediaItems[];
+  paging: PagingRespBase;
 }
 
 export interface GetPlayerMediaItemsRespApiRespBase {
-  ret?: EnumRet;
-  msg?: string | null;
-  traceId?: string | null;
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
   data?: GetPlayerMediaItemsResp;
 }
 
 export interface GetPlayerResp {
-  /** @format int32 */
-  playerId?: number;
-  /** @format int32 */
+  /**
+   * Player id
+   * @format int32
+   */
+  playerId: number;
+  /**
+   * User id
+   * @format int32
+   */
   userId?: number | null;
-  nickName?: string | null;
-  isActive?: boolean;
+  /**
+   * Nickname (Name)
+   * @minLength 1
+   */
+  nickName: string;
+  /** Is active */
+  isActive: boolean;
+  /** First name */
   firstName?: string | null;
+  /** Last name */
   lastName?: string | null;
-  gender?: EnumGender;
-  genderName?: string | null;
-  /** @format date */
+  gender: EnumGender;
+  /**
+   * Gender name
+   * @minLength 1
+   */
+  genderName: string;
+  /**
+   * Date of birth
+   * @format date
+   */
   dateOfBirth?: string | null;
-  /** @format int32 */
+  /**
+   * Country id
+   * @format int32
+   */
   countryId?: number | null;
+  /** Country */
   country?: string | null;
-  /** @format int32 */
+  /**
+   * Initial rating
+   * @format int32
+   */
   initialRating?: number | null;
-  /** @format int32 */
+  /**
+   * Primary game id
+   * @format int32
+   */
   primaryGameId?: number | null;
+  /** Primary game */
   primaryGame?: string | null;
+  /** Description */
   description?: string | null;
+  /** Image file name */
   imageFileName?: string | null;
+  /** Facebook */
   facebook?: string | null;
+  /** Twitter */
   twitter?: string | null;
+  /** Youtube */
   youtube?: string | null;
 }
 
 export interface GetPlayerRespApiRespBase {
-  ret?: EnumRet;
-  msg?: string | null;
-  traceId?: string | null;
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
   data?: GetPlayerResp;
 }
 
 export interface GetPlayersDetail {
-  /** @format int32 */
-  playerId?: number;
-  nickName?: string | null;
-  name?: string | null;
-  urlSafeName?: string | null;
+  /**
+   * Player id
+   * @format int32
+   */
+  playerId: number;
+  /**
+   * Nickname (Name)
+   * @minLength 1
+   */
+  nickName: string;
+  /**
+   * Name
+   * @minLength 1
+   */
+  name: string;
+  /**
+   * Url safe name
+   * @minLength 1
+   */
+  urlSafeName: string;
+  /** Country name */
   countryName?: string | null;
+  /** Country code */
   countryCode?: string | null;
-  /** @format int32 */
+  /**
+   * Primary game id
+   * @format int32
+   */
   primaryGameId?: number | null;
+  /** Primary game */
   primaryGame?: string | null;
+  /** Team names */
   teamNames?: string[] | null;
+  /** Primary game icon url */
   primaryGameIconUrl?: string | null;
+  /** Primary game url safe name */
   primaryGameUrlSafeName?: string | null;
-  isActive?: boolean;
-  /** @format int64 */
-  createdAt?: number;
-  /** Url */
-  url?: string | null;
+  /** Is active */
+  isActive: boolean;
+  /**
+   * Created at
+   * @format int64
+   */
+  createdAt: number;
+  /**
+   * Url
+   * @minLength 1
+   */
+  url: string;
 }
 
 export interface GetPlayersResp {
-  players?: GetPlayersDetail[] | null;
-  paging?: PagingRespBase;
+  /** Players */
+  players: GetPlayersDetail[];
+  paging: PagingRespBase;
 }
 
 export interface GetPlayersRespApiRespBase {
-  ret?: EnumRet;
-  msg?: string | null;
-  traceId?: string | null;
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
   data?: GetPlayersResp;
+}
+
+export interface GetPointsAdjustmentResp {
+  /** @format int32 */
+  id: number;
+  /** @format int32 */
+  registrationId: number;
+  /** @minLength 1 */
+  name: string;
+  /** @format int32 */
+  placementPoints: number;
+  /** @format int32 */
+  killPoints: number;
+  /** @format int32 */
+  gamePointsAddition: number;
+  /** @format int32 */
+  gamePointsDeduction: number;
+  /** @format int32 */
+  pointsAddition: number;
+  /** @format int32 */
+  pointsDeduction: number;
+  /** @format int32 */
+  totalPoints: number;
+}
+
+export interface GetPointsAdjustmentRespListApiRespBase {
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
+  data?: GetPointsAdjustmentResp[] | null;
 }
 
 export interface GetPointsAwardedOptionsResp {
   /** @format int32 */
-  id?: number;
-  name?: string | null;
+  id: number;
+  /** @minLength 1 */
+  name: string;
 }
 
 export interface GetPointsAwardedOptionsRespListApiRespBase {
-  ret?: EnumRet;
-  msg?: string | null;
-  traceId?: string | null;
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
   data?: GetPointsAwardedOptionsResp[] | null;
 }
 
@@ -4120,53 +5603,61 @@ export interface GetPrizePoolStatusOptionsResp {
 }
 
 export interface GetPrizePoolStatusOptionsRespApiRespBase {
-  ret?: EnumRet;
-  msg?: string | null;
-  traceId?: string | null;
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
   data?: GetPrizePoolStatusOptionsResp;
 }
 
 export interface GetReplaceOpponentsResp {
   /** @format int32 */
-  id?: number;
+  id: number;
   /** @format int32 */
-  registrationId?: number;
+  registrationId: number;
   opponentName?: string | null;
   /** @format int32 */
-  replaceByRegistrationId?: number;
+  replaceByRegistrationId: number;
   replaceOpponentName?: string | null;
 }
 
 export interface GetReplaceOpponentsRespListApiRespBase {
-  ret?: EnumRet;
-  msg?: string | null;
-  traceId?: string | null;
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
   data?: GetReplaceOpponentsResp[] | null;
 }
 
 export interface GetRoleBlankPermissionsResp {
   /** Frontend permissions */
-  frontendPermissions?: Int16Item[] | null;
+  frontendPermissions: Int16Item[];
   /** Backoffice permissions */
-  backofficePermissions?: SimpleBackOfficePermissionItem[] | null;
+  backofficePermissions: SimpleBackOfficePermissionItem[];
 }
 
 export interface GetRoleBlankPermissionsRespApiRespBase {
-  ret?: EnumRet;
-  msg?: string | null;
-  traceId?: string | null;
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
   data?: GetRoleBlankPermissionsResp;
 }
 
 export interface GetRoleOptionsByGroupResp {
   /** Roles */
-  roles?: UInt32Item[] | null;
+  roles: UInt32Item[];
 }
 
 export interface GetRoleOptionsByGroupRespApiRespBase {
-  ret?: EnumRet;
-  msg?: string | null;
-  traceId?: string | null;
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
   data?: GetRoleOptionsByGroupResp;
 }
 
@@ -4205,55 +5696,128 @@ export interface GetRoleResp {
 }
 
 export interface GetRoleRespApiRespBase {
-  ret?: EnumRet;
-  msg?: string | null;
-  traceId?: string | null;
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
   data?: GetRoleResp;
 }
 
 export interface GetRoleTemplatesByGroupResp {
   /** Templates */
-  templates?: RoleTemplate[] | null;
+  templates: RoleTemplate[];
 }
 
 export interface GetRoleTemplatesByGroupRespApiRespBase {
-  ret?: EnumRet;
-  msg?: string | null;
-  traceId?: string | null;
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
   data?: GetRoleTemplatesByGroupResp;
 }
 
 export interface GetRolesByGroupResp {
   /** Roles */
-  roles?: RoleListItem[] | null;
-  paging?: PagingRespBase;
+  roles: RoleListItem[];
+  paging: PagingRespBase;
 }
 
 export interface GetRolesByGroupRespApiRespBase {
-  ret?: EnumRet;
-  msg?: string | null;
-  traceId?: string | null;
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
   data?: GetRolesByGroupResp;
 }
 
 export interface GetRoundResp {
-  /** @format int32 */
-  id?: number;
+  /**
+   * Id
+   * @format int32
+   */
+  id: number;
   pointsAwarded?: EnumPointsAwarded;
-  type?: EnumRoundType;
-  isHidden?: boolean;
-  /** @format int32 */
-  number?: number;
-  /** @format int32 */
-  gamesPerMatch?: number;
-  mappingPoints?: RoundMappingPoints;
+  /**
+   * Round name
+   * @minLength 1
+   */
+  roundName: string;
+  type: EnumRoundType;
+  /** Is hidden */
+  isHidden: boolean;
+  /**
+   * Number
+   * @format int32
+   */
+  number: number;
+  /**
+   * Game per match
+   * @format int32
+   */
+  gamesPerMatch: number;
+  /** Mapping points */
+  mappingPoints: RoundMappingPointsItem[];
 }
 
 export interface GetRoundRespApiRespBase {
-  ret?: EnumRet;
-  msg?: string | null;
-  traceId?: string | null;
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
   data?: GetRoundResp;
+}
+
+export interface GetRoundSetsItem {
+  /**
+   * sorting no
+   * @format int32
+   */
+  number: number;
+  /** Is over time */
+  isOverTime: boolean;
+  /**
+   * game side [CS:GO 0:Team1->CT/Team2->T, 1: Team2->CT/Team1->T], [Valorant 0:Team1->A/Team2->D, 1:Team2->A/Team1->D]
+   * @format int32
+   */
+  sides: number;
+  /**
+   * Team1 Name
+   * @minLength 1
+   */
+  team1Name: string;
+  /**
+   * Team 1 score
+   * @format int32
+   */
+  team1Score: number;
+  /**
+   * Team2 Name
+   * @minLength 1
+   */
+  team2Name: string;
+  /**
+   * Team 2 score
+   * @format int32
+   */
+  team2Score: number;
+}
+
+export interface GetRoundSetsResp {
+  /** Round sets items */
+  roundSetsItems: GetRoundSetsItem[];
+}
+
+export interface GetRoundSetsRespApiRespBase {
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
+  data?: GetRoundSetsResp;
 }
 
 export interface GetRoundsItem {
@@ -4261,85 +5825,153 @@ export interface GetRoundsItem {
    * Round Id
    * @format int32
    */
-  id?: number;
-  /** Round Name */
-  name?: string | null;
-  type?: EnumRoundType;
+  id: number;
+  /**
+   * Round Name
+   * @minLength 1
+   */
+  name: string;
+  /**
+   * Round Number
+   * @format int32
+   */
+  number: number;
+  type: EnumRoundType;
   /**
    * Games per match
    * @format int32
    */
-  gamesPerMatch?: number;
+  gamesPerMatch: number;
 }
 
 export interface GetRoundsResp {
+  /**
+   * Parent tournament id
+   * @minLength 1
+   */
+  parentTournamentName: string;
+  /**
+   * Stage name
+   * @minLength 1
+   */
+  stageName: string;
+  /**
+   * Child tournament name
+   * @minLength 1
+   */
+  childTournamentName: string;
   /** Rounds */
-  rounds?: GetRoundsItem[] | null;
-  paging?: PagingRespBase;
+  rounds: GetRoundsItem[];
 }
 
 export interface GetRoundsRespApiRespBase {
-  ret?: EnumRet;
-  msg?: string | null;
-  traceId?: string | null;
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
   data?: GetRoundsResp;
 }
 
 export interface GetServerOptionsResp {
   /** @format int32 */
-  serverId?: number;
+  serverId: number;
   /** @format int32 */
-  gameId?: number;
-  name?: string | null;
-  isFrozen?: boolean;
+  gameId: number;
+  /** @minLength 1 */
+  name: string;
+  isFrozen: boolean;
 }
 
 export interface GetServerOptionsRespListApiRespBase {
-  ret?: EnumRet;
-  msg?: string | null;
-  traceId?: string | null;
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
   data?: GetServerOptionsResp[] | null;
 }
 
 export interface GetServerResp {
-  /** @format int32 */
-  id?: number;
-  name?: string | null;
-  isFrozen?: boolean;
+  /**
+   * Server id
+   * @format int32
+   */
+  id: number;
+  /**
+   * Name
+   * @minLength 1
+   */
+  name: string;
+  /** Is frozen */
+  isFrozen: boolean;
+  /** Account name format */
   accountNameFormat?: string | null;
-  accountNameRegex?: string | null;
-  /** @format int32 */
-  gameId?: number;
+  /**
+   * Account name regex
+   * @minLength 1
+   */
+  accountNameRegex: string;
+  /**
+   * Game id
+   * @format int32
+   */
+  gameId: number;
 }
 
 export interface GetServerRespApiRespBase {
-  ret?: EnumRet;
-  msg?: string | null;
-  traceId?: string | null;
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
   data?: GetServerResp;
 }
 
 export interface GetServers {
-  /** @format int32 */
-  id?: number;
-  name?: string | null;
-  /** @format int32 */
-  gameId?: number;
-  isFrozen?: boolean;
+  /**
+   * Server id
+   * @format int32
+   */
+  id: number;
+  /**
+   * Name
+   * @minLength 1
+   */
+  name: string;
+  /**
+   * Game id
+   * @format int32
+   */
+  gameId: number;
+  /** Is frozen */
+  isFrozen: boolean;
+  /** Account name format */
   accountNameFormat?: string | null;
-  gameName?: string | null;
-  gameIconImageUrl?: string | null;
+  /**
+   * Game name
+   * @minLength 1
+   */
+  gameName: string;
+  /**
+   * Game icon image url
+   * @minLength 1
+   */
+  gameIconImageUrl: string;
 }
 
 export interface GetServersResp {
-  servers?: GetServers[] | null;
-  paging?: PagingRespBase;
+  /** Servers */
+  servers: GetServers[];
+  paging: PagingRespBase;
 }
 
 export interface GetServersRespApiRespBase {
-  ret?: EnumRet;
-  msg?: string | null;
-  traceId?: string | null;
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
   data?: GetServersResp;
 }
 
@@ -4348,17 +5980,28 @@ export interface GetSide {
    * Side Id
    * @format int32
    */
-  id?: number;
-  name?: string | null;
-  gameName?: string | null;
-  translations?: GetSideTranslation[] | null;
+  id: number;
+  /**
+   * Name
+   * @minLength 1
+   */
+  name: string;
+  /**
+   * Game name
+   * @minLength 1
+   */
+  gameName: string;
+  /** Translations */
+  translations: GetSideTranslation[];
 }
 
 export interface GetSideLocale {
   /** @format int32 */
-  id?: number;
-  bcp47Identifier?: string | null;
-  displayName?: string | null;
+  id: number;
+  /** @minLength 1 */
+  bcp47Identifier: string;
+  /** @minLength 1 */
+  displayName: string;
 }
 
 export interface GetSideResp {
@@ -4366,456 +6009,838 @@ export interface GetSideResp {
    * Side Id
    * @format int32
    */
-  id?: number;
-  /** @format int32 */
-  gameId?: number;
-  name?: string | null;
+  id: number;
+  /**
+   * Game id
+   * @format int32
+   */
+  gameId: number;
+  /**
+   * Name
+   * @minLength 1
+   */
+  name: string;
+  /** Image file name */
   iconFileName?: string | null;
 }
 
 export interface GetSideRespApiRespBase {
-  ret?: EnumRet;
-  msg?: string | null;
-  traceId?: string | null;
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
   data?: GetSideResp;
 }
 
 export interface GetSideTranslation {
-  name?: string | null;
-  status?: string | null;
-  locale?: GetSideLocale;
+  /** @minLength 1 */
+  name: string;
+  /** @minLength 1 */
+  status: string;
+  locale: GetSideLocale;
 }
 
 export interface GetSideTranslationsResp {
   /** @format int32 */
-  id?: number;
-  name?: string | null;
-  translations?: GetSideTranslation[] | null;
+  id: number;
+  /** @minLength 1 */
+  name: string;
+  translations: GetSideTranslation[];
 }
 
 export interface GetSideTranslationsRespApiRespBase {
-  ret?: EnumRet;
-  msg?: string | null;
-  traceId?: string | null;
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
   data?: GetSideTranslationsResp;
 }
 
 export interface GetSidesResp {
-  sides?: GetSide[] | null;
-  paging?: PagingRespBase;
+  /** Sites */
+  sides: GetSide[];
+  paging: PagingRespBase;
 }
 
 export interface GetSidesRespApiRespBase {
-  ret?: EnumRet;
-  msg?: string | null;
-  traceId?: string | null;
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
   data?: GetSidesResp;
 }
 
 export interface GetSiteSectionResp {
-  /** @format int32 */
-  id?: number;
+  /**
+   * Site section id
+   * @format int32
+   */
+  id: number;
   /** @format int32 */
   gameId?: number | null;
-  name?: string | null;
-  hidden?: boolean;
-  urlSafeName?: string | null;
-  /** @format int32 */
-  position?: number;
+  /**
+   * Name
+   * @minLength 1
+   */
+  name: string;
+  /** Hidden */
+  hidden: boolean;
+  /**
+   * Url safe name
+   * @minLength 1
+   */
+  urlSafeName: string;
+  /**
+   * Position
+   * @format int32
+   */
+  position: number;
+  /** Header image url */
   headerImageUrl?: string | null;
+  /** Back ground image url */
   backGroundImageUrl?: string | null;
+  /** Icon image url */
   iconImageUrl?: string | null;
+  /** Logo image url */
   logoImageUrl?: string | null;
 }
 
 export interface GetSiteSectionRespApiRespBase {
-  ret?: EnumRet;
-  msg?: string | null;
-  traceId?: string | null;
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
   data?: GetSiteSectionResp;
 }
 
 export interface GetSiteSections {
-  /** @format int32 */
-  id?: number;
-  name?: string | null;
-  urlSafeName?: string | null;
-  hidden?: boolean;
-  gameName?: string | null;
-  gameUrlSafeName?: string | null;
+  /**
+   * Site section id
+   * @format int32
+   */
+  id: number;
+  /**
+   * Name
+   * @minLength 1
+   */
+  name: string;
+  /**
+   * Url safe name
+   * @minLength 1
+   */
+  urlSafeName: string;
+  /** Hidden */
+  hidden: boolean;
+  /**
+   * Game name
+   * @minLength 1
+   */
+  gameName: string;
+  /**
+   * Game url safe name
+   * @minLength 1
+   */
+  gameUrlSafeName: string;
 }
 
 export interface GetSiteSectionsOptionsResp {
-  siteSectionOptions?: Int16Item[] | null;
+  /** Site section options */
+  siteSectionOptions: Int16Item[];
 }
 
 export interface GetSiteSectionsOptionsRespApiRespBase {
-  ret?: EnumRet;
-  msg?: string | null;
-  traceId?: string | null;
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
   data?: GetSiteSectionsOptionsResp;
 }
 
 export interface GetSiteSectionsResp {
-  siteSections?: GetSiteSections[] | null;
-  paging?: PagingRespBase;
+  /** Site sections */
+  siteSections: GetSiteSections[];
+  paging: PagingRespBase;
 }
 
 export interface GetSiteSectionsRespApiRespBase {
-  ret?: EnumRet;
-  msg?: string | null;
-  traceId?: string | null;
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
   data?: GetSiteSectionsResp;
 }
 
 export interface GetSponsorResp {
-  /** @format int32 */
-  id?: number;
-  name?: string | null;
+  /**
+   * Sponsor id
+   * @format int32
+   */
+  id: number;
+  /**
+   * Name
+   * @minLength 1
+   */
+  name: string;
+  /** Image file name */
   imageFileName?: string | null;
-  description?: string | null;
-  url?: string | null;
+  /**
+   * Description
+   * @minLength 1
+   */
+  description: string;
+  /**
+   * Url
+   * @minLength 1
+   */
+  url: string;
 }
 
 export interface GetSponsorRespApiRespBase {
-  ret?: EnumRet;
-  msg?: string | null;
-  traceId?: string | null;
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
   data?: GetSponsorResp;
 }
 
 export interface GetSponsors {
-  /** @format int32 */
-  id?: number;
-  name?: string | null;
+  /**
+   * Sponsor id
+   * @format int32
+   */
+  id: number;
+  /**
+   * Name
+   * @minLength 1
+   */
+  name: string;
+  /** Image file name */
   imageFileName?: string | null;
-  urlSafeName?: string | null;
-  url?: string | null;
-  /** @format int64 */
-  createdAt?: number;
-  /** @format int64 */
+  /**
+   * Url safe name
+   * @minLength 1
+   */
+  urlSafeName: string;
+  /**
+   * Url
+   * @minLength 1
+   */
+  url: string;
+  /**
+   * Created at
+   * @format int64
+   */
+  createdAt: number;
+  /**
+   * Updated at
+   * @format int64
+   */
   updatedAt?: number | null;
-  /** @format int32 */
-  createdBy?: number;
-  userName?: string | null;
+  /**
+   * Created by
+   * @format int32
+   */
+  createdBy: number;
+  /**
+   * Username
+   * @minLength 1
+   */
+  userName: string;
 }
 
 export interface GetSponsorsResp {
-  sponsors?: GetSponsors[] | null;
-  paging?: PagingRespBase;
+  /** Sponsors */
+  sponsors: GetSponsors[];
+  paging: PagingRespBase;
 }
 
 export interface GetSponsorsRespApiRespBase {
-  ret?: EnumRet;
-  msg?: string | null;
-  traceId?: string | null;
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
   data?: GetSponsorsResp;
 }
 
 export interface GetStateOptionsResp {
   /** Func states */
-  states?: ByteItem[] | null;
+  states: ByteItem[];
 }
 
 export interface GetStateOptionsRespApiRespBase {
-  ret?: EnumRet;
-  msg?: string | null;
-  traceId?: string | null;
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
   data?: GetStateOptionsResp;
 }
 
 export interface GetStreamResp {
-  /** @format int32 */
-  id?: number;
-  /** @format int32 */
-  platform?: number;
-  streamId?: string | null;
+  /**
+   * Stream media id
+   * @format int32
+   */
+  id: number;
+  /**
+   * Platform
+   * @format int32
+   */
+  platform: number;
+  /**
+   * Stream id
+   * @minLength 1
+   */
+  streamId: string;
+  /** Stream url */
   streamUrl?: string | null;
+  /** Screen cap url */
   screenCapUrl?: string | null;
-  /** @format int32 */
-  gameId?: number;
-  /** @format int32 */
-  languageId?: number;
-  isEventStream?: boolean;
-  isProPlayer?: boolean;
-  isCelebCaster?: boolean;
-  /** @format int64 */
+  /**
+   * Game id
+   * @format int32
+   */
+  gameId: number;
+  /**
+   * Language id
+   * @format int32
+   */
+  languageId: number;
+  /** Is event stream */
+  isEventStream: boolean;
+  /** Is pro player */
+  isProPlayer: boolean;
+  /** Is celeb caster */
+  isCelebCaster: boolean;
+  /**
+   * Next broadcast at
+   * @format int64
+   */
   nextBroadcastAt?: number | null;
-  title?: string | null;
-  isFeatured?: boolean;
+  /**
+   * Title
+   * @minLength 1
+   */
+  title: string;
+  /** Is featured */
+  isFeatured: boolean;
+  /** Description */
   description?: string | null;
-  tags?: MediaTag[] | null;
+  /** Tags */
+  tags: MediaTag[];
 }
 
 export interface GetStreamRespApiRespBase {
-  ret?: EnumRet;
-  msg?: string | null;
-  traceId?: string | null;
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
   data?: GetStreamResp;
 }
 
 export interface GetStreams {
-  /** @format int32 */
-  id?: number;
-  title?: string | null;
-  /** @format int32 */
-  platform?: number;
-  streamId?: string | null;
+  /**
+   * Stream media id
+   * @format int32
+   */
+  id: number;
+  /**
+   * Title
+   * @minLength 1
+   */
+  title: string;
+  /**
+   * Platform
+   * @format int32
+   */
+  platform: number;
+  /**
+   * Stream id
+   * @minLength 1
+   */
+  streamId: string;
+  /** Stream url */
   streamUrl?: string | null;
-  /** @format int32 */
-  gameId?: number;
-  isLive?: boolean;
-  /** @format int32 */
-  userId?: number;
-  /** @format int64 */
-  createdAt?: number;
-  gameName?: string | null;
-  gameUrlSafeName?: string | null;
-  userName?: string | null;
+  /**
+   * Game id
+   * @format int32
+   */
+  gameId: number;
+  /** Is live */
+  isLive: boolean;
+  /**
+   * User id
+   * @format int32
+   */
+  userId: number;
+  /**
+   * Created at
+   * @format int64
+   */
+  createdAt: number;
+  /**
+   * Game name
+   * @minLength 1
+   */
+  gameName: string;
+  /**
+   * Game url safe name
+   * @minLength 1
+   */
+  gameUrlSafeName: string;
+  /**
+   * Username
+   * @minLength 1
+   */
+  userName: string;
 }
 
 export interface GetStreamsResp {
-  streams?: GetStreams[] | null;
-  paging?: PagingRespBase;
+  /** Streams */
+  streams: GetStreams[];
+  paging: PagingRespBase;
 }
 
 export interface GetStreamsRespApiRespBase {
-  ret?: EnumRet;
-  msg?: string | null;
-  traceId?: string | null;
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
   data?: GetStreamsResp;
 }
 
 export interface GetSystemLogResp {
-  log?: SystemLogDetail;
+  log: SystemLogDetail;
 }
 
 export interface GetSystemLogRespApiRespBase {
-  ret?: EnumRet;
-  msg?: string | null;
-  traceId?: string | null;
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
   data?: GetSystemLogResp;
 }
 
 export interface GetSystemLogsResp {
   /** Api Logs */
-  logs?: SystemLogListItem[] | null;
-  paging?: PagingRespBase;
+  logs: SystemLogListItem[];
+  paging: PagingRespBase;
 }
 
 export interface GetSystemLogsRespApiRespBase {
-  ret?: EnumRet;
-  msg?: string | null;
-  traceId?: string | null;
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
   data?: GetSystemLogsResp;
 }
 
 export interface GetTeamPlayer {
-  /** @format int32 */
-  teamPlayerId?: number;
-  /** @format int32 */
-  playerId?: number;
-  /** @format int32 */
-  teamId?: number;
-  playerName?: string | null;
-  playerUrlSafeName?: string | null;
-  /** @format int64 */
-  joinDate?: number;
-  /** @format int64 */
+  /**
+   * Team player id
+   * @format int32
+   */
+  teamPlayerId: number;
+  /**
+   * Player id
+   * @format int32
+   */
+  playerId: number;
+  /**
+   * Team id
+   * @format int32
+   */
+  teamId: number;
+  /**
+   * Player name
+   * @minLength 1
+   */
+  playerName: string;
+  /**
+   * Player url safe name
+   * @minLength 1
+   */
+  playerUrlSafeName: string;
+  /**
+   * Join date
+   * @format int64
+   */
+  joinDate: number;
+  /**
+   * Leave date
+   * @format int64
+   */
   leaveDate?: number | null;
-  isHidden?: boolean;
-  position?: string | null;
+  /** Is hidden */
+  isHidden: boolean;
+  /**
+   * Position
+   * @minLength 1
+   */
+  position: string;
 }
 
 export interface GetTeamPlayerOptionsResp {
   /** Players */
-  players?: Int32Item[] | null;
+  players: Int32Item[];
 }
 
 export interface GetTeamPlayerOptionsRespApiRespBase {
-  ret?: EnumRet;
-  msg?: string | null;
-  traceId?: string | null;
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
   data?: GetTeamPlayerOptionsResp;
 }
 
 export interface GetTeamPlayerResp {
-  /** @format int32 */
-  teamPlayerId?: number;
-  /** @format int32 */
-  playerId?: number;
-  /** @format int32 */
-  teamId?: number;
-  /** @format int64 */
-  joinDate?: number;
-  /** @format int64 */
+  /**
+   * Team player id
+   * @format int32
+   */
+  teamPlayerId: number;
+  /**
+   * Player id
+   * @format int32
+   */
+  playerId: number;
+  /**
+   * Team id
+   * @format int32
+   */
+  teamId: number;
+  /**
+   * Join date
+   * @format int64
+   */
+  joinDate: number;
+  /**
+   * Leave date
+   * @format int64
+   */
   leaveDate?: number | null;
-  isHidden?: boolean;
+  /** Is hidden */
+  isHidden: boolean;
 }
 
 export interface GetTeamPlayerRespApiRespBase {
-  ret?: EnumRet;
-  msg?: string | null;
-  traceId?: string | null;
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
   data?: GetTeamPlayerResp;
 }
 
 export interface GetTeamPlayersResp {
-  players?: GetTeamPlayer[] | null;
-  paging?: PagingRespBase;
+  /** Players */
+  players: GetTeamPlayer[];
+  paging: PagingRespBase;
 }
 
 export interface GetTeamPlayersRespApiRespBase {
-  ret?: EnumRet;
-  msg?: string | null;
-  traceId?: string | null;
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
   data?: GetTeamPlayersResp;
 }
 
 export interface GetTeamResp {
-  /** @format int32 */
-  teamId?: number;
-  teamName?: string | null;
-  teamTag?: string | null;
-  /** @format int32 */
+  /**
+   * Team id
+   * @format int32
+   */
+  teamId: number;
+  /**
+   * Team name
+   * @minLength 1
+   */
+  teamName: string;
+  /**
+   * Team tag
+   * @minLength 1
+   */
+  teamTag: string;
+  /**
+   * Owner id
+   * @format int32
+   */
   ownerId?: number | null;
+  /** Owner name */
   ownerName?: string | null;
-  /** @format int32 */
+  /**
+   * Captain id
+   * @format int32
+   */
   captainId?: number | null;
+  /** Captain name */
   captainName?: string | null;
-  /** @format int32 */
+  /**
+   * Manage id
+   * @format int32
+   */
   manageId?: number | null;
+  /** Manage name */
   manageName?: string | null;
-  excludedRankings?: boolean;
+  /** Excluded ranking */
+  excludedRankings: boolean;
+  /** Image file name */
   imageFileName?: string | null;
-  /** @format int32 */
+  /**
+   * Game id
+   * @format int32
+   */
   gameId?: number;
+  /** Game name */
   gameName?: string | null;
-  /** @format int32 */
+  /**
+   * Country id
+   * @format int32
+   */
   countryId?: number | null;
+  /** Country name */
   countryName?: string | null;
+  /** Description */
   description?: string | null;
+  /** Facebook */
   facebook?: string | null;
+  /** Twitter */
   twitter?: string | null;
+  /** Youtube */
   youtube?: string | null;
 }
 
 export interface GetTeamRespApiRespBase {
-  ret?: EnumRet;
-  msg?: string | null;
-  traceId?: string | null;
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
   data?: GetTeamResp;
 }
 
 export interface GetTeamsDetail {
-  /** @format int32 */
-  teamId?: number;
-  teamName?: string | null;
-  teamUrlSafeName?: string | null;
-  teamTag?: string | null;
-  /** @format int32 */
+  /**
+   * Team id
+   * @format int32
+   */
+  teamId: number;
+  /**
+   * Team name
+   * @minLength 1
+   */
+  teamName: string;
+  /**
+   * Team url safe name
+   * @minLength 1
+   */
+  teamUrlSafeName: string;
+  /**
+   * Team tag
+   * @minLength 1
+   */
+  teamTag: string;
+  /**
+   * Country id
+   * @format int32
+   */
   countryId?: number | null;
+  /** Country name */
   countryName?: string | null;
+  /** Country code */
   countryCode?: string | null;
-  /** @format int32 */
-  gameId?: number | null;
-  gameName?: string | null;
-  gameUrlSafeName?: string | null;
-  isRanked?: boolean;
-  /** @format int64 */
+  /**
+   * Game id
+   * @format int32
+   */
+  gameId: number;
+  /**
+   * Game name
+   * @minLength 1
+   */
+  gameName: string;
+  /**
+   * Game url safe name
+   * @minLength 1
+   */
+  gameUrlSafeName: string;
+  /** Is ranked */
+  isRanked: boolean;
+  /**
+   * Updated at
+   * @format int64
+   */
   updatedAt?: number | null;
-  /** @format int32 */
+  /**
+   * Updated by
+   * @format int32
+   */
   updatedBy?: number | null;
+  /** Username */
   username?: string | null;
-  url?: string | null;
+  /**
+   * Url
+   * @minLength 1
+   */
+  url: string;
 }
 
 export interface GetTeamsResp {
-  teams?: GetTeamsDetail[] | null;
-  paging?: PagingRespBase;
+  /** Teams */
+  teams: GetTeamsDetail[];
+  paging: PagingRespBase;
 }
 
 export interface GetTeamsRespApiRespBase {
-  ret?: EnumRet;
-  msg?: string | null;
-  traceId?: string | null;
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
   data?: GetTeamsResp;
 }
 
 export interface GetUserForPlayerResp {
-  /** @format int32 */
-  userId?: number;
-  userName?: string | null;
+  /**
+   * User id
+   * @format int32
+   */
+  userId: number;
+  /**
+   * Username
+   * @minLength 1
+   */
+  userName: string;
+  /** First name */
   firstName?: string | null;
+  /** Last name */
   lastName?: string | null;
-  /** @format int32 */
+  /**
+   * Country id
+   * @format int32
+   */
   countryId?: number | null;
+  /** Country name */
   countryName?: string | null;
-  /** @format date */
+  /**
+   * Date of birth
+   * @format date
+   */
   dateOfBirth?: string | null;
   gender?: EnumGender;
-  /** @format int32 */
+  /**
+   * Primary game id
+   * @format int32
+   */
   primaryGameId?: number | null;
+  /** Primary game */
   primaryGame?: string | null;
 }
 
 export interface GetUserForPlayerRespApiRespBase {
-  ret?: EnumRet;
-  msg?: string | null;
-  traceId?: string | null;
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
   data?: GetUserForPlayerResp;
 }
 
 export interface GetUserPermissionsResp {
   /** Groups */
-  groups?: string[] | null;
+  groups: string[];
   /** Roles */
-  roles?: string[] | null;
+  roles: string[];
 }
 
 export interface GetUserPermissionsRespApiRespBase {
-  ret?: EnumRet;
-  msg?: string | null;
-  traceId?: string | null;
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
   data?: GetUserPermissionsResp;
 }
 
 export interface GetUserResp {
-  /** @format int32 */
-  userId?: number;
-  userName?: string | null;
+  /**
+   * User id
+   * @format int32
+   */
+  userId: number;
+  /**
+   * Username
+   * @minLength 1
+   */
+  userName: string;
+  /** Password */
   password?: string | null;
+  /** First name */
   firstName?: string | null;
+  /** Last name */
   lastName?: string | null;
-  email?: string | null;
+  /**
+   * Email
+   * @minLength 1
+   */
+  email: string;
+  /** City */
   city?: string | null;
-  /** @format int32 */
+  /**
+   * Country id
+   * @format int32
+   */
   countryId?: number | null;
+  /** Country name */
   countryName?: string | null;
-  /** @format date */
+  /**
+   * Date of birth
+   * @format date
+   */
   dateOfBirth?: string | null;
   gender?: EnumGender;
+  /** About */
   aboutMe?: string | null;
+  /** Avatar image path */
   avatarImagePath?: string | null;
 }
 
 export interface GetUserRespApiRespBase {
-  ret?: EnumRet;
-  msg?: string | null;
-  traceId?: string | null;
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
   data?: GetUserResp;
 }
 
 export interface GetUserSessionResp {
-  userProfile?: UserProfile;
-  menuList?: MenuItem[] | null;
-  funcItem?: Record<string, Record<string, number>>;
+  userProfile: UserProfile;
+  menuList: MenuItem[];
+  funcItem: Record<string, Record<string, number>>;
 }
 
 export interface GetUserSessionRespApiRespBase {
-  ret?: EnumRet;
-  msg?: string | null;
-  traceId?: string | null;
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
   data?: GetUserSessionResp;
 }
 
@@ -4824,18 +6849,27 @@ export interface GetUsers {
    * User id
    * @format int32
    */
-  userId?: number;
-  /** Username */
-  userName?: string | null;
-  /** Email */
-  email?: string | null;
+  userId: number;
+  /**
+   * Username
+   * @minLength 1
+   */
+  userName: string;
+  /**
+   * Email
+   * @minLength 1
+   */
+  email: string;
   /**
    * Updated at
    * @format int64
    */
   updatedAt?: number | null;
-  /** Updated username */
-  updatedUserName?: string | null;
+  /**
+   * Updated username
+   * @minLength 1
+   */
+  updatedUserName: string;
   /**
    * Registered at
    * @format int64
@@ -4850,87 +6884,143 @@ export interface GetUsers {
 
 export interface GetUsersByGroupResp {
   /** Users */
-  users?: GroupUserListItem[] | null;
+  users: GroupUserListItem[];
 }
 
 export interface GetUsersByGroupRespApiRespBase {
-  ret?: EnumRet;
-  msg?: string | null;
-  traceId?: string | null;
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
   data?: GetUsersByGroupResp;
 }
 
 export interface GetUsersByRoleResp {
   /** Users */
-  users?: RoleUserListItem[] | null;
+  users: RoleUserListItem[];
 }
 
 export interface GetUsersByRoleRespApiRespBase {
-  ret?: EnumRet;
-  msg?: string | null;
-  traceId?: string | null;
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
   data?: GetUsersByRoleResp;
 }
 
 export interface GetUsersResp {
   /** Users */
-  users?: GetUsers[] | null;
-  paging?: PagingRespBase;
+  users: GetUsers[];
+  paging: PagingRespBase;
 }
 
 export interface GetUsersRespApiRespBase {
-  ret?: EnumRet;
-  msg?: string | null;
-  traceId?: string | null;
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
   data?: GetUsersResp;
 }
 
 export interface GetVenueResp {
-  /** @format int32 */
-  id?: number;
-  city?: string | null;
+  /**
+   * Venue id
+   * @format int32
+   */
+  id: number;
+  /**
+   * City
+   * @minLength 1
+   */
+  city: string;
+  /** Coordinates */
   coordinates?: string | null;
-  name?: string | null;
+  /**
+   * Name
+   * @minLength 1
+   */
+  name: string;
+  /** Image file name */
   imageFileName?: string | null;
-  /** @format int32 */
-  countryId?: number;
+  /**
+   * Country id
+   * @format int32
+   */
+  countryId: number;
+  /** Address */
   address?: string | null;
 }
 
 export interface GetVenueRespApiRespBase {
-  ret?: EnumRet;
-  msg?: string | null;
-  traceId?: string | null;
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
   data?: GetVenueResp;
 }
 
 export interface GetVenues {
-  /** @format int32 */
-  id?: number;
-  city?: string | null;
+  /**
+   * Venue id
+   * @format int32
+   */
+  id: number;
+  /**
+   * City
+   * @minLength 1
+   */
+  city: string;
+  /** Coordinates */
   coordinates?: string | null;
-  hasCoordinates?: boolean;
-  name?: string | null;
+  /** Has coordinates */
+  hasCoordinates: boolean;
+  /**
+   * Name
+   * @minLength 1
+   */
+  name: string;
+  /** Image file name */
   imageFileName?: string | null;
-  hasImage?: boolean;
-  /** @format int64 */
-  createdAt?: number;
-  /** @format int64 */
+  /** Has image */
+  hasImage: boolean;
+  /**
+   * Created at
+   * @format int64
+   */
+  createdAt: number;
+  /**
+   * Updated at
+   * @format int64
+   */
   updatedAt?: number | null;
-  countryName?: string | null;
-  username?: string | null;
+  /**
+   * Country name
+   * @minLength 1
+   */
+  countryName: string;
+  /**
+   * Username
+   * @minLength 1
+   */
+  username: string;
 }
 
 export interface GetVenuesResp {
-  /** /Venues */
-  venues?: GetVenues[] | null;
-  paging?: PagingRespBase;
+  /** Venues */
+  venues: GetVenues[];
+  paging: PagingRespBase;
 }
 
 export interface GetVenuesRespApiRespBase {
-  ret?: EnumRet;
-  msg?: string | null;
-  traceId?: string | null;
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
   data?: GetVenuesResp;
 }
 
@@ -4939,20 +7029,29 @@ export interface GroupListItem {
    * Group id
    * @format int32
    */
-  groupId?: number;
-  /** User group name */
-  name?: string | null;
-  /** Remark */
-  remark?: string | null;
+  groupId: number;
+  /**
+   * User group name
+   * @minLength 1
+   */
+  name: string;
+  /**
+   * Remark
+   * @minLength 1
+   */
+  remark: string;
   /**
    * Updated At
    * @format int64
    */
-  updatedAt?: number;
-  /** User name */
-  updatedUserName?: string | null;
+  updatedAt: number;
+  /**
+   * User name
+   * @minLength 1
+   */
+  updatedUserName: string;
   /** Frontend names */
-  frontendNames?: string[] | null;
+  frontendNames: string[];
 }
 
 export interface GroupTemplate {
@@ -4960,13 +7059,16 @@ export interface GroupTemplate {
    * Group template id
    * @format int32
    */
-  templateId?: number;
-  /** Group template name */
-  name?: string | null;
+  templateId: number;
+  /**
+   * Group template name
+   * @minLength 1
+   */
+  name: string;
   /** Frontend permissions */
-  frontendPermissions?: Int16Item[] | null;
+  frontendPermissions: Int16Item[];
   /** Backoffice permissions */
-  backofficePermissions?: SimpleBackOfficePermissionItem[] | null;
+  backofficePermissions: SimpleBackOfficePermissionItem[];
 }
 
 export interface GroupUserListItem {
@@ -4974,29 +7076,36 @@ export interface GroupUserListItem {
    * User id
    * @format int32
    */
-  userId?: number;
-  /** User name */
-  userName?: string | null;
+  userId: number;
+  /**
+   * User name
+   * @minLength 1
+   */
+  userName: string;
 }
 
 export interface Int16Item {
   /** @format int32 */
-  id?: number;
-  name?: string | null;
+  id: number;
+  /** @minLength 1 */
+  name: string;
 }
 
 export interface Int16ItemListApiRespBase {
-  ret?: EnumRet;
-  msg?: string | null;
-  traceId?: string | null;
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
   data?: Int16Item[] | null;
 }
 
 export interface Int16ItemWithSubItem {
   /** @format int32 */
-  id?: number;
-  name?: string | null;
-  subItems?: Int16Item[] | null;
+  id: number;
+  /** @minLength 1 */
+  name: string;
+  subItems: Int16Item[];
 }
 
 export interface Int16OrderItem {
@@ -5013,21 +7122,25 @@ export interface Int16OrderItem {
 
 export interface Int32CheckItem {
   /** @format int32 */
-  id?: number;
-  name?: string | null;
-  checked?: boolean;
+  id: number;
+  /** @minLength 1 */
+  name: string;
+  checked: boolean;
 }
 
 export interface Int32Item {
   /** @format int32 */
-  id?: number;
-  name?: string | null;
+  id: number;
+  /** @minLength 1 */
+  name: string;
 }
 
 export interface Int32ItemListApiRespBase {
-  ret?: EnumRet;
-  msg?: string | null;
-  traceId?: string | null;
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
   data?: Int32Item[] | null;
 }
 
@@ -5044,36 +7157,76 @@ export interface Int32OrderItem {
 }
 
 export interface Int32StringDictionaryApiRespBase {
-  ret?: EnumRet;
-  msg?: string | null;
-  traceId?: string | null;
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
   data?: Record<string, string | null>;
 }
 
 export interface LanguageOption {
-  /** @format int32 */
-  id?: number;
-  name?: string | null;
+  /**
+   * Language id
+   * @format int32
+   */
+  id: number;
+  /**
+   * Language name
+   * @minLength 1
+   */
+  name: string;
 }
 
 /** @format int32 */
 export enum LogLevel {
-  Value0 = 0,
-  Value1 = 1,
-  Value2 = 2,
-  Value3 = 3,
-  Value4 = 4,
-  Value5 = 5,
-  Value6 = 6,
+  Trace = 0,
+  Debug = 1,
+  Information = 2,
+  Warning = 3,
+  Error = 4,
+  Critical = 5,
+  None = 6,
 }
 
 export type LogoutResp = object;
 
 export interface LogoutRespApiRespBase {
-  ret?: EnumRet;
-  msg?: string | null;
-  traceId?: string | null;
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
   data?: LogoutResp;
+}
+
+export interface MatchGameItem {
+  /** @format int32 */
+  matchGameId?: number;
+  /** @format int32 */
+  number?: number;
+}
+
+export interface MatchGames {
+  /**
+   * Match id
+   * @format int32
+   */
+  matchId: number;
+  /** Match game */
+  matchName?: string | null;
+  /**
+   * Starting at
+   * @format int64
+   */
+  startingAt: number;
+  /**
+   * Hyper link
+   * @minLength 1
+   */
+  hyperlink: string;
+  /** Games */
+  games: MatchGameItem[];
 }
 
 export interface MediaTag {
@@ -5081,14 +7234,17 @@ export interface MediaTag {
    * Media Tag Id
    * @format int32
    */
-  id?: number;
+  id: number;
   /**
    * Media Item Id
    * @format int32
    */
-  mediaItemId?: number;
-  /** Media Item Name */
-  name?: string | null;
+  mediaItemId: number;
+  /**
+   * Media Item Name
+   * @minLength 1
+   */
+  name: string;
 }
 
 export interface MediaVodListItem {
@@ -5141,45 +7297,81 @@ export interface MenuItem {
    * Backoffice func id
    * @format int32
    */
-  funcId?: number;
-  /** Backoffice func name */
-  name?: string | null;
+  funcId: number;
+  /**
+   * Backoffice func name
+   * @minLength 1
+   */
+  name: string;
   /**
    * Parent func id
    * @format int32
    */
-  parentId?: number;
+  parentId: number;
   /**
    * Func level
    * @format int32
    */
-  level?: number;
+  level: number;
   /**
    * Func position
    * @format int32
    */
-  position?: number;
+  position: number;
   /** Api url */
   url?: string | null;
   /** Sub Menus */
-  subMenus?: MenuItem[] | null;
+  subMenus: MenuItem[];
 }
 
 export type ModArticleResp = object;
 
 export interface ModArticleRespApiRespBase {
-  ret?: EnumRet;
-  msg?: string | null;
-  traceId?: string | null;
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
   data?: ModArticleResp;
+}
+
+export interface ModBrResultReq {
+  /** @format int32 */
+  matchGameId?: number;
+  /** @format int32 */
+  registrationId?: number;
+  /** @format int32 */
+  placement?: number | null;
+  /** @format int32 */
+  placementPoints?: number | null;
+  /** @format int32 */
+  kills?: number | null;
+  /** @format int32 */
+  pointsAddition?: number | null;
+  /** @format int32 */
+  pointsDeduction?: number | null;
+  players?: GameResultBattleRoyalePlayer[] | null;
+}
+
+export type ModBrResultResp = object;
+
+export interface ModBrResultRespApiRespBase {
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
+  data?: ModBrResultResp;
 }
 
 export type ModBroadcastTalentResp = object;
 
 export interface ModBroadcastTalentRespApiRespBase {
-  ret?: EnumRet;
-  msg?: string | null;
-  traceId?: string | null;
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
   data?: ModBroadcastTalentResp;
 }
 
@@ -5213,13 +7405,15 @@ export interface ModChildEarningPrizePoolStatusResp {
    * Child id
    * @format int32
    */
-  childId?: number;
+  childId: number;
 }
 
 export interface ModChildEarningPrizePoolStatusRespApiRespBase {
-  ret?: EnumRet;
-  msg?: string | null;
-  traceId?: string | null;
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
   data?: ModChildEarningPrizePoolStatusResp;
 }
 
@@ -5295,14 +7489,45 @@ export interface ModChildReq {
    * @max 2147483647
    */
   gridId?: number | null;
+  /**
+   * Rounds
+   * @format int32
+   * @min 1
+   * @max 32767
+   */
+  rounds?: number | null;
+  pointsAwarded?: EnumPointsAwarded;
+  /**
+   * Points for win
+   * @format int32
+   * @min 0
+   * @max 32767
+   */
+  pointsWin?: number | null;
+  /**
+   * Points for draw
+   * @format int32
+   * @min 0
+   * @max 32767
+   */
+  pointsDraw?: number | null;
+  /**
+   * Game Mode Id
+   * @format int32
+   * @min 1
+   * @max 32767
+   */
+  gameModeId?: number | null;
 }
 
 export type ModChildResp = object;
 
 export interface ModChildRespApiRespBase {
-  ret?: EnumRet;
-  msg?: string | null;
-  traceId?: string | null;
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
   data?: ModChildResp;
 }
 
@@ -5315,29 +7540,35 @@ export interface ModChildTeamRegistrationReq {
 
 export interface ModFileResp {
   /** @format int32 */
-  fileId?: number;
+  fileId: number;
   /** @format int32 */
-  folderId?: number;
-  fileName?: string | null;
+  folderId: number;
+  /** @minLength 1 */
+  fileName: string;
 }
 
 export interface ModFileRespApiRespBase {
-  ret?: EnumRet;
-  msg?: string | null;
-  traceId?: string | null;
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
   data?: ModFileResp;
 }
 
 export interface ModFolderResp {
   /** @format int32 */
-  id?: number;
-  name?: string | null;
+  id: number;
+  /** @minLength 1 */
+  name: string;
 }
 
 export interface ModFolderRespApiRespBase {
-  ret?: EnumRet;
-  msg?: string | null;
-  traceId?: string | null;
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
   data?: ModFolderResp;
 }
 
@@ -5363,18 +7594,20 @@ export interface ModFrontendSiteSectionResp {
    * Frontend id
    * @format int32
    */
-  frontendId?: number;
+  frontendId: number;
   /**
    * Site section id
    * @format int32
    */
-  siteSectionId?: number;
+  siteSectionId: number;
 }
 
 export interface ModFrontendSiteSectionRespApiRespBase {
-  ret?: EnumRet;
-  msg?: string | null;
-  traceId?: string | null;
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
   data?: ModFrontendSiteSectionResp;
 }
 
@@ -5383,13 +7616,15 @@ export interface ModFuncResp {
    * Backoffice func id
    * @format int32
    */
-  funcId?: number;
+  funcId: number;
 }
 
 export interface ModFuncRespApiRespBase {
-  ret?: EnumRet;
-  msg?: string | null;
-  traceId?: string | null;
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
   data?: ModFuncResp;
 }
 
@@ -5419,10 +7654,29 @@ export interface ModGameAccountReq {
 export type ModGameAccountResp = object;
 
 export interface ModGameAccountRespApiRespBase {
-  ret?: EnumRet;
-  msg?: string | null;
-  traceId?: string | null;
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
   data?: ModGameAccountResp;
+}
+
+export interface ModGameDraftReq {
+  /** @format int32 */
+  matchGameId?: number;
+  items?: GameResultDraft[] | null;
+}
+
+export type ModGameDraftResp = object;
+
+export interface ModGameDraftRespApiRespBase {
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
+  data?: ModGameDraftResp;
 }
 
 export interface ModGameRegionReq {
@@ -5457,9 +7711,11 @@ export interface ModGameRegionResp {
 }
 
 export interface ModGameRegionRespApiRespBase {
-  ret?: EnumRet;
-  msg?: string | null;
-  traceId?: string | null;
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
   data?: ModGameRegionResp;
 }
 
@@ -5489,9 +7745,11 @@ export interface ModGameRegionTranslationReq {
 export type ModGameRegionTranslationResp = object;
 
 export interface ModGameRegionTranslationRespApiRespBase {
-  ret?: EnumRet;
-  msg?: string | null;
-  traceId?: string | null;
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
   data?: ModGameRegionTranslationResp;
 }
 
@@ -5500,13 +7758,15 @@ export interface ModGameResp {
    * Game id
    * @format int32
    */
-  gameId?: number;
+  gameId: number;
 }
 
 export interface ModGameRespApiRespBase {
-  ret?: EnumRet;
-  msg?: string | null;
-  traceId?: string | null;
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
   data?: ModGameResp;
 }
 
@@ -5536,9 +7796,11 @@ export interface ModGameTranslationsReq {
 export type ModGameTranslationsResp = object;
 
 export interface ModGameTranslationsRespApiRespBase {
-  ret?: EnumRet;
-  msg?: string | null;
-  traceId?: string | null;
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
   data?: ModGameTranslationsResp;
 }
 
@@ -5573,22 +7835,26 @@ export interface ModGroupResp {
    * Group id
    * @format int32
    */
-  groupId?: number | null;
+  groupId: number;
 }
 
 export interface ModGroupRespApiRespBase {
-  ret?: EnumRet;
-  msg?: string | null;
-  traceId?: string | null;
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
   data?: ModGroupResp;
 }
 
 export type ModHeroResp = object;
 
 export interface ModHeroRespApiRespBase {
-  ret?: EnumRet;
-  msg?: string | null;
-  traceId?: string | null;
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
   data?: ModHeroResp;
 }
 
@@ -5636,18 +7902,22 @@ export interface ModHeroTranslationsReq {
 export type ModHeroTranslationsResp = object;
 
 export interface ModHeroTranslationsRespApiRespBase {
-  ret?: EnumRet;
-  msg?: string | null;
-  traceId?: string | null;
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
   data?: ModHeroTranslationsResp;
 }
 
 export type ModMapResp = object;
 
 export interface ModMapRespApiRespBase {
-  ret?: EnumRet;
-  msg?: string | null;
-  traceId?: string | null;
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
   data?: ModMapResp;
 }
 
@@ -5677,19 +7947,104 @@ export interface ModMapTranslationsReq {
 export type ModMapTranslationsResp = object;
 
 export interface ModMapTranslationsRespApiRespBase {
-  ret?: EnumRet;
-  msg?: string | null;
-  traceId?: string | null;
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
   data?: ModMapTranslationsResp;
 }
 
 export type ModMatchArchivedResp = object;
 
 export interface ModMatchArchivedRespApiRespBase {
-  ret?: EnumRet;
-  msg?: string | null;
-  traceId?: string | null;
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
   data?: ModMatchArchivedResp;
+}
+
+export interface ModMatchGameReq {
+  /**
+   * Match-Game Id
+   * @format int32
+   * @min 1
+   * @max 2147483647
+   */
+  matchGameId: number;
+  /**
+   * Winner RegistrationId
+   * @format int32
+   * @min 1
+   * @max 2147483647
+   */
+  winnerId?: number | null;
+  result?: EnumGameResult;
+  /**
+   * Team1 score
+   * @format int32
+   * @min 0
+   * @max 2147483647
+   */
+  team1Score?: number | null;
+  /**
+   * Team2 score
+   * @format int32
+   * @min 0
+   * @max 2147483647
+   */
+  team2Score?: number | null;
+  /**
+   * Map Id
+   * @format int32
+   * @min 1
+   * @max 32767
+   */
+  mapId?: number | null;
+  /**
+   * Team1 games side id
+   * @format int32
+   * @min 1
+   * @max 2147483647
+   */
+  team1GameSideId?: number | null;
+  /**
+   * Team2 games side id
+   * @format int32
+   * @min 1
+   * @max 2147483647
+   */
+  team2GameSideId?: number | null;
+  /** Media items */
+  vods?: number[] | null;
+  /** Team1 lineup(playerId) */
+  team1Lineup?: number[] | null;
+  /** Team2 lineup(playerId) */
+  team2Lineup?: number[] | null;
+  /** Team1 StandIns(playerId) */
+  team1StandIns?: number[] | null;
+  /** Team2 StandIns(playerId) */
+  team2StandIns?: number[] | null;
+  /**
+   * Br points per kill
+   * @format int32
+   * @min 0
+   * @max 32767
+   */
+  pointsPerKill?: number | null;
+}
+
+export type ModMatchGameResp = object;
+
+export interface ModMatchGameRespApiRespBase {
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
+  data?: ModMatchGameResp;
 }
 
 export interface ModMatchOpponent {
@@ -5781,9 +8136,11 @@ export interface ModMatchesReq {
 export type ModMatchesResp = object;
 
 export interface ModMatchesRespApiRespBase {
-  ret?: EnumRet;
-  msg?: string | null;
-  traceId?: string | null;
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
   data?: ModMatchesResp;
 }
 
@@ -5848,9 +8205,11 @@ export interface ModMediaVodResp {
 }
 
 export interface ModMediaVodRespApiRespBase {
-  ret?: EnumRet;
-  msg?: string | null;
-  traceId?: string | null;
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
   data?: ModMediaVodResp;
 }
 
@@ -5886,9 +8245,11 @@ export interface ModModeReq {
 export type ModModeResp = object;
 
 export interface ModModeRespApiRespBase {
-  ret?: EnumRet;
-  msg?: string | null;
-  traceId?: string | null;
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
   data?: ModModeResp;
 }
 
@@ -5924,9 +8285,11 @@ export interface ModModeTranslationsReq {
 export type ModModeTranslationsResp = object;
 
 export interface ModModeTranslationsRespApiRespBase {
-  ret?: EnumRet;
-  msg?: string | null;
-  traceId?: string | null;
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
   data?: ModModeTranslationsResp;
 }
 
@@ -5978,13 +8341,15 @@ export interface ModNotificationTemplateResp {
    * Notification Template Id
    * @format int32
    */
-  notificationTemplateId?: number;
+  notificationTemplateId: number;
 }
 
 export interface ModNotificationTemplateRespApiRespBase {
-  ret?: EnumRet;
-  msg?: string | null;
-  traceId?: string | null;
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
   data?: ModNotificationTemplateResp;
 }
 
@@ -6067,13 +8432,15 @@ export interface ModOneSignalAppResp {
    * One Signal App Id
    * @format int32
    */
-  oneSignalAppId?: number | null;
+  oneSignalAppId: number;
 }
 
 export interface ModOneSignalAppRespApiRespBase {
-  ret?: EnumRet;
-  msg?: string | null;
-  traceId?: string | null;
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
   data?: ModOneSignalAppResp;
 }
 
@@ -6093,9 +8460,11 @@ export interface ModOpponentsReq {
 export type ModOpponentsResp = object;
 
 export interface ModOpponentsRespApiRespBase {
-  ret?: EnumRet;
-  msg?: string | null;
-  traceId?: string | null;
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
   data?: ModOpponentsResp;
 }
 
@@ -6137,25 +8506,32 @@ export interface ModPageResp {
    * Page id
    * @format int32
    */
-  pageId?: number | null;
+  pageId: number;
 }
 
 export interface ModPageRespApiRespBase {
-  ret?: EnumRet;
-  msg?: string | null;
-  traceId?: string | null;
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
   data?: ModPageResp;
 }
 
 export interface ModParentResp {
-  /** @format int32 */
-  parentId?: number;
+  /**
+   * Parent id
+   * @format int32
+   */
+  parentId: number;
 }
 
 export interface ModParentRespApiRespBase {
-  ret?: EnumRet;
-  msg?: string | null;
-  traceId?: string | null;
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
   data?: ModParentResp;
 }
 
@@ -6173,13 +8549,75 @@ export interface ModParentStagesReq {
   stages?: Int32OrderItem[] | null;
 }
 
+export interface ModParentStatusReq {
+  status: EnumTournamentStatus;
+}
+
+export interface ModParentStatusResp {
+  /**
+   * Parent id
+   * @format int32
+   */
+  parentId: number;
+}
+
+export interface ModParentStatusRespApiRespBase {
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
+  data?: ModParentStatusResp;
+}
+
 export type ModPlayerResp = object;
 
 export interface ModPlayerRespApiRespBase {
-  ret?: EnumRet;
-  msg?: string | null;
-  traceId?: string | null;
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
   data?: ModPlayerResp;
+}
+
+export interface ModPointsAdjustmentItem {
+  /**
+   * child tournament match opponents id
+   * @format int32
+   * @min 1
+   * @max 2147483647
+   */
+  id: number;
+  /**
+   * Points addition
+   * @format int32
+   * @min 0
+   * @max 2147483647
+   */
+  pointsAddition?: number;
+  /**
+   * Points deduction
+   * @format int32
+   * @min 0
+   * @max 2147483647
+   */
+  pointsDeduction?: number;
+}
+
+export interface ModPointsAdjustmentReq {
+  oppoents?: ModPointsAdjustmentItem[] | null;
+}
+
+export type ModPointsAdjustmentResp = object;
+
+export interface ModPointsAdjustmentRespApiRespBase {
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
+  data?: ModPointsAdjustmentResp;
 }
 
 export interface ModPrizePoolDistribution {
@@ -6258,9 +8696,11 @@ export interface ModReplaceOpponentsReq {
 export type ModReplaceOpponentsResp = object;
 
 export interface ModReplaceOpponentsRespApiRespBase {
-  ret?: EnumRet;
-  msg?: string | null;
-  traceId?: string | null;
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
   data?: ModReplaceOpponentsResp;
 }
 
@@ -6295,13 +8735,15 @@ export interface ModRoleResp {
    * Role id
    * @format int32
    */
-  roleId?: number | null;
+  roleId: number;
 }
 
 export interface ModRoleRespApiRespBase {
-  ret?: EnumRet;
-  msg?: string | null;
-  traceId?: string | null;
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
   data?: ModRoleResp;
 }
 
@@ -6338,27 +8780,50 @@ export interface ModRoundReq {
 export type ModRoundResp = object;
 
 export interface ModRoundRespApiRespBase {
-  ret?: EnumRet;
-  msg?: string | null;
-  traceId?: string | null;
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
   data?: ModRoundResp;
+}
+
+export interface ModRoundSetsReq {
+  /** @format int32 */
+  matchGameId?: number;
+  items?: GameResultRoundSet[] | null;
+}
+
+export type ModRoundSetsResp = object;
+
+export interface ModRoundSetsRespApiRespBase {
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
+  data?: ModRoundSetsResp;
 }
 
 export type ModServerResp = object;
 
 export interface ModServerRespApiRespBase {
-  ret?: EnumRet;
-  msg?: string | null;
-  traceId?: string | null;
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
   data?: ModServerResp;
 }
 
 export type ModSideResp = object;
 
 export interface ModSideRespApiRespBase {
-  ret?: EnumRet;
-  msg?: string | null;
-  traceId?: string | null;
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
   data?: ModSideResp;
 }
 
@@ -6388,36 +8853,44 @@ export interface ModSideTranslationsReq {
 export type ModSideTranslationsResp = object;
 
 export interface ModSideTranslationsRespApiRespBase {
-  ret?: EnumRet;
-  msg?: string | null;
-  traceId?: string | null;
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
   data?: ModSideTranslationsResp;
 }
 
 export type ModSiteSectionsResp = object;
 
 export interface ModSiteSectionsRespApiRespBase {
-  ret?: EnumRet;
-  msg?: string | null;
-  traceId?: string | null;
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
   data?: ModSiteSectionsResp;
 }
 
 export type ModSponsorResp = object;
 
 export interface ModSponsorRespApiRespBase {
-  ret?: EnumRet;
-  msg?: string | null;
-  traceId?: string | null;
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
   data?: ModSponsorResp;
 }
 
 export type ModStreamResp = object;
 
 export interface ModStreamRespApiRespBase {
-  ret?: EnumRet;
-  msg?: string | null;
-  traceId?: string | null;
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
   data?: ModStreamResp;
 }
 
@@ -6471,36 +8944,44 @@ export interface ModTeamPlayerReq {
 export type ModTeamPlayerResp = object;
 
 export interface ModTeamPlayerRespApiRespBase {
-  ret?: EnumRet;
-  msg?: string | null;
-  traceId?: string | null;
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
   data?: ModTeamPlayerResp;
 }
 
 export type ModTeamResp = object;
 
 export interface ModTeamRespApiRespBase {
-  ret?: EnumRet;
-  msg?: string | null;
-  traceId?: string | null;
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
   data?: ModTeamResp;
 }
 
 export type ModUserResp = object;
 
 export interface ModUserRespApiRespBase {
-  ret?: EnumRet;
-  msg?: string | null;
-  traceId?: string | null;
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
   data?: ModUserResp;
 }
 
 export type ModVenueResp = object;
 
 export interface ModVenueRespApiRespBase {
-  ret?: EnumRet;
-  msg?: string | null;
-  traceId?: string | null;
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
   data?: ModVenueResp;
 }
 
@@ -6511,26 +8992,61 @@ export interface NotificationTemplateArgument {
 }
 
 export interface NotificationTemplateDetail {
-  /** @format int32 */
+  /**
+   * Notification template id
+   * @format int32
+   */
   id: number;
-  /** @format int32 */
+  /**
+   * Frontend id
+   * @format int32
+   */
   frontEndId: number;
-  /** @format int32 */
+  /**
+   * Messaging notification type id
+   * @format int32
+   */
   messagingNotificationTypeId?: number | null;
-  typeIdentifier?: string | null;
-  webSupported?: boolean;
-  webTitle?: string | null;
-  webBody?: string | null;
-  pushSupported?: boolean;
+  /**
+   * Type identifier
+   * @minLength 1
+   */
+  typeIdentifier: string;
+  /** Web supported */
+  webSupported: boolean;
+  /**
+   * Web title
+   * @minLength 1
+   */
+  webTitle: string;
+  /**
+   * Web body
+   * @minLength 1
+   */
+  webBody: string;
+  /** Push supported */
+  pushSupported: boolean;
+  /** Push title */
   pushTitle?: string | null;
+  /** Push body */
   pushBody?: string | null;
-  emailSupported?: boolean;
+  /** Email supported */
+  emailSupported: boolean;
+  /** Email subject */
   emailSubject?: string | null;
+  /** Email text body */
   emailTextBody?: string | null;
+  /** Email html body */
   emailHtmlBody?: string | null;
-  /** @format int64 */
+  /**
+   * Created at
+   * @format int64
+   */
   createdAt: number;
-  /** @format int64 */
+  /**
+   * Updated at
+   * @format int64
+   */
   updatedAt: number;
 }
 
@@ -6570,10 +9086,13 @@ export interface NotificationTemplateListItem {
 
 export interface OneSignalAppListItem {
   /** @format int32 */
-  id?: number;
-  appId?: string | null;
-  apiKey?: string | null;
-  safariWebId?: string | null;
+  id: number;
+  /** @minLength 1 */
+  appId: string;
+  /** @minLength 1 */
+  apiKey: string;
+  /** @minLength 1 */
+  safariWebId: string;
   playerMatchStartingNotificationAndroidChannelId?: string | null;
   teamMatchStartingNotificationAndroidChannelId?: string | null;
   playerArticleNotificationAndroidChannelId?: string | null;
@@ -6607,15 +9126,27 @@ export interface PageListItem {
    * Page id
    * @format int32
    */
-  pageId?: number;
-  /** Frontend name */
-  feName?: string | null;
-  /** Title */
-  title?: string | null;
-  /** Url */
-  url?: string | null;
-  /** Author */
-  author?: string | null;
+  pageId: number;
+  /**
+   * Frontend name
+   * @minLength 1
+   */
+  feName: string;
+  /**
+   * Title
+   * @minLength 1
+   */
+  title: string;
+  /**
+   * Url
+   * @minLength 1
+   */
+  url: string;
+  /**
+   * Author
+   * @minLength 1
+   */
+  author: string;
   /**
    * Edited At
    * @format int64
@@ -6625,7 +9156,7 @@ export interface PageListItem {
    * View count
    * @format int32
    */
-  viewCount?: number;
+  viewCount: number;
 }
 
 export interface PagingRespBase {
@@ -6644,19 +9175,28 @@ export interface ParentBroadcastTalentListItem {
    * Broadcast talent id
    * @format int32
    */
-  broadcastTalentId?: number;
-  /** Name (NickName) */
-  name?: string | null;
+  broadcastTalentId: number;
+  /**
+   * Name (NickName)
+   * @minLength 1
+   */
+  name: string;
   /** First name */
   firstName?: string | null;
   /** Last name */
   lastName?: string | null;
   /** Roles */
-  roles?: string[] | null;
-  /** Country */
-  country?: string | null;
-  /** Language */
-  language?: string | null;
+  roles: string[];
+  /**
+   * Country
+   * @minLength 1
+   */
+  country: string;
+  /**
+   * Language
+   * @minLength 1
+   */
+  language: string;
 }
 
 export interface ParentChildDetail {
@@ -6724,7 +9264,7 @@ export interface ParentFolder {
    * Folder Id
    * @format int32
    */
-  id?: number;
+  id: number;
   /**
    * ParentId
    * @format int32
@@ -6732,8 +9272,11 @@ export interface ParentFolder {
   parentId?: number | null;
   /** Folder name */
   name?: string | null;
-  /** Folder path */
-  path?: string | null;
+  /**
+   * Folder path
+   * @minLength 1
+   */
+  path: string;
 }
 
 export interface ParentStageDetail {
@@ -6762,16 +9305,22 @@ export interface ParentTournamentDetail {
    * @minLength 1
    */
   name: string;
-  /** Type name */
-  typeName?: string | null;
+  /**
+   * Type name
+   * @minLength 1
+   */
+  typeName: string;
   /**
    * Game name
    * @minLength 1
    */
   gameName: string;
-  status?: EnumTournamentStatus;
-  /** Status name */
-  statusName?: string | null;
+  status: EnumTournamentStatus;
+  /**
+   * Status name
+   * @minLength 1
+   */
+  statusName: string;
   /**
    * Starting at
    * @format int64
@@ -6839,7 +9388,7 @@ export interface ParentTournamentEditDetail {
    * Game id
    * @format int32
    */
-  gameId?: number;
+  gameId: number;
   /**
    * Type name
    * @minLength 1
@@ -6894,10 +9443,20 @@ export interface ParentTournamentListItem {
    */
   feName: string;
   /**
-   * Game icon url
+   * Game id
+   * @format int32
+   */
+  gameId: number;
+  /**
+   * Game name
    * @minLength 1
    */
-  gameIconUrl: string;
+  gameName: string;
+  /**
+   * Game url safe name
+   * @minLength 1
+   */
+  gameUrlSafeName: string;
   /**
    * Parent tournament name
    * @minLength 1
@@ -6918,7 +9477,7 @@ export interface ParentTournamentListItem {
    * @format int64
    */
   startingAt: number;
-  status?: EnumTournamentStatus;
+  status: EnumTournamentStatus;
   /**
    * Status name
    * @minLength 1
@@ -6935,24 +9494,24 @@ export interface PrizePlacement {
    * Id
    * @format int32
    */
-  placementId?: number;
+  placementId: number;
   /**
    * Placement from
    * @format int32
    */
-  placementFrom?: number;
+  placementFrom: number;
   /**
    * Placement to
    * @format int32
    */
-  placementTo?: number;
+  placementTo: number;
   /**
    * Prize amount
    * @format double
    */
-  prizeAmount?: number;
+  prizeAmount: number;
   /** Distributions */
-  distributions?: PrizePoolDistributionListItem[] | null;
+  distributions: PrizePoolDistributionListItem[];
 }
 
 export interface PrizePoolDistributionListItem {
@@ -6960,16 +9519,30 @@ export interface PrizePoolDistributionListItem {
    * Id (Distribution id)
    * @format int32
    */
-  id?: number;
+  id: number;
   /**
    * Team id
    * @format int32
    */
   teamId?: number | null;
-  /** Team name */
-  teamName?: string | null;
+  /**
+   * Team name
+   * @minLength 1
+   */
+  teamName: string;
   /** Player items */
-  playerItems?: Int32Item[] | null;
+  playerItems: Int32Item[];
+}
+
+export type RecalculatePointsResp = object;
+
+export interface RecalculatePointsRespApiRespBase {
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
+  data?: RecalculatePointsResp;
 }
 
 export interface RelatedQuickPoll {
@@ -6984,7 +9557,7 @@ export interface RelatedQuickPoll {
    */
   question: string;
   /** Quick poll options */
-  options?: Option[] | null;
+  options: Option[];
 }
 
 export interface RoleListItem {
@@ -6992,27 +9565,39 @@ export interface RoleListItem {
    * Role id
    * @format int32
    */
-  roleId?: number;
-  /** Role name */
-  name?: string | null;
+  roleId: number;
+  /**
+   * Role name
+   * @minLength 1
+   */
+  name: string;
   /**
    * Group id
    * @format int32
    */
-  groupId?: number;
-  /** Group Name */
-  groupName?: string | null;
-  /** Remark */
-  remark?: string | null;
+  groupId: number;
+  /**
+   * Group Name
+   * @minLength 1
+   */
+  groupName: string;
+  /**
+   * Remark
+   * @minLength 1
+   */
+  remark: string;
   /**
    * Updated At
    * @format int64
    */
   updatedAt?: number;
-  /** User name */
-  updatedUserName?: string | null;
+  /**
+   * User name
+   * @minLength 1
+   */
+  updatedUserName: string;
   /** Frontend names */
-  frontendNames?: string[] | null;
+  frontendNames: string[];
 }
 
 export interface RoleTemplate {
@@ -7020,13 +9605,16 @@ export interface RoleTemplate {
    * Role template id
    * @format int32
    */
-  templateId?: number;
-  /** Role template name */
-  name?: string | null;
+  templateId: number;
+  /**
+   * Role template name
+   * @minLength 1
+   */
+  name: string;
   /** Frontend permissions */
-  frontendPermissions?: Int16Item[] | null;
+  frontendPermissions: Int16Item[];
   /** Backoffice permissions */
-  backofficePermissions?: SimpleBackOfficePermissionItem[] | null;
+  backofficePermissions: SimpleBackOfficePermissionItem[];
 }
 
 export interface RoleUserListItem {
@@ -7034,25 +9622,30 @@ export interface RoleUserListItem {
    * User id
    * @format int32
    */
-  userId?: number;
-  /** User name */
-  userName?: string | null;
-}
-
-export interface RoundMappingPoints {
-  mappingPoints?: RoundMappingPointsItem[] | null;
+  userId: number;
+  /**
+   * User name
+   * @minLength 1
+   */
+  userName: string;
 }
 
 export interface RoundMappingPointsItem {
-  score1?: RoundPointsItem;
-  score2?: RoundPointsItem;
+  score1: RoundPointsItem;
+  score2: RoundPointsItem;
 }
 
 export interface RoundPointsItem {
-  /** @format int32 */
-  score?: number;
-  /** @format int32 */
-  points?: number;
+  /**
+   * Score
+   * @format int32
+   */
+  score: number;
+  /**
+   * Points
+   * @format int32
+   */
+  points: number;
 }
 
 export interface SimpleBackOfficePermissionItem {
@@ -7060,13 +9653,16 @@ export interface SimpleBackOfficePermissionItem {
    * Backoffice func id
    * @format int32
    */
-  funcId?: number;
-  /** Backoffice func name */
-  name?: string | null;
+  funcId: number;
+  /**
+   * Backoffice func name
+   * @minLength 1
+   */
+  name: string;
   /** Checked */
-  checked?: boolean;
+  checked: boolean;
   /** Sub */
-  subFuncs?: SimpleBackOfficePermissionItem[] | null;
+  subFuncs: SimpleBackOfficePermissionItem[];
 }
 
 export interface SiteSection {
@@ -7084,41 +9680,84 @@ export interface StagingEarningListItem {
    * Stage id
    * @format int32
    */
-  stageId?: number;
-  /** Stage name */
-  stageName?: string | null;
+  stageId: number;
+  /**
+   * Stage name
+   * @minLength 1
+   */
+  stageName: string;
   /**
    * Stage order
    * @format int32
    */
-  order?: number;
+  order: number;
   /** Child earnings */
-  childEarnings?: ChildEarningListItem[] | null;
+  childEarnings: ChildEarningListItem[];
 }
 
 export type StartTournamentResp = object;
 
 export interface StartTournamentRespApiRespBase {
-  ret?: EnumRet;
-  msg?: string | null;
-  traceId?: string | null;
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
   data?: StartTournamentResp;
 }
 
 export interface SystemLogDetail {
-  /** @format int64 */
-  id?: number;
-  traceId?: string | null;
-  prefix?: string | null;
-  serverName?: string | null;
-  level?: LogLevel;
-  logger?: string | null;
-  method?: string | null;
-  message?: string | null;
-  messagePayload?: string | null;
-  exception?: string | null;
-  /** @format int64 */
-  recordedAt?: number;
+  /**
+   * Id
+   * @format int64
+   */
+  id: number;
+  /**
+   * Trace id
+   * @minLength 1
+   */
+  traceId: string;
+  /**
+   * Prefix
+   * @minLength 1
+   */
+  prefix: string;
+  /**
+   * Server name
+   * @minLength 1
+   */
+  serverName: string;
+  level: LogLevel;
+  /**
+   * Logger
+   * @minLength 1
+   */
+  logger: string;
+  /**
+   * Method
+   * @minLength 1
+   */
+  method: string;
+  /**
+   * Message
+   * @minLength 1
+   */
+  message: string;
+  /**
+   * Message payload
+   * @minLength 1
+   */
+  messagePayload: string;
+  /**
+   * Exception
+   * @minLength 1
+   */
+  exception: string;
+  /**
+   * Recorded at
+   * @format int64
+   */
+  recordedAt: number;
 }
 
 export interface SystemLogListItem {
@@ -7126,50 +9765,74 @@ export interface SystemLogListItem {
    * Id
    * @format int64
    */
-  id?: number;
-  /** Trace Id */
-  traceId?: string | null;
-  /** Prefix */
-  prefix?: string | null;
-  /** Server Name */
-  serverName?: string | null;
-  level?: LogLevel;
-  /** Logger */
-  logger?: string | null;
-  /** Method */
-  method?: string | null;
-  /** Message */
-  message?: string | null;
+  id: number;
+  /**
+   * Trace Id
+   * @minLength 1
+   */
+  traceId: string;
+  /**
+   * Prefix
+   * @minLength 1
+   */
+  prefix: string;
+  /**
+   * Server Name
+   * @minLength 1
+   */
+  serverName: string;
+  level: LogLevel;
+  /**
+   * Logger
+   * @minLength 1
+   */
+  logger: string;
+  /**
+   * Method
+   * @minLength 1
+   */
+  method: string;
+  /**
+   * Message
+   * @minLength 1
+   */
+  message: string;
   /**
    * Record At
    * @format int64
    */
-  recordedAt?: number;
+  recordedAt: number;
 }
 
 export interface Translation {
-  name?: string | null;
-  status?: string | null;
-  locale?: TranslationLocale;
+  /** @minLength 1 */
+  name: string;
+  /** @minLength 1 */
+  status: string;
+  locale: TranslationLocale;
 }
 
 export interface TranslationLocale {
   /** @format int32 */
-  id?: number;
-  bcp47Identifier?: string | null;
-  displayName?: string | null;
+  id: number;
+  /** @minLength 1 */
+  bcp47Identifier: string;
+  /** @minLength 1 */
+  displayName: string;
 }
 
 export interface UInt16Item {
   /** @format int32 */
-  id?: number;
-  name?: string | null;
+  id: number;
+  /** @minLength 1 */
+  name: string;
 }
 
 export interface UInt32Item {
   /** @format int32 */
-  id?: number;
-  name?: string | null;
+  id: number;
+  /** @minLength 1 */
+  name: string;
 }
 
 export interface UnAssignGroupReq {
@@ -7186,13 +9849,15 @@ export interface UnAssignGroupReq {
 
 export interface UnAssignGroupResp {
   /** UnAssign user ids */
-  userIds?: number[] | null;
+  userIds: number[];
 }
 
 export interface UnAssignGroupRespApiRespBase {
-  ret?: EnumRet;
-  msg?: string | null;
-  traceId?: string | null;
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
   data?: UnAssignGroupResp;
 }
 
@@ -7210,18 +9875,25 @@ export interface UnAssignRoleReq {
 
 export interface UnAssignRoleResp {
   /** UnAssign user ids */
-  userIds?: number[] | null;
+  userIds: number[];
 }
 
 export interface UnAssignRoleRespApiRespBase {
-  ret?: EnumRet;
-  msg?: string | null;
-  traceId?: string | null;
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
   data?: UnAssignRoleResp;
 }
 
 export interface UserProfile {
-  userName?: string | null;
+  /**
+   * Username
+   * @minLength 1
+   */
+  userName: string;
+  /** Avatar image */
   avatarImage?: string | null;
 }
 
@@ -8325,7 +10997,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @secure
      */
     v4CurrencyCurrentExchangeRateList: (
-      query?: {
+      query: {
         /**
          * Currency
          * USD = 1,
@@ -8358,12 +11030,12 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
          * ZAR = 28,
          * JPY = 29,
          */
-        Currency?: EnumCurrency;
+        Currency: EnumCurrency;
         /**
          * Amount
          * @format double
          */
-        Amount?: number;
+        Amount: number;
       },
       params: RequestParams = {},
     ) =>
@@ -8664,7 +11336,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      *
      * @tags Files
      * @name V4FilesCrewFilesCreate
-     * @summary add crew file
+     * @summary Add crew file
      * @request POST:/api/v4/files/crew-files
      * @secure
      */
@@ -9142,7 +11814,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      *
      * @tags GameRaces
      * @name V4GameracesFuzzyList
-     * @summary Get fuzzy gameRaces
+     * @summary Get fuzzy game races
      * @request GET:/api/v4/gameraces/fuzzy
      * @secure
      */
@@ -9548,7 +12220,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       },
       query?: {
         /**
-         * GameId
+         * Game id
          * @format int32
          */
         id?: number;
@@ -10077,11 +12749,13 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       id: number,
       query: {
         /**
+         * Fuzzy prefix
          * @minLength 1
          * @maxLength 30
          */
         FuzzyPrefix: string;
         /**
+         * Max count
          * @format int32
          * @min 10
          * @max 100
@@ -10357,7 +13031,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @secure
      */
     v4LogsLogLevelsList: (params: RequestParams = {}) =>
-      this.request<void, any>({
+      this.request<any, GetLogLevelsRespApiRespBase>({
         path: `/api/v4/logs/log-levels`,
         method: "GET",
         secure: true,
@@ -12178,7 +14852,10 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      */
     v4OptionsTournamentOpponentsList: (
       query?: {
-        /** @format int32 */
+        /**
+         * Child tournament id
+         * @format int32
+         */
         childTournamentId?: number;
       },
       params: RequestParams = {},
@@ -14151,11 +16828,13 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     v4TournamentsFuzzyList: (
       query: {
         /**
+         * Fuzzy prefix
          * @minLength 0
          * @maxLength 80
          */
         FuzzyPrefix: string;
         /**
+         * Max count
          * @format int32
          * @min 10
          * @max 100
@@ -14362,7 +17041,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      *
      * @tags Tournaments
      * @name V4TournamentsParentsChildrenStartTournamentPartialUpdate
-     * @summary start child tournament
+     * @summary Start child tournament
      * @request PATCH:/api/v4/tournaments/parents/{parentid}/children/{childid}/start-tournament
      * @secure
      */
@@ -14373,6 +17052,27 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     ) =>
       this.request<any, StartTournamentRespApiRespBase>({
         path: `/api/v4/tournaments/parents/${parentid}/children/${childid}/start-tournament`,
+        method: "PATCH",
+        secure: true,
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Tournaments
+     * @name V4TournamentsParentsChildrenRecalculatePointsPartialUpdate
+     * @summary group type child tournament recalculate points
+     * @request PATCH:/api/v4/tournaments/parents/{parentid}/children/{childid}/recalculate-points
+     * @secure
+     */
+    v4TournamentsParentsChildrenRecalculatePointsPartialUpdate: (
+      parentid: number,
+      childid: number,
+      params: RequestParams = {},
+    ) =>
+      this.request<any, RecalculatePointsRespApiRespBase>({
+        path: `/api/v4/tournaments/parents/${parentid}/children/${childid}/recalculate-points`,
         method: "PATCH",
         secure: true,
         ...params,
@@ -14690,6 +17390,198 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Tournaments
+     * @name V4TournamentsRoundsMatchGamesDetail
+     * @summary Get child tournament match games
+     * @request GET:/api/v4/tournaments/rounds/{roundid}/match-games
+     * @secure
+     */
+    v4TournamentsRoundsMatchGamesDetail: (roundid: number, params: RequestParams = {}) =>
+      this.request<any, GetMatchGamesRespApiRespBase>({
+        path: `/api/v4/tournaments/rounds/${roundid}/match-games`,
+        method: "GET",
+        secure: true,
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Tournaments
+     * @name V4TournamentsRoundsMatchGamesDetail2
+     * @summary Get child tournament match game detail
+     * @request GET:/api/v4/tournaments/rounds/{roundid}/match-games/{matchgameid}
+     * @originalName v4TournamentsRoundsMatchGamesDetail
+     * @duplicate
+     * @secure
+     */
+    v4TournamentsRoundsMatchGamesDetail2: (roundid: number, matchgameid: number, params: RequestParams = {}) =>
+      this.request<any, GetMatchGameRespApiRespBase>({
+        path: `/api/v4/tournaments/rounds/${roundid}/match-games/${matchgameid}`,
+        method: "GET",
+        secure: true,
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Tournaments
+     * @name V4TournamentsRoundsMatchGamesPartialUpdate
+     * @summary Modify child tournament match game
+     * @request PATCH:/api/v4/tournaments/rounds/{roundid}/match-games/{matchgameid}
+     * @secure
+     */
+    v4TournamentsRoundsMatchGamesPartialUpdate: (
+      roundid: number,
+      matchgameid: number,
+      data: ModMatchGameReq,
+      params: RequestParams = {},
+    ) =>
+      this.request<any, ModMatchGameRespApiRespBase>({
+        path: `/api/v4/tournaments/rounds/${roundid}/match-games/${matchgameid}`,
+        method: "PATCH",
+        body: data,
+        secure: true,
+        type: ContentType.Json,
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Tournaments
+     * @name V4TournamentsRoundsMatchGamesDraftDetail
+     * @summary Get child tournament match game draft
+     * @request GET:/api/v4/tournaments/rounds/{roundid}/match-games/{matchgameid}/draft
+     * @secure
+     */
+    v4TournamentsRoundsMatchGamesDraftDetail: (roundid: number, matchgameid: number, params: RequestParams = {}) =>
+      this.request<any, GetGameDraftRespApiRespBase>({
+        path: `/api/v4/tournaments/rounds/${roundid}/match-games/${matchgameid}/draft`,
+        method: "GET",
+        secure: true,
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Tournaments
+     * @name V4TournamentsRoundsMatchGamesDraftPartialUpdate
+     * @summary Modify child tournament match game draft
+     * @request PATCH:/api/v4/tournaments/rounds/{roundid}/match-games/{matchgameid}/draft
+     * @secure
+     */
+    v4TournamentsRoundsMatchGamesDraftPartialUpdate: (
+      roundid: number,
+      matchgameid: number,
+      data: ModGameDraftReq,
+      params: RequestParams = {},
+    ) =>
+      this.request<any, ModGameDraftRespApiRespBase>({
+        path: `/api/v4/tournaments/rounds/${roundid}/match-games/${matchgameid}/draft`,
+        method: "PATCH",
+        body: data,
+        secure: true,
+        type: ContentType.Json,
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Tournaments
+     * @name V4TournamentsRoundsMatchGamesRoundSetsDetail
+     * @summary Get child tournament match game round sets
+     * @request GET:/api/v4/tournaments/rounds/{roundid}/match-games/{matchgameid}/round-sets
+     * @secure
+     */
+    v4TournamentsRoundsMatchGamesRoundSetsDetail: (roundid: number, matchgameid: number, params: RequestParams = {}) =>
+      this.request<any, GetRoundSetsRespApiRespBase>({
+        path: `/api/v4/tournaments/rounds/${roundid}/match-games/${matchgameid}/round-sets`,
+        method: "GET",
+        secure: true,
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Tournaments
+     * @name V4TournamentsRoundsMatchGamesRoundSetsPartialUpdate
+     * @summary Modify child tournament match game round sets
+     * @request PATCH:/api/v4/tournaments/rounds/{roundid}/match-games/{matchgameid}/round-sets
+     * @secure
+     */
+    v4TournamentsRoundsMatchGamesRoundSetsPartialUpdate: (
+      roundid: number,
+      matchgameid: number,
+      data: ModRoundSetsReq,
+      params: RequestParams = {},
+    ) =>
+      this.request<any, ModRoundSetsRespApiRespBase>({
+        path: `/api/v4/tournaments/rounds/${roundid}/match-games/${matchgameid}/round-sets`,
+        method: "PATCH",
+        body: data,
+        secure: true,
+        type: ContentType.Json,
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Tournaments
+     * @name V4TournamentsRoundsMatchGamesBrResultDetail
+     * @summary Get child tournament match game br result detail
+     * @request GET:/api/v4/tournaments/rounds/{roundid}/match-games/{matchgameid}/br-result
+     * @secure
+     */
+    v4TournamentsRoundsMatchGamesBrResultDetail: (
+      roundid: number,
+      matchgameid: number,
+      query?: {
+        /** @format int32 */
+        RegistrationId?: number;
+      },
+      params: RequestParams = {},
+    ) =>
+      this.request<any, GetBrResultDetailRespApiRespBase>({
+        path: `/api/v4/tournaments/rounds/${roundid}/match-games/${matchgameid}/br-result`,
+        method: "GET",
+        query: query,
+        secure: true,
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Tournaments
+     * @name V4TournamentsRoundsMatchGamesBrResultPartialUpdate
+     * @summary Modify child tournament match game br result
+     * @request PATCH:/api/v4/tournaments/rounds/{roundid}/match-games/{matchgameid}/br-result
+     * @secure
+     */
+    v4TournamentsRoundsMatchGamesBrResultPartialUpdate: (
+      roundid: number,
+      matchgameid: number,
+      data: ModBrResultReq,
+      params: RequestParams = {},
+    ) =>
+      this.request<any, ModBrResultRespApiRespBase>({
+        path: `/api/v4/tournaments/rounds/${roundid}/match-games/${matchgameid}/br-result`,
+        method: "PATCH",
+        body: data,
+        secure: true,
+        type: ContentType.Json,
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Tournaments
      * @name V4TournamentsRoundsMatchesDetail
      * @summary Get child tournament matches or archived matches
      * @request GET:/api/v4/tournaments/rounds/{roundid}/matches
@@ -14698,7 +17590,10 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     v4TournamentsRoundsMatchesDetail: (
       roundid: number,
       query?: {
-        /** @default false */
+        /**
+         * Is archived
+         * @default false
+         */
         isArchived?: boolean;
       },
       params: RequestParams = {},
@@ -14846,6 +17741,47 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Tournaments
+     * @name V4TournamentsRoundsMatchesPointsAdjustmentDetail
+     * @summary Get child tournament match points adjustment
+     * @request GET:/api/v4/tournaments/rounds/{roundid}/matches/{matchid}/points-adjustment
+     * @secure
+     */
+    v4TournamentsRoundsMatchesPointsAdjustmentDetail: (roundid: number, matchid: number, params: RequestParams = {}) =>
+      this.request<any, GetPointsAdjustmentRespListApiRespBase>({
+        path: `/api/v4/tournaments/rounds/${roundid}/matches/${matchid}/points-adjustment`,
+        method: "GET",
+        secure: true,
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Tournaments
+     * @name V4TournamentsRoundsMatchesPointsAdjustmentPartialUpdate
+     * @summary Modify child tournament match points adjustment
+     * @request PATCH:/api/v4/tournaments/rounds/{roundid}/matches/{matchid}/points-adjustment
+     * @secure
+     */
+    v4TournamentsRoundsMatchesPointsAdjustmentPartialUpdate: (
+      roundid: number,
+      matchid: number,
+      data: ModPointsAdjustmentReq,
+      params: RequestParams = {},
+    ) =>
+      this.request<any, ModPointsAdjustmentRespApiRespBase>({
+        path: `/api/v4/tournaments/rounds/${roundid}/matches/${matchid}/points-adjustment`,
+        method: "PATCH",
+        body: data,
+        secure: true,
+        type: ContentType.Json,
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Tournaments
      * @name V4TournamentsParentsChildrenOpponentsDetail
      * @summary Get child tournament opponents
      * @request GET:/api/v4/tournaments/parents/{parentid}/children/{childid}/opponents
@@ -14979,46 +17915,60 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
         /**
          * Venue id
          * @format int32
+         * @min 1
+         * @max 2147483647
          */
         VenueId?: number;
         /**
          * Parent tournament id
          * @format int32
+         * @min 1
+         * @max 2147483647
          */
         ParentId?: number;
         /**
          * Created from
          * @format int64
+         * @min 1
          */
         CreatedFrom?: number;
         /**
          * Created to
          * @format int64
+         * @min 1
          */
         CreatedTo?: number;
         /**
          * Starting from
          * @format int64
+         * @min 1
          */
         StartingFrom?: number;
         /**
          * Starting to
          * @format int64
+         * @min 1
          */
         StartingTo?: number;
         /**
          * Created user id
          * @format int32
+         * @min 1
+         * @max 2147483647
          */
         CreatedUserId?: number;
         /**
          * Map id
          * @format int32
+         * @min 1
+         * @max 32767
          */
         MapId?: number;
         /**
          * Sponsor id
          * @format int32
+         * @min 1
+         * @max 32767
          */
         SponsorId?: number;
         /**
@@ -15275,6 +18225,25 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Tournaments
+     * @name V4TournamentsParentsStatusPartialUpdate
+     * @summary Modify parent tournament status
+     * @request PATCH:/api/v4/tournaments/parents/{parentId}/status
+     * @secure
+     */
+    v4TournamentsParentsStatusPartialUpdate: (parentId: number, data: ModParentStatusReq, params: RequestParams = {}) =>
+      this.request<any, ModParentStatusRespApiRespBase>({
+        path: `/api/v4/tournaments/parents/${parentId}/status`,
+        method: "PATCH",
+        body: data,
+        secure: true,
+        type: ContentType.Json,
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Tournaments
      * @name V4TournamentsParentsChildrenTeamRegistrationsDetail
      * @summary Get child team registrations
      * @request GET:/api/v4/tournaments/parents/{parentId}/children/{childId}/team-registrations
@@ -15488,29 +18457,10 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/api/v4/tournaments/parents/{parentid}/children/{childid}/rounds
      * @secure
      */
-    v4TournamentsParentsChildrenRoundsDetail: (
-      parentid: number,
-      childid: number,
-      query?: {
-        /**
-         * @format int32
-         * @min 1
-         * @max 2147483647
-         */
-        PageNo?: number;
-        /**
-         * @format int32
-         * @min 1
-         * @max 100
-         */
-        PageSize?: number;
-      },
-      params: RequestParams = {},
-    ) =>
+    v4TournamentsParentsChildrenRoundsDetail: (parentid: number, childid: number, params: RequestParams = {}) =>
       this.request<any, GetRoundsRespApiRespBase>({
         path: `/api/v4/tournaments/parents/${parentid}/children/${childid}/rounds`,
         method: "GET",
-        query: query,
         secure: true,
         ...params,
       }),
@@ -16254,11 +19204,13 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     v4VenuesFuzzyList: (
       query: {
         /**
+         * Fuzzy prefix
          * @minLength 0
          * @maxLength 30
          */
         FuzzyPrefix: string;
         /**
+         * Max count
          * @format int32
          * @min 10
          * @max 100
