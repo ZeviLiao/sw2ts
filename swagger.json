@@ -19309,9 +19309,9 @@
           "prizePoolCurrency": {
             "$ref": "#/components/schemas/EnumCurrency"
           },
-          "prizePoolCurrencyName": {
+          "prizePoolCurrencyCode": {
             "type": "string",
-            "description": "Prize pool currency name",
+            "description": "Prize pool currency code",
             "nullable": true,
             "readOnly": true
           },
@@ -19722,6 +19722,29 @@
             "minLength": 1,
             "type": "string",
             "description": "Path"
+          }
+        },
+        "additionalProperties": false
+      },
+      "CurrencyItem": {
+        "required": [
+          "code",
+          "id",
+          "name"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "name": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "code": {
+            "minLength": 1,
+            "type": "string"
           }
         },
         "additionalProperties": false
@@ -21002,7 +21025,9 @@
           "feName",
           "frontendName",
           "gameIconUrl",
+          "gameId",
           "gameName",
+          "gameUrlSafeName",
           "name",
           "parentId",
           "prizePoolStatus",
@@ -21036,10 +21061,20 @@
             "type": "string",
             "description": "Frontend short name"
           },
+          "gameId": {
+            "type": "integer",
+            "description": "Game id",
+            "format": "int32"
+          },
           "gameName": {
             "minLength": 1,
             "type": "string",
             "description": "Game name"
+          },
+          "gameUrlSafeName": {
+            "minLength": 1,
+            "type": "string",
+            "description": "Game url safe name"
           },
           "gameIconUrl": {
             "minLength": 1,
@@ -21049,9 +21084,9 @@
           "prizePoolCurrency": {
             "$ref": "#/components/schemas/EnumCurrency"
           },
-          "prizePoolCurrencyName": {
+          "prizePoolCurrencyCode": {
             "type": "string",
-            "description": "Prize pool currency name",
+            "description": "Prize pool currency code",
             "nullable": true,
             "readOnly": true
           },
@@ -22912,9 +22947,9 @@
           "prizePoolCurrency": {
             "$ref": "#/components/schemas/EnumCurrency"
           },
-          "prizePoolCurrencyName": {
+          "prizePoolCurrencyCode": {
             "type": "string",
-            "description": "Prize pool currency name",
+            "description": "Prize pool currency code",
             "nullable": true,
             "readOnly": true
           },
@@ -23554,7 +23589,7 @@
           "currencies": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/Int16Item"
+              "$ref": "#/components/schemas/CurrencyItem"
             },
             "description": "Currencies"
           }
@@ -33800,6 +33835,7 @@
             "nullable": true
           },
           "startingAt": {
+            "minimum": 0,
             "type": "integer",
             "description": "Starting at",
             "format": "int64",

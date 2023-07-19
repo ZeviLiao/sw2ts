@@ -1348,8 +1348,8 @@ export interface ChildEarningListItem {
   childName: string;
   prizePoolStatus: EnumPrizePoolStatus;
   prizePoolCurrency?: EnumCurrency;
-  /** Prize pool currency name */
-  prizePoolCurrencyName?: string | null;
+  /** Prize pool currency code */
+  prizePoolCurrencyCode?: string | null;
   /**
    * Prize pool
    * @format double
@@ -1588,6 +1588,15 @@ export interface CrewFile {
    * @minLength 1
    */
   path: string;
+}
+
+export interface CurrencyItem {
+  /** @format int32 */
+  id: number;
+  /** @minLength 1 */
+  name: string;
+  /** @minLength 1 */
+  code: string;
 }
 
 export interface DelArticleResp {
@@ -2118,18 +2127,28 @@ export interface EarningListItem {
    */
   feName: string;
   /**
+   * Game id
+   * @format int32
+   */
+  gameId: number;
+  /**
    * Game name
    * @minLength 1
    */
   gameName: string;
+  /**
+   * Game url safe name
+   * @minLength 1
+   */
+  gameUrlSafeName: string;
   /**
    * Game icon url
    * @minLength 1
    */
   gameIconUrl: string;
   prizePoolCurrency?: EnumCurrency;
-  /** Prize pool currency name */
-  prizePoolCurrencyName?: string | null;
+  /** Prize pool currency code */
+  prizePoolCurrencyCode?: string | null;
   /**
    * Prize pool
    * @format double
@@ -3085,8 +3104,8 @@ export interface GetChildEarningPrizePoolResp {
    */
   teamSize: number;
   prizePoolCurrency?: EnumCurrency;
-  /** Prize pool currency name */
-  prizePoolCurrencyName?: string | null;
+  /** Prize pool currency code */
+  prizePoolCurrencyCode?: string | null;
   /**
    * Prize pool
    * @format double
@@ -3377,7 +3396,7 @@ export interface GetCrewFoldersRespApiRespBase {
 
 export interface GetCurrencyOptionsResp {
   /** Currencies */
-  currencies: Int16Item[];
+  currencies: CurrencyItem[];
 }
 
 export interface GetCurrencyOptionsRespApiRespBase {
@@ -8088,6 +8107,7 @@ export interface ModMatches {
   /**
    * Starting at
    * @format int64
+   * @min 0
    */
   startingAt?: number | null;
   /** Stream Id List */
