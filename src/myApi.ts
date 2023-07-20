@@ -14093,7 +14093,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
          */
         Creator?: string;
         /**
-         * @format int32
+         * @format int32  
          * @min 1
          * @max 2147483647
          */
