@@ -425,10 +425,10 @@ export interface AddMediaVodReq {
   /**
    * Start time
    * @format int32
-   * @min 1
+   * @min 0
    * @max 2147483647
    */
-  startTime: number;
+  startTime?: number | null;
   /**
    * Description
    * @minLength 1
@@ -495,6 +495,17 @@ export interface AddModeRespApiRespBase {
   /** @minLength 1 */
   traceId: string;
   data?: AddModeResp;
+}
+
+export type AddMultipleChildTournamentsResp = object;
+
+export interface AddMultipleChildTournamentsRespApiRespBase {
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
+  data?: AddMultipleChildTournamentsResp;
 }
 
 export interface AddNotificationTemplateReq {
@@ -781,22 +792,22 @@ export interface AddRoundReq {
    * @minLength 0
    * @maxLength 50
    */
-  name?: string | null;
-  type?: EnumRoundType;
+  name: string;
+  type: EnumRoundType;
   /**
    * Round Number
    * @format int32
    * @min 1
    * @max 32767
    */
-  number?: number;
+  number: number;
   /**
    * Games per match
    * @format int32
    * @min 1
    * @max 32767
    */
-  gamesPerMatch?: number;
+  gamesPerMatch: number;
   /** Is hidden */
   isHidden?: boolean;
   /** Mapping points for points awarded (ByResultFull = 3 or ByResult = 4) */
@@ -815,6 +826,22 @@ export interface AddRoundRespApiRespBase {
   /** @minLength 1 */
   traceId: string;
   data?: AddRoundResp;
+}
+
+export interface AddServerReq {
+  /**
+   * Server Name
+   * @minLength 0
+   * @maxLength 50
+   */
+  name: string;
+  /**
+   * Game Id
+   * @format int32
+   * @min 1
+   * @max 32767
+   */
+  gameId: number;
 }
 
 export type AddServerResp = object;
@@ -1170,6 +1197,8 @@ export interface ArticleDetail {
    * @format int64
    */
   proofreadAt?: number | null;
+  /** Meta data */
+  metadata?: SeoMetadata[] | null;
 }
 
 export interface ArticleListItem {
@@ -1408,20 +1437,37 @@ export interface ChildRegistrationPlayerListItemGetChildRegistrationsResp {
    * Parent id
    * @format int32
    */
-  parentId?: number;
+  parentId: number;
   /**
    * Child id
    * @format int32
    */
-  childId?: number;
-  /** Parent name */
-  parentName?: string | null;
-  /** Stage name */
-  stageName?: string | null;
-  /** Child name */
-  childName?: string | null;
-  /** @format int32 */
-  gameId?: number;
+  childId: number;
+  /**
+   * Parent name
+   * @minLength 1
+   */
+  parentName: string;
+  /**
+   * Stage name
+   * @minLength 1
+   */
+  stageName: string;
+  /**
+   * Child name
+   * @minLength 1
+   */
+  childName: string;
+  /**
+   * Game id
+   * @format int32
+   */
+  gameId: number;
+  /**
+   * Team size
+   * @format int32
+   */
+  teamSize: number;
   /** Registrations */
   registrations?: ChildRegistrationPlayerListItem[] | null;
 }
@@ -1453,6 +1499,8 @@ export interface ChildRegistrationTeamListItem {
   teamTag: string;
   /** Player names */
   playerNames: string[];
+  /** Players */
+  players: Int32Item[];
   /** Has opp */
   hasOpp: boolean;
   /** Is reserved */
@@ -1471,20 +1519,37 @@ export interface ChildRegistrationTeamListItemGetChildRegistrationsResp {
    * Parent id
    * @format int32
    */
-  parentId?: number;
+  parentId: number;
   /**
    * Child id
    * @format int32
    */
-  childId?: number;
-  /** Parent name */
-  parentName?: string | null;
-  /** Stage name */
-  stageName?: string | null;
-  /** Child name */
-  childName?: string | null;
-  /** @format int32 */
-  gameId?: number;
+  childId: number;
+  /**
+   * Parent name
+   * @minLength 1
+   */
+  parentName: string;
+  /**
+   * Stage name
+   * @minLength 1
+   */
+  stageName: string;
+  /**
+   * Child name
+   * @minLength 1
+   */
+  childName: string;
+  /**
+   * Game id
+   * @format int32
+   */
+  gameId: number;
+  /**
+   * Team size
+   * @format int32
+   */
+  teamSize: number;
   /** Registrations */
   registrations?: ChildRegistrationTeamListItem[] | null;
 }
@@ -2100,12 +2165,21 @@ export interface DeleteParentRespApiRespBase {
   data?: DeleteParentResp;
 }
 
+export interface DraftPlayerOption {
+  /** @format int32 */
+  registrationId: number;
+  /** player options */
+  playerOptions: Int32Item[];
+}
+
 export interface EarningListItem {
   /**
    * Parent tournament id
    * @format int32
    */
   parentId: number;
+  /** Is hidden */
+  isHidden: boolean;
   /**
    * Parent tournament name
    * @minLength 1
@@ -2185,6 +2259,15 @@ export enum EnumArticleType {
   News = 1,
   Feature = 2,
   Guide = 3,
+}
+
+/** @format int32 */
+export enum EnumBoMatchStatus {
+  NotCompleted = 0,
+  Completed = 1,
+  Canceled = 2,
+  Upcoming = 3,
+  Live = 4,
 }
 
 /** @format int32 */
@@ -2276,6 +2359,7 @@ export enum EnumMapSelection {
 
 /** @format int32 */
 export enum EnumParentTournamentState {
+  All = 0,
   Live = 1,
   Upcoming = 2,
   Completed = 3,
@@ -2361,6 +2445,11 @@ export enum EnumRet {
   PrizePoolNotMathStructure = 20036,
   PrizePoolDistributionNotMatchPlacement = 20037,
   PasswordIncorrect = 20038,
+  ExceededTeamSize = 20039,
+  NotCompleted = 20040,
+  UsernameExist = 20041,
+  NoCalculation = 20042,
+  NoJob = 20043,
   InvalidParamsErrorEnd = 29999,
   NotFoundErrorsStart = 30000,
   NotExist = 30001,
@@ -2588,9 +2677,17 @@ export interface GameRegionListItem {
 }
 
 export interface GameResultBattleRoyalePlayer {
-  /** @format int32 */
-  playerId?: number;
-  /** @format int32 */
+  /**
+   * @format int32
+   * @min 1
+   * @max 2147483647
+   */
+  playerId: number;
+  /**
+   * @format int32
+   * @min 0
+   * @max 2147483647
+   */
   kills?: number | null;
 }
 
@@ -2615,7 +2712,7 @@ export interface GameResultDraft {
    * Player Id
    * @format int32
    */
-  playerId: number;
+  playerId?: number | null;
 }
 
 export interface GameResultRoundSet {
@@ -2770,6 +2867,44 @@ export interface GetBrResultPlayer {
   kills?: number | null;
 }
 
+export interface GetBracketMatch {
+  /** @format int32 */
+  matchId: number;
+  /** @format int32 */
+  matchNumber: number;
+  /** @format int32 */
+  winnerRegistrationId?: number | null;
+  /** @format int32 */
+  nextMatchId?: number | null;
+  /** @format int32 */
+  nextMatchPlacement?: number | null;
+  /** @format int32 */
+  team1RegistrationId?: number | null;
+  team1Name?: string | null;
+  /** @format int32 */
+  team1Score?: number | null;
+  team1IsSeed: boolean;
+  team1IsQualification: boolean;
+  /** @format int32 */
+  team2RegistrationId?: number | null;
+  team2Name?: string | null;
+  /** @format int32 */
+  team2Score?: number | null;
+  team2IsSeed: boolean;
+  team2IsQualification: boolean;
+}
+
+export interface GetBracketRound {
+  /** @format int32 */
+  roundId: number;
+  roundType: EnumRoundType;
+  /** @format int32 */
+  roundNumber: number;
+  /** @minLength 1 */
+  roundName: string;
+  matches: GetBracketMatch[];
+}
+
 export interface GetBroadcastTalentResp {
   /**
    * Broadcast talent id
@@ -2897,6 +3032,35 @@ export interface GetBroadcastTalentsRespApiRespBase {
   data?: GetBroadcastTalentsResp;
 }
 
+export interface GetChildBracketResp {
+  /**
+   * Parent tournament id
+   * @minLength 1
+   */
+  parentTournamentName: string;
+  /**
+   * Stage name
+   * @minLength 1
+   */
+  stageName: string;
+  /**
+   * Child tournament name
+   * @minLength 1
+   */
+  childTournamentName: string;
+  /** Child tournament rounds */
+  rounds: GetBracketRound[];
+}
+
+export interface GetChildBracketRespApiRespBase {
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
+  data?: GetChildBracketResp;
+}
+
 export interface GetChildDetailResp {
   /**
    * Child tournament id
@@ -3019,6 +3183,11 @@ export interface GetChildDetailResp {
    * @minLength 1
    */
   parentUrlSafeName: string;
+  /**
+   * Stage name
+   * @minLength 1
+   */
+  stageName: string;
   parentType: EnumParentTournamentType;
   parentStatus: EnumTournamentStatus;
   /**
@@ -3219,6 +3388,11 @@ export interface GetChildTeamRegistrationResp {
   teamName: string;
   /** Is reserved */
   isReserved: boolean;
+  /**
+   * Team size
+   * @format int32
+   */
+  teamSize: number;
   /** Players */
   players: Int32CheckItem[];
 }
@@ -3243,6 +3417,21 @@ export interface GetChildTournamentResp {
    * @format int32
    */
   parentTournamentId: number;
+  /**
+   * Parent tournament name
+   * @minLength 1
+   */
+  parentName: string;
+  /**
+   * Stage name
+   * @minLength 1
+   */
+  stageName: string;
+  /**
+   * Child tournament name
+   * @minLength 1
+   */
+  childName: string;
   type: EnumChildTournament;
   /**
    * Stage id
@@ -3394,6 +3583,46 @@ export interface GetCrewFoldersRespApiRespBase {
   data?: GetCrewFoldersResp;
 }
 
+export interface GetCrewPerformanceResp {
+  /** @format int32 */
+  articlesCreated?: number;
+  /** @format int32 */
+  articlesPublished?: number;
+  /** @format int32 */
+  newsCreated?: number;
+  /** @format int32 */
+  featuresCreated?: number;
+  /** @format int32 */
+  articlesProofread?: number;
+  /** @format int32 */
+  matchGamesResulted?: number;
+  /** @format int32 */
+  matchGamesResultUpdated?: number;
+  /** @format int32 */
+  matchGamesDrafted?: number;
+  /** @format int32 */
+  matchGamesWithMaps?: number;
+  /** @format int32 */
+  matchGamesWithRoundSets?: number;
+  /** @format int32 */
+  tournamentsCreated?: number;
+  /** @format int32 */
+  childTournamentsCreated?: number;
+  /** @format int32 */
+  voDsCreated?: number;
+  /** @format int32 */
+  streamsCreated?: number;
+}
+
+export interface GetCrewPerformanceRespApiRespBase {
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
+  data?: GetCrewPerformanceResp;
+}
+
 export interface GetCurrencyOptionsResp {
   /** Currencies */
   currencies: CurrencyItem[];
@@ -3434,6 +3663,30 @@ export interface GetEarningsRespApiRespBase {
   /** @minLength 1 */
   traceId: string;
   data?: GetEarningsResp;
+}
+
+export interface GetEarningsStsResp {
+  /** @minLength 1 */
+  gameSection: string;
+  /** @format int32 */
+  tournaments: number;
+  /** @format double */
+  totalAmountUSD: number;
+  /** @format int32 */
+  prizePoolsLogged: number;
+  /** @format int32 */
+  estimatedQualifiers: number;
+  /** @format int32 */
+  estimatedPlayoffs: number;
+}
+
+export interface GetEarningsStsRespListApiRespBase {
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
+  data?: GetEarningsStsResp[] | null;
 }
 
 export interface GetFrontendLocaleOptionsResp {
@@ -3876,10 +4129,8 @@ export interface GetGameDraftResp {
   teamOptions: Int32Item[];
   /** Hero options */
   heroOptions: Int32Item[];
-  /** Team1 player options */
-  team1PlayerOptions: Int32Item[];
-  /** Team2 player options */
-  team2PlayerOptions: Int32Item[];
+  team1PlayerOptions: DraftPlayerOption;
+  team2PlayerOptions: DraftPlayerOption;
   /** Draft items */
   draftItems: GameResultDraft[];
 }
@@ -4071,6 +4322,21 @@ export interface GetGamesRespApiRespBase {
   data?: GetGamesResp;
 }
 
+export interface GetGamesResultedResp {
+  /** Match games resulted */
+  matchGames: MatchGameResult[];
+  paging: PagingRespBase;
+}
+
+export interface GetGamesResultedRespApiRespBase {
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
+  data?: GetGamesResultedResp;
+}
+
 export interface GetGenderOptionsResp {
   /** Gender */
   genders: GenderOption[];
@@ -4201,6 +4467,8 @@ export interface GetGroupResp {
   remark: string;
   /** Frontend permissions */
   frontendPermissions: Int16Item[];
+  /** Frontend permission options */
+  frontendPermissionOptions: Int16Item[];
   /** Backoffice permissions */
   backofficePermissions: SimpleBackOfficePermissionItem[];
 }
@@ -4573,6 +4841,21 @@ export interface GetMatchGameResp {
    * @format int32
    */
   matchGameId: number;
+  /**
+   * Round Name
+   * @minLength 1
+   */
+  roundName: string;
+  /**
+   * Match Name
+   * @minLength 1
+   */
+  matchName: string;
+  /**
+   * Match game number
+   * @format int32
+   */
+  gameNumber: number;
   tournamentType: EnumChildTournament;
   /**
    * Game id
@@ -4592,11 +4875,18 @@ export interface GetMatchGameResp {
    * @format int32
    */
   mapId?: number | null;
+  /** Map name */
+  mapName?: string | null;
   /** Vods */
   vods: Int32Item[];
   team1?: GetGameOpponent;
   team2?: GetGameOpponent;
   brResults?: GetMatchGameBrResults;
+  /**
+   * Parent tournament team size
+   * @format int32
+   */
+  teamSize?: number;
 }
 
 export interface GetMatchGameRespApiRespBase {
@@ -4647,6 +4937,23 @@ export interface GetMatchesOpponent {
    */
   placement?: number | null;
   name?: string | null;
+  isSeed?: boolean;
+  isQualification?: boolean;
+}
+
+export interface GetMatchesReportsResp {
+  /** Heroes */
+  matches: MatchesReport[];
+  paging: PagingRespBase;
+}
+
+export interface GetMatchesReportsRespApiRespBase {
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
+  data?: GetMatchesReportsResp;
 }
 
 export interface GetMatchesResp {
@@ -4664,7 +4971,12 @@ export interface GetMatchesResp {
   /** @format int32 */
   gridId?: number | null;
   /** @format int32 */
+  nextMatchId?: number | null;
+  /** @format int32 */
+  nextMatchPlacement?: number | null;
+  /** @format int32 */
   tournamentGridId?: number | null;
+  status?: EnumBoMatchStatus;
 }
 
 export interface GetMatchesRespListApiRespBase {
@@ -5256,6 +5568,8 @@ export interface GetParentStageChild {
   groupEmbedUrl: string;
   /** Has started */
   hasStarted: boolean;
+  /** Is hidden */
+  isHidden: boolean;
 }
 
 export interface GetParentStagesForEditResp {
@@ -5522,6 +5836,12 @@ export interface GetPlayersDetail {
    * @minLength 1
    */
   urlSafeName: string;
+  gender: EnumGender;
+  /**
+   * Gender name
+   * @minLength 1
+   */
+  genderName: string;
   /** Country name */
   countryName?: string | null;
   /** Country code */
@@ -5616,6 +5936,26 @@ export interface GetPointsAwardedOptionsRespListApiRespBase {
   data?: GetPointsAwardedOptionsResp[] | null;
 }
 
+export interface GetPreviousLineupsResp {
+  /** Team1 current players on the team */
+  team1Lineup?: Int32Item[] | null;
+  /** Team1 stand ins players */
+  team1StandIns?: Int32Item[] | null;
+  /** Team2 current players on the team */
+  team2Lineup?: Int32Item[] | null;
+  /** Team2 stand ins players */
+  team2StandIns?: Int32Item[] | null;
+}
+
+export interface GetPreviousLineupsRespApiRespBase {
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
+  data?: GetPreviousLineupsResp;
+}
+
 export interface GetPrizePoolStatusOptionsResp {
   /** Prize pool status */
   prizePoolStatus: Int16Item[];
@@ -5639,6 +5979,8 @@ export interface GetReplaceOpponentsResp {
   /** @format int32 */
   replaceByRegistrationId: number;
   replaceOpponentName?: string | null;
+  /** @format int64 */
+  replacedDateTime: number;
 }
 
 export interface GetReplaceOpponentsRespListApiRespBase {
@@ -5764,6 +6106,11 @@ export interface GetRoundResp {
    * @minLength 1
    */
   roundName: string;
+  /**
+   * Game Id
+   * @format int32
+   */
+  gameId: number;
   type: EnumRoundType;
   /** Is hidden */
   isHidden: boolean;
@@ -5936,6 +6283,9 @@ export interface GetServerResp {
    * @format int32
    */
   gameId: number;
+  /** @minLength 1 */
+  gameName: string;
+  gameIsLegacy: boolean;
 }
 
 export interface GetServerRespApiRespBase {
@@ -6107,24 +6457,6 @@ export interface GetSiteSectionResp {
   name: string;
   /** Hidden */
   hidden: boolean;
-  /**
-   * Url safe name
-   * @minLength 1
-   */
-  urlSafeName: string;
-  /**
-   * Position
-   * @format int32
-   */
-  position: number;
-  /** Header image url */
-  headerImageUrl?: string | null;
-  /** Back ground image url */
-  backGroundImageUrl?: string | null;
-  /** Icon image url */
-  iconImageUrl?: string | null;
-  /** Logo image url */
-  logoImageUrl?: string | null;
 }
 
 export interface GetSiteSectionRespApiRespBase {
@@ -6734,6 +7066,21 @@ export interface GetTeamsRespApiRespBase {
   data?: GetTeamsResp;
 }
 
+export interface GetTournamentViewershipResp {
+  /** Tournaments */
+  tournaments: TournamentViewership[];
+  paging: PagingRespBase;
+}
+
+export interface GetTournamentViewershipRespApiRespBase {
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
+  data?: GetTournamentViewershipResp;
+}
+
 export interface GetUserForPlayerResp {
   /**
    * User id
@@ -7043,6 +7390,42 @@ export interface GetVenuesRespApiRespBase {
   data?: GetVenuesResp;
 }
 
+export interface GetViewershipResp {
+  articles: Viewership[];
+  paging: PagingRespBase;
+}
+
+export interface GetViewershipRespApiRespBase {
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
+  data?: GetViewershipResp;
+}
+
+export interface GetViewershipSummaryResp {
+  /** @format int32 */
+  articles: number;
+  /** @format int32 */
+  views: number;
+  /** @format int32 */
+  timeSpent: number;
+  /** @format double */
+  avgTimeSpent: number;
+  /** @format int32 */
+  quickPolls: number;
+}
+
+export interface GetViewershipSummaryRespApiRespBase {
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
+  data?: GetViewershipSummaryResp;
+}
+
 export interface GroupListItem {
   /**
    * Group id
@@ -7175,15 +7558,6 @@ export interface Int32OrderItem {
   name: string;
 }
 
-export interface Int32StringDictionaryApiRespBase {
-  ret: EnumRet;
-  /** @minLength 1 */
-  msg: string;
-  /** @minLength 1 */
-  traceId: string;
-  data?: Record<string, string | null>;
-}
-
 export interface LanguageOption {
   /**
    * Language id
@@ -7221,9 +7595,38 @@ export interface LogoutRespApiRespBase {
 
 export interface MatchGameItem {
   /** @format int32 */
-  matchGameId?: number;
+  matchGameId: number;
   /** @format int32 */
-  number?: number;
+  number: number;
+  enabled: boolean;
+}
+
+export interface MatchGameResult {
+  /** @format int32 */
+  gameId?: number;
+  /** @format int32 */
+  matchId?: number;
+  /** @format int32 */
+  roundId?: number;
+  /** @format int32 */
+  parentId?: number;
+  /** @format int32 */
+  childId?: number;
+  opponent1?: string | null;
+  opponent2?: string | null;
+  result?: string | null;
+  score?: string | null;
+  resultedBy?: string | null;
+  /** @format date-time */
+  resultAt?: string | null;
+  map?: string | null;
+  mapSetBy?: string | null;
+  draftBy?: string | null;
+  roundSetBy?: string | null;
+  resultedByUrl?: string | null;
+  mapSetByUrl?: string | null;
+  draftByUrl?: string | null;
+  roundSetByUrl?: string | null;
 }
 
 export interface MatchGames {
@@ -7240,12 +7643,47 @@ export interface MatchGames {
    */
   startingAt: number;
   /**
+   * Games per match
+   * @format int32
+   */
+  gamesPerMatch: number;
+  /**
    * Hyper link
    * @minLength 1
    */
   hyperlink: string;
   /** Games */
   games: MatchGameItem[];
+  status?: EnumBoMatchStatus;
+}
+
+export interface MatchesReport {
+  /** @format int32 */
+  rowId: number;
+  /** @minLength 1 */
+  match: string;
+  /** @format date-time */
+  matchStartingTime: string;
+  /** @format date-time */
+  matchResultedTime: string;
+  /** @minLength 1 */
+  game: string;
+  /** @minLength 1 */
+  tournament: string;
+  /** @format double */
+  ri: number;
+  /** @format int32 */
+  vods: number;
+  /** @minLength 1 */
+  hosts: string;
+  /** @format date-time */
+  lastVOD?: string | null;
+  /** @minLength 1 */
+  user: string;
+  delay?: string | null;
+  matchUrl?: string | null;
+  tournamentUrl?: string | null;
+  userUrl?: string | null;
 }
 
 export interface MediaTag {
@@ -7355,19 +7793,54 @@ export interface ModArticleRespApiRespBase {
 }
 
 export interface ModBrResultReq {
-  /** @format int32 */
-  matchGameId?: number;
-  /** @format int32 */
-  registrationId?: number;
-  /** @format int32 */
+  /**
+   * @format int32
+   * @min 1
+   * @max 2147483647
+   */
+  matchGameId: number;
+  /**
+   * Br points per kill
+   * @format int32
+   * @min 0
+   * @max 32767
+   */
+  pointsPerKill: number;
+  /**
+   * @format int32
+   * @min 1
+   * @max 2147483647
+   */
+  registrationId: number;
+  /**
+   * @format int32
+   * @min 1
+   * @max 32767
+   */
   placement?: number | null;
-  /** @format int32 */
+  /**
+   * @format int32
+   * @min 0
+   * @max 2147483647
+   */
   placementPoints?: number | null;
-  /** @format int32 */
+  /**
+   * @format int32
+   * @min 0
+   * @max 2147483647
+   */
   kills?: number | null;
-  /** @format int32 */
+  /**
+   * @format int32
+   * @min 0
+   * @max 2147483647
+   */
   pointsAddition?: number | null;
-  /** @format int32 */
+  /**
+   * @format int32
+   * @min 0
+   * @max 2147483647
+   */
   pointsDeduction?: number | null;
   players?: GameResultBattleRoyalePlayer[] | null;
 }
@@ -7548,6 +8021,16 @@ export interface ModChildRespApiRespBase {
   /** @minLength 1 */
   traceId: string;
   data?: ModChildResp;
+}
+
+export interface ModChildStageReq {
+  /**
+   * Stage id
+   * @format int32
+   * @min 1
+   * @max 2147483647
+   */
+  stageId: number;
 }
 
 export interface ModChildTeamRegistrationReq {
@@ -8005,14 +8488,14 @@ export interface ModMatchGameReq {
    * Team1 score
    * @format int32
    * @min 0
-   * @max 2147483647
+   * @max 32767
    */
   team1Score?: number | null;
   /**
    * Team2 score
    * @format int32
    * @min 0
-   * @max 2147483647
+   * @max 32767
    */
   team2Score?: number | null;
   /**
@@ -8026,14 +8509,14 @@ export interface ModMatchGameReq {
    * Team1 games side id
    * @format int32
    * @min 1
-   * @max 2147483647
+   * @max 32767
    */
   team1GameSideId?: number | null;
   /**
    * Team2 games side id
    * @format int32
    * @min 1
-   * @max 2147483647
+   * @max 32767
    */
   team2GameSideId?: number | null;
   /** Media items */
@@ -8046,13 +8529,6 @@ export interface ModMatchGameReq {
   team1StandIns?: number[] | null;
   /** Team2 StandIns(playerId) */
   team2StandIns?: number[] | null;
-  /**
-   * Br points per kill
-   * @format int32
-   * @min 0
-   * @max 32767
-   */
-  pointsPerKill?: number | null;
 }
 
 export type ModMatchGameResp = object;
@@ -8194,10 +8670,10 @@ export interface ModMediaVodReq {
   /**
    * Start time
    * @format int32
-   * @min 1
+   * @min 0
    * @max 2147483647
    */
-  startTime: number;
+  startTime?: number | null;
   /**
    * Description
    * @minLength 1
@@ -8705,6 +9181,12 @@ export interface ModReplaceOpponents {
    * @max 2147483647
    */
   replaceByRegistrationId?: number;
+  /**
+   * Replaced date time
+   * @format int64
+   * @min 1
+   */
+  replacedDateTime?: number;
 }
 
 export interface ModReplaceOpponentsReq {
@@ -8768,26 +9250,27 @@ export interface ModRoleRespApiRespBase {
 }
 
 export interface ModRoundReq {
+  roundType?: EnumRoundType;
   /**
    * Round Name
    * @minLength 0
    * @maxLength 50
    */
-  name?: string | null;
+  name: string;
   /**
    * Round Number
    * @format int32
    * @min 1
    * @max 32767
    */
-  number?: number;
+  number: number;
   /**
    * Games per match
    * @format int32
    * @min 1
    * @max 32767
    */
-  gamesPerMatch?: number;
+  gamesPerMatch: number;
   /** Is hidden */
   isHidden?: boolean;
   /** Mapping points for points awarded (ByResultFull = 3 or ByResult = 4) */
@@ -8809,8 +9292,12 @@ export interface ModRoundRespApiRespBase {
 }
 
 export interface ModRoundSetsReq {
-  /** @format int32 */
-  matchGameId?: number;
+  /**
+   * @format int32
+   * @min 1
+   * @max 2147483647
+   */
+  matchGameId: number;
   items?: GameResultRoundSet[] | null;
 }
 
@@ -8823,6 +9310,31 @@ export interface ModRoundSetsRespApiRespBase {
   /** @minLength 1 */
   traceId: string;
   data?: ModRoundSetsResp;
+}
+
+export interface ModServerReq {
+  /**
+   * Server Id
+   * @format int32
+   * @min 1
+   * @max 2147483647
+   */
+  id: number;
+  /**
+   * Server Name
+   * @minLength 0
+   * @maxLength 50
+   */
+  name: string;
+  /** Is Frozen */
+  isFrozen: boolean;
+  /**
+   * Game Id
+   * @format int32
+   * @min 1
+   * @max 32767
+   */
+  gameId: number;
 }
 
 export type ModServerResp = object;
@@ -9507,6 +10019,8 @@ export interface ParentTournamentListItem {
   hasSponsor: boolean;
   /** Has venue */
   hasVenue: boolean;
+  /** Is hidden */
+  isHidden: boolean;
 }
 
 export interface PrizePlacement {
@@ -9578,6 +10092,17 @@ export interface RelatedQuickPoll {
   question: string;
   /** Quick poll options */
   options: Option[];
+}
+
+export type RestartTournamentResp = object;
+
+export interface RestartTournamentRespApiRespBase {
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
+  data?: RestartTournamentResp;
 }
 
 export interface RoleListItem {
@@ -9666,6 +10191,29 @@ export interface RoundPointsItem {
    * @format int32
    */
   points: number;
+}
+
+export interface SeoMetaDataOption {
+  /** @format int32 */
+  id?: number;
+  name?: string | null;
+  /** @format int32 */
+  lengthLimit?: number;
+}
+
+export interface SeoMetaDataOptionListApiRespBase {
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
+  data?: SeoMetaDataOption[] | null;
+}
+
+export interface SeoMetadata {
+  /** @format int32 */
+  id?: number;
+  content?: string | null;
 }
 
 export interface SimpleBackOfficePermissionItem {
@@ -9824,6 +10372,34 @@ export interface SystemLogListItem {
   recordedAt: number;
 }
 
+export interface TournamentViewership {
+  /** @format int32 */
+  rowId?: number;
+  tournament?: string | null;
+  game?: string | null;
+  creator?: string | null;
+  /** @format int64 */
+  created?: number;
+  /** @format int32 */
+  articles?: number;
+  /** @format int32 */
+  articlesViews?: number;
+  /** @format int32 */
+  tournamentViews?: number;
+  /** @format int32 */
+  matches?: number;
+  /** @format int32 */
+  matchViews?: number;
+  /** @format int32 */
+  vods?: number;
+  /** @format int32 */
+  vodViews?: number;
+  /** @format int32 */
+  totalViews?: number;
+  tournamentUrl?: string | null;
+  userUrl?: string | null;
+}
+
 export interface Translation {
   /** @minLength 1 */
   name: string;
@@ -9907,6 +10483,28 @@ export interface UnAssignRoleRespApiRespBase {
   data?: UnAssignRoleResp;
 }
 
+export type UpdateRoundsResp = object;
+
+export interface UpdateRoundsRespApiRespBase {
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
+  data?: UpdateRoundsResp;
+}
+
+export type UpdateStreamResp = object;
+
+export interface UpdateStreamRespApiRespBase {
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
+  data?: UpdateStreamResp;
+}
+
 export interface UserProfile {
   /**
    * Username
@@ -9915,6 +10513,31 @@ export interface UserProfile {
   userName: string;
   /** Avatar image */
   avatarImage?: string | null;
+}
+
+export interface Viewership {
+  /** @format int32 */
+  rowId: number;
+  /** @minLength 1 */
+  title: string;
+  sections: string[];
+  /** @minLength 1 */
+  author: string;
+  /** @minLength 1 */
+  proofreader: string;
+  /** @format int64 */
+  created: number;
+  /** @format int32 */
+  views: number;
+  /** @format int32 */
+  timeSpent: number;
+  qp: boolean;
+  /** @minLength 1 */
+  articleUrl: string;
+  /** @minLength 1 */
+  authorUrl: string;
+  /** @minLength 1 */
+  proofreaderUrl: string;
 }
 
 export type QueryParamsType = Record<string | number, any>;
@@ -10128,8 +10751,8 @@ export class HttpClient<SecurityDataType = unknown> {
 }
 
 /**
- * @title BackofficeApi v4
- * @version v4
+ * @title BackofficeApi v5
+ * @version v5
  */
 export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDataType> {
   api = {
@@ -10137,14 +10760,14 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Articles
-     * @name V4ArticlesTypesList
+     * @name V5ArticlesTypesList
      * @summary Get all article types and subtypes
-     * @request GET:/api/v4/articles/types
+     * @request GET:/api/v5/articles/types
      * @secure
      */
-    v4ArticlesTypesList: (params: RequestParams = {}) =>
+    v5ArticlesTypesList: (params: RequestParams = {}) =>
       this.request<any, GetArticleTypesRespApiRespBase>({
-        path: `/api/v4/articles/types`,
+        path: `/api/v5/articles/types`,
         method: "GET",
         secure: true,
         ...params,
@@ -10154,12 +10777,12 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Articles
-     * @name V4ArticlesList
+     * @name V5ArticlesList
      * @summary Get articles by condition
-     * @request GET:/api/v4/articles
+     * @request GET:/api/v5/articles
      * @secure
      */
-    v4ArticlesList: (
+    v5ArticlesList: (
       query?: {
         /**
          * Article Id for troubleshooting
@@ -10217,6 +10840,40 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
          */
         State?: EnumArticleState;
         /**
+         * publish user name
+         * @minLength 0
+         * @maxLength 20
+         */
+        Publisher?: string;
+        /**
+         * proofread user name
+         * @minLength 0
+         * @maxLength 20
+         */
+        Proofreader?: string;
+        /** Article type */
+        ArticleType?: EnumArticleType;
+        /**
+         * publish From
+         * @format int64
+         */
+        PublishFrom?: number;
+        /**
+         * publish To
+         * @format int64
+         */
+        PublishTo?: number;
+        /**
+         * proofread From
+         * @format int64
+         */
+        ProofreadFrom?: number;
+        /**
+         * proofread To
+         * @format int64
+         */
+        ProofreadTo?: number;
+        /**
          * @format int32
          * @min 1
          * @max 2147483647
@@ -10232,7 +10889,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       params: RequestParams = {},
     ) =>
       this.request<any, GetArticlesRespApiRespBase>({
-        path: `/api/v4/articles`,
+        path: `/api/v5/articles`,
         method: "GET",
         query: query,
         secure: true,
@@ -10243,12 +10900,12 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Articles
-     * @name V4ArticlesCreate
+     * @name V5ArticlesCreate
      * @summary Add new article
-     * @request POST:/api/v4/articles
+     * @request POST:/api/v5/articles
      * @secure
      */
-    v4ArticlesCreate: (
+    v5ArticlesCreate: (
       data: {
         /**
          * Article SubtypeId
@@ -10335,11 +10992,13 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
         "QuickPoll.Question"?: string;
         /** Options */
         "QuickPoll.Options"?: string[];
+        /** Metadata */
+        Metadata?: string;
       },
       params: RequestParams = {},
     ) =>
       this.request<any, AddArticleRespApiRespBase>({
-        path: `/api/v4/articles`,
+        path: `/api/v5/articles`,
         method: "POST",
         body: data,
         secure: true,
@@ -10351,14 +11010,14 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Articles
-     * @name V4ArticlesDetail
+     * @name V5ArticlesDetail
      * @summary Get article
-     * @request GET:/api/v4/articles/{id}
+     * @request GET:/api/v5/articles/{id}
      * @secure
      */
-    v4ArticlesDetail: (id: number, params: RequestParams = {}) =>
+    v5ArticlesDetail: (id: number, params: RequestParams = {}) =>
       this.request<any, GetArticleRespApiRespBase>({
-        path: `/api/v4/articles/${id}`,
+        path: `/api/v5/articles/${id}`,
         method: "GET",
         secure: true,
         ...params,
@@ -10368,12 +11027,12 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Articles
-     * @name V4ArticlesPartialUpdate
+     * @name V5ArticlesPartialUpdate
      * @summary Modify article
-     * @request PATCH:/api/v4/articles/{id}
+     * @request PATCH:/api/v5/articles/{id}
      * @secure
      */
-    v4ArticlesPartialUpdate: (
+    v5ArticlesPartialUpdate: (
       id: number,
       data: {
         /**
@@ -10487,11 +11146,13 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
         "QuickPoll.Question"?: string;
         /** Options */
         "QuickPoll.Options"?: string[];
+        /** Metadata */
+        Metadata?: string;
       },
       params: RequestParams = {},
     ) =>
       this.request<any, ModArticleRespApiRespBase>({
-        path: `/api/v4/articles/${id}`,
+        path: `/api/v5/articles/${id}`,
         method: "PATCH",
         body: data,
         secure: true,
@@ -10503,14 +11164,14 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Articles
-     * @name V4ArticlesDelete
+     * @name V5ArticlesDelete
      * @summary Delete article
-     * @request DELETE:/api/v4/articles/{id}
+     * @request DELETE:/api/v5/articles/{id}
      * @secure
      */
-    v4ArticlesDelete: (id: number, params: RequestParams = {}) =>
+    v5ArticlesDelete: (id: number, params: RequestParams = {}) =>
       this.request<any, DelArticleRespApiRespBase>({
-        path: `/api/v4/articles/${id}`,
+        path: `/api/v5/articles/${id}`,
         method: "DELETE",
         secure: true,
         ...params,
@@ -10520,12 +11181,12 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags BroadcastTalents
-     * @name V4BroadcasttalentsFuzzyList
+     * @name V5BroadcasttalentsFuzzyList
      * @summary Get fuzzy broadcast talents
-     * @request GET:/api/v4/broadcasttalents/fuzzy
+     * @request GET:/api/v5/broadcasttalents/fuzzy
      * @secure
      */
-    v4BroadcasttalentsFuzzyList: (
+    v5BroadcasttalentsFuzzyList: (
       query: {
         /**
          * Prefix
@@ -10544,7 +11205,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       params: RequestParams = {},
     ) =>
       this.request<any, GetFuzzyBroadcastTalentsRespApiRespBase>({
-        path: `/api/v4/broadcasttalents/fuzzy`,
+        path: `/api/v5/broadcasttalents/fuzzy`,
         method: "GET",
         query: query,
         secure: true,
@@ -10555,13 +11216,20 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags BroadcastTalents
-     * @name V4BroadcasttalentsList
+     * @name V5BroadcasttalentsList
      * @summary Get broadcast talents by condition
-     * @request GET:/api/v4/broadcasttalents
+     * @request GET:/api/v5/broadcasttalents
      * @secure
      */
-    v4BroadcasttalentsList: (
+    v5BroadcasttalentsList: (
       query?: {
+        /**
+         * Broadcast talent Id
+         * @format int32
+         * @min 1
+         * @max 2147483647
+         */
+        Id?: number;
         /**
          * Name
          * @minLength 0
@@ -10611,7 +11279,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       params: RequestParams = {},
     ) =>
       this.request<any, GetBroadcastTalentsRespApiRespBase>({
-        path: `/api/v4/broadcasttalents`,
+        path: `/api/v5/broadcasttalents`,
         method: "GET",
         query: query,
         secure: true,
@@ -10622,12 +11290,12 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags BroadcastTalents
-     * @name V4BroadcasttalentsCreate
+     * @name V5BroadcasttalentsCreate
      * @summary Add new broadcast talent
-     * @request POST:/api/v4/broadcasttalents
+     * @request POST:/api/v5/broadcasttalents
      * @secure
      */
-    v4BroadcasttalentsCreate: (
+    v5BroadcasttalentsCreate: (
       data: {
         /**
          * Name
@@ -10746,7 +11414,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       params: RequestParams = {},
     ) =>
       this.request<any, AddBroadcastTalentRespApiRespBase>({
-        path: `/api/v4/broadcasttalents`,
+        path: `/api/v5/broadcasttalents`,
         method: "POST",
         body: data,
         secure: true,
@@ -10758,14 +11426,14 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags BroadcastTalents
-     * @name V4BroadcasttalentsDetail
+     * @name V5BroadcasttalentsDetail
      * @summary Get broadcast talent
-     * @request GET:/api/v4/broadcasttalents/{id}
+     * @request GET:/api/v5/broadcasttalents/{id}
      * @secure
      */
-    v4BroadcasttalentsDetail: (id: number, params: RequestParams = {}) =>
+    v5BroadcasttalentsDetail: (id: number, params: RequestParams = {}) =>
       this.request<any, GetBroadcastTalentRespApiRespBase>({
-        path: `/api/v4/broadcasttalents/${id}`,
+        path: `/api/v5/broadcasttalents/${id}`,
         method: "GET",
         secure: true,
         ...params,
@@ -10775,12 +11443,12 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags BroadcastTalents
-     * @name V4BroadcasttalentsPartialUpdate
+     * @name V5BroadcasttalentsPartialUpdate
      * @summary Modify broadcast talent
-     * @request PATCH:/api/v4/broadcasttalents/{id}
+     * @request PATCH:/api/v5/broadcasttalents/{id}
      * @secure
      */
-    v4BroadcasttalentsPartialUpdate: (
+    v5BroadcasttalentsPartialUpdate: (
       id: number,
       data: {
         /**
@@ -10854,6 +11522,8 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
          * @format binary
          */
         ProfileImage?: File;
+        /** Is remove ProfileImage */
+        IsRemoveProfileImage?: boolean;
         /**
          * Header Image
          * @format binary
@@ -10907,7 +11577,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       params: RequestParams = {},
     ) =>
       this.request<any, ModBroadcastTalentRespApiRespBase>({
-        path: `/api/v4/broadcasttalents/${id}`,
+        path: `/api/v5/broadcasttalents/${id}`,
         method: "PATCH",
         body: data,
         secure: true,
@@ -10919,14 +11589,14 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags BroadcastTalents
-     * @name V4BroadcasttalentsDelete
+     * @name V5BroadcasttalentsDelete
      * @summary Delete broadcast talent
-     * @request DELETE:/api/v4/broadcasttalents/{id}
+     * @request DELETE:/api/v5/broadcasttalents/{id}
      * @secure
      */
-    v4BroadcasttalentsDelete: (id: number, params: RequestParams = {}) =>
+    v5BroadcasttalentsDelete: (id: number, params: RequestParams = {}) =>
       this.request<any, DelBroadcastTalentRespApiRespBase>({
-        path: `/api/v4/broadcasttalents/${id}`,
+        path: `/api/v5/broadcasttalents/${id}`,
         method: "DELETE",
         secure: true,
         ...params,
@@ -10936,12 +11606,12 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags BroadcastTalents
-     * @name V4BroadcasttalentsMediaItemsList
+     * @name V5BroadcasttalentsMediaItemsList
      * @summary Get broadcast talents Media items
-     * @request GET:/api/v4/broadcasttalents/media-items
+     * @request GET:/api/v5/broadcasttalents/media-items
      * @secure
      */
-    v4BroadcasttalentsMediaItemsList: (
+    v5BroadcasttalentsMediaItemsList: (
       query?: {
         /**
          * Broadcast Talent Id
@@ -10964,7 +11634,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       params: RequestParams = {},
     ) =>
       this.request<any, GetMediaItemsRespApiRespBase>({
-        path: `/api/v4/broadcasttalents/media-items`,
+        path: `/api/v5/broadcasttalents/media-items`,
         method: "GET",
         query: query,
         secure: true,
@@ -10975,14 +11645,14 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags BroadcastTalents
-     * @name V4BroadcasttalentsMediaItemsCreate
+     * @name V5BroadcasttalentsMediaItemsCreate
      * @summary Add broadcast talent new Media items
-     * @request POST:/api/v4/broadcasttalents/media-items
+     * @request POST:/api/v5/broadcasttalents/media-items
      * @secure
      */
-    v4BroadcasttalentsMediaItemsCreate: (data: AddMediaItemsReq, params: RequestParams = {}) =>
+    v5BroadcasttalentsMediaItemsCreate: (data: AddMediaItemsReq, params: RequestParams = {}) =>
       this.request<any, AddMediaItemsRespApiRespBase>({
-        path: `/api/v4/broadcasttalents/media-items`,
+        path: `/api/v5/broadcasttalents/media-items`,
         method: "POST",
         body: data,
         secure: true,
@@ -10994,14 +11664,14 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags BroadcastTalents
-     * @name V4BroadcasttalentsMediaItemsDelete
+     * @name V5BroadcasttalentsMediaItemsDelete
      * @summary Delete broadcast talent Media item
-     * @request DELETE:/api/v4/broadcasttalents/{broadcastid}/media-items/{mediaitemid}
+     * @request DELETE:/api/v5/broadcasttalents/{broadcastid}/media-items/{mediaitemid}
      * @secure
      */
-    v4BroadcasttalentsMediaItemsDelete: (broadcastid: number, mediaitemid: number, params: RequestParams = {}) =>
+    v5BroadcasttalentsMediaItemsDelete: (broadcastid: number, mediaitemid: number, params: RequestParams = {}) =>
       this.request<any, DelMediaItemRespApiRespBase>({
-        path: `/api/v4/broadcasttalents/${broadcastid}/media-items/${mediaitemid}`,
+        path: `/api/v5/broadcasttalents/${broadcastid}/media-items/${mediaitemid}`,
         method: "DELETE",
         secure: true,
         ...params,
@@ -11011,12 +11681,12 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Currency
-     * @name V4CurrencyCurrentExchangeRateList
+     * @name V5CurrencyCurrentExchangeRateList
      * @summary Get current exchange rate
-     * @request GET:/api/v4/currency/current-exchange-rate
+     * @request GET:/api/v5/currency/current-exchange-rate
      * @secure
      */
-    v4CurrencyCurrentExchangeRateList: (
+    v5CurrencyCurrentExchangeRateList: (
       query: {
         /**
          * Currency
@@ -11060,7 +11730,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       params: RequestParams = {},
     ) =>
       this.request<any, GetCurrentExchangeRateResp>({
-        path: `/api/v4/currency/current-exchange-rate`,
+        path: `/api/v5/currency/current-exchange-rate`,
         method: "GET",
         query: query,
         secure: true,
@@ -11071,12 +11741,12 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Earnings
-     * @name V4EarningsList
+     * @name V5EarningsList
      * @summary Get earnings
-     * @request GET:/api/v4/earnings
+     * @request GET:/api/v5/earnings
      * @secure
      */
-    v4EarningsList: (
+    v5EarningsList: (
       query?: {
         /**
          * Parent tournament id
@@ -11124,7 +11794,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       params: RequestParams = {},
     ) =>
       this.request<any, GetEarningsRespApiRespBase>({
-        path: `/api/v4/earnings`,
+        path: `/api/v5/earnings`,
         method: "GET",
         query: query,
         secure: true,
@@ -11135,14 +11805,14 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Earnings
-     * @name V4EarningsDetail
+     * @name V5EarningsDetail
      * @summary Get child earnings by parent
-     * @request GET:/api/v4/earnings/{parentId}
+     * @request GET:/api/v5/earnings/{parentId}
      * @secure
      */
-    v4EarningsDetail: (parentId: number, params: RequestParams = {}) =>
+    v5EarningsDetail: (parentId: number, params: RequestParams = {}) =>
       this.request<any, GetChildEarningsRespApiRespBase>({
-        path: `/api/v4/earnings/${parentId}`,
+        path: `/api/v5/earnings/${parentId}`,
         method: "GET",
         secure: true,
         ...params,
@@ -11152,14 +11822,14 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Earnings
-     * @name V4EarningsChildDetail
+     * @name V5EarningsChildDetail
      * @summary Get child earning prize pool
-     * @request GET:/api/v4/earnings/child/{childId}
+     * @request GET:/api/v5/earnings/child/{childId}
      * @secure
      */
-    v4EarningsChildDetail: (childId: number, params: RequestParams = {}) =>
+    v5EarningsChildDetail: (childId: number, params: RequestParams = {}) =>
       this.request<any, GetChildEarningPrizePoolRespApiRespBase>({
-        path: `/api/v4/earnings/child/${childId}`,
+        path: `/api/v5/earnings/child/${childId}`,
         method: "GET",
         secure: true,
         ...params,
@@ -11169,14 +11839,14 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Earnings
-     * @name V4EarningsChildPartialUpdate
+     * @name V5EarningsChildPartialUpdate
      * @summary Modify child prize pool
-     * @request PATCH:/api/v4/earnings/child/{childId}
+     * @request PATCH:/api/v5/earnings/child/{childId}
      * @secure
      */
-    v4EarningsChildPartialUpdate: (childId: number, data: ModChildEarningPrizePoolReq, params: RequestParams = {}) =>
+    v5EarningsChildPartialUpdate: (childId: number, data: ModChildEarningPrizePoolReq, params: RequestParams = {}) =>
       this.request<any, ApiRespBase>({
-        path: `/api/v4/earnings/child/${childId}`,
+        path: `/api/v5/earnings/child/${childId}`,
         method: "PATCH",
         body: data,
         secure: true,
@@ -11188,18 +11858,18 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Earnings
-     * @name V4EarningsChildStatusPartialUpdate
+     * @name V5EarningsChildStatusPartialUpdate
      * @summary Modify child prize pool status
-     * @request PATCH:/api/v4/earnings/child/{childId}/status
+     * @request PATCH:/api/v5/earnings/child/{childId}/status
      * @secure
      */
-    v4EarningsChildStatusPartialUpdate: (
+    v5EarningsChildStatusPartialUpdate: (
       childId: number,
       data: ModChildEarningPrizePoolStatusReq,
       params: RequestParams = {},
     ) =>
       this.request<any, ModChildEarningPrizePoolStatusRespApiRespBase>({
-        path: `/api/v4/earnings/child/${childId}/status`,
+        path: `/api/v5/earnings/child/${childId}/status`,
         method: "PATCH",
         body: data,
         secure: true,
@@ -11211,12 +11881,12 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Files
-     * @name V4FilesCrewFoldersList
+     * @name V5FilesCrewFoldersList
      * @summary Get folders
-     * @request GET:/api/v4/files/crew-folders
+     * @request GET:/api/v5/files/crew-folders
      * @secure
      */
-    v4FilesCrewFoldersList: (
+    v5FilesCrewFoldersList: (
       query?: {
         /**
          * @format int32
@@ -11246,7 +11916,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       params: RequestParams = {},
     ) =>
       this.request<any, GetCrewFoldersRespApiRespBase>({
-        path: `/api/v4/files/crew-folders`,
+        path: `/api/v5/files/crew-folders`,
         method: "GET",
         query: query,
         secure: true,
@@ -11257,12 +11927,12 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Files
-     * @name V4FilesCrewFoldersCreate
+     * @name V5FilesCrewFoldersCreate
      * @summary Add folder
-     * @request POST:/api/v4/files/crew-folders
+     * @request POST:/api/v5/files/crew-folders
      * @secure
      */
-    v4FilesCrewFoldersCreate: (
+    v5FilesCrewFoldersCreate: (
       data: {
         /**
          * @format int32
@@ -11279,7 +11949,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       params: RequestParams = {},
     ) =>
       this.request<any, AddFolderRespApiRespBase>({
-        path: `/api/v4/files/crew-folders`,
+        path: `/api/v5/files/crew-folders`,
         method: "POST",
         body: data,
         secure: true,
@@ -11291,12 +11961,12 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Files
-     * @name V4FilesCrewFilesList
+     * @name V5FilesCrewFilesList
      * @summary Get files
-     * @request GET:/api/v4/files/crew-files
+     * @request GET:/api/v5/files/crew-files
      * @secure
      */
-    v4FilesCrewFilesList: (
+    v5FilesCrewFilesList: (
       query: {
         /**
          * @format int32
@@ -11344,7 +12014,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       params: RequestParams = {},
     ) =>
       this.request<any, GetCrewFilesRespApiRespBase>({
-        path: `/api/v4/files/crew-files`,
+        path: `/api/v5/files/crew-files`,
         method: "GET",
         query: query,
         secure: true,
@@ -11355,12 +12025,12 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Files
-     * @name V4FilesCrewFilesCreate
+     * @name V5FilesCrewFilesCreate
      * @summary Add crew file
-     * @request POST:/api/v4/files/crew-files
+     * @request POST:/api/v5/files/crew-files
      * @secure
      */
-    v4FilesCrewFilesCreate: (
+    v5FilesCrewFilesCreate: (
       data: {
         /**
          * @format int32
@@ -11379,7 +12049,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       params: RequestParams = {},
     ) =>
       this.request<any, AddFileRespApiRespBase>({
-        path: `/api/v4/files/crew-files`,
+        path: `/api/v5/files/crew-files`,
         method: "POST",
         body: data,
         secure: true,
@@ -11391,12 +12061,12 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Files
-     * @name V4FilesCrewFoldersPartialUpdate
+     * @name V5FilesCrewFoldersPartialUpdate
      * @summary Modify folder
-     * @request PATCH:/api/v4/files/crew-folders/{id}
+     * @request PATCH:/api/v5/files/crew-folders/{id}
      * @secure
      */
-    v4FilesCrewFoldersPartialUpdate: (
+    v5FilesCrewFoldersPartialUpdate: (
       id: number,
       data: {
         /** @format int32 */
@@ -11408,7 +12078,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       params: RequestParams = {},
     ) =>
       this.request<any, ModFolderRespApiRespBase>({
-        path: `/api/v4/files/crew-folders/${id}`,
+        path: `/api/v5/files/crew-folders/${id}`,
         method: "PATCH",
         body: data,
         secure: true,
@@ -11420,14 +12090,14 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Files
-     * @name V4FilesCrewFoldersDelete
+     * @name V5FilesCrewFoldersDelete
      * @summary Delete folder
-     * @request DELETE:/api/v4/files/crew-folders/{id}
+     * @request DELETE:/api/v5/files/crew-folders/{id}
      * @secure
      */
-    v4FilesCrewFoldersDelete: (id: number, params: RequestParams = {}) =>
+    v5FilesCrewFoldersDelete: (id: number, params: RequestParams = {}) =>
       this.request<any, DelFolderRespApiRespBase>({
-        path: `/api/v4/files/crew-folders/${id}`,
+        path: `/api/v5/files/crew-folders/${id}`,
         method: "DELETE",
         secure: true,
         ...params,
@@ -11437,12 +12107,12 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Files
-     * @name V4FilesFuzzyFoldersList
+     * @name V5FilesFuzzyFoldersList
      * @summary Get fuzzy folders
-     * @request GET:/api/v4/files/fuzzy-folders
+     * @request GET:/api/v5/files/fuzzy-folders
      * @secure
      */
-    v4FilesFuzzyFoldersList: (
+    v5FilesFuzzyFoldersList: (
       query: {
         /**
          * @format int32
@@ -11465,7 +12135,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       params: RequestParams = {},
     ) =>
       this.request<any, GetFuzzyFoldersRespApiRespBase>({
-        path: `/api/v4/files/fuzzy-folders`,
+        path: `/api/v5/files/fuzzy-folders`,
         method: "GET",
         query: query,
         secure: true,
@@ -11476,12 +12146,12 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Files
-     * @name V4FilesCrewFilesPartialUpdate
+     * @name V5FilesCrewFilesPartialUpdate
      * @summary Modify file
-     * @request PATCH:/api/v4/files/crew-files/{id}
+     * @request PATCH:/api/v5/files/crew-files/{id}
      * @secure
      */
-    v4FilesCrewFilesPartialUpdate: (
+    v5FilesCrewFilesPartialUpdate: (
       id: number,
       data: {
         /**
@@ -11505,7 +12175,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       params: RequestParams = {},
     ) =>
       this.request<any, ModFileRespApiRespBase>({
-        path: `/api/v4/files/crew-files/${id}`,
+        path: `/api/v5/files/crew-files/${id}`,
         method: "PATCH",
         body: data,
         secure: true,
@@ -11517,14 +12187,14 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Files
-     * @name V4FilesCrewFilesDelete
+     * @name V5FilesCrewFilesDelete
      * @summary Delete file
-     * @request DELETE:/api/v4/files/crew-files/{id}
+     * @request DELETE:/api/v5/files/crew-files/{id}
      * @secure
      */
-    v4FilesCrewFilesDelete: (id: number, params: RequestParams = {}) =>
+    v5FilesCrewFilesDelete: (id: number, params: RequestParams = {}) =>
       this.request<any, DelFileRespApiRespBase>({
-        path: `/api/v4/files/crew-files/${id}`,
+        path: `/api/v5/files/crew-files/${id}`,
         method: "DELETE",
         secure: true,
         ...params,
@@ -11534,14 +12204,14 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags FrontendSiteSections
-     * @name V4FrontendSiteSectionsDetail
+     * @name V5FrontendSiteSectionsDetail
      * @summary Get frontend site sections
-     * @request GET:/api/v4/frontend-site-sections/{id}
+     * @request GET:/api/v5/frontend-site-sections/{id}
      * @secure
      */
-    v4FrontendSiteSectionsDetail: (id: number, params: RequestParams = {}) =>
+    v5FrontendSiteSectionsDetail: (id: number, params: RequestParams = {}) =>
       this.request<any, GetFrontendSiteSectionsRespApiRespBase>({
-        path: `/api/v4/frontend-site-sections/${id}`,
+        path: `/api/v5/frontend-site-sections/${id}`,
         method: "GET",
         secure: true,
         ...params,
@@ -11551,14 +12221,14 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags FrontendSiteSections
-     * @name V4FrontendSiteSectionsCreate
+     * @name V5FrontendSiteSectionsCreate
      * @summary Add frontend site sections
-     * @request POST:/api/v4/frontend-site-sections
+     * @request POST:/api/v5/frontend-site-sections
      * @secure
      */
-    v4FrontendSiteSectionsCreate: (data: AddFrontendSiteSectionsReq, params: RequestParams = {}) =>
+    v5FrontendSiteSectionsCreate: (data: AddFrontendSiteSectionsReq, params: RequestParams = {}) =>
       this.request<any, AddFrontendSiteSectionsRespApiRespBase>({
-        path: `/api/v4/frontend-site-sections`,
+        path: `/api/v5/frontend-site-sections`,
         method: "POST",
         body: data,
         secure: true,
@@ -11570,14 +12240,14 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags FrontendSiteSections
-     * @name V4FrontendSiteSectionsPartialUpdate
+     * @name V5FrontendSiteSectionsPartialUpdate
      * @summary Modify frontend site section
-     * @request PATCH:/api/v4/frontend-site-sections
+     * @request PATCH:/api/v5/frontend-site-sections
      * @secure
      */
-    v4FrontendSiteSectionsPartialUpdate: (data: ModFrontendSiteSectionReq, params: RequestParams = {}) =>
+    v5FrontendSiteSectionsPartialUpdate: (data: ModFrontendSiteSectionReq, params: RequestParams = {}) =>
       this.request<any, ModFrontendSiteSectionRespApiRespBase>({
-        path: `/api/v4/frontend-site-sections`,
+        path: `/api/v5/frontend-site-sections`,
         method: "PATCH",
         body: data,
         secure: true,
@@ -11589,14 +12259,14 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags FrontendSiteSections
-     * @name V4FrontendSiteSectionsDelete
+     * @name V5FrontendSiteSectionsDelete
      * @summary Delete frontend site section
-     * @request DELETE:/api/v4/frontend-site-sections
+     * @request DELETE:/api/v5/frontend-site-sections
      * @secure
      */
-    v4FrontendSiteSectionsDelete: (data: DelFrontendSiteSectionReq, params: RequestParams = {}) =>
+    v5FrontendSiteSectionsDelete: (data: DelFrontendSiteSectionReq, params: RequestParams = {}) =>
       this.request<any, DelFrontendSiteSectionRespApiRespBase>({
-        path: `/api/v4/frontend-site-sections`,
+        path: `/api/v5/frontend-site-sections`,
         method: "DELETE",
         body: data,
         secure: true,
@@ -11608,14 +12278,14 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Funcs
-     * @name V4FuncsTypesList
+     * @name V5FuncsTypesList
      * @summary Get Func Types
-     * @request GET:/api/v4/funcs/types
+     * @request GET:/api/v5/funcs/types
      * @secure
      */
-    v4FuncsTypesList: (params: RequestParams = {}) =>
+    v5FuncsTypesList: (params: RequestParams = {}) =>
       this.request<any, GetFuncTypesRespApiRespBase>({
-        path: `/api/v4/funcs/types`,
+        path: `/api/v5/funcs/types`,
         method: "GET",
         secure: true,
         ...params,
@@ -11625,14 +12295,14 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Funcs
-     * @name V4FuncsOptionsList
+     * @name V5FuncsOptionsList
      * @summary Get Func Options
-     * @request GET:/api/v4/funcs/options
+     * @request GET:/api/v5/funcs/options
      * @secure
      */
-    v4FuncsOptionsList: (params: RequestParams = {}) =>
+    v5FuncsOptionsList: (params: RequestParams = {}) =>
       this.request<any, GetFuncOptionsRespApiRespBase>({
-        path: `/api/v4/funcs/options`,
+        path: `/api/v5/funcs/options`,
         method: "GET",
         secure: true,
         ...params,
@@ -11642,14 +12312,14 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Funcs
-     * @name V4FuncsList
+     * @name V5FuncsList
      * @summary Get Funcs
-     * @request GET:/api/v4/funcs
+     * @request GET:/api/v5/funcs
      * @secure
      */
-    v4FuncsList: (params: RequestParams = {}) =>
+    v5FuncsList: (params: RequestParams = {}) =>
       this.request<any, GetFuncsRespApiRespBase>({
-        path: `/api/v4/funcs`,
+        path: `/api/v5/funcs`,
         method: "GET",
         secure: true,
         ...params,
@@ -11659,12 +12329,12 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Funcs
-     * @name V4FuncsCreate
+     * @name V5FuncsCreate
      * @summary Add Func
-     * @request POST:/api/v4/funcs
+     * @request POST:/api/v5/funcs
      * @secure
      */
-    v4FuncsCreate: (
+    v5FuncsCreate: (
       data: {
         /**
          * Func id
@@ -11716,7 +12386,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       params: RequestParams = {},
     ) =>
       this.request<any, AddFuncRespApiRespBase>({
-        path: `/api/v4/funcs`,
+        path: `/api/v5/funcs`,
         method: "POST",
         body: data,
         secure: true,
@@ -11728,14 +12398,14 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Funcs
-     * @name V4FuncsDetail
+     * @name V5FuncsDetail
      * @summary Get Func
-     * @request GET:/api/v4/funcs/{id}
+     * @request GET:/api/v5/funcs/{id}
      * @secure
      */
-    v4FuncsDetail: (id: number, params: RequestParams = {}) =>
+    v5FuncsDetail: (id: number, params: RequestParams = {}) =>
       this.request<any, GetFuncRespApiRespBase>({
-        path: `/api/v4/funcs/${id}`,
+        path: `/api/v5/funcs/${id}`,
         method: "GET",
         secure: true,
         ...params,
@@ -11745,12 +12415,12 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Funcs
-     * @name V4FuncsPartialUpdate
+     * @name V5FuncsPartialUpdate
      * @summary Modify Func
-     * @request PATCH:/api/v4/funcs/{id}
+     * @request PATCH:/api/v5/funcs/{id}
      * @secure
      */
-    v4FuncsPartialUpdate: (
+    v5FuncsPartialUpdate: (
       id: number,
       data: {
         /**
@@ -11804,7 +12474,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       params: RequestParams = {},
     ) =>
       this.request<any, ModFuncRespApiRespBase>({
-        path: `/api/v4/funcs/${id}`,
+        path: `/api/v5/funcs/${id}`,
         method: "PATCH",
         body: data,
         secure: true,
@@ -11816,14 +12486,14 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Funcs
-     * @name V4FuncsDelete
+     * @name V5FuncsDelete
      * @summary Delete Func
-     * @request DELETE:/api/v4/funcs/{id}
+     * @request DELETE:/api/v5/funcs/{id}
      * @secure
      */
-    v4FuncsDelete: (id: number, params: RequestParams = {}) =>
+    v5FuncsDelete: (id: number, params: RequestParams = {}) =>
       this.request<any, DelFuncRespApiRespBase>({
-        path: `/api/v4/funcs/${id}`,
+        path: `/api/v5/funcs/${id}`,
         method: "DELETE",
         secure: true,
         ...params,
@@ -11833,12 +12503,12 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags GameRaces
-     * @name V4GameracesFuzzyList
+     * @name V5GameracesFuzzyList
      * @summary Get fuzzy game races
-     * @request GET:/api/v4/gameraces/fuzzy
+     * @request GET:/api/v5/gameraces/fuzzy
      * @secure
      */
-    v4GameracesFuzzyList: (
+    v5GameracesFuzzyList: (
       query?: {
         /**
          * if FuzzyPrefix = null will get list of all GameRaces
@@ -11856,7 +12526,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       params: RequestParams = {},
     ) =>
       this.request<any, GetFuzzyGameRaceRespApiRespBase>({
-        path: `/api/v4/gameraces/fuzzy`,
+        path: `/api/v5/gameraces/fuzzy`,
         method: "GET",
         query: query,
         secure: true,
@@ -11867,13 +12537,20 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags GameRegions
-     * @name V4GameRegionsList
+     * @name V5GameRegionsList
      * @summary Get game regions
-     * @request GET:/api/v4/game-regions
+     * @request GET:/api/v5/game-regions
      * @secure
      */
-    v4GameRegionsList: (
+    v5GameRegionsList: (
       query?: {
+        /**
+         * Region id
+         * @format int32
+         * @min 1
+         * @max 32767
+         */
+        RegionId?: number;
         /**
          * Game id
          * @format int32
@@ -11903,7 +12580,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       params: RequestParams = {},
     ) =>
       this.request<any, GetGameRegionsRespApiRespBase>({
-        path: `/api/v4/game-regions`,
+        path: `/api/v5/game-regions`,
         method: "GET",
         query: query,
         secure: true,
@@ -11914,14 +12591,14 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags GameRegions
-     * @name V4GameRegionsCreate
+     * @name V5GameRegionsCreate
      * @summary Add game region
-     * @request POST:/api/v4/game-regions
+     * @request POST:/api/v5/game-regions
      * @secure
      */
-    v4GameRegionsCreate: (data: AddGameRegionReq, params: RequestParams = {}) =>
+    v5GameRegionsCreate: (data: AddGameRegionReq, params: RequestParams = {}) =>
       this.request<any, AddGameRegionRespApiRespBase>({
-        path: `/api/v4/game-regions`,
+        path: `/api/v5/game-regions`,
         method: "POST",
         body: data,
         secure: true,
@@ -11933,14 +12610,14 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags GameRegions
-     * @name V4GameRegionsDetail
+     * @name V5GameRegionsDetail
      * @summary Get game region detail
-     * @request GET:/api/v4/game-regions/{id}
+     * @request GET:/api/v5/game-regions/{id}
      * @secure
      */
-    v4GameRegionsDetail: (id: number, params: RequestParams = {}) =>
+    v5GameRegionsDetail: (id: number, params: RequestParams = {}) =>
       this.request<any, GetGameRegionRespApiRespBase>({
-        path: `/api/v4/game-regions/${id}`,
+        path: `/api/v5/game-regions/${id}`,
         method: "GET",
         secure: true,
         ...params,
@@ -11950,14 +12627,14 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags GameRegions
-     * @name V4GameRegionsPartialUpdate
+     * @name V5GameRegionsPartialUpdate
      * @summary Modify game region
-     * @request PATCH:/api/v4/game-regions/{id}
+     * @request PATCH:/api/v5/game-regions/{id}
      * @secure
      */
-    v4GameRegionsPartialUpdate: (id: number, data: ModGameRegionReq, params: RequestParams = {}) =>
+    v5GameRegionsPartialUpdate: (id: number, data: ModGameRegionReq, params: RequestParams = {}) =>
       this.request<any, ModGameRegionRespApiRespBase>({
-        path: `/api/v4/game-regions/${id}`,
+        path: `/api/v5/game-regions/${id}`,
         method: "PATCH",
         body: data,
         secure: true,
@@ -11969,14 +12646,14 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags GameRegions
-     * @name V4GameRegionsDelete
+     * @name V5GameRegionsDelete
      * @summary Delete game region
-     * @request DELETE:/api/v4/game-regions/{id}
+     * @request DELETE:/api/v5/game-regions/{id}
      * @secure
      */
-    v4GameRegionsDelete: (id: number, params: RequestParams = {}) =>
+    v5GameRegionsDelete: (id: number, params: RequestParams = {}) =>
       this.request<any, DelGameRegionRespApiRespBase>({
-        path: `/api/v4/game-regions/${id}`,
+        path: `/api/v5/game-regions/${id}`,
         method: "DELETE",
         secure: true,
         ...params,
@@ -11986,14 +12663,14 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags GameRegions
-     * @name V4GameRegionsTranslationsDetail
+     * @name V5GameRegionsTranslationsDetail
      * @summary Get game region translations
-     * @request GET:/api/v4/game-regions/{id}/translations
+     * @request GET:/api/v5/game-regions/{id}/translations
      * @secure
      */
-    v4GameRegionsTranslationsDetail: (id: number, params: RequestParams = {}) =>
+    v5GameRegionsTranslationsDetail: (id: number, params: RequestParams = {}) =>
       this.request<any, GetGameRegionTranslationRespApiRespBase>({
-        path: `/api/v4/game-regions/${id}/translations`,
+        path: `/api/v5/game-regions/${id}/translations`,
         method: "GET",
         secure: true,
         ...params,
@@ -12003,18 +12680,18 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags GameRegions
-     * @name V4GameRegionsTranslationsPartialUpdate
+     * @name V5GameRegionsTranslationsPartialUpdate
      * @summary Modify game region translation
-     * @request PATCH:/api/v4/game-regions/{id}/translations
+     * @request PATCH:/api/v5/game-regions/{id}/translations
      * @secure
      */
-    v4GameRegionsTranslationsPartialUpdate: (
+    v5GameRegionsTranslationsPartialUpdate: (
       id: number,
       data: ModGameRegionTranslationReq,
       params: RequestParams = {},
     ) =>
       this.request<any, ModGameRegionTranslationRespApiRespBase>({
-        path: `/api/v4/game-regions/${id}/translations`,
+        path: `/api/v5/game-regions/${id}/translations`,
         method: "PATCH",
         body: data,
         secure: true,
@@ -12026,13 +12703,20 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Games
-     * @name V4GamesList
+     * @name V5GamesList
      * @summary Get games by condition
-     * @request GET:/api/v4/games
+     * @request GET:/api/v5/games
      * @secure
      */
-    v4GamesList: (
+    v5GamesList: (
       query?: {
+        /**
+         * Games Id
+         * @format int32
+         * @min 1
+         * @max 32767
+         */
+        Id?: number;
         /**
          * Game name
          * @minLength 1
@@ -12061,7 +12745,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       params: RequestParams = {},
     ) =>
       this.request<any, GetGamesRespApiRespBase>({
-        path: `/api/v4/games`,
+        path: `/api/v5/games`,
         method: "GET",
         query: query,
         secure: true,
@@ -12072,12 +12756,12 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Games
-     * @name V4GamesCreate
+     * @name V5GamesCreate
      * @summary Add game
-     * @request POST:/api/v4/games
+     * @request POST:/api/v5/games
      * @secure
      */
-    v4GamesCreate: (
+    v5GamesCreate: (
       data: {
         /**
          * Game name
@@ -12130,7 +12814,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       params: RequestParams = {},
     ) =>
       this.request<any, AddGameRespApiRespBase>({
-        path: `/api/v4/games`,
+        path: `/api/v5/games`,
         method: "POST",
         body: data,
         secure: true,
@@ -12142,14 +12826,14 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Games
-     * @name V4GamesDetail
+     * @name V5GamesDetail
      * @summary Get game
-     * @request GET:/api/v4/games/{id}
+     * @request GET:/api/v5/games/{id}
      * @secure
      */
-    v4GamesDetail: (id: number, params: RequestParams = {}) =>
+    v5GamesDetail: (id: number, params: RequestParams = {}) =>
       this.request<any, GetGameRespApiRespBase>({
-        path: `/api/v4/games/${id}`,
+        path: `/api/v5/games/${id}`,
         method: "GET",
         secure: true,
         ...params,
@@ -12159,14 +12843,14 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Games
-     * @name V4GamesDelete
+     * @name V5GamesDelete
      * @summary Delete game
-     * @request DELETE:/api/v4/games/{id}
+     * @request DELETE:/api/v5/games/{id}
      * @secure
      */
-    v4GamesDelete: (id: number, params: RequestParams = {}) =>
+    v5GamesDelete: (id: number, params: RequestParams = {}) =>
       this.request<any, DelGameRespApiRespBase>({
-        path: `/api/v4/games/${id}`,
+        path: `/api/v5/games/${id}`,
         method: "DELETE",
         secure: true,
         ...params,
@@ -12176,12 +12860,12 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Games
-     * @name V4GamesIdPartialUpdate
+     * @name V5GamesIdPartialUpdate
      * @summary Modify game
-     * @request PATCH:/api/v4/games/id
+     * @request PATCH:/api/v5/games/id
      * @secure
      */
-    v4GamesIdPartialUpdate: (
+    v5GamesIdPartialUpdate: (
       data: {
         /**
          * Game id
@@ -12248,7 +12932,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       params: RequestParams = {},
     ) =>
       this.request<any, ModGameRespApiRespBase>({
-        path: `/api/v4/games/id`,
+        path: `/api/v5/games/id`,
         method: "PATCH",
         query: query,
         body: data,
@@ -12261,14 +12945,14 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Games
-     * @name V4GamesTranslationsPartialUpdate
+     * @name V5GamesTranslationsPartialUpdate
      * @summary Modify game translations
-     * @request PATCH:/api/v4/games/{id}/translations
+     * @request PATCH:/api/v5/games/{id}/translations
      * @secure
      */
-    v4GamesTranslationsPartialUpdate: (id: number, data: ModGameTranslationsReq, params: RequestParams = {}) =>
+    v5GamesTranslationsPartialUpdate: (id: number, data: ModGameTranslationsReq, params: RequestParams = {}) =>
       this.request<any, ModGameTranslationsRespApiRespBase>({
-        path: `/api/v4/games/${id}/translations`,
+        path: `/api/v5/games/${id}/translations`,
         method: "PATCH",
         body: data,
         secure: true,
@@ -12280,12 +12964,12 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Games
-     * @name V4GamesFuzzyList
+     * @name V5GamesFuzzyList
      * @summary Get fuzzy games
-     * @request GET:/api/v4/games/fuzzy
+     * @request GET:/api/v5/games/fuzzy
      * @secure
      */
-    v4GamesFuzzyList: (
+    v5GamesFuzzyList: (
       query?: {
         /**
          * if FuzzyPrefix = null will get list of all games
@@ -12303,7 +12987,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       params: RequestParams = {},
     ) =>
       this.request<any, GetFuzzyGamesRespApiRespBase>({
-        path: `/api/v4/games/fuzzy`,
+        path: `/api/v5/games/fuzzy`,
         method: "GET",
         query: query,
         secure: true,
@@ -12314,13 +12998,20 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags GameSides
-     * @name V4GamesidesList
+     * @name V5GamesidesList
      * @summary Get sides by condition
-     * @request GET:/api/v4/gamesides
+     * @request GET:/api/v5/gamesides
      * @secure
      */
-    v4GamesidesList: (
+    v5GamesidesList: (
       query?: {
+        /**
+         * Side Id
+         * @format int32
+         * @min 1
+         * @max 32767
+         */
+        Id?: number;
         /**
          * Side Name
          * @minLength 0
@@ -12350,7 +13041,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       params: RequestParams = {},
     ) =>
       this.request<any, GetSidesRespApiRespBase>({
-        path: `/api/v4/gamesides`,
+        path: `/api/v5/gamesides`,
         method: "GET",
         query: query,
         secure: true,
@@ -12361,12 +13052,12 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags GameSides
-     * @name V4GamesidesCreate
+     * @name V5GamesidesCreate
      * @summary Add new game side
-     * @request POST:/api/v4/gamesides
+     * @request POST:/api/v5/gamesides
      * @secure
      */
-    v4GamesidesCreate: (
+    v5GamesidesCreate: (
       data: {
         /**
          * Game Side Name
@@ -12390,7 +13081,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       params: RequestParams = {},
     ) =>
       this.request<any, AddSideRespApiRespBase>({
-        path: `/api/v4/gamesides`,
+        path: `/api/v5/gamesides`,
         method: "POST",
         body: data,
         secure: true,
@@ -12402,14 +13093,14 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags GameSides
-     * @name V4GamesidesDetail
+     * @name V5GamesidesDetail
      * @summary Get game side
-     * @request GET:/api/v4/gamesides/{id}
+     * @request GET:/api/v5/gamesides/{id}
      * @secure
      */
-    v4GamesidesDetail: (id: number, params: RequestParams = {}) =>
+    v5GamesidesDetail: (id: number, params: RequestParams = {}) =>
       this.request<any, GetSideRespApiRespBase>({
-        path: `/api/v4/gamesides/${id}`,
+        path: `/api/v5/gamesides/${id}`,
         method: "GET",
         secure: true,
         ...params,
@@ -12419,12 +13110,12 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags GameSides
-     * @name V4GamesidesPartialUpdate
+     * @name V5GamesidesPartialUpdate
      * @summary Modify game side
-     * @request PATCH:/api/v4/gamesides/{id}
+     * @request PATCH:/api/v5/gamesides/{id}
      * @secure
      */
-    v4GamesidesPartialUpdate: (
+    v5GamesidesPartialUpdate: (
       id: number,
       data: {
         /**
@@ -12456,7 +13147,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       params: RequestParams = {},
     ) =>
       this.request<any, ModSideRespApiRespBase>({
-        path: `/api/v4/gamesides/${id}`,
+        path: `/api/v5/gamesides/${id}`,
         method: "PATCH",
         body: data,
         secure: true,
@@ -12468,14 +13159,14 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags GameSides
-     * @name V4GamesidesDelete
+     * @name V5GamesidesDelete
      * @summary Delete game side
-     * @request DELETE:/api/v4/gamesides/{id}
+     * @request DELETE:/api/v5/gamesides/{id}
      * @secure
      */
-    v4GamesidesDelete: (id: number, params: RequestParams = {}) =>
+    v5GamesidesDelete: (id: number, params: RequestParams = {}) =>
       this.request<any, DelSideRespApiRespBase>({
-        path: `/api/v4/gamesides/${id}`,
+        path: `/api/v5/gamesides/${id}`,
         method: "DELETE",
         secure: true,
         ...params,
@@ -12485,14 +13176,14 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags GameSides
-     * @name V4GamesidesTranslationsDetail
+     * @name V5GamesidesTranslationsDetail
      * @summary Get game side translations
-     * @request GET:/api/v4/gamesides/{id}/translations
+     * @request GET:/api/v5/gamesides/{id}/translations
      * @secure
      */
-    v4GamesidesTranslationsDetail: (id: number, params: RequestParams = {}) =>
+    v5GamesidesTranslationsDetail: (id: number, params: RequestParams = {}) =>
       this.request<any, GetSideTranslationsRespApiRespBase>({
-        path: `/api/v4/gamesides/${id}/translations`,
+        path: `/api/v5/gamesides/${id}/translations`,
         method: "GET",
         secure: true,
         ...params,
@@ -12502,14 +13193,14 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags GameSides
-     * @name V4GamesidesTranslationsPartialUpdate
+     * @name V5GamesidesTranslationsPartialUpdate
      * @summary Modify game side translations
-     * @request PATCH:/api/v4/gamesides/{id}/translations
+     * @request PATCH:/api/v5/gamesides/{id}/translations
      * @secure
      */
-    v4GamesidesTranslationsPartialUpdate: (id: number, data: ModSideTranslationsReq, params: RequestParams = {}) =>
+    v5GamesidesTranslationsPartialUpdate: (id: number, data: ModSideTranslationsReq, params: RequestParams = {}) =>
       this.request<any, ModSideTranslationsRespApiRespBase>({
-        path: `/api/v4/gamesides/${id}/translations`,
+        path: `/api/v5/gamesides/${id}/translations`,
         method: "PATCH",
         body: data,
         secure: true,
@@ -12521,14 +13212,14 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Groups
-     * @name V4GroupsGroupOptionsList
+     * @name V5GroupsGroupOptionsList
      * @summary Get group options
-     * @request GET:/api/v4/groups/group-options
+     * @request GET:/api/v5/groups/group-options
      * @secure
      */
-    v4GroupsGroupOptionsList: (params: RequestParams = {}) =>
+    v5GroupsGroupOptionsList: (params: RequestParams = {}) =>
       this.request<any, GetGroupOptionsRespApiRespBase>({
-        path: `/api/v4/groups/group-options`,
+        path: `/api/v5/groups/group-options`,
         method: "GET",
         secure: true,
         ...params,
@@ -12538,14 +13229,14 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Groups
-     * @name V4GroupsGroupOptionsByUserList
+     * @name V5GroupsGroupOptionsByUserList
      * @summary Get group options by user
-     * @request GET:/api/v4/groups/group-options-by-user
+     * @request GET:/api/v5/groups/group-options-by-user
      * @secure
      */
-    v4GroupsGroupOptionsByUserList: (params: RequestParams = {}) =>
+    v5GroupsGroupOptionsByUserList: (params: RequestParams = {}) =>
       this.request<any, GetGroupOptionsRespApiRespBase>({
-        path: `/api/v4/groups/group-options-by-user`,
+        path: `/api/v5/groups/group-options-by-user`,
         method: "GET",
         secure: true,
         ...params,
@@ -12555,12 +13246,12 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Groups
-     * @name V4GroupsList
+     * @name V5GroupsList
      * @summary Get Groups
-     * @request GET:/api/v4/groups
+     * @request GET:/api/v5/groups
      * @secure
      */
-    v4GroupsList: (
+    v5GroupsList: (
       query?: {
         /** Group ids */
         GroupIds?: number[];
@@ -12588,7 +13279,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       params: RequestParams = {},
     ) =>
       this.request<any, GetGroupsRespApiRespBase>({
-        path: `/api/v4/groups`,
+        path: `/api/v5/groups`,
         method: "GET",
         query: query,
         secure: true,
@@ -12599,14 +13290,14 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Groups
-     * @name V4GroupsCreate
+     * @name V5GroupsCreate
      * @summary Add group
-     * @request POST:/api/v4/groups
+     * @request POST:/api/v5/groups
      * @secure
      */
-    v4GroupsCreate: (data: AddGroupReq, params: RequestParams = {}) =>
+    v5GroupsCreate: (data: AddGroupReq, params: RequestParams = {}) =>
       this.request<any, AddGroupRespApiRespBase>({
-        path: `/api/v4/groups`,
+        path: `/api/v5/groups`,
         method: "POST",
         body: data,
         secure: true,
@@ -12618,14 +13309,14 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Groups
-     * @name V4GroupsDetail
+     * @name V5GroupsDetail
      * @summary Get Group
-     * @request GET:/api/v4/groups/{id}
+     * @request GET:/api/v5/groups/{id}
      * @secure
      */
-    v4GroupsDetail: (id: number, params: RequestParams = {}) =>
+    v5GroupsDetail: (id: number, params: RequestParams = {}) =>
       this.request<any, GetGroupRespApiRespBase>({
-        path: `/api/v4/groups/${id}`,
+        path: `/api/v5/groups/${id}`,
         method: "GET",
         secure: true,
         ...params,
@@ -12635,14 +13326,14 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Groups
-     * @name V4GroupsPartialUpdate
+     * @name V5GroupsPartialUpdate
      * @summary Modify Group
-     * @request PATCH:/api/v4/groups/{id}
+     * @request PATCH:/api/v5/groups/{id}
      * @secure
      */
-    v4GroupsPartialUpdate: (id: number, data: ModGroupReq, params: RequestParams = {}) =>
+    v5GroupsPartialUpdate: (id: number, data: ModGroupReq, params: RequestParams = {}) =>
       this.request<any, ModGroupRespApiRespBase>({
-        path: `/api/v4/groups/${id}`,
+        path: `/api/v5/groups/${id}`,
         method: "PATCH",
         body: data,
         secure: true,
@@ -12654,14 +13345,14 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Groups
-     * @name V4GroupsDelete
+     * @name V5GroupsDelete
      * @summary Delete Group
-     * @request DELETE:/api/v4/groups/{id}
+     * @request DELETE:/api/v5/groups/{id}
      * @secure
      */
-    v4GroupsDelete: (id: number, params: RequestParams = {}) =>
+    v5GroupsDelete: (id: number, params: RequestParams = {}) =>
       this.request<any, DelGroupRespApiRespBase>({
-        path: `/api/v4/groups/${id}`,
+        path: `/api/v5/groups/${id}`,
         method: "DELETE",
         secure: true,
         ...params,
@@ -12671,14 +13362,14 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Groups
-     * @name V4GroupsBlankPermissionsList
+     * @name V5GroupsBlankPermissionsList
      * @summary Get group blank permissions
-     * @request GET:/api/v4/groups/blank-permissions
+     * @request GET:/api/v5/groups/blank-permissions
      * @secure
      */
-    v4GroupsBlankPermissionsList: (params: RequestParams = {}) =>
+    v5GroupsBlankPermissionsList: (params: RequestParams = {}) =>
       this.request<any, GetGroupBlankPermissionsRespApiRespBase>({
-        path: `/api/v4/groups/blank-permissions`,
+        path: `/api/v5/groups/blank-permissions`,
         method: "GET",
         secure: true,
         ...params,
@@ -12688,14 +13379,14 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Groups
-     * @name V4GroupsTemplatesList
+     * @name V5GroupsTemplatesList
      * @summary Get Group Templates
-     * @request GET:/api/v4/groups/templates
+     * @request GET:/api/v5/groups/templates
      * @secure
      */
-    v4GroupsTemplatesList: (params: RequestParams = {}) =>
+    v5GroupsTemplatesList: (params: RequestParams = {}) =>
       this.request<any, GetGroupTemplatesRespApiRespBase>({
-        path: `/api/v4/groups/templates`,
+        path: `/api/v5/groups/templates`,
         method: "GET",
         secure: true,
         ...params,
@@ -12705,14 +13396,14 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Groups
-     * @name V4GroupsAssignGroupPartialUpdate
-     * @summary Assign group to ser
-     * @request PATCH:/api/v4/groups/assign-group
+     * @name V5GroupsAssignGroupPartialUpdate
+     * @summary Assign group to user
+     * @request PATCH:/api/v5/groups/assign-group
      * @secure
      */
-    v4GroupsAssignGroupPartialUpdate: (data: AssignGroupReq, params: RequestParams = {}) =>
+    v5GroupsAssignGroupPartialUpdate: (data: AssignGroupReq, params: RequestParams = {}) =>
       this.request<any, AssignGroupRespApiRespBase>({
-        path: `/api/v4/groups/assign-group`,
+        path: `/api/v5/groups/assign-group`,
         method: "PATCH",
         body: data,
         secure: true,
@@ -12724,14 +13415,14 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Groups
-     * @name V4GroupsUnassignGroupDelete
+     * @name V5GroupsUnassignGroupDelete
      * @summary UnAssign group from user
-     * @request DELETE:/api/v4/groups/unassign-group
+     * @request DELETE:/api/v5/groups/unassign-group
      * @secure
      */
-    v4GroupsUnassignGroupDelete: (data: UnAssignGroupReq, params: RequestParams = {}) =>
+    v5GroupsUnassignGroupDelete: (data: UnAssignGroupReq, params: RequestParams = {}) =>
       this.request<any, UnAssignGroupRespApiRespBase>({
-        path: `/api/v4/groups/unassign-group`,
+        path: `/api/v5/groups/unassign-group`,
         method: "DELETE",
         body: data,
         secure: true,
@@ -12743,14 +13434,14 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Groups
-     * @name V4GroupsUsersDetail
+     * @name V5GroupsUsersDetail
      * @summary Get users by group
-     * @request GET:/api/v4/groups/{id}/users
+     * @request GET:/api/v5/groups/{id}/users
      * @secure
      */
-    v4GroupsUsersDetail: (id: number, params: RequestParams = {}) =>
+    v5GroupsUsersDetail: (id: number, params: RequestParams = {}) =>
       this.request<any, GetUsersByGroupRespApiRespBase>({
-        path: `/api/v4/groups/${id}/users`,
+        path: `/api/v5/groups/${id}/users`,
         method: "GET",
         secure: true,
         ...params,
@@ -12760,12 +13451,12 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Groups
-     * @name V4GroupsFuzzyUsersDetail
+     * @name V5GroupsFuzzyUsersDetail
      * @summary Get fuzzy users by group
-     * @request GET:/api/v4/groups/{id}/fuzzy-users
+     * @request GET:/api/v5/groups/{id}/fuzzy-users
      * @secure
      */
-    v4GroupsFuzzyUsersDetail: (
+    v5GroupsFuzzyUsersDetail: (
       id: number,
       query: {
         /**
@@ -12785,7 +13476,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       params: RequestParams = {},
     ) =>
       this.request<any, GetFuzzyUsersByGroupRespApiRespBase>({
-        path: `/api/v4/groups/${id}/fuzzy-users`,
+        path: `/api/v5/groups/${id}/fuzzy-users`,
         method: "GET",
         query: query,
         secure: true,
@@ -12796,13 +13487,20 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Heroes
-     * @name V4HeroesList
+     * @name V5HeroesList
      * @summary Get heroes by condition
-     * @request GET:/api/v4/heroes
+     * @request GET:/api/v5/heroes
      * @secure
      */
-    v4HeroesList: (
+    v5HeroesList: (
       query?: {
+        /**
+         * Game hero id
+         * @format int32
+         * @min 1
+         * @max 32767
+         */
+        Id?: number;
         /**
          * Hero Name
          * @minLength 1
@@ -12838,7 +13536,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       params: RequestParams = {},
     ) =>
       this.request<any, GetHeroesRespApiRespBase>({
-        path: `/api/v4/heroes`,
+        path: `/api/v5/heroes`,
         method: "GET",
         query: query,
         secure: true,
@@ -12849,12 +13547,12 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Heroes
-     * @name V4HeroesCreate
+     * @name V5HeroesCreate
      * @summary Add new game Hero
-     * @request POST:/api/v4/heroes
+     * @request POST:/api/v5/heroes
      * @secure
      */
-    v4HeroesCreate: (
+    v5HeroesCreate: (
       data: {
         /**
          * Game Hero Name
@@ -12870,12 +13568,6 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
          */
         GameId: number;
         /**
-         * Description
-         * @minLength 0
-         * @maxLength 10000
-         */
-        Description: string;
-        /**
          * Icon file
          * @format binary
          */
@@ -12884,7 +13576,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       params: RequestParams = {},
     ) =>
       this.request<any, AddHeroRespApiRespBase>({
-        path: `/api/v4/heroes`,
+        path: `/api/v5/heroes`,
         method: "POST",
         body: data,
         secure: true,
@@ -12896,14 +13588,14 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Heroes
-     * @name V4HeroesDetail
+     * @name V5HeroesDetail
      * @summary Get game hero
-     * @request GET:/api/v4/heroes/{id}
+     * @request GET:/api/v5/heroes/{id}
      * @secure
      */
-    v4HeroesDetail: (id: number, params: RequestParams = {}) =>
+    v5HeroesDetail: (id: number, params: RequestParams = {}) =>
       this.request<any, GetHeroRespApiRespBase>({
-        path: `/api/v4/heroes/${id}`,
+        path: `/api/v5/heroes/${id}`,
         method: "GET",
         secure: true,
         ...params,
@@ -12913,12 +13605,12 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Heroes
-     * @name V4HeroesPartialUpdate
+     * @name V5HeroesPartialUpdate
      * @summary Modify game Hero
-     * @request PATCH:/api/v4/heroes/{id}
+     * @request PATCH:/api/v5/heroes/{id}
      * @secure
      */
-    v4HeroesPartialUpdate: (
+    v5HeroesPartialUpdate: (
       id: number,
       data: {
         /**
@@ -12942,12 +13634,6 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
          */
         GameId: number;
         /**
-         * Description
-         * @minLength 0
-         * @maxLength 10000
-         */
-        Description: string;
-        /**
          * Icon file
          * @format binary
          */
@@ -12956,7 +13642,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       params: RequestParams = {},
     ) =>
       this.request<any, ModHeroRespApiRespBase>({
-        path: `/api/v4/heroes/${id}`,
+        path: `/api/v5/heroes/${id}`,
         method: "PATCH",
         body: data,
         secure: true,
@@ -12968,14 +13654,14 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Heroes
-     * @name V4HeroesDelete
+     * @name V5HeroesDelete
      * @summary Delete game Hero
-     * @request DELETE:/api/v4/heroes/{id}
+     * @request DELETE:/api/v5/heroes/{id}
      * @secure
      */
-    v4HeroesDelete: (id: number, params: RequestParams = {}) =>
+    v5HeroesDelete: (id: number, params: RequestParams = {}) =>
       this.request<any, DelHeroRespApiRespBase>({
-        path: `/api/v4/heroes/${id}`,
+        path: `/api/v5/heroes/${id}`,
         method: "DELETE",
         secure: true,
         ...params,
@@ -12985,14 +13671,14 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Heroes
-     * @name V4HeroesTranslationsDetail
+     * @name V5HeroesTranslationsDetail
      * @summary Get game hero translations
-     * @request GET:/api/v4/heroes/{id}/translations
+     * @request GET:/api/v5/heroes/{id}/translations
      * @secure
      */
-    v4HeroesTranslationsDetail: (id: number, params: RequestParams = {}) =>
+    v5HeroesTranslationsDetail: (id: number, params: RequestParams = {}) =>
       this.request<any, GetHeroTranslationsRespApiRespBase>({
-        path: `/api/v4/heroes/${id}/translations`,
+        path: `/api/v5/heroes/${id}/translations`,
         method: "GET",
         secure: true,
         ...params,
@@ -13002,14 +13688,14 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Heroes
-     * @name V4HeroesTranslationsPartialUpdate
+     * @name V5HeroesTranslationsPartialUpdate
      * @summary Modify game Hero translations
-     * @request PATCH:/api/v4/heroes/{id}/translations
+     * @request PATCH:/api/v5/heroes/{id}/translations
      * @secure
      */
-    v4HeroesTranslationsPartialUpdate: (id: number, data: ModHeroTranslationsReq, params: RequestParams = {}) =>
+    v5HeroesTranslationsPartialUpdate: (id: number, data: ModHeroTranslationsReq, params: RequestParams = {}) =>
       this.request<any, ModHeroTranslationsRespApiRespBase>({
-        path: `/api/v4/heroes/${id}/translations`,
+        path: `/api/v5/heroes/${id}/translations`,
         method: "PATCH",
         body: data,
         secure: true,
@@ -13021,12 +13707,12 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Logout
-     * @name V4LogoutCreate
+     * @name V5LogoutCreate
      * @summary Logout
-     * @request POST:/api/v4/logout
+     * @request POST:/api/v5/logout
      * @secure
      */
-    v4LogoutCreate: (
+    v5LogoutCreate: (
       query?: {
         /** RefreshToken */
         refreshToken?: string;
@@ -13034,7 +13720,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       params: RequestParams = {},
     ) =>
       this.request<any, LogoutRespApiRespBase>({
-        path: `/api/v4/logout`,
+        path: `/api/v5/logout`,
         method: "POST",
         query: query,
         secure: true,
@@ -13045,14 +13731,14 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Logs
-     * @name V4LogsLogLevelsList
+     * @name V5LogsLogLevelsList
      * @summary Get Log Levels
-     * @request GET:/api/v4/logs/log-levels
+     * @request GET:/api/v5/logs/log-levels
      * @secure
      */
-    v4LogsLogLevelsList: (params: RequestParams = {}) =>
+    v5LogsLogLevelsList: (params: RequestParams = {}) =>
       this.request<any, GetLogLevelsRespApiRespBase>({
-        path: `/api/v4/logs/log-levels`,
+        path: `/api/v5/logs/log-levels`,
         method: "GET",
         secure: true,
         ...params,
@@ -13062,12 +13748,12 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Logs
-     * @name V4LogsApiLogsList
+     * @name V5LogsApiLogsList
      * @summary Get Api Logs
-     * @request GET:/api/v4/logs/api-logs
+     * @request GET:/api/v5/logs/api-logs
      * @secure
      */
-    v4LogsApiLogsList: (
+    v5LogsApiLogsList: (
       query?: {
         /**
          * From
@@ -13140,7 +13826,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       params: RequestParams = {},
     ) =>
       this.request<any, GetApiLogsRespApiRespBase>({
-        path: `/api/v4/logs/api-logs`,
+        path: `/api/v5/logs/api-logs`,
         method: "GET",
         query: query,
         secure: true,
@@ -13151,14 +13837,14 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Logs
-     * @name V4LogsApiLogsDetail
+     * @name V5LogsApiLogsDetail
      * @summary Get Api log
-     * @request GET:/api/v4/logs/api-logs/{id}
+     * @request GET:/api/v5/logs/api-logs/{id}
      * @secure
      */
-    v4LogsApiLogsDetail: (id: number, params: RequestParams = {}) =>
+    v5LogsApiLogsDetail: (id: number, params: RequestParams = {}) =>
       this.request<any, GetApiLogRespApiRespBase>({
-        path: `/api/v4/logs/api-logs/${id}`,
+        path: `/api/v5/logs/api-logs/${id}`,
         method: "GET",
         secure: true,
         ...params,
@@ -13168,12 +13854,12 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Logs
-     * @name V4LogsSystemLogsList
+     * @name V5LogsSystemLogsList
      * @summary Get System Logs
-     * @request GET:/api/v4/logs/system-logs
+     * @request GET:/api/v5/logs/system-logs
      * @secure
      */
-    v4LogsSystemLogsList: (
+    v5LogsSystemLogsList: (
       query?: {
         /**
          * From
@@ -13241,7 +13927,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       params: RequestParams = {},
     ) =>
       this.request<any, GetSystemLogsRespApiRespBase>({
-        path: `/api/v4/logs/system-logs`,
+        path: `/api/v5/logs/system-logs`,
         method: "GET",
         query: query,
         secure: true,
@@ -13252,14 +13938,14 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Logs
-     * @name V4LogsSystemLogsDetail
+     * @name V5LogsSystemLogsDetail
      * @summary Get System Log
-     * @request GET:/api/v4/logs/system-logs/{id}
+     * @request GET:/api/v5/logs/system-logs/{id}
      * @secure
      */
-    v4LogsSystemLogsDetail: (id: number, params: RequestParams = {}) =>
+    v5LogsSystemLogsDetail: (id: number, params: RequestParams = {}) =>
       this.request<any, GetSystemLogRespApiRespBase>({
-        path: `/api/v4/logs/system-logs/${id}`,
+        path: `/api/v5/logs/system-logs/${id}`,
         method: "GET",
         secure: true,
         ...params,
@@ -13269,13 +13955,20 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Maps
-     * @name V4MapsList
+     * @name V5MapsList
      * @summary Get maps by condition
-     * @request GET:/api/v4/maps
+     * @request GET:/api/v5/maps
      * @secure
      */
-    v4MapsList: (
+    v5MapsList: (
       query?: {
+        /**
+         * Map Id
+         * @format int32
+         * @min 1
+         * @max 32767
+         */
+        Id?: number;
         /**
          * Maps Name
          * @minLength 0
@@ -13305,7 +13998,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       params: RequestParams = {},
     ) =>
       this.request<any, GetMapsRespApiRespBase>({
-        path: `/api/v4/maps`,
+        path: `/api/v5/maps`,
         method: "GET",
         query: query,
         secure: true,
@@ -13316,12 +14009,12 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Maps
-     * @name V4MapsCreate
+     * @name V5MapsCreate
      * @summary Add new game map
-     * @request POST:/api/v4/maps
+     * @request POST:/api/v5/maps
      * @secure
      */
-    v4MapsCreate: (
+    v5MapsCreate: (
       data: {
         /**
          * Game Map Name
@@ -13345,7 +14038,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       params: RequestParams = {},
     ) =>
       this.request<any, AddMapRespApiRespBase>({
-        path: `/api/v4/maps`,
+        path: `/api/v5/maps`,
         method: "POST",
         body: data,
         secure: true,
@@ -13357,14 +14050,14 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Maps
-     * @name V4MapsDetail
+     * @name V5MapsDetail
      * @summary Get game map
-     * @request GET:/api/v4/maps/{id}
+     * @request GET:/api/v5/maps/{id}
      * @secure
      */
-    v4MapsDetail: (id: number, params: RequestParams = {}) =>
+    v5MapsDetail: (id: number, params: RequestParams = {}) =>
       this.request<any, GetMapRespApiRespBase>({
-        path: `/api/v4/maps/${id}`,
+        path: `/api/v5/maps/${id}`,
         method: "GET",
         secure: true,
         ...params,
@@ -13374,12 +14067,12 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Maps
-     * @name V4MapsPartialUpdate
+     * @name V5MapsPartialUpdate
      * @summary Modify game map
-     * @request PATCH:/api/v4/maps/{id}
+     * @request PATCH:/api/v5/maps/{id}
      * @secure
      */
-    v4MapsPartialUpdate: (
+    v5MapsPartialUpdate: (
       id: number,
       data: {
         /**
@@ -13411,7 +14104,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       params: RequestParams = {},
     ) =>
       this.request<any, ModMapRespApiRespBase>({
-        path: `/api/v4/maps/${id}`,
+        path: `/api/v5/maps/${id}`,
         method: "PATCH",
         body: data,
         secure: true,
@@ -13423,14 +14116,14 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Maps
-     * @name V4MapsDelete
+     * @name V5MapsDelete
      * @summary Delete game map
-     * @request DELETE:/api/v4/maps/{id}
+     * @request DELETE:/api/v5/maps/{id}
      * @secure
      */
-    v4MapsDelete: (id: number, params: RequestParams = {}) =>
+    v5MapsDelete: (id: number, params: RequestParams = {}) =>
       this.request<any, DelMapRespApiRespBase>({
-        path: `/api/v4/maps/${id}`,
+        path: `/api/v5/maps/${id}`,
         method: "DELETE",
         secure: true,
         ...params,
@@ -13440,14 +14133,14 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Maps
-     * @name V4MapsTranslationsDetail
+     * @name V5MapsTranslationsDetail
      * @summary Get game map translations
-     * @request GET:/api/v4/maps/{id}/translations
+     * @request GET:/api/v5/maps/{id}/translations
      * @secure
      */
-    v4MapsTranslationsDetail: (id: number, params: RequestParams = {}) =>
+    v5MapsTranslationsDetail: (id: number, params: RequestParams = {}) =>
       this.request<any, GetMapTranslationsRespApiRespBase>({
-        path: `/api/v4/maps/${id}/translations`,
+        path: `/api/v5/maps/${id}/translations`,
         method: "GET",
         secure: true,
         ...params,
@@ -13457,14 +14150,14 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Maps
-     * @name V4MapsTranslationsPartialUpdate
+     * @name V5MapsTranslationsPartialUpdate
      * @summary Modify game map translations
-     * @request PATCH:/api/v4/maps/{id}/translations
+     * @request PATCH:/api/v5/maps/{id}/translations
      * @secure
      */
-    v4MapsTranslationsPartialUpdate: (id: number, data: ModMapTranslationsReq, params: RequestParams = {}) =>
+    v5MapsTranslationsPartialUpdate: (id: number, data: ModMapTranslationsReq, params: RequestParams = {}) =>
       this.request<any, ModMapTranslationsRespApiRespBase>({
-        path: `/api/v4/maps/${id}/translations`,
+        path: `/api/v5/maps/${id}/translations`,
         method: "PATCH",
         body: data,
         secure: true,
@@ -13476,12 +14169,12 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Maps
-     * @name V4MapsFuzzyList
+     * @name V5MapsFuzzyList
      * @summary Get fuzzy maps
-     * @request GET:/api/v4/maps/fuzzy
+     * @request GET:/api/v5/maps/fuzzy
      * @secure
      */
-    v4MapsFuzzyList: (
+    v5MapsFuzzyList: (
       query: {
         /**
          * Game id
@@ -13507,7 +14200,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       params: RequestParams = {},
     ) =>
       this.request<any, GetFuzzyMapsRespApiRespBase>({
-        path: `/api/v4/maps/fuzzy`,
+        path: `/api/v5/maps/fuzzy`,
         method: "GET",
         query: query,
         secure: true,
@@ -13518,13 +14211,20 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Media
-     * @name V4MediaStreamsList
+     * @name V5MediaStreamsList
      * @summary Get media streams by condition
-     * @request GET:/api/v4/media/streams
+     * @request GET:/api/v5/media/streams
      * @secure
      */
-    v4MediaStreamsList: (
+    v5MediaStreamsList: (
       query?: {
+        /**
+         * Media item Id
+         * @format int32
+         * @min 1
+         * @max 2147483647
+         */
+        Id?: number;
         /**
          * Title
          * @minLength 0
@@ -13532,11 +14232,12 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
          */
         Title?: string;
         /**
-         * Creator(Username)
-         * @minLength 0
-         * @maxLength 20
+         * Created user id
+         * @format int32
+         * @min -2147483648
+         * @max 2147483647
          */
-        Creator?: string;
+        CreatedUserId?: number;
         /** Platform Id (TwitchTV = 1,Youtube_Channel = 10,Youtube_Stream = 11,Other = 99) */
         PlatformId?: EnumPlatform;
         /**
@@ -13580,7 +14281,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       params: RequestParams = {},
     ) =>
       this.request<any, GetStreamsRespApiRespBase>({
-        path: `/api/v4/media/streams`,
+        path: `/api/v5/media/streams`,
         method: "GET",
         query: query,
         secure: true,
@@ -13591,12 +14292,12 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Media
-     * @name V4MediaStreamsCreate
+     * @name V5MediaStreamsCreate
      * @summary Add new media stream
-     * @request POST:/api/v4/media/streams
+     * @request POST:/api/v5/media/streams
      * @secure
      */
-    v4MediaStreamsCreate: (
+    v5MediaStreamsCreate: (
       data: {
         Platform: EnumPlatform;
         /**
@@ -13662,7 +14363,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       params: RequestParams = {},
     ) =>
       this.request<any, AddStreamRespApiRespBase>({
-        path: `/api/v4/media/streams`,
+        path: `/api/v5/media/streams`,
         method: "POST",
         body: data,
         secure: true,
@@ -13674,14 +14375,14 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Media
-     * @name V4MediaStreamsDetail
+     * @name V5MediaStreamsDetail
      * @summary Get media stream detail
-     * @request GET:/api/v4/media/streams/{id}
+     * @request GET:/api/v5/media/streams/{id}
      * @secure
      */
-    v4MediaStreamsDetail: (id: number, params: RequestParams = {}) =>
+    v5MediaStreamsDetail: (id: number, params: RequestParams = {}) =>
       this.request<any, GetStreamRespApiRespBase>({
-        path: `/api/v4/media/streams/${id}`,
+        path: `/api/v5/media/streams/${id}`,
         method: "GET",
         secure: true,
         ...params,
@@ -13691,12 +14392,12 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Media
-     * @name V4MediaStreamsPartialUpdate
+     * @name V5MediaStreamsPartialUpdate
      * @summary Modify media stream
-     * @request PATCH:/api/v4/media/streams/{id}
+     * @request PATCH:/api/v5/media/streams/{id}
      * @secure
      */
-    v4MediaStreamsPartialUpdate: (
+    v5MediaStreamsPartialUpdate: (
       id: number,
       data: {
         /**
@@ -13770,7 +14471,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       params: RequestParams = {},
     ) =>
       this.request<any, ModStreamRespApiRespBase>({
-        path: `/api/v4/media/streams/${id}`,
+        path: `/api/v5/media/streams/${id}`,
         method: "PATCH",
         body: data,
         secure: true,
@@ -13782,14 +14483,14 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Media
-     * @name V4MediaStreamsDelete
+     * @name V5MediaStreamsDelete
      * @summary Delete media stream
-     * @request DELETE:/api/v4/media/streams/{id}
+     * @request DELETE:/api/v5/media/streams/{id}
      * @secure
      */
-    v4MediaStreamsDelete: (id: number, params: RequestParams = {}) =>
+    v5MediaStreamsDelete: (id: number, params: RequestParams = {}) =>
       this.request<any, DelStreamRespApiRespBase>({
-        path: `/api/v4/media/streams/${id}`,
+        path: `/api/v5/media/streams/${id}`,
         method: "DELETE",
         secure: true,
         ...params,
@@ -13799,17 +14500,17 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Media
-     * @name V4MediaFuzzyStreamsList
+     * @name V5MediaFuzzyStreamsList
      * @summary Get fuzzy media streams
-     * @request GET:/api/v4/media/fuzzy-streams
+     * @request GET:/api/v5/media/fuzzy-streams
      * @secure
      */
-    v4MediaFuzzyStreamsList: (
+    v5MediaFuzzyStreamsList: (
       query?: {
         /**
          * FuzzyPrefix
          * @minLength 0
-         * @maxLength 20
+         * @maxLength 60
          */
         FuzzyPrefix?: string;
         /**
@@ -13822,7 +14523,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       params: RequestParams = {},
     ) =>
       this.request<any, GetFuzzyMediaStreamsRespApiRespBase>({
-        path: `/api/v4/media/fuzzy-streams`,
+        path: `/api/v5/media/fuzzy-streams`,
         method: "GET",
         query: query,
         secure: true,
@@ -13833,17 +14534,17 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Media
-     * @name V4MediaFuzzyVideosList
+     * @name V5MediaFuzzyVideosList
      * @summary Get fuzzy media videos
-     * @request GET:/api/v4/media/fuzzy-videos
+     * @request GET:/api/v5/media/fuzzy-videos
      * @secure
      */
-    v4MediaFuzzyVideosList: (
+    v5MediaFuzzyVideosList: (
       query?: {
         /**
          * FuzzyPrefix
          * @minLength 0
-         * @maxLength 20
+         * @maxLength 60
          */
         FuzzyPrefix?: string;
         /**
@@ -13856,7 +14557,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       params: RequestParams = {},
     ) =>
       this.request<any, GetFuzzyMediaVideosRespApiRespBase>({
-        path: `/api/v4/media/fuzzy-videos`,
+        path: `/api/v5/media/fuzzy-videos`,
         method: "GET",
         query: query,
         secure: true,
@@ -13866,15 +14567,44 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     /**
      * No description
      *
-     * @tags MediaVods
-     * @name V4MediaVodsHostOptionsList
-     * @summary Get media vod host options
-     * @request GET:/api/v4/media/vods/host-options
+     * @tags Media
+     * @name V5MediaStreamsRemoteUpdatePartialUpdate
+     * @summary Remote update media stream
+     * @request PATCH:/api/v5/media/streams/remote-update
      * @secure
      */
-    v4MediaVodsHostOptionsList: (params: RequestParams = {}) =>
+    v5MediaStreamsRemoteUpdatePartialUpdate: (
+      data: {
+        /**
+         * @format int32
+         * @min 1
+         * @max 2147483647
+         */
+        MediaItemId: number;
+      },
+      params: RequestParams = {},
+    ) =>
+      this.request<any, UpdateStreamRespApiRespBase>({
+        path: `/api/v5/media/streams/remote-update`,
+        method: "PATCH",
+        body: data,
+        secure: true,
+        type: ContentType.FormData,
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags MediaVods
+     * @name V5MediaVodsHostOptionsList
+     * @summary Get media vod host options
+     * @request GET:/api/v5/media/vods/host-options
+     * @secure
+     */
+    v5MediaVodsHostOptionsList: (params: RequestParams = {}) =>
       this.request<any, GetMediaVodHostOptionsResp>({
-        path: `/api/v4/media/vods/host-options`,
+        path: `/api/v5/media/vods/host-options`,
         method: "GET",
         secure: true,
         ...params,
@@ -13884,12 +14614,12 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags MediaVods
-     * @name V4MediaVodsList
+     * @name V5MediaVodsList
      * @summary Get media vods
-     * @request GET:/api/v4/media/vods
+     * @request GET:/api/v5/media/vods
      * @secure
      */
-    v4MediaVodsList: (
+    v5MediaVodsList: (
       query?: {
         /**
          * Vod id
@@ -13930,11 +14660,14 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
          */
         CreatedTo?: number;
         /**
-         * Creator user name
-         * @minLength 3
-         * @maxLength 20
+         * Created user id
+         * @format int32
+         * @min -2147483648
+         * @max 2147483647
          */
-        Creator?: string;
+        CreatedUserId?: number;
+        /** Is Featured */
+        IsFeatured?: boolean;
         /**
          * @format int32
          * @min 1
@@ -13951,7 +14684,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       params: RequestParams = {},
     ) =>
       this.request<any, GetMediaVodsRespApiRespBase>({
-        path: `/api/v4/media/vods`,
+        path: `/api/v5/media/vods`,
         method: "GET",
         query: query,
         secure: true,
@@ -13962,14 +14695,14 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags MediaVods
-     * @name V4MediaVodsCreate
+     * @name V5MediaVodsCreate
      * @summary Add media vod
-     * @request POST:/api/v4/media/vods
+     * @request POST:/api/v5/media/vods
      * @secure
      */
-    v4MediaVodsCreate: (data: AddMediaVodReq, params: RequestParams = {}) =>
+    v5MediaVodsCreate: (data: AddMediaVodReq, params: RequestParams = {}) =>
       this.request<any, AddMediaVodRespApiRespBase>({
-        path: `/api/v4/media/vods`,
+        path: `/api/v5/media/vods`,
         method: "POST",
         body: data,
         secure: true,
@@ -13981,14 +14714,14 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags MediaVods
-     * @name V4MediaVodsDetail
+     * @name V5MediaVodsDetail
      * @summary Get media vod
-     * @request GET:/api/v4/media/vods/{id}
+     * @request GET:/api/v5/media/vods/{id}
      * @secure
      */
-    v4MediaVodsDetail: (id: number, params: RequestParams = {}) =>
+    v5MediaVodsDetail: (id: number, params: RequestParams = {}) =>
       this.request<any, GetMediaVodRespApiRespBase>({
-        path: `/api/v4/media/vods/${id}`,
+        path: `/api/v5/media/vods/${id}`,
         method: "GET",
         secure: true,
         ...params,
@@ -13998,14 +14731,14 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags MediaVods
-     * @name V4MediaVodsPartialUpdate
+     * @name V5MediaVodsPartialUpdate
      * @summary Modify media vod
-     * @request PATCH:/api/v4/media/vods/{id}
+     * @request PATCH:/api/v5/media/vods/{id}
      * @secure
      */
-    v4MediaVodsPartialUpdate: (id: number, data: ModMediaVodReq, params: RequestParams = {}) =>
+    v5MediaVodsPartialUpdate: (id: number, data: ModMediaVodReq, params: RequestParams = {}) =>
       this.request<any, ModMediaVodRespApiRespBase>({
-        path: `/api/v4/media/vods/${id}`,
+        path: `/api/v5/media/vods/${id}`,
         method: "PATCH",
         body: data,
         secure: true,
@@ -14017,14 +14750,14 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags MediaVods
-     * @name V4MediaVodsDelete
+     * @name V5MediaVodsDelete
      * @summary Delete media vod
-     * @request DELETE:/api/v4/media/vods/{id}
+     * @request DELETE:/api/v5/media/vods/{id}
      * @secure
      */
-    v4MediaVodsDelete: (id: number, params: RequestParams = {}) =>
+    v5MediaVodsDelete: (id: number, params: RequestParams = {}) =>
       this.request<any, DelMediaVodRespApiRespBase>({
-        path: `/api/v4/media/vods/${id}`,
+        path: `/api/v5/media/vods/${id}`,
         method: "DELETE",
         secure: true,
         ...params,
@@ -14034,13 +14767,18 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags MediaVods
-     * @name V4MediaVodsDownloadCsvList
+     * @name V5MediaVodsDownloadCsvList
      * @summary Download media vods csv
-     * @request GET:/api/v4/media/vods/download-csv
+     * @request GET:/api/v5/media/vods/download-csv
      * @secure
      */
-    v4MediaVodsDownloadCsvList: (
+    v5MediaVodsDownloadCsvList: (
       query?: {
+        /**
+         * Site section ids
+         * Format=1,2,3,4,5,6
+         */
+        SiteSectionIdsStr?: string;
         /**
          * Page size
          * @format int32
@@ -14074,8 +14812,6 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
          * @maxLength 40
          */
         HostVideoId?: string;
-        /** Site section ids */
-        SiteSectionIds?: number[];
         /**
          * Created From
          * @format int64
@@ -14087,13 +14823,16 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
          */
         CreatedTo?: number;
         /**
-         * Creator user name
-         * @minLength 3
-         * @maxLength 20
+         * Created user id
+         * @format int32
+         * @min -2147483648
+         * @max 2147483647
          */
-        Creator?: string;
+        CreatedUserId?: number;
+        /** Is Featured */
+        IsFeatured?: boolean;
         /**
-         * @format int32  
+         * @format int32
          * @min 1
          * @max 2147483647
          */
@@ -14102,7 +14841,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       params: RequestParams = {},
     ) =>
       this.request<void, any>({
-        path: `/api/v4/media/vods/download-csv`,
+        path: `/api/v5/media/vods/download-csv`,
         method: "GET",
         query: query,
         secure: true,
@@ -14113,13 +14852,20 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Modes
-     * @name V4ModesList
+     * @name V5ModesList
      * @summary Get modes by condition
-     * @request GET:/api/v4/modes
+     * @request GET:/api/v5/modes
      * @secure
      */
-    v4ModesList: (
+    v5ModesList: (
       query?: {
+        /**
+         * Modes Id
+         * @format int32
+         * @min 1
+         * @max 32767
+         */
+        Id?: number;
         /**
          * Modes Name
          * @minLength 0
@@ -14155,7 +14901,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       params: RequestParams = {},
     ) =>
       this.request<any, GetModesRespApiRespBase>({
-        path: `/api/v4/modes`,
+        path: `/api/v5/modes`,
         method: "GET",
         query: query,
         secure: true,
@@ -14166,14 +14912,14 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Modes
-     * @name V4ModesCreate
+     * @name V5ModesCreate
      * @summary Add new game mode
-     * @request POST:/api/v4/modes
+     * @request POST:/api/v5/modes
      * @secure
      */
-    v4ModesCreate: (data: AddModeReq, params: RequestParams = {}) =>
+    v5ModesCreate: (data: AddModeReq, params: RequestParams = {}) =>
       this.request<any, AddModeRespApiRespBase>({
-        path: `/api/v4/modes`,
+        path: `/api/v5/modes`,
         method: "POST",
         body: data,
         secure: true,
@@ -14185,14 +14931,14 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Modes
-     * @name V4ModesDetail
+     * @name V5ModesDetail
      * @summary Get game mode
-     * @request GET:/api/v4/modes/{id}
+     * @request GET:/api/v5/modes/{id}
      * @secure
      */
-    v4ModesDetail: (id: number, params: RequestParams = {}) =>
+    v5ModesDetail: (id: number, params: RequestParams = {}) =>
       this.request<any, GetModeRespApiRespBase>({
-        path: `/api/v4/modes/${id}`,
+        path: `/api/v5/modes/${id}`,
         method: "GET",
         secure: true,
         ...params,
@@ -14202,14 +14948,14 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Modes
-     * @name V4ModesPartialUpdate
+     * @name V5ModesPartialUpdate
      * @summary Modify game mode
-     * @request PATCH:/api/v4/modes/{id}
+     * @request PATCH:/api/v5/modes/{id}
      * @secure
      */
-    v4ModesPartialUpdate: (id: number, data: ModModeReq, params: RequestParams = {}) =>
+    v5ModesPartialUpdate: (id: number, data: ModModeReq, params: RequestParams = {}) =>
       this.request<any, ModModeRespApiRespBase>({
-        path: `/api/v4/modes/${id}`,
+        path: `/api/v5/modes/${id}`,
         method: "PATCH",
         body: data,
         secure: true,
@@ -14221,14 +14967,14 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Modes
-     * @name V4ModesDelete
+     * @name V5ModesDelete
      * @summary Delete game mode
-     * @request DELETE:/api/v4/modes/{id}
+     * @request DELETE:/api/v5/modes/{id}
      * @secure
      */
-    v4ModesDelete: (id: number, params: RequestParams = {}) =>
+    v5ModesDelete: (id: number, params: RequestParams = {}) =>
       this.request<any, DelModeRespApiRespBase>({
-        path: `/api/v4/modes/${id}`,
+        path: `/api/v5/modes/${id}`,
         method: "DELETE",
         secure: true,
         ...params,
@@ -14238,14 +14984,14 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Modes
-     * @name V4ModesTranslationsDetail
+     * @name V5ModesTranslationsDetail
      * @summary Get game mode translations
-     * @request GET:/api/v4/modes/{id}/translations
+     * @request GET:/api/v5/modes/{id}/translations
      * @secure
      */
-    v4ModesTranslationsDetail: (id: number, params: RequestParams = {}) =>
+    v5ModesTranslationsDetail: (id: number, params: RequestParams = {}) =>
       this.request<any, GetModeTranslationsRespApiRespBase>({
-        path: `/api/v4/modes/${id}/translations`,
+        path: `/api/v5/modes/${id}/translations`,
         method: "GET",
         secure: true,
         ...params,
@@ -14255,14 +15001,14 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Modes
-     * @name V4ModesTranslationsPartialUpdate
+     * @name V5ModesTranslationsPartialUpdate
      * @summary Modify game mode translations
-     * @request PATCH:/api/v4/modes/{id}/translations
+     * @request PATCH:/api/v5/modes/{id}/translations
      * @secure
      */
-    v4ModesTranslationsPartialUpdate: (id: number, data: ModModeTranslationsReq, params: RequestParams = {}) =>
+    v5ModesTranslationsPartialUpdate: (id: number, data: ModModeTranslationsReq, params: RequestParams = {}) =>
       this.request<any, ModModeTranslationsRespApiRespBase>({
-        path: `/api/v4/modes/${id}/translations`,
+        path: `/api/v5/modes/${id}/translations`,
         method: "PATCH",
         body: data,
         secure: true,
@@ -14274,12 +15020,12 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Modes
-     * @name V4ModesOptionsList
+     * @name V5ModesOptionsList
      * @summary Get modes options
-     * @request GET:/api/v4/modes/options
+     * @request GET:/api/v5/modes/options
      * @secure
      */
-    v4ModesOptionsList: (
+    v5ModesOptionsList: (
       query: {
         /**
          * Game id
@@ -14292,7 +15038,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       params: RequestParams = {},
     ) =>
       this.request<any, Int16ItemListApiRespBase>({
-        path: `/api/v4/modes/options`,
+        path: `/api/v5/modes/options`,
         method: "GET",
         query: query,
         secure: true,
@@ -14303,12 +15049,12 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags NotificationTemplates
-     * @name V4MessagingNotificationTemplatesList
+     * @name V5MessagingNotificationTemplatesList
      * @summary Get Notification Templates
-     * @request GET:/api/v4/messaging-notification-templates
+     * @request GET:/api/v5/messaging-notification-templates
      * @secure
      */
-    v4MessagingNotificationTemplatesList: (
+    v5MessagingNotificationTemplatesList: (
       query?: {
         /**
          * Frontend id
@@ -14336,7 +15082,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       params: RequestParams = {},
     ) =>
       this.request<any, GetNotificationTemplatesRespApiRespBase>({
-        path: `/api/v4/messaging-notification-templates`,
+        path: `/api/v5/messaging-notification-templates`,
         method: "GET",
         query: query,
         secure: true,
@@ -14347,14 +15093,14 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags NotificationTemplates
-     * @name V4MessagingNotificationTemplatesCreate
+     * @name V5MessagingNotificationTemplatesCreate
      * @summary Add Notification Template
-     * @request POST:/api/v4/messaging-notification-templates
+     * @request POST:/api/v5/messaging-notification-templates
      * @secure
      */
-    v4MessagingNotificationTemplatesCreate: (data: AddNotificationTemplateReq, params: RequestParams = {}) =>
+    v5MessagingNotificationTemplatesCreate: (data: AddNotificationTemplateReq, params: RequestParams = {}) =>
       this.request<any, AddNotificationTemplateRespApiRespBase>({
-        path: `/api/v4/messaging-notification-templates`,
+        path: `/api/v5/messaging-notification-templates`,
         method: "POST",
         body: data,
         secure: true,
@@ -14366,14 +15112,14 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags NotificationTemplates
-     * @name V4MessagingNotificationTemplatesDetail
+     * @name V5MessagingNotificationTemplatesDetail
      * @summary Get Notification Template
-     * @request GET:/api/v4/messaging-notification-templates/{id}
+     * @request GET:/api/v5/messaging-notification-templates/{id}
      * @secure
      */
-    v4MessagingNotificationTemplatesDetail: (id: number, params: RequestParams = {}) =>
+    v5MessagingNotificationTemplatesDetail: (id: number, params: RequestParams = {}) =>
       this.request<any, GetNotificationTemplateRespApiRespBase>({
-        path: `/api/v4/messaging-notification-templates/${id}`,
+        path: `/api/v5/messaging-notification-templates/${id}`,
         method: "GET",
         secure: true,
         ...params,
@@ -14383,18 +15129,18 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags NotificationTemplates
-     * @name V4MessagingNotificationTemplatesPartialUpdate
+     * @name V5MessagingNotificationTemplatesPartialUpdate
      * @summary Modify Notification Template
-     * @request PATCH:/api/v4/messaging-notification-templates/{id}
+     * @request PATCH:/api/v5/messaging-notification-templates/{id}
      * @secure
      */
-    v4MessagingNotificationTemplatesPartialUpdate: (
+    v5MessagingNotificationTemplatesPartialUpdate: (
       id: number,
       data: ModNotificationTemplateReq,
       params: RequestParams = {},
     ) =>
       this.request<any, ModNotificationTemplateRespApiRespBase>({
-        path: `/api/v4/messaging-notification-templates/${id}`,
+        path: `/api/v5/messaging-notification-templates/${id}`,
         method: "PATCH",
         body: data,
         secure: true,
@@ -14406,14 +15152,14 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags NotificationTemplates
-     * @name V4MessagingNotificationTemplatesDelete
+     * @name V5MessagingNotificationTemplatesDelete
      * @summary Delete Notification Template
-     * @request DELETE:/api/v4/messaging-notification-templates/{id}
+     * @request DELETE:/api/v5/messaging-notification-templates/{id}
      * @secure
      */
-    v4MessagingNotificationTemplatesDelete: (id: number, params: RequestParams = {}) =>
+    v5MessagingNotificationTemplatesDelete: (id: number, params: RequestParams = {}) =>
       this.request<any, DelNotificationTemplateRespApiRespBase>({
-        path: `/api/v4/messaging-notification-templates/${id}`,
+        path: `/api/v5/messaging-notification-templates/${id}`,
         method: "DELETE",
         secure: true,
         ...params,
@@ -14423,12 +15169,12 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags OneSignalApps
-     * @name V4MessagingOnesignalAppsList
+     * @name V5MessagingOnesignalAppsList
      * @summary Get One Signal Apps
-     * @request GET:/api/v4/messaging-onesignal-apps
+     * @request GET:/api/v5/messaging-onesignal-apps
      * @secure
      */
-    v4MessagingOnesignalAppsList: (
+    v5MessagingOnesignalAppsList: (
       query?: {
         /**
          * @format int32
@@ -14446,7 +15192,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       params: RequestParams = {},
     ) =>
       this.request<any, GetOneSignalAppsRespApiRespBase>({
-        path: `/api/v4/messaging-onesignal-apps`,
+        path: `/api/v5/messaging-onesignal-apps`,
         method: "GET",
         query: query,
         secure: true,
@@ -14457,14 +15203,14 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags OneSignalApps
-     * @name V4MessagingOnesignalAppsCreate
+     * @name V5MessagingOnesignalAppsCreate
      * @summary Add One Signal App
-     * @request POST:/api/v4/messaging-onesignal-apps
+     * @request POST:/api/v5/messaging-onesignal-apps
      * @secure
      */
-    v4MessagingOnesignalAppsCreate: (data: AddOneSignalAppReq, params: RequestParams = {}) =>
+    v5MessagingOnesignalAppsCreate: (data: AddOneSignalAppReq, params: RequestParams = {}) =>
       this.request<any, AddOneSignalAppRespApiRespBase>({
-        path: `/api/v4/messaging-onesignal-apps`,
+        path: `/api/v5/messaging-onesignal-apps`,
         method: "POST",
         body: data,
         secure: true,
@@ -14476,14 +15222,14 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags OneSignalApps
-     * @name V4MessagingOnesignalAppsDetail
+     * @name V5MessagingOnesignalAppsDetail
      * @summary Get One Signal App
-     * @request GET:/api/v4/messaging-onesignal-apps/{id}
+     * @request GET:/api/v5/messaging-onesignal-apps/{id}
      * @secure
      */
-    v4MessagingOnesignalAppsDetail: (id: number, params: RequestParams = {}) =>
+    v5MessagingOnesignalAppsDetail: (id: number, params: RequestParams = {}) =>
       this.request<any, GetOneSignalAppRespApiRespBase>({
-        path: `/api/v4/messaging-onesignal-apps/${id}`,
+        path: `/api/v5/messaging-onesignal-apps/${id}`,
         method: "GET",
         secure: true,
         ...params,
@@ -14493,14 +15239,14 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags OneSignalApps
-     * @name V4MessagingOnesignalAppsPartialUpdate
+     * @name V5MessagingOnesignalAppsPartialUpdate
      * @summary Modify One Signal App
-     * @request PATCH:/api/v4/messaging-onesignal-apps/{id}
+     * @request PATCH:/api/v5/messaging-onesignal-apps/{id}
      * @secure
      */
-    v4MessagingOnesignalAppsPartialUpdate: (id: number, data: ModOneSignalAppReq, params: RequestParams = {}) =>
+    v5MessagingOnesignalAppsPartialUpdate: (id: number, data: ModOneSignalAppReq, params: RequestParams = {}) =>
       this.request<any, ModOneSignalAppRespApiRespBase>({
-        path: `/api/v4/messaging-onesignal-apps/${id}`,
+        path: `/api/v5/messaging-onesignal-apps/${id}`,
         method: "PATCH",
         body: data,
         secure: true,
@@ -14512,14 +15258,14 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags OneSignalApps
-     * @name V4MessagingOnesignalAppsDelete
+     * @name V5MessagingOnesignalAppsDelete
      * @summary Delete One Signal App
-     * @request DELETE:/api/v4/messaging-onesignal-apps/{id}
+     * @request DELETE:/api/v5/messaging-onesignal-apps/{id}
      * @secure
      */
-    v4MessagingOnesignalAppsDelete: (id: number, params: RequestParams = {}) =>
+    v5MessagingOnesignalAppsDelete: (id: number, params: RequestParams = {}) =>
       this.request<any, DelOneSignalAppRespApiRespBase>({
-        path: `/api/v4/messaging-onesignal-apps/${id}`,
+        path: `/api/v5/messaging-onesignal-apps/${id}`,
         method: "DELETE",
         secure: true,
         ...params,
@@ -14529,14 +15275,14 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Options
-     * @name V4OptionsStatesList
+     * @name V5OptionsStatesList
      * @summary Get state options
-     * @request GET:/api/v4/options/states
+     * @request GET:/api/v5/options/states
      * @secure
      */
-    v4OptionsStatesList: (params: RequestParams = {}) =>
+    v5OptionsStatesList: (params: RequestParams = {}) =>
       this.request<any, GetStateOptionsRespApiRespBase>({
-        path: `/api/v4/options/states`,
+        path: `/api/v5/options/states`,
         method: "GET",
         secure: true,
         ...params,
@@ -14546,14 +15292,14 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Options
-     * @name V4OptionsContactTypesList
+     * @name V5OptionsContactTypesList
      * @summary Get contact types
-     * @request GET:/api/v4/options/contact-types
+     * @request GET:/api/v5/options/contact-types
      * @secure
      */
-    v4OptionsContactTypesList: (params: RequestParams = {}) =>
+    v5OptionsContactTypesList: (params: RequestParams = {}) =>
       this.request<any, GetContactTypesRespApiRespBase>({
-        path: `/api/v4/options/contact-types`,
+        path: `/api/v5/options/contact-types`,
         method: "GET",
         secure: true,
         ...params,
@@ -14563,138 +15309,20 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Options
-     * @name V4OptionsFrontendsList
+     * @name V5OptionsFrontendsList
      * @summary Get frontend options
-     * @request GET:/api/v4/options/frontends
+     * @request GET:/api/v5/options/frontends
      * @secure
      */
-    v4OptionsFrontendsList: (params: RequestParams = {}) =>
-      this.request<any, GetFrontendOptionsRespApiRespBase>({
-        path: `/api/v4/options/frontends`,
-        method: "GET",
-        secure: true,
-        ...params,
-      }),
-
-    /**
-     * No description
-     *
-     * @tags Options
-     * @name V4OptionsFrontendsByUserList
-     * @summary Get frontend options by user
-     * @request GET:/api/v4/options/frontends-by-user
-     * @secure
-     */
-    v4OptionsFrontendsByUserList: (params: RequestParams = {}) =>
-      this.request<any, GetFrontendOptionsRespApiRespBase>({
-        path: `/api/v4/options/frontends-by-user`,
-        method: "GET",
-        secure: true,
-        ...params,
-      }),
-
-    /**
-     * No description
-     *
-     * @tags Options
-     * @name V4OptionsLocalesList
-     * @summary Get locale options
-     * @request GET:/api/v4/options/locales
-     * @secure
-     */
-    v4OptionsLocalesList: (params: RequestParams = {}) =>
-      this.request<any, GetLocaleOptionsRespApiRespBase>({
-        path: `/api/v4/options/locales`,
-        method: "GET",
-        secure: true,
-        ...params,
-      }),
-
-    /**
-     * No description
-     *
-     * @tags Options
-     * @name V4OptionsFrontendLocalesList
-     * @summary Get frontend locale options
-     * @request GET:/api/v4/options/frontend-locales
-     * @secure
-     */
-    v4OptionsFrontendLocalesList: (params: RequestParams = {}) =>
-      this.request<any, GetFrontendLocaleOptionsRespApiRespBase>({
-        path: `/api/v4/options/frontend-locales`,
-        method: "GET",
-        secure: true,
-        ...params,
-      }),
-
-    /**
-     * No description
-     *
-     * @tags Options
-     * @name V4OptionsSiteSectionsList
-     * @summary Get site section options
-     * @request GET:/api/v4/options/site-sections
-     * @secure
-     */
-    v4OptionsSiteSectionsList: (params: RequestParams = {}) =>
-      this.request<any, GetSiteSectionsOptionsRespApiRespBase>({
-        path: `/api/v4/options/site-sections`,
-        method: "GET",
-        secure: true,
-        ...params,
-      }),
-
-    /**
-     * No description
-     *
-     * @tags Options
-     * @name V4OptionsCountriesList
-     * @summary Get country options
-     * @request GET:/api/v4/options/countries
-     * @secure
-     */
-    v4OptionsCountriesList: (params: RequestParams = {}) =>
-      this.request<any, GetCountryOptionsRespApiRespBase>({
-        path: `/api/v4/options/countries`,
-        method: "GET",
-        secure: true,
-        ...params,
-      }),
-
-    /**
-     * No description
-     *
-     * @tags Options
-     * @name V4OptionsGendersList
-     * @summary Get gender options
-     * @request GET:/api/v4/options/genders
-     * @secure
-     */
-    v4OptionsGendersList: (params: RequestParams = {}) =>
-      this.request<any, GetGenderOptionsRespApiRespBase>({
-        path: `/api/v4/options/genders`,
-        method: "GET",
-        secure: true,
-        ...params,
-      }),
-
-    /**
-     * No description
-     *
-     * @tags Options
-     * @name V4OptionsProxyList
-     * @summary Get GG Code Info
-     * @request GET:/api/v4/options/proxy
-     * @secure
-     */
-    v4OptionsProxyList: (
+    v5OptionsFrontendsList: (
       query?: {
-        url?: string;
+        /** Include all options */
+        IncludeAll?: boolean;
       },
       params: RequestParams = {},
     ) =>
-      this.request<any, GetGgCodeInfoRespApiRespBase>({
-        path: `/api/v4/options/proxy`,
+      this.request<any, GetFrontendOptionsRespApiRespBase>({
+        path: `/api/v5/options/frontends`,
         method: "GET",
         query: query,
         secure: true,
@@ -14705,14 +15333,146 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Options
-     * @name V4OptionsNotificationTypesList
+     * @name V5OptionsFrontendsByUserList
+     * @summary Get frontend options by user
+     * @request GET:/api/v5/options/frontends-by-user
+     * @secure
+     */
+    v5OptionsFrontendsByUserList: (
+      query?: {
+        /** Include all options */
+        IncludeAll?: boolean;
+      },
+      params: RequestParams = {},
+    ) =>
+      this.request<any, GetFrontendOptionsRespApiRespBase>({
+        path: `/api/v5/options/frontends-by-user`,
+        method: "GET",
+        query: query,
+        secure: true,
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Options
+     * @name V5OptionsLocalesList
+     * @summary Get locale options
+     * @request GET:/api/v5/options/locales
+     * @secure
+     */
+    v5OptionsLocalesList: (params: RequestParams = {}) =>
+      this.request<any, GetLocaleOptionsRespApiRespBase>({
+        path: `/api/v5/options/locales`,
+        method: "GET",
+        secure: true,
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Options
+     * @name V5OptionsFrontendLocalesList
+     * @summary Get frontend locale options
+     * @request GET:/api/v5/options/frontend-locales
+     * @secure
+     */
+    v5OptionsFrontendLocalesList: (params: RequestParams = {}) =>
+      this.request<any, GetFrontendLocaleOptionsRespApiRespBase>({
+        path: `/api/v5/options/frontend-locales`,
+        method: "GET",
+        secure: true,
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Options
+     * @name V5OptionsSiteSectionsList
+     * @summary Get site section options
+     * @request GET:/api/v5/options/site-sections
+     * @secure
+     */
+    v5OptionsSiteSectionsList: (params: RequestParams = {}) =>
+      this.request<any, GetSiteSectionsOptionsRespApiRespBase>({
+        path: `/api/v5/options/site-sections`,
+        method: "GET",
+        secure: true,
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Options
+     * @name V5OptionsCountriesList
+     * @summary Get country options
+     * @request GET:/api/v5/options/countries
+     * @secure
+     */
+    v5OptionsCountriesList: (params: RequestParams = {}) =>
+      this.request<any, GetCountryOptionsRespApiRespBase>({
+        path: `/api/v5/options/countries`,
+        method: "GET",
+        secure: true,
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Options
+     * @name V5OptionsGendersList
+     * @summary Get gender options
+     * @request GET:/api/v5/options/genders
+     * @secure
+     */
+    v5OptionsGendersList: (params: RequestParams = {}) =>
+      this.request<any, GetGenderOptionsRespApiRespBase>({
+        path: `/api/v5/options/genders`,
+        method: "GET",
+        secure: true,
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Options
+     * @name V5OptionsProxyList
+     * @summary Get GG Code Info
+     * @request GET:/api/v5/options/proxy
+     * @secure
+     */
+    v5OptionsProxyList: (
+      query?: {
+        url?: string;
+      },
+      params: RequestParams = {},
+    ) =>
+      this.request<any, GetGgCodeInfoRespApiRespBase>({
+        path: `/api/v5/options/proxy`,
+        method: "GET",
+        query: query,
+        secure: true,
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Options
+     * @name V5OptionsNotificationTypesList
      * @summary Get Notification Type Options
-     * @request GET:/api/v4/options/notification-types
+     * @request GET:/api/v5/options/notification-types
      * @secure
      */
-    v4OptionsNotificationTypesList: (params: RequestParams = {}) =>
+    v5OptionsNotificationTypesList: (params: RequestParams = {}) =>
       this.request<any, GetNotificationTypeOptionsRespApiRespBase>({
-        path: `/api/v4/options/notification-types`,
+        path: `/api/v5/options/notification-types`,
         method: "GET",
         secure: true,
         ...params,
@@ -14722,14 +15482,14 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Options
-     * @name V4OptionsLanguagesList
+     * @name V5OptionsLanguagesList
      * @summary Get language options
-     * @request GET:/api/v4/options/languages
+     * @request GET:/api/v5/options/languages
      * @secure
      */
-    v4OptionsLanguagesList: (params: RequestParams = {}) =>
+    v5OptionsLanguagesList: (params: RequestParams = {}) =>
       this.request<any, GetLanguagesRespApiRespBase>({
-        path: `/api/v4/options/languages`,
+        path: `/api/v5/options/languages`,
         method: "GET",
         secure: true,
         ...params,
@@ -14739,15 +15499,22 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Options
-     * @name V4OptionsGamesList
+     * @name V5OptionsGamesList
      * @summary Get games options
-     * @request GET:/api/v4/options/games
+     * @request GET:/api/v5/options/games
      * @secure
      */
-    v4OptionsGamesList: (params: RequestParams = {}) =>
+    v5OptionsGamesList: (
+      query?: {
+        /** @default false */
+        includeLegacy?: boolean;
+      },
+      params: RequestParams = {},
+    ) =>
       this.request<any, GetGameOptionsRespApiRespBase>({
-        path: `/api/v4/options/games`,
+        path: `/api/v5/options/games`,
         method: "GET",
+        query: query,
         secure: true,
         ...params,
       }),
@@ -14756,14 +15523,14 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Options
-     * @name V4OptionsBroadcastTalentRolesList
+     * @name V5OptionsBroadcastTalentRolesList
      * @summary Get broadcast talent roles options
-     * @request GET:/api/v4/options/broadcast-talent-roles
+     * @request GET:/api/v5/options/broadcast-talent-roles
      * @secure
      */
-    v4OptionsBroadcastTalentRolesList: (params: RequestParams = {}) =>
+    v5OptionsBroadcastTalentRolesList: (params: RequestParams = {}) =>
       this.request<any, GetBroadcastTalentRoleOptionsRespApiRespBase>({
-        path: `/api/v4/options/broadcast-talent-roles`,
+        path: `/api/v5/options/broadcast-talent-roles`,
         method: "GET",
         secure: true,
         ...params,
@@ -14773,12 +15540,12 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Options
-     * @name V4OptionsServersList
+     * @name V5OptionsServersList
      * @summary Get servers(locations) options
-     * @request GET:/api/v4/options/servers
+     * @request GET:/api/v5/options/servers
      * @secure
      */
-    v4OptionsServersList: (
+    v5OptionsServersList: (
       query?: {
         /** @format int32 */
         gameId?: number;
@@ -14786,7 +15553,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       params: RequestParams = {},
     ) =>
       this.request<any, GetServerOptionsRespListApiRespBase>({
-        path: `/api/v4/options/servers`,
+        path: `/api/v5/options/servers`,
         method: "GET",
         query: query,
         secure: true,
@@ -14797,14 +15564,14 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Options
-     * @name V4OptionsTournamentPointsAwardedList
+     * @name V5OptionsTournamentPointsAwardedList
      * @summary Get tournament points awarded options
-     * @request GET:/api/v4/options/tournament/points-awarded
+     * @request GET:/api/v5/options/tournament/points-awarded
      * @secure
      */
-    v4OptionsTournamentPointsAwardedList: (params: RequestParams = {}) =>
+    v5OptionsTournamentPointsAwardedList: (params: RequestParams = {}) =>
       this.request<any, GetPointsAwardedOptionsRespListApiRespBase>({
-        path: `/api/v4/options/tournament/points-awarded`,
+        path: `/api/v5/options/tournament/points-awarded`,
         method: "GET",
         secure: true,
         ...params,
@@ -14814,14 +15581,14 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Options
-     * @name V4OptionsEarningPrizePoolStatusList
+     * @name V5OptionsEarningPrizePoolStatusList
      * @summary Get earning prize pool status
-     * @request GET:/api/v4/options/earning-prize-pool-status
+     * @request GET:/api/v5/options/earning-prize-pool-status
      * @secure
      */
-    v4OptionsEarningPrizePoolStatusList: (params: RequestParams = {}) =>
+    v5OptionsEarningPrizePoolStatusList: (params: RequestParams = {}) =>
       this.request<any, GetPrizePoolStatusOptionsRespApiRespBase>({
-        path: `/api/v4/options/earning-prize-pool-status`,
+        path: `/api/v5/options/earning-prize-pool-status`,
         method: "GET",
         secure: true,
         ...params,
@@ -14831,14 +15598,14 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Options
-     * @name V4OptionsCurrenciesList
+     * @name V5OptionsCurrenciesList
      * @summary Get currency options
-     * @request GET:/api/v4/options/currencies
+     * @request GET:/api/v5/options/currencies
      * @secure
      */
-    v4OptionsCurrenciesList: (params: RequestParams = {}) =>
+    v5OptionsCurrenciesList: (params: RequestParams = {}) =>
       this.request<any, GetCurrencyOptionsRespApiRespBase>({
-        path: `/api/v4/options/currencies`,
+        path: `/api/v5/options/currencies`,
         method: "GET",
         secure: true,
         ...params,
@@ -14848,14 +15615,14 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Options
-     * @name V4OptionsTournamentStatesList
+     * @name V5OptionsTournamentStatesList
      * @summary Get tournament state options
-     * @request GET:/api/v4/options/tournament-states
+     * @request GET:/api/v5/options/tournament-states
      * @secure
      */
-    v4OptionsTournamentStatesList: (params: RequestParams = {}) =>
+    v5OptionsTournamentStatesList: (params: RequestParams = {}) =>
       this.request<any, GetParentTournamentStateOptionsRespApiRespBase>({
-        path: `/api/v4/options/tournament-states`,
+        path: `/api/v5/options/tournament-states`,
         method: "GET",
         secure: true,
         ...params,
@@ -14865,12 +15632,12 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Options
-     * @name V4OptionsTournamentOpponentsList
+     * @name V5OptionsTournamentOpponentsList
      * @summary Get tournament opponents options
-     * @request GET:/api/v4/options/tournament-opponents
+     * @request GET:/api/v5/options/tournament-opponents
      * @secure
      */
-    v4OptionsTournamentOpponentsList: (
+    v5OptionsTournamentOpponentsList: (
       query?: {
         /**
          * Child tournament id
@@ -14881,7 +15648,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       params: RequestParams = {},
     ) =>
       this.request<any, Int32ItemListApiRespBase>({
-        path: `/api/v4/options/tournament-opponents`,
+        path: `/api/v5/options/tournament-opponents`,
         method: "GET",
         query: query,
         secure: true,
@@ -14892,14 +15659,59 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Options
-     * @name V4OptionsGameResultsList
+     * @name V5OptionsGameResultsList
      * @summary Get game result options
-     * @request GET:/api/v4/options/game-results
+     * @request GET:/api/v5/options/game-results
      * @secure
      */
-    v4OptionsGameResultsList: (params: RequestParams = {}) =>
+    v5OptionsGameResultsList: (params: RequestParams = {}) =>
       this.request<any, Int16ItemListApiRespBase>({
-        path: `/api/v4/options/game-results`,
+        path: `/api/v5/options/game-results`,
+        method: "GET",
+        secure: true,
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Options
+     * @name V5OptionsGameSidesList
+     * @summary Get game side options
+     * @request GET:/api/v5/options/game-sides
+     * @secure
+     */
+    v5OptionsGameSidesList: (
+      query: {
+        /**
+         * @format int32
+         * @min 1
+         * @max 32767
+         */
+        GameId: number;
+      },
+      params: RequestParams = {},
+    ) =>
+      this.request<any, Int16ItemListApiRespBase>({
+        path: `/api/v5/options/game-sides`,
+        method: "GET",
+        query: query,
+        secure: true,
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Options
+     * @name V5OptionsSeoMetadataList
+     * @summary Get seo metadata options
+     * @request GET:/api/v5/options/seo-metadata
+     * @secure
+     */
+    v5OptionsSeoMetadataList: (params: RequestParams = {}) =>
+      this.request<any, SeoMetaDataOptionListApiRespBase>({
+        path: `/api/v5/options/seo-metadata`,
         method: "GET",
         secure: true,
         ...params,
@@ -14909,12 +15721,12 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Pages
-     * @name V4PagesList
+     * @name V5PagesList
      * @summary Get pages byt conditions
-     * @request GET:/api/v4/pages
+     * @request GET:/api/v5/pages
      * @secure
      */
-    v4PagesList: (
+    v5PagesList: (
       query?: {
         /**
          * Title
@@ -14970,7 +15782,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       params: RequestParams = {},
     ) =>
       this.request<any, GetPagesRespApiRespBase>({
-        path: `/api/v4/pages`,
+        path: `/api/v5/pages`,
         method: "GET",
         query: query,
         secure: true,
@@ -14981,14 +15793,14 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Pages
-     * @name V4PagesCreate
+     * @name V5PagesCreate
      * @summary Add page
-     * @request POST:/api/v4/pages
+     * @request POST:/api/v5/pages
      * @secure
      */
-    v4PagesCreate: (data: AddPageReq, params: RequestParams = {}) =>
+    v5PagesCreate: (data: AddPageReq, params: RequestParams = {}) =>
       this.request<any, AddPageRespApiRespBase>({
-        path: `/api/v4/pages`,
+        path: `/api/v5/pages`,
         method: "POST",
         body: data,
         secure: true,
@@ -15000,14 +15812,14 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Pages
-     * @name V4PagesDelete
+     * @name V5PagesDelete
      * @summary Delete page
-     * @request DELETE:/api/v4/pages
+     * @request DELETE:/api/v5/pages
      * @secure
      */
-    v4PagesDelete: (data: DelPageReq, params: RequestParams = {}) =>
+    v5PagesDelete: (data: DelPageReq, params: RequestParams = {}) =>
       this.request<any, DelPageRespApiRespBase>({
-        path: `/api/v4/pages`,
+        path: `/api/v5/pages`,
         method: "DELETE",
         body: data,
         secure: true,
@@ -15019,14 +15831,14 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Pages
-     * @name V4PagesDetail
+     * @name V5PagesDetail
      * @summary Get page
-     * @request GET:/api/v4/pages/{id}
+     * @request GET:/api/v5/pages/{id}
      * @secure
      */
-    v4PagesDetail: (id: number, params: RequestParams = {}) =>
+    v5PagesDetail: (id: number, params: RequestParams = {}) =>
       this.request<any, GetPageRespApiRespBase>({
-        path: `/api/v4/pages/${id}`,
+        path: `/api/v5/pages/${id}`,
         method: "GET",
         secure: true,
         ...params,
@@ -15036,14 +15848,14 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Pages
-     * @name V4PagesPartialUpdate
+     * @name V5PagesPartialUpdate
      * @summary Modify page
-     * @request PATCH:/api/v4/pages/{id}
+     * @request PATCH:/api/v5/pages/{id}
      * @secure
      */
-    v4PagesPartialUpdate: (id: number, data: ModPageReq, params: RequestParams = {}) =>
+    v5PagesPartialUpdate: (id: number, data: ModPageReq, params: RequestParams = {}) =>
       this.request<any, ModPageRespApiRespBase>({
-        path: `/api/v4/pages/${id}`,
+        path: `/api/v5/pages/${id}`,
         method: "PATCH",
         body: data,
         secure: true,
@@ -15055,12 +15867,12 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Players
-     * @name V4PlayersList
+     * @name V5PlayersList
      * @summary Get players
-     * @request GET:/api/v4/players
+     * @request GET:/api/v5/players
      * @secure
      */
-    v4PlayersList: (
+    v5PlayersList: (
       query?: {
         /**
          * Player Id
@@ -15133,7 +15945,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       params: RequestParams = {},
     ) =>
       this.request<any, GetPlayersRespApiRespBase>({
-        path: `/api/v4/players`,
+        path: `/api/v5/players`,
         method: "GET",
         query: query,
         secure: true,
@@ -15144,12 +15956,12 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Players
-     * @name V4PlayersCreate
+     * @name V5PlayersCreate
      * @summary Add player
-     * @request POST:/api/v4/players
+     * @request POST:/api/v5/players
      * @secure
      */
-    v4PlayersCreate: (
+    v5PlayersCreate: (
       data: {
         /**
          * User id
@@ -15239,7 +16051,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       params: RequestParams = {},
     ) =>
       this.request<any, AddPlayerRespApiRespBase>({
-        path: `/api/v4/players`,
+        path: `/api/v5/players`,
         method: "POST",
         body: data,
         secure: true,
@@ -15251,14 +16063,14 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Players
-     * @name V4PlayersDetail
+     * @name V5PlayersDetail
      * @summary Get player
-     * @request GET:/api/v4/players/{id}
+     * @request GET:/api/v5/players/{id}
      * @secure
      */
-    v4PlayersDetail: (id: number, params: RequestParams = {}) =>
+    v5PlayersDetail: (id: number, params: RequestParams = {}) =>
       this.request<any, GetPlayerRespApiRespBase>({
-        path: `/api/v4/players/${id}`,
+        path: `/api/v5/players/${id}`,
         method: "GET",
         secure: true,
         ...params,
@@ -15268,12 +16080,12 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Players
-     * @name V4PlayersPartialUpdate
+     * @name V5PlayersPartialUpdate
      * @summary Modify player
-     * @request PATCH:/api/v4/players/{id}
+     * @request PATCH:/api/v5/players/{id}
      * @secure
      */
-    v4PlayersPartialUpdate: (
+    v5PlayersPartialUpdate: (
       id: number,
       data: {
         /**
@@ -15369,7 +16181,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       params: RequestParams = {},
     ) =>
       this.request<any, ModPlayerRespApiRespBase>({
-        path: `/api/v4/players/${id}`,
+        path: `/api/v5/players/${id}`,
         method: "PATCH",
         body: data,
         secure: true,
@@ -15381,14 +16193,14 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Players
-     * @name V4PlayersDelete
+     * @name V5PlayersDelete
      * @summary Delete player
-     * @request DELETE:/api/v4/players/{id}
+     * @request DELETE:/api/v5/players/{id}
      * @secure
      */
-    v4PlayersDelete: (id: number, params: RequestParams = {}) =>
+    v5PlayersDelete: (id: number, params: RequestParams = {}) =>
       this.request<any, DelPlayerRespApiRespBase>({
-        path: `/api/v4/players/${id}`,
+        path: `/api/v5/players/${id}`,
         method: "DELETE",
         secure: true,
         ...params,
@@ -15398,12 +16210,12 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Players
-     * @name V4PlayersFuzzyList
+     * @name V5PlayersFuzzyList
      * @summary Get fuzzy players
-     * @request GET:/api/v4/players/fuzzy
+     * @request GET:/api/v5/players/fuzzy
      * @secure
      */
-    v4PlayersFuzzyList: (
+    v5PlayersFuzzyList: (
       query: {
         /**
          * Fuzzy prefix
@@ -15422,7 +16234,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       params: RequestParams = {},
     ) =>
       this.request<any, GetFuzzyPlayersRespApiRespBase>({
-        path: `/api/v4/players/fuzzy`,
+        path: `/api/v5/players/fuzzy`,
         method: "GET",
         query: query,
         secure: true,
@@ -15433,14 +16245,14 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Players
-     * @name V4PlayersUsersDetail
+     * @name V5PlayersUsersDetail
      * @summary Get User
-     * @request GET:/api/v4/players/users/{id}
+     * @request GET:/api/v5/players/users/{id}
      * @secure
      */
-    v4PlayersUsersDetail: (id: number, params: RequestParams = {}) =>
+    v5PlayersUsersDetail: (id: number, params: RequestParams = {}) =>
       this.request<any, GetUserForPlayerRespApiRespBase>({
-        path: `/api/v4/players/users/${id}`,
+        path: `/api/v5/players/users/${id}`,
         method: "GET",
         secure: true,
         ...params,
@@ -15450,12 +16262,12 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Players
-     * @name V4PlayersMediaItemsDetail
+     * @name V5PlayersMediaItemsDetail
      * @summary Get player Media items
-     * @request GET:/api/v4/players/{playerid}/media-items
+     * @request GET:/api/v5/players/{playerid}/media-items
      * @secure
      */
-    v4PlayersMediaItemsDetail: (
+    v5PlayersMediaItemsDetail: (
       playerid: number,
       query?: {
         /**
@@ -15474,7 +16286,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       params: RequestParams = {},
     ) =>
       this.request<any, GetPlayerMediaItemsRespApiRespBase>({
-        path: `/api/v4/players/${playerid}/media-items`,
+        path: `/api/v5/players/${playerid}/media-items`,
         method: "GET",
         query: query,
         secure: true,
@@ -15485,12 +16297,12 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Players
-     * @name V4PlayersMediaItemsCreate
+     * @name V5PlayersMediaItemsCreate
      * @summary Add player new Media items
-     * @request POST:/api/v4/players/{playerid}/media-items
+     * @request POST:/api/v5/players/{playerid}/media-items
      * @secure
      */
-    v4PlayersMediaItemsCreate: (
+    v5PlayersMediaItemsCreate: (
       playerid: number,
       query: {
         /** Media item Ids */
@@ -15499,7 +16311,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       params: RequestParams = {},
     ) =>
       this.request<any, AddPlayerMediaItemRespApiRespBase>({
-        path: `/api/v4/players/${playerid}/media-items`,
+        path: `/api/v5/players/${playerid}/media-items`,
         method: "POST",
         query: query,
         secure: true,
@@ -15510,14 +16322,14 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Players
-     * @name V4PlayersMediaItemsDelete
+     * @name V5PlayersMediaItemsDelete
      * @summary Delete player Media item
-     * @request DELETE:/api/v4/players/{playerid}/media-items/{mediaitemid}
+     * @request DELETE:/api/v5/players/{playerid}/media-items/{mediaitemid}
      * @secure
      */
-    v4PlayersMediaItemsDelete: (playerid: number, mediaitemid: number, params: RequestParams = {}) =>
+    v5PlayersMediaItemsDelete: (playerid: number, mediaitemid: number, params: RequestParams = {}) =>
       this.request<any, DelPlayerMediaItemRespApiRespBase>({
-        path: `/api/v4/players/${playerid}/media-items/${mediaitemid}`,
+        path: `/api/v5/players/${playerid}/media-items/${mediaitemid}`,
         method: "DELETE",
         secure: true,
         ...params,
@@ -15526,15 +16338,453 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     /**
      * No description
      *
+     * @tags Reports
+     * @name V5ReportsArticlesViewershipSummaryList
+     * @summary Get articles viewership summary
+     * @request GET:/api/v5/reports/articles/viewership-summary
+     * @secure
+     */
+    v5ReportsArticlesViewershipSummaryList: (
+      query: {
+        /** @format int64 */
+        From: number;
+        /** @format int64 */
+        To: number;
+        /**
+         * LocaleId
+         * @format int32
+         * @min 1
+         * @max 32767
+         */
+        Locale?: number;
+        /** Site section id */
+        SiteSections?: number[];
+        /**
+         * Parent tournament name
+         * @minLength 0
+         * @maxLength 80
+         */
+        Tournaments?: string;
+        /**
+         * Proofreader (fuzzy search)
+         * @minLength 0
+         * @maxLength 20
+         */
+        Proofreader?: string;
+        /**
+         * Author (fuzzy search)
+         * @minLength 0
+         * @maxLength 20
+         */
+        Author?: string;
+      },
+      params: RequestParams = {},
+    ) =>
+      this.request<any, GetViewershipSummaryRespApiRespBase>({
+        path: `/api/v5/reports/articles/viewership-summary`,
+        method: "GET",
+        query: query,
+        secure: true,
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Reports
+     * @name V5ReportsArticlesViewershipList
+     * @summary Get articles viewership
+     * @request GET:/api/v5/reports/articles/viewership
+     * @secure
+     */
+    v5ReportsArticlesViewershipList: (
+      query: {
+        /** @format int64 */
+        From: number;
+        /** @format int64 */
+        To: number;
+        /**
+         * LocaleId
+         * @format int32
+         * @min 1
+         * @max 32767
+         */
+        Locale?: number;
+        /** Site section id */
+        SiteSections?: number[];
+        /**
+         * Parent tournament name
+         * @minLength 0
+         * @maxLength 80
+         */
+        Tournaments?: string;
+        /**
+         * Proofreader (fuzzy search)
+         * @minLength 0
+         * @maxLength 20
+         */
+        Proofreader?: string;
+        /**
+         * Author (fuzzy search)
+         * @minLength 0
+         * @maxLength 20
+         */
+        Author?: string;
+        /**
+         * @format int32
+         * @min 1
+         * @max 2147483647
+         */
+        PageNo?: number;
+        /**
+         * @format int32
+         * @min 1
+         * @max 100
+         */
+        PageSize?: number;
+      },
+      params: RequestParams = {},
+    ) =>
+      this.request<any, GetViewershipRespApiRespBase>({
+        path: `/api/v5/reports/articles/viewership`,
+        method: "GET",
+        query: query,
+        secure: true,
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Reports
+     * @name V5ReportsMatchesList
+     * @summary Get child tournament matches and vods report
+     * @request GET:/api/v5/reports/matches
+     * @secure
+     */
+    v5ReportsMatchesList: (
+      query: {
+        /**
+         * @format int64
+         * @min 1
+         */
+        From: number;
+        /**
+         * @format int64
+         * @min 1
+         */
+        To: number;
+        /**
+         * @format int32
+         * @min 1
+         * @max 2147483647
+         */
+        PageNo?: number;
+        /**
+         * @format int32
+         * @min 1
+         * @max 100
+         */
+        PageSize?: number;
+      },
+      params: RequestParams = {},
+    ) =>
+      this.request<any, GetMatchesReportsRespApiRespBase>({
+        path: `/api/v5/reports/matches`,
+        method: "GET",
+        query: query,
+        secure: true,
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Reports
+     * @name V5ReportsMatchesDownloadExcelList
+     * @summary Download child tournament matches and VODs report excel
+     * @request GET:/api/v5/reports/matches/download-excel
+     * @secure
+     */
+    v5ReportsMatchesDownloadExcelList: (
+      query: {
+        /**
+         * @format int64
+         * @min 1
+         */
+        From: number;
+        /**
+         * @format int64
+         * @min 1
+         */
+        To: number;
+        /**
+         * @format int32
+         * @min -12
+         * @max 14
+         */
+        TimeZone: number;
+      },
+      params: RequestParams = {},
+    ) =>
+      this.request<void, any>({
+        path: `/api/v5/reports/matches/download-excel`,
+        method: "GET",
+        query: query,
+        secure: true,
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Reports
+     * @name V5ReportsTournamentsViewershipList
+     * @summary Get tournament viewership
+     * @request GET:/api/v5/reports/tournaments/viewership
+     * @secure
+     */
+    v5ReportsTournamentsViewershipList: (
+      query?: {
+        /**
+         * @format int32
+         * @min 1
+         * @max 2147483647
+         */
+        ParentTournamentId?: number;
+        /**
+         * @minLength 0
+         * @maxLength 80
+         */
+        TournamentName?: string;
+        /**
+         * @format int32
+         * @min 1
+         * @max 32767
+         */
+        GameId?: number;
+        /**
+         * @format int32
+         * @min 1
+         * @max 32767
+         */
+        FrontEndId?: number;
+        IsHidden?: boolean;
+        IsLan?: boolean;
+        /**
+         * @format int32
+         * @min 1
+         * @max 32767
+         */
+        CountryId?: number;
+        /**
+         * @format int32
+         * @min 1
+         * @max 2147483647
+         */
+        VenueId?: number;
+        /**
+         * @format int64
+         * @min 1
+         */
+        CreatedAtFrom?: number;
+        /**
+         * @format int64
+         * @min 1
+         */
+        CreatedAtTo?: number;
+        /**
+         * @format int64
+         * @min 1
+         */
+        StartingAtFrom?: number;
+        /**
+         * @format int64
+         * @min 1
+         */
+        StartingAtTo?: number;
+        /**
+         * @format int32
+         * @min 1
+         * @max 2147483647
+         */
+        CreatedBy?: number;
+        /**
+         * @format int32
+         * @min 1
+         * @max 32767
+         */
+        MapId?: number;
+        /**
+         * @format int32
+         * @min 1
+         * @max 2147483647
+         */
+        SponsorId?: number;
+        /**
+         * @format int32
+         * @min 1
+         * @max 2147483647
+         */
+        PageNo?: number;
+        /**
+         * @format int32
+         * @min 1
+         * @max 100
+         */
+        PageSize?: number;
+      },
+      params: RequestParams = {},
+    ) =>
+      this.request<any, GetTournamentViewershipRespApiRespBase>({
+        path: `/api/v5/reports/tournaments/viewership`,
+        method: "GET",
+        query: query,
+        secure: true,
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Reports
+     * @name V5ReportsEarningsStatisticsList
+     * @summary Get earnings statistics
+     * @request GET:/api/v5/reports/earnings-statistics
+     * @secure
+     */
+    v5ReportsEarningsStatisticsList: (params: RequestParams = {}) =>
+      this.request<any, GetEarningsStsRespListApiRespBase>({
+        path: `/api/v5/reports/earnings-statistics`,
+        method: "GET",
+        secure: true,
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Reports
+     * @name V5ReportsCrewPerformanceList
+     * @summary Get crew performance
+     * @request GET:/api/v5/reports/crew-performance
+     * @secure
+     */
+    v5ReportsCrewPerformanceList: (
+      query: {
+        /**
+         * @format int64
+         * @min 1
+         */
+        From: number;
+        /**
+         * @format int64
+         * @min 1
+         */
+        To: number;
+        /**
+         * @format int32
+         * @min 1
+         * @max 2147483647
+         */
+        UserId: number;
+      },
+      params: RequestParams = {},
+    ) =>
+      this.request<any, GetCrewPerformanceRespApiRespBase>({
+        path: `/api/v5/reports/crew-performance`,
+        method: "GET",
+        query: query,
+        secure: true,
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Reports
+     * @name V5ReportsCrewPerformanceMatchGamesList
+     * @summary Get crew performance match games resulted
+     * @request GET:/api/v5/reports/crew-performance/match-games
+     * @secure
+     */
+    v5ReportsCrewPerformanceMatchGamesList: (
+      query: {
+        /**
+         * @format int64
+         * @min 1
+         */
+        From: number;
+        /**
+         * @format int64
+         * @min 1
+         */
+        To: number;
+        /**
+         * @format int32
+         * @min 1
+         * @max 2147483647
+         */
+        ResultedBy?: number;
+        /**
+         * @format int32
+         * @min 1
+         * @max 2147483647
+         */
+        UpdatedBy?: number;
+        /**
+         * @format int32
+         * @min 1
+         * @max 2147483647
+         */
+        DraftedBy?: number;
+        /**
+         * @format int32
+         * @min 1
+         * @max 2147483647
+         */
+        MapBy?: number;
+        /**
+         * @format int32
+         * @min 1
+         * @max 2147483647
+         */
+        RoundSetBy?: number;
+        /**
+         * @format int32
+         * @min 1
+         * @max 2147483647
+         */
+        PageNo?: number;
+        /**
+         * @format int32
+         * @min 1
+         * @max 100
+         */
+        PageSize?: number;
+      },
+      params: RequestParams = {},
+    ) =>
+      this.request<any, GetGamesResultedRespApiRespBase>({
+        path: `/api/v5/reports/crew-performance/match-games`,
+        method: "GET",
+        query: query,
+        secure: true,
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
      * @tags Roles
-     * @name V4RolesRoleOptionsList
+     * @name V5RolesRoleOptionsList
      * @summary Get role options
-     * @request GET:/api/v4/roles/role-options
+     * @request GET:/api/v5/roles/role-options
      * @secure
      */
-    v4RolesRoleOptionsList: (params: RequestParams = {}) =>
+    v5RolesRoleOptionsList: (params: RequestParams = {}) =>
       this.request<any, GetRoleOptionsByGroupRespApiRespBase>({
-        path: `/api/v4/roles/role-options`,
+        path: `/api/v5/roles/role-options`,
         method: "GET",
         secure: true,
         ...params,
@@ -15544,14 +16794,14 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Roles
-     * @name V4RolesUsersDetail
+     * @name V5RolesUsersDetail
      * @summary Get users by role
-     * @request GET:/api/v4/roles/users/{id}
+     * @request GET:/api/v5/roles/users/{id}
      * @secure
      */
-    v4RolesUsersDetail: (id: number, params: RequestParams = {}) =>
+    v5RolesUsersDetail: (id: number, params: RequestParams = {}) =>
       this.request<any, GetUsersByRoleRespApiRespBase>({
-        path: `/api/v4/roles/users/${id}`,
+        path: `/api/v5/roles/users/${id}`,
         method: "GET",
         secure: true,
         ...params,
@@ -15561,12 +16811,12 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Roles
-     * @name V4RolesList
+     * @name V5RolesList
      * @summary Get roles
-     * @request GET:/api/v4/roles
+     * @request GET:/api/v5/roles
      * @secure
      */
-    v4RolesList: (
+    v5RolesList: (
       query?: {
         /** Role ids */
         RoleIds?: number[];
@@ -15596,7 +16846,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       params: RequestParams = {},
     ) =>
       this.request<any, GetRolesByGroupRespApiRespBase>({
-        path: `/api/v4/roles`,
+        path: `/api/v5/roles`,
         method: "GET",
         query: query,
         secure: true,
@@ -15607,14 +16857,14 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Roles
-     * @name V4RolesCreate
+     * @name V5RolesCreate
      * @summary Add role
-     * @request POST:/api/v4/roles
+     * @request POST:/api/v5/roles
      * @secure
      */
-    v4RolesCreate: (data: AddRoleReq, params: RequestParams = {}) =>
+    v5RolesCreate: (data: AddRoleReq, params: RequestParams = {}) =>
       this.request<any, AddRoleRespApiRespBase>({
-        path: `/api/v4/roles`,
+        path: `/api/v5/roles`,
         method: "POST",
         body: data,
         secure: true,
@@ -15626,14 +16876,14 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Roles
-     * @name V4RolesDetail
+     * @name V5RolesDetail
      * @summary Get role
-     * @request GET:/api/v4/roles/{id}
+     * @request GET:/api/v5/roles/{id}
      * @secure
      */
-    v4RolesDetail: (id: number, params: RequestParams = {}) =>
+    v5RolesDetail: (id: number, params: RequestParams = {}) =>
       this.request<any, GetRoleRespApiRespBase>({
-        path: `/api/v4/roles/${id}`,
+        path: `/api/v5/roles/${id}`,
         method: "GET",
         secure: true,
         ...params,
@@ -15643,14 +16893,14 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Roles
-     * @name V4RolesPartialUpdate
+     * @name V5RolesPartialUpdate
      * @summary Modify Role
-     * @request PATCH:/api/v4/roles/{id}
+     * @request PATCH:/api/v5/roles/{id}
      * @secure
      */
-    v4RolesPartialUpdate: (id: number, data: ModRoleReq, params: RequestParams = {}) =>
+    v5RolesPartialUpdate: (id: number, data: ModRoleReq, params: RequestParams = {}) =>
       this.request<any, ModRoleRespApiRespBase>({
-        path: `/api/v4/roles/${id}`,
+        path: `/api/v5/roles/${id}`,
         method: "PATCH",
         body: data,
         secure: true,
@@ -15662,14 +16912,14 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Roles
-     * @name V4RolesDelete
+     * @name V5RolesDelete
      * @summary Delete role
-     * @request DELETE:/api/v4/roles/{id}
+     * @request DELETE:/api/v5/roles/{id}
      * @secure
      */
-    v4RolesDelete: (id: number, params: RequestParams = {}) =>
+    v5RolesDelete: (id: number, params: RequestParams = {}) =>
       this.request<any, DelRoleRespApiRespBase>({
-        path: `/api/v4/roles/${id}`,
+        path: `/api/v5/roles/${id}`,
         method: "DELETE",
         secure: true,
         ...params,
@@ -15679,14 +16929,14 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Roles
-     * @name V4RolesAssignRolePartialUpdate
+     * @name V5RolesAssignRolePartialUpdate
      * @summary Assign role
-     * @request PATCH:/api/v4/roles/assign-role
+     * @request PATCH:/api/v5/roles/assign-role
      * @secure
      */
-    v4RolesAssignRolePartialUpdate: (data: AssignRoleReq, params: RequestParams = {}) =>
+    v5RolesAssignRolePartialUpdate: (data: AssignRoleReq, params: RequestParams = {}) =>
       this.request<any, AssignRoleRespApiRespBase>({
-        path: `/api/v4/roles/assign-role`,
+        path: `/api/v5/roles/assign-role`,
         method: "PATCH",
         body: data,
         secure: true,
@@ -15698,14 +16948,14 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Roles
-     * @name V4RolesUnassignRoleDelete
+     * @name V5RolesUnassignRoleDelete
      * @summary UnAssign role
-     * @request DELETE:/api/v4/roles/unassign-role
+     * @request DELETE:/api/v5/roles/unassign-role
      * @secure
      */
-    v4RolesUnassignRoleDelete: (data: UnAssignRoleReq, params: RequestParams = {}) =>
+    v5RolesUnassignRoleDelete: (data: UnAssignRoleReq, params: RequestParams = {}) =>
       this.request<any, UnAssignRoleRespApiRespBase>({
-        path: `/api/v4/roles/unassign-role`,
+        path: `/api/v5/roles/unassign-role`,
         method: "DELETE",
         body: data,
         secure: true,
@@ -15717,14 +16967,14 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Roles
-     * @name V4RolesBlankPermissionsList
+     * @name V5RolesBlankPermissionsList
      * @summary Get role blank permissions
-     * @request GET:/api/v4/roles/blank-permissions
+     * @request GET:/api/v5/roles/blank-permissions
      * @secure
      */
-    v4RolesBlankPermissionsList: (params: RequestParams = {}) =>
+    v5RolesBlankPermissionsList: (params: RequestParams = {}) =>
       this.request<any, GetRoleBlankPermissionsRespApiRespBase>({
-        path: `/api/v4/roles/blank-permissions`,
+        path: `/api/v5/roles/blank-permissions`,
         method: "GET",
         secure: true,
         ...params,
@@ -15734,14 +16984,14 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Roles
-     * @name V4RolesTemplatesDetail
+     * @name V5RolesTemplatesDetail
      * @summary Get role templates by group
-     * @request GET:/api/v4/roles/templates/{id}
+     * @request GET:/api/v5/roles/templates/{id}
      * @secure
      */
-    v4RolesTemplatesDetail: (id: number, params: RequestParams = {}) =>
+    v5RolesTemplatesDetail: (id: number, params: RequestParams = {}) =>
       this.request<any, GetRoleTemplatesByGroupRespApiRespBase>({
-        path: `/api/v4/roles/templates/${id}`,
+        path: `/api/v5/roles/templates/${id}`,
         method: "GET",
         secure: true,
         ...params,
@@ -15751,13 +17001,20 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Servers
-     * @name V4ServersList
+     * @name V5ServersList
      * @summary Get servers by condition
-     * @request GET:/api/v4/servers
+     * @request GET:/api/v5/servers
      * @secure
      */
-    v4ServersList: (
+    v5ServersList: (
       query?: {
+        /**
+         * Servers Id
+         * @format int32
+         * @min 1
+         * @max 2147483647
+         */
+        Id?: number;
         /**
          * Server Name
          * @minLength 0
@@ -15787,7 +17044,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       params: RequestParams = {},
     ) =>
       this.request<any, GetServersRespApiRespBase>({
-        path: `/api/v4/servers`,
+        path: `/api/v5/servers`,
         method: "GET",
         query: query,
         secure: true,
@@ -15798,35 +17055,18 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Servers
-     * @name V4ServersCreate
+     * @name V5ServersCreate
      * @summary Add new tournaments server
-     * @request POST:/api/v4/servers
+     * @request POST:/api/v5/servers
      * @secure
      */
-    v4ServersCreate: (
-      data: {
-        /**
-         * Server Name
-         * @minLength 0
-         * @maxLength 50
-         */
-        Name: string;
-        /**
-         * Game Id
-         * @format int32
-         * @min 1
-         * @max 32767
-         */
-        GameId: number;
-      },
-      params: RequestParams = {},
-    ) =>
+    v5ServersCreate: (data: AddServerReq, params: RequestParams = {}) =>
       this.request<any, AddServerRespApiRespBase>({
-        path: `/api/v4/servers`,
+        path: `/api/v5/servers`,
         method: "POST",
         body: data,
         secure: true,
-        type: ContentType.FormData,
+        type: ContentType.Json,
         ...params,
       }),
 
@@ -15834,14 +17074,14 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Servers
-     * @name V4ServersDetail
+     * @name V5ServersDetail
      * @summary Get tournaments server detail
-     * @request GET:/api/v4/servers/{id}
+     * @request GET:/api/v5/servers/{id}
      * @secure
      */
-    v4ServersDetail: (id: number, params: RequestParams = {}) =>
+    v5ServersDetail: (id: number, params: RequestParams = {}) =>
       this.request<any, GetServerRespApiRespBase>({
-        path: `/api/v4/servers/${id}`,
+        path: `/api/v5/servers/${id}`,
         method: "GET",
         secure: true,
         ...params,
@@ -15851,45 +17091,18 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Servers
-     * @name V4ServersPartialUpdate
+     * @name V5ServersPartialUpdate
      * @summary Modify tournaments server
-     * @request PATCH:/api/v4/servers/{id}
+     * @request PATCH:/api/v5/servers/{id}
      * @secure
      */
-    v4ServersPartialUpdate: (
-      id: number,
-      data: {
-        /**
-         * Server Id
-         * @format int32
-         * @min 1
-         * @max 2147483647
-         */
-        Id: number;
-        /**
-         * Server Name
-         * @minLength 0
-         * @maxLength 50
-         */
-        Name: string;
-        /** Is Frozen */
-        IsFrozen: boolean;
-        /**
-         * Game Id
-         * @format int32
-         * @min 1
-         * @max 32767
-         */
-        GameId: number;
-      },
-      params: RequestParams = {},
-    ) =>
+    v5ServersPartialUpdate: (id: number, data: ModServerReq, params: RequestParams = {}) =>
       this.request<any, ModServerRespApiRespBase>({
-        path: `/api/v4/servers/${id}`,
+        path: `/api/v5/servers/${id}`,
         method: "PATCH",
         body: data,
         secure: true,
-        type: ContentType.FormData,
+        type: ContentType.Json,
         ...params,
       }),
 
@@ -15897,14 +17110,14 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Servers
-     * @name V4ServersDelete
+     * @name V5ServersDelete
      * @summary Delete tournaments server
-     * @request DELETE:/api/v4/servers/{id}
+     * @request DELETE:/api/v5/servers/{id}
      * @secure
      */
-    v4ServersDelete: (id: number, params: RequestParams = {}) =>
+    v5ServersDelete: (id: number, params: RequestParams = {}) =>
       this.request<any, DelServerRespApiRespBase>({
-        path: `/api/v4/servers/${id}`,
+        path: `/api/v5/servers/${id}`,
         method: "DELETE",
         secure: true,
         ...params,
@@ -15914,34 +17127,31 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags SiteSections
-     * @name V4SitesectionsSiteSectionsList
+     * @name V5SitesectionsSiteSectionsList
      * @summary Get Site-Sections
-     * @request GET:/api/v4/sitesections/site-sections
+     * @request GET:/api/v5/sitesections/site-sections
      * @secure
      */
-    v4SitesectionsSiteSectionsList: (
+    v5SitesectionsSiteSectionsList: (
       query?: {
         /**
          * @format int32
          * @min 1
          * @max 32767
          */
-        "Filters.Id"?: number;
+        Id?: number;
         /**
          * @minLength 1
          * @maxLength 40
          */
-        "Filters.Name"?: string;
+        Name?: string;
         /**
-         * @minLength 1
-         * @maxLength 20
+         * @format int32
+         * @min 1
+         * @max 32767
          */
-        "Filters.GameName"?: string;
-        "Filters.Hidden"?: boolean;
-        "Sorts.Id"?: EnumFieldSort;
-        "Sorts.GameName"?: EnumFieldSort;
-        "Sorts.Name"?: EnumFieldSort;
-        "Sorts.Hidden"?: EnumFieldSort;
+        GameId?: number;
+        Hidden?: boolean;
         /**
          * @format int32
          * @min 1
@@ -15958,7 +17168,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       params: RequestParams = {},
     ) =>
       this.request<any, GetSiteSectionsRespApiRespBase>({
-        path: `/api/v4/sitesections/site-sections`,
+        path: `/api/v5/sitesections/site-sections`,
         method: "GET",
         query: query,
         secure: true,
@@ -15969,12 +17179,12 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags SiteSections
-     * @name V4SitesectionsSiteSectionsCreate
+     * @name V5SitesectionsSiteSectionsCreate
      * @summary Add Site-Sections
-     * @request POST:/api/v4/sitesections/site-sections
+     * @request POST:/api/v5/sitesections/site-sections
      * @secure
      */
-    v4SitesectionsSiteSectionsCreate: (
+    v5SitesectionsSiteSectionsCreate: (
       data: {
         /**
          * @format int32
@@ -15988,25 +17198,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
          */
         Name: string;
         Hidden: boolean;
-        /**
-         * @format int32
-         * @min 1
-         * @max 32767
-         */
-        Position: number;
-        /** @format binary */
-        HeaderImage?: File;
-        /** @format binary */
-        BackGroundImage?: File;
-        /** @format binary */
-        IconImage?: File;
-        /** @format binary */
-        LogoImage?: File;
       },
       params: RequestParams = {},
     ) =>
       this.request<any, AddSiteSectionsRespApiRespBase>({
-        path: `/api/v4/sitesections/site-sections`,
+        path: `/api/v5/sitesections/site-sections`,
         method: "POST",
         body: data,
         secure: true,
@@ -16018,14 +17214,14 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags SiteSections
-     * @name V4SitesectionsSiteSectionsDetail
+     * @name V5SitesectionsSiteSectionsDetail
      * @summary Get Site-Section
-     * @request GET:/api/v4/sitesections/site-sections/{id}
+     * @request GET:/api/v5/sitesections/site-sections/{id}
      * @secure
      */
-    v4SitesectionsSiteSectionsDetail: (id: number, params: RequestParams = {}) =>
+    v5SitesectionsSiteSectionsDetail: (id: number, params: RequestParams = {}) =>
       this.request<any, GetSiteSectionRespApiRespBase>({
-        path: `/api/v4/sitesections/site-sections/${id}`,
+        path: `/api/v5/sitesections/site-sections/${id}`,
         method: "GET",
         secure: true,
         ...params,
@@ -16035,12 +17231,12 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags SiteSections
-     * @name V4SitesectionsSiteSectionsPartialUpdate
+     * @name V5SitesectionsSiteSectionsPartialUpdate
      * @summary Modify Site-Sections
-     * @request PATCH:/api/v4/sitesections/site-sections/{id}
+     * @request PATCH:/api/v5/sitesections/site-sections/{id}
      * @secure
      */
-    v4SitesectionsSiteSectionsPartialUpdate: (
+    v5SitesectionsSiteSectionsPartialUpdate: (
       id: number,
       data: {
         /**
@@ -16061,25 +17257,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
          */
         Name?: string;
         Hidden?: boolean;
-        /**
-         * @format int32
-         * @min 1
-         * @max 32767
-         */
-        Position?: number;
-        /** @format binary */
-        HeaderImage?: File;
-        /** @format binary */
-        BackGroundImage?: File;
-        /** @format binary */
-        IconImage?: File;
-        /** @format binary */
-        LogoImage?: File;
       },
       params: RequestParams = {},
     ) =>
       this.request<any, ModSiteSectionsRespApiRespBase>({
-        path: `/api/v4/sitesections/site-sections/${id}`,
+        path: `/api/v5/sitesections/site-sections/${id}`,
         method: "PATCH",
         body: data,
         secure: true,
@@ -16091,14 +17273,14 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags SiteSections
-     * @name V4SitesectionsSiteSectionsDelete
+     * @name V5SitesectionsSiteSectionsDelete
      * @summary Delete Site-Sections
-     * @request DELETE:/api/v4/sitesections/site-sections/{id}
+     * @request DELETE:/api/v5/sitesections/site-sections/{id}
      * @secure
      */
-    v4SitesectionsSiteSectionsDelete: (id: number, params: RequestParams = {}) =>
+    v5SitesectionsSiteSectionsDelete: (id: number, params: RequestParams = {}) =>
       this.request<any, DelSiteSectionsRespApiRespBase>({
-        path: `/api/v4/sitesections/site-sections/${id}`,
+        path: `/api/v5/sitesections/site-sections/${id}`,
         method: "DELETE",
         secure: true,
         ...params,
@@ -16108,13 +17290,20 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Sponsors
-     * @name V4SponsorsList
+     * @name V5SponsorsList
      * @summary Get tournaments sponsors by condition
-     * @request GET:/api/v4/sponsors
+     * @request GET:/api/v5/sponsors
      * @secure
      */
-    v4SponsorsList: (
+    v5SponsorsList: (
       query?: {
+        /**
+         * Sponsors Id
+         * @format int32
+         * @min 1
+         * @max 2147483647
+         */
+        Id?: number;
         /**
          * Sponsor Name
          * @minLength 0
@@ -16159,7 +17348,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       params: RequestParams = {},
     ) =>
       this.request<any, GetSponsorsRespApiRespBase>({
-        path: `/api/v4/sponsors`,
+        path: `/api/v5/sponsors`,
         method: "GET",
         query: query,
         secure: true,
@@ -16170,12 +17359,12 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Sponsors
-     * @name V4SponsorsCreate
+     * @name V5SponsorsCreate
      * @summary Add new Tournaments Sponsor
-     * @request POST:/api/v4/sponsors
+     * @request POST:/api/v5/sponsors
      * @secure
      */
-    v4SponsorsCreate: (
+    v5SponsorsCreate: (
       data: {
         /**
          * Sponsor Name
@@ -16205,7 +17394,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       params: RequestParams = {},
     ) =>
       this.request<any, AddSponsorRespApiRespBase>({
-        path: `/api/v4/sponsors`,
+        path: `/api/v5/sponsors`,
         method: "POST",
         body: data,
         secure: true,
@@ -16217,14 +17406,14 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Sponsors
-     * @name V4SponsorsDetail
+     * @name V5SponsorsDetail
      * @summary Get Tournaments Sponsor
-     * @request GET:/api/v4/sponsors/{id}
+     * @request GET:/api/v5/sponsors/{id}
      * @secure
      */
-    v4SponsorsDetail: (id: number, params: RequestParams = {}) =>
+    v5SponsorsDetail: (id: number, params: RequestParams = {}) =>
       this.request<any, GetSponsorRespApiRespBase>({
-        path: `/api/v4/sponsors/${id}`,
+        path: `/api/v5/sponsors/${id}`,
         method: "GET",
         secure: true,
         ...params,
@@ -16234,12 +17423,12 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Sponsors
-     * @name V4SponsorsPartialUpdate
+     * @name V5SponsorsPartialUpdate
      * @summary Modify Tournaments Sponsor
-     * @request PATCH:/api/v4/sponsors/{id}
+     * @request PATCH:/api/v5/sponsors/{id}
      * @secure
      */
-    v4SponsorsPartialUpdate: (
+    v5SponsorsPartialUpdate: (
       id: number,
       data: {
         /**
@@ -16277,7 +17466,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       params: RequestParams = {},
     ) =>
       this.request<any, ModSponsorRespApiRespBase>({
-        path: `/api/v4/sponsors/${id}`,
+        path: `/api/v5/sponsors/${id}`,
         method: "PATCH",
         body: data,
         secure: true,
@@ -16289,14 +17478,14 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Sponsors
-     * @name V4SponsorsDelete
+     * @name V5SponsorsDelete
      * @summary Delete Tournaments Sponsor
-     * @request DELETE:/api/v4/sponsors/{id}
+     * @request DELETE:/api/v5/sponsors/{id}
      * @secure
      */
-    v4SponsorsDelete: (id: number, params: RequestParams = {}) =>
+    v5SponsorsDelete: (id: number, params: RequestParams = {}) =>
       this.request<any, DelSponsorRespApiRespBase>({
-        path: `/api/v4/sponsors/${id}`,
+        path: `/api/v5/sponsors/${id}`,
         method: "DELETE",
         secure: true,
         ...params,
@@ -16306,12 +17495,12 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Sponsors
-     * @name V4SponsorsFuzzyList
+     * @name V5SponsorsFuzzyList
      * @summary Get fuzzy sponsors
-     * @request GET:/api/v4/sponsors/fuzzy
+     * @request GET:/api/v5/sponsors/fuzzy
      * @secure
      */
-    v4SponsorsFuzzyList: (
+    v5SponsorsFuzzyList: (
       query: {
         /**
          * Fuzzy prefix
@@ -16330,7 +17519,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       params: RequestParams = {},
     ) =>
       this.request<any, GetFuzzySponsorsRespApiRespBase>({
-        path: `/api/v4/sponsors/fuzzy`,
+        path: `/api/v5/sponsors/fuzzy`,
         method: "GET",
         query: query,
         secure: true,
@@ -16341,12 +17530,12 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Teams
-     * @name V4TeamsList
+     * @name V5TeamsList
      * @summary Get teams
-     * @request GET:/api/v4/teams
+     * @request GET:/api/v5/teams
      * @secure
      */
-    v4TeamsList: (
+    v5TeamsList: (
       query?: {
         /**
          * TeamName
@@ -16354,6 +17543,12 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
          * @maxLength 50
          */
         TeamName?: string;
+        /**
+         * TeamTag
+         * @minLength 1
+         * @maxLength 20
+         */
+        TeamTag?: string;
         /**
          * Team Id
          * @format int32
@@ -16408,7 +17603,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       params: RequestParams = {},
     ) =>
       this.request<any, GetTeamsRespApiRespBase>({
-        path: `/api/v4/teams`,
+        path: `/api/v5/teams`,
         method: "GET",
         query: query,
         secure: true,
@@ -16419,12 +17614,12 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Teams
-     * @name V4TeamsCreate
+     * @name V5TeamsCreate
      * @summary Add team
-     * @request POST:/api/v4/teams
+     * @request POST:/api/v5/teams
      * @secure
      */
-    v4TeamsCreate: (
+    v5TeamsCreate: (
       data: {
         /**
          * @minLength 0
@@ -16481,7 +17676,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       params: RequestParams = {},
     ) =>
       this.request<any, AddTeamRespApiRespBase>({
-        path: `/api/v4/teams`,
+        path: `/api/v5/teams`,
         method: "POST",
         body: data,
         secure: true,
@@ -16493,14 +17688,14 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Teams
-     * @name V4TeamsDetail
+     * @name V5TeamsDetail
      * @summary Get team
-     * @request GET:/api/v4/teams/{id}
+     * @request GET:/api/v5/teams/{id}
      * @secure
      */
-    v4TeamsDetail: (id: number, params: RequestParams = {}) =>
+    v5TeamsDetail: (id: number, params: RequestParams = {}) =>
       this.request<any, GetTeamRespApiRespBase>({
-        path: `/api/v4/teams/${id}`,
+        path: `/api/v5/teams/${id}`,
         method: "GET",
         secure: true,
         ...params,
@@ -16510,12 +17705,12 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Teams
-     * @name V4TeamsPartialUpdate
+     * @name V5TeamsPartialUpdate
      * @summary Modify team
-     * @request PATCH:/api/v4/teams/{id}
+     * @request PATCH:/api/v5/teams/{id}
      * @secure
      */
-    v4TeamsPartialUpdate: (
+    v5TeamsPartialUpdate: (
       id: number,
       data: {
         /**
@@ -16596,7 +17791,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       params: RequestParams = {},
     ) =>
       this.request<any, ModTeamRespApiRespBase>({
-        path: `/api/v4/teams/${id}`,
+        path: `/api/v5/teams/${id}`,
         method: "PATCH",
         body: data,
         secure: true,
@@ -16608,14 +17803,14 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Teams
-     * @name V4TeamsDelete
+     * @name V5TeamsDelete
      * @summary Delete team
-     * @request DELETE:/api/v4/teams/{id}
+     * @request DELETE:/api/v5/teams/{id}
      * @secure
      */
-    v4TeamsDelete: (id: number, params: RequestParams = {}) =>
+    v5TeamsDelete: (id: number, params: RequestParams = {}) =>
       this.request<any, DelTeamRespApiRespBase>({
-        path: `/api/v4/teams/${id}`,
+        path: `/api/v5/teams/${id}`,
         method: "DELETE",
         secure: true,
         ...params,
@@ -16625,12 +17820,12 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Teams
-     * @name V4TeamsTeamPlayersDetail
+     * @name V5TeamsTeamPlayersDetail
      * @summary Get team players
-     * @request GET:/api/v4/teams/{teamid}/team-players
+     * @request GET:/api/v5/teams/{teamid}/team-players
      * @secure
      */
-    v4TeamsTeamPlayersDetail: (
+    v5TeamsTeamPlayersDetail: (
       teamid: number,
       query?: {
         /**
@@ -16649,7 +17844,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       params: RequestParams = {},
     ) =>
       this.request<any, GetTeamPlayersRespApiRespBase>({
-        path: `/api/v4/teams/${teamid}/team-players`,
+        path: `/api/v5/teams/${teamid}/team-players`,
         method: "GET",
         query: query,
         secure: true,
@@ -16660,14 +17855,14 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Teams
-     * @name V4TeamsTeamPlayersCreate
+     * @name V5TeamsTeamPlayersCreate
      * @summary Add team player
-     * @request POST:/api/v4/teams/{teamid}/team-players
+     * @request POST:/api/v5/teams/{teamid}/team-players
      * @secure
      */
-    v4TeamsTeamPlayersCreate: (teamid: number, data: AddTeamPlayerReq, params: RequestParams = {}) =>
+    v5TeamsTeamPlayersCreate: (teamid: number, data: AddTeamPlayerReq, params: RequestParams = {}) =>
       this.request<any, AddTeamPlayerRespApiRespBase>({
-        path: `/api/v4/teams/${teamid}/team-players`,
+        path: `/api/v5/teams/${teamid}/team-players`,
         method: "POST",
         body: data,
         secure: true,
@@ -16679,16 +17874,16 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Teams
-     * @name V4TeamsTeamPlayersDetail2
+     * @name V5TeamsTeamPlayersDetail2
      * @summary Get team player
-     * @request GET:/api/v4/teams/{teamid}/team-players/{teamplayerid}
-     * @originalName v4TeamsTeamPlayersDetail
+     * @request GET:/api/v5/teams/{teamid}/team-players/{teamplayerid}
+     * @originalName v5TeamsTeamPlayersDetail
      * @duplicate
      * @secure
      */
-    v4TeamsTeamPlayersDetail2: (teamid: number, teamplayerid: number, params: RequestParams = {}) =>
+    v5TeamsTeamPlayersDetail2: (teamid: number, teamplayerid: number, params: RequestParams = {}) =>
       this.request<any, GetTeamPlayerRespApiRespBase>({
-        path: `/api/v4/teams/${teamid}/team-players/${teamplayerid}`,
+        path: `/api/v5/teams/${teamid}/team-players/${teamplayerid}`,
         method: "GET",
         secure: true,
         ...params,
@@ -16698,19 +17893,19 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Teams
-     * @name V4TeamsTeamPlayersPartialUpdate
+     * @name V5TeamsTeamPlayersPartialUpdate
      * @summary Modify team player
-     * @request PATCH:/api/v4/teams/{teamid}/team-players/{teamplayerid}
+     * @request PATCH:/api/v5/teams/{teamid}/team-players/{teamplayerid}
      * @secure
      */
-    v4TeamsTeamPlayersPartialUpdate: (
+    v5TeamsTeamPlayersPartialUpdate: (
       teamid: number,
       teamplayerid: number,
       data: ModTeamPlayerReq,
       params: RequestParams = {},
     ) =>
       this.request<any, ModTeamPlayerRespApiRespBase>({
-        path: `/api/v4/teams/${teamid}/team-players/${teamplayerid}`,
+        path: `/api/v5/teams/${teamid}/team-players/${teamplayerid}`,
         method: "PATCH",
         body: data,
         secure: true,
@@ -16722,14 +17917,14 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Teams
-     * @name V4TeamsTeamPlayersDelete
+     * @name V5TeamsTeamPlayersDelete
      * @summary Delete team player
-     * @request DELETE:/api/v4/teams/{teamid}/team-players/{teamplayerid}
+     * @request DELETE:/api/v5/teams/{teamid}/team-players/{teamplayerid}
      * @secure
      */
-    v4TeamsTeamPlayersDelete: (teamid: number, teamplayerid: number, params: RequestParams = {}) =>
+    v5TeamsTeamPlayersDelete: (teamid: number, teamplayerid: number, params: RequestParams = {}) =>
       this.request<any, DelTeamPlayerRespApiRespBase>({
-        path: `/api/v4/teams/${teamid}/team-players/${teamplayerid}`,
+        path: `/api/v5/teams/${teamid}/team-players/${teamplayerid}`,
         method: "DELETE",
         secure: true,
         ...params,
@@ -16739,12 +17934,12 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Teams
-     * @name V4TeamsFuzzyList
+     * @name V5TeamsFuzzyList
      * @summary Get fuzzy teams
-     * @request GET:/api/v4/teams/fuzzy
+     * @request GET:/api/v5/teams/fuzzy
      * @secure
      */
-    v4TeamsFuzzyList: (
+    v5TeamsFuzzyList: (
       query: {
         /**
          * @minLength 0
@@ -16766,7 +17961,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       params: RequestParams = {},
     ) =>
       this.request<any, GetFuzzyTeamsRespApiRespBase>({
-        path: `/api/v4/teams/fuzzy`,
+        path: `/api/v5/teams/fuzzy`,
         method: "GET",
         query: query,
         secure: true,
@@ -16777,14 +17972,14 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Teams
-     * @name V4TeamsTeamPlayerOptionsDetail
+     * @name V5TeamsTeamPlayerOptionsDetail
      * @summary Get team player options for tournament registrations
-     * @request GET:/api/v4/teams/{teamId}/team-player-options
+     * @request GET:/api/v5/teams/{teamId}/team-player-options
      * @secure
      */
-    v4TeamsTeamPlayerOptionsDetail: (teamId: number, params: RequestParams = {}) =>
+    v5TeamsTeamPlayerOptionsDetail: (teamId: number, params: RequestParams = {}) =>
       this.request<any, GetTeamPlayerOptionsRespApiRespBase>({
-        path: `/api/v4/teams/${teamId}/team-player-options`,
+        path: `/api/v5/teams/${teamId}/team-player-options`,
         method: "GET",
         secure: true,
         ...params,
@@ -16793,59 +17988,13 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     /**
      * No description
      *
-     * @tags Tools
-     * @name ToolsClearAllMemoryCacheCreate
-     * @summary Clear All Memory Cache
-     * @request POST:/api/tools/clear-all-memory-cache
-     * @secure
-     */
-    toolsClearAllMemoryCacheCreate: (
-      query?: {
-        "api-version"?: string;
-      },
-      params: RequestParams = {},
-    ) =>
-      this.request<void, any>({
-        path: `/api/tools/clear-all-memory-cache`,
-        method: "POST",
-        query: query,
-        secure: true,
-        ...params,
-      }),
-
-    /**
-     * No description
-     *
-     * @tags Tools
-     * @name ToolsConvertTournamentDataPartialUpdate
-     * @summary Convert tournament data
-     * @request PATCH:/api/tools/convert-tournament-data
-     * @secure
-     */
-    toolsConvertTournamentDataPartialUpdate: (
-      query?: {
-        "api-version"?: string;
-      },
-      params: RequestParams = {},
-    ) =>
-      this.request<void, any>({
-        path: `/api/tools/convert-tournament-data`,
-        method: "PATCH",
-        query: query,
-        secure: true,
-        ...params,
-      }),
-
-    /**
-     * No description
-     *
      * @tags Tournaments
-     * @name V4TournamentsFuzzyList
+     * @name V5TournamentsFuzzyList
      * @summary Get fuzzy tournaments
-     * @request GET:/api/v4/tournaments/fuzzy
+     * @request GET:/api/v5/tournaments/fuzzy
      * @secure
      */
-    v4TournamentsFuzzyList: (
+    v5TournamentsFuzzyList: (
       query: {
         /**
          * Fuzzy prefix
@@ -16864,7 +18013,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       params: RequestParams = {},
     ) =>
       this.request<any, GetFuzzyTournamentsRespApiRespBase>({
-        path: `/api/v4/tournaments/fuzzy`,
+        path: `/api/v5/tournaments/fuzzy`,
         method: "GET",
         query: query,
         secure: true,
@@ -16875,12 +18024,12 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Tournaments
-     * @name V4TournamentsParentsBroadcastTalentsDetail
+     * @name V5TournamentsParentsBroadcastTalentsDetail
      * @summary Get parent tournament broadcast talents
-     * @request GET:/api/v4/tournaments/parents/{parentId}/broadcast-talents
+     * @request GET:/api/v5/tournaments/parents/{parentId}/broadcast-talents
      * @secure
      */
-    v4TournamentsParentsBroadcastTalentsDetail: (
+    v5TournamentsParentsBroadcastTalentsDetail: (
       parentId: number,
       query?: {
         /**
@@ -16899,7 +18048,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       params: RequestParams = {},
     ) =>
       this.request<any, GetParentBroadcastTalentsRespApiRespBase>({
-        path: `/api/v4/tournaments/parents/${parentId}/broadcast-talents`,
+        path: `/api/v5/tournaments/parents/${parentId}/broadcast-talents`,
         method: "GET",
         query: query,
         secure: true,
@@ -16910,18 +18059,18 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Tournaments
-     * @name V4TournamentsParentsBroadcastTalentsCreate
+     * @name V5TournamentsParentsBroadcastTalentsCreate
      * @summary Add parent tournament broadcast talent
-     * @request POST:/api/v4/tournaments/parents/{parentId}/broadcast-talents
+     * @request POST:/api/v5/tournaments/parents/{parentId}/broadcast-talents
      * @secure
      */
-    v4TournamentsParentsBroadcastTalentsCreate: (
+    v5TournamentsParentsBroadcastTalentsCreate: (
       parentId: number,
       data: AddParentBroadcastTalentsReq,
       params: RequestParams = {},
     ) =>
       this.request<any, ApiRespBase>({
-        path: `/api/v4/tournaments/parents/${parentId}/broadcast-talents`,
+        path: `/api/v5/tournaments/parents/${parentId}/broadcast-talents`,
         method: "POST",
         body: data,
         secure: true,
@@ -16933,18 +18082,18 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Tournaments
-     * @name V4TournamentsParentsBroadcastTalentsDelete
+     * @name V5TournamentsParentsBroadcastTalentsDelete
      * @summary Delete parent tournament broadcast talents
-     * @request DELETE:/api/v4/tournaments/parents/{parentId}/broadcast-talents/{broadcastTalentId}
+     * @request DELETE:/api/v5/tournaments/parents/{parentId}/broadcast-talents/{broadcastTalentId}
      * @secure
      */
-    v4TournamentsParentsBroadcastTalentsDelete: (
+    v5TournamentsParentsBroadcastTalentsDelete: (
       parentId: number,
       broadcastTalentId: number,
       params: RequestParams = {},
     ) =>
       this.request<any, ApiRespBase>({
-        path: `/api/v4/tournaments/parents/${parentId}/broadcast-talents/${broadcastTalentId}`,
+        path: `/api/v5/tournaments/parents/${parentId}/broadcast-talents/${broadcastTalentId}`,
         method: "DELETE",
         secure: true,
         ...params,
@@ -16954,19 +18103,19 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Tournaments
-     * @name V4TournamentsParentsStagesChildrenCreate
+     * @name V5TournamentsParentsStagesChildrenCreate
      * @summary Add child tournament
-     * @request POST:/api/v4/tournaments/parents/{parentid}/stages/{stageid}/children
+     * @request POST:/api/v5/tournaments/parents/{parentid}/stages/{stageid}/children
      * @secure
      */
-    v4TournamentsParentsStagesChildrenCreate: (
+    v5TournamentsParentsStagesChildrenCreate: (
       parentid: number,
       stageid: number,
       data: AddChildReq,
       params: RequestParams = {},
     ) =>
       this.request<any, AddChildRespApiRespBase>({
-        path: `/api/v4/tournaments/parents/${parentid}/stages/${stageid}/children`,
+        path: `/api/v5/tournaments/parents/${parentid}/stages/${stageid}/children`,
         method: "POST",
         body: data,
         secure: true,
@@ -16978,14 +18127,38 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Tournaments
-     * @name V4TournamentsParentsChildrenDetail
-     * @summary Get child tournament for edit
-     * @request GET:/api/v4/tournaments/parents/{parentid}/children/{childid}
+     * @name V5TournamentsParentsStagesMultipleTournamentsCreate
+     * @summary Add multiple child tournaments
+     * @request POST:/api/v5/tournaments/parents/{parentid}/stages/{stageid}/multiple-tournaments
      * @secure
      */
-    v4TournamentsParentsChildrenDetail: (parentid: number, childid: number, params: RequestParams = {}) =>
+    v5TournamentsParentsStagesMultipleTournamentsCreate: (
+      parentid: number,
+      stageid: number,
+      data: AddChildReq[],
+      params: RequestParams = {},
+    ) =>
+      this.request<any, AddMultipleChildTournamentsRespApiRespBase>({
+        path: `/api/v5/tournaments/parents/${parentid}/stages/${stageid}/multiple-tournaments`,
+        method: "POST",
+        body: data,
+        secure: true,
+        type: ContentType.Json,
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Tournaments
+     * @name V5TournamentsParentsChildrenDetail
+     * @summary Get child tournament for edit
+     * @request GET:/api/v5/tournaments/parents/{parentid}/children/{childid}
+     * @secure
+     */
+    v5TournamentsParentsChildrenDetail: (parentid: number, childid: number, params: RequestParams = {}) =>
       this.request<any, GetChildTournamentRespApiRespBase>({
-        path: `/api/v4/tournaments/parents/${parentid}/children/${childid}`,
+        path: `/api/v5/tournaments/parents/${parentid}/children/${childid}`,
         method: "GET",
         secure: true,
         ...params,
@@ -16995,19 +18168,19 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Tournaments
-     * @name V4TournamentsParentsChildrenPartialUpdate
+     * @name V5TournamentsParentsChildrenPartialUpdate
      * @summary Modify child tournament
-     * @request PATCH:/api/v4/tournaments/parents/{parentid}/children/{childid}
+     * @request PATCH:/api/v5/tournaments/parents/{parentid}/children/{childid}
      * @secure
      */
-    v4TournamentsParentsChildrenPartialUpdate: (
+    v5TournamentsParentsChildrenPartialUpdate: (
       parentid: number,
       childid: number,
       data: ModChildReq,
       params: RequestParams = {},
     ) =>
       this.request<any, ModChildRespApiRespBase>({
-        path: `/api/v4/tournaments/parents/${parentid}/children/${childid}`,
+        path: `/api/v5/tournaments/parents/${parentid}/children/${childid}`,
         method: "PATCH",
         body: data,
         secure: true,
@@ -17019,19 +18192,19 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Tournaments
-     * @name V4TournamentsParentsChildrenDelete
+     * @name V5TournamentsParentsChildrenDelete
      * @summary Delete child tournaments
-     * @request DELETE:/api/v4/tournaments/parents/{parentid}/children/{childid}
+     * @request DELETE:/api/v5/tournaments/parents/{parentid}/children/{childid}
      * @secure
      */
-    v4TournamentsParentsChildrenDelete: (
+    v5TournamentsParentsChildrenDelete: (
       parentid: number,
       childid: number,
       data: DelChildReq,
       params: RequestParams = {},
     ) =>
       this.request<any, DelChildRespApiRespBase>({
-        path: `/api/v4/tournaments/parents/${parentid}/children/${childid}`,
+        path: `/api/v5/tournaments/parents/${parentid}/children/${childid}`,
         method: "DELETE",
         body: data,
         secure: true,
@@ -17043,14 +18216,14 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Tournaments
-     * @name V4TournamentsParentsChildrenDetailDetail
+     * @name V5TournamentsParentsChildrenDetailDetail
      * @summary Get child tournament for detail
-     * @request GET:/api/v4/tournaments/parents/{parentid}/children/{childid}/detail
+     * @request GET:/api/v5/tournaments/parents/{parentid}/children/{childid}/detail
      * @secure
      */
-    v4TournamentsParentsChildrenDetailDetail: (parentid: number, childid: number, params: RequestParams = {}) =>
+    v5TournamentsParentsChildrenDetailDetail: (parentid: number, childid: number, params: RequestParams = {}) =>
       this.request<any, GetChildDetailRespApiRespBase>({
-        path: `/api/v4/tournaments/parents/${parentid}/children/${childid}/detail`,
+        path: `/api/v5/tournaments/parents/${parentid}/children/${childid}/detail`,
         method: "GET",
         secure: true,
         ...params,
@@ -17060,18 +18233,35 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Tournaments
-     * @name V4TournamentsParentsChildrenStartTournamentPartialUpdate
-     * @summary Start child tournament
-     * @request PATCH:/api/v4/tournaments/parents/{parentid}/children/{childid}/start-tournament
+     * @name V5TournamentsParentsChildrenBracketDetail
+     * @summary Get child tournament for bracket
+     * @request GET:/api/v5/tournaments/parents/{parentid}/children/{childid}/bracket
      * @secure
      */
-    v4TournamentsParentsChildrenStartTournamentPartialUpdate: (
+    v5TournamentsParentsChildrenBracketDetail: (parentid: number, childid: number, params: RequestParams = {}) =>
+      this.request<any, GetChildBracketRespApiRespBase>({
+        path: `/api/v5/tournaments/parents/${parentid}/children/${childid}/bracket`,
+        method: "GET",
+        secure: true,
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Tournaments
+     * @name V5TournamentsParentsChildrenStartTournamentPartialUpdate
+     * @summary Start child tournament
+     * @request PATCH:/api/v5/tournaments/parents/{parentid}/children/{childid}/start-tournament
+     * @secure
+     */
+    v5TournamentsParentsChildrenStartTournamentPartialUpdate: (
       parentid: number,
       childid: number,
       params: RequestParams = {},
     ) =>
       this.request<any, StartTournamentRespApiRespBase>({
-        path: `/api/v4/tournaments/parents/${parentid}/children/${childid}/start-tournament`,
+        path: `/api/v5/tournaments/parents/${parentid}/children/${childid}/start-tournament`,
         method: "PATCH",
         secure: true,
         ...params,
@@ -17081,18 +18271,60 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Tournaments
-     * @name V4TournamentsParentsChildrenRecalculatePointsPartialUpdate
-     * @summary group type child tournament recalculate points
-     * @request PATCH:/api/v4/tournaments/parents/{parentid}/children/{childid}/recalculate-points
+     * @name V5TournamentsParentsChildrenRestartTournamentPartialUpdate
+     * @summary Restart child tournament
+     * @request PATCH:/api/v5/tournaments/parents/{parentid}/children/{childid}/restart-tournament
      * @secure
      */
-    v4TournamentsParentsChildrenRecalculatePointsPartialUpdate: (
+    v5TournamentsParentsChildrenRestartTournamentPartialUpdate: (
+      parentid: number,
+      childid: number,
+      params: RequestParams = {},
+    ) =>
+      this.request<any, RestartTournamentRespApiRespBase>({
+        path: `/api/v5/tournaments/parents/${parentid}/children/${childid}/restart-tournament`,
+        method: "PATCH",
+        secure: true,
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Tournaments
+     * @name V5TournamentsParentsChildrenUpdateRoundsPartialUpdate
+     * @summary Update rounds
+     * @request PATCH:/api/v5/tournaments/parents/{parentid}/children/{childid}/update-rounds
+     * @secure
+     */
+    v5TournamentsParentsChildrenUpdateRoundsPartialUpdate: (
+      parentid: number,
+      childid: number,
+      params: RequestParams = {},
+    ) =>
+      this.request<any, UpdateRoundsRespApiRespBase>({
+        path: `/api/v5/tournaments/parents/${parentid}/children/${childid}/update-rounds`,
+        method: "PATCH",
+        secure: true,
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Tournaments
+     * @name V5TournamentsParentsChildrenRecalculatePointsPartialUpdate
+     * @summary group type child tournament recalculate points
+     * @request PATCH:/api/v5/tournaments/parents/{parentid}/children/{childid}/recalculate-points
+     * @secure
+     */
+    v5TournamentsParentsChildrenRecalculatePointsPartialUpdate: (
       parentid: number,
       childid: number,
       params: RequestParams = {},
     ) =>
       this.request<any, RecalculatePointsRespApiRespBase>({
-        path: `/api/v4/tournaments/parents/${parentid}/children/${childid}/recalculate-points`,
+        path: `/api/v5/tournaments/parents/${parentid}/children/${childid}/recalculate-points`,
         method: "PATCH",
         secure: true,
         ...params,
@@ -17102,12 +18334,12 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Tournaments
-     * @name V4TournamentsDataProvidersGridTournamentsList
+     * @name V5TournamentsDataProvidersGridTournamentsList
      * @summary Get grid tournaments
-     * @request GET:/api/v4/tournaments/data-providers/grid/tournaments
+     * @request GET:/api/v5/tournaments/data-providers/grid/tournaments
      * @secure
      */
-    v4TournamentsDataProvidersGridTournamentsList: (
+    v5TournamentsDataProvidersGridTournamentsList: (
       query: {
         /**
          * Game Id
@@ -17132,7 +18364,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       params: RequestParams = {},
     ) =>
       this.request<any, GetGridTournamentsRespListApiRespBase>({
-        path: `/api/v4/tournaments/data-providers/grid/tournaments`,
+        path: `/api/v5/tournaments/data-providers/grid/tournaments`,
         method: "GET",
         query: query,
         secure: true,
@@ -17143,12 +18375,12 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Tournaments
-     * @name V4TournamentsDataProvidersGridMatchesList
+     * @name V5TournamentsDataProvidersGridMatchesList
      * @summary Get grid matches
-     * @request GET:/api/v4/tournaments/data-providers/grid/matches
+     * @request GET:/api/v5/tournaments/data-providers/grid/matches
      * @secure
      */
-    v4TournamentsDataProvidersGridMatchesList: (
+    v5TournamentsDataProvidersGridMatchesList: (
       query: {
         /**
          * Child Tournament Id
@@ -17173,7 +18405,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       params: RequestParams = {},
     ) =>
       this.request<any, GetGridMatchesRespListApiRespBase>({
-        path: `/api/v4/tournaments/data-providers/grid/matches`,
+        path: `/api/v5/tournaments/data-providers/grid/matches`,
         method: "GET",
         query: query,
         secure: true,
@@ -17184,12 +18416,12 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Tournaments
-     * @name V4TournamentsParentsChildrenMediaItemsDetail
+     * @name V5TournamentsParentsChildrenMediaItemsDetail
      * @summary Get child tournament Media items
-     * @request GET:/api/v4/tournaments/parents/{parentid}/children/{childid}/media-items
+     * @request GET:/api/v5/tournaments/parents/{parentid}/children/{childid}/media-items
      * @secure
      */
-    v4TournamentsParentsChildrenMediaItemsDetail: (
+    v5TournamentsParentsChildrenMediaItemsDetail: (
       parentid: number,
       childid: number,
       query?: {
@@ -17209,7 +18441,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       params: RequestParams = {},
     ) =>
       this.request<any, GetChildMediaItemsRespApiRespBase>({
-        path: `/api/v4/tournaments/parents/${parentid}/children/${childid}/media-items`,
+        path: `/api/v5/tournaments/parents/${parentid}/children/${childid}/media-items`,
         method: "GET",
         query: query,
         secure: true,
@@ -17220,19 +18452,19 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Tournaments
-     * @name V4TournamentsParentsChildrenMediaItemsCreate
+     * @name V5TournamentsParentsChildrenMediaItemsCreate
      * @summary Add child tournament new Media items
-     * @request POST:/api/v4/tournaments/parents/{parentid}/children/{childid}/media-items
+     * @request POST:/api/v5/tournaments/parents/{parentid}/children/{childid}/media-items
      * @secure
      */
-    v4TournamentsParentsChildrenMediaItemsCreate: (
+    v5TournamentsParentsChildrenMediaItemsCreate: (
       parentid: number,
       childid: number,
       data: AddChildMediaItemReq,
       params: RequestParams = {},
     ) =>
       this.request<any, AddChildMediaItemRespApiRespBase>({
-        path: `/api/v4/tournaments/parents/${parentid}/children/${childid}/media-items`,
+        path: `/api/v5/tournaments/parents/${parentid}/children/${childid}/media-items`,
         method: "POST",
         body: data,
         secure: true,
@@ -17244,19 +18476,19 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Tournaments
-     * @name V4TournamentsParentsChildrenMediaItemsDelete
+     * @name V5TournamentsParentsChildrenMediaItemsDelete
      * @summary Delete child tournament Media item
-     * @request DELETE:/api/v4/tournaments/parents/{parentid}/children/{childid}/media-items/{mediaitemid}
+     * @request DELETE:/api/v5/tournaments/parents/{parentid}/children/{childid}/media-items/{mediaitemid}
      * @secure
      */
-    v4TournamentsParentsChildrenMediaItemsDelete: (
+    v5TournamentsParentsChildrenMediaItemsDelete: (
       parentid: number,
       childid: number,
       mediaitemid: number,
       params: RequestParams = {},
     ) =>
       this.request<any, DelChildMediaItemRespApiRespBase>({
-        path: `/api/v4/tournaments/parents/${parentid}/children/${childid}/media-items/${mediaitemid}`,
+        path: `/api/v5/tournaments/parents/${parentid}/children/${childid}/media-items/${mediaitemid}`,
         method: "DELETE",
         secure: true,
         ...params,
@@ -17266,12 +18498,12 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Tournaments
-     * @name V4TournamentsGameAccountsList
+     * @name V5TournamentsGameAccountsList
      * @summary Get GameAccounts
-     * @request GET:/api/v4/tournaments/game-accounts
+     * @request GET:/api/v5/tournaments/game-accounts
      * @secure
      */
-    v4TournamentsGameAccountsList: (
+    v5TournamentsGameAccountsList: (
       query: {
         /**
          * PlayerId
@@ -17296,7 +18528,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       params: RequestParams = {},
     ) =>
       this.request<any, GetGameAccountsRespApiRespBase>({
-        path: `/api/v4/tournaments/game-accounts`,
+        path: `/api/v5/tournaments/game-accounts`,
         method: "GET",
         query: query,
         secure: true,
@@ -17307,12 +18539,12 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Tournaments
-     * @name V4TournamentsGameAccountsCreate
+     * @name V5TournamentsGameAccountsCreate
      * @summary Add GameAccount
-     * @request POST:/api/v4/tournaments/game-accounts
+     * @request POST:/api/v5/tournaments/game-accounts
      * @secure
      */
-    v4TournamentsGameAccountsCreate: (
+    v5TournamentsGameAccountsCreate: (
       data: {
         /**
          * PlayerId
@@ -17345,7 +18577,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       params: RequestParams = {},
     ) =>
       this.request<any, AddGameAccountRespApiRespBase>({
-        path: `/api/v4/tournaments/game-accounts`,
+        path: `/api/v5/tournaments/game-accounts`,
         method: "POST",
         body: data,
         secure: true,
@@ -17357,14 +18589,14 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Tournaments
-     * @name V4TournamentsGameAccountsDetail
+     * @name V5TournamentsGameAccountsDetail
      * @summary Get GameAccount
-     * @request GET:/api/v4/tournaments/game-accounts/{id}
+     * @request GET:/api/v5/tournaments/game-accounts/{id}
      * @secure
      */
-    v4TournamentsGameAccountsDetail: (id: number, params: RequestParams = {}) =>
+    v5TournamentsGameAccountsDetail: (id: number, params: RequestParams = {}) =>
       this.request<any, GetGameAccountRespApiRespBase>({
-        path: `/api/v4/tournaments/game-accounts/${id}`,
+        path: `/api/v5/tournaments/game-accounts/${id}`,
         method: "GET",
         secure: true,
         ...params,
@@ -17374,14 +18606,14 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Tournaments
-     * @name V4TournamentsGameAccountsPartialUpdate
+     * @name V5TournamentsGameAccountsPartialUpdate
      * @summary Modify GameAccount
-     * @request PATCH:/api/v4/tournaments/game-accounts/{id}
+     * @request PATCH:/api/v5/tournaments/game-accounts/{id}
      * @secure
      */
-    v4TournamentsGameAccountsPartialUpdate: (id: number, data: ModGameAccountReq, params: RequestParams = {}) =>
+    v5TournamentsGameAccountsPartialUpdate: (id: number, data: ModGameAccountReq, params: RequestParams = {}) =>
       this.request<any, ModGameAccountRespApiRespBase>({
-        path: `/api/v4/tournaments/game-accounts/${id}`,
+        path: `/api/v5/tournaments/game-accounts/${id}`,
         method: "PATCH",
         body: data,
         secure: true,
@@ -17393,14 +18625,14 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Tournaments
-     * @name V4TournamentsGameAccountsDelete
+     * @name V5TournamentsGameAccountsDelete
      * @summary Delete GameAccount
-     * @request DELETE:/api/v4/tournaments/game-accounts/{id}
+     * @request DELETE:/api/v5/tournaments/game-accounts/{id}
      * @secure
      */
-    v4TournamentsGameAccountsDelete: (id: number, params: RequestParams = {}) =>
+    v5TournamentsGameAccountsDelete: (id: number, params: RequestParams = {}) =>
       this.request<any, DelGameAccountRespApiRespBase>({
-        path: `/api/v4/tournaments/game-accounts/${id}`,
+        path: `/api/v5/tournaments/game-accounts/${id}`,
         method: "DELETE",
         secure: true,
         ...params,
@@ -17410,14 +18642,14 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Tournaments
-     * @name V4TournamentsRoundsMatchGamesDetail
+     * @name V5TournamentsRoundsMatchGamesDetail
      * @summary Get child tournament match games
-     * @request GET:/api/v4/tournaments/rounds/{roundid}/match-games
+     * @request GET:/api/v5/tournaments/rounds/{roundid}/match-games
      * @secure
      */
-    v4TournamentsRoundsMatchGamesDetail: (roundid: number, params: RequestParams = {}) =>
+    v5TournamentsRoundsMatchGamesDetail: (roundid: number, params: RequestParams = {}) =>
       this.request<any, GetMatchGamesRespApiRespBase>({
-        path: `/api/v4/tournaments/rounds/${roundid}/match-games`,
+        path: `/api/v5/tournaments/rounds/${roundid}/match-games`,
         method: "GET",
         secure: true,
         ...params,
@@ -17427,16 +18659,16 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Tournaments
-     * @name V4TournamentsRoundsMatchGamesDetail2
+     * @name V5TournamentsRoundsMatchGamesDetail2
      * @summary Get child tournament match game detail
-     * @request GET:/api/v4/tournaments/rounds/{roundid}/match-games/{matchgameid}
-     * @originalName v4TournamentsRoundsMatchGamesDetail
+     * @request GET:/api/v5/tournaments/rounds/{roundid}/match-games/{matchgameid}
+     * @originalName v5TournamentsRoundsMatchGamesDetail
      * @duplicate
      * @secure
      */
-    v4TournamentsRoundsMatchGamesDetail2: (roundid: number, matchgameid: number, params: RequestParams = {}) =>
+    v5TournamentsRoundsMatchGamesDetail2: (roundid: number, matchgameid: number, params: RequestParams = {}) =>
       this.request<any, GetMatchGameRespApiRespBase>({
-        path: `/api/v4/tournaments/rounds/${roundid}/match-games/${matchgameid}`,
+        path: `/api/v5/tournaments/rounds/${roundid}/match-games/${matchgameid}`,
         method: "GET",
         secure: true,
         ...params,
@@ -17446,19 +18678,19 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Tournaments
-     * @name V4TournamentsRoundsMatchGamesPartialUpdate
+     * @name V5TournamentsRoundsMatchGamesPartialUpdate
      * @summary Modify child tournament match game
-     * @request PATCH:/api/v4/tournaments/rounds/{roundid}/match-games/{matchgameid}
+     * @request PATCH:/api/v5/tournaments/rounds/{roundid}/match-games/{matchgameid}
      * @secure
      */
-    v4TournamentsRoundsMatchGamesPartialUpdate: (
+    v5TournamentsRoundsMatchGamesPartialUpdate: (
       roundid: number,
       matchgameid: number,
       data: ModMatchGameReq,
       params: RequestParams = {},
     ) =>
       this.request<any, ModMatchGameRespApiRespBase>({
-        path: `/api/v4/tournaments/rounds/${roundid}/match-games/${matchgameid}`,
+        path: `/api/v5/tournaments/rounds/${roundid}/match-games/${matchgameid}`,
         method: "PATCH",
         body: data,
         secure: true,
@@ -17470,14 +18702,14 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Tournaments
-     * @name V4TournamentsRoundsMatchGamesDraftDetail
+     * @name V5TournamentsRoundsMatchGamesDraftDetail
      * @summary Get child tournament match game draft
-     * @request GET:/api/v4/tournaments/rounds/{roundid}/match-games/{matchgameid}/draft
+     * @request GET:/api/v5/tournaments/rounds/{roundid}/match-games/{matchgameid}/draft
      * @secure
      */
-    v4TournamentsRoundsMatchGamesDraftDetail: (roundid: number, matchgameid: number, params: RequestParams = {}) =>
+    v5TournamentsRoundsMatchGamesDraftDetail: (roundid: number, matchgameid: number, params: RequestParams = {}) =>
       this.request<any, GetGameDraftRespApiRespBase>({
-        path: `/api/v4/tournaments/rounds/${roundid}/match-games/${matchgameid}/draft`,
+        path: `/api/v5/tournaments/rounds/${roundid}/match-games/${matchgameid}/draft`,
         method: "GET",
         secure: true,
         ...params,
@@ -17487,19 +18719,19 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Tournaments
-     * @name V4TournamentsRoundsMatchGamesDraftPartialUpdate
+     * @name V5TournamentsRoundsMatchGamesDraftPartialUpdate
      * @summary Modify child tournament match game draft
-     * @request PATCH:/api/v4/tournaments/rounds/{roundid}/match-games/{matchgameid}/draft
+     * @request PATCH:/api/v5/tournaments/rounds/{roundid}/match-games/{matchgameid}/draft
      * @secure
      */
-    v4TournamentsRoundsMatchGamesDraftPartialUpdate: (
+    v5TournamentsRoundsMatchGamesDraftPartialUpdate: (
       roundid: number,
       matchgameid: number,
       data: ModGameDraftReq,
       params: RequestParams = {},
     ) =>
       this.request<any, ModGameDraftRespApiRespBase>({
-        path: `/api/v4/tournaments/rounds/${roundid}/match-games/${matchgameid}/draft`,
+        path: `/api/v5/tournaments/rounds/${roundid}/match-games/${matchgameid}/draft`,
         method: "PATCH",
         body: data,
         secure: true,
@@ -17511,14 +18743,14 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Tournaments
-     * @name V4TournamentsRoundsMatchGamesRoundSetsDetail
+     * @name V5TournamentsRoundsMatchGamesRoundSetsDetail
      * @summary Get child tournament match game round sets
-     * @request GET:/api/v4/tournaments/rounds/{roundid}/match-games/{matchgameid}/round-sets
+     * @request GET:/api/v5/tournaments/rounds/{roundid}/match-games/{matchgameid}/round-sets
      * @secure
      */
-    v4TournamentsRoundsMatchGamesRoundSetsDetail: (roundid: number, matchgameid: number, params: RequestParams = {}) =>
+    v5TournamentsRoundsMatchGamesRoundSetsDetail: (roundid: number, matchgameid: number, params: RequestParams = {}) =>
       this.request<any, GetRoundSetsRespApiRespBase>({
-        path: `/api/v4/tournaments/rounds/${roundid}/match-games/${matchgameid}/round-sets`,
+        path: `/api/v5/tournaments/rounds/${roundid}/match-games/${matchgameid}/round-sets`,
         method: "GET",
         secure: true,
         ...params,
@@ -17528,19 +18760,19 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Tournaments
-     * @name V4TournamentsRoundsMatchGamesRoundSetsPartialUpdate
+     * @name V5TournamentsRoundsMatchGamesRoundSetsPartialUpdate
      * @summary Modify child tournament match game round sets
-     * @request PATCH:/api/v4/tournaments/rounds/{roundid}/match-games/{matchgameid}/round-sets
+     * @request PATCH:/api/v5/tournaments/rounds/{roundid}/match-games/{matchgameid}/round-sets
      * @secure
      */
-    v4TournamentsRoundsMatchGamesRoundSetsPartialUpdate: (
+    v5TournamentsRoundsMatchGamesRoundSetsPartialUpdate: (
       roundid: number,
       matchgameid: number,
       data: ModRoundSetsReq,
       params: RequestParams = {},
     ) =>
       this.request<any, ModRoundSetsRespApiRespBase>({
-        path: `/api/v4/tournaments/rounds/${roundid}/match-games/${matchgameid}/round-sets`,
+        path: `/api/v5/tournaments/rounds/${roundid}/match-games/${matchgameid}/round-sets`,
         method: "PATCH",
         body: data,
         secure: true,
@@ -17552,22 +18784,26 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Tournaments
-     * @name V4TournamentsRoundsMatchGamesBrResultDetail
+     * @name V5TournamentsRoundsMatchGamesBrResultDetail
      * @summary Get child tournament match game br result detail
-     * @request GET:/api/v4/tournaments/rounds/{roundid}/match-games/{matchgameid}/br-result
+     * @request GET:/api/v5/tournaments/rounds/{roundid}/match-games/{matchgameid}/br-result
      * @secure
      */
-    v4TournamentsRoundsMatchGamesBrResultDetail: (
+    v5TournamentsRoundsMatchGamesBrResultDetail: (
       roundid: number,
       matchgameid: number,
-      query?: {
-        /** @format int32 */
-        RegistrationId?: number;
+      query: {
+        /**
+         * @format int32
+         * @min 1
+         * @max 2147483647
+         */
+        RegistrationId: number;
       },
       params: RequestParams = {},
     ) =>
       this.request<any, GetBrResultDetailRespApiRespBase>({
-        path: `/api/v4/tournaments/rounds/${roundid}/match-games/${matchgameid}/br-result`,
+        path: `/api/v5/tournaments/rounds/${roundid}/match-games/${matchgameid}/br-result`,
         method: "GET",
         query: query,
         secure: true,
@@ -17578,19 +18814,19 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Tournaments
-     * @name V4TournamentsRoundsMatchGamesBrResultPartialUpdate
+     * @name V5TournamentsRoundsMatchGamesBrResultPartialUpdate
      * @summary Modify child tournament match game br result
-     * @request PATCH:/api/v4/tournaments/rounds/{roundid}/match-games/{matchgameid}/br-result
+     * @request PATCH:/api/v5/tournaments/rounds/{roundid}/match-games/{matchgameid}/br-result
      * @secure
      */
-    v4TournamentsRoundsMatchGamesBrResultPartialUpdate: (
+    v5TournamentsRoundsMatchGamesBrResultPartialUpdate: (
       roundid: number,
       matchgameid: number,
       data: ModBrResultReq,
       params: RequestParams = {},
     ) =>
       this.request<any, ModBrResultRespApiRespBase>({
-        path: `/api/v4/tournaments/rounds/${roundid}/match-games/${matchgameid}/br-result`,
+        path: `/api/v5/tournaments/rounds/${roundid}/match-games/${matchgameid}/br-result`,
         method: "PATCH",
         body: data,
         secure: true,
@@ -17602,12 +18838,41 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Tournaments
-     * @name V4TournamentsRoundsMatchesDetail
-     * @summary Get child tournament matches or archived matches
-     * @request GET:/api/v4/tournaments/rounds/{roundid}/matches
+     * @name V5TournamentsMatchGamesPreviousLineupsList
+     * @summary Get previous game lineups and standins
+     * @request GET:/api/v5/tournaments/match-games/previous-lineups
      * @secure
      */
-    v4TournamentsRoundsMatchesDetail: (
+    v5TournamentsMatchGamesPreviousLineupsList: (
+      query: {
+        /**
+         * Tournament game Id
+         * @format int32
+         * @min 1
+         * @max 2147483647
+         */
+        GameId: number;
+      },
+      params: RequestParams = {},
+    ) =>
+      this.request<any, GetPreviousLineupsRespApiRespBase>({
+        path: `/api/v5/tournaments/match-games/previous-lineups`,
+        method: "GET",
+        query: query,
+        secure: true,
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Tournaments
+     * @name V5TournamentsRoundsMatchesDetail
+     * @summary Get child tournament matches or archived matches
+     * @request GET:/api/v5/tournaments/rounds/{roundid}/matches
+     * @secure
+     */
+    v5TournamentsRoundsMatchesDetail: (
       roundid: number,
       query?: {
         /**
@@ -17615,11 +18880,17 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
          * @default false
          */
         isArchived?: boolean;
+        /**
+         * @format int32
+         * @min 1
+         * @max 2147483647
+         */
+        matchId?: number;
       },
       params: RequestParams = {},
     ) =>
       this.request<any, GetMatchesRespListApiRespBase>({
-        path: `/api/v4/tournaments/rounds/${roundid}/matches`,
+        path: `/api/v5/tournaments/rounds/${roundid}/matches`,
         method: "GET",
         query: query,
         secure: true,
@@ -17630,14 +18901,14 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Tournaments
-     * @name V4TournamentsRoundsMatchesPartialUpdate
+     * @name V5TournamentsRoundsMatchesPartialUpdate
      * @summary Modify child tournament matches
-     * @request PATCH:/api/v4/tournaments/rounds/{roundid}/matches
+     * @request PATCH:/api/v5/tournaments/rounds/{roundid}/matches
      * @secure
      */
-    v4TournamentsRoundsMatchesPartialUpdate: (roundid: number, data: ModMatchesReq, params: RequestParams = {}) =>
+    v5TournamentsRoundsMatchesPartialUpdate: (roundid: number, data: ModMatchesReq, params: RequestParams = {}) =>
       this.request<any, ModMatchesRespApiRespBase>({
-        path: `/api/v4/tournaments/rounds/${roundid}/matches`,
+        path: `/api/v5/tournaments/rounds/${roundid}/matches`,
         method: "PATCH",
         body: data,
         secure: true,
@@ -17649,14 +18920,14 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Tournaments
-     * @name V4TournamentsRoundsMatchesCreate
+     * @name V5TournamentsRoundsMatchesCreate
      * @summary Add new child tournament matches
-     * @request POST:/api/v4/tournaments/rounds/{roundid}/matches
+     * @request POST:/api/v5/tournaments/rounds/{roundid}/matches
      * @secure
      */
-    v4TournamentsRoundsMatchesCreate: (roundid: number, data: AddMatchReq, params: RequestParams = {}) =>
+    v5TournamentsRoundsMatchesCreate: (roundid: number, data: AddMatchReq, params: RequestParams = {}) =>
       this.request<any, AddMatchRespApiRespBase>({
-        path: `/api/v4/tournaments/rounds/${roundid}/matches`,
+        path: `/api/v5/tournaments/rounds/${roundid}/matches`,
         method: "POST",
         body: data,
         secure: true,
@@ -17668,14 +18939,14 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Tournaments
-     * @name V4TournamentsRoundsMatchesDelete
+     * @name V5TournamentsRoundsMatchesDelete
      * @summary Delete child tournament match
-     * @request DELETE:/api/v4/tournaments/rounds/{roundid}/matches/{matchid}
+     * @request DELETE:/api/v5/tournaments/rounds/{roundid}/matches/{matchid}
      * @secure
      */
-    v4TournamentsRoundsMatchesDelete: (roundid: number, matchid: number, params: RequestParams = {}) =>
+    v5TournamentsRoundsMatchesDelete: (roundid: number, matchid: number, params: RequestParams = {}) =>
       this.request<any, DelMatchRespApiRespBase>({
-        path: `/api/v4/tournaments/rounds/${roundid}/matches/${matchid}`,
+        path: `/api/v5/tournaments/rounds/${roundid}/matches/${matchid}`,
         method: "DELETE",
         secure: true,
         ...params,
@@ -17685,16 +18956,16 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Tournaments
-     * @name V4TournamentsRoundsMatchesPartialUpdate2
+     * @name V5TournamentsRoundsMatchesPartialUpdate2
      * @summary Modify child tournament match archived
-     * @request PATCH:/api/v4/tournaments/rounds/{roundid}/matches/{matchid}
-     * @originalName v4TournamentsRoundsMatchesPartialUpdate
+     * @request PATCH:/api/v5/tournaments/rounds/{roundid}/matches/{matchid}
+     * @originalName v5TournamentsRoundsMatchesPartialUpdate
      * @duplicate
      * @secure
      */
-    v4TournamentsRoundsMatchesPartialUpdate2: (roundid: number, matchid: number, params: RequestParams = {}) =>
+    v5TournamentsRoundsMatchesPartialUpdate2: (roundid: number, matchid: number, params: RequestParams = {}) =>
       this.request<any, ModMatchArchivedRespApiRespBase>({
-        path: `/api/v4/tournaments/rounds/${roundid}/matches/${matchid}`,
+        path: `/api/v5/tournaments/rounds/${roundid}/matches/${matchid}`,
         method: "PATCH",
         secure: true,
         ...params,
@@ -17704,14 +18975,14 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Tournaments
-     * @name V4TournamentsChildrenReplaceOpponentsDetail
+     * @name V5TournamentsChildrenReplaceOpponentsDetail
      * @summary Get child tournament replace opponents
-     * @request GET:/api/v4/tournaments/children/{childid}/replace-opponents
+     * @request GET:/api/v5/tournaments/children/{childid}/replace-opponents
      * @secure
      */
-    v4TournamentsChildrenReplaceOpponentsDetail: (childid: number, params: RequestParams = {}) =>
+    v5TournamentsChildrenReplaceOpponentsDetail: (childid: number, params: RequestParams = {}) =>
       this.request<any, GetReplaceOpponentsRespListApiRespBase>({
-        path: `/api/v4/tournaments/children/${childid}/replace-opponents`,
+        path: `/api/v5/tournaments/children/${childid}/replace-opponents`,
         method: "GET",
         secure: true,
         ...params,
@@ -17721,18 +18992,18 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Tournaments
-     * @name V4TournamentsChildrenReplaceOpponentsPartialUpdate
+     * @name V5TournamentsChildrenReplaceOpponentsPartialUpdate
      * @summary Add/Modify child tournament replace opponents
-     * @request PATCH:/api/v4/tournaments/children/{childid}/replace-opponents
+     * @request PATCH:/api/v5/tournaments/children/{childid}/replace-opponents
      * @secure
      */
-    v4TournamentsChildrenReplaceOpponentsPartialUpdate: (
+    v5TournamentsChildrenReplaceOpponentsPartialUpdate: (
       childid: number,
       data: ModReplaceOpponentsReq,
       params: RequestParams = {},
     ) =>
       this.request<any, ModReplaceOpponentsRespApiRespBase>({
-        path: `/api/v4/tournaments/children/${childid}/replace-opponents`,
+        path: `/api/v5/tournaments/children/${childid}/replace-opponents`,
         method: "PATCH",
         body: data,
         secure: true,
@@ -17744,14 +19015,14 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Tournaments
-     * @name V4TournamentsChildrenReplaceOpponentsDelete
+     * @name V5TournamentsChildrenReplaceOpponentsDelete
      * @summary Delete child tournament replace opponents
-     * @request DELETE:/api/v4/tournaments/children/{childid}/replace-opponents/{id}
+     * @request DELETE:/api/v5/tournaments/children/{childid}/replace-opponents/{id}
      * @secure
      */
-    v4TournamentsChildrenReplaceOpponentsDelete: (childid: number, id: number, params: RequestParams = {}) =>
+    v5TournamentsChildrenReplaceOpponentsDelete: (childid: number, id: number, params: RequestParams = {}) =>
       this.request<any, DelReplaceOpponentsRespApiRespBase>({
-        path: `/api/v4/tournaments/children/${childid}/replace-opponents/${id}`,
+        path: `/api/v5/tournaments/children/${childid}/replace-opponents/${id}`,
         method: "DELETE",
         secure: true,
         ...params,
@@ -17761,14 +19032,14 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Tournaments
-     * @name V4TournamentsRoundsMatchesPointsAdjustmentDetail
+     * @name V5TournamentsRoundsMatchesPointsAdjustmentDetail
      * @summary Get child tournament match points adjustment
-     * @request GET:/api/v4/tournaments/rounds/{roundid}/matches/{matchid}/points-adjustment
+     * @request GET:/api/v5/tournaments/rounds/{roundid}/matches/{matchid}/points-adjustment
      * @secure
      */
-    v4TournamentsRoundsMatchesPointsAdjustmentDetail: (roundid: number, matchid: number, params: RequestParams = {}) =>
+    v5TournamentsRoundsMatchesPointsAdjustmentDetail: (roundid: number, matchid: number, params: RequestParams = {}) =>
       this.request<any, GetPointsAdjustmentRespListApiRespBase>({
-        path: `/api/v4/tournaments/rounds/${roundid}/matches/${matchid}/points-adjustment`,
+        path: `/api/v5/tournaments/rounds/${roundid}/matches/${matchid}/points-adjustment`,
         method: "GET",
         secure: true,
         ...params,
@@ -17778,19 +19049,19 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Tournaments
-     * @name V4TournamentsRoundsMatchesPointsAdjustmentPartialUpdate
+     * @name V5TournamentsRoundsMatchesPointsAdjustmentPartialUpdate
      * @summary Modify child tournament match points adjustment
-     * @request PATCH:/api/v4/tournaments/rounds/{roundid}/matches/{matchid}/points-adjustment
+     * @request PATCH:/api/v5/tournaments/rounds/{roundid}/matches/{matchid}/points-adjustment
      * @secure
      */
-    v4TournamentsRoundsMatchesPointsAdjustmentPartialUpdate: (
+    v5TournamentsRoundsMatchesPointsAdjustmentPartialUpdate: (
       roundid: number,
       matchid: number,
       data: ModPointsAdjustmentReq,
       params: RequestParams = {},
     ) =>
       this.request<any, ModPointsAdjustmentRespApiRespBase>({
-        path: `/api/v4/tournaments/rounds/${roundid}/matches/${matchid}/points-adjustment`,
+        path: `/api/v5/tournaments/rounds/${roundid}/matches/${matchid}/points-adjustment`,
         method: "PATCH",
         body: data,
         secure: true,
@@ -17802,14 +19073,14 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Tournaments
-     * @name V4TournamentsParentsChildrenOpponentsDetail
+     * @name V5TournamentsParentsChildrenOpponentsDetail
      * @summary Get child tournament opponents
-     * @request GET:/api/v4/tournaments/parents/{parentid}/children/{childid}/opponents
+     * @request GET:/api/v5/tournaments/parents/{parentid}/children/{childid}/opponents
      * @secure
      */
-    v4TournamentsParentsChildrenOpponentsDetail: (parentid: number, childid: number, params: RequestParams = {}) =>
+    v5TournamentsParentsChildrenOpponentsDetail: (parentid: number, childid: number, params: RequestParams = {}) =>
       this.request<any, GetOpponentsRespApiRespBase>({
-        path: `/api/v4/tournaments/parents/${parentid}/children/${childid}/opponents`,
+        path: `/api/v5/tournaments/parents/${parentid}/children/${childid}/opponents`,
         method: "GET",
         secure: true,
         ...params,
@@ -17819,19 +19090,19 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Tournaments
-     * @name V4TournamentsParentsChildrenOpponentsPartialUpdate
+     * @name V5TournamentsParentsChildrenOpponentsPartialUpdate
      * @summary Modify child tournament opponents
-     * @request PATCH:/api/v4/tournaments/parents/{parentid}/children/{childid}/opponents
+     * @request PATCH:/api/v5/tournaments/parents/{parentid}/children/{childid}/opponents
      * @secure
      */
-    v4TournamentsParentsChildrenOpponentsPartialUpdate: (
+    v5TournamentsParentsChildrenOpponentsPartialUpdate: (
       parentid: number,
       childid: number,
       data: ModOpponentsReq,
       params: RequestParams = {},
     ) =>
       this.request<any, ModOpponentsRespApiRespBase>({
-        path: `/api/v4/tournaments/parents/${parentid}/children/${childid}/opponents`,
+        path: `/api/v5/tournaments/parents/${parentid}/children/${childid}/opponents`,
         method: "PATCH",
         body: data,
         secure: true,
@@ -17843,14 +19114,14 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Tournaments
-     * @name V4TournamentsParentsChildTypesDetail
+     * @name V5TournamentsParentsChildTypesDetail
      * @summary Get child tournament types by parent tournament
-     * @request GET:/api/v4/tournaments/parents/{parentId}/child-types
+     * @request GET:/api/v5/tournaments/parents/{parentId}/child-types
      * @secure
      */
-    v4TournamentsParentsChildTypesDetail: (parentId: number, params: RequestParams = {}) =>
+    v5TournamentsParentsChildTypesDetail: (parentId: number, params: RequestParams = {}) =>
       this.request<any, Int16ItemListApiRespBase>({
-        path: `/api/v4/tournaments/parents/${parentId}/child-types`,
+        path: `/api/v5/tournaments/parents/${parentId}/child-types`,
         method: "GET",
         secure: true,
         ...params,
@@ -17860,12 +19131,12 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Tournaments
-     * @name V4TournamentsParentsGameMapsDetail
+     * @name V5TournamentsParentsGameMapsDetail
      * @summary Get game maps by parent tournament
-     * @request GET:/api/v4/tournaments/parents/{parentId}/game-maps
+     * @request GET:/api/v5/tournaments/parents/{parentId}/game-maps
      * @secure
      */
-    v4TournamentsParentsGameMapsDetail: (
+    v5TournamentsParentsGameMapsDetail: (
       parentId: number,
       query: {
         /**
@@ -17885,7 +19156,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       params: RequestParams = {},
     ) =>
       this.request<any, Int16ItemListApiRespBase>({
-        path: `/api/v4/tournaments/parents/${parentId}/game-maps`,
+        path: `/api/v5/tournaments/parents/${parentId}/game-maps`,
         method: "GET",
         query: query,
         secure: true,
@@ -17896,12 +19167,57 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Tournaments
-     * @name V4TournamentsParentsList
-     * @summary Get parent tournaments
-     * @request GET:/api/v4/tournaments/parents
+     * @name V5TournamentsMatchGamesTeamSelectionsList
+     * @summary Get opponent team selection options
+     * @request GET:/api/v5/tournaments/match-games/team-selections
      * @secure
      */
-    v4TournamentsParentsList: (
+    v5TournamentsMatchGamesTeamSelectionsList: (
+      query: {
+        /**
+         * @format int32
+         * @min 1
+         * @max 2147483647
+         */
+        RegistrationId: number;
+      },
+      params: RequestParams = {},
+    ) =>
+      this.request<any, Int32ItemListApiRespBase>({
+        path: `/api/v5/tournaments/match-games/team-selections`,
+        method: "GET",
+        query: query,
+        secure: true,
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Tournaments
+     * @name V5TournamentsParentsChildrenBracketMatchesDetail
+     * @summary Get child tournament bracket match options
+     * @request GET:/api/v5/tournaments/parents/{parentid}/children/{childid}/bracket-matches
+     * @secure
+     */
+    v5TournamentsParentsChildrenBracketMatchesDetail: (parentid: number, childid: number, params: RequestParams = {}) =>
+      this.request<any, Int32ItemListApiRespBase>({
+        path: `/api/v5/tournaments/parents/${parentid}/children/${childid}/bracket-matches`,
+        method: "GET",
+        secure: true,
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Tournaments
+     * @name V5TournamentsParentsList
+     * @summary Get parent tournaments
+     * @request GET:/api/v5/tournaments/parents
+     * @secure
+     */
+    v5TournamentsParentsList: (
       query?: {
         /**
          * Parent tournament name
@@ -17919,7 +19235,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
         /**
          * Frontend id
          * @format int32
-         * @min 1
+         * @min 0
          * @max 32767
          */
         FrontendId?: number;
@@ -17993,6 +19309,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
         SponsorId?: number;
         /**
          * State
+         * All = 0
          * Live = 1
          * Upcoming = 2
          * Completed = 3
@@ -18016,7 +19333,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       params: RequestParams = {},
     ) =>
       this.request<any, GetParentsRespApiRespBase>({
-        path: `/api/v4/tournaments/parents`,
+        path: `/api/v5/tournaments/parents`,
         method: "GET",
         query: query,
         secure: true,
@@ -18027,12 +19344,12 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Tournaments
-     * @name V4TournamentsParentsCreate
+     * @name V5TournamentsParentsCreate
      * @summary Add parent tournament
-     * @request POST:/api/v4/tournaments/parents
+     * @request POST:/api/v5/tournaments/parents
      * @secure
      */
-    v4TournamentsParentsCreate: (
+    v5TournamentsParentsCreate: (
       data: {
         /**
          * Game id
@@ -18044,7 +19361,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
         /**
          * Frontend id
          * @format int32
-         * @min 1
+         * @min 0
          * @max 32767
          */
         FrontendId?: number;
@@ -18101,7 +19418,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       params: RequestParams = {},
     ) =>
       this.request<any, AddParentRespApiRespBase>({
-        path: `/api/v4/tournaments/parents`,
+        path: `/api/v5/tournaments/parents`,
         method: "POST",
         body: data,
         secure: true,
@@ -18113,14 +19430,14 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Tournaments
-     * @name V4TournamentsParentsDetail
+     * @name V5TournamentsParentsDetail
      * @summary Get parent tournament for edit
-     * @request GET:/api/v4/tournaments/parents/{parentId}
+     * @request GET:/api/v5/tournaments/parents/{parentId}
      * @secure
      */
-    v4TournamentsParentsDetail: (parentId: number, params: RequestParams = {}) =>
+    v5TournamentsParentsDetail: (parentId: number, params: RequestParams = {}) =>
       this.request<any, GetParentRespApiRespBase>({
-        path: `/api/v4/tournaments/parents/${parentId}`,
+        path: `/api/v5/tournaments/parents/${parentId}`,
         method: "GET",
         secure: true,
         ...params,
@@ -18130,12 +19447,12 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Tournaments
-     * @name V4TournamentsParentsPartialUpdate
+     * @name V5TournamentsParentsPartialUpdate
      * @summary Modify parent tournament
-     * @request PATCH:/api/v4/tournaments/parents/{parentId}
+     * @request PATCH:/api/v5/tournaments/parents/{parentId}
      * @secure
      */
-    v4TournamentsParentsPartialUpdate: (
+    v5TournamentsParentsPartialUpdate: (
       parentId: number,
       data: {
         /**
@@ -18149,7 +19466,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
          * Frontend id
          * null: ALL
          * @format int32
-         * @min 1
+         * @min 0
          * @max 32767
          */
         FrontendId?: number;
@@ -18197,7 +19514,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       params: RequestParams = {},
     ) =>
       this.request<any, ModParentRespApiRespBase>({
-        path: `/api/v4/tournaments/parents/${parentId}`,
+        path: `/api/v5/tournaments/parents/${parentId}`,
         method: "PATCH",
         body: data,
         secure: true,
@@ -18209,14 +19526,14 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Tournaments
-     * @name V4TournamentsParentsDelete
+     * @name V5TournamentsParentsDelete
      * @summary Delete parent tournaments
-     * @request DELETE:/api/v4/tournaments/parents/{parentId}
+     * @request DELETE:/api/v5/tournaments/parents/{parentId}
      * @secure
      */
-    v4TournamentsParentsDelete: (parentId: number, data: DeleteParentReq, params: RequestParams = {}) =>
+    v5TournamentsParentsDelete: (parentId: number, data: DeleteParentReq, params: RequestParams = {}) =>
       this.request<any, DeleteParentRespApiRespBase>({
-        path: `/api/v4/tournaments/parents/${parentId}`,
+        path: `/api/v5/tournaments/parents/${parentId}`,
         method: "DELETE",
         body: data,
         secure: true,
@@ -18228,14 +19545,14 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Tournaments
-     * @name V4TournamentsParentsDetailDetail
+     * @name V5TournamentsParentsDetailDetail
      * @summary Get parent tournament for detail
-     * @request GET:/api/v4/tournaments/parents/{parentId}/detail
+     * @request GET:/api/v5/tournaments/parents/{parentId}/detail
      * @secure
      */
-    v4TournamentsParentsDetailDetail: (parentId: number, params: RequestParams = {}) =>
+    v5TournamentsParentsDetailDetail: (parentId: number, params: RequestParams = {}) =>
       this.request<any, GetParentDetailRespApiRespBase>({
-        path: `/api/v4/tournaments/parents/${parentId}/detail`,
+        path: `/api/v5/tournaments/parents/${parentId}/detail`,
         method: "GET",
         secure: true,
         ...params,
@@ -18245,14 +19562,14 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Tournaments
-     * @name V4TournamentsParentsStatusPartialUpdate
+     * @name V5TournamentsParentsStatusPartialUpdate
      * @summary Modify parent tournament status
-     * @request PATCH:/api/v4/tournaments/parents/{parentId}/status
+     * @request PATCH:/api/v5/tournaments/parents/{parentId}/status
      * @secure
      */
-    v4TournamentsParentsStatusPartialUpdate: (parentId: number, data: ModParentStatusReq, params: RequestParams = {}) =>
+    v5TournamentsParentsStatusPartialUpdate: (parentId: number, data: ModParentStatusReq, params: RequestParams = {}) =>
       this.request<any, ModParentStatusRespApiRespBase>({
-        path: `/api/v4/tournaments/parents/${parentId}/status`,
+        path: `/api/v5/tournaments/parents/${parentId}/status`,
         method: "PATCH",
         body: data,
         secure: true,
@@ -18264,18 +19581,18 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Tournaments
-     * @name V4TournamentsParentsChildrenTeamRegistrationsDetail
+     * @name V5TournamentsParentsChildrenTeamRegistrationsDetail
      * @summary Get child team registrations
-     * @request GET:/api/v4/tournaments/parents/{parentId}/children/{childId}/team-registrations
+     * @request GET:/api/v5/tournaments/parents/{parentId}/children/{childId}/team-registrations
      * @secure
      */
-    v4TournamentsParentsChildrenTeamRegistrationsDetail: (
+    v5TournamentsParentsChildrenTeamRegistrationsDetail: (
       parentId: number,
       childId: number,
       params: RequestParams = {},
     ) =>
       this.request<any, ChildRegistrationTeamListItemGetChildRegistrationsRespApiRespBase>({
-        path: `/api/v4/tournaments/parents/${parentId}/children/${childId}/team-registrations`,
+        path: `/api/v5/tournaments/parents/${parentId}/children/${childId}/team-registrations`,
         method: "GET",
         secure: true,
         ...params,
@@ -18285,19 +19602,19 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Tournaments
-     * @name V4TournamentsParentsChildrenTeamRegistrationsCreate
+     * @name V5TournamentsParentsChildrenTeamRegistrationsCreate
      * @summary Add child team registrations
-     * @request POST:/api/v4/tournaments/parents/{parentId}/children/{childId}/team-registrations
+     * @request POST:/api/v5/tournaments/parents/{parentId}/children/{childId}/team-registrations
      * @secure
      */
-    v4TournamentsParentsChildrenTeamRegistrationsCreate: (
+    v5TournamentsParentsChildrenTeamRegistrationsCreate: (
       parentId: number,
       childId: number,
       data: AddChildTeamRegistrationsReq,
       params: RequestParams = {},
     ) =>
       this.request<any, ApiRespBase>({
-        path: `/api/v4/tournaments/parents/${parentId}/children/${childId}/team-registrations`,
+        path: `/api/v5/tournaments/parents/${parentId}/children/${childId}/team-registrations`,
         method: "POST",
         body: data,
         secure: true,
@@ -18309,21 +19626,21 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Tournaments
-     * @name V4TournamentsParentsChildrenTeamRegistrationsDetail2
+     * @name V5TournamentsParentsChildrenTeamRegistrationsDetail2
      * @summary Get child team registration
-     * @request GET:/api/v4/tournaments/parents/{parentId}/children/{childId}/team-registrations/{registerId}
-     * @originalName v4TournamentsParentsChildrenTeamRegistrationsDetail
+     * @request GET:/api/v5/tournaments/parents/{parentId}/children/{childId}/team-registrations/{registerId}
+     * @originalName v5TournamentsParentsChildrenTeamRegistrationsDetail
      * @duplicate
      * @secure
      */
-    v4TournamentsParentsChildrenTeamRegistrationsDetail2: (
+    v5TournamentsParentsChildrenTeamRegistrationsDetail2: (
       parentId: number,
       childId: number,
       registerId: number,
       params: RequestParams = {},
     ) =>
       this.request<any, GetChildTeamRegistrationRespApiRespBase>({
-        path: `/api/v4/tournaments/parents/${parentId}/children/${childId}/team-registrations/${registerId}`,
+        path: `/api/v5/tournaments/parents/${parentId}/children/${childId}/team-registrations/${registerId}`,
         method: "GET",
         secure: true,
         ...params,
@@ -18333,12 +19650,12 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Tournaments
-     * @name V4TournamentsParentsChildrenTeamRegistrationsPartialUpdate
+     * @name V5TournamentsParentsChildrenTeamRegistrationsPartialUpdate
      * @summary Modify child team registration
-     * @request PATCH:/api/v4/tournaments/parents/{parentId}/children/{childId}/team-registrations/{registerId}
+     * @request PATCH:/api/v5/tournaments/parents/{parentId}/children/{childId}/team-registrations/{registerId}
      * @secure
      */
-    v4TournamentsParentsChildrenTeamRegistrationsPartialUpdate: (
+    v5TournamentsParentsChildrenTeamRegistrationsPartialUpdate: (
       parentId: number,
       childId: number,
       registerId: number,
@@ -18346,7 +19663,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       params: RequestParams = {},
     ) =>
       this.request<any, ApiRespBase>({
-        path: `/api/v4/tournaments/parents/${parentId}/children/${childId}/team-registrations/${registerId}`,
+        path: `/api/v5/tournaments/parents/${parentId}/children/${childId}/team-registrations/${registerId}`,
         method: "PATCH",
         body: data,
         secure: true,
@@ -18358,19 +19675,19 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Tournaments
-     * @name V4TournamentsParentsChildrenTeamRegistrationsDelete
+     * @name V5TournamentsParentsChildrenTeamRegistrationsDelete
      * @summary Delete child team registration
-     * @request DELETE:/api/v4/tournaments/parents/{parentId}/children/{childId}/team-registrations/{registerId}
+     * @request DELETE:/api/v5/tournaments/parents/{parentId}/children/{childId}/team-registrations/{registerId}
      * @secure
      */
-    v4TournamentsParentsChildrenTeamRegistrationsDelete: (
+    v5TournamentsParentsChildrenTeamRegistrationsDelete: (
       parentId: number,
       childId: number,
       registerId: number,
       params: RequestParams = {},
     ) =>
       this.request<any, ApiRespBase>({
-        path: `/api/v4/tournaments/parents/${parentId}/children/${childId}/team-registrations/${registerId}`,
+        path: `/api/v5/tournaments/parents/${parentId}/children/${childId}/team-registrations/${registerId}`,
         method: "DELETE",
         secure: true,
         ...params,
@@ -18380,18 +19697,18 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Tournaments
-     * @name V4TournamentsParentsChildrenPlayerRegistrationsDetail
+     * @name V5TournamentsParentsChildrenPlayerRegistrationsDetail
      * @summary Get child player registrations
-     * @request GET:/api/v4/tournaments/parents/{parentId}/children/{childId}/player-registrations
+     * @request GET:/api/v5/tournaments/parents/{parentId}/children/{childId}/player-registrations
      * @secure
      */
-    v4TournamentsParentsChildrenPlayerRegistrationsDetail: (
+    v5TournamentsParentsChildrenPlayerRegistrationsDetail: (
       parentId: number,
       childId: number,
       params: RequestParams = {},
     ) =>
       this.request<any, ChildRegistrationPlayerListItemGetChildRegistrationsRespApiRespBase>({
-        path: `/api/v4/tournaments/parents/${parentId}/children/${childId}/player-registrations`,
+        path: `/api/v5/tournaments/parents/${parentId}/children/${childId}/player-registrations`,
         method: "GET",
         secure: true,
         ...params,
@@ -18401,19 +19718,19 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Tournaments
-     * @name V4TournamentsParentsChildrenPlayerRegistrationsCreate
+     * @name V5TournamentsParentsChildrenPlayerRegistrationsCreate
      * @summary Add child player registrations
-     * @request POST:/api/v4/tournaments/parents/{parentId}/children/{childId}/player-registrations
+     * @request POST:/api/v5/tournaments/parents/{parentId}/children/{childId}/player-registrations
      * @secure
      */
-    v4TournamentsParentsChildrenPlayerRegistrationsCreate: (
+    v5TournamentsParentsChildrenPlayerRegistrationsCreate: (
       parentId: number,
       childId: number,
       data: AddChildPlayerRegistrationsReq,
       params: RequestParams = {},
     ) =>
       this.request<any, ApiRespBase>({
-        path: `/api/v4/tournaments/parents/${parentId}/children/${childId}/player-registrations`,
+        path: `/api/v5/tournaments/parents/${parentId}/children/${childId}/player-registrations`,
         method: "POST",
         body: data,
         secure: true,
@@ -18425,12 +19742,12 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Tournaments
-     * @name V4TournamentsParentsChildrenPlayerRegistrationsPartialUpdate
+     * @name V5TournamentsParentsChildrenPlayerRegistrationsPartialUpdate
      * @summary Modify child player registration
-     * @request PATCH:/api/v4/tournaments/parents/{parentId}/children/{childId}/player-registrations/{registerId}
+     * @request PATCH:/api/v5/tournaments/parents/{parentId}/children/{childId}/player-registrations/{registerId}
      * @secure
      */
-    v4TournamentsParentsChildrenPlayerRegistrationsPartialUpdate: (
+    v5TournamentsParentsChildrenPlayerRegistrationsPartialUpdate: (
       parentId: number,
       childId: number,
       registerId: number,
@@ -18438,7 +19755,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       params: RequestParams = {},
     ) =>
       this.request<any, ApiRespBase>({
-        path: `/api/v4/tournaments/parents/${parentId}/children/${childId}/player-registrations/${registerId}`,
+        path: `/api/v5/tournaments/parents/${parentId}/children/${childId}/player-registrations/${registerId}`,
         method: "PATCH",
         body: data,
         secure: true,
@@ -18450,19 +19767,19 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Tournaments
-     * @name V4TournamentsParentsChildrenPlayerRegistrationsDelete
+     * @name V5TournamentsParentsChildrenPlayerRegistrationsDelete
      * @summary Delete child player registration
-     * @request DELETE:/api/v4/tournaments/parents/{parentId}/children/{childId}/player-registrations/{registerId}
+     * @request DELETE:/api/v5/tournaments/parents/{parentId}/children/{childId}/player-registrations/{registerId}
      * @secure
      */
-    v4TournamentsParentsChildrenPlayerRegistrationsDelete: (
+    v5TournamentsParentsChildrenPlayerRegistrationsDelete: (
       parentId: number,
       childId: number,
       registerId: number,
       params: RequestParams = {},
     ) =>
       this.request<any, ApiRespBase>({
-        path: `/api/v4/tournaments/parents/${parentId}/children/${childId}/player-registrations/${registerId}`,
+        path: `/api/v5/tournaments/parents/${parentId}/children/${childId}/player-registrations/${registerId}`,
         method: "DELETE",
         secure: true,
         ...params,
@@ -18472,14 +19789,14 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Tournaments
-     * @name V4TournamentsParentsChildrenRoundsDetail
+     * @name V5TournamentsParentsChildrenRoundsDetail
      * @summary Get child tournament rounds
-     * @request GET:/api/v4/tournaments/parents/{parentid}/children/{childid}/rounds
+     * @request GET:/api/v5/tournaments/parents/{parentid}/children/{childid}/rounds
      * @secure
      */
-    v4TournamentsParentsChildrenRoundsDetail: (parentid: number, childid: number, params: RequestParams = {}) =>
+    v5TournamentsParentsChildrenRoundsDetail: (parentid: number, childid: number, params: RequestParams = {}) =>
       this.request<any, GetRoundsRespApiRespBase>({
-        path: `/api/v4/tournaments/parents/${parentid}/children/${childid}/rounds`,
+        path: `/api/v5/tournaments/parents/${parentid}/children/${childid}/rounds`,
         method: "GET",
         secure: true,
         ...params,
@@ -18489,19 +19806,19 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Tournaments
-     * @name V4TournamentsParentsChildrenRoundsCreate
+     * @name V5TournamentsParentsChildrenRoundsCreate
      * @summary Add new child tournament round
-     * @request POST:/api/v4/tournaments/parents/{parentid}/children/{childid}/rounds
+     * @request POST:/api/v5/tournaments/parents/{parentid}/children/{childid}/rounds
      * @secure
      */
-    v4TournamentsParentsChildrenRoundsCreate: (
+    v5TournamentsParentsChildrenRoundsCreate: (
       parentid: number,
       childid: number,
       data: AddRoundReq,
       params: RequestParams = {},
     ) =>
       this.request<any, AddRoundRespApiRespBase>({
-        path: `/api/v4/tournaments/parents/${parentid}/children/${childid}/rounds`,
+        path: `/api/v5/tournaments/parents/${parentid}/children/${childid}/rounds`,
         method: "POST",
         body: data,
         secure: true,
@@ -18513,21 +19830,21 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Tournaments
-     * @name V4TournamentsParentsChildrenRoundsDetail2
+     * @name V5TournamentsParentsChildrenRoundsDetail2
      * @summary Get child tournament round detail
-     * @request GET:/api/v4/tournaments/parents/{parentid}/children/{childid}/rounds/{roundid}
-     * @originalName v4TournamentsParentsChildrenRoundsDetail
+     * @request GET:/api/v5/tournaments/parents/{parentid}/children/{childid}/rounds/{roundid}
+     * @originalName v5TournamentsParentsChildrenRoundsDetail
      * @duplicate
      * @secure
      */
-    v4TournamentsParentsChildrenRoundsDetail2: (
+    v5TournamentsParentsChildrenRoundsDetail2: (
       parentid: number,
       childid: number,
       roundid: number,
       params: RequestParams = {},
     ) =>
       this.request<any, GetRoundRespApiRespBase>({
-        path: `/api/v4/tournaments/parents/${parentid}/children/${childid}/rounds/${roundid}`,
+        path: `/api/v5/tournaments/parents/${parentid}/children/${childid}/rounds/${roundid}`,
         method: "GET",
         secure: true,
         ...params,
@@ -18537,12 +19854,12 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Tournaments
-     * @name V4TournamentsParentsChildrenRoundsPartialUpdate
+     * @name V5TournamentsParentsChildrenRoundsPartialUpdate
      * @summary Modify child tournament round
-     * @request PATCH:/api/v4/tournaments/parents/{parentid}/children/{childid}/rounds/{roundid}
+     * @request PATCH:/api/v5/tournaments/parents/{parentid}/children/{childid}/rounds/{roundid}
      * @secure
      */
-    v4TournamentsParentsChildrenRoundsPartialUpdate: (
+    v5TournamentsParentsChildrenRoundsPartialUpdate: (
       parentid: number,
       childid: number,
       roundid: number,
@@ -18550,7 +19867,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       params: RequestParams = {},
     ) =>
       this.request<any, ModRoundRespApiRespBase>({
-        path: `/api/v4/tournaments/parents/${parentid}/children/${childid}/rounds/${roundid}`,
+        path: `/api/v5/tournaments/parents/${parentid}/children/${childid}/rounds/${roundid}`,
         method: "PATCH",
         body: data,
         secure: true,
@@ -18562,19 +19879,19 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Tournaments
-     * @name V4TournamentsParentsChildrenRoundsDelete
+     * @name V5TournamentsParentsChildrenRoundsDelete
      * @summary Delete child tournament round
-     * @request DELETE:/api/v4/tournaments/parents/{parentid}/children/{childid}/rounds/{roundid}
+     * @request DELETE:/api/v5/tournaments/parents/{parentid}/children/{childid}/rounds/{roundid}
      * @secure
      */
-    v4TournamentsParentsChildrenRoundsDelete: (
+    v5TournamentsParentsChildrenRoundsDelete: (
       parentid: number,
       childid: number,
       roundid: number,
       params: RequestParams = {},
     ) =>
       this.request<any, DelRoundRespApiRespBase>({
-        path: `/api/v4/tournaments/parents/${parentid}/children/${childid}/rounds/${roundid}`,
+        path: `/api/v5/tournaments/parents/${parentid}/children/${childid}/rounds/${roundid}`,
         method: "DELETE",
         secure: true,
         ...params,
@@ -18584,14 +19901,14 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Tournaments
-     * @name V4TournamentsParentsStagesDetail
+     * @name V5TournamentsParentsStagesDetail
      * @summary Get parent stages
-     * @request GET:/api/v4/tournaments/parents/{parentId}/stages
+     * @request GET:/api/v5/tournaments/parents/{parentId}/stages
      * @secure
      */
-    v4TournamentsParentsStagesDetail: (parentId: number, params: RequestParams = {}) =>
+    v5TournamentsParentsStagesDetail: (parentId: number, params: RequestParams = {}) =>
       this.request<any, GetParentStagesRespApiRespBase>({
-        path: `/api/v4/tournaments/parents/${parentId}/stages`,
+        path: `/api/v5/tournaments/parents/${parentId}/stages`,
         method: "GET",
         secure: true,
         ...params,
@@ -18601,14 +19918,14 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Tournaments
-     * @name V4TournamentsParentsStagesPartialUpdate
+     * @name V5TournamentsParentsStagesPartialUpdate
      * @summary Modify parent stages
-     * @request PATCH:/api/v4/tournaments/parents/{parentId}/stages
+     * @request PATCH:/api/v5/tournaments/parents/{parentId}/stages
      * @secure
      */
-    v4TournamentsParentsStagesPartialUpdate: (parentId: number, data: ModParentStagesReq, params: RequestParams = {}) =>
+    v5TournamentsParentsStagesPartialUpdate: (parentId: number, data: ModParentStagesReq, params: RequestParams = {}) =>
       this.request<any, ApiRespBase>({
-        path: `/api/v4/tournaments/parents/${parentId}/stages`,
+        path: `/api/v5/tournaments/parents/${parentId}/stages`,
         method: "PATCH",
         body: data,
         secure: true,
@@ -18620,14 +19937,14 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Tournaments
-     * @name V4TournamentsParentsStagesForEditDetail
-     * @summary Get parent stages for edit
-     * @request GET:/api/v4/tournaments/parents/{parentId}/stages-for-edit
+     * @name V5TournamentsParentsChildrenStageDetail
+     * @summary Get child stage info
+     * @request GET:/api/v5/tournaments/parents/{parentId}/children/{childId}/stage
      * @secure
      */
-    v4TournamentsParentsStagesForEditDetail: (parentId: number, params: RequestParams = {}) =>
-      this.request<any, GetParentStagesForEditRespApiRespBase>({
-        path: `/api/v4/tournaments/parents/${parentId}/stages-for-edit`,
+    v5TournamentsParentsChildrenStageDetail: (parentId: number, childId: number, params: RequestParams = {}) =>
+      this.request<any, GetParentStagesRespApiRespBase>({
+        path: `/api/v5/tournaments/parents/${parentId}/children/${childId}/stage`,
         method: "GET",
         secure: true,
         ...params,
@@ -18637,21 +19954,62 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Tournaments
-     * @name V4TournamentsParentsStagesPartialUpdate2
+     * @name V5TournamentsParentsChildrenStagePartialUpdate
+     * @summary Mod child stage info
+     * @request PATCH:/api/v5/tournaments/parents/{parentId}/children/{childId}/stage
+     * @secure
+     */
+    v5TournamentsParentsChildrenStagePartialUpdate: (
+      parentId: number,
+      childId: number,
+      data: ModChildStageReq,
+      params: RequestParams = {},
+    ) =>
+      this.request<any, ApiRespBase>({
+        path: `/api/v5/tournaments/parents/${parentId}/children/${childId}/stage`,
+        method: "PATCH",
+        body: data,
+        secure: true,
+        type: ContentType.Json,
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Tournaments
+     * @name V5TournamentsParentsStagesForEditDetail
+     * @summary Get parent stages for edit
+     * @request GET:/api/v5/tournaments/parents/{parentId}/stages-for-edit
+     * @secure
+     */
+    v5TournamentsParentsStagesForEditDetail: (parentId: number, params: RequestParams = {}) =>
+      this.request<any, GetParentStagesForEditRespApiRespBase>({
+        path: `/api/v5/tournaments/parents/${parentId}/stages-for-edit`,
+        method: "GET",
+        secure: true,
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Tournaments
+     * @name V5TournamentsParentsStagesPartialUpdate2
      * @summary Modify parent stage
-     * @request PATCH:/api/v4/tournaments/parents/{parentId}/stages/{stageId}
-     * @originalName v4TournamentsParentsStagesPartialUpdate
+     * @request PATCH:/api/v5/tournaments/parents/{parentId}/stages/{stageId}
+     * @originalName v5TournamentsParentsStagesPartialUpdate
      * @duplicate
      * @secure
      */
-    v4TournamentsParentsStagesPartialUpdate2: (
+    v5TournamentsParentsStagesPartialUpdate2: (
       parentId: number,
       stageId: number,
       data: ModParentStageReq,
       params: RequestParams = {},
     ) =>
       this.request<any, ApiRespBase>({
-        path: `/api/v4/tournaments/parents/${parentId}/stages/${stageId}`,
+        path: `/api/v5/tournaments/parents/${parentId}/stages/${stageId}`,
         method: "PATCH",
         body: data,
         secure: true,
@@ -18663,14 +20021,14 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Tournaments
-     * @name V4TournamentsParentsStagesDelete
+     * @name V5TournamentsParentsStagesDelete
      * @summary Delete parent stage
-     * @request DELETE:/api/v4/tournaments/parents/{parentId}/stages/{stageId}
+     * @request DELETE:/api/v5/tournaments/parents/{parentId}/stages/{stageId}
      * @secure
      */
-    v4TournamentsParentsStagesDelete: (parentId: number, stageId: number, params: RequestParams = {}) =>
+    v5TournamentsParentsStagesDelete: (parentId: number, stageId: number, params: RequestParams = {}) =>
       this.request<any, ApiRespBase>({
-        path: `/api/v4/tournaments/parents/${parentId}/stages/${stageId}`,
+        path: `/api/v5/tournaments/parents/${parentId}/stages/${stageId}`,
         method: "DELETE",
         secure: true,
         ...params,
@@ -18680,12 +20038,12 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Users
-     * @name V4UsersList
+     * @name V5UsersList
      * @summary Get users
-     * @request GET:/api/v4/users
+     * @request GET:/api/v5/users
      * @secure
      */
-    v4UsersList: (
+    v5UsersList: (
       query?: {
         /**
          * Username
@@ -18722,7 +20080,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       params: RequestParams = {},
     ) =>
       this.request<any, GetUsersRespApiRespBase>({
-        path: `/api/v4/users`,
+        path: `/api/v5/users`,
         method: "GET",
         query: query,
         secure: true,
@@ -18733,12 +20091,12 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Users
-     * @name V4UsersCreate
+     * @name V5UsersCreate
      * @summary Add User
-     * @request POST:/api/v4/users
+     * @request POST:/api/v5/users
      * @secure
      */
-    v4UsersCreate: (
+    v5UsersCreate: (
       data: {
         /**
          * Username
@@ -18804,7 +20162,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       params: RequestParams = {},
     ) =>
       this.request<any, AddUserRespApiRespBase>({
-        path: `/api/v4/users`,
+        path: `/api/v5/users`,
         method: "POST",
         body: data,
         secure: true,
@@ -18816,14 +20174,14 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Users
-     * @name V4UsersDetail
+     * @name V5UsersDetail
      * @summary Get User
-     * @request GET:/api/v4/users/{id}
+     * @request GET:/api/v5/users/{id}
      * @secure
      */
-    v4UsersDetail: (id: number, params: RequestParams = {}) =>
+    v5UsersDetail: (id: number, params: RequestParams = {}) =>
       this.request<any, GetUserRespApiRespBase>({
-        path: `/api/v4/users/${id}`,
+        path: `/api/v5/users/${id}`,
         method: "GET",
         secure: true,
         ...params,
@@ -18833,12 +20191,12 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Users
-     * @name V4UsersPartialUpdate
+     * @name V5UsersPartialUpdate
      * @summary Modify user
-     * @request PATCH:/api/v4/users/{id}
+     * @request PATCH:/api/v5/users/{id}
      * @secure
      */
-    v4UsersPartialUpdate: (
+    v5UsersPartialUpdate: (
       id: number,
       data: {
         /**
@@ -18913,7 +20271,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       params: RequestParams = {},
     ) =>
       this.request<any, ModUserRespApiRespBase>({
-        path: `/api/v4/users/${id}`,
+        path: `/api/v5/users/${id}`,
         method: "PATCH",
         body: data,
         secure: true,
@@ -18925,14 +20283,14 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Users
-     * @name V4UsersDelete
+     * @name V5UsersDelete
      * @summary Delete user
-     * @request DELETE:/api/v4/users/{id}
+     * @request DELETE:/api/v5/users/{id}
      * @secure
      */
-    v4UsersDelete: (id: number, params: RequestParams = {}) =>
+    v5UsersDelete: (id: number, params: RequestParams = {}) =>
       this.request<any, DelUserRespApiRespBase>({
-        path: `/api/v4/users/${id}`,
+        path: `/api/v5/users/${id}`,
         method: "DELETE",
         secure: true,
         ...params,
@@ -18942,14 +20300,14 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Users
-     * @name V4UsersPermissionsDetail
+     * @name V5UsersPermissionsDetail
      * @summary Get User permissions
-     * @request GET:/api/v4/users/{id}/permissions
+     * @request GET:/api/v5/users/{id}/permissions
      * @secure
      */
-    v4UsersPermissionsDetail: (id: number, params: RequestParams = {}) =>
+    v5UsersPermissionsDetail: (id: number, params: RequestParams = {}) =>
       this.request<any, GetUserPermissionsRespApiRespBase>({
-        path: `/api/v4/users/${id}/permissions`,
+        path: `/api/v5/users/${id}/permissions`,
         method: "GET",
         secure: true,
         ...params,
@@ -18959,12 +20317,12 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Users
-     * @name V4UsersFuzzyList
+     * @name V5UsersFuzzyList
      * @summary Get fuzzy users
-     * @request GET:/api/v4/users/fuzzy
+     * @request GET:/api/v5/users/fuzzy
      * @secure
      */
-    v4UsersFuzzyList: (
+    v5UsersFuzzyList: (
       query: {
         /**
          * @minLength 1
@@ -18981,7 +20339,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       params: RequestParams = {},
     ) =>
       this.request<any, GetFuzzyUsersRespApiRespBase>({
-        path: `/api/v4/users/fuzzy`,
+        path: `/api/v5/users/fuzzy`,
         method: "GET",
         query: query,
         secure: true,
@@ -18992,14 +20350,14 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags UserSession
-     * @name V4UsersessionList
+     * @name V5UsersessionList
      * @summary Get user menu and userprofile
-     * @request GET:/api/v4/usersession
+     * @request GET:/api/v5/usersession
      * @secure
      */
-    v4UsersessionList: (params: RequestParams = {}) =>
+    v5UsersessionList: (params: RequestParams = {}) =>
       this.request<any, GetUserSessionRespApiRespBase>({
-        path: `/api/v4/usersession`,
+        path: `/api/v5/usersession`,
         method: "GET",
         secure: true,
         ...params,
@@ -19009,13 +20367,20 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Venues
-     * @name V4VenuesList
+     * @name V5VenuesList
      * @summary Get venues by condition
-     * @request GET:/api/v4/venues
+     * @request GET:/api/v5/venues
      * @secure
      */
-    v4VenuesList: (
+    v5VenuesList: (
       query?: {
+        /**
+         * Venues Id
+         * @format int32
+         * @min 1
+         * @max 2147483647
+         */
+        Id?: number;
         /**
          * Venues Name
          * @minLength 0
@@ -19045,7 +20410,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       params: RequestParams = {},
     ) =>
       this.request<any, GetVenuesRespApiRespBase>({
-        path: `/api/v4/venues`,
+        path: `/api/v5/venues`,
         method: "GET",
         query: query,
         secure: true,
@@ -19056,12 +20421,12 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Venues
-     * @name V4VenuesCreate
+     * @name V5VenuesCreate
      * @summary Add new tournaments venue
-     * @request POST:/api/v4/venues
+     * @request POST:/api/v5/venues
      * @secure
      */
-    v4VenuesCreate: (
+    v5VenuesCreate: (
       data: {
         /**
          * Venues Name
@@ -19103,7 +20468,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       params: RequestParams = {},
     ) =>
       this.request<any, AddVenueRespApiRespBase>({
-        path: `/api/v4/venues`,
+        path: `/api/v5/venues`,
         method: "POST",
         body: data,
         secure: true,
@@ -19115,14 +20480,14 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Venues
-     * @name V4VenuesDetail
+     * @name V5VenuesDetail
      * @summary Get tournaments venue detail
-     * @request GET:/api/v4/venues/{id}
+     * @request GET:/api/v5/venues/{id}
      * @secure
      */
-    v4VenuesDetail: (id: number, params: RequestParams = {}) =>
+    v5VenuesDetail: (id: number, params: RequestParams = {}) =>
       this.request<any, GetVenueRespApiRespBase>({
-        path: `/api/v4/venues/${id}`,
+        path: `/api/v5/venues/${id}`,
         method: "GET",
         secure: true,
         ...params,
@@ -19132,12 +20497,12 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Venues
-     * @name V4VenuesPartialUpdate
+     * @name V5VenuesPartialUpdate
      * @summary Modify tournaments venue
-     * @request PATCH:/api/v4/venues/{id}
+     * @request PATCH:/api/v5/venues/{id}
      * @secure
      */
-    v4VenuesPartialUpdate: (
+    v5VenuesPartialUpdate: (
       id: number,
       data: {
         /**
@@ -19187,7 +20552,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       params: RequestParams = {},
     ) =>
       this.request<any, ModVenueRespApiRespBase>({
-        path: `/api/v4/venues/${id}`,
+        path: `/api/v5/venues/${id}`,
         method: "PATCH",
         body: data,
         secure: true,
@@ -19199,14 +20564,14 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Venues
-     * @name V4VenuesDelete
+     * @name V5VenuesDelete
      * @summary Delete tournaments venue
-     * @request DELETE:/api/v4/venues/{id}
+     * @request DELETE:/api/v5/venues/{id}
      * @secure
      */
-    v4VenuesDelete: (id: number, params: RequestParams = {}) =>
+    v5VenuesDelete: (id: number, params: RequestParams = {}) =>
       this.request<any, DelVenueRespApiRespBase>({
-        path: `/api/v4/venues/${id}`,
+        path: `/api/v5/venues/${id}`,
         method: "DELETE",
         secure: true,
         ...params,
@@ -19216,12 +20581,12 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Venues
-     * @name V4VenuesFuzzyList
+     * @name V5VenuesFuzzyList
      * @summary Get fuzzy venue
-     * @request GET:/api/v4/venues/fuzzy
+     * @request GET:/api/v5/venues/fuzzy
      * @secure
      */
-    v4VenuesFuzzyList: (
+    v5VenuesFuzzyList: (
       query: {
         /**
          * Fuzzy prefix
@@ -19240,133 +20605,10 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       params: RequestParams = {},
     ) =>
       this.request<any, GetFuzzyVenuesRespApiRespBase>({
-        path: `/api/v4/venues/fuzzy`,
+        path: `/api/v5/venues/fuzzy`,
         method: "GET",
         query: query,
         secure: true,
-        ...params,
-      }),
-  };
-  login = {
-    /**
-     * No description
-     *
-     * @tags AuthTest
-     * @name LoginList
-     * @summary Login
-     * @request GET:/login
-     * @secure
-     */
-    loginList: (
-      query?: {
-        "api-version"?: string;
-      },
-      params: RequestParams = {},
-    ) =>
-      this.request<void, any>({
-        path: `/login`,
-        method: "GET",
-        query: query,
-        secure: true,
-        ...params,
-      }),
-  };
-  register = {
-    /**
-     * No description
-     *
-     * @tags AuthTest
-     * @name RegisterList
-     * @summary Register
-     * @request GET:/register
-     * @secure
-     */
-    registerList: (
-      query?: {
-        "api-version"?: string;
-      },
-      params: RequestParams = {},
-    ) =>
-      this.request<void, any>({
-        path: `/register`,
-        method: "GET",
-        query: query,
-        secure: true,
-        ...params,
-      }),
-  };
-  logout = {
-    /**
-     * No description
-     *
-     * @tags AuthTest
-     * @name LogoutList
-     * @request GET:/logout
-     * @secure
-     */
-    logoutList: (
-      query?: {
-        "api-version"?: string;
-      },
-      params: RequestParams = {},
-    ) =>
-      this.request<void, any>({
-        path: `/logout`,
-        method: "GET",
-        query: query,
-        secure: true,
-        ...params,
-      }),
-  };
-  oauthCallback = {
-    /**
-     * No description
-     *
-     * @tags AuthTest
-     * @name OauthCallbackList
-     * @request GET:/oauth-callback
-     * @secure
-     */
-    oauthCallbackList: (
-      query?: {
-        Code?: string;
-        Locale?: string;
-        State?: string;
-        UserState?: string;
-        "api-version"?: string;
-      },
-      params: RequestParams = {},
-    ) =>
-      this.request<void, any>({
-        path: `/oauth-callback`,
-        method: "GET",
-        query: query,
-        secure: true,
-        ...params,
-      }),
-  };
-  enumret = {
-    /**
-     * No description
-     *
-     * @tags EnumRetList
-     * @name EnumretList
-     * @summary Get EnumRet List
-     * @request GET:/enumret
-     * @secure
-     */
-    enumretList: (
-      query?: {
-        "api-version"?: string;
-      },
-      params: RequestParams = {},
-    ) =>
-      this.request<Int32StringDictionaryApiRespBase, any>({
-        path: `/enumret`,
-        method: "GET",
-        query: query,
-        secure: true,
-        format: "json",
         ...params,
       }),
   };

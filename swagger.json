@@ -1,11 +1,11 @@
 {
   "openapi": "3.0.1",
   "info": {
-    "title": "BackofficeApi v4",
-    "version": "v4"
+    "title": "BackofficeApi v5",
+    "version": "v5"
   },
   "paths": {
-    "/api/v4/articles/types": {
+    "/api/v5/articles/types": {
       "get": {
         "tags": [
           "Articles"
@@ -25,7 +25,7 @@
         }
       }
     },
-    "/api/v4/articles": {
+    "/api/v5/articles": {
       "get": {
         "tags": [
           "Articles"
@@ -126,6 +126,77 @@
             "style": "form",
             "schema": {
               "$ref": "#/components/schemas/EnumArticleState"
+            }
+          },
+          {
+            "name": "Publisher",
+            "in": "query",
+            "description": "publish user name",
+            "style": "form",
+            "schema": {
+              "maxLength": 20,
+              "minLength": 0,
+              "type": "string"
+            }
+          },
+          {
+            "name": "Proofreader",
+            "in": "query",
+            "description": "proofread user name",
+            "style": "form",
+            "schema": {
+              "maxLength": 20,
+              "minLength": 0,
+              "type": "string"
+            }
+          },
+          {
+            "name": "ArticleType",
+            "in": "query",
+            "description": "Article type",
+            "style": "form",
+            "schema": {
+              "$ref": "#/components/schemas/EnumArticleType"
+            }
+          },
+          {
+            "name": "PublishFrom",
+            "in": "query",
+            "description": "publish From",
+            "style": "form",
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "PublishTo",
+            "in": "query",
+            "description": "publish To",
+            "style": "form",
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "ProofreadFrom",
+            "in": "query",
+            "description": "proofread From",
+            "style": "form",
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "ProofreadTo",
+            "in": "query",
+            "description": "proofread To",
+            "style": "form",
+            "schema": {
+              "type": "integer",
+              "format": "int64"
             }
           },
           {
@@ -306,6 +377,10 @@
                       "type": "string"
                     },
                     "description": "Options"
+                  },
+                  "Metadata": {
+                    "type": "string",
+                    "description": "Metadata"
                   }
                 }
               },
@@ -369,6 +444,9 @@
                 },
                 "QuickPoll.Options": {
                   "style": "form"
+                },
+                "Metadata": {
+                  "style": "form"
                 }
               }
             }
@@ -388,7 +466,7 @@
         }
       }
     },
-    "/api/v4/articles/{id}": {
+    "/api/v5/articles/{id}": {
       "get": {
         "tags": [
           "Articles"
@@ -604,6 +682,10 @@
                       "type": "string"
                     },
                     "description": "Options"
+                  },
+                  "Metadata": {
+                    "type": "string",
+                    "description": "Metadata"
                   }
                 }
               },
@@ -685,6 +767,9 @@
                 },
                 "QuickPoll.Options": {
                   "style": "form"
+                },
+                "Metadata": {
+                  "style": "form"
                 }
               }
             }
@@ -737,129 +822,7 @@
         }
       }
     },
-    "/login": {
-      "get": {
-        "tags": [
-          "AuthTest"
-        ],
-        "summary": "Login",
-        "parameters": [
-          {
-            "name": "api-version",
-            "in": "query",
-            "style": "form",
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success"
-          }
-        }
-      }
-    },
-    "/register": {
-      "get": {
-        "tags": [
-          "AuthTest"
-        ],
-        "summary": "Register",
-        "parameters": [
-          {
-            "name": "api-version",
-            "in": "query",
-            "style": "form",
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success"
-          }
-        }
-      }
-    },
-    "/logout": {
-      "get": {
-        "tags": [
-          "AuthTest"
-        ],
-        "parameters": [
-          {
-            "name": "api-version",
-            "in": "query",
-            "style": "form",
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success"
-          }
-        }
-      }
-    },
-    "/oauth-callback": {
-      "get": {
-        "tags": [
-          "AuthTest"
-        ],
-        "parameters": [
-          {
-            "name": "Code",
-            "in": "query",
-            "style": "form",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "Locale",
-            "in": "query",
-            "style": "form",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "State",
-            "in": "query",
-            "style": "form",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "UserState",
-            "in": "query",
-            "style": "form",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "api-version",
-            "in": "query",
-            "style": "form",
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success"
-          }
-        }
-      }
-    },
-    "/api/v4/broadcasttalents/fuzzy": {
+    "/api/v5/broadcasttalents/fuzzy": {
       "get": {
         "tags": [
           "BroadcastTalents"
@@ -905,13 +868,25 @@
         }
       }
     },
-    "/api/v4/broadcasttalents": {
+    "/api/v5/broadcasttalents": {
       "get": {
         "tags": [
           "BroadcastTalents"
         ],
         "summary": "Get broadcast talents by condition",
         "parameters": [
+          {
+            "name": "Id",
+            "in": "query",
+            "description": "Broadcast talent Id",
+            "style": "form",
+            "schema": {
+              "maximum": 2147483647,
+              "minimum": 1,
+              "type": "integer",
+              "format": "int32"
+            }
+          },
           {
             "name": "NickName",
             "in": "query",
@@ -1221,7 +1196,7 @@
         }
       }
     },
-    "/api/v4/broadcasttalents/{id}": {
+    "/api/v5/broadcasttalents/{id}": {
       "get": {
         "tags": [
           "BroadcastTalents"
@@ -1363,6 +1338,10 @@
                     "description": "Profile Image",
                     "format": "binary"
                   },
+                  "IsRemoveProfileImage": {
+                    "type": "boolean",
+                    "description": "Is remove ProfileImage"
+                  },
                   "HeaderImage": {
                     "type": "string",
                     "description": "Header Image",
@@ -1454,6 +1433,9 @@
                 "ProfileImage": {
                   "style": "form"
                 },
+                "IsRemoveProfileImage": {
+                  "style": "form"
+                },
                 "HeaderImage": {
                   "style": "form"
                 },
@@ -1529,7 +1511,7 @@
         }
       }
     },
-    "/api/v4/broadcasttalents/media-items": {
+    "/api/v5/broadcasttalents/media-items": {
       "get": {
         "tags": [
           "BroadcastTalents"
@@ -1621,7 +1603,7 @@
         }
       }
     },
-    "/api/v4/broadcasttalents/{broadcastid}/media-items/{mediaitemid}": {
+    "/api/v5/broadcasttalents/{broadcastid}/media-items/{mediaitemid}": {
       "delete": {
         "tags": [
           "BroadcastTalents"
@@ -1669,7 +1651,7 @@
         }
       }
     },
-    "/api/v4/currency/current-exchange-rate": {
+    "/api/v5/currency/current-exchange-rate": {
       "get": {
         "tags": [
           "Currency"
@@ -1712,7 +1694,7 @@
         }
       }
     },
-    "/api/v4/earnings": {
+    "/api/v5/earnings": {
       "get": {
         "tags": [
           "Earnings"
@@ -1800,7 +1782,7 @@
         }
       }
     },
-    "/api/v4/earnings/{parentId}": {
+    "/api/v5/earnings/{parentId}": {
       "get": {
         "tags": [
           "Earnings"
@@ -1833,7 +1815,7 @@
         }
       }
     },
-    "/api/v4/earnings/child/{childId}": {
+    "/api/v5/earnings/child/{childId}": {
       "get": {
         "tags": [
           "Earnings"
@@ -1917,7 +1899,7 @@
         }
       }
     },
-    "/api/v4/earnings/child/{childId}/status": {
+    "/api/v5/earnings/child/{childId}/status": {
       "patch": {
         "tags": [
           "Earnings"
@@ -1970,47 +1952,7 @@
         }
       }
     },
-    "/enumret": {
-      "get": {
-        "tags": [
-          "EnumRetList"
-        ],
-        "summary": "Get EnumRet List",
-        "parameters": [
-          {
-            "name": "api-version",
-            "in": "query",
-            "style": "form",
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "$ref": "#/components/schemas/Int32StringDictionaryApiRespBase"
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Int32StringDictionaryApiRespBase"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Int32StringDictionaryApiRespBase"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/v4/files/crew-folders": {
+    "/api/v5/files/crew-folders": {
       "get": {
         "tags": [
           "Files"
@@ -2135,7 +2077,7 @@
         }
       }
     },
-    "/api/v4/files/crew-files": {
+    "/api/v5/files/crew-files": {
       "get": {
         "tags": [
           "Files"
@@ -2323,7 +2265,7 @@
         }
       }
     },
-    "/api/v4/files/crew-folders/{id}": {
+    "/api/v5/files/crew-folders/{id}": {
       "patch": {
         "tags": [
           "Files"
@@ -2420,7 +2362,7 @@
         }
       }
     },
-    "/api/v4/files/fuzzy-folders": {
+    "/api/v5/files/fuzzy-folders": {
       "get": {
         "tags": [
           "Files"
@@ -2476,7 +2418,7 @@
         }
       }
     },
-    "/api/v4/files/crew-files/{id}": {
+    "/api/v5/files/crew-files/{id}": {
       "patch": {
         "tags": [
           "Files"
@@ -2584,7 +2526,7 @@
         }
       }
     },
-    "/api/v4/frontend-site-sections/{id}": {
+    "/api/v5/frontend-site-sections/{id}": {
       "get": {
         "tags": [
           "FrontendSiteSections"
@@ -2617,7 +2559,7 @@
         }
       }
     },
-    "/api/v4/frontend-site-sections": {
+    "/api/v5/frontend-site-sections": {
       "post": {
         "tags": [
           "FrontendSiteSections"
@@ -2733,7 +2675,7 @@
         }
       }
     },
-    "/api/v4/funcs/types": {
+    "/api/v5/funcs/types": {
       "get": {
         "tags": [
           "Funcs"
@@ -2753,7 +2695,7 @@
         }
       }
     },
-    "/api/v4/funcs/options": {
+    "/api/v5/funcs/options": {
       "get": {
         "tags": [
           "Funcs"
@@ -2773,7 +2715,7 @@
         }
       }
     },
-    "/api/v4/funcs": {
+    "/api/v5/funcs": {
       "get": {
         "tags": [
           "Funcs"
@@ -2904,7 +2846,7 @@
         }
       }
     },
-    "/api/v4/funcs/{id}": {
+    "/api/v5/funcs/{id}": {
       "get": {
         "tags": [
           "Funcs"
@@ -3093,7 +3035,7 @@
         }
       }
     },
-    "/api/v4/gameraces/fuzzy": {
+    "/api/v5/gameraces/fuzzy": {
       "get": {
         "tags": [
           "GameRaces"
@@ -3137,13 +3079,25 @@
         }
       }
     },
-    "/api/v4/game-regions": {
+    "/api/v5/game-regions": {
       "get": {
         "tags": [
           "GameRegions"
         ],
         "summary": "Get game regions",
         "parameters": [
+          {
+            "name": "RegionId",
+            "in": "query",
+            "description": "Region id",
+            "style": "form",
+            "schema": {
+              "maximum": 32767,
+              "minimum": 1,
+              "type": "integer",
+              "format": "int32"
+            }
+          },
           {
             "name": "GameId",
             "in": "query",
@@ -3242,7 +3196,7 @@
         }
       }
     },
-    "/api/v4/game-regions/{id}": {
+    "/api/v5/game-regions/{id}": {
       "get": {
         "tags": [
           "GameRegions"
@@ -3357,7 +3311,7 @@
         }
       }
     },
-    "/api/v4/game-regions/{id}/translations": {
+    "/api/v5/game-regions/{id}/translations": {
       "get": {
         "tags": [
           "GameRegions"
@@ -3443,13 +3397,25 @@
         }
       }
     },
-    "/api/v4/games": {
+    "/api/v5/games": {
       "get": {
         "tags": [
           "Games"
         ],
         "summary": "Get games by condition",
         "parameters": [
+          {
+            "name": "Id",
+            "in": "query",
+            "description": "Games Id",
+            "style": "form",
+            "schema": {
+              "maximum": 32767,
+              "minimum": 1,
+              "type": "integer",
+              "format": "int32"
+            }
+          },
           {
             "name": "GameName",
             "in": "query",
@@ -3649,7 +3615,7 @@
         }
       }
     },
-    "/api/v4/games/{id}": {
+    "/api/v5/games/{id}": {
       "get": {
         "tags": [
           "Games"
@@ -3713,7 +3679,7 @@
         }
       }
     },
-    "/api/v4/games/id": {
+    "/api/v5/games/id": {
       "patch": {
         "tags": [
           "Games"
@@ -3862,7 +3828,7 @@
         }
       }
     },
-    "/api/v4/games/{id}/translations": {
+    "/api/v5/games/{id}/translations": {
       "patch": {
         "tags": [
           "Games"
@@ -3915,7 +3881,7 @@
         }
       }
     },
-    "/api/v4/games/fuzzy": {
+    "/api/v5/games/fuzzy": {
       "get": {
         "tags": [
           "Games"
@@ -3959,13 +3925,25 @@
         }
       }
     },
-    "/api/v4/gamesides": {
+    "/api/v5/gamesides": {
       "get": {
         "tags": [
           "GameSides"
         ],
         "summary": "Get sides by condition",
         "parameters": [
+          {
+            "name": "Id",
+            "in": "query",
+            "description": "Side Id",
+            "style": "form",
+            "schema": {
+              "maximum": 32767,
+              "minimum": 1,
+              "type": "integer",
+              "format": "int32"
+            }
+          },
           {
             "name": "Name",
             "in": "query",
@@ -4088,7 +4066,7 @@
         }
       }
     },
-    "/api/v4/gamesides/{id}": {
+    "/api/v5/gamesides/{id}": {
       "get": {
         "tags": [
           "GameSides"
@@ -4244,7 +4222,7 @@
         }
       }
     },
-    "/api/v4/gamesides/{id}/translations": {
+    "/api/v5/gamesides/{id}/translations": {
       "get": {
         "tags": [
           "GameSides"
@@ -4332,7 +4310,7 @@
         }
       }
     },
-    "/api/v4/groups/group-options": {
+    "/api/v5/groups/group-options": {
       "get": {
         "tags": [
           "Groups"
@@ -4352,7 +4330,7 @@
         }
       }
     },
-    "/api/v4/groups/group-options-by-user": {
+    "/api/v5/groups/group-options-by-user": {
       "get": {
         "tags": [
           "Groups"
@@ -4372,7 +4350,7 @@
         }
       }
     },
-    "/api/v4/groups": {
+    "/api/v5/groups": {
       "get": {
         "tags": [
           "Groups"
@@ -4491,7 +4469,7 @@
         }
       }
     },
-    "/api/v4/groups/{id}": {
+    "/api/v5/groups/{id}": {
       "get": {
         "tags": [
           "Groups"
@@ -4606,7 +4584,7 @@
         }
       }
     },
-    "/api/v4/groups/blank-permissions": {
+    "/api/v5/groups/blank-permissions": {
       "get": {
         "tags": [
           "Groups"
@@ -4626,7 +4604,7 @@
         }
       }
     },
-    "/api/v4/groups/templates": {
+    "/api/v5/groups/templates": {
       "get": {
         "tags": [
           "Groups"
@@ -4646,12 +4624,12 @@
         }
       }
     },
-    "/api/v4/groups/assign-group": {
+    "/api/v5/groups/assign-group": {
       "patch": {
         "tags": [
           "Groups"
         ],
-        "summary": "Assign group to ser",
+        "summary": "Assign group to user",
         "requestBody": {
           "description": "Request",
           "content": {
@@ -4686,7 +4664,7 @@
         }
       }
     },
-    "/api/v4/groups/unassign-group": {
+    "/api/v5/groups/unassign-group": {
       "delete": {
         "tags": [
           "Groups"
@@ -4726,7 +4704,7 @@
         }
       }
     },
-    "/api/v4/groups/{id}/users": {
+    "/api/v5/groups/{id}/users": {
       "get": {
         "tags": [
           "Groups"
@@ -4759,7 +4737,7 @@
         }
       }
     },
-    "/api/v4/groups/{id}/fuzzy-users": {
+    "/api/v5/groups/{id}/fuzzy-users": {
       "get": {
         "tags": [
           "Groups"
@@ -4816,13 +4794,25 @@
         }
       }
     },
-    "/api/v4/heroes": {
+    "/api/v5/heroes": {
       "get": {
         "tags": [
           "Heroes"
         ],
         "summary": "Get heroes by condition",
         "parameters": [
+          {
+            "name": "Id",
+            "in": "query",
+            "description": "Game hero id",
+            "style": "form",
+            "schema": {
+              "maximum": 32767,
+              "minimum": 1,
+              "type": "integer",
+              "format": "int32"
+            }
+          },
           {
             "name": "Name",
             "in": "query",
@@ -4903,7 +4893,6 @@
             "multipart/form-data": {
               "schema": {
                 "required": [
-                  "Description",
                   "GameId",
                   "Name"
                 ],
@@ -4922,12 +4911,6 @@
                     "description": "Hero Game Id",
                     "format": "int32"
                   },
-                  "Description": {
-                    "maxLength": 10000,
-                    "minLength": 0,
-                    "type": "string",
-                    "description": "Description"
-                  },
                   "IconFile": {
                     "type": "string",
                     "description": "Icon file",
@@ -4940,9 +4923,6 @@
                   "style": "form"
                 },
                 "GameId": {
-                  "style": "form"
-                },
-                "Description": {
                   "style": "form"
                 },
                 "IconFile": {
@@ -4966,7 +4946,7 @@
         }
       }
     },
-    "/api/v4/heroes/{id}": {
+    "/api/v5/heroes/{id}": {
       "get": {
         "tags": [
           "Heroes"
@@ -5025,7 +5005,6 @@
             "multipart/form-data": {
               "schema": {
                 "required": [
-                  "Description",
                   "GameId",
                   "Id",
                   "Name"
@@ -5052,12 +5031,6 @@
                     "description": "Hero Game Id",
                     "format": "int32"
                   },
-                  "Description": {
-                    "maxLength": 10000,
-                    "minLength": 0,
-                    "type": "string",
-                    "description": "Description"
-                  },
                   "IconFile": {
                     "type": "string",
                     "description": "Icon file",
@@ -5073,9 +5046,6 @@
                   "style": "form"
                 },
                 "GameId": {
-                  "style": "form"
-                },
-                "Description": {
                   "style": "form"
                 },
                 "IconFile": {
@@ -5132,7 +5102,7 @@
         }
       }
     },
-    "/api/v4/heroes/{id}/translations": {
+    "/api/v5/heroes/{id}/translations": {
       "get": {
         "tags": [
           "Heroes"
@@ -5220,7 +5190,7 @@
         }
       }
     },
-    "/api/v4/logout": {
+    "/api/v5/logout": {
       "post": {
         "tags": [
           "Logout"
@@ -5251,7 +5221,7 @@
         }
       }
     },
-    "/api/v4/logs/log-levels": {
+    "/api/v5/logs/log-levels": {
       "get": {
         "tags": [
           "Logs"
@@ -5271,7 +5241,7 @@
         }
       }
     },
-    "/api/v4/logs/api-logs": {
+    "/api/v5/logs/api-logs": {
       "get": {
         "tags": [
           "Logs"
@@ -5415,7 +5385,7 @@
         }
       }
     },
-    "/api/v4/logs/api-logs/{id}": {
+    "/api/v5/logs/api-logs/{id}": {
       "get": {
         "tags": [
           "Logs"
@@ -5448,7 +5418,7 @@
         }
       }
     },
-    "/api/v4/logs/system-logs": {
+    "/api/v5/logs/system-logs": {
       "get": {
         "tags": [
           "Logs"
@@ -5589,7 +5559,7 @@
         }
       }
     },
-    "/api/v4/logs/system-logs/{id}": {
+    "/api/v5/logs/system-logs/{id}": {
       "get": {
         "tags": [
           "Logs"
@@ -5622,13 +5592,25 @@
         }
       }
     },
-    "/api/v4/maps": {
+    "/api/v5/maps": {
       "get": {
         "tags": [
           "Maps"
         ],
         "summary": "Get maps by condition",
         "parameters": [
+          {
+            "name": "Id",
+            "in": "query",
+            "description": "Map Id",
+            "style": "form",
+            "schema": {
+              "maximum": 32767,
+              "minimum": 1,
+              "type": "integer",
+              "format": "int32"
+            }
+          },
           {
             "name": "Name",
             "in": "query",
@@ -5751,7 +5733,7 @@
         }
       }
     },
-    "/api/v4/maps/{id}": {
+    "/api/v5/maps/{id}": {
       "get": {
         "tags": [
           "Maps"
@@ -5907,7 +5889,7 @@
         }
       }
     },
-    "/api/v4/maps/{id}/translations": {
+    "/api/v5/maps/{id}/translations": {
       "get": {
         "tags": [
           "Maps"
@@ -5995,7 +5977,7 @@
         }
       }
     },
-    "/api/v4/maps/fuzzy": {
+    "/api/v5/maps/fuzzy": {
       "get": {
         "tags": [
           "Maps"
@@ -6053,13 +6035,25 @@
         }
       }
     },
-    "/api/v4/media/streams": {
+    "/api/v5/media/streams": {
       "get": {
         "tags": [
           "Media"
         ],
         "summary": "Get media streams by condition",
         "parameters": [
+          {
+            "name": "Id",
+            "in": "query",
+            "description": "Media item Id",
+            "style": "form",
+            "schema": {
+              "maximum": 2147483647,
+              "minimum": 1,
+              "type": "integer",
+              "format": "int32"
+            }
+          },
           {
             "name": "Title",
             "in": "query",
@@ -6072,14 +6066,15 @@
             }
           },
           {
-            "name": "Creator",
+            "name": "CreatedUserId",
             "in": "query",
-            "description": "Creator(Username)",
+            "description": "Created user id",
             "style": "form",
             "schema": {
-              "maxLength": 20,
-              "minLength": 0,
-              "type": "string"
+              "maximum": 2147483647,
+              "minimum": -2147483648,
+              "type": "integer",
+              "format": "int32"
             }
           },
           {
@@ -6338,7 +6333,7 @@
         }
       }
     },
-    "/api/v4/media/streams/{id}": {
+    "/api/v5/media/streams/{id}": {
       "get": {
         "tags": [
           "Media"
@@ -6590,7 +6585,7 @@
         }
       }
     },
-    "/api/v4/media/fuzzy-streams": {
+    "/api/v5/media/fuzzy-streams": {
       "get": {
         "tags": [
           "Media"
@@ -6603,7 +6598,7 @@
             "description": "FuzzyPrefix",
             "style": "form",
             "schema": {
-              "maxLength": 20,
+              "maxLength": 60,
               "minLength": 0,
               "type": "string"
             }
@@ -6634,7 +6629,7 @@
         }
       }
     },
-    "/api/v4/media/fuzzy-videos": {
+    "/api/v5/media/fuzzy-videos": {
       "get": {
         "tags": [
           "Media"
@@ -6647,7 +6642,7 @@
             "description": "FuzzyPrefix",
             "style": "form",
             "schema": {
-              "maxLength": 20,
+              "maxLength": 60,
               "minLength": 0,
               "type": "string"
             }
@@ -6678,7 +6673,52 @@
         }
       }
     },
-    "/api/v4/media/vods/host-options": {
+    "/api/v5/media/streams/remote-update": {
+      "patch": {
+        "tags": [
+          "Media"
+        ],
+        "summary": "Remote update media stream",
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "required": [
+                  "MediaItemId"
+                ],
+                "type": "object",
+                "properties": {
+                  "MediaItemId": {
+                    "maximum": 2147483647,
+                    "minimum": 1,
+                    "type": "integer",
+                    "format": "int32"
+                  }
+                }
+              },
+              "encoding": {
+                "MediaItemId": {
+                  "style": "form"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "default": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UpdateStreamRespApiRespBase"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v5/media/vods/host-options": {
       "get": {
         "tags": [
           "MediaVods"
@@ -6698,7 +6738,7 @@
         }
       }
     },
-    "/api/v4/media/vods": {
+    "/api/v5/media/vods": {
       "get": {
         "tags": [
           "MediaVods"
@@ -6785,14 +6825,24 @@
             }
           },
           {
-            "name": "Creator",
+            "name": "CreatedUserId",
             "in": "query",
-            "description": "Creator user name",
+            "description": "Created user id",
             "style": "form",
             "schema": {
-              "maxLength": 20,
-              "minLength": 3,
-              "type": "string"
+              "maximum": 2147483647,
+              "minimum": -2147483648,
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "IsFeatured",
+            "in": "query",
+            "description": "Is Featured",
+            "style": "form",
+            "schema": {
+              "type": "boolean"
             }
           },
           {
@@ -6870,7 +6920,7 @@
         }
       }
     },
-    "/api/v4/media/vods/{id}": {
+    "/api/v5/media/vods/{id}": {
       "get": {
         "tags": [
           "MediaVods"
@@ -6985,13 +7035,22 @@
         }
       }
     },
-    "/api/v4/media/vods/download-csv": {
+    "/api/v5/media/vods/download-csv": {
       "get": {
         "tags": [
           "MediaVods"
         ],
         "summary": "Download media vods csv",
         "parameters": [
+          {
+            "name": "SiteSectionIdsStr",
+            "in": "query",
+            "description": "Site section ids\r\nFormat=1,2,3,4,5,6",
+            "style": "form",
+            "schema": {
+              "type": "string"
+            }
+          },
           {
             "name": "PageSize",
             "in": "query",
@@ -7051,19 +7110,6 @@
             }
           },
           {
-            "name": "SiteSectionIds",
-            "in": "query",
-            "description": "Site section ids",
-            "style": "form",
-            "schema": {
-              "type": "array",
-              "items": {
-                "type": "integer",
-                "format": "int32"
-              }
-            }
-          },
-          {
             "name": "CreatedFrom",
             "in": "query",
             "description": "Created From",
@@ -7084,14 +7130,24 @@
             }
           },
           {
-            "name": "Creator",
+            "name": "CreatedUserId",
             "in": "query",
-            "description": "Creator user name",
+            "description": "Created user id",
             "style": "form",
             "schema": {
-              "maxLength": 20,
-              "minLength": 3,
-              "type": "string"
+              "maximum": 2147483647,
+              "minimum": -2147483648,
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "IsFeatured",
+            "in": "query",
+            "description": "Is Featured",
+            "style": "form",
+            "schema": {
+              "type": "boolean"
             }
           },
           {
@@ -7113,13 +7169,25 @@
         }
       }
     },
-    "/api/v4/modes": {
+    "/api/v5/modes": {
       "get": {
         "tags": [
           "Modes"
         ],
         "summary": "Get modes by condition",
         "parameters": [
+          {
+            "name": "Id",
+            "in": "query",
+            "description": "Modes Id",
+            "style": "form",
+            "schema": {
+              "maximum": 32767,
+              "minimum": 1,
+              "type": "integer",
+              "format": "int32"
+            }
+          },
           {
             "name": "Name",
             "in": "query",
@@ -7229,7 +7297,7 @@
         }
       }
     },
-    "/api/v4/modes/{id}": {
+    "/api/v5/modes/{id}": {
       "get": {
         "tags": [
           "Modes"
@@ -7350,7 +7418,7 @@
         }
       }
     },
-    "/api/v4/modes/{id}/translations": {
+    "/api/v5/modes/{id}/translations": {
       "get": {
         "tags": [
           "Modes"
@@ -7438,7 +7506,7 @@
         }
       }
     },
-    "/api/v4/modes/options": {
+    "/api/v5/modes/options": {
       "get": {
         "tags": [
           "Modes"
@@ -7473,7 +7541,7 @@
         }
       }
     },
-    "/api/v4/messaging-notification-templates": {
+    "/api/v5/messaging-notification-templates": {
       "get": {
         "tags": [
           "NotificationTemplates"
@@ -7577,7 +7645,7 @@
         }
       }
     },
-    "/api/v4/messaging-notification-templates/{id}": {
+    "/api/v5/messaging-notification-templates/{id}": {
       "get": {
         "tags": [
           "NotificationTemplates"
@@ -7692,7 +7760,7 @@
         }
       }
     },
-    "/api/v4/messaging-onesignal-apps": {
+    "/api/v5/messaging-onesignal-apps": {
       "get": {
         "tags": [
           "OneSignalApps"
@@ -7774,7 +7842,7 @@
         }
       }
     },
-    "/api/v4/messaging-onesignal-apps/{id}": {
+    "/api/v5/messaging-onesignal-apps/{id}": {
       "get": {
         "tags": [
           "OneSignalApps"
@@ -7889,7 +7957,7 @@
         }
       }
     },
-    "/api/v4/options/states": {
+    "/api/v5/options/states": {
       "get": {
         "tags": [
           "Options"
@@ -7909,7 +7977,7 @@
         }
       }
     },
-    "/api/v4/options/contact-types": {
+    "/api/v5/options/contact-types": {
       "get": {
         "tags": [
           "Options"
@@ -7929,12 +7997,23 @@
         }
       }
     },
-    "/api/v4/options/frontends": {
+    "/api/v5/options/frontends": {
       "get": {
         "tags": [
           "Options"
         ],
         "summary": "Get frontend options",
+        "parameters": [
+          {
+            "name": "IncludeAll",
+            "in": "query",
+            "description": "Include all options",
+            "style": "form",
+            "schema": {
+              "type": "boolean"
+            }
+          }
+        ],
         "responses": {
           "default": {
             "description": "Error",
@@ -7949,12 +8028,23 @@
         }
       }
     },
-    "/api/v4/options/frontends-by-user": {
+    "/api/v5/options/frontends-by-user": {
       "get": {
         "tags": [
           "Options"
         ],
         "summary": "Get frontend options by user",
+        "parameters": [
+          {
+            "name": "IncludeAll",
+            "in": "query",
+            "description": "Include all options",
+            "style": "form",
+            "schema": {
+              "type": "boolean"
+            }
+          }
+        ],
         "responses": {
           "default": {
             "description": "Error",
@@ -7969,7 +8059,7 @@
         }
       }
     },
-    "/api/v4/options/locales": {
+    "/api/v5/options/locales": {
       "get": {
         "tags": [
           "Options"
@@ -7989,7 +8079,7 @@
         }
       }
     },
-    "/api/v4/options/frontend-locales": {
+    "/api/v5/options/frontend-locales": {
       "get": {
         "tags": [
           "Options"
@@ -8009,7 +8099,7 @@
         }
       }
     },
-    "/api/v4/options/site-sections": {
+    "/api/v5/options/site-sections": {
       "get": {
         "tags": [
           "Options"
@@ -8029,7 +8119,7 @@
         }
       }
     },
-    "/api/v4/options/countries": {
+    "/api/v5/options/countries": {
       "get": {
         "tags": [
           "Options"
@@ -8049,7 +8139,7 @@
         }
       }
     },
-    "/api/v4/options/genders": {
+    "/api/v5/options/genders": {
       "get": {
         "tags": [
           "Options"
@@ -8069,7 +8159,7 @@
         }
       }
     },
-    "/api/v4/options/proxy": {
+    "/api/v5/options/proxy": {
       "get": {
         "tags": [
           "Options"
@@ -8099,7 +8189,7 @@
         }
       }
     },
-    "/api/v4/options/notification-types": {
+    "/api/v5/options/notification-types": {
       "get": {
         "tags": [
           "Options"
@@ -8119,7 +8209,7 @@
         }
       }
     },
-    "/api/v4/options/languages": {
+    "/api/v5/options/languages": {
       "get": {
         "tags": [
           "Options"
@@ -8139,12 +8229,23 @@
         }
       }
     },
-    "/api/v4/options/games": {
+    "/api/v5/options/games": {
       "get": {
         "tags": [
           "Options"
         ],
         "summary": "Get games options",
+        "parameters": [
+          {
+            "name": "includeLegacy",
+            "in": "query",
+            "style": "form",
+            "schema": {
+              "type": "boolean",
+              "default": false
+            }
+          }
+        ],
         "responses": {
           "default": {
             "description": "Error",
@@ -8159,7 +8260,7 @@
         }
       }
     },
-    "/api/v4/options/broadcast-talent-roles": {
+    "/api/v5/options/broadcast-talent-roles": {
       "get": {
         "tags": [
           "Options"
@@ -8179,7 +8280,7 @@
         }
       }
     },
-    "/api/v4/options/servers": {
+    "/api/v5/options/servers": {
       "get": {
         "tags": [
           "Options"
@@ -8210,7 +8311,7 @@
         }
       }
     },
-    "/api/v4/options/tournament/points-awarded": {
+    "/api/v5/options/tournament/points-awarded": {
       "get": {
         "tags": [
           "Options"
@@ -8230,7 +8331,7 @@
         }
       }
     },
-    "/api/v4/options/earning-prize-pool-status": {
+    "/api/v5/options/earning-prize-pool-status": {
       "get": {
         "tags": [
           "Options"
@@ -8250,7 +8351,7 @@
         }
       }
     },
-    "/api/v4/options/currencies": {
+    "/api/v5/options/currencies": {
       "get": {
         "tags": [
           "Options"
@@ -8270,7 +8371,7 @@
         }
       }
     },
-    "/api/v4/options/tournament-states": {
+    "/api/v5/options/tournament-states": {
       "get": {
         "tags": [
           "Options"
@@ -8290,7 +8391,7 @@
         }
       }
     },
-    "/api/v4/options/tournament-opponents": {
+    "/api/v5/options/tournament-opponents": {
       "get": {
         "tags": [
           "Options"
@@ -8322,7 +8423,7 @@
         }
       }
     },
-    "/api/v4/options/game-results": {
+    "/api/v5/options/game-results": {
       "get": {
         "tags": [
           "Options"
@@ -8342,7 +8443,61 @@
         }
       }
     },
-    "/api/v4/pages": {
+    "/api/v5/options/game-sides": {
+      "get": {
+        "tags": [
+          "Options"
+        ],
+        "summary": "Get game side options",
+        "parameters": [
+          {
+            "name": "GameId",
+            "in": "query",
+            "required": true,
+            "style": "form",
+            "schema": {
+              "maximum": 32767,
+              "minimum": 1,
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Int16ItemListApiRespBase"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v5/options/seo-metadata": {
+      "get": {
+        "tags": [
+          "Options"
+        ],
+        "summary": "Get seo metadata options",
+        "responses": {
+          "default": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SeoMetaDataOptionListApiRespBase"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v5/pages": {
       "get": {
         "tags": [
           "Pages"
@@ -8530,7 +8685,7 @@
         }
       }
     },
-    "/api/v4/pages/{id}": {
+    "/api/v5/pages/{id}": {
       "get": {
         "tags": [
           "Pages"
@@ -8616,7 +8771,7 @@
         }
       }
     },
-    "/api/v4/players": {
+    "/api/v5/players": {
       "get": {
         "tags": [
           "Players"
@@ -8929,7 +9084,7 @@
         }
       }
     },
-    "/api/v4/players/{id}": {
+    "/api/v5/players/{id}": {
       "get": {
         "tags": [
           "Players"
@@ -9183,7 +9338,7 @@
         }
       }
     },
-    "/api/v4/players/fuzzy": {
+    "/api/v5/players/fuzzy": {
       "get": {
         "tags": [
           "Players"
@@ -9229,7 +9384,7 @@
         }
       }
     },
-    "/api/v4/players/users/{id}": {
+    "/api/v5/players/users/{id}": {
       "get": {
         "tags": [
           "Players"
@@ -9262,7 +9417,7 @@
         }
       }
     },
-    "/api/v4/players/{playerid}/media-items": {
+    "/api/v5/players/{playerid}/media-items": {
       "get": {
         "tags": [
           "Players"
@@ -9366,7 +9521,7 @@
         }
       }
     },
-    "/api/v4/players/{playerid}/media-items/{mediaitemid}": {
+    "/api/v5/players/{playerid}/media-items/{mediaitemid}": {
       "delete": {
         "tags": [
           "Players"
@@ -9414,7 +9569,739 @@
         }
       }
     },
-    "/api/v4/roles/role-options": {
+    "/api/v5/reports/articles/viewership-summary": {
+      "get": {
+        "tags": [
+          "Reports"
+        ],
+        "summary": "Get articles viewership summary",
+        "parameters": [
+          {
+            "name": "From",
+            "in": "query",
+            "required": true,
+            "style": "form",
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "To",
+            "in": "query",
+            "required": true,
+            "style": "form",
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "Locale",
+            "in": "query",
+            "description": "LocaleId",
+            "style": "form",
+            "schema": {
+              "maximum": 32767,
+              "minimum": 1,
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "SiteSections",
+            "in": "query",
+            "description": "Site section id",
+            "style": "form",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "integer",
+                "format": "int32"
+              }
+            }
+          },
+          {
+            "name": "Tournaments",
+            "in": "query",
+            "description": "Parent tournament name",
+            "style": "form",
+            "schema": {
+              "maxLength": 80,
+              "minLength": 0,
+              "type": "string"
+            }
+          },
+          {
+            "name": "Proofreader",
+            "in": "query",
+            "description": "Proofreader (fuzzy search)",
+            "style": "form",
+            "schema": {
+              "maxLength": 20,
+              "minLength": 0,
+              "type": "string"
+            }
+          },
+          {
+            "name": "Author",
+            "in": "query",
+            "description": "Author (fuzzy search)",
+            "style": "form",
+            "schema": {
+              "maxLength": 20,
+              "minLength": 0,
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetViewershipSummaryRespApiRespBase"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v5/reports/articles/viewership": {
+      "get": {
+        "tags": [
+          "Reports"
+        ],
+        "summary": "Get articles viewership",
+        "parameters": [
+          {
+            "name": "From",
+            "in": "query",
+            "required": true,
+            "style": "form",
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "To",
+            "in": "query",
+            "required": true,
+            "style": "form",
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "Locale",
+            "in": "query",
+            "description": "LocaleId",
+            "style": "form",
+            "schema": {
+              "maximum": 32767,
+              "minimum": 1,
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "SiteSections",
+            "in": "query",
+            "description": "Site section id",
+            "style": "form",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "integer",
+                "format": "int32"
+              }
+            }
+          },
+          {
+            "name": "Tournaments",
+            "in": "query",
+            "description": "Parent tournament name",
+            "style": "form",
+            "schema": {
+              "maxLength": 80,
+              "minLength": 0,
+              "type": "string"
+            }
+          },
+          {
+            "name": "Proofreader",
+            "in": "query",
+            "description": "Proofreader (fuzzy search)",
+            "style": "form",
+            "schema": {
+              "maxLength": 20,
+              "minLength": 0,
+              "type": "string"
+            }
+          },
+          {
+            "name": "Author",
+            "in": "query",
+            "description": "Author (fuzzy search)",
+            "style": "form",
+            "schema": {
+              "maxLength": 20,
+              "minLength": 0,
+              "type": "string"
+            }
+          },
+          {
+            "name": "PageNo",
+            "in": "query",
+            "style": "form",
+            "schema": {
+              "maximum": 2147483647,
+              "minimum": 1,
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "PageSize",
+            "in": "query",
+            "style": "form",
+            "schema": {
+              "maximum": 100,
+              "minimum": 1,
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetViewershipRespApiRespBase"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v5/reports/matches": {
+      "get": {
+        "tags": [
+          "Reports"
+        ],
+        "summary": "Get child tournament matches and vods report",
+        "parameters": [
+          {
+            "name": "From",
+            "in": "query",
+            "required": true,
+            "style": "form",
+            "schema": {
+              "minimum": 1,
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "To",
+            "in": "query",
+            "required": true,
+            "style": "form",
+            "schema": {
+              "minimum": 1,
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "PageNo",
+            "in": "query",
+            "style": "form",
+            "schema": {
+              "maximum": 2147483647,
+              "minimum": 1,
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "PageSize",
+            "in": "query",
+            "style": "form",
+            "schema": {
+              "maximum": 100,
+              "minimum": 1,
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetMatchesReportsRespApiRespBase"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v5/reports/matches/download-excel": {
+      "get": {
+        "tags": [
+          "Reports"
+        ],
+        "summary": "Download child tournament matches and VODs report excel",
+        "parameters": [
+          {
+            "name": "From",
+            "in": "query",
+            "required": true,
+            "style": "form",
+            "schema": {
+              "minimum": 1,
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "To",
+            "in": "query",
+            "required": true,
+            "style": "form",
+            "schema": {
+              "minimum": 1,
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "TimeZone",
+            "in": "query",
+            "required": true,
+            "style": "form",
+            "schema": {
+              "maximum": 14,
+              "minimum": -12,
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/v5/reports/tournaments/viewership": {
+      "get": {
+        "tags": [
+          "Reports"
+        ],
+        "summary": "Get tournament viewership",
+        "parameters": [
+          {
+            "name": "ParentTournamentId",
+            "in": "query",
+            "style": "form",
+            "schema": {
+              "maximum": 2147483647,
+              "minimum": 1,
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "TournamentName",
+            "in": "query",
+            "style": "form",
+            "schema": {
+              "maxLength": 80,
+              "minLength": 0,
+              "type": "string"
+            }
+          },
+          {
+            "name": "GameId",
+            "in": "query",
+            "style": "form",
+            "schema": {
+              "maximum": 32767,
+              "minimum": 1,
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "FrontEndId",
+            "in": "query",
+            "style": "form",
+            "schema": {
+              "maximum": 32767,
+              "minimum": 1,
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "IsHidden",
+            "in": "query",
+            "style": "form",
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "IsLan",
+            "in": "query",
+            "style": "form",
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "CountryId",
+            "in": "query",
+            "style": "form",
+            "schema": {
+              "maximum": 32767,
+              "minimum": 1,
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "VenueId",
+            "in": "query",
+            "style": "form",
+            "schema": {
+              "maximum": 2147483647,
+              "minimum": 1,
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "CreatedAtFrom",
+            "in": "query",
+            "style": "form",
+            "schema": {
+              "minimum": 1,
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "CreatedAtTo",
+            "in": "query",
+            "style": "form",
+            "schema": {
+              "minimum": 1,
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "StartingAtFrom",
+            "in": "query",
+            "style": "form",
+            "schema": {
+              "minimum": 1,
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "StartingAtTo",
+            "in": "query",
+            "style": "form",
+            "schema": {
+              "minimum": 1,
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "CreatedBy",
+            "in": "query",
+            "style": "form",
+            "schema": {
+              "maximum": 2147483647,
+              "minimum": 1,
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "MapId",
+            "in": "query",
+            "style": "form",
+            "schema": {
+              "maximum": 32767,
+              "minimum": 1,
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "SponsorId",
+            "in": "query",
+            "style": "form",
+            "schema": {
+              "maximum": 2147483647,
+              "minimum": 1,
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "PageNo",
+            "in": "query",
+            "style": "form",
+            "schema": {
+              "maximum": 2147483647,
+              "minimum": 1,
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "PageSize",
+            "in": "query",
+            "style": "form",
+            "schema": {
+              "maximum": 100,
+              "minimum": 1,
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetTournamentViewershipRespApiRespBase"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v5/reports/earnings-statistics": {
+      "get": {
+        "tags": [
+          "Reports"
+        ],
+        "summary": "Get earnings statistics",
+        "responses": {
+          "default": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetEarningsStsRespListApiRespBase"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v5/reports/crew-performance": {
+      "get": {
+        "tags": [
+          "Reports"
+        ],
+        "summary": "Get crew performance",
+        "parameters": [
+          {
+            "name": "From",
+            "in": "query",
+            "required": true,
+            "style": "form",
+            "schema": {
+              "minimum": 1,
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "To",
+            "in": "query",
+            "required": true,
+            "style": "form",
+            "schema": {
+              "minimum": 1,
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "UserId",
+            "in": "query",
+            "required": true,
+            "style": "form",
+            "schema": {
+              "maximum": 2147483647,
+              "minimum": 1,
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetCrewPerformanceRespApiRespBase"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v5/reports/crew-performance/match-games": {
+      "get": {
+        "tags": [
+          "Reports"
+        ],
+        "summary": "Get crew performance match games resulted",
+        "parameters": [
+          {
+            "name": "From",
+            "in": "query",
+            "required": true,
+            "style": "form",
+            "schema": {
+              "minimum": 1,
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "To",
+            "in": "query",
+            "required": true,
+            "style": "form",
+            "schema": {
+              "minimum": 1,
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "ResultedBy",
+            "in": "query",
+            "style": "form",
+            "schema": {
+              "maximum": 2147483647,
+              "minimum": 1,
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "UpdatedBy",
+            "in": "query",
+            "style": "form",
+            "schema": {
+              "maximum": 2147483647,
+              "minimum": 1,
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "DraftedBy",
+            "in": "query",
+            "style": "form",
+            "schema": {
+              "maximum": 2147483647,
+              "minimum": 1,
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "MapBy",
+            "in": "query",
+            "style": "form",
+            "schema": {
+              "maximum": 2147483647,
+              "minimum": 1,
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "RoundSetBy",
+            "in": "query",
+            "style": "form",
+            "schema": {
+              "maximum": 2147483647,
+              "minimum": 1,
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "PageNo",
+            "in": "query",
+            "style": "form",
+            "schema": {
+              "maximum": 2147483647,
+              "minimum": 1,
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "PageSize",
+            "in": "query",
+            "style": "form",
+            "schema": {
+              "maximum": 100,
+              "minimum": 1,
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetGamesResultedRespApiRespBase"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v5/roles/role-options": {
       "get": {
         "tags": [
           "Roles"
@@ -9434,7 +10321,7 @@
         }
       }
     },
-    "/api/v4/roles/users/{id}": {
+    "/api/v5/roles/users/{id}": {
       "get": {
         "tags": [
           "Roles"
@@ -9467,7 +10354,7 @@
         }
       }
     },
-    "/api/v4/roles": {
+    "/api/v5/roles": {
       "get": {
         "tags": [
           "Roles"
@@ -9599,7 +10486,7 @@
         }
       }
     },
-    "/api/v4/roles/{id}": {
+    "/api/v5/roles/{id}": {
       "get": {
         "tags": [
           "Roles"
@@ -9714,7 +10601,7 @@
         }
       }
     },
-    "/api/v4/roles/assign-role": {
+    "/api/v5/roles/assign-role": {
       "patch": {
         "tags": [
           "Roles"
@@ -9754,7 +10641,7 @@
         }
       }
     },
-    "/api/v4/roles/unassign-role": {
+    "/api/v5/roles/unassign-role": {
       "delete": {
         "tags": [
           "Roles"
@@ -9794,7 +10681,7 @@
         }
       }
     },
-    "/api/v4/roles/blank-permissions": {
+    "/api/v5/roles/blank-permissions": {
       "get": {
         "tags": [
           "Roles"
@@ -9814,7 +10701,7 @@
         }
       }
     },
-    "/api/v4/roles/templates/{id}": {
+    "/api/v5/roles/templates/{id}": {
       "get": {
         "tags": [
           "Roles"
@@ -9846,13 +10733,25 @@
         }
       }
     },
-    "/api/v4/servers": {
+    "/api/v5/servers": {
       "get": {
         "tags": [
           "Servers"
         ],
         "summary": "Get servers by condition",
         "parameters": [
+          {
+            "name": "Id",
+            "in": "query",
+            "description": "Servers Id",
+            "style": "form",
+            "schema": {
+              "maximum": 2147483647,
+              "minimum": 1,
+              "type": "integer",
+              "format": "int32"
+            }
+          },
           {
             "name": "Name",
             "in": "query",
@@ -9918,37 +10817,21 @@
         ],
         "summary": "Add new tournaments server",
         "requestBody": {
+          "description": "Request",
           "content": {
-            "multipart/form-data": {
+            "application/json": {
               "schema": {
-                "required": [
-                  "GameId",
-                  "Name"
-                ],
-                "type": "object",
-                "properties": {
-                  "Name": {
-                    "maxLength": 50,
-                    "minLength": 0,
-                    "type": "string",
-                    "description": "Server Name"
-                  },
-                  "GameId": {
-                    "maximum": 32767,
-                    "minimum": 1,
-                    "type": "integer",
-                    "description": "Game Id",
-                    "format": "int32"
-                  }
-                }
-              },
-              "encoding": {
-                "Name": {
-                  "style": "form"
-                },
-                "GameId": {
-                  "style": "form"
-                }
+                "$ref": "#/components/schemas/AddServerReq"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AddServerReq"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/AddServerReq"
               }
             }
           }
@@ -9967,7 +10850,7 @@
         }
       }
     },
-    "/api/v4/servers/{id}": {
+    "/api/v5/servers/{id}": {
       "get": {
         "tags": [
           "Servers"
@@ -10022,56 +10905,21 @@
           }
         ],
         "requestBody": {
+          "description": "Request",
           "content": {
-            "multipart/form-data": {
+            "application/json": {
               "schema": {
-                "required": [
-                  "GameId",
-                  "Id",
-                  "IsFrozen",
-                  "Name"
-                ],
-                "type": "object",
-                "properties": {
-                  "Id": {
-                    "maximum": 2147483647,
-                    "minimum": 1,
-                    "type": "integer",
-                    "description": "Server Id",
-                    "format": "int32"
-                  },
-                  "Name": {
-                    "maxLength": 50,
-                    "minLength": 0,
-                    "type": "string",
-                    "description": "Server Name"
-                  },
-                  "IsFrozen": {
-                    "type": "boolean",
-                    "description": "Is Frozen"
-                  },
-                  "GameId": {
-                    "maximum": 32767,
-                    "minimum": 1,
-                    "type": "integer",
-                    "description": "Game Id",
-                    "format": "int32"
-                  }
-                }
-              },
-              "encoding": {
-                "Id": {
-                  "style": "form"
-                },
-                "Name": {
-                  "style": "form"
-                },
-                "IsFrozen": {
-                  "style": "form"
-                },
-                "GameId": {
-                  "style": "form"
-                }
+                "$ref": "#/components/schemas/ModServerReq"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ModServerReq"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ModServerReq"
               }
             }
           }
@@ -10123,7 +10971,7 @@
         }
       }
     },
-    "/api/v4/sitesections/site-sections": {
+    "/api/v5/sitesections/site-sections": {
       "get": {
         "tags": [
           "SiteSections"
@@ -10131,7 +10979,7 @@
         "summary": "Get Site-Sections",
         "parameters": [
           {
-            "name": "Filters.Id",
+            "name": "Id",
             "in": "query",
             "style": "form",
             "schema": {
@@ -10142,7 +10990,7 @@
             }
           },
           {
-            "name": "Filters.Name",
+            "name": "Name",
             "in": "query",
             "style": "form",
             "schema": {
@@ -10152,53 +11000,22 @@
             }
           },
           {
-            "name": "Filters.GameName",
+            "name": "GameId",
             "in": "query",
             "style": "form",
             "schema": {
-              "maxLength": 20,
-              "minLength": 1,
-              "type": "string"
+              "maximum": 32767,
+              "minimum": 1,
+              "type": "integer",
+              "format": "int32"
             }
           },
           {
-            "name": "Filters.Hidden",
+            "name": "Hidden",
             "in": "query",
             "style": "form",
             "schema": {
               "type": "boolean"
-            }
-          },
-          {
-            "name": "Sorts.Id",
-            "in": "query",
-            "style": "form",
-            "schema": {
-              "$ref": "#/components/schemas/EnumFieldSort"
-            }
-          },
-          {
-            "name": "Sorts.GameName",
-            "in": "query",
-            "style": "form",
-            "schema": {
-              "$ref": "#/components/schemas/EnumFieldSort"
-            }
-          },
-          {
-            "name": "Sorts.Name",
-            "in": "query",
-            "style": "form",
-            "schema": {
-              "$ref": "#/components/schemas/EnumFieldSort"
-            }
-          },
-          {
-            "name": "Sorts.Hidden",
-            "in": "query",
-            "style": "form",
-            "schema": {
-              "$ref": "#/components/schemas/EnumFieldSort"
             }
           },
           {
@@ -10248,8 +11065,7 @@
               "schema": {
                 "required": [
                   "Hidden",
-                  "Name",
-                  "Position"
+                  "Name"
                 ],
                 "type": "object",
                 "properties": {
@@ -10266,28 +11082,6 @@
                   },
                   "Hidden": {
                     "type": "boolean"
-                  },
-                  "Position": {
-                    "maximum": 32767,
-                    "minimum": 1,
-                    "type": "integer",
-                    "format": "int32"
-                  },
-                  "HeaderImage": {
-                    "type": "string",
-                    "format": "binary"
-                  },
-                  "BackGroundImage": {
-                    "type": "string",
-                    "format": "binary"
-                  },
-                  "IconImage": {
-                    "type": "string",
-                    "format": "binary"
-                  },
-                  "LogoImage": {
-                    "type": "string",
-                    "format": "binary"
                   }
                 }
               },
@@ -10299,21 +11093,6 @@
                   "style": "form"
                 },
                 "Hidden": {
-                  "style": "form"
-                },
-                "Position": {
-                  "style": "form"
-                },
-                "HeaderImage": {
-                  "style": "form"
-                },
-                "BackGroundImage": {
-                  "style": "form"
-                },
-                "IconImage": {
-                  "style": "form"
-                },
-                "LogoImage": {
                   "style": "form"
                 }
               }
@@ -10334,7 +11113,7 @@
         }
       }
     },
-    "/api/v4/sitesections/site-sections/{id}": {
+    "/api/v5/sitesections/site-sections/{id}": {
       "get": {
         "tags": [
           "SiteSections"
@@ -10412,28 +11191,6 @@
                   },
                   "Hidden": {
                     "type": "boolean"
-                  },
-                  "Position": {
-                    "maximum": 32767,
-                    "minimum": 1,
-                    "type": "integer",
-                    "format": "int32"
-                  },
-                  "HeaderImage": {
-                    "type": "string",
-                    "format": "binary"
-                  },
-                  "BackGroundImage": {
-                    "type": "string",
-                    "format": "binary"
-                  },
-                  "IconImage": {
-                    "type": "string",
-                    "format": "binary"
-                  },
-                  "LogoImage": {
-                    "type": "string",
-                    "format": "binary"
                   }
                 }
               },
@@ -10448,21 +11205,6 @@
                   "style": "form"
                 },
                 "Hidden": {
-                  "style": "form"
-                },
-                "Position": {
-                  "style": "form"
-                },
-                "HeaderImage": {
-                  "style": "form"
-                },
-                "BackGroundImage": {
-                  "style": "form"
-                },
-                "IconImage": {
-                  "style": "form"
-                },
-                "LogoImage": {
                   "style": "form"
                 }
               }
@@ -10514,13 +11256,25 @@
         }
       }
     },
-    "/api/v4/sponsors": {
+    "/api/v5/sponsors": {
       "get": {
         "tags": [
           "Sponsors"
         ],
         "summary": "Get tournaments sponsors by condition",
         "parameters": [
+          {
+            "name": "Id",
+            "in": "query",
+            "description": "Sponsors Id",
+            "style": "form",
+            "schema": {
+              "maximum": 2147483647,
+              "minimum": 1,
+              "type": "integer",
+              "format": "int32"
+            }
+          },
           {
             "name": "Name",
             "in": "query",
@@ -10683,7 +11437,7 @@
         }
       }
     },
-    "/api/v4/sponsors/{id}": {
+    "/api/v5/sponsors/{id}": {
       "get": {
         "tags": [
           "Sponsors"
@@ -10849,7 +11603,7 @@
         }
       }
     },
-    "/api/v4/sponsors/fuzzy": {
+    "/api/v5/sponsors/fuzzy": {
       "get": {
         "tags": [
           "Sponsors"
@@ -10895,7 +11649,7 @@
         }
       }
     },
-    "/api/v4/teams": {
+    "/api/v5/teams": {
       "get": {
         "tags": [
           "Teams"
@@ -10909,6 +11663,17 @@
             "style": "form",
             "schema": {
               "maxLength": 50,
+              "minLength": 1,
+              "type": "string"
+            }
+          },
+          {
+            "name": "TeamTag",
+            "in": "query",
+            "description": "TeamTag",
+            "style": "form",
+            "schema": {
+              "maxLength": 20,
               "minLength": 1,
               "type": "string"
             }
@@ -11143,7 +11908,7 @@
         }
       }
     },
-    "/api/v4/teams/{id}": {
+    "/api/v5/teams/{id}": {
       "get": {
         "tags": [
           "Teams"
@@ -11383,7 +12148,7 @@
         }
       }
     },
-    "/api/v4/teams/{teamid}/team-players": {
+    "/api/v5/teams/{teamid}/team-players": {
       "get": {
         "tags": [
           "Teams"
@@ -11493,7 +12258,7 @@
         }
       }
     },
-    "/api/v4/teams/{teamid}/team-players/{teamplayerid}": {
+    "/api/v5/teams/{teamid}/team-players/{teamplayerid}": {
       "get": {
         "tags": [
           "Teams"
@@ -11653,7 +12418,7 @@
         }
       }
     },
-    "/api/v4/teams/fuzzy": {
+    "/api/v5/teams/fuzzy": {
       "get": {
         "tags": [
           "Teams"
@@ -11707,7 +12472,7 @@
         }
       }
     },
-    "/api/v4/teams/{teamId}/team-player-options": {
+    "/api/v5/teams/{teamId}/team-player-options": {
       "get": {
         "tags": [
           "Teams"
@@ -11740,53 +12505,7 @@
         }
       }
     },
-    "/api/tools/clear-all-memory-cache": {
-      "post": {
-        "tags": [
-          "Tools"
-        ],
-        "summary": "Clear All Memory Cache",
-        "parameters": [
-          {
-            "name": "api-version",
-            "in": "query",
-            "style": "form",
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success"
-          }
-        }
-      }
-    },
-    "/api/tools/convert-tournament-data": {
-      "patch": {
-        "tags": [
-          "Tools"
-        ],
-        "summary": "Convert tournament data",
-        "parameters": [
-          {
-            "name": "api-version",
-            "in": "query",
-            "style": "form",
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success"
-          }
-        }
-      }
-    },
-    "/api/v4/tournaments/fuzzy": {
+    "/api/v5/tournaments/fuzzy": {
       "get": {
         "tags": [
           "Tournaments"
@@ -11832,7 +12551,7 @@
         }
       }
     },
-    "/api/v4/tournaments/parents/{parentId}/broadcast-talents": {
+    "/api/v5/tournaments/parents/{parentId}/broadcast-talents": {
       "get": {
         "tags": [
           "Tournaments"
@@ -11938,7 +12657,7 @@
         }
       }
     },
-    "/api/v4/tournaments/parents/{parentId}/broadcast-talents/{broadcastTalentId}": {
+    "/api/v5/tournaments/parents/{parentId}/broadcast-talents/{broadcastTalentId}": {
       "delete": {
         "tags": [
           "Tournaments"
@@ -11982,7 +12701,7 @@
         }
       }
     },
-    "/api/v4/tournaments/parents/{parentid}/stages/{stageid}/children": {
+    "/api/v5/tournaments/parents/{parentid}/stages/{stageid}/children": {
       "post": {
         "tags": [
           "Tournaments"
@@ -12046,7 +12765,80 @@
         }
       }
     },
-    "/api/v4/tournaments/parents/{parentid}/children/{childid}": {
+    "/api/v5/tournaments/parents/{parentid}/stages/{stageid}/multiple-tournaments": {
+      "post": {
+        "tags": [
+          "Tournaments"
+        ],
+        "summary": "Add multiple child tournaments",
+        "parameters": [
+          {
+            "name": "parentid",
+            "in": "path",
+            "description": "Parent tournament id",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "stageid",
+            "in": "path",
+            "description": "Stage id",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Request",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/AddChildReq"
+                }
+              }
+            },
+            "text/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/AddChildReq"
+                }
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/AddChildReq"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "default": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AddMultipleChildTournamentsRespApiRespBase"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v5/tournaments/parents/{parentid}/children/{childid}": {
       "get": {
         "tags": [
           "Tournaments"
@@ -12214,7 +13006,7 @@
         }
       }
     },
-    "/api/v4/tournaments/parents/{parentid}/children/{childid}/detail": {
+    "/api/v5/tournaments/parents/{parentid}/children/{childid}/detail": {
       "get": {
         "tags": [
           "Tournaments"
@@ -12258,7 +13050,51 @@
         }
       }
     },
-    "/api/v4/tournaments/parents/{parentid}/children/{childid}/start-tournament": {
+    "/api/v5/tournaments/parents/{parentid}/children/{childid}/bracket": {
+      "get": {
+        "tags": [
+          "Tournaments"
+        ],
+        "summary": "Get child tournament for bracket",
+        "parameters": [
+          {
+            "name": "parentid",
+            "in": "path",
+            "description": "Parent tournament id",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "childid",
+            "in": "path",
+            "description": "Child tournament id",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetChildBracketRespApiRespBase"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v5/tournaments/parents/{parentid}/children/{childid}/start-tournament": {
       "patch": {
         "tags": [
           "Tournaments"
@@ -12302,7 +13138,95 @@
         }
       }
     },
-    "/api/v4/tournaments/parents/{parentid}/children/{childid}/recalculate-points": {
+    "/api/v5/tournaments/parents/{parentid}/children/{childid}/restart-tournament": {
+      "patch": {
+        "tags": [
+          "Tournaments"
+        ],
+        "summary": "Restart child tournament",
+        "parameters": [
+          {
+            "name": "parentid",
+            "in": "path",
+            "description": "Parent tournament id",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "childid",
+            "in": "path",
+            "description": "Child tournament id",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RestartTournamentRespApiRespBase"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v5/tournaments/parents/{parentid}/children/{childid}/update-rounds": {
+      "patch": {
+        "tags": [
+          "Tournaments"
+        ],
+        "summary": "Update rounds",
+        "parameters": [
+          {
+            "name": "parentid",
+            "in": "path",
+            "description": "Parent tournament id",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "childid",
+            "in": "path",
+            "description": "Child tournament id",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UpdateRoundsRespApiRespBase"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v5/tournaments/parents/{parentid}/children/{childid}/recalculate-points": {
       "patch": {
         "tags": [
           "Tournaments"
@@ -12346,7 +13270,7 @@
         }
       }
     },
-    "/api/v4/tournaments/data-providers/grid/tournaments": {
+    "/api/v5/tournaments/data-providers/grid/tournaments": {
       "get": {
         "tags": [
           "Tournaments"
@@ -12404,7 +13328,7 @@
         }
       }
     },
-    "/api/v4/tournaments/data-providers/grid/matches": {
+    "/api/v5/tournaments/data-providers/grid/matches": {
       "get": {
         "tags": [
           "Tournaments"
@@ -12463,7 +13387,7 @@
         }
       }
     },
-    "/api/v4/tournaments/parents/{parentid}/children/{childid}/media-items": {
+    "/api/v5/tournaments/parents/{parentid}/children/{childid}/media-items": {
       "get": {
         "tags": [
           "Tournaments"
@@ -12591,7 +13515,7 @@
         }
       }
     },
-    "/api/v4/tournaments/parents/{parentid}/children/{childid}/media-items/{mediaitemid}": {
+    "/api/v5/tournaments/parents/{parentid}/children/{childid}/media-items/{mediaitemid}": {
       "delete": {
         "tags": [
           "Tournaments"
@@ -12646,7 +13570,7 @@
         }
       }
     },
-    "/api/v4/tournaments/game-accounts": {
+    "/api/v5/tournaments/game-accounts": {
       "get": {
         "tags": [
           "Tournaments"
@@ -12778,7 +13702,7 @@
         }
       }
     },
-    "/api/v4/tournaments/game-accounts/{id}": {
+    "/api/v5/tournaments/game-accounts/{id}": {
       "get": {
         "tags": [
           "Tournaments"
@@ -12893,7 +13817,7 @@
         }
       }
     },
-    "/api/v4/tournaments/rounds/{roundid}/match-games": {
+    "/api/v5/tournaments/rounds/{roundid}/match-games": {
       "get": {
         "tags": [
           "Tournaments"
@@ -12926,7 +13850,7 @@
         }
       }
     },
-    "/api/v4/tournaments/rounds/{roundid}/match-games/{matchgameid}": {
+    "/api/v5/tournaments/rounds/{roundid}/match-games/{matchgameid}": {
       "get": {
         "tags": [
           "Tournaments"
@@ -13032,7 +13956,7 @@
         }
       }
     },
-    "/api/v4/tournaments/rounds/{roundid}/match-games/{matchgameid}/draft": {
+    "/api/v5/tournaments/rounds/{roundid}/match-games/{matchgameid}/draft": {
       "get": {
         "tags": [
           "Tournaments"
@@ -13138,7 +14062,7 @@
         }
       }
     },
-    "/api/v4/tournaments/rounds/{roundid}/match-games/{matchgameid}/round-sets": {
+    "/api/v5/tournaments/rounds/{roundid}/match-games/{matchgameid}/round-sets": {
       "get": {
         "tags": [
           "Tournaments"
@@ -13244,7 +14168,7 @@
         }
       }
     },
-    "/api/v4/tournaments/rounds/{roundid}/match-games/{matchgameid}/br-result": {
+    "/api/v5/tournaments/rounds/{roundid}/match-games/{matchgameid}/br-result": {
       "get": {
         "tags": [
           "Tournaments"
@@ -13276,8 +14200,11 @@
           {
             "name": "RegistrationId",
             "in": "query",
+            "required": true,
             "style": "form",
             "schema": {
+              "maximum": 2147483647,
+              "minimum": 1,
               "type": "integer",
               "format": "int32"
             }
@@ -13359,7 +14286,42 @@
         }
       }
     },
-    "/api/v4/tournaments/rounds/{roundid}/matches": {
+    "/api/v5/tournaments/match-games/previous-lineups": {
+      "get": {
+        "tags": [
+          "Tournaments"
+        ],
+        "summary": "Get previous game lineups and standins",
+        "parameters": [
+          {
+            "name": "GameId",
+            "in": "query",
+            "description": "Tournament game Id",
+            "required": true,
+            "style": "form",
+            "schema": {
+              "maximum": 2147483647,
+              "minimum": 1,
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetPreviousLineupsRespApiRespBase"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v5/tournaments/rounds/{roundid}/matches": {
       "get": {
         "tags": [
           "Tournaments"
@@ -13385,6 +14347,18 @@
             "schema": {
               "type": "boolean",
               "default": false
+            }
+          },
+          {
+            "name": "matchId",
+            "in": "query",
+            "description": "",
+            "style": "form",
+            "schema": {
+              "maximum": 2147483647,
+              "minimum": 1,
+              "type": "integer",
+              "format": "int32"
             }
           }
         ],
@@ -13504,7 +14478,7 @@
         }
       }
     },
-    "/api/v4/tournaments/rounds/{roundid}/matches/{matchid}": {
+    "/api/v5/tournaments/rounds/{roundid}/matches/{matchid}": {
       "delete": {
         "tags": [
           "Tournaments"
@@ -13590,7 +14564,7 @@
         }
       }
     },
-    "/api/v4/tournaments/children/{childid}/replace-opponents": {
+    "/api/v5/tournaments/children/{childid}/replace-opponents": {
       "get": {
         "tags": [
           "Tournaments"
@@ -13674,7 +14648,7 @@
         }
       }
     },
-    "/api/v4/tournaments/children/{childid}/replace-opponents/{id}": {
+    "/api/v5/tournaments/children/{childid}/replace-opponents/{id}": {
       "delete": {
         "tags": [
           "Tournaments"
@@ -13718,7 +14692,7 @@
         }
       }
     },
-    "/api/v4/tournaments/rounds/{roundid}/matches/{matchid}/points-adjustment": {
+    "/api/v5/tournaments/rounds/{roundid}/matches/{matchid}/points-adjustment": {
       "get": {
         "tags": [
           "Tournaments"
@@ -13824,7 +14798,7 @@
         }
       }
     },
-    "/api/v4/tournaments/parents/{parentid}/children/{childid}/opponents": {
+    "/api/v5/tournaments/parents/{parentid}/children/{childid}/opponents": {
       "get": {
         "tags": [
           "Tournaments"
@@ -13930,7 +14904,7 @@
         }
       }
     },
-    "/api/v4/tournaments/parents/{parentId}/child-types": {
+    "/api/v5/tournaments/parents/{parentId}/child-types": {
       "get": {
         "tags": [
           "Tournaments"
@@ -13963,7 +14937,7 @@
         }
       }
     },
-    "/api/v4/tournaments/parents/{parentId}/game-maps": {
+    "/api/v5/tournaments/parents/{parentId}/game-maps": {
       "get": {
         "tags": [
           "Tournaments"
@@ -14020,7 +14994,83 @@
         }
       }
     },
-    "/api/v4/tournaments/parents": {
+    "/api/v5/tournaments/match-games/team-selections": {
+      "get": {
+        "tags": [
+          "Tournaments"
+        ],
+        "summary": "Get opponent team selection options",
+        "parameters": [
+          {
+            "name": "RegistrationId",
+            "in": "query",
+            "required": true,
+            "style": "form",
+            "schema": {
+              "maximum": 2147483647,
+              "minimum": 1,
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Int32ItemListApiRespBase"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v5/tournaments/parents/{parentid}/children/{childid}/bracket-matches": {
+      "get": {
+        "tags": [
+          "Tournaments"
+        ],
+        "summary": "Get child tournament bracket match options",
+        "parameters": [
+          {
+            "name": "parentid",
+            "in": "path",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "childid",
+            "in": "path",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Int32ItemListApiRespBase"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v5/tournaments/parents": {
       "get": {
         "tags": [
           "Tournaments"
@@ -14057,7 +15107,7 @@
             "style": "form",
             "schema": {
               "maximum": 32767,
-              "minimum": 1,
+              "minimum": 0,
               "type": "integer",
               "format": "int32"
             }
@@ -14197,7 +15247,7 @@
           {
             "name": "State",
             "in": "query",
-            "description": "State\r\nLive = 1\r\nUpcoming = 2\r\nCompleted = 3\r\nCanceled = 4\r\nFeatured = 5",
+            "description": "State\r\nAll = 0\r\nLive = 1\r\nUpcoming = 2\r\nCompleted = 3\r\nCanceled = 4\r\nFeatured = 5",
             "style": "form",
             "schema": {
               "$ref": "#/components/schemas/EnumParentTournamentState"
@@ -14272,7 +15322,7 @@
                   },
                   "FrontendId": {
                     "maximum": 32767,
-                    "minimum": 1,
+                    "minimum": 0,
                     "type": "integer",
                     "description": "Frontend id",
                     "format": "int32"
@@ -14401,7 +15451,7 @@
         }
       }
     },
-    "/api/v4/tournaments/parents/{parentId}": {
+    "/api/v5/tournaments/parents/{parentId}": {
       "get": {
         "tags": [
           "Tournaments"
@@ -14477,7 +15527,7 @@
                   },
                   "FrontendId": {
                     "maximum": 32767,
-                    "minimum": 1,
+                    "minimum": 0,
                     "type": "integer",
                     "description": "Frontend id\r\nnull: ALL",
                     "format": "int32"
@@ -14640,7 +15690,7 @@
         }
       }
     },
-    "/api/v4/tournaments/parents/{parentId}/detail": {
+    "/api/v5/tournaments/parents/{parentId}/detail": {
       "get": {
         "tags": [
           "Tournaments"
@@ -14673,7 +15723,7 @@
         }
       }
     },
-    "/api/v4/tournaments/parents/{parentId}/status": {
+    "/api/v5/tournaments/parents/{parentId}/status": {
       "patch": {
         "tags": [
           "Tournaments"
@@ -14726,7 +15776,7 @@
         }
       }
     },
-    "/api/v4/tournaments/parents/{parentId}/children/{childId}/team-registrations": {
+    "/api/v5/tournaments/parents/{parentId}/children/{childId}/team-registrations": {
       "get": {
         "tags": [
           "Tournaments"
@@ -14832,7 +15882,7 @@
         }
       }
     },
-    "/api/v4/tournaments/parents/{parentId}/children/{childId}/team-registrations/{registerId}": {
+    "/api/v5/tournaments/parents/{parentId}/children/{childId}/team-registrations/{registerId}": {
       "get": {
         "tags": [
           "Tournaments"
@@ -15013,7 +16063,7 @@
         }
       }
     },
-    "/api/v4/tournaments/parents/{parentId}/children/{childId}/player-registrations": {
+    "/api/v5/tournaments/parents/{parentId}/children/{childId}/player-registrations": {
       "get": {
         "tags": [
           "Tournaments"
@@ -15119,7 +16169,7 @@
         }
       }
     },
-    "/api/v4/tournaments/parents/{parentId}/children/{childId}/player-registrations/{registerId}": {
+    "/api/v5/tournaments/parents/{parentId}/children/{childId}/player-registrations/{registerId}": {
       "patch": {
         "tags": [
           "Tournaments"
@@ -15247,7 +16297,7 @@
         }
       }
     },
-    "/api/v4/tournaments/parents/{parentid}/children/{childid}/rounds": {
+    "/api/v5/tournaments/parents/{parentid}/children/{childid}/rounds": {
       "get": {
         "tags": [
           "Tournaments"
@@ -15353,7 +16403,7 @@
         }
       }
     },
-    "/api/v4/tournaments/parents/{parentid}/children/{childid}/rounds/{roundid}": {
+    "/api/v5/tournaments/parents/{parentid}/children/{childid}/rounds/{roundid}": {
       "get": {
         "tags": [
           "Tournaments"
@@ -15534,7 +16584,7 @@
         }
       }
     },
-    "/api/v4/tournaments/parents/{parentId}/stages": {
+    "/api/v5/tournaments/parents/{parentId}/stages": {
       "get": {
         "tags": [
           "Tournaments"
@@ -15618,7 +16668,113 @@
         }
       }
     },
-    "/api/v4/tournaments/parents/{parentId}/stages-for-edit": {
+    "/api/v5/tournaments/parents/{parentId}/children/{childId}/stage": {
+      "get": {
+        "tags": [
+          "Tournaments"
+        ],
+        "summary": "Get child stage info",
+        "parameters": [
+          {
+            "name": "parentId",
+            "in": "path",
+            "description": "Parent tournament id",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "childId",
+            "in": "path",
+            "description": "Child tournament id",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetParentStagesRespApiRespBase"
+                }
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Tournaments"
+        ],
+        "summary": "Mod child stage info",
+        "parameters": [
+          {
+            "name": "parentId",
+            "in": "path",
+            "description": "Parent tournament id",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "childId",
+            "in": "path",
+            "description": "Child tournament id",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ModChildStageReq"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ModChildStageReq"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ModChildStageReq"
+              }
+            }
+          }
+        },
+        "responses": {
+          "default": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiRespBase"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v5/tournaments/parents/{parentId}/stages-for-edit": {
       "get": {
         "tags": [
           "Tournaments"
@@ -15651,7 +16807,7 @@
         }
       }
     },
-    "/api/v4/tournaments/parents/{parentId}/stages/{stageId}": {
+    "/api/v5/tournaments/parents/{parentId}/stages/{stageId}": {
       "patch": {
         "tags": [
           "Tournaments"
@@ -15757,7 +16913,7 @@
         }
       }
     },
-    "/api/v4/users": {
+    "/api/v5/users": {
       "get": {
         "tags": [
           "Users"
@@ -15966,7 +17122,7 @@
         }
       }
     },
-    "/api/v4/users/{id}": {
+    "/api/v5/users/{id}": {
       "get": {
         "tags": [
           "Users"
@@ -16183,7 +17339,7 @@
         }
       }
     },
-    "/api/v4/users/{id}/permissions": {
+    "/api/v5/users/{id}/permissions": {
       "get": {
         "tags": [
           "Users"
@@ -16216,7 +17372,7 @@
         }
       }
     },
-    "/api/v4/users/fuzzy": {
+    "/api/v5/users/fuzzy": {
       "get": {
         "tags": [
           "Users"
@@ -16260,7 +17416,7 @@
         }
       }
     },
-    "/api/v4/usersession": {
+    "/api/v5/usersession": {
       "get": {
         "tags": [
           "UserSession"
@@ -16280,13 +17436,25 @@
         }
       }
     },
-    "/api/v4/venues": {
+    "/api/v5/venues": {
       "get": {
         "tags": [
           "Venues"
         ],
         "summary": "Get venues by condition",
         "parameters": [
+          {
+            "name": "Id",
+            "in": "query",
+            "description": "Venues Id",
+            "style": "form",
+            "schema": {
+              "maximum": 2147483647,
+              "minimum": 1,
+              "type": "integer",
+              "format": "int32"
+            }
+          },
           {
             "name": "Name",
             "in": "query",
@@ -16437,7 +17605,7 @@
         }
       }
     },
-    "/api/v4/venues/{id}": {
+    "/api/v5/venues/{id}": {
       "get": {
         "tags": [
           "Venues"
@@ -16621,7 +17789,7 @@
         }
       }
     },
-    "/api/v4/venues/fuzzy": {
+    "/api/v5/venues/fuzzy": {
       "get": {
         "tags": [
           "Venues"
@@ -17532,7 +18700,6 @@
           "isFeatured",
           "isInGame",
           "siteSectionIds",
-          "startTime",
           "title"
         ],
         "type": "object",
@@ -17566,10 +18733,11 @@
           },
           "startTime": {
             "maximum": 2147483647,
-            "minimum": 1,
+            "minimum": 0,
             "type": "integer",
             "description": "Start time",
-            "format": "int32"
+            "format": "int32",
+            "nullable": true
           },
           "description": {
             "maxLength": 255,
@@ -17711,6 +18879,36 @@
           },
           "data": {
             "$ref": "#/components/schemas/AddModeResp"
+          }
+        },
+        "additionalProperties": false
+      },
+      "AddMultipleChildTournamentsResp": {
+        "type": "object",
+        "additionalProperties": false
+      },
+      "AddMultipleChildTournamentsRespApiRespBase": {
+        "required": [
+          "msg",
+          "ret",
+          "traceId"
+        ],
+        "type": "object",
+        "properties": {
+          "ret": {
+            "$ref": "#/components/schemas/EnumRet"
+          },
+          "msg": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "traceId": {
+            "minLength": 1,
+            "type": "string",
+            "readOnly": true
+          },
+          "data": {
+            "$ref": "#/components/schemas/AddMultipleChildTournamentsResp"
           }
         },
         "additionalProperties": false
@@ -18217,14 +19415,19 @@
         "additionalProperties": false
       },
       "AddRoundReq": {
+        "required": [
+          "gamesPerMatch",
+          "name",
+          "number",
+          "type"
+        ],
         "type": "object",
         "properties": {
           "name": {
             "maxLength": 50,
             "minLength": 0,
             "type": "string",
-            "description": "Round Name",
-            "nullable": true
+            "description": "Round Name"
           },
           "type": {
             "$ref": "#/components/schemas/EnumRoundType"
@@ -18296,6 +19499,29 @@
           },
           "data": {
             "$ref": "#/components/schemas/AddRoundResp"
+          }
+        },
+        "additionalProperties": false
+      },
+      "AddServerReq": {
+        "required": [
+          "gameId",
+          "name"
+        ],
+        "type": "object",
+        "properties": {
+          "name": {
+            "maxLength": 50,
+            "minLength": 0,
+            "type": "string",
+            "description": "Server Name"
+          },
+          "gameId": {
+            "maximum": 32767,
+            "minimum": 1,
+            "type": "integer",
+            "description": "Game Id",
+            "format": "int32"
           }
         },
         "additionalProperties": false
@@ -18933,6 +20159,14 @@
             "description": "Proofread datetime",
             "format": "int64",
             "nullable": true
+          },
+          "metadata": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SeoMetadata"
+            },
+            "description": "Meta data",
+            "nullable": true
           }
         },
         "additionalProperties": false
@@ -19399,6 +20633,15 @@
         "additionalProperties": false
       },
       "ChildRegistrationPlayerListItemGetChildRegistrationsResp": {
+        "required": [
+          "childId",
+          "childName",
+          "gameId",
+          "parentId",
+          "parentName",
+          "stageName",
+          "teamSize"
+        ],
         "type": "object",
         "properties": {
           "parentId": {
@@ -19412,22 +20655,28 @@
             "format": "int32"
           },
           "parentName": {
+            "minLength": 1,
             "type": "string",
-            "description": "Parent name",
-            "nullable": true
+            "description": "Parent name"
           },
           "stageName": {
+            "minLength": 1,
             "type": "string",
-            "description": "Stage name",
-            "nullable": true
+            "description": "Stage name"
           },
           "childName": {
+            "minLength": 1,
             "type": "string",
-            "description": "Child name",
-            "nullable": true
+            "description": "Child name"
           },
           "gameId": {
             "type": "integer",
+            "description": "Game id",
+            "format": "int32"
+          },
+          "teamSize": {
+            "type": "integer",
+            "description": "Team size",
             "format": "int32"
           },
           "registrations": {
@@ -19473,6 +20722,7 @@
           "hasOpp",
           "isReserved",
           "playerNames",
+          "players",
           "registeredAt",
           "registerId",
           "teamName",
@@ -19502,6 +20752,13 @@
             },
             "description": "Player names"
           },
+          "players": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Int32Item"
+            },
+            "description": "Players"
+          },
           "hasOpp": {
             "type": "boolean",
             "description": "Has opp"
@@ -19523,6 +20780,15 @@
         "additionalProperties": false
       },
       "ChildRegistrationTeamListItemGetChildRegistrationsResp": {
+        "required": [
+          "childId",
+          "childName",
+          "gameId",
+          "parentId",
+          "parentName",
+          "stageName",
+          "teamSize"
+        ],
         "type": "object",
         "properties": {
           "parentId": {
@@ -19536,22 +20802,28 @@
             "format": "int32"
           },
           "parentName": {
+            "minLength": 1,
             "type": "string",
-            "description": "Parent name",
-            "nullable": true
+            "description": "Parent name"
           },
           "stageName": {
+            "minLength": 1,
             "type": "string",
-            "description": "Stage name",
-            "nullable": true
+            "description": "Stage name"
           },
           "childName": {
+            "minLength": 1,
             "type": "string",
-            "description": "Child name",
-            "nullable": true
+            "description": "Child name"
           },
           "gameId": {
             "type": "integer",
+            "description": "Game id",
+            "format": "int32"
+          },
+          "teamSize": {
+            "type": "integer",
+            "description": "Team size",
             "format": "int32"
           },
           "registrations": {
@@ -21020,6 +22292,27 @@
         },
         "additionalProperties": false
       },
+      "DraftPlayerOption": {
+        "required": [
+          "playerOptions",
+          "registrationId"
+        ],
+        "type": "object",
+        "properties": {
+          "registrationId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "playerOptions": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Int32Item"
+            },
+            "description": "player options"
+          }
+        },
+        "additionalProperties": false
+      },
       "EarningListItem": {
         "required": [
           "feName",
@@ -21028,6 +22321,7 @@
           "gameId",
           "gameName",
           "gameUrlSafeName",
+          "isHidden",
           "name",
           "parentId",
           "prizePoolStatus",
@@ -21040,6 +22334,10 @@
             "type": "integer",
             "description": "Parent tournament id",
             "format": "int32"
+          },
+          "isHidden": {
+            "type": "boolean",
+            "description": "Is hidden"
           },
           "name": {
             "minLength": 1,
@@ -21147,6 +22445,24 @@
           "News",
           "Feature",
           "Guide"
+        ]
+      },
+      "EnumBoMatchStatus": {
+        "enum": [
+          0,
+          1,
+          2,
+          3,
+          4
+        ],
+        "type": "integer",
+        "format": "int32",
+        "x-enumNames": [
+          "NotCompleted",
+          "Completed",
+          "Canceled",
+          "Upcoming",
+          "Live"
         ]
       },
       "EnumChildTournament": {
@@ -21325,6 +22641,7 @@
       },
       "EnumParentTournamentState": {
         "enum": [
+          0,
           1,
           2,
           3,
@@ -21334,6 +22651,7 @@
         "type": "integer",
         "format": "int32",
         "x-enumNames": [
+          "All",
           "Live",
           "Upcoming",
           "Completed",
@@ -21451,6 +22769,11 @@
           20036,
           20037,
           20038,
+          20039,
+          20040,
+          20041,
+          20042,
+          20043,
           29999,
           30000,
           30001,
@@ -21520,6 +22843,11 @@
           "PrizePoolNotMathStructure",
           "PrizePoolDistributionNotMatchPlacement",
           "PasswordIncorrect",
+          "ExceededTeamSize",
+          "NotCompleted",
+          "UsernameExist",
+          "NoCalculation",
+          "NoJob",
           "InvalidParamsErrorEnd",
           "NotFoundErrorsStart",
           "NotExist",
@@ -21880,13 +23208,20 @@
         "additionalProperties": false
       },
       "GameResultBattleRoyalePlayer": {
+        "required": [
+          "playerId"
+        ],
         "type": "object",
         "properties": {
           "playerId": {
+            "maximum": 2147483647,
+            "minimum": 1,
             "type": "integer",
             "format": "int32"
           },
           "kills": {
+            "maximum": 2147483647,
+            "minimum": 0,
             "type": "integer",
             "format": "int32",
             "nullable": true
@@ -21898,7 +23233,6 @@
         "required": [
           "heroId",
           "number",
-          "playerId",
           "registrationId",
           "type"
         ],
@@ -21925,7 +23259,8 @@
           "playerId": {
             "type": "integer",
             "description": "Player Id",
-            "format": "int32"
+            "format": "int32",
+            "nullable": true
           }
         },
         "additionalProperties": false
@@ -22337,6 +23672,117 @@
         },
         "additionalProperties": false
       },
+      "GetBracketMatch": {
+        "required": [
+          "matchId",
+          "matchNumber",
+          "team1IsQualification",
+          "team1IsSeed",
+          "team2IsQualification",
+          "team2IsSeed"
+        ],
+        "type": "object",
+        "properties": {
+          "matchId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "matchNumber": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "winnerRegistrationId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "nextMatchId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "nextMatchPlacement": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "team1RegistrationId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "team1Name": {
+            "type": "string",
+            "nullable": true
+          },
+          "team1Score": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "team1IsSeed": {
+            "type": "boolean"
+          },
+          "team1IsQualification": {
+            "type": "boolean"
+          },
+          "team2RegistrationId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "team2Name": {
+            "type": "string",
+            "nullable": true
+          },
+          "team2Score": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "team2IsSeed": {
+            "type": "boolean"
+          },
+          "team2IsQualification": {
+            "type": "boolean"
+          }
+        },
+        "additionalProperties": false
+      },
+      "GetBracketRound": {
+        "required": [
+          "matches",
+          "roundId",
+          "roundName",
+          "roundNumber",
+          "roundType"
+        ],
+        "type": "object",
+        "properties": {
+          "roundId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "roundType": {
+            "$ref": "#/components/schemas/EnumRoundType"
+          },
+          "roundNumber": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "roundName": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "matches": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/GetBracketMatch"
+            }
+          }
+        },
+        "additionalProperties": false
+      },
       "GetBroadcastTalentResp": {
         "required": [
           "country",
@@ -22634,6 +24080,66 @@
         },
         "additionalProperties": false
       },
+      "GetChildBracketResp": {
+        "required": [
+          "childTournamentName",
+          "parentTournamentName",
+          "rounds",
+          "stageName"
+        ],
+        "type": "object",
+        "properties": {
+          "parentTournamentName": {
+            "minLength": 1,
+            "type": "string",
+            "description": "Parent tournament id"
+          },
+          "stageName": {
+            "minLength": 1,
+            "type": "string",
+            "description": "Stage name"
+          },
+          "childTournamentName": {
+            "minLength": 1,
+            "type": "string",
+            "description": "Child tournament name"
+          },
+          "rounds": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/GetBracketRound"
+            },
+            "description": "Child tournament rounds"
+          }
+        },
+        "additionalProperties": false
+      },
+      "GetChildBracketRespApiRespBase": {
+        "required": [
+          "msg",
+          "ret",
+          "traceId"
+        ],
+        "type": "object",
+        "properties": {
+          "ret": {
+            "$ref": "#/components/schemas/EnumRet"
+          },
+          "msg": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "traceId": {
+            "minLength": 1,
+            "type": "string",
+            "readOnly": true
+          },
+          "data": {
+            "$ref": "#/components/schemas/GetChildBracketResp"
+          }
+        },
+        "additionalProperties": false
+      },
       "GetChildDetailResp": {
         "required": [
           "childCreatedAt",
@@ -22665,6 +24171,7 @@
           "parentUrlSafeName",
           "prizePoolStatus",
           "rankingImportance",
+          "stageName",
           "teamSize"
         ],
         "type": "object",
@@ -22813,6 +24320,11 @@
             "minLength": 1,
             "type": "string",
             "description": "Parent tournament url safe name"
+          },
+          "stageName": {
+            "minLength": 1,
+            "type": "string",
+            "description": "Stage name"
           },
           "parentType": {
             "$ref": "#/components/schemas/EnumParentTournamentType"
@@ -23165,7 +24677,8 @@
           "players",
           "registerId",
           "teamId",
-          "teamName"
+          "teamName",
+          "teamSize"
         ],
         "type": "object",
         "properties": {
@@ -23197,6 +24710,11 @@
           "isReserved": {
             "type": "boolean",
             "description": "Is reserved"
+          },
+          "teamSize": {
+            "type": "integer",
+            "description": "Team size",
+            "format": "int32"
           },
           "players": {
             "type": "array",
@@ -23236,14 +24754,17 @@
       },
       "GetChildTournamentResp": {
         "required": [
+          "childName",
           "childTournamentId",
           "isHidden",
           "isLan",
           "name",
+          "parentName",
           "parentTournamentId",
           "prizePoolStatus",
           "rankingImportance",
           "stageId",
+          "stageName",
           "startingAt",
           "status",
           "type"
@@ -23259,6 +24780,21 @@
             "type": "integer",
             "description": "Parent tournament id",
             "format": "int32"
+          },
+          "parentName": {
+            "minLength": 1,
+            "type": "string",
+            "description": "Parent tournament name"
+          },
+          "stageName": {
+            "minLength": 1,
+            "type": "string",
+            "description": "Stage name"
+          },
+          "childName": {
+            "minLength": 1,
+            "type": "string",
+            "description": "Child tournament name"
           },
           "type": {
             "$ref": "#/components/schemas/EnumChildTournament"
@@ -23580,6 +25116,94 @@
         },
         "additionalProperties": false
       },
+      "GetCrewPerformanceResp": {
+        "type": "object",
+        "properties": {
+          "articlesCreated": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "articlesPublished": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "newsCreated": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "featuresCreated": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "articlesProofread": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "matchGamesResulted": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "matchGamesResultUpdated": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "matchGamesDrafted": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "matchGamesWithMaps": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "matchGamesWithRoundSets": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "tournamentsCreated": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "childTournamentsCreated": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "voDsCreated": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "streamsCreated": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "GetCrewPerformanceRespApiRespBase": {
+        "required": [
+          "msg",
+          "ret",
+          "traceId"
+        ],
+        "type": "object",
+        "properties": {
+          "ret": {
+            "$ref": "#/components/schemas/EnumRet"
+          },
+          "msg": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "traceId": {
+            "minLength": 1,
+            "type": "string",
+            "readOnly": true
+          },
+          "data": {
+            "$ref": "#/components/schemas/GetCrewPerformanceResp"
+          }
+        },
+        "additionalProperties": false
+      },
       "GetCurrencyOptionsResp": {
         "required": [
           "currencies"
@@ -23684,6 +25308,74 @@
           },
           "data": {
             "$ref": "#/components/schemas/GetEarningsResp"
+          }
+        },
+        "additionalProperties": false
+      },
+      "GetEarningsStsResp": {
+        "required": [
+          "estimatedPlayoffs",
+          "estimatedQualifiers",
+          "gameSection",
+          "prizePoolsLogged",
+          "totalAmountUSD",
+          "tournaments"
+        ],
+        "type": "object",
+        "properties": {
+          "gameSection": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "tournaments": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "totalAmountUSD": {
+            "type": "number",
+            "format": "double"
+          },
+          "prizePoolsLogged": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "estimatedQualifiers": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "estimatedPlayoffs": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "GetEarningsStsRespListApiRespBase": {
+        "required": [
+          "msg",
+          "ret",
+          "traceId"
+        ],
+        "type": "object",
+        "properties": {
+          "ret": {
+            "$ref": "#/components/schemas/EnumRet"
+          },
+          "msg": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "traceId": {
+            "minLength": 1,
+            "type": "string",
+            "readOnly": true
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/GetEarningsStsResp"
+            },
+            "nullable": true
           }
         },
         "additionalProperties": false
@@ -24825,18 +26517,10 @@
             "description": "Hero options"
           },
           "team1PlayerOptions": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/Int32Item"
-            },
-            "description": "Team1 player options"
+            "$ref": "#/components/schemas/DraftPlayerOption"
           },
           "team2PlayerOptions": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/Int32Item"
-            },
-            "description": "Team2 player options"
+            "$ref": "#/components/schemas/DraftPlayerOption"
           },
           "draftItems": {
             "type": "array",
@@ -25268,6 +26952,52 @@
         },
         "additionalProperties": false
       },
+      "GetGamesResultedResp": {
+        "required": [
+          "matchGames",
+          "paging"
+        ],
+        "type": "object",
+        "properties": {
+          "matchGames": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/MatchGameResult"
+            },
+            "description": "Match games resulted"
+          },
+          "paging": {
+            "$ref": "#/components/schemas/PagingRespBase"
+          }
+        },
+        "additionalProperties": false
+      },
+      "GetGamesResultedRespApiRespBase": {
+        "required": [
+          "msg",
+          "ret",
+          "traceId"
+        ],
+        "type": "object",
+        "properties": {
+          "ret": {
+            "$ref": "#/components/schemas/EnumRet"
+          },
+          "msg": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "traceId": {
+            "minLength": 1,
+            "type": "string",
+            "readOnly": true
+          },
+          "data": {
+            "$ref": "#/components/schemas/GetGamesResultedResp"
+          }
+        },
+        "additionalProperties": false
+      },
       "GetGenderOptionsResp": {
         "required": [
           "genders"
@@ -25595,6 +27325,7 @@
       "GetGroupResp": {
         "required": [
           "backofficePermissions",
+          "frontendPermissionOptions",
           "frontendPermissions",
           "groupId",
           "name",
@@ -25623,6 +27354,13 @@
               "$ref": "#/components/schemas/Int16Item"
             },
             "description": "Frontend permissions"
+          },
+          "frontendPermissionOptions": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Int16Item"
+            },
+            "description": "Frontend permission options"
           },
           "backofficePermissions": {
             "type": "array",
@@ -26456,8 +28194,11 @@
       "GetMatchGameResp": {
         "required": [
           "gameId",
+          "gameNumber",
           "matchGameId",
+          "matchName",
           "opponentOptions",
+          "roundName",
           "tournamentType",
           "vods"
         ],
@@ -26466,6 +28207,21 @@
           "matchGameId": {
             "type": "integer",
             "description": "Match game id",
+            "format": "int32"
+          },
+          "roundName": {
+            "minLength": 1,
+            "type": "string",
+            "description": "Round Name"
+          },
+          "matchName": {
+            "minLength": 1,
+            "type": "string",
+            "description": "Match Name"
+          },
+          "gameNumber": {
+            "type": "integer",
+            "description": "Match game number",
             "format": "int32"
           },
           "tournamentType": {
@@ -26498,6 +28254,11 @@
             "format": "int32",
             "nullable": true
           },
+          "mapName": {
+            "type": "string",
+            "description": "Map name",
+            "nullable": true
+          },
           "vods": {
             "type": "array",
             "items": {
@@ -26513,6 +28274,11 @@
           },
           "brResults": {
             "$ref": "#/components/schemas/GetMatchGameBrResults"
+          },
+          "teamSize": {
+            "type": "integer",
+            "description": "Parent tournament team size",
+            "format": "int32"
           }
         },
         "additionalProperties": false
@@ -26629,6 +28395,58 @@
           "name": {
             "type": "string",
             "nullable": true
+          },
+          "isSeed": {
+            "type": "boolean"
+          },
+          "isQualification": {
+            "type": "boolean"
+          }
+        },
+        "additionalProperties": false
+      },
+      "GetMatchesReportsResp": {
+        "required": [
+          "matches",
+          "paging"
+        ],
+        "type": "object",
+        "properties": {
+          "matches": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/MatchesReport"
+            },
+            "description": "Heroes"
+          },
+          "paging": {
+            "$ref": "#/components/schemas/PagingRespBase"
+          }
+        },
+        "additionalProperties": false
+      },
+      "GetMatchesReportsRespApiRespBase": {
+        "required": [
+          "msg",
+          "ret",
+          "traceId"
+        ],
+        "type": "object",
+        "properties": {
+          "ret": {
+            "$ref": "#/components/schemas/EnumRet"
+          },
+          "msg": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "traceId": {
+            "minLength": 1,
+            "type": "string",
+            "readOnly": true
+          },
+          "data": {
+            "$ref": "#/components/schemas/GetMatchesReportsResp"
           }
         },
         "additionalProperties": false
@@ -26681,10 +28499,23 @@
             "format": "int32",
             "nullable": true
           },
+          "nextMatchId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "nextMatchPlacement": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
           "tournamentGridId": {
             "type": "integer",
             "format": "int32",
             "nullable": true
+          },
+          "status": {
+            "$ref": "#/components/schemas/EnumBoMatchStatus"
           }
         },
         "additionalProperties": false
@@ -27926,6 +29757,7 @@
           "childUrlSafeName",
           "groupEmbedUrl",
           "hasStarted",
+          "isHidden",
           "ranking",
           "startAt"
         ],
@@ -27982,6 +29814,10 @@
           "hasStarted": {
             "type": "boolean",
             "description": "Has started"
+          },
+          "isHidden": {
+            "type": "boolean",
+            "description": "Is hidden"
           }
         },
         "additionalProperties": false
@@ -28475,6 +30311,8 @@
       "GetPlayersDetail": {
         "required": [
           "createdAt",
+          "gender",
+          "genderName",
           "isActive",
           "name",
           "nickName",
@@ -28503,6 +30341,15 @@
             "minLength": 1,
             "type": "string",
             "description": "Url safe name"
+          },
+          "gender": {
+            "$ref": "#/components/schemas/EnumGender"
+          },
+          "genderName": {
+            "minLength": 1,
+            "type": "string",
+            "description": "Gender name",
+            "readOnly": true
           },
           "countryName": {
             "type": "string",
@@ -28742,6 +30589,70 @@
         },
         "additionalProperties": false
       },
+      "GetPreviousLineupsResp": {
+        "type": "object",
+        "properties": {
+          "team1Lineup": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Int32Item"
+            },
+            "description": "Team1 current players on the team",
+            "nullable": true
+          },
+          "team1StandIns": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Int32Item"
+            },
+            "description": "Team1 stand ins players",
+            "nullable": true
+          },
+          "team2Lineup": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Int32Item"
+            },
+            "description": "Team2 current players on the team",
+            "nullable": true
+          },
+          "team2StandIns": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Int32Item"
+            },
+            "description": "Team2 stand ins players",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "GetPreviousLineupsRespApiRespBase": {
+        "required": [
+          "msg",
+          "ret",
+          "traceId"
+        ],
+        "type": "object",
+        "properties": {
+          "ret": {
+            "$ref": "#/components/schemas/EnumRet"
+          },
+          "msg": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "traceId": {
+            "minLength": 1,
+            "type": "string",
+            "readOnly": true
+          },
+          "data": {
+            "$ref": "#/components/schemas/GetPreviousLineupsResp"
+          }
+        },
+        "additionalProperties": false
+      },
       "GetPrizePoolStatusOptionsResp": {
         "required": [
           "prizePoolStatus"
@@ -28788,7 +30699,8 @@
         "required": [
           "id",
           "registrationId",
-          "replaceByRegistrationId"
+          "replaceByRegistrationId",
+          "replacedDateTime"
         ],
         "type": "object",
         "properties": {
@@ -28811,6 +30723,10 @@
           "replaceOpponentName": {
             "type": "string",
             "nullable": true
+          },
+          "replacedDateTime": {
+            "type": "integer",
+            "format": "int64"
           }
         },
         "additionalProperties": false
@@ -29115,6 +31031,7 @@
       },
       "GetRoundResp": {
         "required": [
+          "gameId",
           "gamesPerMatch",
           "id",
           "isHidden",
@@ -29137,6 +31054,11 @@
             "minLength": 1,
             "type": "string",
             "description": "Round name"
+          },
+          "gameId": {
+            "type": "integer",
+            "description": "Game Id",
+            "format": "int32"
           },
           "type": {
             "$ref": "#/components/schemas/EnumRoundType"
@@ -29439,6 +31361,8 @@
         "required": [
           "accountNameRegex",
           "gameId",
+          "gameIsLegacy",
+          "gameName",
           "id",
           "isFrozen",
           "name"
@@ -29473,6 +31397,13 @@
             "type": "integer",
             "description": "Game id",
             "format": "int32"
+          },
+          "gameName": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "gameIsLegacy": {
+            "type": "boolean"
           }
         },
         "additionalProperties": false
@@ -29834,9 +31765,7 @@
         "required": [
           "hidden",
           "id",
-          "name",
-          "position",
-          "urlSafeName"
+          "name"
         ],
         "type": "object",
         "properties": {
@@ -29858,36 +31787,6 @@
           "hidden": {
             "type": "boolean",
             "description": "Hidden"
-          },
-          "urlSafeName": {
-            "minLength": 1,
-            "type": "string",
-            "description": "Url safe name"
-          },
-          "position": {
-            "type": "integer",
-            "description": "Position",
-            "format": "int32"
-          },
-          "headerImageUrl": {
-            "type": "string",
-            "description": "Header image url",
-            "nullable": true
-          },
-          "backGroundImageUrl": {
-            "type": "string",
-            "description": "Back ground image url",
-            "nullable": true
-          },
-          "iconImageUrl": {
-            "type": "string",
-            "description": "Icon image url",
-            "nullable": true
-          },
-          "logoImageUrl": {
-            "type": "string",
-            "description": "Logo image url",
-            "nullable": true
           }
         },
         "additionalProperties": false
@@ -31082,6 +32981,52 @@
         },
         "additionalProperties": false
       },
+      "GetTournamentViewershipResp": {
+        "required": [
+          "paging",
+          "tournaments"
+        ],
+        "type": "object",
+        "properties": {
+          "tournaments": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TournamentViewership"
+            },
+            "description": "Tournaments"
+          },
+          "paging": {
+            "$ref": "#/components/schemas/PagingRespBase"
+          }
+        },
+        "additionalProperties": false
+      },
+      "GetTournamentViewershipRespApiRespBase": {
+        "required": [
+          "msg",
+          "ret",
+          "traceId"
+        ],
+        "type": "object",
+        "properties": {
+          "ret": {
+            "$ref": "#/components/schemas/EnumRet"
+          },
+          "msg": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "traceId": {
+            "minLength": 1,
+            "type": "string",
+            "readOnly": true
+          },
+          "data": {
+            "$ref": "#/components/schemas/GetTournamentViewershipResp"
+          }
+        },
+        "additionalProperties": false
+      },
       "GetUserForPlayerResp": {
         "required": [
           "userId",
@@ -31748,6 +33693,110 @@
         },
         "additionalProperties": false
       },
+      "GetViewershipResp": {
+        "required": [
+          "articles",
+          "paging"
+        ],
+        "type": "object",
+        "properties": {
+          "articles": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Viewership"
+            }
+          },
+          "paging": {
+            "$ref": "#/components/schemas/PagingRespBase"
+          }
+        },
+        "additionalProperties": false
+      },
+      "GetViewershipRespApiRespBase": {
+        "required": [
+          "msg",
+          "ret",
+          "traceId"
+        ],
+        "type": "object",
+        "properties": {
+          "ret": {
+            "$ref": "#/components/schemas/EnumRet"
+          },
+          "msg": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "traceId": {
+            "minLength": 1,
+            "type": "string",
+            "readOnly": true
+          },
+          "data": {
+            "$ref": "#/components/schemas/GetViewershipResp"
+          }
+        },
+        "additionalProperties": false
+      },
+      "GetViewershipSummaryResp": {
+        "required": [
+          "articles",
+          "avgTimeSpent",
+          "quickPolls",
+          "timeSpent",
+          "views"
+        ],
+        "type": "object",
+        "properties": {
+          "articles": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "views": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "timeSpent": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "avgTimeSpent": {
+            "type": "number",
+            "format": "double"
+          },
+          "quickPolls": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "GetViewershipSummaryRespApiRespBase": {
+        "required": [
+          "msg",
+          "ret",
+          "traceId"
+        ],
+        "type": "object",
+        "properties": {
+          "ret": {
+            "$ref": "#/components/schemas/EnumRet"
+          },
+          "msg": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "traceId": {
+            "minLength": 1,
+            "type": "string",
+            "readOnly": true
+          },
+          "data": {
+            "$ref": "#/components/schemas/GetViewershipSummaryResp"
+          }
+        },
+        "additionalProperties": false
+      },
       "GroupListItem": {
         "required": [
           "frontendNames",
@@ -32041,37 +34090,6 @@
         },
         "additionalProperties": false
       },
-      "Int32StringDictionaryApiRespBase": {
-        "required": [
-          "msg",
-          "ret",
-          "traceId"
-        ],
-        "type": "object",
-        "properties": {
-          "ret": {
-            "$ref": "#/components/schemas/EnumRet"
-          },
-          "msg": {
-            "minLength": 1,
-            "type": "string"
-          },
-          "traceId": {
-            "minLength": 1,
-            "type": "string",
-            "readOnly": true
-          },
-          "data": {
-            "type": "object",
-            "additionalProperties": {
-              "type": "string",
-              "nullable": true
-            },
-            "nullable": true
-          }
-        },
-        "additionalProperties": false
-      },
       "LanguageOption": {
         "required": [
           "id",
@@ -32145,6 +34163,11 @@
         "additionalProperties": false
       },
       "MatchGameItem": {
+        "required": [
+          "enabled",
+          "matchGameId",
+          "number"
+        ],
         "type": "object",
         "properties": {
           "matchGameId": {
@@ -32154,6 +34177,94 @@
           "number": {
             "type": "integer",
             "format": "int32"
+          },
+          "enabled": {
+            "type": "boolean"
+          }
+        },
+        "additionalProperties": false
+      },
+      "MatchGameResult": {
+        "type": "object",
+        "properties": {
+          "gameId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "matchId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "roundId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "parentId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "childId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "opponent1": {
+            "type": "string",
+            "nullable": true
+          },
+          "opponent2": {
+            "type": "string",
+            "nullable": true
+          },
+          "result": {
+            "type": "string",
+            "nullable": true,
+            "readOnly": true
+          },
+          "score": {
+            "type": "string",
+            "nullable": true,
+            "readOnly": true
+          },
+          "resultedBy": {
+            "type": "string",
+            "nullable": true
+          },
+          "resultAt": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "map": {
+            "type": "string",
+            "nullable": true
+          },
+          "mapSetBy": {
+            "type": "string",
+            "nullable": true
+          },
+          "draftBy": {
+            "type": "string",
+            "nullable": true
+          },
+          "roundSetBy": {
+            "type": "string",
+            "nullable": true
+          },
+          "resultedByUrl": {
+            "type": "string",
+            "nullable": true
+          },
+          "mapSetByUrl": {
+            "type": "string",
+            "nullable": true
+          },
+          "draftByUrl": {
+            "type": "string",
+            "nullable": true
+          },
+          "roundSetByUrl": {
+            "type": "string",
+            "nullable": true
           }
         },
         "additionalProperties": false
@@ -32161,6 +34272,7 @@
       "MatchGames": {
         "required": [
           "games",
+          "gamesPerMatch",
           "hyperlink",
           "matchId",
           "startingAt"
@@ -32182,6 +34294,11 @@
             "description": "Starting at",
             "format": "int64"
           },
+          "gamesPerMatch": {
+            "type": "integer",
+            "description": "Games per match",
+            "format": "int32"
+          },
           "hyperlink": {
             "minLength": 1,
             "type": "string",
@@ -32193,6 +34310,90 @@
               "$ref": "#/components/schemas/MatchGameItem"
             },
             "description": "Games"
+          },
+          "status": {
+            "$ref": "#/components/schemas/EnumBoMatchStatus"
+          }
+        },
+        "additionalProperties": false
+      },
+      "MatchesReport": {
+        "required": [
+          "game",
+          "hosts",
+          "match",
+          "matchResultedTime",
+          "matchStartingTime",
+          "ri",
+          "rowId",
+          "tournament",
+          "user",
+          "vods"
+        ],
+        "type": "object",
+        "properties": {
+          "rowId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "match": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "matchStartingTime": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "matchResultedTime": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "game": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "tournament": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "ri": {
+            "type": "number",
+            "format": "double"
+          },
+          "vods": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "hosts": {
+            "minLength": 1,
+            "type": "string",
+            "readOnly": true
+          },
+          "lastVOD": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "user": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "delay": {
+            "type": "string",
+            "nullable": true,
+            "readOnly": true
+          },
+          "matchUrl": {
+            "type": "string",
+            "nullable": true
+          },
+          "tournamentUrl": {
+            "type": "string",
+            "nullable": true
+          },
+          "userUrl": {
+            "type": "string",
+            "nullable": true
           }
         },
         "additionalProperties": false
@@ -32366,37 +34567,63 @@
         "additionalProperties": false
       },
       "ModBrResultReq": {
+        "required": [
+          "matchGameId",
+          "pointsPerKill",
+          "registrationId"
+        ],
         "type": "object",
         "properties": {
           "matchGameId": {
+            "maximum": 2147483647,
+            "minimum": 1,
             "type": "integer",
             "format": "int32"
           },
+          "pointsPerKill": {
+            "maximum": 32767,
+            "minimum": 0,
+            "type": "integer",
+            "description": "Br points per kill",
+            "format": "int32"
+          },
           "registrationId": {
+            "maximum": 2147483647,
+            "minimum": 1,
             "type": "integer",
             "format": "int32"
           },
           "placement": {
+            "maximum": 32767,
+            "minimum": 1,
             "type": "integer",
             "format": "int32",
             "nullable": true
           },
           "placementPoints": {
+            "maximum": 2147483647,
+            "minimum": 0,
             "type": "integer",
             "format": "int32",
             "nullable": true
           },
           "kills": {
+            "maximum": 2147483647,
+            "minimum": 0,
             "type": "integer",
             "format": "int32",
             "nullable": true
           },
           "pointsAddition": {
+            "maximum": 2147483647,
+            "minimum": 0,
             "type": "integer",
             "format": "int32",
             "nullable": true
           },
           "pointsDeduction": {
+            "maximum": 2147483647,
+            "minimum": 0,
             "type": "integer",
             "format": "int32",
             "nullable": true
@@ -32729,6 +34956,22 @@
           },
           "data": {
             "$ref": "#/components/schemas/ModChildResp"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ModChildStageReq": {
+        "required": [
+          "stageId"
+        ],
+        "type": "object",
+        "properties": {
+          "stageId": {
+            "maximum": 2147483647,
+            "minimum": 1,
+            "type": "integer",
+            "description": "Stage id",
+            "format": "int32"
           }
         },
         "additionalProperties": false
@@ -33652,7 +35895,7 @@
             "$ref": "#/components/schemas/EnumGameResult"
           },
           "team1Score": {
-            "maximum": 2147483647,
+            "maximum": 32767,
             "minimum": 0,
             "type": "integer",
             "description": "Team1 score",
@@ -33660,7 +35903,7 @@
             "nullable": true
           },
           "team2Score": {
-            "maximum": 2147483647,
+            "maximum": 32767,
             "minimum": 0,
             "type": "integer",
             "description": "Team2 score",
@@ -33676,7 +35919,7 @@
             "nullable": true
           },
           "team1GameSideId": {
-            "maximum": 2147483647,
+            "maximum": 32767,
             "minimum": 1,
             "type": "integer",
             "description": "Team1 games side id",
@@ -33684,7 +35927,7 @@
             "nullable": true
           },
           "team2GameSideId": {
-            "maximum": 2147483647,
+            "maximum": 32767,
             "minimum": 1,
             "type": "integer",
             "description": "Team2 games side id",
@@ -33734,14 +35977,6 @@
               "format": "int32"
             },
             "description": "Team2 StandIns(playerId)",
-            "nullable": true
-          },
-          "pointsPerKill": {
-            "maximum": 32767,
-            "minimum": 0,
-            "type": "integer",
-            "description": "Br points per kill",
-            "format": "int32",
             "nullable": true
           }
         },
@@ -33942,7 +36177,6 @@
           "isFeatured",
           "isInGame",
           "siteSectionIds",
-          "startTime",
           "title",
           "vodId"
         ],
@@ -33982,10 +36216,11 @@
           },
           "startTime": {
             "maximum": 2147483647,
-            "minimum": 1,
+            "minimum": 0,
             "type": "integer",
             "description": "Start time",
-            "format": "int32"
+            "format": "int32",
+            "nullable": true
           },
           "description": {
             "maxLength": 255,
@@ -34890,6 +37125,12 @@
             "type": "integer",
             "description": "Replace by RegistrationId",
             "format": "int32"
+          },
+          "replacedDateTime": {
+            "minimum": 1,
+            "type": "integer",
+            "description": "Replaced date time",
+            "format": "int64"
           }
         },
         "additionalProperties": false
@@ -35030,14 +37271,21 @@
         "additionalProperties": false
       },
       "ModRoundReq": {
+        "required": [
+          "gamesPerMatch",
+          "name",
+          "number"
+        ],
         "type": "object",
         "properties": {
+          "roundType": {
+            "$ref": "#/components/schemas/EnumRoundType"
+          },
           "name": {
             "maxLength": 50,
             "minLength": 0,
             "type": "string",
-            "description": "Round Name",
-            "nullable": true
+            "description": "Round Name"
           },
           "number": {
             "maximum": 32767,
@@ -35111,9 +37359,14 @@
         "additionalProperties": false
       },
       "ModRoundSetsReq": {
+        "required": [
+          "matchGameId"
+        ],
         "type": "object",
         "properties": {
           "matchGameId": {
+            "maximum": 2147483647,
+            "minimum": 1,
             "type": "integer",
             "format": "int32"
           },
@@ -35153,6 +37406,42 @@
           },
           "data": {
             "$ref": "#/components/schemas/ModRoundSetsResp"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ModServerReq": {
+        "required": [
+          "gameId",
+          "id",
+          "isFrozen",
+          "name"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "maximum": 2147483647,
+            "minimum": 1,
+            "type": "integer",
+            "description": "Server Id",
+            "format": "int32"
+          },
+          "name": {
+            "maxLength": 50,
+            "minLength": 0,
+            "type": "string",
+            "description": "Server Name"
+          },
+          "isFrozen": {
+            "type": "boolean",
+            "description": "Is Frozen"
+          },
+          "gameId": {
+            "maximum": 32767,
+            "minimum": 1,
+            "type": "integer",
+            "description": "Game Id",
+            "format": "int32"
           }
         },
         "additionalProperties": false
@@ -36309,6 +38598,7 @@
           "gameUrlSafeName",
           "hasSponsor",
           "hasVenue",
+          "isHidden",
           "name",
           "parentId",
           "startingAt",
@@ -36380,6 +38670,10 @@
           "hasVenue": {
             "type": "boolean",
             "description": "Has venue"
+          },
+          "isHidden": {
+            "type": "boolean",
+            "description": "Is hidden"
           }
         },
         "additionalProperties": false
@@ -36512,6 +38806,36 @@
               "$ref": "#/components/schemas/Option"
             },
             "description": "Quick poll options"
+          }
+        },
+        "additionalProperties": false
+      },
+      "RestartTournamentResp": {
+        "type": "object",
+        "additionalProperties": false
+      },
+      "RestartTournamentRespApiRespBase": {
+        "required": [
+          "msg",
+          "ret",
+          "traceId"
+        ],
+        "type": "object",
+        "properties": {
+          "ret": {
+            "$ref": "#/components/schemas/EnumRet"
+          },
+          "msg": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "traceId": {
+            "minLength": 1,
+            "type": "string",
+            "readOnly": true
+          },
+          "data": {
+            "$ref": "#/components/schemas/RestartTournamentResp"
           }
         },
         "additionalProperties": false
@@ -36661,6 +38985,68 @@
             "type": "integer",
             "description": "Points",
             "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "SeoMetaDataOption": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "lengthLimit": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "SeoMetaDataOptionListApiRespBase": {
+        "required": [
+          "msg",
+          "ret",
+          "traceId"
+        ],
+        "type": "object",
+        "properties": {
+          "ret": {
+            "$ref": "#/components/schemas/EnumRet"
+          },
+          "msg": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "traceId": {
+            "minLength": 1,
+            "type": "string",
+            "readOnly": true
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SeoMetaDataOption"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "SeoMetadata": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "content": {
+            "type": "string",
+            "nullable": true
           }
         },
         "additionalProperties": false
@@ -36910,6 +39296,72 @@
         },
         "additionalProperties": false
       },
+      "TournamentViewership": {
+        "type": "object",
+        "properties": {
+          "rowId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "tournament": {
+            "type": "string",
+            "nullable": true
+          },
+          "game": {
+            "type": "string",
+            "nullable": true
+          },
+          "creator": {
+            "type": "string",
+            "nullable": true
+          },
+          "created": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "articles": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "articlesViews": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "tournamentViews": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "matches": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "matchViews": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "vods": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "vodViews": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "totalViews": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "tournamentUrl": {
+            "type": "string",
+            "nullable": true
+          },
+          "userUrl": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
       "Translation": {
         "required": [
           "locale",
@@ -37127,6 +39579,66 @@
         },
         "additionalProperties": false
       },
+      "UpdateRoundsResp": {
+        "type": "object",
+        "additionalProperties": false
+      },
+      "UpdateRoundsRespApiRespBase": {
+        "required": [
+          "msg",
+          "ret",
+          "traceId"
+        ],
+        "type": "object",
+        "properties": {
+          "ret": {
+            "$ref": "#/components/schemas/EnumRet"
+          },
+          "msg": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "traceId": {
+            "minLength": 1,
+            "type": "string",
+            "readOnly": true
+          },
+          "data": {
+            "$ref": "#/components/schemas/UpdateRoundsResp"
+          }
+        },
+        "additionalProperties": false
+      },
+      "UpdateStreamResp": {
+        "type": "object",
+        "additionalProperties": false
+      },
+      "UpdateStreamRespApiRespBase": {
+        "required": [
+          "msg",
+          "ret",
+          "traceId"
+        ],
+        "type": "object",
+        "properties": {
+          "ret": {
+            "$ref": "#/components/schemas/EnumRet"
+          },
+          "msg": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "traceId": {
+            "minLength": 1,
+            "type": "string",
+            "readOnly": true
+          },
+          "data": {
+            "$ref": "#/components/schemas/UpdateStreamResp"
+          }
+        },
+        "additionalProperties": false
+      },
       "UserProfile": {
         "required": [
           "userName"
@@ -37142,6 +39654,77 @@
             "type": "string",
             "description": "Avatar image",
             "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "Viewership": {
+        "required": [
+          "articleUrl",
+          "author",
+          "authorUrl",
+          "created",
+          "proofreader",
+          "proofreaderUrl",
+          "qp",
+          "rowId",
+          "sections",
+          "timeSpent",
+          "title",
+          "views"
+        ],
+        "type": "object",
+        "properties": {
+          "rowId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "title": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "sections": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "readOnly": true
+          },
+          "author": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "proofreader": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "created": {
+            "type": "integer",
+            "format": "int64",
+            "readOnly": true
+          },
+          "views": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "timeSpent": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "qp": {
+            "type": "boolean"
+          },
+          "articleUrl": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "authorUrl": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "proofreaderUrl": {
+            "minLength": 1,
+            "type": "string"
           }
         },
         "additionalProperties": false
