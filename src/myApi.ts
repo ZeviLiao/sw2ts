@@ -173,6 +173,174 @@ export interface AddChildTeamRegistrationsReq {
   registrations: ChildTeamRegistration[];
 }
 
+export interface AddCountryResp {
+  /**
+   * Country id
+   * @format int32
+   */
+  countryId: number;
+}
+
+export interface AddCountryRespApiRespBase {
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
+  data?: AddCountryResp;
+}
+
+export interface AddEventBoxReq {
+  /**
+   * Event page id
+   * @format int32
+   * @min 1
+   * @max 2147483647
+   */
+  eventPageId: number;
+  type: EnumEventBoxType;
+  /**
+   * Style
+   * @format int32
+   * @min 1
+   * @max 127
+   */
+  style: number;
+  /**
+   * Position
+   * @format int32
+   * @min 1
+   * @max 127
+   */
+  position: number;
+  /**
+   * Content
+   * @minLength 0
+   * @maxLength 20000
+   */
+  content: string;
+}
+
+export type AddEventBoxResp = object;
+
+export interface AddEventBoxRespApiRespBase {
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
+  data?: AddEventBoxResp;
+}
+
+export interface AddEventPageReq {
+  /**
+   * Event id
+   * @format int32
+   * @min 1
+   * @max 2147483647
+   */
+  eventId: number;
+  /**
+   * Page no
+   * @format int32
+   * @min 1
+   * @max 32767
+   */
+  number: number;
+  /**
+   * Page name
+   * @minLength 0
+   * @maxLength 60
+   */
+  name: string;
+}
+
+export type AddEventPageResp = object;
+
+export interface AddEventPageRespApiRespBase {
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
+  data?: AddEventPageResp;
+}
+
+export interface AddEventReq {
+  /**
+   * Event name
+   * @minLength 0
+   * @maxLength 80
+   */
+  name: string;
+  /**
+   * Organizer ids
+   * @maxItems 20
+   * @minItems 1
+   */
+  organizerIds: number[];
+  /**
+   * Description
+   * @minLength 0
+   * @maxLength 10000
+   */
+  description: string;
+  /** Is hidden */
+  isHidden: boolean;
+  /**
+   * Starting at
+   * @format int64
+   * @min 1
+   */
+  startingAt: number;
+  /**
+   * Ending at
+   * @format int64
+   * @min 1
+   */
+  endingAt: number;
+  /**
+   * Frontend id
+   * 0 : ALL
+   * @format int32
+   * @min 0
+   * @max 32767
+   */
+  frontendId: number;
+  /** Is Lan */
+  isLan: boolean;
+  /**
+   * City
+   * @minLength 0
+   * @maxLength 100
+   */
+  city?: string | null;
+  /**
+   * Country id
+   * @format int32
+   * @min 1
+   * @max 32767
+   */
+  countryId?: number | null;
+  /**
+   * Games
+   * @maxItems 20
+   * @minItems 1
+   */
+  games: number[];
+}
+
+export type AddEventResp = object;
+
+export interface AddEventRespApiRespBase {
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
+  data?: AddEventResp;
+}
+
 export type AddFileResp = object;
 
 export interface AddFileRespApiRespBase {
@@ -200,20 +368,120 @@ export interface AddFolderRespApiRespBase {
   data?: AddFolderResp;
 }
 
-export interface AddFrontendSiteSectionsReq {
-  /** New site sections */
-  newSiteSections?: FrontendSiteSection[] | null;
+export interface AddFrontendMenuReq {
+  /**
+   * @format int32
+   * @min 1
+   * @max 32767
+   */
+  frontendId: number;
+  platform: EnumMenuPlatform;
+  /**
+   * @minLength 0
+   * @maxLength 40
+   */
+  name: string;
+  /**
+   * @format int32
+   * @min 1
+   * @max 32767
+   */
+  siteSectionId?: number | null;
+  /**
+   * @format int32
+   * @min 0
+   * @max 32767
+   */
+  parentId: number;
+  state: EnumState;
+  isUseCustomUrl: boolean;
+  /**
+   * @minLength 0
+   * @maxLength 255
+   */
+  customUrl?: string | null;
 }
 
-export type AddFrontendSiteSectionsResp = object;
+export type AddFrontendMenuResp = object;
 
-export interface AddFrontendSiteSectionsRespApiRespBase {
+export interface AddFrontendMenuRespApiRespBase {
   ret: EnumRet;
   /** @minLength 1 */
   msg: string;
   /** @minLength 1 */
   traceId: string;
-  data?: AddFrontendSiteSectionsResp;
+  data?: AddFrontendMenuResp;
+}
+
+export interface AddFrontendReq {
+  /**
+   * @minLength 0
+   * @maxLength 50
+   */
+  name: string;
+  /**
+   * @minLength 0
+   * @maxLength 5
+   */
+  shortName: string;
+  /**
+   * @minLength 0
+   * @maxLength 255
+   */
+  url: string;
+  /**
+   * @minLength 0
+   * @maxLength 100
+   */
+  emailDomain: string;
+  /**
+   * @format int32
+   * @min 1
+   * @max 32767
+   */
+  localeId: number;
+  isHidden?: boolean;
+  /**
+   * @format int32
+   * @min 1
+   * @max 2147483647
+   */
+  aboutPageId?: number | null;
+  /**
+   * @format int32
+   * @min 1
+   * @max 2147483647
+   */
+  jobsPageId?: number | null;
+  /**
+   * @format int32
+   * @min 1
+   * @max 2147483647
+   */
+  privacyPageId?: number | null;
+  /**
+   * @format int32
+   * @min 1
+   * @max 2147483647
+   */
+  supportPageId?: number | null;
+  /**
+   * @format int32
+   * @min 1
+   * @max 2147483647
+   */
+  termsPageId?: number | null;
+}
+
+export type AddFrontendResp = object;
+
+export interface AddFrontendRespApiRespBase {
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
+  data?: AddFrontendResp;
 }
 
 export interface AddFuncResp {
@@ -364,6 +632,13 @@ export interface AddMatchReq {
    * @max 2147483647
    */
   roundId?: number;
+  /**
+   * multiple matches number
+   * @format int32
+   * @min 1
+   * @max 100
+   */
+  multipleNumber?: number;
 }
 
 export type AddMatchResp = object;
@@ -866,6 +1141,21 @@ export interface AddSideRespApiRespBase {
   data?: AddSideResp;
 }
 
+export interface AddSiteSectionsReq {
+  /**
+   * @format int32
+   * @min 1
+   * @max 32767
+   */
+  gameId?: number | null;
+  /**
+   * @minLength 1
+   * @maxLength 40
+   */
+  name: string;
+  hidden: boolean;
+}
+
 export interface AddSiteSectionsResp {
   /**
    * Site section id
@@ -967,6 +1257,21 @@ export interface AddVenueRespApiRespBase {
   data?: AddVenueResp;
 }
 
+export interface AdjustBoxesReq {
+  boxes: BoxPosition[];
+}
+
+export type AdjustBoxesResp = object;
+
+export interface AdjustBoxesRespApiRespBase {
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
+  data?: AdjustBoxesResp;
+}
+
 export interface ApiLogDetail {
   /**
    * Id
@@ -1045,6 +1350,13 @@ export interface ApiLogDetail {
    * @format int64
    */
   recordedAt: number;
+  /**
+   * Updated user id
+   * @format int32
+   */
+  updatedUserId?: number | null;
+  /** Updated user name */
+  updatedUserName?: string | null;
 }
 
 export interface ApiLogListItem {
@@ -1113,6 +1425,13 @@ export interface ApiLogListItem {
    * @format int64
    */
   recordedAt: number;
+  /**
+   * Updated user id
+   * @format int32
+   */
+  updatedUserId?: number | null;
+  /** Updated user name */
+  updatedUserName?: string | null;
 }
 
 export interface ApiRespBase {
@@ -1308,6 +1627,21 @@ export interface AssignRoleRespApiRespBase {
   data?: AssignRoleResp;
 }
 
+export interface BoxPosition {
+  /**
+   * @format int32
+   * @min 1
+   * @max 2147483647
+   */
+  id: number;
+  /**
+   * @format int32
+   * @min 1
+   * @max 127
+   */
+  position: number;
+}
+
 export interface BroadcastTalentCountry {
   /** @format int32 */
   id: number;
@@ -1362,6 +1696,15 @@ export interface ByteItem {
   id: number;
   /** @minLength 1 */
   name: string;
+}
+
+export interface ByteItemListApiRespBase {
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
+  data?: ByteItem[] | null;
 }
 
 export interface ChildEarningListItem {
@@ -1577,23 +1920,56 @@ export interface ChildTeamRegistration {
   playerIds?: number[] | null;
 }
 
-export interface CountryOption {
+export type ClearMatchesResp = object;
+
+export interface ClearMatchesRespApiRespBase {
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
+  data?: ClearMatchesResp;
+}
+
+export interface Country {
   /**
    * Country id
    * @format int32
    */
+  id?: number;
+  /** Country name */
+  name?: string | null;
+  /** Country code */
+  code?: string | null;
+  /** Flag image url */
+  flagImageUrl?: string | null;
+}
+
+export interface CountryOption {
+  /**
+   * Country id
+   * @format int32
+   * @min 1
+   * @max 32767
+   */
   id: number;
   /**
    * Country name
-   * @minLength 1
+   * @minLength 0
+   * @maxLength 50
    */
   name: string;
   /**
    * Country code
-   * @minLength 1
+   * @minLength 0
+   * @maxLength 2
    */
   code: string;
-  /** Flag image url */
+  /**
+   * Flag image url
+   * @minLength 0
+   * @maxLength 255
+   */
   flagImageUrl?: string | null;
 }
 
@@ -1660,7 +2036,10 @@ export interface CurrencyItem {
   id: number;
   /** @minLength 1 */
   name: string;
-  /** @minLength 1 */
+  /**
+   * @minLength 0
+   * @maxLength 30
+   */
   code: string;
 }
 
@@ -1719,6 +2098,50 @@ export interface DelChildRespApiRespBase {
   data?: DelChildResp;
 }
 
+export type DelEventBoxResp = object;
+
+export interface DelEventBoxRespApiRespBase {
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
+  data?: DelEventBoxResp;
+}
+
+export type DelEventPageResp = object;
+
+export interface DelEventPageRespApiRespBase {
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
+  data?: DelEventPageResp;
+}
+
+export type DelEventResp = object;
+
+export interface DelEventRespApiRespBase {
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
+  data?: DelEventResp;
+}
+
+export type DelFileByHashResp = object;
+
+export interface DelFileByHashRespApiRespBase {
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
+  data?: DelFileByHashResp;
+}
+
 export type DelFileResp = object;
 
 export interface DelFileRespApiRespBase {
@@ -1741,43 +2164,26 @@ export interface DelFolderRespApiRespBase {
   data?: DelFolderResp;
 }
 
-export interface DelFrontendSiteSectionReq {
-  /**
-   * Frontend id
-   * @format int32
-   * @min 1
-   * @max 32767
-   */
-  frontendId: number;
-  /**
-   * Site section id
-   * @format int32
-   * @min 1
-   * @max 32767
-   */
-  siteSectionId: number;
-}
+export type DelFrontendMenuResp = object;
 
-export interface DelFrontendSiteSectionResp {
-  /**
-   * Frontend id
-   * @format int32
-   */
-  frontendId: number;
-  /**
-   * Site section id
-   * @format int32
-   */
-  siteSectionId: number;
-}
-
-export interface DelFrontendSiteSectionRespApiRespBase {
+export interface DelFrontendMenuRespApiRespBase {
   ret: EnumRet;
   /** @minLength 1 */
   msg: string;
   /** @minLength 1 */
   traceId: string;
-  data?: DelFrontendSiteSectionResp;
+  data?: DelFrontendMenuResp;
+}
+
+export type DelFrontendResp = object;
+
+export interface DelFrontendRespApiRespBase {
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
+  data?: DelFrontendResp;
 }
 
 export interface DelFuncResp {
@@ -2257,8 +2663,8 @@ export enum EnumArticleState {
 /** @format int32 */
 export enum EnumArticleType {
   News = 1,
-  Feature = 2,
-  Guide = 3,
+  Features = 2,
+  Guides = 3,
 }
 
 /** @format int32 */
@@ -2318,6 +2724,26 @@ export enum EnumEarningPrizeStatus {
 }
 
 /** @format int32 */
+export enum EnumEventBoxType {
+  None = 0,
+  TitleBox = 1,
+  PageMenuBar = 2,
+  CKECustomBox = 3,
+  FeatureArticleBox = 4,
+  FeatureVODBox = 5,
+  ParticipantsBox = 6,
+  BracketGroupBox = 7,
+  TournamentListBox = 8,
+  SponsorShowcaseBox = 9,
+  RelatedArticlesBox = 10,
+  RelatedEventsBox = 11,
+  RelatedVideosBox = 12,
+  MainEventShowcaseBox = 13,
+  CustomBox = 14,
+  MatchTickerBox = 15,
+}
+
+/** @format int32 */
 export enum EnumFieldSort {
   Asc = 0,
   Desc = 1,
@@ -2352,9 +2778,22 @@ export enum EnumGender {
 }
 
 /** @format int32 */
+export enum EnumGridStateOption {
+  WithGirdLinked = 1,
+  WithoutGridLinked = 2,
+}
+
+/** @format int32 */
 export enum EnumMapSelection {
   Specified = 0,
   UserSelected = 1,
+}
+
+/** @format int32 */
+export enum EnumMenuPlatform {
+  Web = 1,
+  MobileWeb = 2,
+  MobileApp = 3,
 }
 
 /** @format int32 */
@@ -2406,6 +2845,7 @@ export enum EnumRet {
   PermissionDenied = 10002,
   InvalidAuthorizationToken = 10003,
   AuthorizationTokenExpired = 10004,
+  InvalidApiKey = 10005,
   InvalidParamsErrorStart = 20000,
   InvalidParams = 20001,
   NameRepeated = 20002,
@@ -2485,10 +2925,33 @@ export enum EnumRoundType {
 }
 
 /** @format int32 */
+export enum EnumSorting {
+  CreatedAtASC = 1,
+  CreatedAtDESC = 2,
+  UpdatedAtASC = 3,
+  UpdatedAtDESC = 4,
+  ViewsASC = 5,
+  ViewsDESC = 6,
+}
+
+/** @format int32 */
 export enum EnumState {
   Disabled = 0,
   Enabled = 1,
   Deleted = 2,
+}
+
+/** @format int32 */
+export enum EnumTeamSortOption {
+  RankingAsc = 1,
+  RankingDesc = 2,
+}
+
+/** @format int32 */
+export enum EnumTournamentRelatedType {
+  Article = 1,
+  Sponsor = 2,
+  Video = 3,
 }
 
 /** @format int32 */
@@ -2497,6 +2960,44 @@ export enum EnumTournamentStatus {
   Live = 1,
   Canceled = 2,
   Completed = 3,
+}
+
+export interface EventPage {
+  /**
+   * Event Page Id
+   * @format int32
+   */
+  id: number;
+  /**
+   * Event page name
+   * @minLength 1
+   */
+  name: string;
+  /**
+   * Event page UrlSafeName
+   * @minLength 1
+   */
+  urlSafeName: string;
+  /**
+   * Event page number
+   * @format int32
+   */
+  number: number;
+  /** Event page boxes */
+  boxes?: EventPageBox[] | null;
+}
+
+export interface EventPageBox {
+  /**
+   * Event page box id
+   * @format int32
+   */
+  id: number;
+  type: EnumEventBoxType;
+  /** @format int32 */
+  style: number;
+  /** @format int32 */
+  position: number;
 }
 
 export interface FolderDetail {
@@ -2514,49 +3015,44 @@ export interface FolderDetail {
   path: string;
 }
 
-export interface FrontendSiteSection {
-  /**
-   * Frontend id
-   * @format int32
-   * @min 1
-   * @max 32767
-   */
-  frontendId?: number;
-  /**
-   * Site section id
-   * @format int32
-   * @min 1
-   * @max 32767
-   */
-  siteSectionId?: number;
-  state?: EnumState;
-  /**
-   * Position
-   * @format int32
-   * @min 1
-   * @max 32767
-   */
-  position?: number;
+export interface FrontendBasicInfo {
+  /** @minLength 1 */
+  name: string;
+  /** @minLength 1 */
+  shortName: string;
+  /** @minLength 1 */
+  url: string;
+  /** @minLength 1 */
+  emailDomain: string;
+  /** @format int32 */
+  localeId: number;
+  /** @minLength 1 */
+  localeName: string;
+  isHidden: boolean;
+  /** @format int32 */
+  aboutPageId?: number | null;
+  aboutPageTitle?: string | null;
+  /** @format int32 */
+  jobsPageId?: number | null;
+  jobsPageTitle?: string | null;
+  /** @format int32 */
+  privacyPageId?: number | null;
+  privacyPageTitle?: string | null;
+  /** @format int32 */
+  supportPageId?: number | null;
+  supportPageTitle?: string | null;
+  /** @format int32 */
+  termsPageId?: number | null;
+  termsPageTitle?: string | null;
 }
 
-export interface FrontendSiteSectionListItem {
-  /**
-   * Frontend id
-   * @format int32
-   */
-  frontendId: number;
-  /**
-   * Site section id
-   * @format int32
-   */
-  siteSectionId: number;
-  /**
-   * Site section name
-   * @minLength 1
-   */
-  name: string;
-  /** Game name */
-  gameName?: string | null;
+export interface FrontendGoogleSetting {
+  appEnv?: string | null;
+  recaptcha?: Recaptcha;
+  googleAdSense?: GoogleAdSense;
+  googleAdManager?: GoogleAdManager;
+  googleAnalytics?: GoogleAnalytics;
+  googleTagManager?: GoogleTagManager;
 }
 
 export interface FuncItem {
@@ -2618,6 +3114,28 @@ export interface FuzzyFolderDetail {
   path: string;
 }
 
+export interface GameBasicInfo {
+  /**
+   * Game Id
+   * @format int32
+   * @min 1
+   * @max 32767
+   */
+  id: number;
+  /**
+   * Game Name
+   * @minLength 0
+   * @maxLength 20
+   */
+  name: string;
+  /**
+   * Game UrlSafeName
+   * @minLength 0
+   * @maxLength 20
+   */
+  urlSafeName: string;
+}
+
 export interface GameListItem {
   /**
    * Game id
@@ -2652,6 +3170,18 @@ export interface GameListItem {
    * @minLength 1
    */
   iconImageUrl: string;
+  /** Is off season */
+  isOffSeason: boolean;
+  /**
+   * Off season start at
+   * @format int64
+   */
+  offSeasonStartAt?: number | null;
+  /**
+   * Off season end at
+   * @format int64
+   */
+  offSeasonEndAt?: number | null;
   /** Translation */
   translations: Translation[];
 }
@@ -2740,11 +3270,55 @@ export interface GameResultRoundSet {
   team2Score?: number;
 }
 
+export interface GeTournamentRelatedResp {
+  /** Tournament related data */
+  relatedData: Int32Item[];
+}
+
+export interface GeTournamentRelatedRespApiRespBase {
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
+  data?: GeTournamentRelatedResp;
+}
+
 export interface GenderOption {
   /** @format int32 */
   id: number;
   /** @minLength 1 */
   name: string;
+}
+
+export interface GetAccountResp {
+  /**
+   * User Id
+   * @format int32
+   */
+  id: number;
+  username?: string | null;
+  firstName?: string | null;
+  lastName?: string | null;
+  /** @minLength 1 */
+  email: string;
+  gender?: EnumGender;
+  /** @format int32 */
+  countryId?: number | null;
+  countryName?: string | null;
+  city?: string | null;
+  /** @format date */
+  dateOfBirth?: string | null;
+  aboutMe?: string | null;
+}
+
+export interface GetAccountRespApiRespBase {
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
+  data?: GetAccountResp;
 }
 
 export interface GetApiLogResp {
@@ -3360,6 +3934,35 @@ export interface GetChildMediaItemsRespApiRespBase {
   data?: GetChildMediaItemsResp;
 }
 
+export interface GetChildStageInfoResp {
+  /**
+   * Child tournament id
+   * @format int32
+   */
+  childId?: number;
+  /**
+   * Parent tournament id
+   * @format int32
+   */
+  parentId?: number;
+  /**
+   * Current stage id
+   * @format int32
+   */
+  currentStageId?: number;
+  /** Stages options */
+  stages: Int32Item[];
+}
+
+export interface GetChildStageInfoRespApiRespBase {
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
+  data?: GetChildStageInfoResp;
+}
+
 export interface GetChildTeamRegistrationResp {
   /**
    * Parent id
@@ -3538,6 +4141,21 @@ export interface GetContactTypesRespApiRespBase {
   data?: GetContactTypesResp;
 }
 
+export interface GetCountriesResp {
+  /** Countries */
+  countries: Country[];
+  paging: PagingRespBase;
+}
+
+export interface GetCountriesRespApiRespBase {
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
+  data?: GetCountriesResp;
+}
+
 export interface GetCountryOptionsResp {
   /** Countries */
   countries: CountryOption[];
@@ -3550,6 +4168,19 @@ export interface GetCountryOptionsRespApiRespBase {
   /** @minLength 1 */
   traceId: string;
   data?: GetCountryOptionsResp;
+}
+
+export interface GetCountryResp {
+  country: Country;
+}
+
+export interface GetCountryRespApiRespBase {
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
+  data?: GetCountryResp;
 }
 
 export interface GetCrewFilesResp {
@@ -3689,6 +4320,217 @@ export interface GetEarningsStsRespListApiRespBase {
   data?: GetEarningsStsResp[] | null;
 }
 
+export interface GetEventBoxResp {
+  /**
+   * Event box Id
+   * @format int32
+   */
+  id: number;
+  /** @format int32 */
+  eventPageId: number;
+  type: EnumEventBoxType;
+  /** @format int32 */
+  style: number;
+  /** @format int32 */
+  position: number;
+  /** @minLength 1 */
+  content: string;
+}
+
+export interface GetEventBoxRespApiRespBase {
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
+  data?: GetEventBoxResp;
+}
+
+export interface GetEventPagesResp {
+  /**
+   * Event Id
+   * @format int32
+   */
+  id: number;
+  /**
+   * Event Name
+   * @minLength 1
+   */
+  name: string;
+  /**
+   * Event UrlSafeName
+   * @minLength 1
+   */
+  urlSafeName: string;
+  /** @minLength 1 */
+  frontendUrl: string;
+  /** Event pages */
+  pages?: EventPage[] | null;
+}
+
+export interface GetEventPagesRespApiRespBase {
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
+  data?: GetEventPagesResp;
+}
+
+export interface GetEventResp {
+  /**
+   * Event id
+   * @format int32
+   */
+  id: number;
+  /**
+   * Event name
+   * @minLength 1
+   */
+  name: string;
+  /** Organizers */
+  organizers: Int16Item[];
+  /**
+   * Description
+   * @minLength 1
+   */
+  description: string;
+  /** Is hidden */
+  isHidden: boolean;
+  /**
+   * Starting at
+   * @format int64
+   */
+  startingAt: number;
+  /**
+   * Ending at
+   * @format int64
+   */
+  endingAt: number;
+  /**
+   * Frontend id
+   * @format int32
+   */
+  frontendId: number;
+  /** Is lan */
+  isLan: boolean;
+  /** City */
+  city?: string | null;
+  /**
+   * Country id
+   * @format int32
+   */
+  countryId?: number | null;
+  /** Country name */
+  countryName?: string | null;
+  /** Games */
+  games: Int16Item[];
+}
+
+export interface GetEventRespApiRespBase {
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
+  data?: GetEventResp;
+}
+
+export interface GetEventsItem {
+  /**
+   * Event id
+   * @format int32
+   */
+  id: number;
+  /**
+   * Event name
+   * @minLength 1
+   */
+  name: string;
+  /**
+   * Event url safe name
+   * @minLength 1
+   */
+  urlSafeName: string;
+  /** Is hidden */
+  isHidden: boolean;
+  /**
+   * Starting at
+   * @format int64
+   */
+  startingAt: number;
+  /**
+   * Ending at
+   * @format int64
+   */
+  endingAt: number;
+  /**
+   * View count
+   * @format int32
+   */
+  viewCount: number;
+  /**
+   * Updated at
+   * @format int64
+   */
+  updatedAt: number;
+  /**
+   * Created at
+   * @format int64
+   */
+  createdAt: number;
+  /**
+   * Frontend id
+   * @format int32
+   */
+  frontendId: number;
+  /**
+   * Frontend short name
+   * @minLength 1
+   */
+  feShortName: string;
+  /** Game ids */
+  games?: GameBasicInfo[] | null;
+  /** Organizers */
+  organizers: string[];
+  /**
+   * Url
+   * @minLength 1
+   */
+  url: string;
+  createdBy?: string | null;
+  updatedBy?: string | null;
+}
+
+export interface GetEventsResp {
+  /** Maps */
+  events: GetEventsItem[];
+  paging: PagingRespBase;
+}
+
+export interface GetEventsRespApiRespBase {
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
+  data?: GetEventsResp;
+}
+
+export interface GetFrontendItem {
+  /** @format int32 */
+  id: number;
+  /** @minLength 1 */
+  shortName: string;
+  /** @minLength 1 */
+  name: string;
+  isHidden: boolean;
+  /** @format int32 */
+  localeId: number;
+  /** @minLength 1 */
+  localeName: string;
+}
+
 export interface GetFrontendLocaleOptionsResp {
   /** Locale options */
   localeOptions: Record<string, Int16Item[]>;
@@ -3701,6 +4543,60 @@ export interface GetFrontendLocaleOptionsRespApiRespBase {
   /** @minLength 1 */
   traceId: string;
   data?: GetFrontendLocaleOptionsResp;
+}
+
+export interface GetFrontendMenu {
+  /** @format int32 */
+  id: number;
+  /** @minLength 1 */
+  name: string;
+  /** @format int32 */
+  parentId: number;
+  /** @format int32 */
+  position: number;
+  state: EnumState;
+}
+
+export interface GetFrontendMenuDetailResp {
+  /** @format int32 */
+  id?: number;
+  name?: string | null;
+  /** @format int32 */
+  parentId?: number;
+  parentName?: string | null;
+  state?: EnumState;
+  /** @format int32 */
+  siteSectionId?: number | null;
+  siteSectionName?: string | null;
+  /** @format int32 */
+  position?: number;
+  isUseCustomUrl?: boolean;
+  customUrl?: string | null;
+}
+
+export interface GetFrontendMenuDetailRespApiRespBase {
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
+  data?: GetFrontendMenuDetailResp;
+}
+
+export interface GetFrontendMenusResp {
+  /** @format int32 */
+  frontendId: number;
+  platform: EnumMenuPlatform;
+  menuItems: GetFrontendMenu[];
+}
+
+export interface GetFrontendMenusRespApiRespBase {
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
+  data?: GetFrontendMenusResp;
 }
 
 export interface GetFrontendOptionsResp {
@@ -3717,18 +4613,37 @@ export interface GetFrontendOptionsRespApiRespBase {
   data?: GetFrontendOptionsResp;
 }
 
-export interface GetFrontendSiteSectionsResp {
-  /** Frontend site sections */
-  frontendSiteSections: FrontendSiteSectionListItem[];
+export interface GetFrontendResp {
+  /** @format int32 */
+  id: number;
+  basicInfo?: FrontendBasicInfo;
+  googleSettings?: FrontendGoogleSetting;
+  ads?: string | null;
+  robots?: string | null;
 }
 
-export interface GetFrontendSiteSectionsRespApiRespBase {
+export interface GetFrontendRespApiRespBase {
   ret: EnumRet;
   /** @minLength 1 */
   msg: string;
   /** @minLength 1 */
   traceId: string;
-  data?: GetFrontendSiteSectionsResp;
+  data?: GetFrontendResp;
+}
+
+export interface GetFrontendsResp {
+  /** Frontends */
+  frontends: GetFrontendItem[];
+  paging: PagingRespBase;
+}
+
+export interface GetFrontendsRespApiRespBase {
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
+  data?: GetFrontendsResp;
 }
 
 export interface GetFuncOptionsResp {
@@ -3837,6 +4752,20 @@ export interface GetFuncsRespApiRespBase {
   data?: GetFuncsResp;
 }
 
+export interface GetFuzzyArticlesResp {
+  /** Fuzzy articles */
+  fuzzyArticles: Int32Item[];
+}
+
+export interface GetFuzzyArticlesRespApiRespBase {
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
+  data?: GetFuzzyArticlesResp;
+}
+
 export interface GetFuzzyBroadcastTalentsResp {
   /** Fuzzy broadcast talents */
   fuzzyBroadcastTalents: Int32Item[];
@@ -3849,6 +4778,20 @@ export interface GetFuzzyBroadcastTalentsRespApiRespBase {
   /** @minLength 1 */
   traceId: string;
   data?: GetFuzzyBroadcastTalentsResp;
+}
+
+export interface GetFuzzyEventsResp {
+  /** Fuzzy events */
+  fuzzyEvents: Int32Item[];
+}
+
+export interface GetFuzzyEventsRespApiRespBase {
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
+  data?: GetFuzzyEventsResp;
 }
 
 export interface GetFuzzyFoldersResp {
@@ -4351,32 +5294,6 @@ export interface GetGenderOptionsRespApiRespBase {
   data?: GetGenderOptionsResp;
 }
 
-export interface GetGgCodeInfoResp {
-  /** @minLength 1 */
-  type: string;
-  /** @minLength 1 */
-  version: string;
-  /** @minLength 1 */
-  providerName: string;
-  /** @minLength 1 */
-  providerUrl: string;
-  /** @format int32 */
-  width: number;
-  /** @format int32 */
-  height: number;
-  /** @minLength 1 */
-  html: string;
-}
-
-export interface GetGgCodeInfoRespApiRespBase {
-  ret: EnumRet;
-  /** @minLength 1 */
-  msg: string;
-  /** @minLength 1 */
-  traceId: string;
-  data?: GetGgCodeInfoResp;
-}
-
 export interface GetGridMatchesResp {
   /** @format int32 */
   id: number;
@@ -4401,6 +5318,34 @@ export interface GetGridMatchesRespListApiRespBase {
   /** @minLength 1 */
   traceId: string;
   data?: GetGridMatchesResp[] | null;
+}
+
+export interface GetGridPlayersResp {
+  /** Grid Players */
+  players: StringItem[];
+}
+
+export interface GetGridPlayersRespApiRespBase {
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
+  data?: GetGridPlayersResp;
+}
+
+export interface GetGridTeamsResp {
+  /** teams */
+  teams: GridTeam[];
+}
+
+export interface GetGridTeamsRespApiRespBase {
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
+  data?: GetGridTeamsResp;
 }
 
 export interface GetGridTournamentsResp {
@@ -4563,6 +5508,8 @@ export interface GetHeroResp {
   description: string;
   /** Icon file name */
   iconFileName?: string | null;
+  /** Mobile Icon file name */
+  mobileIconFileName?: string | null;
 }
 
 export interface GetHeroRespApiRespBase {
@@ -5804,6 +6751,8 @@ export interface GetPlayerResp {
   twitter?: string | null;
   /** Youtube */
   youtube?: string | null;
+  /** Grid Player Id */
+  gridId?: string | null;
 }
 
 export interface GetPlayerRespApiRespBase {
@@ -5871,6 +6820,10 @@ export interface GetPlayersDetail {
    * @minLength 1
    */
   url: string;
+  /** Grid id */
+  gridId?: string | null;
+  /** With grid linked */
+  withGridLinked: boolean;
 }
 
 export interface GetPlayersResp {
@@ -5968,6 +6921,22 @@ export interface GetPrizePoolStatusOptionsRespApiRespBase {
   /** @minLength 1 */
   traceId: string;
   data?: GetPrizePoolStatusOptionsResp;
+}
+
+export interface GetRegisteredPlayersResp {
+  /** Team1 current players on the team */
+  team1Lineup?: Int32Item[] | null;
+  /** Team2 current players on the team */
+  team2Lineup?: Int32Item[] | null;
+}
+
+export interface GetRegisteredPlayersRespApiRespBase {
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
+  data?: GetRegisteredPlayersResp;
 }
 
 export interface GetReplaceOpponentsResp {
@@ -6102,6 +7071,21 @@ export interface GetRoundResp {
   id: number;
   pointsAwarded?: EnumPointsAwarded;
   /**
+   * Parent tournament name
+   * @minLength 1
+   */
+  parentName: string;
+  /**
+   * Stage tournament name
+   * @minLength 1
+   */
+  stageName: string;
+  /**
+   * Child tournament name
+   * @minLength 1
+   */
+  childName: string;
+  /**
    * Round name
    * @minLength 1
    */
@@ -6226,6 +7210,7 @@ export interface GetRoundsResp {
    * @minLength 1
    */
   childTournamentName: string;
+  tournamentType: EnumChildTournament;
   /** Rounds */
   rounds: GetRoundsItem[];
 }
@@ -6540,6 +7525,8 @@ export interface GetSponsorResp {
   name: string;
   /** Image file name */
   imageFileName?: string | null;
+  /** Small logo image */
+  smallLogoImg?: string | null;
   /**
    * Description
    * @minLength 1
@@ -6974,6 +7961,8 @@ export interface GetTeamResp {
   twitter?: string | null;
   /** Youtube */
   youtube?: string | null;
+  /** Grid Team Id */
+  gridId?: string | null;
 }
 
 export interface GetTeamRespApiRespBase {
@@ -7049,6 +8038,15 @@ export interface GetTeamsDetail {
    * @minLength 1
    */
   url: string;
+  /**
+   * Global ranking
+   * @format int32
+   */
+  globalRanking?: number | null;
+  /** Grid id */
+  gridId?: string | null;
+  /** With grid linked */
+  withGridLinked: boolean;
 }
 
 export interface GetTeamsResp {
@@ -7426,6 +8424,36 @@ export interface GetViewershipSummaryRespApiRespBase {
   data?: GetViewershipSummaryResp;
 }
 
+export interface GoogleAdManager {
+  enabled?: boolean;
+  /** @format int64 */
+  networkCode?: number;
+}
+
+export interface GoogleAdSense {
+  enabled?: boolean;
+  publisherId?: string | null;
+}
+
+export interface GoogleAnalytics {
+  reportingTimeZone?: string | null;
+}
+
+export interface GoogleTagManager {
+  id?: string | null;
+  enabled?: boolean;
+  queryParams?: QueryParams;
+}
+
+export interface GridTeam {
+  /** @minLength 1 */
+  id: string;
+  /** @minLength 1 */
+  name: string;
+  /** @minLength 1 */
+  logoUrl: string;
+}
+
 export interface GroupListItem {
   /**
    * Group id
@@ -7562,11 +8590,14 @@ export interface LanguageOption {
   /**
    * Language id
    * @format int32
+   * @min 1
+   * @max 32767
    */
   id: number;
   /**
    * Language name
-   * @minLength 1
+   * @minLength 0
+   * @maxLength 100
    */
   name: string;
 }
@@ -7603,15 +8634,17 @@ export interface MatchGameItem {
 
 export interface MatchGameResult {
   /** @format int32 */
-  gameId?: number;
+  gameId: number;
   /** @format int32 */
-  matchId?: number;
+  matchId: number;
   /** @format int32 */
-  roundId?: number;
+  roundId: number;
   /** @format int32 */
-  parentId?: number;
+  parentId: number;
   /** @format int32 */
-  childId?: number;
+  childId: number;
+  tournamentType: EnumChildTournament;
+  isPlayerBased: boolean;
   opponent1?: string | null;
   opponent2?: string | null;
   result?: string | null;
@@ -7779,6 +8812,27 @@ export interface MenuItem {
   url?: string | null;
   /** Sub Menus */
   subMenus: MenuItem[];
+}
+
+export interface ModAccountReq {
+  firstName?: string | null;
+  lastName?: string | null;
+  gender?: EnumGender;
+  city?: string | null;
+  /** @format int32 */
+  countryId?: number | null;
+  aboutMe?: string | null;
+}
+
+export type ModAccountResp = object;
+
+export interface ModAccountRespApiRespBase {
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
+  data?: ModAccountResp;
 }
 
 export type ModArticleResp = object;
@@ -8040,6 +9094,148 @@ export interface ModChildTeamRegistrationReq {
   playerIds?: number[] | null;
 }
 
+export interface ModEventBoxReq {
+  /**
+   * Box Id
+   * @format int32
+   * @min 1
+   * @max 2147483647
+   */
+  id: number;
+  /**
+   * Position
+   * @format int32
+   * @min 1
+   * @max 127
+   */
+  position: number;
+  /**
+   * Content
+   * @minLength 0
+   * @maxLength 20000
+   */
+  content: string;
+}
+
+export type ModEventBoxResp = object;
+
+export interface ModEventBoxRespApiRespBase {
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
+  data?: ModEventBoxResp;
+}
+
+export interface ModEventPageReq {
+  /**
+   * Event page id
+   * @format int32
+   * @min 1
+   * @max 2147483647
+   */
+  id: number;
+  /**
+   * Event page name
+   * @minLength 0
+   * @maxLength 60
+   */
+  name: string;
+}
+
+export type ModEventPageResp = object;
+
+export interface ModEventPageRespApiRespBase {
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
+  data?: ModEventPageResp;
+}
+
+export interface ModEventReq {
+  /**
+   * Event id
+   * @format int32
+   * @min 1
+   * @max 2147483647
+   */
+  id: number;
+  /**
+   * Event name
+   * @minLength 0
+   * @maxLength 80
+   */
+  name: string;
+  /**
+   * Organizer ids
+   * @maxItems 20
+   * @minItems 1
+   */
+  organizerIds: number[];
+  /**
+   * Description
+   * @minLength 0
+   * @maxLength 10000
+   */
+  description: string;
+  /** Is hidden */
+  isHidden: boolean;
+  /**
+   * Starting at
+   * @format int64
+   * @min 1
+   */
+  startingAt: number;
+  /**
+   * Ending at
+   * @format int64
+   * @min 1
+   */
+  endingAt: number;
+  /**
+   * Frontend id
+   * @format int32
+   * @min 0
+   * @max 32767
+   */
+  frontendId: number;
+  /** Is lan */
+  isLan: boolean;
+  /**
+   * City
+   * @minLength 0
+   * @maxLength 100
+   */
+  city?: string | null;
+  /**
+   * Country id
+   * @format int32
+   * @min 1
+   * @max 32767
+   */
+  countryId?: number | null;
+  /**
+   * Game ids
+   * @maxItems 20
+   * @minItems 1
+   */
+  games: number[];
+}
+
+export type ModEventResp = object;
+
+export interface ModEventRespApiRespBase {
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
+  data?: ModEventResp;
+}
+
 export interface ModFileResp {
   /** @format int32 */
   fileId: number;
@@ -8074,43 +9270,253 @@ export interface ModFolderRespApiRespBase {
   data?: ModFolderResp;
 }
 
-export interface ModFrontendSiteSectionReq {
+export interface ModFrontendAdsReq {
   /**
-   * Frontend id
    * @format int32
    * @min 1
    * @max 32767
    */
-  frontendId: number;
+  id: number;
   /**
-   * Site section id
-   * @format int32
-   * @min 1
-   * @max 32767
+   * @minLength 0
+   * @maxLength 25000
    */
-  siteSectionId: number;
+  ads?: string | null;
 }
 
-export interface ModFrontendSiteSectionResp {
-  /**
-   * Frontend id
-   * @format int32
-   */
-  frontendId: number;
-  /**
-   * Site section id
-   * @format int32
-   */
-  siteSectionId: number;
-}
+export type ModFrontendAdsResp = object;
 
-export interface ModFrontendSiteSectionRespApiRespBase {
+export interface ModFrontendAdsRespApiRespBase {
   ret: EnumRet;
   /** @minLength 1 */
   msg: string;
   /** @minLength 1 */
   traceId: string;
-  data?: ModFrontendSiteSectionResp;
+  data?: ModFrontendAdsResp;
+}
+
+export interface ModFrontendBasicInfoReq {
+  /**
+   * @format int32
+   * @min 1
+   * @max 32767
+   */
+  id: number;
+  /**
+   * @minLength 0
+   * @maxLength 50
+   */
+  name: string;
+  /**
+   * @minLength 0
+   * @maxLength 5
+   */
+  shortName: string;
+  /**
+   * @minLength 0
+   * @maxLength 255
+   */
+  url: string;
+  /**
+   * @minLength 0
+   * @maxLength 100
+   */
+  emailDomain: string;
+  /**
+   * @format int32
+   * @min 1
+   * @max 32767
+   */
+  localeId: number;
+  isHidden?: boolean;
+  /**
+   * @format int32
+   * @min 1
+   * @max 2147483647
+   */
+  aboutPageId?: number | null;
+  /**
+   * @format int32
+   * @min 1
+   * @max 2147483647
+   */
+  jobsPageId?: number | null;
+  /**
+   * @format int32
+   * @min 1
+   * @max 2147483647
+   */
+  privacyPageId?: number | null;
+  /**
+   * @format int32
+   * @min 1
+   * @max 2147483647
+   */
+  supportPageId?: number | null;
+  /**
+   * @format int32
+   * @min 1
+   * @max 2147483647
+   */
+  termsPageId?: number | null;
+}
+
+export type ModFrontendBasicInfoResp = object;
+
+export interface ModFrontendBasicInfoRespApiRespBase {
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
+  data?: ModFrontendBasicInfoResp;
+}
+
+export interface ModFrontendGoogleSettingsReq {
+  /**
+   * @format int32
+   * @min 1
+   * @max 32767
+   */
+  id: number;
+  /**
+   * App environment (ex: staging, production)
+   * @minLength 0
+   * @maxLength 10
+   */
+  appEnv: string;
+  /**
+   * @minLength 0
+   * @maxLength 50
+   */
+  siteKey: string;
+  /** Google Ad sense enabled */
+  adSenseEnabled: boolean;
+  /**
+   * Google Ad sense publisherId
+   * @minLength 0
+   * @maxLength 30
+   */
+  publisherId: string;
+  /** Google Ad Manager enabled */
+  adManagerEnabled: boolean;
+  /**
+   * Google Ad Manager Network code
+   * @format int64
+   */
+  networkCode: number;
+  /**
+   * Google analytics reportingTimeZone
+   * @minLength 0
+   * @maxLength 50
+   */
+  reportingTimeZone: string;
+  /**
+   * Google tag manager id
+   * @minLength 0
+   * @maxLength 25
+   */
+  tagId: string;
+  /** Google tag manager enabled */
+  tagEnabled: boolean;
+  /**
+   * Google tag manager query params gtm auth
+   * @minLength 0
+   * @maxLength 50
+   */
+  gtmAuth: string;
+  /**
+   * Google tag manager query params gtm preview
+   * @minLength 0
+   * @maxLength 25
+   */
+  gtmPreview: string;
+  /**
+   * Google tag manager query params gtm cookies win
+   * @minLength 0
+   * @maxLength 25
+   */
+  gtmCookiesWin: string;
+}
+
+export type ModFrontendGoogleSettingsResp = object;
+
+export interface ModFrontendGoogleSettingsRespApiRespBase {
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
+  data?: ModFrontendGoogleSettingsResp;
+}
+
+export interface ModFrontendMenuReq {
+  /**
+   * @format int32
+   * @min 1
+   * @max 32767
+   */
+  id: number;
+  /**
+   * @minLength 0
+   * @maxLength 40
+   */
+  name: string;
+  /**
+   * @format int32
+   * @min 1
+   * @max 32767
+   */
+  siteSectionId?: number | null;
+  /**
+   * @format int32
+   * @min 0
+   * @max 32767
+   */
+  parentId: number;
+  state: EnumState;
+  isUseCustomUrl: boolean;
+  /**
+   * @minLength 0
+   * @maxLength 255
+   */
+  customUrl?: string | null;
+}
+
+export type ModFrontendMenuResp = object;
+
+export interface ModFrontendMenuRespApiRespBase {
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
+  data?: ModFrontendMenuResp;
+}
+
+export interface ModFrontendRobotsReq {
+  /**
+   * @format int32
+   * @min 1
+   * @max 32767
+   */
+  id: number;
+  /**
+   * @minLength 0
+   * @maxLength 2500
+   */
+  robots?: string | null;
+}
+
+export type ModFrontendRobotsResp = object;
+
+export interface ModFrontendRobotsRespApiRespBase {
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
+  data?: ModFrontendRobotsResp;
 }
 
 export interface ModFuncResp {
@@ -8179,6 +9585,19 @@ export interface ModGameDraftRespApiRespBase {
   /** @minLength 1 */
   traceId: string;
   data?: ModGameDraftResp;
+}
+
+export interface ModGameOffSeasonReq {
+  /**
+   * Start at
+   * @format int64
+   */
+  startAt: number;
+  /**
+   * End at
+   * @format int64
+   */
+  endAt: number;
 }
 
 export interface ModGameRegionReq {
@@ -8709,6 +10128,31 @@ export interface ModMediaVodRespApiRespBase {
   data?: ModMediaVodResp;
 }
 
+export interface ModMenuOptions {
+  /** @format int32 */
+  id: number;
+  state?: EnumState;
+  /** @format int32 */
+  parentId?: number | null;
+  /** @format int32 */
+  position?: number | null;
+}
+
+export interface ModMenuOptionsReq {
+  menus: ModMenuOptions[];
+}
+
+export type ModMenuOptionsResp = object;
+
+export interface ModMenuOptionsRespApiRespBase {
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
+  data?: ModMenuOptionsResp;
+}
+
 export interface ModModeReq {
   /**
    * Modes Id
@@ -9066,6 +10510,38 @@ export interface ModParentStatusRespApiRespBase {
   data?: ModParentStatusResp;
 }
 
+export interface ModPasswordReq {
+  /**
+   * Original Password
+   * @minLength 8
+   * @maxLength 72
+   */
+  originalPassword: string;
+  /**
+   * New Password
+   * @minLength 8
+   * @maxLength 72
+   */
+  newPassword: string;
+  /**
+   * New Password verify
+   * @minLength 8
+   * @maxLength 72
+   */
+  passwordVerify: string;
+}
+
+export type ModPasswordResp = object;
+
+export interface ModPasswordRespApiRespBase {
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
+  data?: ModPasswordResp;
+}
+
 export type ModPlayerResp = object;
 
 export interface ModPlayerRespApiRespBase {
@@ -9391,6 +10867,27 @@ export interface ModSideTranslationsRespApiRespBase {
   /** @minLength 1 */
   traceId: string;
   data?: ModSideTranslationsResp;
+}
+
+export interface ModSiteSectionsReq {
+  /**
+   * @format int32
+   * @min 1
+   * @max 32767
+   */
+  id: number;
+  /**
+   * @format int32
+   * @min 1
+   * @max 32767
+   */
+  gameId?: number | null;
+  /**
+   * @minLength 1
+   * @maxLength 40
+   */
+  name?: string | null;
+  hidden?: boolean | null;
 }
 
 export type ModSiteSectionsResp = object;
@@ -10068,6 +11565,12 @@ export interface PrizePoolDistributionListItem {
   playerItems: Int32Item[];
 }
 
+export interface QueryParams {
+  gtm_auth?: string | null;
+  gtm_preview?: string | null;
+  gtm_cookies_win?: string | null;
+}
+
 export type RecalculatePointsResp = object;
 
 export interface RecalculatePointsRespApiRespBase {
@@ -10077,6 +11580,10 @@ export interface RecalculatePointsRespApiRespBase {
   /** @minLength 1 */
   traceId: string;
   data?: RecalculatePointsResp;
+}
+
+export interface Recaptcha {
+  siteKey?: string | null;
 }
 
 export interface RelatedQuickPoll {
@@ -10272,6 +11779,22 @@ export interface StartTournamentRespApiRespBase {
   /** @minLength 1 */
   traceId: string;
   data?: StartTournamentResp;
+}
+
+export interface StringItem {
+  /** @minLength 1 */
+  id: string;
+  /** @minLength 1 */
+  name: string;
+}
+
+export interface StringItemListApiRespBase {
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
+  data?: StringItem[] | null;
 }
 
 export interface SystemLogDetail {
@@ -10503,6 +12026,19 @@ export interface UpdateStreamRespApiRespBase {
   /** @minLength 1 */
   traceId: string;
   data?: UpdateStreamResp;
+}
+
+export interface UploadFileResp {
+  filePath?: string | null;
+}
+
+export interface UploadFileRespApiRespBase {
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
+  data?: UploadFileResp;
 }
 
 export interface UserProfile {
@@ -10759,6 +12295,78 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     /**
      * No description
      *
+     * @tags Account
+     * @name V5AccountList
+     * @summary Get account detail
+     * @request GET:/api/v5/account
+     * @secure
+     */
+    v5AccountList: (params: RequestParams = {}) =>
+      this.request<any, GetAccountRespApiRespBase>({
+        path: `/api/v5/account`,
+        method: "GET",
+        secure: true,
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Account
+     * @name V5AccountPartialUpdate
+     * @summary Modify account
+     * @request PATCH:/api/v5/account
+     * @secure
+     */
+    v5AccountPartialUpdate: (data: ModAccountReq, params: RequestParams = {}) =>
+      this.request<any, ModAccountRespApiRespBase>({
+        path: `/api/v5/account`,
+        method: "PATCH",
+        body: data,
+        secure: true,
+        type: ContentType.Json,
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Account
+     * @name V5AccountPermissionsList
+     * @summary Get account permissions
+     * @request GET:/api/v5/account/permissions
+     * @secure
+     */
+    v5AccountPermissionsList: (params: RequestParams = {}) =>
+      this.request<any, GetUserPermissionsRespApiRespBase>({
+        path: `/api/v5/account/permissions`,
+        method: "GET",
+        secure: true,
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Account
+     * @name V5AccountPasswordPartialUpdate
+     * @summary Change password
+     * @request PATCH:/api/v5/account/password
+     * @secure
+     */
+    v5AccountPasswordPartialUpdate: (data: ModPasswordReq, params: RequestParams = {}) =>
+      this.request<any, ModPasswordRespApiRespBase>({
+        path: `/api/v5/account/password`,
+        method: "PATCH",
+        body: data,
+        secure: true,
+        type: ContentType.Json,
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
      * @tags Articles
      * @name V5ArticlesTypesList
      * @summary Get all article types and subtypes
@@ -10873,6 +12481,8 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
          * @format int64
          */
         ProofreadTo?: number;
+        /** null = not sorting ,CreatedAtASC = 1,CreatedAtDESC = 2,UpdatedAtASC = 3,UpdatedAtDESC = 4,ViewsASC = 5,ViewsDESC = 6 */
+        Sorting?: EnumSorting[];
         /**
          * @format int32
          * @min 1
@@ -11173,6 +12783,39 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       this.request<any, DelArticleRespApiRespBase>({
         path: `/api/v5/articles/${id}`,
         method: "DELETE",
+        secure: true,
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Articles
+     * @name V5ArticlesFuzzyList
+     * @summary Get fuzzy article
+     * @request GET:/api/v5/articles/fuzzy
+     * @secure
+     */
+    v5ArticlesFuzzyList: (
+      query: {
+        /**
+         * @minLength 1
+         * @maxLength 20
+         */
+        FuzzyPrefix: string;
+        /**
+         * @format int32
+         * @min 10
+         * @max 100
+         */
+        MaxCount?: number;
+      },
+      params: RequestParams = {},
+    ) =>
+      this.request<any, GetFuzzyArticlesRespApiRespBase>({
+        path: `/api/v5/articles/fuzzy`,
+        method: "GET",
+        query: query,
         secure: true,
         ...params,
       }),
@@ -11680,6 +13323,188 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     /**
      * No description
      *
+     * @tags Countries
+     * @name V5CountriesList
+     * @summary Get countries by condition
+     * @request GET:/api/v5/countries
+     * @secure
+     */
+    v5CountriesList: (
+      query?: {
+        /**
+         * Country id
+         * @format int32
+         * @min 1
+         * @max 32767
+         */
+        Id?: number;
+        /**
+         * Country name
+         * @minLength 0
+         * @maxLength 50
+         */
+        Name?: string;
+        /**
+         * Country code
+         * @minLength 0
+         * @maxLength 2
+         */
+        Code?: string;
+        /**
+         * @format int32
+         * @min 1
+         * @max 2147483647
+         */
+        PageNo?: number;
+        /**
+         * @format int32
+         * @min 1
+         * @max 100
+         */
+        PageSize?: number;
+      },
+      params: RequestParams = {},
+    ) =>
+      this.request<any, GetCountriesRespApiRespBase>({
+        path: `/api/v5/countries`,
+        method: "GET",
+        query: query,
+        secure: true,
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Countries
+     * @name V5CountriesCreate
+     * @summary Add country
+     * @request POST:/api/v5/countries
+     * @secure
+     */
+    v5CountriesCreate: (
+      data: {
+        /**
+         * Country id
+         * @format int32
+         * @min 1
+         * @max 32767
+         */
+        Id: number;
+        /**
+         * Country name
+         * @minLength 0
+         * @maxLength 50
+         */
+        Name: string;
+        /**
+         * Country code
+         * @minLength 0
+         * @maxLength 2
+         */
+        Code: string;
+        /**
+         * Flag image file
+         * @format binary
+         */
+        FlagImageFile: File;
+      },
+      params: RequestParams = {},
+    ) =>
+      this.request<any, AddCountryRespApiRespBase>({
+        path: `/api/v5/countries`,
+        method: "POST",
+        body: data,
+        secure: true,
+        type: ContentType.FormData,
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Countries
+     * @name V5CountriesDetail
+     * @summary Get country
+     * @request GET:/api/v5/countries/{id}
+     * @secure
+     */
+    v5CountriesDetail: (id: number, params: RequestParams = {}) =>
+      this.request<any, GetCountryRespApiRespBase>({
+        path: `/api/v5/countries/${id}`,
+        method: "GET",
+        secure: true,
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Countries
+     * @name V5CountriesPartialUpdate
+     * @summary Modify country
+     * @request PATCH:/api/v5/countries/{id}
+     * @secure
+     */
+    v5CountriesPartialUpdate: (
+      id: number,
+      data: {
+        /**
+         * Country id
+         * @format int32
+         * @min 1
+         * @max 32767
+         */
+        Id: number;
+        /**
+         * Country name
+         * @minLength 0
+         * @maxLength 50
+         */
+        Name: string;
+        /**
+         * Country code
+         * @minLength 0
+         * @maxLength 2
+         */
+        Code: string;
+        /**
+         * Flag image file
+         * @format binary
+         */
+        FlagImageFile?: File;
+      },
+      params: RequestParams = {},
+    ) =>
+      this.request<any, ApiRespBase>({
+        path: `/api/v5/countries/${id}`,
+        method: "PATCH",
+        body: data,
+        secure: true,
+        type: ContentType.FormData,
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Countries
+     * @name V5CountriesDelete
+     * @summary Delete country
+     * @request DELETE:/api/v5/countries/{id}
+     * @secure
+     */
+    v5CountriesDelete: (id: number, params: RequestParams = {}) =>
+      this.request<any, ApiRespBase>({
+        path: `/api/v5/countries/${id}`,
+        method: "DELETE",
+        secure: true,
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
      * @tags Currency
      * @name V5CurrencyCurrentExchangeRateList
      * @summary Get current exchange rate
@@ -11874,6 +13699,405 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
         body: data,
         secure: true,
         type: ContentType.Json,
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Events
+     * @name V5EventsList
+     * @summary Get events by conditions
+     * @request GET:/api/v5/events
+     * @secure
+     */
+    v5EventsList: (
+      query?: {
+        /**
+         * Event Id
+         * @format int32
+         * @min 1
+         * @max 2147483647
+         */
+        Id?: number;
+        /**
+         * Event Name
+         * @minLength 0
+         * @maxLength 80
+         */
+        Name?: string;
+        /**
+         * Game Id
+         * @format int32
+         * @min 1
+         * @max 32767
+         */
+        GameId?: number;
+        /**
+         * Frontend Id
+         * 0: ALL
+         * @format int32
+         * @min 0
+         * @max 32767
+         */
+        FrontendId?: number;
+        /** Hidden */
+        IsHidden?: boolean;
+        /**
+         * Organizer id
+         * @format int32
+         * @min 0
+         * @max 32767
+         */
+        OrganizerId?: number;
+        /**
+         * Created at from
+         * @format int64
+         * @min 1
+         */
+        CreatedFrom?: number;
+        /**
+         * Created at to
+         * @format int64
+         * @min 1
+         */
+        CreatedTo?: number;
+        /**
+         * Starting at from
+         * @format int64
+         * @min 1
+         */
+        StartingFrom?: number;
+        /**
+         * Starting at to
+         * @format int64
+         * @min 1
+         */
+        StartingTo?: number;
+        /**
+         * Created by
+         * @format int32
+         * @min 1
+         * @max 2147483647
+         */
+        CreatedBy?: number;
+        /**
+         * @format int32
+         * @min 1
+         * @max 2147483647
+         */
+        PageNo?: number;
+        /**
+         * @format int32
+         * @min 1
+         * @max 100
+         */
+        PageSize?: number;
+      },
+      params: RequestParams = {},
+    ) =>
+      this.request<any, GetEventsRespApiRespBase>({
+        path: `/api/v5/events`,
+        method: "GET",
+        query: query,
+        secure: true,
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Events
+     * @name V5EventsCreate
+     * @summary Add new event
+     * @request POST:/api/v5/events
+     * @secure
+     */
+    v5EventsCreate: (data: AddEventReq, params: RequestParams = {}) =>
+      this.request<any, AddEventRespApiRespBase>({
+        path: `/api/v5/events`,
+        method: "POST",
+        body: data,
+        secure: true,
+        type: ContentType.Json,
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Events
+     * @name V5EventsDetail
+     * @summary Get event detail
+     * @request GET:/api/v5/events/{id}
+     * @secure
+     */
+    v5EventsDetail: (id: number, params: RequestParams = {}) =>
+      this.request<any, GetEventRespApiRespBase>({
+        path: `/api/v5/events/${id}`,
+        method: "GET",
+        secure: true,
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Events
+     * @name V5EventsPartialUpdate
+     * @summary Modify event
+     * @request PATCH:/api/v5/events/{id}
+     * @secure
+     */
+    v5EventsPartialUpdate: (id: number, data: ModEventReq, params: RequestParams = {}) =>
+      this.request<any, ModEventRespApiRespBase>({
+        path: `/api/v5/events/${id}`,
+        method: "PATCH",
+        body: data,
+        secure: true,
+        type: ContentType.Json,
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Events
+     * @name V5EventsDelete
+     * @summary Delete event
+     * @request DELETE:/api/v5/events/{id}
+     * @secure
+     */
+    v5EventsDelete: (id: number, params: RequestParams = {}) =>
+      this.request<any, DelEventRespApiRespBase>({
+        path: `/api/v5/events/${id}`,
+        method: "DELETE",
+        secure: true,
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Events
+     * @name V5EventsPagesList
+     * @summary Get event pages
+     * @request GET:/api/v5/events/pages
+     * @secure
+     */
+    v5EventsPagesList: (
+      query: {
+        /**
+         * Event id
+         * @format int32
+         * @min 1
+         * @max 2147483647
+         */
+        EventId: number;
+      },
+      params: RequestParams = {},
+    ) =>
+      this.request<any, GetEventPagesRespApiRespBase>({
+        path: `/api/v5/events/pages`,
+        method: "GET",
+        query: query,
+        secure: true,
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Events
+     * @name V5EventsPagesCreate
+     * @summary Add new event page
+     * @request POST:/api/v5/events/pages
+     * @secure
+     */
+    v5EventsPagesCreate: (data: AddEventPageReq, params: RequestParams = {}) =>
+      this.request<any, AddEventPageRespApiRespBase>({
+        path: `/api/v5/events/pages`,
+        method: "POST",
+        body: data,
+        secure: true,
+        type: ContentType.Json,
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Events
+     * @name V5EventsPagesPartialUpdate
+     * @summary Modify event page
+     * @request PATCH:/api/v5/events/pages/{id}
+     * @secure
+     */
+    v5EventsPagesPartialUpdate: (id: number, data: ModEventPageReq, params: RequestParams = {}) =>
+      this.request<any, ModEventPageRespApiRespBase>({
+        path: `/api/v5/events/pages/${id}`,
+        method: "PATCH",
+        body: data,
+        secure: true,
+        type: ContentType.Json,
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Events
+     * @name V5EventsPagesDelete
+     * @summary Delete event page
+     * @request DELETE:/api/v5/events/pages/{id}
+     * @secure
+     */
+    v5EventsPagesDelete: (id: number, params: RequestParams = {}) =>
+      this.request<any, DelEventPageRespApiRespBase>({
+        path: `/api/v5/events/pages/${id}`,
+        method: "DELETE",
+        secure: true,
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Events
+     * @name V5EventsBoxesDetail
+     * @summary Get event page box detail
+     * @request GET:/api/v5/events/boxes/{id}
+     * @secure
+     */
+    v5EventsBoxesDetail: (id: number, params: RequestParams = {}) =>
+      this.request<any, GetEventBoxRespApiRespBase>({
+        path: `/api/v5/events/boxes/${id}`,
+        method: "GET",
+        secure: true,
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Events
+     * @name V5EventsBoxesPartialUpdate
+     * @summary Modify event page box
+     * @request PATCH:/api/v5/events/boxes/{id}
+     * @secure
+     */
+    v5EventsBoxesPartialUpdate: (id: number, data: ModEventBoxReq, params: RequestParams = {}) =>
+      this.request<any, ModEventBoxRespApiRespBase>({
+        path: `/api/v5/events/boxes/${id}`,
+        method: "PATCH",
+        body: data,
+        secure: true,
+        type: ContentType.Json,
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Events
+     * @name V5EventsBoxesDelete
+     * @summary Delete event page box
+     * @request DELETE:/api/v5/events/boxes/{id}
+     * @secure
+     */
+    v5EventsBoxesDelete: (id: number, params: RequestParams = {}) =>
+      this.request<any, DelEventBoxRespApiRespBase>({
+        path: `/api/v5/events/boxes/${id}`,
+        method: "DELETE",
+        secure: true,
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Events
+     * @name V5EventsBoxesCreate
+     * @summary Add new event page box
+     * @request POST:/api/v5/events/boxes
+     * @secure
+     */
+    v5EventsBoxesCreate: (data: AddEventBoxReq, params: RequestParams = {}) =>
+      this.request<any, AddEventBoxRespApiRespBase>({
+        path: `/api/v5/events/boxes`,
+        method: "POST",
+        body: data,
+        secure: true,
+        type: ContentType.Json,
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Events
+     * @name V5EventsBoxesTypeList
+     * @summary Get boxes type options
+     * @request GET:/api/v5/events/boxes-type
+     * @secure
+     */
+    v5EventsBoxesTypeList: (params: RequestParams = {}) =>
+      this.request<any, ByteItemListApiRespBase>({
+        path: `/api/v5/events/boxes-type`,
+        method: "GET",
+        secure: true,
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Events
+     * @name V5EventsBoxesAdjustPositionPartialUpdate
+     * @summary Modify event page boxes position
+     * @request PATCH:/api/v5/events/boxes/adjust-position
+     * @secure
+     */
+    v5EventsBoxesAdjustPositionPartialUpdate: (data: AdjustBoxesReq, params: RequestParams = {}) =>
+      this.request<any, AdjustBoxesRespApiRespBase>({
+        path: `/api/v5/events/boxes/adjust-position`,
+        method: "PATCH",
+        body: data,
+        secure: true,
+        type: ContentType.Json,
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Events
+     * @name V5EventsFuzzyList
+     * @summary Get fuzzy events
+     * @request GET:/api/v5/events/fuzzy
+     * @secure
+     */
+    v5EventsFuzzyList: (
+      query: {
+        /**
+         * @minLength 1
+         * @maxLength 20
+         */
+        FuzzyPrefix: string;
+        /**
+         * @format int32
+         * @min 10
+         * @max 100
+         */
+        MaxCount?: number;
+      },
+      params: RequestParams = {},
+    ) =>
+      this.request<any, GetFuzzyEventsRespApiRespBase>({
+        path: `/api/v5/events/fuzzy`,
+        method: "GET",
+        query: query,
+        secure: true,
         ...params,
       }),
 
@@ -12203,16 +14427,57 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     /**
      * No description
      *
-     * @tags FrontendSiteSections
-     * @name V5FrontendSiteSectionsDetail
-     * @summary Get frontend site sections
-     * @request GET:/api/v5/frontend-site-sections/{id}
+     * @tags Files
+     * @name V5FilesUploadFileCreate
+     * @summary Upload file
+     * @request POST:/api/v5/files/upload-file
      * @secure
      */
-    v5FrontendSiteSectionsDetail: (id: number, params: RequestParams = {}) =>
-      this.request<any, GetFrontendSiteSectionsRespApiRespBase>({
-        path: `/api/v5/frontend-site-sections/${id}`,
-        method: "GET",
+    v5FilesUploadFileCreate: (
+      data: {
+        /**
+         * @minLength 0
+         * @maxLength 100
+         */
+        UploadType: string;
+        /** @format binary */
+        File: File;
+      },
+      params: RequestParams = {},
+    ) =>
+      this.request<any, UploadFileRespApiRespBase>({
+        path: `/api/v5/files/upload-file`,
+        method: "POST",
+        body: data,
+        secure: true,
+        type: ContentType.FormData,
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Files
+     * @name V5FilesDeleteFileDelete
+     * @summary Delete file by file(hash) path
+     * @request DELETE:/api/v5/files/delete-file
+     * @secure
+     */
+    v5FilesDeleteFileDelete: (
+      query: {
+        /**
+         * Image hash path
+         * @minLength 0
+         * @maxLength 255
+         */
+        FilePath: string;
+      },
+      params: RequestParams = {},
+    ) =>
+      this.request<any, DelFileByHashRespApiRespBase>({
+        path: `/api/v5/files/delete-file`,
+        method: "DELETE",
+        query: query,
         secure: true,
         ...params,
       }),
@@ -12220,15 +14485,58 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     /**
      * No description
      *
-     * @tags FrontendSiteSections
-     * @name V5FrontendSiteSectionsCreate
-     * @summary Add frontend site sections
-     * @request POST:/api/v5/frontend-site-sections
+     * @tags Frontends
+     * @name V5FrontendsList
+     * @summary Get frontends by condition
+     * @request GET:/api/v5/frontends
      * @secure
      */
-    v5FrontendSiteSectionsCreate: (data: AddFrontendSiteSectionsReq, params: RequestParams = {}) =>
-      this.request<any, AddFrontendSiteSectionsRespApiRespBase>({
-        path: `/api/v5/frontend-site-sections`,
+    v5FrontendsList: (
+      query?: {
+        /**
+         * Frontend Id
+         * @format int32
+         */
+        Id?: number;
+        /** Frontend Name */
+        Name?: string;
+        /** Is Hidden */
+        IsHidden?: boolean;
+        /**
+         * @format int32
+         * @min 1
+         * @max 2147483647
+         */
+        PageNo?: number;
+        /**
+         * @format int32
+         * @min 1
+         * @max 100
+         */
+        PageSize?: number;
+      },
+      params: RequestParams = {},
+    ) =>
+      this.request<any, GetFrontendsRespApiRespBase>({
+        path: `/api/v5/frontends`,
+        method: "GET",
+        query: query,
+        secure: true,
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Frontends
+     * @name V5FrontendsCreate
+     * @summary Add frontend basic info
+     * @request POST:/api/v5/frontends
+     * @secure
+     */
+    v5FrontendsCreate: (data: AddFrontendReq, params: RequestParams = {}) =>
+      this.request<any, AddFrontendRespApiRespBase>({
+        path: `/api/v5/frontends`,
         method: "POST",
         body: data,
         secure: true,
@@ -12239,15 +14547,49 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     /**
      * No description
      *
-     * @tags FrontendSiteSections
-     * @name V5FrontendSiteSectionsPartialUpdate
-     * @summary Modify frontend site section
-     * @request PATCH:/api/v5/frontend-site-sections
+     * @tags Frontends
+     * @name V5FrontendsDetail
+     * @summary Get frontend detail by user permissions
+     * @request GET:/api/v5/frontends/{id}
      * @secure
      */
-    v5FrontendSiteSectionsPartialUpdate: (data: ModFrontendSiteSectionReq, params: RequestParams = {}) =>
-      this.request<any, ModFrontendSiteSectionRespApiRespBase>({
-        path: `/api/v5/frontend-site-sections`,
+    v5FrontendsDetail: (id: number, params: RequestParams = {}) =>
+      this.request<any, GetFrontendRespApiRespBase>({
+        path: `/api/v5/frontends/${id}`,
+        method: "GET",
+        secure: true,
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Frontends
+     * @name V5FrontendsDelete
+     * @summary Delete frontend
+     * @request DELETE:/api/v5/frontends/{id}
+     * @secure
+     */
+    v5FrontendsDelete: (id: number, params: RequestParams = {}) =>
+      this.request<any, DelFrontendRespApiRespBase>({
+        path: `/api/v5/frontends/${id}`,
+        method: "DELETE",
+        secure: true,
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Frontends
+     * @name V5FrontendsBasicInfoPartialUpdate
+     * @summary Modify frontend Basic info
+     * @request PATCH:/api/v5/frontends/{id}/basic-info
+     * @secure
+     */
+    v5FrontendsBasicInfoPartialUpdate: (id: number, data: ModFrontendBasicInfoReq, params: RequestParams = {}) =>
+      this.request<any, ModFrontendBasicInfoRespApiRespBase>({
+        path: `/api/v5/frontends/${id}/basic-info`,
         method: "PATCH",
         body: data,
         secure: true,
@@ -12258,16 +14600,179 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     /**
      * No description
      *
-     * @tags FrontendSiteSections
-     * @name V5FrontendSiteSectionsDelete
-     * @summary Delete frontend site section
-     * @request DELETE:/api/v5/frontend-site-sections
+     * @tags Frontends
+     * @name V5FrontendsGoogleSettingsPartialUpdate
+     * @summary Modify frontend google settings
+     * @request PATCH:/api/v5/frontends/{id}/google-settings
      * @secure
      */
-    v5FrontendSiteSectionsDelete: (data: DelFrontendSiteSectionReq, params: RequestParams = {}) =>
-      this.request<any, DelFrontendSiteSectionRespApiRespBase>({
-        path: `/api/v5/frontend-site-sections`,
+    v5FrontendsGoogleSettingsPartialUpdate: (
+      id: number,
+      data: ModFrontendGoogleSettingsReq,
+      params: RequestParams = {},
+    ) =>
+      this.request<any, ModFrontendGoogleSettingsRespApiRespBase>({
+        path: `/api/v5/frontends/${id}/google-settings`,
+        method: "PATCH",
+        body: data,
+        secure: true,
+        type: ContentType.Json,
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Frontends
+     * @name V5FrontendsAdsPartialUpdate
+     * @summary Modify frontend ads
+     * @request PATCH:/api/v5/frontends/{id}/ads
+     * @secure
+     */
+    v5FrontendsAdsPartialUpdate: (id: number, data: ModFrontendAdsReq, params: RequestParams = {}) =>
+      this.request<any, ModFrontendAdsRespApiRespBase>({
+        path: `/api/v5/frontends/${id}/ads`,
+        method: "PATCH",
+        body: data,
+        secure: true,
+        type: ContentType.Json,
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Frontends
+     * @name V5FrontendsRobotsPartialUpdate
+     * @summary Modify frontend robots
+     * @request PATCH:/api/v5/frontends/{id}/robots
+     * @secure
+     */
+    v5FrontendsRobotsPartialUpdate: (id: number, data: ModFrontendRobotsReq, params: RequestParams = {}) =>
+      this.request<any, ModFrontendRobotsRespApiRespBase>({
+        path: `/api/v5/frontends/${id}/robots`,
+        method: "PATCH",
+        body: data,
+        secure: true,
+        type: ContentType.Json,
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Frontends
+     * @name V5FrontendsMenusList
+     * @summary Get frontend menus by condition
+     * @request GET:/api/v5/frontends/menus
+     * @secure
+     */
+    v5FrontendsMenusList: (
+      query: {
+        /**
+         * @format int32
+         * @min 1
+         * @max 32767
+         */
+        FrontendId: number;
+        Platform: EnumMenuPlatform;
+        IsIncludeHidden?: boolean;
+      },
+      params: RequestParams = {},
+    ) =>
+      this.request<any, GetFrontendMenusRespApiRespBase>({
+        path: `/api/v5/frontends/menus`,
+        method: "GET",
+        query: query,
+        secure: true,
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Frontends
+     * @name V5FrontendsMenusDetail
+     * @summary Get frontend menu detail
+     * @request GET:/api/v5/frontends/menus/{id}
+     * @secure
+     */
+    v5FrontendsMenusDetail: (id: number, params: RequestParams = {}) =>
+      this.request<any, GetFrontendMenuDetailRespApiRespBase>({
+        path: `/api/v5/frontends/menus/${id}`,
+        method: "GET",
+        secure: true,
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Frontends
+     * @name V5FrontendsMenuCreate
+     * @summary Add frontend menu
+     * @request POST:/api/v5/frontends/menu
+     * @secure
+     */
+    v5FrontendsMenuCreate: (data: AddFrontendMenuReq, params: RequestParams = {}) =>
+      this.request<any, AddFrontendMenuRespApiRespBase>({
+        path: `/api/v5/frontends/menu`,
+        method: "POST",
+        body: data,
+        secure: true,
+        type: ContentType.Json,
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Frontends
+     * @name V5FrontendsMenuPartialUpdate
+     * @summary Modify frontend menu
+     * @request PATCH:/api/v5/frontends/menu/{id}
+     * @secure
+     */
+    v5FrontendsMenuPartialUpdate: (id: number, data: ModFrontendMenuReq, params: RequestParams = {}) =>
+      this.request<any, ModFrontendMenuRespApiRespBase>({
+        path: `/api/v5/frontends/menu/${id}`,
+        method: "PATCH",
+        body: data,
+        secure: true,
+        type: ContentType.Json,
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Frontends
+     * @name V5FrontendsMenuDelete
+     * @summary Delete frontend menu
+     * @request DELETE:/api/v5/frontends/menu/{id}
+     * @secure
+     */
+    v5FrontendsMenuDelete: (id: number, params: RequestParams = {}) =>
+      this.request<any, DelFrontendMenuRespApiRespBase>({
+        path: `/api/v5/frontends/menu/${id}`,
         method: "DELETE",
+        secure: true,
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Frontends
+     * @name V5FrontendsAdjustMenuPartialUpdate
+     * @summary Modify frontend menu options
+     * @request PATCH:/api/v5/frontends/adjust-menu
+     * @secure
+     */
+    v5FrontendsAdjustMenuPartialUpdate: (data: ModMenuOptionsReq, params: RequestParams = {}) =>
+      this.request<any, ModMenuOptionsRespApiRespBase>({
+        path: `/api/v5/frontends/adjust-menu`,
+        method: "PATCH",
         body: data,
         secure: true,
         type: ContentType.Json,
@@ -12843,29 +15348,13 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Games
-     * @name V5GamesDelete
-     * @summary Delete game
-     * @request DELETE:/api/v5/games/{id}
-     * @secure
-     */
-    v5GamesDelete: (id: number, params: RequestParams = {}) =>
-      this.request<any, DelGameRespApiRespBase>({
-        path: `/api/v5/games/${id}`,
-        method: "DELETE",
-        secure: true,
-        ...params,
-      }),
-
-    /**
-     * No description
-     *
-     * @tags Games
-     * @name V5GamesIdPartialUpdate
+     * @name V5GamesPartialUpdate
      * @summary Modify game
-     * @request PATCH:/api/v5/games/id
+     * @request PATCH:/api/v5/games/{id}
      * @secure
      */
-    v5GamesIdPartialUpdate: (
+    v5GamesPartialUpdate: (
+      id: number,
       data: {
         /**
          * Game id
@@ -12922,22 +15411,67 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
          */
         RecommendedReplayCount: number;
       },
-      query?: {
-        /**
-         * Game id
-         * @format int32
-         */
-        id?: number;
-      },
       params: RequestParams = {},
     ) =>
       this.request<any, ModGameRespApiRespBase>({
-        path: `/api/v5/games/id`,
+        path: `/api/v5/games/${id}`,
         method: "PATCH",
-        query: query,
         body: data,
         secure: true,
         type: ContentType.FormData,
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Games
+     * @name V5GamesDelete
+     * @summary Delete game
+     * @request DELETE:/api/v5/games/{id}
+     * @secure
+     */
+    v5GamesDelete: (id: number, params: RequestParams = {}) =>
+      this.request<any, DelGameRespApiRespBase>({
+        path: `/api/v5/games/${id}`,
+        method: "DELETE",
+        secure: true,
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Games
+     * @name V5GamesGameOffSeasonPartialUpdate
+     * @summary Modify game off season
+     * @request PATCH:/api/v5/games/{id}/game-off-season
+     * @secure
+     */
+    v5GamesGameOffSeasonPartialUpdate: (id: number, data: ModGameOffSeasonReq, params: RequestParams = {}) =>
+      this.request<any, ApiRespBase>({
+        path: `/api/v5/games/${id}/game-off-season`,
+        method: "PATCH",
+        body: data,
+        secure: true,
+        type: ContentType.Json,
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Games
+     * @name V5GamesGameOffSeasonDelete
+     * @summary Clear game off season
+     * @request DELETE:/api/v5/games/{id}/game-off-season
+     * @secure
+     */
+    v5GamesGameOffSeasonDelete: (id: number, params: RequestParams = {}) =>
+      this.request<any, ApiRespBase>({
+        path: `/api/v5/games/${id}/game-off-season`,
+        method: "DELETE",
+        secure: true,
         ...params,
       }),
 
@@ -13572,6 +16106,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
          * @format binary
          */
         IconFile?: File;
+        /**
+         * Mobile Icon file
+         * @format binary
+         */
+        MobileIconFile?: File;
       },
       params: RequestParams = {},
     ) =>
@@ -13638,6 +16177,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
          * @format binary
          */
         IconFile?: File;
+        /**
+         * Mobile Icon file
+         * @format binary
+         */
+        MobileIconFile?: File;
       },
       params: RequestParams = {},
     ) =>
@@ -13810,6 +16354,15 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
          * @maxLength 128
          */
         TraceId?: string;
+        /**
+         * Updated user id
+         * @format int32
+         * @min 1
+         * @max 2147483647
+         */
+        UpdatedUserId?: number;
+        /** Http method */
+        Method?: string;
         /**
          * @format int32
          * @min 1
@@ -14615,7 +17168,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      *
      * @tags MediaVods
      * @name V5MediaVodsList
-     * @summary Get media vods
+     * @summary Get media Vods
      * @request GET:/api/v5/media/vods
      * @secure
      */
@@ -15396,10 +17949,21 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/api/v5/options/site-sections
      * @secure
      */
-    v5OptionsSiteSectionsList: (params: RequestParams = {}) =>
+    v5OptionsSiteSectionsList: (
+      query?: {
+        /**
+         * @format int32
+         * @min 1
+         * @max 32767
+         */
+        frontendId?: number;
+      },
+      params: RequestParams = {},
+    ) =>
       this.request<any, GetSiteSectionsOptionsRespApiRespBase>({
         path: `/api/v5/options/site-sections`,
         method: "GET",
+        query: query,
         secure: true,
         ...params,
       }),
@@ -15434,29 +17998,6 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       this.request<any, GetGenderOptionsRespApiRespBase>({
         path: `/api/v5/options/genders`,
         method: "GET",
-        secure: true,
-        ...params,
-      }),
-
-    /**
-     * No description
-     *
-     * @tags Options
-     * @name V5OptionsProxyList
-     * @summary Get GG Code Info
-     * @request GET:/api/v5/options/proxy
-     * @secure
-     */
-    v5OptionsProxyList: (
-      query?: {
-        url?: string;
-      },
-      params: RequestParams = {},
-    ) =>
-      this.request<any, GetGgCodeInfoRespApiRespBase>({
-        path: `/api/v5/options/proxy`,
-        method: "GET",
-        query: query,
         secure: true,
         ...params,
       }),
@@ -15720,6 +18261,91 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     /**
      * No description
      *
+     * @tags Options
+     * @name V5OptionsServicePrefixesList
+     * @summary Get service prefixes
+     * @request GET:/api/v5/options/service-prefixes
+     * @secure
+     */
+    v5OptionsServicePrefixesList: (params: RequestParams = {}) =>
+      this.request<any, StringItemListApiRespBase>({
+        path: `/api/v5/options/service-prefixes`,
+        method: "GET",
+        secure: true,
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Options
+     * @name V5OptionsHttpMethodsList
+     * @summary Get service prefixes
+     * @request GET:/api/v5/options/http-methods
+     * @secure
+     */
+    v5OptionsHttpMethodsList: (params: RequestParams = {}) =>
+      this.request<any, StringItemListApiRespBase>({
+        path: `/api/v5/options/http-methods`,
+        method: "GET",
+        secure: true,
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Options
+     * @name V5OptionsApiActionsDownloadCsvList
+     * @summary Get api actions
+     * @request GET:/api/v5/options/api-actions/download-csv
+     * @secure
+     */
+    v5OptionsApiActionsDownloadCsvList: (params: RequestParams = {}) =>
+      this.request<void, any>({
+        path: `/api/v5/options/api-actions/download-csv`,
+        method: "GET",
+        secure: true,
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Options
+     * @name V5OptionsGridStateOptionsList
+     * @summary Get grid state options
+     * @request GET:/api/v5/options/grid-state-options
+     * @secure
+     */
+    v5OptionsGridStateOptionsList: (params: RequestParams = {}) =>
+      this.request<any, ByteItemListApiRespBase>({
+        path: `/api/v5/options/grid-state-options`,
+        method: "GET",
+        secure: true,
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Options
+     * @name V5OptionsTeamSortOptionsList
+     * @summary Get team sort options
+     * @request GET:/api/v5/options/team-sort-options
+     * @secure
+     */
+    v5OptionsTeamSortOptionsList: (params: RequestParams = {}) =>
+      this.request<any, ByteItemListApiRespBase>({
+        path: `/api/v5/options/team-sort-options`,
+        method: "GET",
+        secure: true,
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
      * @tags Pages
      * @name V5PagesList
      * @summary Get pages byt conditions
@@ -15866,6 +18492,41 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     /**
      * No description
      *
+     * @tags Pages
+     * @name V5PagesFuzzyList
+     * @summary Get fuzzy pages
+     * @request GET:/api/v5/pages/fuzzy
+     * @secure
+     */
+    v5PagesFuzzyList: (
+      query: {
+        /**
+         * Fuzzy prefix
+         * @minLength 0
+         * @maxLength 30
+         */
+        FuzzyPrefix: string;
+        /**
+         * Max count
+         * @format int32
+         * @min 10
+         * @max 100
+         */
+        MaxCount?: number;
+      },
+      params: RequestParams = {},
+    ) =>
+      this.request<any, Int32ItemListApiRespBase>({
+        path: `/api/v5/pages/fuzzy`,
+        method: "GET",
+        query: query,
+        secure: true,
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
      * @tags Players
      * @name V5PlayersList
      * @summary Get players
@@ -15929,6 +18590,12 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
          * @maxLength 50
          */
         GameAccount?: string;
+        /**
+         * Grid state
+         * 1: With GRID linked
+         * 2: Without GRID linked
+         */
+        GridState?: EnumGridStateOption;
         /**
          * @format int32
          * @min 1
@@ -16047,6 +18714,12 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
          * @maxLength 100
          */
         Youtube?: string;
+        /**
+         * Grid Player Id
+         * @minLength 0
+         * @maxLength 12
+         */
+        GridId?: string;
       },
       params: RequestParams = {},
     ) =>
@@ -16177,6 +18850,12 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
          * @maxLength 100
          */
         Youtube?: string;
+        /**
+         * Grid Player Id
+         * @minLength 0
+         * @maxLength 12
+         */
+        GridId?: string;
       },
       params: RequestParams = {},
     ) =>
@@ -16331,6 +19010,40 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       this.request<any, DelPlayerMediaItemRespApiRespBase>({
         path: `/api/v5/players/${playerid}/media-items/${mediaitemid}`,
         method: "DELETE",
+        secure: true,
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Players
+     * @name V5PlayersGridPlayersList
+     * @summary Get grid players option
+     * @request GET:/api/v5/players/grid-players
+     * @secure
+     */
+    v5PlayersGridPlayersList: (
+      query: {
+        /**
+         * @minLength 0
+         * @maxLength 50
+         */
+        FuzzyPrefix: string;
+        /**
+         * default: 20
+         * @format int32
+         * @min 20
+         * @max 50
+         */
+        MaxCount?: number;
+      },
+      params: RequestParams = {},
+    ) =>
+      this.request<any, GetGridPlayersRespApiRespBase>({
+        path: `/api/v5/players/grid-players`,
+        method: "GET",
+        query: query,
         secure: true,
         ...params,
       }),
@@ -17184,29 +19897,13 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request POST:/api/v5/sitesections/site-sections
      * @secure
      */
-    v5SitesectionsSiteSectionsCreate: (
-      data: {
-        /**
-         * @format int32
-         * @min 1
-         * @max 32767
-         */
-        GameId?: number;
-        /**
-         * @minLength 1
-         * @maxLength 40
-         */
-        Name: string;
-        Hidden: boolean;
-      },
-      params: RequestParams = {},
-    ) =>
+    v5SitesectionsSiteSectionsCreate: (data: AddSiteSectionsReq, params: RequestParams = {}) =>
       this.request<any, AddSiteSectionsRespApiRespBase>({
         path: `/api/v5/sitesections/site-sections`,
         method: "POST",
         body: data,
         secure: true,
-        type: ContentType.FormData,
+        type: ContentType.Json,
         ...params,
       }),
 
@@ -17236,36 +19933,13 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request PATCH:/api/v5/sitesections/site-sections/{id}
      * @secure
      */
-    v5SitesectionsSiteSectionsPartialUpdate: (
-      id: number,
-      data: {
-        /**
-         * @format int32
-         * @min 1
-         * @max 32767
-         */
-        Id: number;
-        /**
-         * @format int32
-         * @min 1
-         * @max 32767
-         */
-        GameId?: number;
-        /**
-         * @minLength 1
-         * @maxLength 40
-         */
-        Name?: string;
-        Hidden?: boolean;
-      },
-      params: RequestParams = {},
-    ) =>
+    v5SitesectionsSiteSectionsPartialUpdate: (id: number, data: ModSiteSectionsReq, params: RequestParams = {}) =>
       this.request<any, ModSiteSectionsRespApiRespBase>({
         path: `/api/v5/sitesections/site-sections/${id}`,
         method: "PATCH",
         body: data,
         secure: true,
-        type: ContentType.FormData,
+        type: ContentType.Json,
         ...params,
       }),
 
@@ -17384,6 +20058,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
          */
         ImageFile?: File;
         /**
+         * Sponsor small logo image file
+         * @format binary
+         */
+        SmallImageFile?: File;
+        /**
          * Sponsor website url
          * @format uri
          * @minLength 0
@@ -17455,6 +20134,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
          * @format binary
          */
         ImageFile?: File;
+        /**
+         * Sponsor small logo image file
+         * @format binary
+         */
+        SmallImageFile?: File;
         /**
          * Sponsor website url
          * @format uri
@@ -17588,6 +20272,18 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
          */
         UpdatedAtTo?: number;
         /**
+         * Grid state
+         * 1: With GRID linked
+         * 2: Without GRID linked
+         */
+        GridState?: EnumGridStateOption;
+        /**
+         * Sort by
+         * 1: Rankings, from high to low (1st - 9999th)
+         * 2: Rankings, from low to high (9999th - 1st)
+         */
+        SortBy?: EnumTeamSortOption;
+        /**
          * @format int32
          * @min 1
          * @max 2147483647
@@ -17672,6 +20368,12 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
          * @maxLength 100
          */
         Youtube?: string;
+        /**
+         * Grid Team Id
+         * @minLength 0
+         * @maxLength 12
+         */
+        GridId?: string;
       },
       params: RequestParams = {},
     ) =>
@@ -17689,7 +20391,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      *
      * @tags Teams
      * @name V5TeamsDetail
-     * @summary Get team
+     * @summary Get team detail
      * @request GET:/api/v5/teams/{id}
      * @secure
      */
@@ -17787,6 +20489,12 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
          * @maxLength 100
          */
         Youtube?: string;
+        /**
+         * Grid Team Id
+         * @minLength 0
+         * @maxLength 12
+         */
+        GridId?: string;
       },
       params: RequestParams = {},
     ) =>
@@ -17988,6 +20696,40 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     /**
      * No description
      *
+     * @tags Teams
+     * @name V5TeamsGridTeamsList
+     * @summary Get grid teams option
+     * @request GET:/api/v5/teams/grid-teams
+     * @secure
+     */
+    v5TeamsGridTeamsList: (
+      query: {
+        /**
+         * @minLength 0
+         * @maxLength 50
+         */
+        FuzzyPrefix: string;
+        /**
+         * default: 20
+         * @format int32
+         * @min 20
+         * @max 50
+         */
+        MaxCount?: number;
+      },
+      params: RequestParams = {},
+    ) =>
+      this.request<any, GetGridTeamsRespApiRespBase>({
+        path: `/api/v5/teams/grid-teams`,
+        method: "GET",
+        query: query,
+        secure: true,
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
      * @tags Tournaments
      * @name V5TournamentsFuzzyList
      * @summary Get fuzzy tournaments
@@ -18016,6 +20758,54 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
         path: `/api/v5/tournaments/fuzzy`,
         method: "GET",
         query: query,
+        secure: true,
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Tournaments
+     * @name V5TournamentsRelatedDataList
+     * @summary Get tournaments related data
+     * @request GET:/api/v5/tournaments/related-data
+     * @secure
+     */
+    v5TournamentsRelatedDataList: (
+      query: {
+        /** Article = 1,Sponsor = 2,Video = 3 */
+        RelatedType: EnumTournamentRelatedType;
+        /**
+         * Parent tournament id
+         * @format int32
+         * @min 1
+         * @max 2147483647
+         */
+        ParentId: number;
+      },
+      params: RequestParams = {},
+    ) =>
+      this.request<any, GeTournamentRelatedRespApiRespBase>({
+        path: `/api/v5/tournaments/related-data`,
+        method: "GET",
+        query: query,
+        secure: true,
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Tournaments
+     * @name V5TournamentsClearMatchesList
+     * @summary Clear portal matches cache
+     * @request GET:/api/v5/tournaments/clear-matches
+     * @secure
+     */
+    v5TournamentsClearMatchesList: (params: RequestParams = {}) =>
+      this.request<any, ClearMatchesRespApiRespBase>({
+        path: `/api/v5/tournaments/clear-matches`,
+        method: "GET",
         secure: true,
         ...params,
       }),
@@ -18349,17 +21139,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
          */
         GameId?: number;
         /**
-         * Date from
-         * @format int64
-         * @min 0
+         * Prefix can be name or id
+         * @minLength 0
+         * @maxLength 30
          */
-        DateFrom: number;
-        /**
-         * Date to
-         * @format int64
-         * @min 0
-         */
-        DateTo: number;
+        Prefix: string;
       },
       params: RequestParams = {},
     ) =>
@@ -18857,6 +21641,35 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     ) =>
       this.request<any, GetPreviousLineupsRespApiRespBase>({
         path: `/api/v5/tournaments/match-games/previous-lineups`,
+        method: "GET",
+        query: query,
+        secure: true,
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Tournaments
+     * @name V5TournamentsMatchGamesRegisteredPlayersList
+     * @summary Get current registered players
+     * @request GET:/api/v5/tournaments/match-games/registered-players
+     * @secure
+     */
+    v5TournamentsMatchGamesRegisteredPlayersList: (
+      query: {
+        /**
+         * Tournament game Id
+         * @format int32
+         * @min 1
+         * @max 2147483647
+         */
+        GameId: number;
+      },
+      params: RequestParams = {},
+    ) =>
+      this.request<any, GetRegisteredPlayersRespApiRespBase>({
+        path: `/api/v5/tournaments/match-games/registered-players`,
         method: "GET",
         query: query,
         secure: true,
@@ -19510,6 +22323,8 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
          * @format binary
          */
         ImageFile?: File;
+        /** if IsRemoveImage = true will remove Image and set ImageFilePath = null */
+        IsRemoveImage?: boolean;
       },
       params: RequestParams = {},
     ) =>
@@ -19789,6 +22604,28 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Tournaments
+     * @name V5TournamentsParentsChildrenRegistrationsSyncUpPartialUpdate
+     * @summary Sync up child registration info
+     * @request PATCH:/api/v5/tournaments/parents/{parentId}/children/{childId}/registrations/{registerId}/sync-up
+     * @secure
+     */
+    v5TournamentsParentsChildrenRegistrationsSyncUpPartialUpdate: (
+      parentId: number,
+      childId: number,
+      registerId: number,
+      params: RequestParams = {},
+    ) =>
+      this.request<any, ApiRespBase>({
+        path: `/api/v5/tournaments/parents/${parentId}/children/${childId}/registrations/${registerId}/sync-up`,
+        method: "PATCH",
+        secure: true,
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Tournaments
      * @name V5TournamentsParentsChildrenRoundsDetail
      * @summary Get child tournament rounds
      * @request GET:/api/v5/tournaments/parents/{parentid}/children/{childid}/rounds
@@ -19943,7 +22780,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @secure
      */
     v5TournamentsParentsChildrenStageDetail: (parentId: number, childId: number, params: RequestParams = {}) =>
-      this.request<any, GetParentStagesRespApiRespBase>({
+      this.request<any, GetChildStageInfoRespApiRespBase>({
         path: `/api/v5/tournaments/parents/${parentId}/children/${childId}/stage`,
         method: "GET",
         secure: true,
