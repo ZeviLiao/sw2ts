@@ -2031,6 +2031,27 @@ export interface CrewFile {
   path: string;
 }
 
+export interface CrewSettingReq {
+  /**
+   * @format int32
+   * @min 1
+   * @max 2147483647
+   */
+  userId: number;
+  isCrew: boolean;
+}
+
+export type CrewSettingResp = object;
+
+export interface CrewSettingRespApiRespBase {
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
+  data?: CrewSettingResp;
+}
+
 export interface CurrencyItem {
   /** @format int32 */
   id: number;
@@ -8182,6 +8203,7 @@ export interface GetUserResp {
   aboutMe?: string | null;
   /** Avatar image path */
   avatarImagePath?: string | null;
+  isCrew?: boolean;
 }
 
 export interface GetUserRespApiRespBase {
@@ -8613,6 +8635,14 @@ export enum LogLevel {
   None = 6,
 }
 
+export interface LoginReq {
+  /**
+   * @minLength 0
+   * @maxLength 250
+   */
+  login: string;
+}
+
 export type LogoutResp = object;
 
 export interface LogoutRespApiRespBase {
@@ -8815,12 +8845,32 @@ export interface MenuItem {
 }
 
 export interface ModAccountReq {
+  /**
+   * @minLength 0
+   * @maxLength 50
+   */
   firstName?: string | null;
+  /**
+   * @minLength 0
+   * @maxLength 50
+   */
   lastName?: string | null;
   gender?: EnumGender;
+  /**
+   * @minLength 0
+   * @maxLength 255
+   */
   city?: string | null;
-  /** @format int32 */
+  /**
+   * @format int32
+   * @min 1
+   * @max 32767
+   */
   countryId?: number | null;
+  /**
+   * @minLength 0
+   * @maxLength 500
+   */
   aboutMe?: string | null;
 }
 
@@ -11113,6 +11163,46 @@ export interface NotificationTemplateListItem {
   pushSupported: boolean;
 }
 
+export interface OAuthTokenReq {
+  /**
+   * GrantType = refresh_token
+   * @minLength 0
+   * @maxLength 20
+   */
+  grantType: string;
+  /**
+   * @minLength 0
+   * @maxLength 100
+   */
+  refreshToken: string;
+  /**
+   * @minLength 0
+   * @maxLength 50
+   */
+  clientId: string;
+  /**
+   * @minLength 0
+   * @maxLength 100
+   */
+  clientSecret: string;
+}
+
+export interface OAuthTokenResp {
+  accessToken?: string | null;
+  refreshToken?: string | null;
+  /** @format int64 */
+  expiresAt?: number;
+}
+
+export interface OAuthTokenRespApiRespBase {
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
+  data?: OAuthTokenResp;
+}
+
 export interface OneSignalAppListItem {
   /** @format int32 */
   id: number;
@@ -11599,6 +11689,29 @@ export interface RelatedQuickPoll {
   question: string;
   /** Quick poll options */
   options: Option[];
+}
+
+export interface ResetPasswordReq {
+  /**
+   * @format int32
+   * @min 1
+   * @max 2147483647
+   */
+  userId: number;
+}
+
+export interface ResetPasswordResp {
+  /** @minLength 1 */
+  password: string;
+}
+
+export interface ResetPasswordRespApiRespBase {
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
+  data?: ResetPasswordResp;
 }
 
 export type RestartTournamentResp = object;
@@ -12817,6 +12930,68 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
         method: "GET",
         query: query,
         secure: true,
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags BoAuth
+     * @name V5LogoutCreate
+     * @summary Logout
+     * @request POST:/api/v5/logout
+     * @secure
+     */
+    v5LogoutCreate: (
+      query?: {
+        /** RefreshToken */
+        refreshToken?: string;
+      },
+      params: RequestParams = {},
+    ) =>
+      this.request<any, LogoutRespApiRespBase>({
+        path: `/api/v5/logout`,
+        method: "POST",
+        query: query,
+        secure: true,
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags BoAuth
+     * @name V5LoginCreate
+     * @summary Login
+     * @request POST:/api/v5/login
+     * @secure
+     */
+    v5LoginCreate: (data: LoginReq, params: RequestParams = {}) =>
+      this.request<any, OAuthTokenRespApiRespBase>({
+        path: `/api/v5/login`,
+        method: "POST",
+        body: data,
+        secure: true,
+        type: ContentType.Json,
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags BoAuth
+     * @name V5OauthTokenCreate
+     * @summary refresh token
+     * @request POST:/api/v5/oauth/token
+     * @secure
+     */
+    v5OauthTokenCreate: (data: OAuthTokenReq, params: RequestParams = {}) =>
+      this.request<any, OAuthTokenRespApiRespBase>({
+        path: `/api/v5/oauth/token`,
+        method: "POST",
+        body: data,
+        secure: true,
+        type: ContentType.Json,
         ...params,
       }),
 
@@ -16244,30 +16419,6 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
         body: data,
         secure: true,
         type: ContentType.Json,
-        ...params,
-      }),
-
-    /**
-     * No description
-     *
-     * @tags Logout
-     * @name V5LogoutCreate
-     * @summary Logout
-     * @request POST:/api/v5/logout
-     * @secure
-     */
-    v5LogoutCreate: (
-      query?: {
-        /** RefreshToken */
-        refreshToken?: string;
-      },
-      params: RequestParams = {},
-    ) =>
-      this.request<any, LogoutRespApiRespBase>({
-        path: `/api/v5/logout`,
-        method: "POST",
-        query: query,
-        secure: true,
         ...params,
       }),
 
@@ -22901,6 +23052,8 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
          * @maxLength 60
          */
         Email?: string;
+        /** Is crew */
+        IsCrew?: boolean;
         /**
          * @format int32
          * @min 1
@@ -23180,6 +23333,44 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
         method: "GET",
         query: query,
         secure: true,
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Users
+     * @name V5UsersCrewSettingPartialUpdate
+     * @summary User crew setting
+     * @request PATCH:/api/v5/users/{id}/crew-setting
+     * @secure
+     */
+    v5UsersCrewSettingPartialUpdate: (id: number, data: CrewSettingReq, params: RequestParams = {}) =>
+      this.request<any, CrewSettingRespApiRespBase>({
+        path: `/api/v5/users/${id}/crew-setting`,
+        method: "PATCH",
+        body: data,
+        secure: true,
+        type: ContentType.Json,
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Users
+     * @name V5UsersResetPwdPartialUpdate
+     * @summary Reset password
+     * @request PATCH:/api/v5/users/{id}/reset-pwd
+     * @secure
+     */
+    v5UsersResetPwdPartialUpdate: (id: number, data: ResetPasswordReq, params: RequestParams = {}) =>
+      this.request<any, ResetPasswordRespApiRespBase>({
+        path: `/api/v5/users/${id}/reset-pwd`,
+        method: "PATCH",
+        body: data,
+        secure: true,
+        type: ContentType.Json,
         ...params,
       }),
 
