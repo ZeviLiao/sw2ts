@@ -511,6 +511,10 @@
                   "Metadata": {
                     "type": "string",
                     "description": "Metadata"
+                  },
+                  "IsTgPush": {
+                    "type": "boolean",
+                    "description": "Is telegram push"
                   }
                 }
               },
@@ -576,6 +580,9 @@
                   "style": "form"
                 },
                 "Metadata": {
+                  "style": "form"
+                },
+                "IsTgPush": {
                   "style": "form"
                 }
               }
@@ -816,6 +823,10 @@
                   "Metadata": {
                     "type": "string",
                     "description": "Metadata"
+                  },
+                  "IsTgPush": {
+                    "type": "boolean",
+                    "description": "Is telegram push"
                   }
                 }
               },
@@ -899,6 +910,9 @@
                   "style": "form"
                 },
                 "Metadata": {
+                  "style": "form"
+                },
+                "IsTgPush": {
                   "style": "form"
                 }
               }
@@ -1929,6 +1943,86 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/DelMediaItemRespApiRespBase"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v5/comm/msg-push": {
+      "post": {
+        "tags": [
+          "Comm"
+        ],
+        "summary": "Message Push",
+        "requestBody": {
+          "description": "Request",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/MessagePushReq"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/MessagePushReq"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/MessagePushReq"
+              }
+            }
+          }
+        },
+        "responses": {
+          "default": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MessagePushRespApiRespBase"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v5/comm/msg-retraction": {
+      "delete": {
+        "tags": [
+          "Comm"
+        ],
+        "summary": "Message Retraction",
+        "requestBody": {
+          "description": "Request",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/MessageRetractionReq"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/MessageRetractionReq"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/MessageRetractionReq"
+              }
+            }
+          }
+        },
+        "responses": {
+          "default": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MessageRetractionRespApiRespBase"
                 }
               }
             }
@@ -19406,137 +19500,6 @@
             }
           }
         }
-      },
-      "post": {
-        "tags": [
-          "Users"
-        ],
-        "summary": "Add User",
-        "requestBody": {
-          "content": {
-            "multipart/form-data": {
-              "schema": {
-                "required": [
-                  "Email",
-                  "Password",
-                  "Username"
-                ],
-                "type": "object",
-                "properties": {
-                  "Username": {
-                    "maxLength": 20,
-                    "minLength": 1,
-                    "type": "string",
-                    "description": "Username"
-                  },
-                  "Email": {
-                    "maxLength": 60,
-                    "minLength": 1,
-                    "type": "string",
-                    "description": "Email"
-                  },
-                  "Password": {
-                    "maxLength": 72,
-                    "minLength": 8,
-                    "type": "string",
-                    "description": "Password"
-                  },
-                  "LastName": {
-                    "maxLength": 50,
-                    "minLength": 1,
-                    "type": "string",
-                    "description": "Lastname"
-                  },
-                  "FirstName": {
-                    "maxLength": 50,
-                    "minLength": 1,
-                    "type": "string",
-                    "description": "Firstname"
-                  },
-                  "Gender": {
-                    "$ref": "#/components/schemas/EnumGender"
-                  },
-                  "DateOfBirth": {
-                    "type": "string",
-                    "description": "Date of birth",
-                    "format": "date"
-                  },
-                  "City": {
-                    "maxLength": 255,
-                    "minLength": 1,
-                    "type": "string",
-                    "description": "City"
-                  },
-                  "CountryId": {
-                    "maximum": 32767,
-                    "minimum": 1,
-                    "type": "integer",
-                    "description": "Country id",
-                    "format": "int32"
-                  },
-                  "AboutMe": {
-                    "maxLength": 500,
-                    "minLength": 1,
-                    "type": "string",
-                    "description": "About me"
-                  },
-                  "AvatarImage": {
-                    "type": "string",
-                    "description": "Avatar image",
-                    "format": "binary"
-                  }
-                }
-              },
-              "encoding": {
-                "Username": {
-                  "style": "form"
-                },
-                "Email": {
-                  "style": "form"
-                },
-                "Password": {
-                  "style": "form"
-                },
-                "LastName": {
-                  "style": "form"
-                },
-                "FirstName": {
-                  "style": "form"
-                },
-                "Gender": {
-                  "style": "form"
-                },
-                "DateOfBirth": {
-                  "style": "form"
-                },
-                "City": {
-                  "style": "form"
-                },
-                "CountryId": {
-                  "style": "form"
-                },
-                "AboutMe": {
-                  "style": "form"
-                },
-                "AvatarImage": {
-                  "style": "form"
-                }
-              }
-            }
-          }
-        },
-        "responses": {
-          "default": {
-            "description": "Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/AddUserRespApiRespBase"
-                }
-              }
-            }
-          }
-        }
       }
     },
     "/api/v5/users/{id}": {
@@ -22765,36 +22728,6 @@
         },
         "additionalProperties": false
       },
-      "AddUserResp": {
-        "type": "object",
-        "additionalProperties": false
-      },
-      "AddUserRespApiRespBase": {
-        "required": [
-          "msg",
-          "ret",
-          "traceId"
-        ],
-        "type": "object",
-        "properties": {
-          "ret": {
-            "$ref": "#/components/schemas/EnumRet"
-          },
-          "msg": {
-            "minLength": 1,
-            "type": "string"
-          },
-          "traceId": {
-            "minLength": 1,
-            "type": "string",
-            "readOnly": true
-          },
-          "data": {
-            "$ref": "#/components/schemas/AddUserResp"
-          }
-        },
-        "additionalProperties": false
-      },
       "AddVenueResp": {
         "type": "object",
         "additionalProperties": false
@@ -23114,6 +23047,7 @@
           "isProofread",
           "isPublished",
           "isSticky",
+          "isTgPush",
           "localeId",
           "subTypeId",
           "teaser",
@@ -23223,6 +23157,10 @@
             "description": "Proofread datetime",
             "format": "int64",
             "nullable": true
+          },
+          "isTgPush": {
+            "type": "boolean",
+            "description": "Is telegram push"
           },
           "metadata": {
             "type": "array",
@@ -25914,7 +25852,8 @@
           12,
           13,
           14,
-          15
+          15,
+          16
         ],
         "type": "integer",
         "format": "int32",
@@ -25934,7 +25873,8 @@
           "RelatedVideosBox",
           "MainEventShowcaseBox",
           "CustomBox",
-          "MatchTickerBox"
+          "MatchTickerBox",
+          "FeatureTournamentBox"
         ]
       },
       "EnumFieldSort": {
@@ -26041,6 +25981,16 @@
           "Web",
           "MobileWeb",
           "MobileApp"
+        ]
+      },
+      "EnumMsgPlatform": {
+        "enum": [
+          1
+        ],
+        "type": "integer",
+        "format": "int32",
+        "x-enumNames": [
+          "Telegram"
         ]
       },
       "EnumParentTournamentState": {
@@ -39173,6 +39123,7 @@
       "MatchesReport": {
         "required": [
           "game",
+          "games",
           "hosts",
           "match",
           "matchResultedTime",
@@ -39212,6 +39163,10 @@
           "ri": {
             "type": "number",
             "format": "double"
+          },
+          "games": {
+            "type": "integer",
+            "format": "int32"
           },
           "vods": {
             "type": "integer",
@@ -39385,6 +39340,114 @@
               "$ref": "#/components/schemas/MenuItem"
             },
             "description": "Sub Menus"
+          }
+        },
+        "additionalProperties": false
+      },
+      "MessagePushReq": {
+        "required": [
+          "platform",
+          "sourceId",
+          "type"
+        ],
+        "type": "object",
+        "properties": {
+          "platform": {
+            "$ref": "#/components/schemas/EnumMsgPlatform"
+          },
+          "type": {
+            "type": "integer",
+            "description": "Message type (Tg: article = 1, match = 2)",
+            "format": "int32"
+          },
+          "sourceId": {
+            "type": "integer",
+            "description": "Source Id",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "MessagePushResp": {
+        "type": "object",
+        "additionalProperties": false
+      },
+      "MessagePushRespApiRespBase": {
+        "required": [
+          "msg",
+          "ret",
+          "traceId"
+        ],
+        "type": "object",
+        "properties": {
+          "ret": {
+            "$ref": "#/components/schemas/EnumRet"
+          },
+          "msg": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "traceId": {
+            "minLength": 1,
+            "type": "string",
+            "readOnly": true
+          },
+          "data": {
+            "$ref": "#/components/schemas/MessagePushResp"
+          }
+        },
+        "additionalProperties": false
+      },
+      "MessageRetractionReq": {
+        "required": [
+          "platform",
+          "sourceId",
+          "type"
+        ],
+        "type": "object",
+        "properties": {
+          "platform": {
+            "$ref": "#/components/schemas/EnumMsgPlatform"
+          },
+          "type": {
+            "type": "integer",
+            "description": "Message type (Tg: article = 1, match = 2)",
+            "format": "int32"
+          },
+          "sourceId": {
+            "type": "integer",
+            "description": "Source Id",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "MessageRetractionResp": {
+        "type": "object",
+        "additionalProperties": false
+      },
+      "MessageRetractionRespApiRespBase": {
+        "required": [
+          "msg",
+          "ret",
+          "traceId"
+        ],
+        "type": "object",
+        "properties": {
+          "ret": {
+            "$ref": "#/components/schemas/EnumRet"
+          },
+          "msg": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "traceId": {
+            "minLength": 1,
+            "type": "string",
+            "readOnly": true
+          },
+          "data": {
+            "$ref": "#/components/schemas/MessageRetractionResp"
           }
         },
         "additionalProperties": false
@@ -40270,7 +40333,7 @@
             "format": "int32"
           },
           "ads": {
-            "maxLength": 25000,
+            "maxLength": 1048576,
             "minLength": 0,
             "type": "string",
             "nullable": true

@@ -1235,17 +1235,6 @@ export interface AddTeamRespApiRespBase {
   data?: AddTeamResp;
 }
 
-export type AddUserResp = object;
-
-export interface AddUserRespApiRespBase {
-  ret: EnumRet;
-  /** @minLength 1 */
-  msg: string;
-  /** @minLength 1 */
-  traceId: string;
-  data?: AddUserResp;
-}
-
 export type AddVenueResp = object;
 
 export interface AddVenueRespApiRespBase {
@@ -1516,6 +1505,8 @@ export interface ArticleDetail {
    * @format int64
    */
   proofreadAt?: number | null;
+  /** Is telegram push */
+  isTgPush: boolean;
   /** Meta data */
   metadata?: SeoMetadata[] | null;
 }
@@ -2762,6 +2753,7 @@ export enum EnumEventBoxType {
   MainEventShowcaseBox = 13,
   CustomBox = 14,
   MatchTickerBox = 15,
+  FeatureTournamentBox = 16,
 }
 
 /** @format int32 */
@@ -2815,6 +2807,11 @@ export enum EnumMenuPlatform {
   Web = 1,
   MobileWeb = 2,
   MobileApp = 3,
+}
+
+/** @format int32 */
+export enum EnumMsgPlatform {
+  Telegram = 1,
 }
 
 /** @format int32 */
@@ -8736,6 +8733,8 @@ export interface MatchesReport {
   /** @format double */
   ri: number;
   /** @format int32 */
+  games: number;
+  /** @format int32 */
   vods: number;
   /** @minLength 1 */
   hosts: string;
@@ -8842,6 +8841,56 @@ export interface MenuItem {
   url?: string | null;
   /** Sub Menus */
   subMenus: MenuItem[];
+}
+
+export interface MessagePushReq {
+  platform: EnumMsgPlatform;
+  /**
+   * Message type (Tg: article = 1, match = 2)
+   * @format int32
+   */
+  type: number;
+  /**
+   * Source Id
+   * @format int32
+   */
+  sourceId: number;
+}
+
+export type MessagePushResp = object;
+
+export interface MessagePushRespApiRespBase {
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
+  data?: MessagePushResp;
+}
+
+export interface MessageRetractionReq {
+  platform: EnumMsgPlatform;
+  /**
+   * Message type (Tg: article = 1, match = 2)
+   * @format int32
+   */
+  type: number;
+  /**
+   * Source Id
+   * @format int32
+   */
+  sourceId: number;
+}
+
+export type MessageRetractionResp = object;
+
+export interface MessageRetractionRespApiRespBase {
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
+  data?: MessageRetractionResp;
 }
 
 export interface ModAccountReq {
@@ -9329,7 +9378,7 @@ export interface ModFrontendAdsReq {
   id: number;
   /**
    * @minLength 0
-   * @maxLength 25000
+   * @maxLength 1048576
    */
   ads?: string | null;
 }
@@ -12717,6 +12766,8 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
         "QuickPoll.Options"?: string[];
         /** Metadata */
         Metadata?: string;
+        /** Is telegram push */
+        IsTgPush?: boolean;
       },
       params: RequestParams = {},
     ) =>
@@ -12871,6 +12922,8 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
         "QuickPoll.Options"?: string[];
         /** Metadata */
         Metadata?: string;
+        /** Is telegram push */
+        IsTgPush?: boolean;
       },
       params: RequestParams = {},
     ) =>
@@ -13492,6 +13545,44 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
         path: `/api/v5/broadcasttalents/${broadcastid}/media-items/${mediaitemid}`,
         method: "DELETE",
         secure: true,
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Comm
+     * @name V5CommMsgPushCreate
+     * @summary Message Push
+     * @request POST:/api/v5/comm/msg-push
+     * @secure
+     */
+    v5CommMsgPushCreate: (data: MessagePushReq, params: RequestParams = {}) =>
+      this.request<any, MessagePushRespApiRespBase>({
+        path: `/api/v5/comm/msg-push`,
+        method: "POST",
+        body: data,
+        secure: true,
+        type: ContentType.Json,
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Comm
+     * @name V5CommMsgRetractionDelete
+     * @summary Message Retraction
+     * @request DELETE:/api/v5/comm/msg-retraction
+     * @secure
+     */
+    v5CommMsgRetractionDelete: (data: MessageRetractionReq, params: RequestParams = {}) =>
+      this.request<any, MessageRetractionRespApiRespBase>({
+        path: `/api/v5/comm/msg-retraction`,
+        method: "DELETE",
+        body: data,
+        secure: true,
+        type: ContentType.Json,
         ...params,
       }),
 
@@ -23074,89 +23165,6 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
         method: "GET",
         query: query,
         secure: true,
-        ...params,
-      }),
-
-    /**
-     * No description
-     *
-     * @tags Users
-     * @name V5UsersCreate
-     * @summary Add User
-     * @request POST:/api/v5/users
-     * @secure
-     */
-    v5UsersCreate: (
-      data: {
-        /**
-         * Username
-         * @minLength 1
-         * @maxLength 20
-         */
-        Username: string;
-        /**
-         * Email
-         * @minLength 1
-         * @maxLength 60
-         */
-        Email: string;
-        /**
-         * Password
-         * @minLength 8
-         * @maxLength 72
-         */
-        Password: string;
-        /**
-         * Lastname
-         * @minLength 1
-         * @maxLength 50
-         */
-        LastName?: string;
-        /**
-         * Firstname
-         * @minLength 1
-         * @maxLength 50
-         */
-        FirstName?: string;
-        Gender?: EnumGender;
-        /**
-         * Date of birth
-         * @format date
-         */
-        DateOfBirth?: string;
-        /**
-         * City
-         * @minLength 1
-         * @maxLength 255
-         */
-        City?: string;
-        /**
-         * Country id
-         * @format int32
-         * @min 1
-         * @max 32767
-         */
-        CountryId?: number;
-        /**
-         * About me
-         * @minLength 1
-         * @maxLength 500
-         */
-        AboutMe?: string;
-        /**
-         * Avatar image
-         * @format binary
-         */
-        AvatarImage?: File;
-      },
-      params: RequestParams = {},
-    ) =>
-      this.request<any, AddUserRespApiRespBase>({
-        path: `/api/v5/users`,
-        method: "POST",
-        body: data,
-        secure: true,
-        type: ContentType.FormData,
         ...params,
       }),
 
