@@ -3383,6 +3383,46 @@
         }
       }
     },
+    "/api/v5/events/clear-cache": {
+      "patch": {
+        "tags": [
+          "Events"
+        ],
+        "summary": "Clear portal cache",
+        "requestBody": {
+          "description": "Request",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ClearCacheReq"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ClearCacheReq"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ClearCacheReq"
+              }
+            }
+          }
+        },
+        "responses": {
+          "default": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ClearCacheRespApiRespBase"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/v5/files/crew-folders": {
       "get": {
         "tags": [
@@ -4688,6 +4728,282 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ModMenuOptionsRespApiRespBase"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v5/frontends/banners": {
+      "get": {
+        "tags": [
+          "Frontends"
+        ],
+        "summary": "Get frontend banners by condition",
+        "parameters": [
+          {
+            "name": "FrontendId",
+            "in": "query",
+            "description": "Core frontend id",
+            "required": true,
+            "style": "form",
+            "schema": {
+              "maximum": 32767,
+              "minimum": 1,
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetBannersRespApiRespBase"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Frontends"
+        ],
+        "summary": "Add frontend site section banner",
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "required": [
+                  "BannerImageFile",
+                  "EnableHyperlink",
+                  "FrontendId",
+                  "SiteSectionId"
+                ],
+                "type": "object",
+                "properties": {
+                  "FrontendId": {
+                    "maximum": 32767,
+                    "minimum": 1,
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "SiteSectionId": {
+                    "maximum": 32767,
+                    "minimum": 0,
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "AltText": {
+                    "maxLength": 255,
+                    "minLength": 0,
+                    "type": "string"
+                  },
+                  "EnableHyperlink": {
+                    "type": "boolean"
+                  },
+                  "OpenType": {
+                    "$ref": "#/components/schemas/EnumBannerOpenType"
+                  },
+                  "Url": {
+                    "maxLength": 512,
+                    "minLength": 0,
+                    "type": "string"
+                  },
+                  "BannerImageFile": {
+                    "type": "string",
+                    "description": "Banner image file",
+                    "format": "binary"
+                  }
+                }
+              },
+              "encoding": {
+                "FrontendId": {
+                  "style": "form"
+                },
+                "SiteSectionId": {
+                  "style": "form"
+                },
+                "AltText": {
+                  "style": "form"
+                },
+                "EnableHyperlink": {
+                  "style": "form"
+                },
+                "OpenType": {
+                  "style": "form"
+                },
+                "Url": {
+                  "style": "form"
+                },
+                "BannerImageFile": {
+                  "style": "form"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "default": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AddBannerRespApiRespBase"
+                }
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Frontends"
+        ],
+        "summary": "Modify frontend site section banner",
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "required": [
+                  "EnableHyperlink",
+                  "Id"
+                ],
+                "type": "object",
+                "properties": {
+                  "Id": {
+                    "maximum": 32767,
+                    "minimum": 1,
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "AltText": {
+                    "maxLength": 255,
+                    "minLength": 0,
+                    "type": "string"
+                  },
+                  "EnableHyperlink": {
+                    "type": "boolean"
+                  },
+                  "OpenType": {
+                    "$ref": "#/components/schemas/EnumBannerOpenType"
+                  },
+                  "Url": {
+                    "maxLength": 512,
+                    "minLength": 0,
+                    "type": "string"
+                  },
+                  "BannerImageFile": {
+                    "type": "string",
+                    "description": "Banner image file",
+                    "format": "binary"
+                  }
+                }
+              },
+              "encoding": {
+                "Id": {
+                  "style": "form"
+                },
+                "AltText": {
+                  "style": "form"
+                },
+                "EnableHyperlink": {
+                  "style": "form"
+                },
+                "OpenType": {
+                  "style": "form"
+                },
+                "Url": {
+                  "style": "form"
+                },
+                "BannerImageFile": {
+                  "style": "form"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "default": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ModBannerRespApiRespBase"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v5/frontends/banners/{id}": {
+      "get": {
+        "tags": [
+          "Frontends"
+        ],
+        "summary": "Get frontend site section banner detail",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "maximum": 32767,
+              "minimum": 1,
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetBannerDetailRespApiRespBase"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v5/frontends/banners/site-sections": {
+      "get": {
+        "tags": [
+          "Frontends"
+        ],
+        "summary": "Get banner site sections",
+        "parameters": [
+          {
+            "name": "FrontendId",
+            "in": "query",
+            "description": "Core frontend id",
+            "required": true,
+            "style": "form",
+            "schema": {
+              "maximum": 32767,
+              "minimum": 1,
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Int32ItemListApiRespBase"
                 }
               }
             }
@@ -7023,6 +7339,11 @@
                     "type": "string",
                     "description": "Mobile Icon file",
                     "format": "binary"
+                  },
+                  "MtHeroId": {
+                    "type": "integer",
+                    "description": "Moonton hero id",
+                    "format": "int32"
                   }
                 }
               },
@@ -7037,6 +7358,9 @@
                   "style": "form"
                 },
                 "MobileIconFile": {
+                  "style": "form"
+                },
+                "MtHeroId": {
                   "style": "form"
                 }
               }
@@ -7151,6 +7475,11 @@
                     "type": "string",
                     "description": "Mobile Icon file",
                     "format": "binary"
+                  },
+                  "MtHeroId": {
+                    "type": "integer",
+                    "description": "Moonton hero id",
+                    "format": "int32"
                   }
                 }
               },
@@ -7168,6 +7497,9 @@
                   "style": "form"
                 },
                 "MobileIconFile": {
+                  "style": "form"
+                },
+                "MtHeroId": {
                   "style": "form"
                 }
               }
@@ -7454,6 +7786,19 @@
             "description": "Http method",
             "style": "form",
             "schema": {
+              "maxLength": 8,
+              "minLength": 0,
+              "type": "string"
+            }
+          },
+          {
+            "name": "Host",
+            "in": "query",
+            "description": "Host",
+            "style": "form",
+            "schema": {
+              "maxLength": 100,
+              "minLength": 0,
               "type": "string"
             }
           },
@@ -7694,6 +8039,46 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/GetSystemLogRespApiRespBase"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v5/logs": {
+      "post": {
+        "tags": [
+          "Logs"
+        ],
+        "summary": "Add log",
+        "requestBody": {
+          "description": "Request",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AddLogReq"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AddLogReq"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/AddLogReq"
+              }
+            }
+          }
+        },
+        "responses": {
+          "default": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AddLogRespApiRespBase"
                 }
               }
             }
@@ -8189,7 +8574,7 @@
           {
             "name": "PlatformId",
             "in": "query",
-            "description": "Platform Id (TwitchTV = 1,Youtube_Channel = 10,Youtube_Stream = 11,Other = 99)",
+            "description": "Platform Id (TwitchTV = 1,Youtube_Channel = 10,Youtube_Stream = 11 Facebook = 12,Other = 99)",
             "style": "form",
             "schema": {
               "$ref": "#/components/schemas/EnumPlatform"
@@ -10345,6 +10730,40 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/GetGameOptionsRespApiRespBase"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v5/options/frontend-games": {
+      "get": {
+        "tags": [
+          "Options"
+        ],
+        "summary": "Get games options by frontend",
+        "parameters": [
+          {
+            "name": "frontendId",
+            "in": "query",
+            "required": true,
+            "style": "form",
+            "schema": {
+              "maximum": 32767,
+              "minimum": 0,
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Int16ItemListApiRespBase"
                 }
               }
             }
@@ -12604,6 +13023,121 @@
         }
       }
     },
+    "/api/v5/reports/registrations": {
+      "get": {
+        "tags": [
+          "Reports"
+        ],
+        "summary": "Get registration list",
+        "parameters": [
+          {
+            "name": "From",
+            "in": "query",
+            "required": true,
+            "style": "form",
+            "schema": {
+              "minimum": 1,
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "To",
+            "in": "query",
+            "required": true,
+            "style": "form",
+            "schema": {
+              "minimum": 1,
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "PageNo",
+            "in": "query",
+            "style": "form",
+            "schema": {
+              "maximum": 2147483647,
+              "minimum": 1,
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "PageSize",
+            "in": "query",
+            "style": "form",
+            "schema": {
+              "maximum": 100,
+              "minimum": 1,
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetRegistrationListRespApiRespBase"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v5/reports/registrations/download-excel": {
+      "get": {
+        "tags": [
+          "Reports"
+        ],
+        "summary": "Download registrations report excel",
+        "parameters": [
+          {
+            "name": "From",
+            "in": "query",
+            "required": true,
+            "style": "form",
+            "schema": {
+              "minimum": 1,
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "To",
+            "in": "query",
+            "required": true,
+            "style": "form",
+            "schema": {
+              "minimum": 1,
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "TimeZone",
+            "in": "query",
+            "required": true,
+            "style": "form",
+            "schema": {
+              "maximum": 14,
+              "minimum": -12,
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
     "/api/v5/roles/role-options": {
       "get": {
         "tags": [
@@ -14857,6 +15391,221 @@
         }
       }
     },
+    "/api/v5/teams/{teamId}/rating-logs": {
+      "get": {
+        "tags": [
+          "Teams"
+        ],
+        "summary": "Get team rating adjustment logs",
+        "parameters": [
+          {
+            "name": "teamId",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "TeamId",
+            "in": "query",
+            "required": true,
+            "style": "form",
+            "schema": {
+              "maximum": 2147483647,
+              "minimum": 1,
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "PageNo",
+            "in": "query",
+            "style": "form",
+            "schema": {
+              "maximum": 2147483647,
+              "minimum": 1,
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "PageSize",
+            "in": "query",
+            "style": "form",
+            "schema": {
+              "maximum": 100,
+              "minimum": 1,
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetTeamRatingLogRespApiRespBase"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v5/teams/{teamId}/ratings": {
+      "post": {
+        "tags": [
+          "Teams"
+        ],
+        "summary": "Update team rating",
+        "parameters": [
+          {
+            "name": "teamId",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateTeamRatingReq"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateTeamRatingReq"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateTeamRatingReq"
+              }
+            }
+          }
+        },
+        "responses": {
+          "default": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UpdateTeamRatingRespApiRespBase"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v5/teams/{teamId}/clear-cache": {
+      "patch": {
+        "tags": [
+          "Teams"
+        ],
+        "summary": "Clear portal team detail cache",
+        "parameters": [
+          {
+            "name": "teamId",
+            "in": "path",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ClearTeamDetailCacheRespApiRespBase"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v5/telegram/notifications": {
+      "get": {
+        "tags": [
+          "Telegram"
+        ],
+        "summary": "Get tg notifications by condition",
+        "parameters": [
+          {
+            "name": "Type",
+            "in": "query",
+            "style": "form",
+            "schema": {
+              "$ref": "#/components/schemas/EnumTgMsgType"
+            }
+          },
+          {
+            "name": "SourceId",
+            "in": "query",
+            "style": "form",
+            "schema": {
+              "maximum": 2147483647,
+              "minimum": 1,
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "PageNo",
+            "in": "query",
+            "style": "form",
+            "schema": {
+              "maximum": 2147483647,
+              "minimum": 1,
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "PageSize",
+            "in": "query",
+            "style": "form",
+            "schema": {
+              "maximum": 100,
+              "minimum": 1,
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetTgNotificationsRespApiRespBase"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/v5/tournaments/fuzzy": {
       "get": {
         "tags": [
@@ -15968,6 +16717,82 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/DelChildMediaItemRespApiRespBase"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v5/tournaments/data-providers/mlbb/battile-list": {
+      "get": {
+        "tags": [
+          "Tournaments"
+        ],
+        "summary": "Get MLBB Battle List",
+        "parameters": [
+          {
+            "name": "RoomName",
+            "in": "query",
+            "style": "form",
+            "schema": {
+              "maxLength": 30,
+              "minLength": 0,
+              "type": "string"
+            }
+          },
+          {
+            "name": "JudgeId",
+            "in": "query",
+            "style": "form",
+            "schema": {
+              "maximum": 2147483647,
+              "minimum": 1,
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetMLBBBattileListRespListApiRespBase"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v5/tournaments/data-providers/mlbb/battle-detail": {
+      "get": {
+        "tags": [
+          "Tournaments"
+        ],
+        "summary": "Get MLBB Battle Detail",
+        "parameters": [
+          {
+            "name": "BattleId",
+            "in": "query",
+            "required": true,
+            "style": "form",
+            "schema": {
+              "maxLength": 30,
+              "minLength": 0,
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetMLBBBattileDetailRespApiRespBase"
                 }
               }
             }
@@ -17238,6 +18063,90 @@
         }
       }
     },
+    "/api/v5/tournaments/rounds/{roundid}/matches/{matchid}/status": {
+      "patch": {
+        "tags": [
+          "Tournaments"
+        ],
+        "summary": "Modify child tournament match status",
+        "parameters": [
+          {
+            "name": "roundid",
+            "in": "path",
+            "description": "Round id",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "matchid",
+            "in": "path",
+            "description": "Request",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ModMatchStatusReq"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ModMatchStatusReq"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ModMatchStatusReq"
+              }
+            }
+          }
+        },
+        "responses": {
+          "default": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ModMatchStatusRespApiRespBase"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v5/tournaments/matches/upcoming/clear-cache": {
+      "patch": {
+        "tags": [
+          "Tournaments"
+        ],
+        "summary": "Clear portal upcoming matches cache",
+        "responses": {
+          "default": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ClearUpcomingCacheRespApiRespBase"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/v5/tournaments/parents/{parentid}/children/{childid}/opponents": {
       "get": {
         "tags": [
@@ -18216,6 +19125,61 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ModParentStatusRespApiRespBase"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v5/tournaments/parents/{parentId}/tg-push": {
+      "patch": {
+        "tags": [
+          "Tournaments"
+        ],
+        "summary": "Modify TG Auto push",
+        "parameters": [
+          {
+            "name": "parentId",
+            "in": "path",
+            "description": "Parent tournament id",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "maximum": 2147483647,
+              "minimum": 1,
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ModTgPushReq"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ModTgPushReq"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ModTgPushReq"
+              }
+            }
+          }
+        },
+        "responses": {
+          "default": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ObjectApiRespBase"
                 }
               }
             }
@@ -19854,7 +20818,7 @@
         "tags": [
           "Users"
         ],
-        "summary": "Reset password",
+        "summary": "Reset bo auth password",
         "parameters": [
           {
             "name": "id",
@@ -19895,6 +20859,59 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ResetPasswordRespApiRespBase"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v5/users/{id}/enable": {
+      "patch": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "Enable/Disable user account",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "UserId",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EnableUserReq"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EnableUserReq"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/EnableUserReq"
+              }
+            }
+          }
+        },
+        "responses": {
+          "default": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EnableUserRespApiRespBase"
                 }
               }
             }
@@ -20364,6 +21381,36 @@
         },
         "additionalProperties": false
       },
+      "AddBannerResp": {
+        "type": "object",
+        "additionalProperties": false
+      },
+      "AddBannerRespApiRespBase": {
+        "required": [
+          "msg",
+          "ret",
+          "traceId"
+        ],
+        "type": "object",
+        "properties": {
+          "ret": {
+            "$ref": "#/components/schemas/EnumRet"
+          },
+          "msg": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "traceId": {
+            "minLength": 1,
+            "type": "string",
+            "readOnly": true
+          },
+          "data": {
+            "$ref": "#/components/schemas/AddBannerResp"
+          }
+        },
+        "additionalProperties": false
+      },
       "AddBroadcastTalentResp": {
         "type": "object",
         "additionalProperties": false
@@ -20461,6 +21508,7 @@
         "required": [
           "isHidden",
           "isLan",
+          "isTgPush",
           "name",
           "prizePoolStatus",
           "rankingImportance",
@@ -20586,6 +21634,10 @@
             "description": "Game Mode Id",
             "format": "int32",
             "nullable": true
+          },
+          "isTgPush": {
+            "type": "boolean",
+            "description": "Telegram auto push"
           }
         },
         "additionalProperties": false
@@ -21488,6 +22540,85 @@
           },
           "data": {
             "$ref": "#/components/schemas/AddHeroResp"
+          }
+        },
+        "additionalProperties": false
+      },
+      "AddLogReq": {
+        "required": [
+          "className",
+          "logLevel",
+          "message",
+          "messagePayload",
+          "methodName",
+          "prefix",
+          "traceId"
+        ],
+        "type": "object",
+        "properties": {
+          "traceId": {
+            "maxLength": 128,
+            "minLength": 0,
+            "type": "string"
+          },
+          "prefix": {
+            "maxLength": 128,
+            "minLength": 0,
+            "type": "string",
+            "description": "Ex: GG.Frontend.Backoffice/GB.Frontend.Backoffice"
+          },
+          "logLevel": {
+            "$ref": "#/components/schemas/LogLevel"
+          },
+          "message": {
+            "maxLength": 2000,
+            "minLength": 0,
+            "type": "string"
+          },
+          "messagePayload": {
+            "maxLength": 4000,
+            "minLength": 0,
+            "type": "string"
+          },
+          "className": {
+            "maxLength": 128,
+            "minLength": 0,
+            "type": "string"
+          },
+          "methodName": {
+            "maxLength": 128,
+            "minLength": 0,
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      },
+      "AddLogResp": {
+        "type": "object",
+        "additionalProperties": false
+      },
+      "AddLogRespApiRespBase": {
+        "required": [
+          "msg",
+          "ret",
+          "traceId"
+        ],
+        "type": "object",
+        "properties": {
+          "ret": {
+            "$ref": "#/components/schemas/EnumRet"
+          },
+          "msg": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "traceId": {
+            "minLength": 1,
+            "type": "string",
+            "readOnly": true
+          },
+          "data": {
+            "$ref": "#/components/schemas/AddLogResp"
           }
         },
         "additionalProperties": false
@@ -23647,7 +24778,8 @@
           "playerId",
           "playerName",
           "registeredAt",
-          "registerId"
+          "registerId",
+          "url"
         ],
         "type": "object",
         "properties": {
@@ -23682,6 +24814,11 @@
           "canUnregister": {
             "type": "boolean",
             "description": "Can register"
+          },
+          "url": {
+            "minLength": 1,
+            "type": "string",
+            "description": "Portal player detail page hyperlink"
           }
         },
         "additionalProperties": false
@@ -23780,7 +24917,8 @@
           "registeredAt",
           "registerId",
           "teamName",
-          "teamTag"
+          "teamTag",
+          "url"
         ],
         "type": "object",
         "properties": {
@@ -23829,6 +24967,11 @@
           "canUnregister": {
             "type": "boolean",
             "description": "Can register"
+          },
+          "url": {
+            "minLength": 1,
+            "type": "string",
+            "description": "Portal team detail page hyperlink"
           }
         },
         "additionalProperties": false
@@ -23947,6 +25090,51 @@
         },
         "additionalProperties": false
       },
+      "ClearCacheReq": {
+        "required": [
+          "eventId"
+        ],
+        "type": "object",
+        "properties": {
+          "eventId": {
+            "maximum": 2147483647,
+            "minimum": 1,
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ClearCacheResp": {
+        "type": "object",
+        "additionalProperties": false
+      },
+      "ClearCacheRespApiRespBase": {
+        "required": [
+          "msg",
+          "ret",
+          "traceId"
+        ],
+        "type": "object",
+        "properties": {
+          "ret": {
+            "$ref": "#/components/schemas/EnumRet"
+          },
+          "msg": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "traceId": {
+            "minLength": 1,
+            "type": "string",
+            "readOnly": true
+          },
+          "data": {
+            "$ref": "#/components/schemas/ClearCacheResp"
+          }
+        },
+        "additionalProperties": false
+      },
       "ClearMatchesResp": {
         "type": "object",
         "additionalProperties": false
@@ -23973,6 +25161,66 @@
           },
           "data": {
             "$ref": "#/components/schemas/ClearMatchesResp"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ClearTeamDetailCacheResp": {
+        "type": "object",
+        "additionalProperties": false
+      },
+      "ClearTeamDetailCacheRespApiRespBase": {
+        "required": [
+          "msg",
+          "ret",
+          "traceId"
+        ],
+        "type": "object",
+        "properties": {
+          "ret": {
+            "$ref": "#/components/schemas/EnumRet"
+          },
+          "msg": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "traceId": {
+            "minLength": 1,
+            "type": "string",
+            "readOnly": true
+          },
+          "data": {
+            "$ref": "#/components/schemas/ClearTeamDetailCacheResp"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ClearUpcomingCacheResp": {
+        "type": "object",
+        "additionalProperties": false
+      },
+      "ClearUpcomingCacheRespApiRespBase": {
+        "required": [
+          "msg",
+          "ret",
+          "traceId"
+        ],
+        "type": "object",
+        "properties": {
+          "ret": {
+            "$ref": "#/components/schemas/EnumRet"
+          },
+          "msg": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "traceId": {
+            "minLength": 1,
+            "type": "string",
+            "readOnly": true
+          },
+          "data": {
+            "$ref": "#/components/schemas/ClearUpcomingCacheResp"
           }
         },
         "additionalProperties": false
@@ -25693,6 +26941,56 @@
         },
         "additionalProperties": false
       },
+      "EnableUserReq": {
+        "required": [
+          "enable",
+          "userId"
+        ],
+        "type": "object",
+        "properties": {
+          "userId": {
+            "maximum": 2147483647,
+            "minimum": 1,
+            "type": "integer",
+            "format": "int32"
+          },
+          "enable": {
+            "type": "boolean",
+            "description": "Enable = true/ Disable=false"
+          }
+        },
+        "additionalProperties": false
+      },
+      "EnableUserResp": {
+        "type": "object",
+        "additionalProperties": false
+      },
+      "EnableUserRespApiRespBase": {
+        "required": [
+          "msg",
+          "ret",
+          "traceId"
+        ],
+        "type": "object",
+        "properties": {
+          "ret": {
+            "$ref": "#/components/schemas/EnumRet"
+          },
+          "msg": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "traceId": {
+            "minLength": 1,
+            "type": "string",
+            "readOnly": true
+          },
+          "data": {
+            "$ref": "#/components/schemas/EnableUserResp"
+          }
+        },
+        "additionalProperties": false
+      },
       "EnumArticleState": {
         "enum": [
           1,
@@ -25721,6 +27019,18 @@
           "News",
           "Features",
           "Guides"
+        ]
+      },
+      "EnumBannerOpenType": {
+        "enum": [
+          1,
+          2
+        ],
+        "type": "integer",
+        "format": "int32",
+        "x-enumNames": [
+          "NewTab",
+          "ExistingPage"
         ]
       },
       "EnumBoMatchStatus": {
@@ -25853,7 +27163,8 @@
           13,
           14,
           15,
-          16
+          16,
+          17
         ],
         "type": "integer",
         "format": "int32",
@@ -25874,7 +27185,8 @@
           "MainEventShowcaseBox",
           "CustomBox",
           "MatchTickerBox",
-          "FeatureTournamentBox"
+          "FeatureTournamentBox",
+          "RelatedTournamentsBox"
         ]
       },
       "EnumFieldSort": {
@@ -25969,6 +27281,20 @@
           "UserSelected"
         ]
       },
+      "EnumMatchStatus": {
+        "enum": [
+          0,
+          1,
+          2
+        ],
+        "type": "integer",
+        "format": "int32",
+        "x-enumNames": [
+          "NotCompleted",
+          "Completed",
+          "Canceled"
+        ]
+      },
       "EnumMenuPlatform": {
         "enum": [
           1,
@@ -26028,6 +27354,7 @@
           1,
           10,
           11,
+          12,
           99
         ],
         "type": "integer",
@@ -26036,6 +27363,7 @@
           "PLATFORM_TWITCHTV",
           "PLATFORM_YOUTUBE_CHANNEL",
           "PLATFORM_YOUTUBE_STREAM",
+          "PLATFORM_FACEBOOK",
           "PLATFORM_OTHER"
         ]
       },
@@ -26146,6 +27474,8 @@
           50003,
           50004,
           50005,
+          50006,
+          50007,
           59999,
           60000,
           60001,
@@ -26221,6 +27551,8 @@
           "DeleteFail",
           "GetJwtKeyFail",
           "InternalServerError",
+          "ServerIsBusy",
+          "TooManyRequests",
           "ServerErrorsEnd",
           "ForbiddenErrorsStart",
           "Disallow",
@@ -26293,6 +27625,48 @@
         "x-enumNames": [
           "RankingAsc",
           "RankingDesc"
+        ]
+      },
+      "EnumTgMsgStatus": {
+        "enum": [
+          0,
+          1,
+          2,
+          3,
+          4
+        ],
+        "type": "integer",
+        "format": "int32",
+        "x-enumNames": [
+          "UnPublish",
+          "Schedule",
+          "Publish",
+          "Delete",
+          "GameChannelSchedule"
+        ]
+      },
+      "EnumTgMsgType": {
+        "enum": [
+          1,
+          2
+        ],
+        "type": "integer",
+        "format": "int32",
+        "x-enumNames": [
+          "Article",
+          "Match"
+        ]
+      },
+      "EnumTgTriggerSource": {
+        "enum": [
+          1,
+          2
+        ],
+        "type": "integer",
+        "format": "int32",
+        "x-enumNames": [
+          "System",
+          "Manual"
         ]
       },
       "EnumTournamentRelatedType": {
@@ -26815,6 +28189,8 @@
             "$ref": "#/components/schemas/EnumGameDraftType"
           },
           "registrationId": {
+            "maximum": 2147483647,
+            "minimum": 1,
             "type": "integer",
             "description": "Team/opponent id",
             "format": "int32"
@@ -27247,6 +28623,120 @@
           },
           "data": {
             "$ref": "#/components/schemas/GetArticlesResp"
+          }
+        },
+        "additionalProperties": false
+      },
+      "GetBannerDetailResp": {
+        "required": [
+          "enableHyperlink",
+          "frontendId",
+          "id",
+          "imagePath",
+          "siteSectionId",
+          "siteSectionName"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "frontendId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "siteSectionId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "siteSectionName": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "altText": {
+            "type": "string",
+            "nullable": true
+          },
+          "enableHyperlink": {
+            "type": "boolean"
+          },
+          "openType": {
+            "$ref": "#/components/schemas/EnumBannerOpenType"
+          },
+          "url": {
+            "type": "string",
+            "nullable": true
+          },
+          "imagePath": {
+            "minLength": 1,
+            "type": "string",
+            "description": "Banner image path"
+          }
+        },
+        "additionalProperties": false
+      },
+      "GetBannerDetailRespApiRespBase": {
+        "required": [
+          "msg",
+          "ret",
+          "traceId"
+        ],
+        "type": "object",
+        "properties": {
+          "ret": {
+            "$ref": "#/components/schemas/EnumRet"
+          },
+          "msg": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "traceId": {
+            "minLength": 1,
+            "type": "string",
+            "readOnly": true
+          },
+          "data": {
+            "$ref": "#/components/schemas/GetBannerDetailResp"
+          }
+        },
+        "additionalProperties": false
+      },
+      "GetBannersResp": {
+        "type": "object",
+        "properties": {
+          "banners": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SiteSectionBanner"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "GetBannersRespApiRespBase": {
+        "required": [
+          "msg",
+          "ret",
+          "traceId"
+        ],
+        "type": "object",
+        "properties": {
+          "ret": {
+            "$ref": "#/components/schemas/EnumRet"
+          },
+          "msg": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "traceId": {
+            "minLength": 1,
+            "type": "string",
+            "readOnly": true
+          },
+          "data": {
+            "$ref": "#/components/schemas/GetBannersResp"
           }
         },
         "additionalProperties": false
@@ -27849,6 +29339,7 @@
           "gameId",
           "gameName",
           "isFeatured",
+          "isTgPush",
           "parentCreatedAt",
           "parentCreatorId",
           "parentCreatorName",
@@ -28076,6 +29567,10 @@
             "type": "integer",
             "description": "Parent tournament updated at",
             "format": "int64"
+          },
+          "isTgPush": {
+            "type": "boolean",
+            "description": "Telegram auto psuh"
           }
         },
         "additionalProperties": false
@@ -28507,6 +30002,7 @@
           "childTournamentId",
           "isHidden",
           "isLan",
+          "isTgPush",
           "name",
           "parentName",
           "parentTournamentId",
@@ -28652,6 +30148,10 @@
             "description": "Game Mode Id",
             "format": "int32",
             "nullable": true
+          },
+          "isTgPush": {
+            "type": "boolean",
+            "description": "Is Telegram psuh"
           }
         },
         "additionalProperties": false
@@ -31056,12 +32556,17 @@
         "required": [
           "draftItems",
           "heroOptions",
+          "isPlayerBased",
           "team1PlayerOptions",
           "team2PlayerOptions",
           "teamOptions"
         ],
         "type": "object",
         "properties": {
+          "isPlayerBased": {
+            "type": "boolean",
+            "description": "Is player based"
+          },
           "teamOptions": {
             "type": "array",
             "items": {
@@ -32156,6 +33661,12 @@
             "type": "string",
             "description": "Mobile Icon file name",
             "nullable": true
+          },
+          "mtHeroId": {
+            "type": "integer",
+            "description": "Moonton hero id",
+            "format": "int32",
+            "nullable": true
           }
         },
         "additionalProperties": false
@@ -32487,6 +33998,118 @@
           },
           "data": {
             "$ref": "#/components/schemas/GetLogLevelsResp"
+          }
+        },
+        "additionalProperties": false
+      },
+      "GetMLBBBattileDetailResp": {
+        "type": "object",
+        "properties": {
+          "battleId": {
+            "type": "string",
+            "nullable": true
+          },
+          "roomName": {
+            "type": "string",
+            "nullable": true
+          },
+          "team1Name": {
+            "type": "string",
+            "nullable": true
+          },
+          "team2Name": {
+            "type": "string",
+            "nullable": true
+          },
+          "startTime": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "status": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "GetMLBBBattileDetailRespApiRespBase": {
+        "required": [
+          "msg",
+          "ret",
+          "traceId"
+        ],
+        "type": "object",
+        "properties": {
+          "ret": {
+            "$ref": "#/components/schemas/EnumRet"
+          },
+          "msg": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "traceId": {
+            "minLength": 1,
+            "type": "string",
+            "readOnly": true
+          },
+          "data": {
+            "$ref": "#/components/schemas/GetMLBBBattileDetailResp"
+          }
+        },
+        "additionalProperties": false
+      },
+      "GetMLBBBattileListResp": {
+        "required": [
+          "battleId",
+          "judgeId",
+          "reportTime"
+        ],
+        "type": "object",
+        "properties": {
+          "battleId": {
+            "minLength": 1,
+            "type": "string",
+            "description": "戰鬥Id"
+          },
+          "reportTime": {
+            "type": "integer",
+            "description": "戰鬥開始時間 (已轉為UTC+0)",
+            "format": "int64"
+          },
+          "judgeId": {
+            "type": "integer",
+            "description": "裁判遊戲Id",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "GetMLBBBattileListRespListApiRespBase": {
+        "required": [
+          "msg",
+          "ret",
+          "traceId"
+        ],
+        "type": "object",
+        "properties": {
+          "ret": {
+            "$ref": "#/components/schemas/EnumRet"
+          },
+          "msg": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "traceId": {
+            "minLength": 1,
+            "type": "string",
+            "readOnly": true
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/GetMLBBBattileListResp"
+            },
+            "nullable": true
           }
         },
         "additionalProperties": false
@@ -32859,6 +34482,11 @@
             "type": "integer",
             "description": "Parent tournament team size",
             "format": "int32"
+          },
+          "mtBattleId": {
+            "type": "string",
+            "description": "Moonton battle id (On Mobile Legends needs to set)",
+            "nullable": true
           }
         },
         "additionalProperties": false
@@ -35339,6 +36967,52 @@
         },
         "additionalProperties": false
       },
+      "GetRegistrationListResp": {
+        "required": [
+          "paging",
+          "users"
+        ],
+        "type": "object",
+        "properties": {
+          "users": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/UserRegistration"
+            },
+            "description": "Heroes"
+          },
+          "paging": {
+            "$ref": "#/components/schemas/PagingRespBase"
+          }
+        },
+        "additionalProperties": false
+      },
+      "GetRegistrationListRespApiRespBase": {
+        "required": [
+          "msg",
+          "ret",
+          "traceId"
+        ],
+        "type": "object",
+        "properties": {
+          "ret": {
+            "$ref": "#/components/schemas/EnumRet"
+          },
+          "msg": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "traceId": {
+            "minLength": 1,
+            "type": "string",
+            "readOnly": true
+          },
+          "data": {
+            "$ref": "#/components/schemas/GetRegistrationListResp"
+          }
+        },
+        "additionalProperties": false
+      },
       "GetReplaceOpponentsResp": {
         "required": [
           "id",
@@ -36854,7 +38528,7 @@
           },
           "platform": {
             "type": "integer",
-            "description": "Platform",
+            "description": "Platform Id (TwitchTV = 1,Youtube_Channel = 10,Youtube_Stream = 11 Facebook = 12,Other = 99)",
             "format": "int32"
           },
           "streamId": {
@@ -37376,6 +39050,66 @@
         },
         "additionalProperties": false
       },
+      "GetTeamRatingLogResp": {
+        "required": [
+          "logs",
+          "paging",
+          "teamId",
+          "teamName",
+          "teamRating"
+        ],
+        "type": "object",
+        "properties": {
+          "teamId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "teamName": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "teamRating": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "logs": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TeamRatingLog"
+            }
+          },
+          "paging": {
+            "$ref": "#/components/schemas/PagingRespBase"
+          }
+        },
+        "additionalProperties": false
+      },
+      "GetTeamRatingLogRespApiRespBase": {
+        "required": [
+          "msg",
+          "ret",
+          "traceId"
+        ],
+        "type": "object",
+        "properties": {
+          "ret": {
+            "$ref": "#/components/schemas/EnumRet"
+          },
+          "msg": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "traceId": {
+            "minLength": 1,
+            "type": "string",
+            "readOnly": true
+          },
+          "data": {
+            "$ref": "#/components/schemas/GetTeamRatingLogResp"
+          }
+        },
+        "additionalProperties": false
+      },
       "GetTeamResp": {
         "required": [
           "excludedRankings",
@@ -37670,6 +39404,52 @@
           },
           "data": {
             "$ref": "#/components/schemas/GetTeamsResp"
+          }
+        },
+        "additionalProperties": false
+      },
+      "GetTgNotificationsResp": {
+        "required": [
+          "notifications",
+          "paging"
+        ],
+        "type": "object",
+        "properties": {
+          "notifications": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TgNotification"
+            },
+            "description": "Telegram notifications"
+          },
+          "paging": {
+            "$ref": "#/components/schemas/PagingRespBase"
+          }
+        },
+        "additionalProperties": false
+      },
+      "GetTgNotificationsRespApiRespBase": {
+        "required": [
+          "msg",
+          "ret",
+          "traceId"
+        ],
+        "type": "object",
+        "properties": {
+          "ret": {
+            "$ref": "#/components/schemas/EnumRet"
+          },
+          "msg": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "traceId": {
+            "minLength": 1,
+            "type": "string",
+            "readOnly": true
+          },
+          "data": {
+            "$ref": "#/components/schemas/GetTgNotificationsResp"
           }
         },
         "additionalProperties": false
@@ -39552,6 +41332,36 @@
         },
         "additionalProperties": false
       },
+      "ModBannerResp": {
+        "type": "object",
+        "additionalProperties": false
+      },
+      "ModBannerRespApiRespBase": {
+        "required": [
+          "msg",
+          "ret",
+          "traceId"
+        ],
+        "type": "object",
+        "properties": {
+          "ret": {
+            "$ref": "#/components/schemas/EnumRet"
+          },
+          "msg": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "traceId": {
+            "minLength": 1,
+            "type": "string",
+            "readOnly": true
+          },
+          "data": {
+            "$ref": "#/components/schemas/ModBannerResp"
+          }
+        },
+        "additionalProperties": false
+      },
       "ModBrResultReq": {
         "required": [
           "matchGameId",
@@ -39791,6 +41601,7 @@
         "required": [
           "isHidden",
           "isLan",
+          "isTgPush",
           "name",
           "prizePoolStatus",
           "rankingImportance"
@@ -39912,6 +41723,10 @@
             "description": "Game Mode Id",
             "format": "int32",
             "nullable": true
+          },
+          "isTgPush": {
+            "type": "boolean",
+            "description": "Is tg push"
           }
         },
         "additionalProperties": false
@@ -41573,6 +43388,11 @@
             },
             "description": "Team2 StandIns(playerId)",
             "nullable": true
+          },
+          "mtBattleId": {
+            "type": "string",
+            "description": "Moonton battle id (On Mobile Legends needs to set)",
+            "nullable": true
           }
         },
         "additionalProperties": false
@@ -41635,6 +43455,55 @@
             "type": "boolean",
             "description": "Is Qualification",
             "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ModMatchStatusReq": {
+        "required": [
+          "matchId",
+          "status"
+        ],
+        "type": "object",
+        "properties": {
+          "matchId": {
+            "maximum": 2147483647,
+            "minimum": 1,
+            "type": "integer",
+            "format": "int32"
+          },
+          "status": {
+            "$ref": "#/components/schemas/EnumMatchStatus"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ModMatchStatusResp": {
+        "type": "object",
+        "additionalProperties": false
+      },
+      "ModMatchStatusRespApiRespBase": {
+        "required": [
+          "msg",
+          "ret",
+          "traceId"
+        ],
+        "type": "object",
+        "properties": {
+          "ret": {
+            "$ref": "#/components/schemas/EnumRet"
+          },
+          "msg": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "traceId": {
+            "minLength": 1,
+            "type": "string",
+            "readOnly": true
+          },
+          "data": {
+            "$ref": "#/components/schemas/ModMatchStatusResp"
           }
         },
         "additionalProperties": false
@@ -43538,6 +45407,24 @@
         },
         "additionalProperties": false
       },
+      "ModTgPushReq": {
+        "required": [
+          "isAutoPush",
+          "parentId"
+        ],
+        "type": "object",
+        "properties": {
+          "parentId": {
+            "type": "integer",
+            "description": "Parent tournament id",
+            "format": "int32"
+          },
+          "isAutoPush": {
+            "type": "boolean"
+          }
+        },
+        "additionalProperties": false
+      },
       "ModUserResp": {
         "type": "object",
         "additionalProperties": false
@@ -43838,6 +45725,32 @@
           },
           "data": {
             "$ref": "#/components/schemas/OAuthTokenResp"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ObjectApiRespBase": {
+        "required": [
+          "msg",
+          "ret",
+          "traceId"
+        ],
+        "type": "object",
+        "properties": {
+          "ret": {
+            "$ref": "#/components/schemas/EnumRet"
+          },
+          "msg": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "traceId": {
+            "minLength": 1,
+            "type": "string",
+            "readOnly": true
+          },
+          "data": {
+            "nullable": true
           }
         },
         "additionalProperties": false
@@ -45016,6 +46929,40 @@
         },
         "additionalProperties": false
       },
+      "SiteSectionBanner": {
+        "required": [
+          "id",
+          "imagePath",
+          "siteSectionName",
+          "updatedAt",
+          "updatedBy"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "Core frontends site sections banner id",
+            "format": "int32"
+          },
+          "siteSectionName": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "imagePath": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "updatedAt": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "updatedBy": {
+            "minLength": 1,
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      },
       "StagingEarningListItem": {
         "required": [
           "childEarnings",
@@ -45256,6 +47203,113 @@
             "type": "integer",
             "description": "Record At",
             "format": "int64"
+          }
+        },
+        "additionalProperties": false
+      },
+      "TeamRatingLog": {
+        "required": [
+          "afterRating",
+          "beforeRating",
+          "createdAt",
+          "id",
+          "ratingChange",
+          "reason",
+          "settleDate",
+          "userId",
+          "userName"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "settleDate": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "ratingChange": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "beforeRating": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "afterRating": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "reason": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "userId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "userName": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "createdAt": {
+            "type": "integer",
+            "format": "int64"
+          }
+        },
+        "additionalProperties": false
+      },
+      "TgNotification": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "type": {
+            "$ref": "#/components/schemas/EnumTgMsgType"
+          },
+          "typeDescription": {
+            "type": "string",
+            "nullable": true,
+            "readOnly": true
+          },
+          "sourceId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "status": {
+            "$ref": "#/components/schemas/EnumTgMsgStatus"
+          },
+          "statusDescription": {
+            "type": "string",
+            "nullable": true,
+            "readOnly": true
+          },
+          "createdAt": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "publishAt": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "createdBy": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "userName": {
+            "type": "string",
+            "nullable": true
+          },
+          "triggerSource": {
+            "$ref": "#/components/schemas/EnumTgTriggerSource"
+          },
+          "triggerDescription": {
+            "type": "string",
+            "nullable": true,
+            "readOnly": true
           }
         },
         "additionalProperties": false
@@ -45603,6 +47657,64 @@
         },
         "additionalProperties": false
       },
+      "UpdateTeamRatingReq": {
+        "required": [
+          "ratingChange",
+          "reason",
+          "teamId"
+        ],
+        "type": "object",
+        "properties": {
+          "teamId": {
+            "maximum": 2147483647,
+            "minimum": 1,
+            "type": "integer",
+            "format": "int32"
+          },
+          "ratingChange": {
+            "maximum": 32767,
+            "minimum": -32768,
+            "type": "integer",
+            "format": "int32"
+          },
+          "reason": {
+            "maxLength": 160,
+            "minLength": 0,
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      },
+      "UpdateTeamRatingResp": {
+        "type": "object",
+        "additionalProperties": false
+      },
+      "UpdateTeamRatingRespApiRespBase": {
+        "required": [
+          "msg",
+          "ret",
+          "traceId"
+        ],
+        "type": "object",
+        "properties": {
+          "ret": {
+            "$ref": "#/components/schemas/EnumRet"
+          },
+          "msg": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "traceId": {
+            "minLength": 1,
+            "type": "string",
+            "readOnly": true
+          },
+          "data": {
+            "$ref": "#/components/schemas/UpdateTeamRatingResp"
+          }
+        },
+        "additionalProperties": false
+      },
       "UploadFileResp": {
         "type": "object",
         "properties": {
@@ -45653,6 +47765,33 @@
           "avatarImage": {
             "type": "string",
             "description": "Avatar image",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "UserRegistration": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "username": {
+            "type": "string",
+            "nullable": true
+          },
+          "email": {
+            "type": "string",
+            "nullable": true
+          },
+          "registerAt": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "registerCompletedAt": {
+            "type": "integer",
+            "format": "int64",
             "nullable": true
           }
         },
