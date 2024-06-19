@@ -26,6 +26,17 @@ export interface AddArticleRespApiRespBase {
   data?: AddArticleResp;
 }
 
+export type AddBannerResp = object;
+
+export interface AddBannerRespApiRespBase {
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
+  data?: AddBannerResp;
+}
+
 export type AddBroadcastTalentResp = object;
 
 export interface AddBroadcastTalentRespApiRespBase {
@@ -155,6 +166,8 @@ export interface AddChildReq {
    * @max 32767
    */
   gameModeId?: number | null;
+  /** Telegram auto push */
+  isTgPush: boolean;
 }
 
 export type AddChildResp = object;
@@ -611,6 +624,52 @@ export interface AddHeroRespApiRespBase {
   /** @minLength 1 */
   traceId: string;
   data?: AddHeroResp;
+}
+
+export interface AddLogReq {
+  /**
+   * @minLength 0
+   * @maxLength 128
+   */
+  traceId: string;
+  /**
+   * Ex: GG.Frontend.Backoffice/GB.Frontend.Backoffice
+   * @minLength 0
+   * @maxLength 128
+   */
+  prefix: string;
+  logLevel: LogLevel;
+  /**
+   * @minLength 0
+   * @maxLength 2000
+   */
+  message: string;
+  /**
+   * @minLength 0
+   * @maxLength 4000
+   */
+  messagePayload: string;
+  /**
+   * @minLength 0
+   * @maxLength 128
+   */
+  className: string;
+  /**
+   * @minLength 0
+   * @maxLength 128
+   */
+  methodName: string;
+}
+
+export type AddLogResp = object;
+
+export interface AddLogRespApiRespBase {
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
+  data?: AddLogResp;
 }
 
 export type AddMapResp = object;
@@ -1764,6 +1823,11 @@ export interface ChildRegistrationPlayerListItem {
   registeredAt: number;
   /** Can register */
   canUnregister: boolean;
+  /**
+   * Portal player detail page hyperlink
+   * @minLength 1
+   */
+  url: string;
 }
 
 export interface ChildRegistrationPlayerListItemGetChildRegistrationsResp {
@@ -1846,6 +1910,11 @@ export interface ChildRegistrationTeamListItem {
   registeredAt: number;
   /** Can register */
   canUnregister: boolean;
+  /**
+   * Portal team detail page hyperlink
+   * @minLength 1
+   */
+  url: string;
 }
 
 export interface ChildRegistrationTeamListItemGetChildRegistrationsResp {
@@ -1911,6 +1980,26 @@ export interface ChildTeamRegistration {
   playerIds?: number[] | null;
 }
 
+export interface ClearCacheReq {
+  /**
+   * @format int32
+   * @min 1
+   * @max 2147483647
+   */
+  eventId: number;
+}
+
+export type ClearCacheResp = object;
+
+export interface ClearCacheRespApiRespBase {
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
+  data?: ClearCacheResp;
+}
+
 export type ClearMatchesResp = object;
 
 export interface ClearMatchesRespApiRespBase {
@@ -1920,6 +2009,28 @@ export interface ClearMatchesRespApiRespBase {
   /** @minLength 1 */
   traceId: string;
   data?: ClearMatchesResp;
+}
+
+export type ClearTeamDetailCacheResp = object;
+
+export interface ClearTeamDetailCacheRespApiRespBase {
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
+  data?: ClearTeamDetailCacheResp;
+}
+
+export type ClearUpcomingCacheResp = object;
+
+export interface ClearUpcomingCacheRespApiRespBase {
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
+  data?: ClearUpcomingCacheResp;
 }
 
 export interface Country {
@@ -2664,6 +2775,28 @@ export interface EarningListItem {
   startingAt?: number | null;
 }
 
+export interface EnableUserReq {
+  /**
+   * @format int32
+   * @min 1
+   * @max 2147483647
+   */
+  userId: number;
+  /** Enable = true/ Disable=false */
+  enable: boolean;
+}
+
+export type EnableUserResp = object;
+
+export interface EnableUserRespApiRespBase {
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
+  data?: EnableUserResp;
+}
+
 /** @format int32 */
 export enum EnumArticleState {
   Published = 1,
@@ -2677,6 +2810,12 @@ export enum EnumArticleType {
   News = 1,
   Features = 2,
   Guides = 3,
+}
+
+/** @format int32 */
+export enum EnumBannerOpenType {
+  NewTab = 1,
+  ExistingPage = 2,
 }
 
 /** @format int32 */
@@ -2754,6 +2893,7 @@ export enum EnumEventBoxType {
   CustomBox = 14,
   MatchTickerBox = 15,
   FeatureTournamentBox = 16,
+  RelatedTournamentsBox = 17,
 }
 
 /** @format int32 */
@@ -2800,6 +2940,13 @@ export enum EnumGridStateOption {
 export enum EnumMapSelection {
   Specified = 0,
   UserSelected = 1,
+}
+
+/** @format int32 */
+export enum EnumMatchStatus {
+  NotCompleted = 0,
+  Completed = 1,
+  Canceled = 2,
 }
 
 /** @format int32 */
@@ -3249,6 +3396,8 @@ export interface GameResultDraft {
   /**
    * Team/opponent id
    * @format int32
+   * @min 1
+   * @max 2147483647
    */
   registrationId: number;
   /**
@@ -3416,6 +3565,48 @@ export interface GetArticlesRespApiRespBase {
   /** @minLength 1 */
   traceId: string;
   data?: GetArticlesResp;
+}
+
+export interface GetBannerDetailResp {
+  /** @format int32 */
+  id: number;
+  /** @format int32 */
+  frontendId: number;
+  /** @format int32 */
+  siteSectionId: number;
+  /** @minLength 1 */
+  siteSectionName: string;
+  altText?: string | null;
+  enableHyperlink: boolean;
+  openType?: EnumBannerOpenType;
+  url?: string | null;
+  /**
+   * Banner image path
+   * @minLength 1
+   */
+  imagePath: string;
+}
+
+export interface GetBannerDetailRespApiRespBase {
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
+  data?: GetBannerDetailResp;
+}
+
+export interface GetBannersResp {
+  banners?: SiteSectionBanner[] | null;
+}
+
+export interface GetBannersRespApiRespBase {
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
+  data?: GetBannersResp;
 }
 
 export interface GetBrResultDetailResp {
@@ -3822,6 +4013,8 @@ export interface GetChildDetailResp {
    * @format int64
    */
   parentUpdatedAt: number;
+  /** Telegram auto psuh */
+  isTgPush: boolean;
 }
 
 export interface GetChildDetailRespApiRespBase {
@@ -4134,6 +4327,8 @@ export interface GetChildTournamentResp {
    * @format int32
    */
   gameModeId?: number | null;
+  /** Is Telegram psuh */
+  isTgPush: boolean;
 }
 
 export interface GetChildTournamentRespApiRespBase {
@@ -5086,6 +5281,8 @@ export interface GetGameAccountsRespApiRespBase {
 }
 
 export interface GetGameDraftResp {
+  /** Is player based */
+  isPlayerBased: boolean;
   /** Team options */
   teamOptions: Int32Item[];
   /** Hero options */
@@ -6957,6 +7154,21 @@ export interface GetRegisteredPlayersRespApiRespBase {
   data?: GetRegisteredPlayersResp;
 }
 
+export interface GetRegistrationListResp {
+  /** Heroes */
+  users: UserRegistration[];
+  paging: PagingRespBase;
+}
+
+export interface GetRegistrationListRespApiRespBase {
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
+  data?: GetRegistrationListResp;
+}
+
 export interface GetReplaceOpponentsResp {
   /** @format int32 */
   id: number;
@@ -7914,6 +8126,26 @@ export interface GetTeamPlayersRespApiRespBase {
   /** @minLength 1 */
   traceId: string;
   data?: GetTeamPlayersResp;
+}
+
+export interface GetTeamRatingLogResp {
+  /** @format int32 */
+  teamId: number;
+  /** @minLength 1 */
+  teamName: string;
+  /** @format int32 */
+  teamRating: number;
+  logs: TeamRatingLog[];
+  paging: PagingRespBase;
+}
+
+export interface GetTeamRatingLogRespApiRespBase {
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
+  data?: GetTeamRatingLogResp;
 }
 
 export interface GetTeamResp {
@@ -8945,6 +9177,17 @@ export interface ModArticleRespApiRespBase {
   data?: ModArticleResp;
 }
 
+export type ModBannerResp = object;
+
+export interface ModBannerRespApiRespBase {
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
+  data?: ModBannerResp;
+}
+
 export interface ModBrResultReq {
   /**
    * @format int32
@@ -9163,6 +9406,8 @@ export interface ModChildReq {
    * @max 32767
    */
   gameModeId?: number | null;
+  /** Is tg push */
+  isTgPush: boolean;
 }
 
 export type ModChildResp = object;
@@ -10079,6 +10324,27 @@ export interface ModMatchOpponent {
   isSeed?: boolean | null;
   /** Is Qualification */
   isQualification?: boolean | null;
+}
+
+export interface ModMatchStatusReq {
+  /**
+   * @format int32
+   * @min 1
+   * @max 2147483647
+   */
+  matchId: number;
+  status: EnumMatchStatus;
+}
+
+export type ModMatchStatusResp = object;
+
+export interface ModMatchStatusRespApiRespBase {
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
+  data?: ModMatchStatusResp;
 }
 
 export interface ModMatches {
@@ -11091,6 +11357,15 @@ export interface ModTeamRespApiRespBase {
   data?: ModTeamResp;
 }
 
+export interface ModTgPushReq {
+  /**
+   * Parent tournament id
+   * @format int32
+   */
+  parentId: number;
+  isAutoPush: boolean;
+}
+
 export type ModUserResp = object;
 
 export interface ModUserRespApiRespBase {
@@ -11250,6 +11525,15 @@ export interface OAuthTokenRespApiRespBase {
   /** @minLength 1 */
   traceId: string;
   data?: OAuthTokenResp;
+}
+
+export interface ObjectApiRespBase {
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
+  data?: any;
 }
 
 export interface OneSignalAppListItem {
@@ -11912,6 +12196,22 @@ export interface SiteSection {
   name?: string | null;
 }
 
+export interface SiteSectionBanner {
+  /**
+   * Core frontends site sections banner id
+   * @format int32
+   */
+  id: number;
+  /** @minLength 1 */
+  siteSectionName: string;
+  /** @minLength 1 */
+  imagePath: string;
+  /** @format int64 */
+  updatedAt: number;
+  /** @minLength 1 */
+  updatedBy: string;
+}
+
 export interface StagingEarningListItem {
   /**
    * Stage id
@@ -12057,6 +12357,27 @@ export interface SystemLogListItem {
   recordedAt: number;
 }
 
+export interface TeamRatingLog {
+  /** @format int32 */
+  id: number;
+  /** @format int64 */
+  settleDate: number;
+  /** @format int32 */
+  ratingChange: number;
+  /** @format int32 */
+  beforeRating: number;
+  /** @format int32 */
+  afterRating: number;
+  /** @minLength 1 */
+  reason: string;
+  /** @format int32 */
+  userId: number;
+  /** @minLength 1 */
+  userName: string;
+  /** @format int64 */
+  createdAt: number;
+}
+
 export interface TournamentViewership {
   /** @format int32 */
   rowId?: number;
@@ -12190,6 +12511,37 @@ export interface UpdateStreamRespApiRespBase {
   data?: UpdateStreamResp;
 }
 
+export interface UpdateTeamRatingReq {
+  /**
+   * @format int32
+   * @min 1
+   * @max 2147483647
+   */
+  teamId: number;
+  /**
+   * @format int32
+   * @min -32768
+   * @max 32767
+   */
+  ratingChange: number;
+  /**
+   * @minLength 0
+   * @maxLength 160
+   */
+  reason: string;
+}
+
+export type UpdateTeamRatingResp = object;
+
+export interface UpdateTeamRatingRespApiRespBase {
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
+  data?: UpdateTeamRatingResp;
+}
+
 export interface UploadFileResp {
   filePath?: string | null;
 }
@@ -12211,6 +12563,17 @@ export interface UserProfile {
   userName: string;
   /** Avatar image */
   avatarImage?: string | null;
+}
+
+export interface UserRegistration {
+  /** @format int32 */
+  id?: number;
+  username?: string | null;
+  email?: string | null;
+  /** @format int64 */
+  registerAt?: number;
+  /** @format int64 */
+  registerCompletedAt?: number | null;
 }
 
 export interface Viewership {
@@ -12344,8 +12707,8 @@ export class HttpClient<SecurityDataType = unknown> {
           property instanceof Blob
             ? property
             : typeof property === "object" && property !== null
-            ? JSON.stringify(property)
-            : `${property}`,
+              ? JSON.stringify(property)
+              : `${property}`,
         );
         return formData;
       }, new FormData()),
@@ -12415,10 +12778,10 @@ export class HttpClient<SecurityDataType = unknown> {
         ...(requestParams.headers || {}),
         ...(type && type !== ContentType.FormData ? { "Content-Type": type } : {}),
       },
-      signal: cancelToken ? this.createAbortSignal(cancelToken) : requestParams.signal,
+      signal: (cancelToken ? this.createAbortSignal(cancelToken) : requestParams.signal) || null,
       body: typeof body === "undefined" || body === null ? null : payloadFormatter(body),
     }).then(async (response) => {
-      const r = response as HttpResponse<T, E>;
+      const r = response.clone() as HttpResponse<T, E>;
       r.data = null as unknown as T;
       r.error = null as unknown as E;
 
@@ -14370,6 +14733,25 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     /**
      * No description
      *
+     * @tags Events
+     * @name V5EventsClearCachePartialUpdate
+     * @summary Clear portal cache
+     * @request PATCH:/api/v5/events/clear-cache
+     * @secure
+     */
+    v5EventsClearCachePartialUpdate: (data: ClearCacheReq, params: RequestParams = {}) =>
+      this.request<any, ClearCacheRespApiRespBase>({
+        path: `/api/v5/events/clear-cache`,
+        method: "PATCH",
+        body: data,
+        secure: true,
+        type: ContentType.Json,
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
      * @tags Files
      * @name V5FilesCrewFoldersList
      * @summary Get folders
@@ -15042,6 +15424,179 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
         body: data,
         secure: true,
         type: ContentType.Json,
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Frontends
+     * @name V5FrontendsBannersList
+     * @summary Get frontend banners by condition
+     * @request GET:/api/v5/frontends/banners
+     * @secure
+     */
+    v5FrontendsBannersList: (
+      query: {
+        /**
+         * Core frontend id
+         * @format int32
+         * @min 1
+         * @max 32767
+         */
+        FrontendId: number;
+      },
+      params: RequestParams = {},
+    ) =>
+      this.request<any, GetBannersRespApiRespBase>({
+        path: `/api/v5/frontends/banners`,
+        method: "GET",
+        query: query,
+        secure: true,
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Frontends
+     * @name V5FrontendsBannersCreate
+     * @summary Add frontend site section banner
+     * @request POST:/api/v5/frontends/banners
+     * @secure
+     */
+    v5FrontendsBannersCreate: (
+      data: {
+        /**
+         * @format int32
+         * @min 1
+         * @max 32767
+         */
+        FrontendId: number;
+        /**
+         * @format int32
+         * @min 0
+         * @max 32767
+         */
+        SiteSectionId: number;
+        /**
+         * @minLength 0
+         * @maxLength 255
+         */
+        AltText?: string;
+        EnableHyperlink: boolean;
+        OpenType?: EnumBannerOpenType;
+        /**
+         * @minLength 0
+         * @maxLength 512
+         */
+        Url?: string;
+        /**
+         * Banner image file
+         * @format binary
+         */
+        BannerImageFile: File;
+      },
+      params: RequestParams = {},
+    ) =>
+      this.request<any, AddBannerRespApiRespBase>({
+        path: `/api/v5/frontends/banners`,
+        method: "POST",
+        body: data,
+        secure: true,
+        type: ContentType.FormData,
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Frontends
+     * @name V5FrontendsBannersPartialUpdate
+     * @summary Modify frontend site section banner
+     * @request PATCH:/api/v5/frontends/banners
+     * @secure
+     */
+    v5FrontendsBannersPartialUpdate: (
+      data: {
+        /**
+         * @format int32
+         * @min 1
+         * @max 32767
+         */
+        Id: number;
+        /**
+         * @minLength 0
+         * @maxLength 255
+         */
+        AltText?: string;
+        EnableHyperlink: boolean;
+        OpenType?: EnumBannerOpenType;
+        /**
+         * @minLength 0
+         * @maxLength 512
+         */
+        Url?: string;
+        /**
+         * Banner image file
+         * @format binary
+         */
+        BannerImageFile?: File;
+      },
+      params: RequestParams = {},
+    ) =>
+      this.request<any, ModBannerRespApiRespBase>({
+        path: `/api/v5/frontends/banners`,
+        method: "PATCH",
+        body: data,
+        secure: true,
+        type: ContentType.FormData,
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Frontends
+     * @name V5FrontendsBannersDetail
+     * @summary Get frontend site section banner detail
+     * @request GET:/api/v5/frontends/banners/{id}
+     * @secure
+     */
+    v5FrontendsBannersDetail: (id: number, params: RequestParams = {}) =>
+      this.request<any, GetBannerDetailRespApiRespBase>({
+        path: `/api/v5/frontends/banners/${id}`,
+        method: "GET",
+        secure: true,
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Frontends
+     * @name V5FrontendsBannersSiteSectionsList
+     * @summary Get banner site sections
+     * @request GET:/api/v5/frontends/banners/site-sections
+     * @secure
+     */
+    v5FrontendsBannersSiteSectionsList: (
+      query: {
+        /**
+         * Core frontend id
+         * @format int32
+         * @min 1
+         * @max 32767
+         */
+        FrontendId: number;
+      },
+      params: RequestParams = {},
+    ) =>
+      this.request<any, Int32ItemListApiRespBase>({
+        path: `/api/v5/frontends/banners/site-sections`,
+        method: "GET",
+        query: query,
+        secure: true,
         ...params,
       }),
 
@@ -16603,8 +17158,18 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
          * @max 2147483647
          */
         UpdatedUserId?: number;
-        /** Http method */
+        /**
+         * Http method
+         * @minLength 0
+         * @maxLength 8
+         */
         Method?: string;
+        /**
+         * Host
+         * @minLength 0
+         * @maxLength 100
+         */
+        Host?: string;
         /**
          * @format int32
          * @min 1
@@ -16743,6 +17308,25 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
         path: `/api/v5/logs/system-logs/${id}`,
         method: "GET",
         secure: true,
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Logs
+     * @name V5LogsCreate
+     * @summary Add log
+     * @request POST:/api/v5/logs
+     * @secure
+     */
+    v5LogsCreate: (data: AddLogReq, params: RequestParams = {}) =>
+      this.request<any, AddLogRespApiRespBase>({
+        path: `/api/v5/logs`,
+        method: "POST",
+        body: data,
+        secure: true,
+        type: ContentType.Json,
         ...params,
       }),
 
@@ -18306,6 +18890,34 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Options
+     * @name V5OptionsFrontendGamesList
+     * @summary Get games options by frontend
+     * @request GET:/api/v5/options/frontend-games
+     * @secure
+     */
+    v5OptionsFrontendGamesList: (
+      query: {
+        /**
+         * @format int32
+         * @min 0
+         * @max 32767
+         */
+        frontendId: number;
+      },
+      params: RequestParams = {},
+    ) =>
+      this.request<any, Int16ItemListApiRespBase>({
+        path: `/api/v5/options/frontend-games`,
+        method: "GET",
+        query: query,
+        secure: true,
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Options
      * @name V5OptionsBroadcastTalentRolesList
      * @summary Get broadcast talent roles options
      * @request GET:/api/v5/options/broadcast-talent-roles
@@ -19731,6 +20343,88 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     /**
      * No description
      *
+     * @tags Reports
+     * @name V5ReportsRegistrationsList
+     * @summary Get registration list
+     * @request GET:/api/v5/reports/registrations
+     * @secure
+     */
+    v5ReportsRegistrationsList: (
+      query: {
+        /**
+         * @format int64
+         * @min 1
+         */
+        From: number;
+        /**
+         * @format int64
+         * @min 1
+         */
+        To: number;
+        /**
+         * @format int32
+         * @min 1
+         * @max 2147483647
+         */
+        PageNo?: number;
+        /**
+         * @format int32
+         * @min 1
+         * @max 100
+         */
+        PageSize?: number;
+      },
+      params: RequestParams = {},
+    ) =>
+      this.request<any, GetRegistrationListRespApiRespBase>({
+        path: `/api/v5/reports/registrations`,
+        method: "GET",
+        query: query,
+        secure: true,
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Reports
+     * @name V5ReportsRegistrationsDownloadExcelList
+     * @summary Download registrations report excel
+     * @request GET:/api/v5/reports/registrations/download-excel
+     * @secure
+     */
+    v5ReportsRegistrationsDownloadExcelList: (
+      query: {
+        /**
+         * @format int64
+         * @min 1
+         */
+        From: number;
+        /**
+         * @format int64
+         * @min 1
+         */
+        To: number;
+        /**
+         * @format int32
+         * @min -12
+         * @max 14
+         */
+        TimeZone: number;
+      },
+      params: RequestParams = {},
+    ) =>
+      this.request<void, any>({
+        path: `/api/v5/reports/registrations/download-excel`,
+        method: "GET",
+        query: query,
+        secure: true,
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
      * @tags Roles
      * @name V5RolesRoleOptionsList
      * @summary Get role options
@@ -20972,6 +21666,83 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     /**
      * No description
      *
+     * @tags Teams
+     * @name V5TeamsRatingLogsDetail
+     * @summary Get team rating adjustment logs
+     * @request GET:/api/v5/teams/{teamId}/rating-logs
+     * @secure
+     */
+    v5TeamsRatingLogsDetail: (
+      teamId: number,
+      query: {
+        /**
+         * @format int32
+         * @min 1
+         * @max 2147483647
+         */
+        TeamId: number;
+        /**
+         * @format int32
+         * @min 1
+         * @max 2147483647
+         */
+        PageNo?: number;
+        /**
+         * @format int32
+         * @min 1
+         * @max 100
+         */
+        PageSize?: number;
+      },
+      params: RequestParams = {},
+    ) =>
+      this.request<any, GetTeamRatingLogRespApiRespBase>({
+        path: `/api/v5/teams/${teamId}/rating-logs`,
+        method: "GET",
+        query: query,
+        secure: true,
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Teams
+     * @name V5TeamsRatingsCreate
+     * @summary Update team rating
+     * @request POST:/api/v5/teams/{teamId}/ratings
+     * @secure
+     */
+    v5TeamsRatingsCreate: (teamId: number, data: UpdateTeamRatingReq, params: RequestParams = {}) =>
+      this.request<any, UpdateTeamRatingRespApiRespBase>({
+        path: `/api/v5/teams/${teamId}/ratings`,
+        method: "POST",
+        body: data,
+        secure: true,
+        type: ContentType.Json,
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Teams
+     * @name V5TeamsClearCachePartialUpdate
+     * @summary Clear portal team detail cache
+     * @request PATCH:/api/v5/teams/{teamId}/clear-cache
+     * @secure
+     */
+    v5TeamsClearCachePartialUpdate: (teamId: number, params: RequestParams = {}) =>
+      this.request<any, ClearTeamDetailCacheRespApiRespBase>({
+        path: `/api/v5/teams/${teamId}/clear-cache`,
+        method: "PATCH",
+        secure: true,
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
      * @tags Tournaments
      * @name V5TournamentsFuzzyList
      * @summary Get fuzzy tournaments
@@ -22128,6 +22899,47 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Tournaments
+     * @name V5TournamentsRoundsMatchesStatusPartialUpdate
+     * @summary Modify child tournament match status
+     * @request PATCH:/api/v5/tournaments/rounds/{roundid}/matches/{matchid}/status
+     * @secure
+     */
+    v5TournamentsRoundsMatchesStatusPartialUpdate: (
+      roundid: number,
+      matchid: number,
+      data: ModMatchStatusReq,
+      params: RequestParams = {},
+    ) =>
+      this.request<any, ModMatchStatusRespApiRespBase>({
+        path: `/api/v5/tournaments/rounds/${roundid}/matches/${matchid}/status`,
+        method: "PATCH",
+        body: data,
+        secure: true,
+        type: ContentType.Json,
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Tournaments
+     * @name V5TournamentsMatchesUpcomingClearCachePartialUpdate
+     * @summary Clear portal upcoming matches cache
+     * @request PATCH:/api/v5/tournaments/matches/upcoming/clear-cache
+     * @secure
+     */
+    v5TournamentsMatchesUpcomingClearCachePartialUpdate: (params: RequestParams = {}) =>
+      this.request<any, ClearUpcomingCacheRespApiRespBase>({
+        path: `/api/v5/tournaments/matches/upcoming/clear-cache`,
+        method: "PATCH",
+        secure: true,
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Tournaments
      * @name V5TournamentsParentsChildrenOpponentsDetail
      * @summary Get child tournament opponents
      * @request GET:/api/v5/tournaments/parents/{parentid}/children/{childid}/opponents
@@ -22627,6 +23439,25 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     v5TournamentsParentsStatusPartialUpdate: (parentId: number, data: ModParentStatusReq, params: RequestParams = {}) =>
       this.request<any, ModParentStatusRespApiRespBase>({
         path: `/api/v5/tournaments/parents/${parentId}/status`,
+        method: "PATCH",
+        body: data,
+        secure: true,
+        type: ContentType.Json,
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Tournaments
+     * @name V5TournamentsParentsTgPushPartialUpdate
+     * @summary Modify TG Auto push
+     * @request PATCH:/api/v5/tournaments/parents/{parentId}/tg-push
+     * @secure
+     */
+    v5TournamentsParentsTgPushPartialUpdate: (parentId: number, data: ModTgPushReq, params: RequestParams = {}) =>
+      this.request<any, ObjectApiRespBase>({
+        path: `/api/v5/tournaments/parents/${parentId}/tg-push`,
         method: "PATCH",
         body: data,
         secure: true,
@@ -23368,13 +24199,32 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      *
      * @tags Users
      * @name V5UsersResetPwdPartialUpdate
-     * @summary Reset password
+     * @summary Reset bo auth password
      * @request PATCH:/api/v5/users/{id}/reset-pwd
      * @secure
      */
     v5UsersResetPwdPartialUpdate: (id: number, data: ResetPasswordReq, params: RequestParams = {}) =>
       this.request<any, ResetPasswordRespApiRespBase>({
         path: `/api/v5/users/${id}/reset-pwd`,
+        method: "PATCH",
+        body: data,
+        secure: true,
+        type: ContentType.Json,
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Users
+     * @name V5UsersEnablePartialUpdate
+     * @summary Enable/Disable user account
+     * @request PATCH:/api/v5/users/{id}/enable
+     * @secure
+     */
+    v5UsersEnablePartialUpdate: (id: number, data: EnableUserReq, params: RequestParams = {}) =>
+      this.request<any, EnableUserRespApiRespBase>({
+        path: `/api/v5/users/${id}/enable`,
         method: "PATCH",
         body: data,
         secure: true,
