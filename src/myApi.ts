@@ -2981,6 +2981,7 @@ export enum EnumPlatform {
   PLATFORM_TWITCHTV = 1,
   PLATFORM_YOUTUBE_CHANNEL = 10,
   PLATFORM_YOUTUBE_STREAM = 11,
+  PLATFORM_FACEBOOK = 12,
   PLATFORM_OTHER = 99,
 }
 
@@ -3072,6 +3073,8 @@ export enum EnumRet {
   DeleteFail = 50003,
   GetJwtKeyFail = 50004,
   InternalServerError = 50005,
+  ServerIsBusy = 50006,
+  TooManyRequests = 50007,
   ServerErrorsEnd = 59999,
   ForbiddenErrorsStart = 60000,
   Disallow = 60001,
@@ -3110,6 +3113,27 @@ export enum EnumState {
 export enum EnumTeamSortOption {
   RankingAsc = 1,
   RankingDesc = 2,
+}
+
+/** @format int32 */
+export enum EnumTgMsgStatus {
+  UnPublish = 0,
+  Schedule = 1,
+  Publish = 2,
+  Delete = 3,
+  GameChannelSchedule = 4,
+}
+
+/** @format int32 */
+export enum EnumTgMsgType {
+  Article = 1,
+  Match = 2,
+}
+
+/** @format int32 */
+export enum EnumTgTriggerSource {
+  System = 1,
+  Manual = 2,
 }
 
 /** @format int32 */
@@ -5725,6 +5749,11 @@ export interface GetHeroResp {
   iconFileName?: string | null;
   /** Mobile Icon file name */
   mobileIconFileName?: string | null;
+  /**
+   * Moonton hero id
+   * @format int32
+   */
+  mtHeroId?: number | null;
 }
 
 export interface GetHeroRespApiRespBase {
@@ -5860,6 +5889,52 @@ export interface GetLogLevelsRespApiRespBase {
   /** @minLength 1 */
   traceId: string;
   data?: GetLogLevelsResp;
+}
+
+export interface GetMLBBBattileDetailResp {
+  battleId?: string | null;
+  roomName?: string | null;
+  team1Name?: string | null;
+  team2Name?: string | null;
+  /** @format int64 */
+  startTime?: number;
+  status?: string | null;
+}
+
+export interface GetMLBBBattileDetailRespApiRespBase {
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
+  data?: GetMLBBBattileDetailResp;
+}
+
+export interface GetMLBBBattileListResp {
+  /**
+   * 戰鬥Id
+   * @minLength 1
+   */
+  battleId: string;
+  /**
+   * 戰鬥開始時間 (已轉為UTC+0)
+   * @format int64
+   */
+  reportTime: number;
+  /**
+   * 裁判遊戲Id
+   * @format int32
+   */
+  judgeId: number;
+}
+
+export interface GetMLBBBattileListRespListApiRespBase {
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
+  data?: GetMLBBBattileListResp[] | null;
 }
 
 export interface GetMap {
@@ -6049,6 +6124,8 @@ export interface GetMatchGameResp {
    * @format int32
    */
   teamSize?: number;
+  /** Moonton battle id (On Mobile Legends needs to set) */
+  mtBattleId?: string | null;
 }
 
 export interface GetMatchGameRespApiRespBase {
@@ -7859,7 +7936,7 @@ export interface GetStreamResp {
    */
   id: number;
   /**
-   * Platform
+   * Platform Id (TwitchTV = 1,Youtube_Channel = 10,Youtube_Stream = 11 Facebook = 12,Other = 99)
    * @format int32
    */
   platform: number;
@@ -8312,6 +8389,21 @@ export interface GetTeamsRespApiRespBase {
   /** @minLength 1 */
   traceId: string;
   data?: GetTeamsResp;
+}
+
+export interface GetTgNotificationsResp {
+  /** Telegram notifications */
+  notifications: TgNotification[];
+  paging: PagingRespBase;
+}
+
+export interface GetTgNotificationsRespApiRespBase {
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
+  data?: GetTgNotificationsResp;
 }
 
 export interface GetTournamentViewershipResp {
@@ -10292,6 +10384,8 @@ export interface ModMatchGameReq {
   team1StandIns?: number[] | null;
   /** Team2 StandIns(playerId) */
   team2StandIns?: number[] | null;
+  /** Moonton battle id (On Mobile Legends needs to set) */
+  mtBattleId?: string | null;
 }
 
 export type ModMatchGameResp = object;
@@ -12376,6 +12470,26 @@ export interface TeamRatingLog {
   userName: string;
   /** @format int64 */
   createdAt: number;
+}
+
+export interface TgNotification {
+  /** @format int32 */
+  id?: number;
+  type?: EnumTgMsgType;
+  typeDescription?: string | null;
+  /** @format int32 */
+  sourceId?: number;
+  status?: EnumTgMsgStatus;
+  statusDescription?: string | null;
+  /** @format int64 */
+  createdAt?: number;
+  /** @format int64 */
+  publishAt?: number;
+  /** @format int32 */
+  createdBy?: number;
+  userName?: string | null;
+  triggerSource?: EnumTgTriggerSource;
+  triggerDescription?: string | null;
 }
 
 export interface TournamentViewership {
@@ -16932,6 +17046,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
          * @format binary
          */
         MobileIconFile?: File;
+        /**
+         * Moonton hero id
+         * @format int32
+         */
+        MtHeroId?: number;
       },
       params: RequestParams = {},
     ) =>
@@ -17003,6 +17122,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
          * @format binary
          */
         MobileIconFile?: File;
+        /**
+         * Moonton hero id
+         * @format int32
+         */
+        MtHeroId?: number;
       },
       params: RequestParams = {},
     ) =>
@@ -17617,7 +17741,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
          * @max 2147483647
          */
         CreatedUserId?: number;
-        /** Platform Id (TwitchTV = 1,Youtube_Channel = 10,Youtube_Stream = 11,Other = 99) */
+        /** Platform Id (TwitchTV = 1,Youtube_Channel = 10,Youtube_Stream = 11 Facebook = 12,Other = 99) */
         PlatformId?: EnumPlatform;
         /**
          * Stream Id
@@ -21743,6 +21867,47 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     /**
      * No description
      *
+     * @tags Telegram
+     * @name V5TelegramNotificationsList
+     * @summary Get tg notifications by condition
+     * @request GET:/api/v5/telegram/notifications
+     * @secure
+     */
+    v5TelegramNotificationsList: (
+      query?: {
+        Type?: EnumTgMsgType;
+        /**
+         * @format int32
+         * @min 1
+         * @max 2147483647
+         */
+        SourceId?: number;
+        /**
+         * @format int32
+         * @min 1
+         * @max 2147483647
+         */
+        PageNo?: number;
+        /**
+         * @format int32
+         * @min 1
+         * @max 100
+         */
+        PageSize?: number;
+      },
+      params: RequestParams = {},
+    ) =>
+      this.request<any, GetTgNotificationsRespApiRespBase>({
+        path: `/api/v5/telegram/notifications`,
+        method: "GET",
+        query: query,
+        secure: true,
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
      * @tags Tournaments
      * @name V5TournamentsFuzzyList
      * @summary Get fuzzy tournaments
@@ -22287,6 +22452,66 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       this.request<any, DelChildMediaItemRespApiRespBase>({
         path: `/api/v5/tournaments/parents/${parentid}/children/${childid}/media-items/${mediaitemid}`,
         method: "DELETE",
+        secure: true,
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Tournaments
+     * @name V5TournamentsDataProvidersMlbbBattileListList
+     * @summary Get MLBB Battle List
+     * @request GET:/api/v5/tournaments/data-providers/mlbb/battile-list
+     * @secure
+     */
+    v5TournamentsDataProvidersMlbbBattileListList: (
+      query?: {
+        /**
+         * @minLength 0
+         * @maxLength 30
+         */
+        RoomName?: string;
+        /**
+         * @format int32
+         * @min 1
+         * @max 2147483647
+         */
+        JudgeId?: number;
+      },
+      params: RequestParams = {},
+    ) =>
+      this.request<any, GetMLBBBattileListRespListApiRespBase>({
+        path: `/api/v5/tournaments/data-providers/mlbb/battile-list`,
+        method: "GET",
+        query: query,
+        secure: true,
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Tournaments
+     * @name V5TournamentsDataProvidersMlbbBattleDetailList
+     * @summary Get MLBB Battle Detail
+     * @request GET:/api/v5/tournaments/data-providers/mlbb/battle-detail
+     * @secure
+     */
+    v5TournamentsDataProvidersMlbbBattleDetailList: (
+      query: {
+        /**
+         * @minLength 0
+         * @maxLength 30
+         */
+        BattleId: string;
+      },
+      params: RequestParams = {},
+    ) =>
+      this.request<any, GetMLBBBattileDetailRespApiRespBase>({
+        path: `/api/v5/tournaments/data-providers/mlbb/battle-detail`,
+        method: "GET",
+        query: query,
         secure: true,
         ...params,
       }),
