@@ -672,6 +672,78 @@ export interface AddLogRespApiRespBase {
   data?: AddLogResp;
 }
 
+export interface AddMLBBBattleSpellReq {
+  /**
+   * @format int32
+   * @min 1
+   * @max 2147483647
+   */
+  id: number;
+  /**
+   * @minLength 0
+   * @maxLength 100
+   */
+  battleSpellName: string;
+}
+
+export type AddMLBBBattleSpellResp = object;
+
+export interface AddMLBBBattleSpellRespApiRespBase {
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
+  data?: AddMLBBBattleSpellResp;
+}
+
+export interface AddMLBBEmblemReq {
+  /**
+   * @format int32
+   * @min 1
+   * @max 2147483647
+   */
+  id: number;
+  /**
+   * @minLength 0
+   * @maxLength 100
+   */
+  emblemName: string;
+  /**
+   * @format int32
+   * @min 1
+   * @max 2147483647
+   */
+  emblemType: number;
+  /**
+   * @minLength 0
+   * @maxLength 50
+   */
+  emblemTypeName: string;
+}
+
+export type AddMLBBEmblemResp = object;
+
+export interface AddMLBBEmblemRespApiRespBase {
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
+  data?: AddMLBBEmblemResp;
+}
+
+export type AddMLBBEqpResp = object;
+
+export interface AddMLBBEqpRespApiRespBase {
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
+  data?: AddMLBBEqpResp;
+}
+
 export type AddMapResp = object;
 
 export interface AddMapRespApiRespBase {
@@ -1757,6 +1829,32 @@ export interface ByteItemListApiRespBase {
   data?: ByteItem[] | null;
 }
 
+export interface CheckResetPasswordTokenReq {
+  /**
+   * Token
+   * @minLength 0
+   * @maxLength 100
+   */
+  token: string;
+}
+
+export interface CheckResetPasswordTokenResp {
+  /**
+   * Token
+   * @minLength 1
+   */
+  resetPasswordToken: string;
+}
+
+export interface CheckResetPasswordTokenRespApiRespBase {
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
+  data?: CheckResetPasswordTokenResp;
+}
+
 export interface ChildEarningListItem {
   /**
    * Child tournament id
@@ -1782,6 +1880,7 @@ export interface ChildEarningListItem {
    * @format double
    */
   prizePoolUsd?: number | null;
+  status?: EnumTournamentStatus;
 }
 
 export interface ChildPlayerRegistration {
@@ -2399,6 +2498,39 @@ export interface DelHeroRespApiRespBase {
   data?: DelHeroResp;
 }
 
+export type DelMLBBBattleSpellResp = object;
+
+export interface DelMLBBBattleSpellRespApiRespBase {
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
+  data?: DelMLBBBattleSpellResp;
+}
+
+export type DelMLBBEmblemResp = object;
+
+export interface DelMLBBEmblemRespApiRespBase {
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
+  data?: DelMLBBEmblemResp;
+}
+
+export type DelMLBBEqpResp = object;
+
+export interface DelMLBBEqpRespApiRespBase {
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
+  data?: DelMLBBEqpResp;
+}
+
 export type DelMapResp = object;
 
 export interface DelMapRespApiRespBase {
@@ -2773,6 +2905,7 @@ export interface EarningListItem {
    * @format int64
    */
   startingAt?: number | null;
+  status: EnumTournamentStatus;
 }
 
 export interface EnableUserReq {
@@ -3134,6 +3267,16 @@ export enum EnumTgMsgType {
 export enum EnumTgTriggerSource {
   System = 1,
   Manual = 2,
+}
+
+/** @format int32 */
+export enum EnumTournamentFilters {
+  All = 0,
+  Live = 1,
+  Upcoming = 2,
+  Completed = 3,
+  Canceled = 4,
+  Featured = 5,
 }
 
 /** @format int32 */
@@ -5937,6 +6080,144 @@ export interface GetMLBBBattileListRespListApiRespBase {
   data?: GetMLBBBattileListResp[] | null;
 }
 
+export interface GetMLBBBattleSpellDetailResp {
+  /** @format int32 */
+  id: number;
+  /** @minLength 1 */
+  battleSpellName: string;
+}
+
+export interface GetMLBBBattleSpellDetailRespApiRespBase {
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
+  data?: GetMLBBBattleSpellDetailResp;
+}
+
+export interface GetMLBBBattleSpellsItem {
+  /** @format int32 */
+  id: number;
+  /** @minLength 1 */
+  battleSpellName: string;
+  updatedBy?: string | null;
+  /** @format int64 */
+  updatedAt?: number | null;
+  createdBy?: string | null;
+  /** @format int64 */
+  createdAt?: number | null;
+}
+
+export interface GetMLBBBattleSpellsResp {
+  battleSpells: GetMLBBBattleSpellsItem[];
+  paging: PagingRespBase;
+}
+
+export interface GetMLBBBattleSpellsRespApiRespBase {
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
+  data?: GetMLBBBattleSpellsResp;
+}
+
+export interface GetMLBBEmblemDetailResp {
+  /** @format int32 */
+  id: number;
+  /** @minLength 1 */
+  emblemName: string;
+  /** @format int32 */
+  emblemType: number;
+  /** @minLength 1 */
+  emblemTypeName: string;
+}
+
+export interface GetMLBBEmblemDetailRespApiRespBase {
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
+  data?: GetMLBBEmblemDetailResp;
+}
+
+export interface GetMLBBEmblemsItem {
+  /** @format int32 */
+  id: number;
+  /** @minLength 1 */
+  emblemName: string;
+  /** @format int32 */
+  emblemType: number;
+  /** @minLength 1 */
+  emblemTypeName: string;
+  updatedBy?: string | null;
+  /** @format int64 */
+  updatedAt?: number | null;
+  createdBy?: string | null;
+  /** @format int64 */
+  createdAt?: number | null;
+}
+
+export interface GetMLBBEmblemsResp {
+  emblems: GetMLBBEmblemsItem[];
+  paging: PagingRespBase;
+}
+
+export interface GetMLBBEmblemsRespApiRespBase {
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
+  data?: GetMLBBEmblemsResp;
+}
+
+export interface GetMLBBEqpDetailResp {
+  /** @format int32 */
+  id: number;
+  /** @minLength 1 */
+  equipmentName: string;
+  imagePath?: string | null;
+}
+
+export interface GetMLBBEqpDetailRespApiRespBase {
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
+  data?: GetMLBBEqpDetailResp;
+}
+
+export interface GetMLBBEqpsItem {
+  /** @format int32 */
+  id: number;
+  /** @minLength 1 */
+  equipmentName: string;
+  updatedBy?: string | null;
+  /** @format int64 */
+  updatedAt?: number | null;
+  createdBy?: string | null;
+  /** @format int64 */
+  createdAt?: number | null;
+}
+
+export interface GetMLBBEqpsResp {
+  equipments: GetMLBBEqpsItem[];
+  paging: PagingRespBase;
+}
+
+export interface GetMLBBEqpsRespApiRespBase {
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
+  data?: GetMLBBEqpsResp;
+}
+
 export interface GetMap {
   /**
    * Map Id
@@ -8361,6 +8642,12 @@ export interface GetTeamsDetail {
   /** Username */
   username?: string | null;
   /**
+   * Created by
+   * @format int32
+   */
+  createdBy?: number | null;
+  createdUsername?: string | null;
+  /**
    * Url
    * @minLength 1
    */
@@ -8567,6 +8854,8 @@ export interface GetUsers {
    * @minLength 1
    */
   email: string;
+  /** Email verified */
+  emailVerified: boolean;
   /**
    * Updated at
    * @format int64
@@ -8587,6 +8876,13 @@ export interface GetUsers {
    * @format int64
    */
   registrationCompletedAt?: number | null;
+  /**
+   * Email verified at
+   * @format int64
+   */
+  emailVerifiedAt?: number | null;
+  /** Is crew */
+  isCrew?: boolean;
 }
 
 export interface GetUsersByGroupResp {
@@ -10265,6 +10561,78 @@ export interface ModHeroTranslationsRespApiRespBase {
   /** @minLength 1 */
   traceId: string;
   data?: ModHeroTranslationsResp;
+}
+
+export interface ModMLBBBattleSpellReq {
+  /**
+   * @format int32
+   * @min 1
+   * @max 2147483647
+   */
+  id: number;
+  /**
+   * @minLength 0
+   * @maxLength 100
+   */
+  battleSpellName: string;
+}
+
+export type ModMLBBBattleSpellResp = object;
+
+export interface ModMLBBBattleSpellRespApiRespBase {
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
+  data?: ModMLBBBattleSpellResp;
+}
+
+export interface ModMLBBEmblemReq {
+  /**
+   * @format int32
+   * @min 1
+   * @max 2147483647
+   */
+  id: number;
+  /**
+   * @minLength 0
+   * @maxLength 100
+   */
+  emblemName: string;
+  /**
+   * @format int32
+   * @min 1
+   * @max 2147483647
+   */
+  emblemType: number;
+  /**
+   * @minLength 0
+   * @maxLength 50
+   */
+  emblemTypeName: string;
+}
+
+export type ModMLBBEmblemResp = object;
+
+export interface ModMLBBEmblemRespApiRespBase {
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
+  data?: ModMLBBEmblemResp;
+}
+
+export type ModMLBBEqpResp = object;
+
+export interface ModMLBBEqpRespApiRespBase {
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
+  data?: ModMLBBEqpResp;
 }
 
 export type ModMapResp = object;
@@ -12263,6 +12631,34 @@ export interface SeoMetadata {
   content?: string | null;
 }
 
+export interface SetupPasswordReq {
+  /**
+   * Token
+   * @minLength 0
+   * @maxLength 100
+   */
+  token: string;
+  /**
+   * Email
+   * @format email
+   * @minLength 1
+   * @maxLength 60
+   */
+  email?: string | null;
+  /**
+   * New Password
+   * @minLength 8
+   * @maxLength 72
+   */
+  newPassword: string;
+  /**
+   * New Password verify
+   * @minLength 8
+   * @maxLength 72
+   */
+  passwordVerify: string;
+}
+
 export interface SimpleBackOfficePermissionItem {
   /**
    * Backoffice func id
@@ -12813,9 +13209,9 @@ export class HttpClient<SecurityDataType = unknown> {
     [ContentType.Json]: (input: any) =>
       input !== null && (typeof input === "object" || typeof input === "string") ? JSON.stringify(input) : input,
     [ContentType.Text]: (input: any) => (input !== null && typeof input !== "string" ? JSON.stringify(input) : input),
-    [ContentType.FormData]: (input: any) =>
-      Object.keys(input || {}).reduce((formData, key) => {
-        const property = input[key];
+    [ContentType.FormData]: (input: FormData) =>
+      (Array.from(input.keys()) || []).reduce((formData, key) => {
+        const property = input.get(key);
         formData.append(
           key,
           property instanceof Blob
@@ -14346,6 +14742,8 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
          * Complete = 5,
          */
         PrizePoolStatus?: EnumPrizePoolStatus;
+        /** 0/null:All, 1: Live, 2:Upcoming, 3:Completed, 4: Canceled, 5:Featured */
+        TournamentFilter?: EnumTournamentFilters;
         /**
          * @format int32
          * @min 1
@@ -18347,6 +18745,400 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
         path: `/api/v5/media/vods/download-csv`,
         method: "GET",
         query: query,
+        secure: true,
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Mlbb
+     * @name V5MlbbEquipmentsList
+     * @summary Get Equipments
+     * @request GET:/api/v5/mlbb/equipments
+     * @secure
+     */
+    v5MlbbEquipmentsList: (
+      query?: {
+        /**
+         * @format int32
+         * @min 1
+         * @max 2147483647
+         */
+        Id?: number;
+        /**
+         * Equipment En Name
+         * @minLength 1
+         * @maxLength 100
+         */
+        EquipmentName?: string;
+        /**
+         * @format int32
+         * @min 1
+         * @max 2147483647
+         */
+        PageNo?: number;
+        /**
+         * @format int32
+         * @min 1
+         * @max 100
+         */
+        PageSize?: number;
+      },
+      params: RequestParams = {},
+    ) =>
+      this.request<any, GetMLBBEqpsRespApiRespBase>({
+        path: `/api/v5/mlbb/equipments`,
+        method: "GET",
+        query: query,
+        secure: true,
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Mlbb
+     * @name V5MlbbEquipmentsCreate
+     * @summary Add Equipment
+     * @request POST:/api/v5/mlbb/equipments
+     * @secure
+     */
+    v5MlbbEquipmentsCreate: (
+      data: {
+        /**
+         * @format int32
+         * @min 1
+         * @max 2147483647
+         */
+        Id: number;
+        /**
+         * @minLength 0
+         * @maxLength 100
+         */
+        EquipmentName: string;
+        /** @format binary */
+        Image?: File;
+      },
+      params: RequestParams = {},
+    ) =>
+      this.request<any, AddMLBBEqpRespApiRespBase>({
+        path: `/api/v5/mlbb/equipments`,
+        method: "POST",
+        body: data,
+        secure: true,
+        type: ContentType.FormData,
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Mlbb
+     * @name V5MlbbEquipmentsDetail
+     * @summary Get Equipment detail
+     * @request GET:/api/v5/mlbb/equipments/{id}
+     * @secure
+     */
+    v5MlbbEquipmentsDetail: (id: number, params: RequestParams = {}) =>
+      this.request<any, GetMLBBEqpDetailRespApiRespBase>({
+        path: `/api/v5/mlbb/equipments/${id}`,
+        method: "GET",
+        secure: true,
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Mlbb
+     * @name V5MlbbEquipmentsPartialUpdate
+     * @summary Modify Equipment
+     * @request PATCH:/api/v5/mlbb/equipments/{id}
+     * @secure
+     */
+    v5MlbbEquipmentsPartialUpdate: (
+      id: number,
+      data: {
+        /**
+         * @format int32
+         * @min 1
+         * @max 2147483647
+         */
+        Id: number;
+        /**
+         * @minLength 0
+         * @maxLength 100
+         */
+        EquipmentName: string;
+        /** @format binary */
+        Image?: File;
+      },
+      params: RequestParams = {},
+    ) =>
+      this.request<any, ModMLBBEqpRespApiRespBase>({
+        path: `/api/v5/mlbb/equipments/${id}`,
+        method: "PATCH",
+        body: data,
+        secure: true,
+        type: ContentType.FormData,
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Mlbb
+     * @name V5MlbbEquipmentsDelete
+     * @summary Delete Equipment
+     * @request DELETE:/api/v5/mlbb/equipments/{id}
+     * @secure
+     */
+    v5MlbbEquipmentsDelete: (id: number, params: RequestParams = {}) =>
+      this.request<any, DelMLBBEqpRespApiRespBase>({
+        path: `/api/v5/mlbb/equipments/${id}`,
+        method: "DELETE",
+        secure: true,
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Mlbb
+     * @name V5MlbbBattleSpellsList
+     * @summary Get Battle Spells
+     * @request GET:/api/v5/mlbb/battle-spells
+     * @secure
+     */
+    v5MlbbBattleSpellsList: (
+      query?: {
+        /**
+         * @format int32
+         * @min 1
+         * @max 2147483647
+         */
+        Id?: number;
+        /**
+         * Battle Spell En Name
+         * @minLength 1
+         * @maxLength 100
+         */
+        BattleSpellName?: string;
+        /**
+         * @format int32
+         * @min 1
+         * @max 2147483647
+         */
+        PageNo?: number;
+        /**
+         * @format int32
+         * @min 1
+         * @max 100
+         */
+        PageSize?: number;
+      },
+      params: RequestParams = {},
+    ) =>
+      this.request<any, GetMLBBBattleSpellsRespApiRespBase>({
+        path: `/api/v5/mlbb/battle-spells`,
+        method: "GET",
+        query: query,
+        secure: true,
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Mlbb
+     * @name V5MlbbBattleSpellsCreate
+     * @summary Add Battle Spell
+     * @request POST:/api/v5/mlbb/battle-spells
+     * @secure
+     */
+    v5MlbbBattleSpellsCreate: (data: AddMLBBBattleSpellReq, params: RequestParams = {}) =>
+      this.request<any, AddMLBBBattleSpellRespApiRespBase>({
+        path: `/api/v5/mlbb/battle-spells`,
+        method: "POST",
+        body: data,
+        secure: true,
+        type: ContentType.Json,
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Mlbb
+     * @name V5MlbbBattleSpellsDetail
+     * @summary Get Battle Spell detail
+     * @request GET:/api/v5/mlbb/battle-spells/{id}
+     * @secure
+     */
+    v5MlbbBattleSpellsDetail: (id: number, params: RequestParams = {}) =>
+      this.request<any, GetMLBBBattleSpellDetailRespApiRespBase>({
+        path: `/api/v5/mlbb/battle-spells/${id}`,
+        method: "GET",
+        secure: true,
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Mlbb
+     * @name V5MlbbBattleSpellsPartialUpdate
+     * @summary Modify Battle Spell
+     * @request PATCH:/api/v5/mlbb/battle-spells/{id}
+     * @secure
+     */
+    v5MlbbBattleSpellsPartialUpdate: (id: number, data: ModMLBBBattleSpellReq, params: RequestParams = {}) =>
+      this.request<any, ModMLBBBattleSpellRespApiRespBase>({
+        path: `/api/v5/mlbb/battle-spells/${id}`,
+        method: "PATCH",
+        body: data,
+        secure: true,
+        type: ContentType.Json,
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Mlbb
+     * @name V5MlbbBattleSpellsDelete
+     * @summary Delete Battle Spell
+     * @request DELETE:/api/v5/mlbb/battle-spells/{id}
+     * @secure
+     */
+    v5MlbbBattleSpellsDelete: (id: number, params: RequestParams = {}) =>
+      this.request<any, DelMLBBBattleSpellRespApiRespBase>({
+        path: `/api/v5/mlbb/battle-spells/${id}`,
+        method: "DELETE",
+        secure: true,
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Mlbb
+     * @name V5MlbbEmblemsList
+     * @summary Get Emblems
+     * @request GET:/api/v5/mlbb/emblems
+     * @secure
+     */
+    v5MlbbEmblemsList: (
+      query?: {
+        /**
+         * @format int32
+         * @min 1
+         * @max 2147483647
+         */
+        Id?: number;
+        /**
+         * Emblem En Name
+         * @minLength 1
+         * @maxLength 100
+         */
+        EmblemName?: string;
+        /**
+         * Emblem type
+         * @format int32
+         */
+        EmblemType?: number;
+        /**
+         * @format int32
+         * @min 1
+         * @max 2147483647
+         */
+        PageNo?: number;
+        /**
+         * @format int32
+         * @min 1
+         * @max 100
+         */
+        PageSize?: number;
+      },
+      params: RequestParams = {},
+    ) =>
+      this.request<any, GetMLBBEmblemsRespApiRespBase>({
+        path: `/api/v5/mlbb/emblems`,
+        method: "GET",
+        query: query,
+        secure: true,
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Mlbb
+     * @name V5MlbbEmblemsCreate
+     * @summary Add Emblem
+     * @request POST:/api/v5/mlbb/emblems
+     * @secure
+     */
+    v5MlbbEmblemsCreate: (data: AddMLBBEmblemReq, params: RequestParams = {}) =>
+      this.request<any, AddMLBBEmblemRespApiRespBase>({
+        path: `/api/v5/mlbb/emblems`,
+        method: "POST",
+        body: data,
+        secure: true,
+        type: ContentType.Json,
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Mlbb
+     * @name V5MlbbEmblemsDetail
+     * @summary Get Emblem detail
+     * @request GET:/api/v5/mlbb/emblems/{id}
+     * @secure
+     */
+    v5MlbbEmblemsDetail: (id: number, params: RequestParams = {}) =>
+      this.request<any, GetMLBBEmblemDetailRespApiRespBase>({
+        path: `/api/v5/mlbb/emblems/${id}`,
+        method: "GET",
+        secure: true,
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Mlbb
+     * @name V5MlbbEmblemsPartialUpdate
+     * @summary Modify Emblem
+     * @request PATCH:/api/v5/mlbb/emblems/{id}
+     * @secure
+     */
+    v5MlbbEmblemsPartialUpdate: (id: number, data: ModMLBBEmblemReq, params: RequestParams = {}) =>
+      this.request<any, ModMLBBEmblemRespApiRespBase>({
+        path: `/api/v5/mlbb/emblems/${id}`,
+        method: "PATCH",
+        body: data,
+        secure: true,
+        type: ContentType.Json,
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Mlbb
+     * @name V5MlbbEmblemsDelete
+     * @summary Delete Emblem
+     * @request DELETE:/api/v5/mlbb/emblems/{id}
+     * @secure
+     */
+    v5MlbbEmblemsDelete: (id: number, params: RequestParams = {}) =>
+      this.request<any, DelMLBBEmblemRespApiRespBase>({
+        path: `/api/v5/mlbb/emblems/${id}`,
+        method: "DELETE",
         secure: true,
         ...params,
       }),
@@ -24454,6 +25246,61 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
         body: data,
         secure: true,
         type: ContentType.Json,
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Users
+     * @name V5UsersCheckSetupPasswordUrlValidCreate
+     * @summary Check if setup password url is valid?
+     * @request POST:/api/v5/users/check-setup-password-url-valid
+     * @secure
+     */
+    v5UsersCheckSetupPasswordUrlValidCreate: (data: CheckResetPasswordTokenReq, params: RequestParams = {}) =>
+      this.request<any, CheckResetPasswordTokenRespApiRespBase>({
+        path: `/api/v5/users/check-setup-password-url-valid`,
+        method: "POST",
+        body: data,
+        secure: true,
+        type: ContentType.Json,
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Users
+     * @name V5UsersSetupPasswordPartialUpdate
+     * @summary Setup password
+     * @request PATCH:/api/v5/users/setup-password
+     * @secure
+     */
+    v5UsersSetupPasswordPartialUpdate: (data: SetupPasswordReq, params: RequestParams = {}) =>
+      this.request<any, ApiRespBase>({
+        path: `/api/v5/users/setup-password`,
+        method: "PATCH",
+        body: data,
+        secure: true,
+        type: ContentType.Json,
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Users
+     * @name V5UsersResendSetupPasswordEmailCreate
+     * @summary User crew setting
+     * @request POST:/api/v5/users/{id}/resend-setup-password-email
+     * @secure
+     */
+    v5UsersResendSetupPasswordEmailCreate: (id: number, params: RequestParams = {}) =>
+      this.request<any, ApiRespBase>({
+        path: `/api/v5/users/${id}/resend-setup-password-email`,
+        method: "POST",
+        secure: true,
         ...params,
       }),
 
