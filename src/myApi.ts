@@ -6407,6 +6407,11 @@ export interface GetMatchGameResp {
   teamSize?: number;
   /** Moonton battle id (On Mobile Legends needs to set) */
   mtBattleId?: string | null;
+  /**
+   * Moonton delay seconds
+   * @format int32
+   */
+  mtDelaySeconds?: number | null;
 }
 
 export interface GetMatchGameRespApiRespBase {
@@ -6605,6 +6610,11 @@ export interface GetMediaVodResp {
   players: Int32Item[];
   /** Related teams */
   teams: Int32Item[];
+  /**
+   * Thumbnail url
+   * @minLength 1
+   */
+  thumbnailUrl: string;
 }
 
 export interface GetMediaVodRespApiRespBase {
@@ -8262,6 +8272,8 @@ export interface GetStreamResp {
   description?: string | null;
   /** Tags */
   tags: MediaTag[];
+  /** @minLength 1 */
+  thumbnailUrl: string;
 }
 
 export interface GetStreamRespApiRespBase {
@@ -8328,6 +8340,11 @@ export interface GetStreams {
    * @minLength 1
    */
   userName: string;
+  /**
+   * Thumbnail url
+   * @minLength 1
+   */
+  thumbnailUrl: string;
 }
 
 export interface GetStreamsResp {
@@ -9429,6 +9446,11 @@ export interface MediaVodListItem {
    * @format int32
    */
   hostViewCount: number;
+  /**
+   * Thumbnail url
+   * @minLength 1
+   */
+  thumbnailUrl: string;
 }
 
 export interface MenuItem {
@@ -10752,8 +10774,19 @@ export interface ModMatchGameReq {
   team1StandIns?: number[] | null;
   /** Team2 StandIns(playerId) */
   team2StandIns?: number[] | null;
-  /** Moonton battle id (On Mobile Legends needs to set) */
+  /**
+   * Moonton battle id (On Mobile Legends needs to set)
+   * @minLength 0
+   * @maxLength 30
+   */
   mtBattleId?: string | null;
+  /**
+   * Moonton delay seconds
+   * @format int32
+   * @min 0
+   * @max 2147483647
+   */
+  mtDelaySeconds?: number | null;
 }
 
 export type ModMatchGameResp = object;
@@ -20679,6 +20712,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
          * @max 100
          */
         MaxCount?: number;
+        /**
+         * Game Id used for sorting
+         * @format int32
+         */
+        GameId?: number;
       },
       params: RequestParams = {},
     ) =>

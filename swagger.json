@@ -154,7 +154,6 @@
             "name": "ArticleId",
             "in": "query",
             "description": "Article Id for troubleshooting",
-            "style": "form",
             "schema": {
               "maximum": 2147483647,
               "minimum": 1,
@@ -166,7 +165,6 @@
             "name": "FrontendId",
             "in": "query",
             "description": "Frontend id\r\nnull: All",
-            "style": "form",
             "schema": {
               "maximum": 32767,
               "minimum": 1,
@@ -178,7 +176,6 @@
             "name": "Title",
             "in": "query",
             "description": "Article title",
-            "style": "form",
             "schema": {
               "maxLength": 100,
               "minLength": 1,
@@ -189,7 +186,6 @@
             "name": "IsProofread",
             "in": "query",
             "description": "Is Proofread",
-            "style": "form",
             "schema": {
               "type": "boolean"
             }
@@ -198,7 +194,6 @@
             "name": "SiteSectionId",
             "in": "query",
             "description": "Site Section Id\r\nnull: All",
-            "style": "form",
             "schema": {
               "maximum": 32767,
               "minimum": 1,
@@ -210,7 +205,6 @@
             "name": "CreatedFrom",
             "in": "query",
             "description": "Created From",
-            "style": "form",
             "schema": {
               "type": "integer",
               "format": "int64"
@@ -220,7 +214,6 @@
             "name": "CreatedTo",
             "in": "query",
             "description": "Created To",
-            "style": "form",
             "schema": {
               "type": "integer",
               "format": "int64"
@@ -230,7 +223,6 @@
             "name": "Author",
             "in": "query",
             "description": "Creator user name",
-            "style": "form",
             "schema": {
               "maxLength": 20,
               "minLength": 0,
@@ -241,7 +233,6 @@
             "name": "State",
             "in": "query",
             "description": "Article state\r\nPublished: 1\r\nUnpublished: 2\r\nDeleted: 3\r\nFeatured: 4",
-            "style": "form",
             "schema": {
               "$ref": "#/components/schemas/EnumArticleState"
             }
@@ -250,7 +241,6 @@
             "name": "Publisher",
             "in": "query",
             "description": "publish user name",
-            "style": "form",
             "schema": {
               "maxLength": 20,
               "minLength": 0,
@@ -261,7 +251,6 @@
             "name": "Proofreader",
             "in": "query",
             "description": "proofread user name",
-            "style": "form",
             "schema": {
               "maxLength": 20,
               "minLength": 0,
@@ -272,7 +261,6 @@
             "name": "ArticleType",
             "in": "query",
             "description": "Article type",
-            "style": "form",
             "schema": {
               "$ref": "#/components/schemas/EnumArticleType"
             }
@@ -281,7 +269,6 @@
             "name": "PublishFrom",
             "in": "query",
             "description": "publish From",
-            "style": "form",
             "schema": {
               "type": "integer",
               "format": "int64"
@@ -291,7 +278,6 @@
             "name": "PublishTo",
             "in": "query",
             "description": "publish To",
-            "style": "form",
             "schema": {
               "type": "integer",
               "format": "int64"
@@ -301,7 +287,6 @@
             "name": "ProofreadFrom",
             "in": "query",
             "description": "proofread From",
-            "style": "form",
             "schema": {
               "type": "integer",
               "format": "int64"
@@ -311,7 +296,6 @@
             "name": "ProofreadTo",
             "in": "query",
             "description": "proofread To",
-            "style": "form",
             "schema": {
               "type": "integer",
               "format": "int64"
@@ -321,7 +305,6 @@
             "name": "Sorting",
             "in": "query",
             "description": "null = not sorting ,CreatedAtASC = 1,CreatedAtDESC = 2,UpdatedAtASC = 3,UpdatedAtDESC = 4,ViewsASC = 5,ViewsDESC = 6",
-            "style": "form",
             "schema": {
               "type": "array",
               "items": {
@@ -332,7 +315,6 @@
           {
             "name": "PageNo",
             "in": "query",
-            "style": "form",
             "schema": {
               "maximum": 2147483647,
               "minimum": 1,
@@ -343,7 +325,6 @@
           {
             "name": "PageSize",
             "in": "query",
-            "style": "form",
             "schema": {
               "maximum": 100,
               "minimum": 1,
@@ -615,7 +596,6 @@
             "in": "path",
             "description": "Article id",
             "required": true,
-            "style": "simple",
             "schema": {
               "maximum": 2147483647,
               "minimum": -2147483648,
@@ -648,7 +628,6 @@
             "in": "path",
             "description": "ArticleId",
             "required": true,
-            "style": "simple",
             "schema": {
               "maximum": 2147483647,
               "minimum": -2147483648,
@@ -943,7 +922,6 @@
             "in": "path",
             "description": "ArticleId",
             "required": true,
-            "style": "simple",
             "schema": {
               "maximum": 2147483647,
               "minimum": -2147483648,
@@ -977,7 +955,6 @@
             "name": "FuzzyPrefix",
             "in": "query",
             "required": true,
-            "style": "form",
             "schema": {
               "maxLength": 20,
               "minLength": 1,
@@ -987,7 +964,6 @@
           {
             "name": "MaxCount",
             "in": "query",
-            "style": "form",
             "schema": {
               "maximum": 100,
               "minimum": 10,
@@ -1021,7 +997,6 @@
             "name": "refreshToken",
             "in": "query",
             "description": "RefreshToken",
-            "style": "form",
             "schema": {
               "type": "string"
             }
@@ -1133,7 +1108,6 @@
             "in": "query",
             "description": "Prefix",
             "required": true,
-            "style": "form",
             "schema": {
               "maxLength": 30,
               "minLength": 0,
@@ -1144,7 +1118,6 @@
             "name": "MaxCount",
             "in": "query",
             "description": "Max count",
-            "style": "form",
             "schema": {
               "maximum": 100,
               "minimum": 10,
@@ -1178,7 +1151,6 @@
             "name": "Id",
             "in": "query",
             "description": "Broadcast talent Id",
-            "style": "form",
             "schema": {
               "maximum": 2147483647,
               "minimum": 1,
@@ -1190,7 +1162,6 @@
             "name": "NickName",
             "in": "query",
             "description": "Name",
-            "style": "form",
             "schema": {
               "maxLength": 100,
               "minLength": 0,
@@ -1201,7 +1172,6 @@
             "name": "Name",
             "in": "query",
             "description": "FirstName/LastName",
-            "style": "form",
             "schema": {
               "maxLength": 50,
               "minLength": 0,
@@ -1212,7 +1182,6 @@
             "name": "GameId",
             "in": "query",
             "description": "Primary game Id",
-            "style": "form",
             "schema": {
               "maximum": 32767,
               "minimum": 1,
@@ -1224,7 +1193,6 @@
             "name": "LanguageId",
             "in": "query",
             "description": "LanguageId",
-            "style": "form",
             "schema": {
               "maximum": 32767,
               "minimum": 1,
@@ -1236,7 +1204,6 @@
             "name": "CountryId",
             "in": "query",
             "description": "CountryId",
-            "style": "form",
             "schema": {
               "maximum": 32767,
               "minimum": 1,
@@ -1247,7 +1214,6 @@
           {
             "name": "PageNo",
             "in": "query",
-            "style": "form",
             "schema": {
               "maximum": 2147483647,
               "minimum": 1,
@@ -1258,7 +1224,6 @@
           {
             "name": "PageSize",
             "in": "query",
-            "style": "form",
             "schema": {
               "maximum": 100,
               "minimum": 1,
@@ -1507,7 +1472,6 @@
             "in": "path",
             "description": "Broadcast Talent Id",
             "required": true,
-            "style": "simple",
             "schema": {
               "maximum": 2147483647,
               "minimum": -2147483648,
@@ -1540,7 +1504,6 @@
             "in": "path",
             "description": "Broadcast Talent Id",
             "required": true,
-            "style": "simple",
             "schema": {
               "maximum": 2147483647,
               "minimum": -2147483648,
@@ -1787,7 +1750,6 @@
             "in": "path",
             "description": "Broadcast Talent Id",
             "required": true,
-            "style": "simple",
             "schema": {
               "maximum": 2147483647,
               "minimum": -2147483648,
@@ -1821,7 +1783,6 @@
             "name": "Id",
             "in": "query",
             "description": "Broadcast Talent Id",
-            "style": "form",
             "schema": {
               "type": "integer",
               "format": "int32"
@@ -1830,7 +1791,6 @@
           {
             "name": "PageNo",
             "in": "query",
-            "style": "form",
             "schema": {
               "maximum": 2147483647,
               "minimum": 1,
@@ -1841,7 +1801,6 @@
           {
             "name": "PageSize",
             "in": "query",
-            "style": "form",
             "schema": {
               "maximum": 100,
               "minimum": 1,
@@ -1914,7 +1873,6 @@
             "in": "path",
             "description": "Broadcast Talent Id",
             "required": true,
-            "style": "simple",
             "schema": {
               "maximum": 2147483647,
               "minimum": -2147483648,
@@ -1927,7 +1885,6 @@
             "in": "path",
             "description": "Media Item Id",
             "required": true,
-            "style": "simple",
             "schema": {
               "maximum": 2147483647,
               "minimum": -2147483648,
@@ -2041,7 +1998,6 @@
             "name": "Id",
             "in": "query",
             "description": "Country id",
-            "style": "form",
             "schema": {
               "maximum": 32767,
               "minimum": 1,
@@ -2053,7 +2009,6 @@
             "name": "Name",
             "in": "query",
             "description": "Country name",
-            "style": "form",
             "schema": {
               "maxLength": 50,
               "minLength": 0,
@@ -2064,7 +2019,6 @@
             "name": "Code",
             "in": "query",
             "description": "Country code",
-            "style": "form",
             "schema": {
               "maxLength": 2,
               "minLength": 0,
@@ -2074,7 +2028,6 @@
           {
             "name": "PageNo",
             "in": "query",
-            "style": "form",
             "schema": {
               "maximum": 2147483647,
               "minimum": 1,
@@ -2085,7 +2038,6 @@
           {
             "name": "PageSize",
             "in": "query",
-            "style": "form",
             "schema": {
               "maximum": 100,
               "minimum": 1,
@@ -2193,7 +2145,6 @@
             "in": "path",
             "description": "Country id",
             "required": true,
-            "style": "simple",
             "schema": {
               "type": "integer",
               "format": "int32"
@@ -2224,7 +2175,6 @@
             "in": "path",
             "description": "Country id",
             "required": true,
-            "style": "simple",
             "schema": {
               "type": "integer",
               "format": "int32"
@@ -2308,7 +2258,6 @@
             "name": "id",
             "in": "path",
             "required": true,
-            "style": "simple",
             "schema": {
               "type": "integer",
               "format": "int32"
@@ -2341,7 +2290,6 @@
             "in": "query",
             "description": "Currency\r\nUSD = 1,\r\nEUR = 2,\r\nCNY = 3,\r\nRUB = 4,\r\nGBP = 5,\r\nPHP = 6,\r\nAUD = 7,\r\nBGN = 8,\r\nBRL = 9,\r\nCAD = 10,\r\nCZK = 11,\r\nDKK = 12,\r\nHKD = 13,\r\nHUF = 14,\r\nIDR = 15,\r\nILS = 16,\r\nINR = 17,\r\nKRW = 18,\r\nMXN = 19,\r\nMYR = 20,\r\nNZD = 21,\r\nPLN = 22,\r\nRON = 23,\r\nSEK = 24,\r\nSGD = 25,\r\nTHB = 26,\r\nTRY = 27,\r\nZAR = 28,\r\nJPY = 29,",
             "required": true,
-            "style": "form",
             "schema": {
               "$ref": "#/components/schemas/EnumCurrency"
             }
@@ -2351,7 +2299,6 @@
             "in": "query",
             "description": "Amount",
             "required": true,
-            "style": "form",
             "schema": {
               "type": "number",
               "format": "double"
@@ -2383,7 +2330,6 @@
             "name": "ParentId",
             "in": "query",
             "description": "Parent tournament id",
-            "style": "form",
             "schema": {
               "maximum": 2147483647,
               "minimum": 1,
@@ -2395,7 +2341,6 @@
             "name": "Name",
             "in": "query",
             "description": "Parent tournament name",
-            "style": "form",
             "schema": {
               "maxLength": 80,
               "minLength": 1,
@@ -2406,7 +2351,6 @@
             "name": "GameId",
             "in": "query",
             "description": "Game id",
-            "style": "form",
             "schema": {
               "maximum": 32767,
               "minimum": 1,
@@ -2418,7 +2362,6 @@
             "name": "PrizePoolStatus",
             "in": "query",
             "description": "Prize pool status\r\nNoPrizePool = 0,\r\nNoPrizePoolLogged = 1,\r\nNoStructureDefined = 2,\r\nNoWinnersBacklogged = 3,\r\nMissingWinners = 4,\r\nComplete = 5,",
-            "style": "form",
             "schema": {
               "$ref": "#/components/schemas/EnumPrizePoolStatus"
             }
@@ -2427,7 +2370,6 @@
             "name": "TournamentFilter",
             "in": "query",
             "description": "0/null:All, 1: Live, 2:Upcoming, 3:Completed, 4: Canceled, 5:Featured",
-            "style": "form",
             "schema": {
               "$ref": "#/components/schemas/EnumTournamentFilters"
             }
@@ -2435,7 +2377,6 @@
           {
             "name": "PageNo",
             "in": "query",
-            "style": "form",
             "schema": {
               "maximum": 2147483647,
               "minimum": 1,
@@ -2446,7 +2387,6 @@
           {
             "name": "PageSize",
             "in": "query",
-            "style": "form",
             "schema": {
               "maximum": 100,
               "minimum": 1,
@@ -2481,7 +2421,6 @@
             "in": "path",
             "description": "Parent tournament id",
             "required": true,
-            "style": "simple",
             "schema": {
               "type": "integer",
               "format": "int32"
@@ -2514,7 +2453,6 @@
             "in": "path",
             "description": "Child tournament id",
             "required": true,
-            "style": "simple",
             "schema": {
               "type": "integer",
               "format": "int32"
@@ -2545,7 +2483,6 @@
             "in": "path",
             "description": "Child tournament id",
             "required": true,
-            "style": "simple",
             "schema": {
               "type": "integer",
               "format": "int32"
@@ -2598,7 +2535,6 @@
             "in": "path",
             "description": "Child tournament id",
             "required": true,
-            "style": "simple",
             "schema": {
               "type": "integer",
               "format": "int32"
@@ -2650,7 +2586,6 @@
             "name": "Id",
             "in": "query",
             "description": "Event Id",
-            "style": "form",
             "schema": {
               "maximum": 2147483647,
               "minimum": 1,
@@ -2662,7 +2597,6 @@
             "name": "Name",
             "in": "query",
             "description": "Event Name",
-            "style": "form",
             "schema": {
               "maxLength": 80,
               "minLength": 0,
@@ -2673,7 +2607,6 @@
             "name": "GameId",
             "in": "query",
             "description": "Game Id",
-            "style": "form",
             "schema": {
               "maximum": 32767,
               "minimum": 1,
@@ -2685,7 +2618,6 @@
             "name": "FrontendId",
             "in": "query",
             "description": "Frontend Id\r\n0: ALL",
-            "style": "form",
             "schema": {
               "maximum": 32767,
               "minimum": 0,
@@ -2697,7 +2629,6 @@
             "name": "IsHidden",
             "in": "query",
             "description": "Hidden",
-            "style": "form",
             "schema": {
               "type": "boolean"
             }
@@ -2706,7 +2637,6 @@
             "name": "OrganizerId",
             "in": "query",
             "description": "Organizer id",
-            "style": "form",
             "schema": {
               "maximum": 32767,
               "minimum": 0,
@@ -2718,7 +2648,6 @@
             "name": "CreatedFrom",
             "in": "query",
             "description": "Created at from",
-            "style": "form",
             "schema": {
               "minimum": 1,
               "type": "integer",
@@ -2729,7 +2658,6 @@
             "name": "CreatedTo",
             "in": "query",
             "description": "Created at to",
-            "style": "form",
             "schema": {
               "minimum": 1,
               "type": "integer",
@@ -2740,7 +2668,6 @@
             "name": "StartingFrom",
             "in": "query",
             "description": "Starting at from",
-            "style": "form",
             "schema": {
               "minimum": 1,
               "type": "integer",
@@ -2751,7 +2678,6 @@
             "name": "StartingTo",
             "in": "query",
             "description": "Starting at to",
-            "style": "form",
             "schema": {
               "minimum": 1,
               "type": "integer",
@@ -2762,7 +2688,6 @@
             "name": "CreatedBy",
             "in": "query",
             "description": "Created by",
-            "style": "form",
             "schema": {
               "maximum": 2147483647,
               "minimum": 1,
@@ -2773,7 +2698,6 @@
           {
             "name": "PageNo",
             "in": "query",
-            "style": "form",
             "schema": {
               "maximum": 2147483647,
               "minimum": 1,
@@ -2784,7 +2708,6 @@
           {
             "name": "PageSize",
             "in": "query",
-            "style": "form",
             "schema": {
               "maximum": 100,
               "minimum": 1,
@@ -2857,7 +2780,6 @@
             "in": "path",
             "description": "Event Id",
             "required": true,
-            "style": "simple",
             "schema": {
               "maximum": 2147483647,
               "minimum": 1,
@@ -2890,7 +2812,6 @@
             "in": "path",
             "description": "Event Id",
             "required": true,
-            "style": "simple",
             "schema": {
               "maximum": 2147483647,
               "minimum": 1,
@@ -2943,7 +2864,6 @@
             "in": "path",
             "description": "Event Id",
             "required": true,
-            "style": "simple",
             "schema": {
               "maximum": 2147483647,
               "minimum": 1,
@@ -2978,7 +2898,6 @@
             "in": "query",
             "description": "Event id",
             "required": true,
-            "style": "form",
             "schema": {
               "maximum": 2147483647,
               "minimum": 1,
@@ -3051,7 +2970,6 @@
             "in": "path",
             "description": "Event page id",
             "required": true,
-            "style": "simple",
             "schema": {
               "maximum": 2147483647,
               "minimum": 1,
@@ -3104,7 +3022,6 @@
             "in": "path",
             "description": "Event page Id",
             "required": true,
-            "style": "simple",
             "schema": {
               "maximum": 2147483647,
               "minimum": 1,
@@ -3139,7 +3056,6 @@
             "in": "path",
             "description": "Box id",
             "required": true,
-            "style": "simple",
             "schema": {
               "maximum": 2147483647,
               "minimum": 1,
@@ -3172,7 +3088,6 @@
             "in": "path",
             "description": "Box id",
             "required": true,
-            "style": "simple",
             "schema": {
               "maximum": 2147483647,
               "minimum": 1,
@@ -3225,7 +3140,6 @@
             "in": "path",
             "description": "Box id",
             "required": true,
-            "style": "simple",
             "schema": {
               "maximum": 2147483647,
               "minimum": 1,
@@ -3359,7 +3273,6 @@
             "name": "FuzzyPrefix",
             "in": "query",
             "required": true,
-            "style": "form",
             "schema": {
               "maxLength": 20,
               "minLength": 1,
@@ -3369,7 +3282,6 @@
           {
             "name": "MaxCount",
             "in": "query",
-            "style": "form",
             "schema": {
               "maximum": 100,
               "minimum": 10,
@@ -3442,7 +3354,6 @@
           {
             "name": "ParentId",
             "in": "query",
-            "style": "form",
             "schema": {
               "maximum": 2147483647,
               "minimum": 1,
@@ -3453,7 +3364,6 @@
           {
             "name": "UploadType",
             "in": "query",
-            "style": "form",
             "schema": {
               "maxLength": 50,
               "minLength": 1,
@@ -3463,7 +3373,6 @@
           {
             "name": "Sort",
             "in": "query",
-            "style": "form",
             "schema": {
               "$ref": "#/components/schemas/EnumFieldSort"
             }
@@ -3471,7 +3380,6 @@
           {
             "name": "PageNo",
             "in": "query",
-            "style": "form",
             "schema": {
               "maximum": 2147483647,
               "minimum": 1,
@@ -3482,7 +3390,6 @@
           {
             "name": "PageSize",
             "in": "query",
-            "style": "form",
             "schema": {
               "maximum": 100,
               "minimum": 1,
@@ -3568,7 +3475,6 @@
             "name": "FolderId",
             "in": "query",
             "required": true,
-            "style": "form",
             "schema": {
               "maximum": 2147483647,
               "minimum": 1,
@@ -3579,7 +3485,6 @@
           {
             "name": "FileName",
             "in": "query",
-            "style": "form",
             "schema": {
               "maxLength": 255,
               "minLength": 1,
@@ -3589,7 +3494,6 @@
           {
             "name": "Uploader",
             "in": "query",
-            "style": "form",
             "schema": {
               "maxLength": 20,
               "minLength": 1,
@@ -3599,7 +3503,6 @@
           {
             "name": "UploadedFrom",
             "in": "query",
-            "style": "form",
             "schema": {
               "minimum": 1,
               "type": "integer",
@@ -3609,7 +3512,6 @@
           {
             "name": "UploadedTo",
             "in": "query",
-            "style": "form",
             "schema": {
               "minimum": 1,
               "type": "integer",
@@ -3619,7 +3521,6 @@
           {
             "name": "NameSort",
             "in": "query",
-            "style": "form",
             "schema": {
               "$ref": "#/components/schemas/EnumFieldSort"
             }
@@ -3627,7 +3528,6 @@
           {
             "name": "UploadedSort",
             "in": "query",
-            "style": "form",
             "schema": {
               "$ref": "#/components/schemas/EnumFieldSort"
             }
@@ -3635,7 +3535,6 @@
           {
             "name": "UploaderSort",
             "in": "query",
-            "style": "form",
             "schema": {
               "$ref": "#/components/schemas/EnumFieldSort"
             }
@@ -3643,7 +3542,6 @@
           {
             "name": "SizeSort",
             "in": "query",
-            "style": "form",
             "schema": {
               "$ref": "#/components/schemas/EnumFieldSort"
             }
@@ -3651,7 +3549,6 @@
           {
             "name": "PageNo",
             "in": "query",
-            "style": "form",
             "schema": {
               "maximum": 2147483647,
               "minimum": 1,
@@ -3662,7 +3559,6 @@
           {
             "name": "PageSize",
             "in": "query",
-            "style": "form",
             "schema": {
               "maximum": 100,
               "minimum": 1,
@@ -3757,7 +3653,6 @@
             "in": "path",
             "description": "FolderId",
             "required": true,
-            "style": "simple",
             "schema": {
               "type": "integer",
               "format": "int32"
@@ -3821,7 +3716,6 @@
             "in": "path",
             "description": "FolderId",
             "required": true,
-            "style": "simple",
             "schema": {
               "type": "integer",
               "format": "int32"
@@ -3853,7 +3747,6 @@
             "name": "FolderId",
             "in": "query",
             "required": true,
-            "style": "form",
             "schema": {
               "maximum": 2147483647,
               "minimum": 1,
@@ -3865,7 +3758,6 @@
             "name": "FuzzyName",
             "in": "query",
             "required": true,
-            "style": "form",
             "schema": {
               "maxLength": 20,
               "minLength": 1,
@@ -3875,7 +3767,6 @@
           {
             "name": "MaxCount",
             "in": "query",
-            "style": "form",
             "schema": {
               "maximum": 100,
               "minimum": 10,
@@ -3910,7 +3801,6 @@
             "in": "path",
             "description": "FileId",
             "required": true,
-            "style": "simple",
             "schema": {
               "type": "integer",
               "format": "int32"
@@ -3985,7 +3875,6 @@
             "in": "path",
             "description": "FileId",
             "required": true,
-            "style": "simple",
             "schema": {
               "type": "integer",
               "format": "int32"
@@ -4070,7 +3959,6 @@
             "in": "query",
             "description": "Image hash path",
             "required": true,
-            "style": "form",
             "schema": {
               "maxLength": 255,
               "minLength": 0,
@@ -4103,7 +3991,6 @@
             "name": "Id",
             "in": "query",
             "description": "Frontend Id",
-            "style": "form",
             "schema": {
               "type": "integer",
               "format": "int32"
@@ -4113,7 +4000,6 @@
             "name": "Name",
             "in": "query",
             "description": "Frontend Name",
-            "style": "form",
             "schema": {
               "type": "string"
             }
@@ -4122,7 +4008,6 @@
             "name": "IsHidden",
             "in": "query",
             "description": "Is Hidden",
-            "style": "form",
             "schema": {
               "type": "boolean"
             }
@@ -4130,7 +4015,6 @@
           {
             "name": "PageNo",
             "in": "query",
-            "style": "form",
             "schema": {
               "maximum": 2147483647,
               "minimum": 1,
@@ -4141,7 +4025,6 @@
           {
             "name": "PageSize",
             "in": "query",
-            "style": "form",
             "schema": {
               "maximum": 100,
               "minimum": 1,
@@ -4214,7 +4097,6 @@
             "in": "path",
             "description": "FrontendId",
             "required": true,
-            "style": "simple",
             "schema": {
               "maximum": 32767,
               "minimum": 1,
@@ -4247,7 +4129,6 @@
             "in": "path",
             "description": "Request",
             "required": true,
-            "style": "simple",
             "schema": {
               "maximum": 32767,
               "minimum": 1,
@@ -4282,7 +4163,6 @@
             "in": "path",
             "description": "Request",
             "required": true,
-            "style": "simple",
             "schema": {
               "maximum": 32767,
               "minimum": 1,
@@ -4337,7 +4217,6 @@
             "in": "path",
             "description": "Request",
             "required": true,
-            "style": "simple",
             "schema": {
               "maximum": 32767,
               "minimum": 1,
@@ -4392,7 +4271,6 @@
             "in": "path",
             "description": "Request",
             "required": true,
-            "style": "simple",
             "schema": {
               "maximum": 32767,
               "minimum": 1,
@@ -4447,7 +4325,6 @@
             "in": "path",
             "description": "Request",
             "required": true,
-            "style": "simple",
             "schema": {
               "maximum": 32767,
               "minimum": 1,
@@ -4501,7 +4378,6 @@
             "name": "FrontendId",
             "in": "query",
             "required": true,
-            "style": "form",
             "schema": {
               "maximum": 32767,
               "minimum": 1,
@@ -4513,7 +4389,6 @@
             "name": "Platform",
             "in": "query",
             "required": true,
-            "style": "form",
             "schema": {
               "$ref": "#/components/schemas/EnumMenuPlatform"
             }
@@ -4521,7 +4396,6 @@
           {
             "name": "IsIncludeHidden",
             "in": "query",
-            "style": "form",
             "schema": {
               "type": "boolean"
             }
@@ -4553,7 +4427,6 @@
             "in": "path",
             "description": "",
             "required": true,
-            "style": "simple",
             "schema": {
               "maximum": 32767,
               "minimum": 1,
@@ -4628,7 +4501,6 @@
             "in": "path",
             "description": "Request",
             "required": true,
-            "style": "simple",
             "schema": {
               "maximum": 32767,
               "minimum": 1,
@@ -4681,7 +4553,6 @@
             "in": "path",
             "description": "Request",
             "required": true,
-            "style": "simple",
             "schema": {
               "maximum": 32767,
               "minimum": 1,
@@ -4756,7 +4627,6 @@
             "in": "query",
             "description": "Core frontend id",
             "required": true,
-            "style": "form",
             "schema": {
               "maximum": 32767,
               "minimum": 1,
@@ -4962,7 +4832,6 @@
             "in": "path",
             "description": "",
             "required": true,
-            "style": "simple",
             "schema": {
               "maximum": 32767,
               "minimum": 1,
@@ -4997,7 +4866,6 @@
             "in": "query",
             "description": "Core frontend id",
             "required": true,
-            "style": "form",
             "schema": {
               "maximum": 32767,
               "minimum": 1,
@@ -5203,7 +5071,6 @@
             "in": "path",
             "description": "Func id",
             "required": true,
-            "style": "simple",
             "schema": {
               "type": "integer",
               "format": "int32"
@@ -5234,7 +5101,6 @@
             "in": "path",
             "description": "FuncId",
             "required": true,
-            "style": "simple",
             "schema": {
               "type": "integer",
               "format": "int32"
@@ -5359,7 +5225,6 @@
             "in": "path",
             "description": "FuncId",
             "required": true,
-            "style": "simple",
             "schema": {
               "type": "integer",
               "format": "int32"
@@ -5391,7 +5256,6 @@
             "name": "FuzzyPrefix",
             "in": "query",
             "description": "if FuzzyPrefix = null will get list of all GameRaces",
-            "style": "form",
             "schema": {
               "maxLength": 25,
               "minLength": 1,
@@ -5401,7 +5265,6 @@
           {
             "name": "MaxCount",
             "in": "query",
-            "style": "form",
             "schema": {
               "maximum": 100,
               "minimum": 10,
@@ -5435,7 +5298,6 @@
             "name": "RegionId",
             "in": "query",
             "description": "Region id",
-            "style": "form",
             "schema": {
               "maximum": 32767,
               "minimum": 1,
@@ -5447,7 +5309,6 @@
             "name": "GameId",
             "in": "query",
             "description": "Game id",
-            "style": "form",
             "schema": {
               "maximum": 32767,
               "minimum": 1,
@@ -5459,7 +5320,6 @@
             "name": "RegionName",
             "in": "query",
             "description": "Region name",
-            "style": "form",
             "schema": {
               "maxLength": 50,
               "minLength": 1,
@@ -5469,7 +5329,6 @@
           {
             "name": "PageNo",
             "in": "query",
-            "style": "form",
             "schema": {
               "maximum": 2147483647,
               "minimum": 1,
@@ -5480,7 +5339,6 @@
           {
             "name": "PageSize",
             "in": "query",
-            "style": "form",
             "schema": {
               "maximum": 100,
               "minimum": 1,
@@ -5553,7 +5411,6 @@
             "in": "path",
             "description": "Game region id",
             "required": true,
-            "style": "simple",
             "schema": {
               "type": "integer",
               "format": "int32"
@@ -5584,7 +5441,6 @@
             "in": "path",
             "description": "",
             "required": true,
-            "style": "simple",
             "schema": {
               "type": "integer",
               "format": "int32"
@@ -5635,7 +5491,6 @@
             "in": "path",
             "description": "",
             "required": true,
-            "style": "simple",
             "schema": {
               "type": "integer",
               "format": "int32"
@@ -5668,7 +5523,6 @@
             "in": "path",
             "description": "",
             "required": true,
-            "style": "simple",
             "schema": {
               "type": "integer",
               "format": "int32"
@@ -5699,7 +5553,6 @@
             "in": "path",
             "description": "",
             "required": true,
-            "style": "simple",
             "schema": {
               "maximum": 32767,
               "minimum": 1,
@@ -5753,7 +5606,6 @@
             "name": "Id",
             "in": "query",
             "description": "Games Id",
-            "style": "form",
             "schema": {
               "maximum": 32767,
               "minimum": 1,
@@ -5765,7 +5617,6 @@
             "name": "GameName",
             "in": "query",
             "description": "Game name",
-            "style": "form",
             "schema": {
               "maxLength": 20,
               "minLength": 1,
@@ -5776,7 +5627,6 @@
             "name": "IsLegacy",
             "in": "query",
             "description": "Is legacy",
-            "style": "form",
             "schema": {
               "type": "boolean"
             }
@@ -5785,7 +5635,6 @@
             "name": "HasPlayerRankings",
             "in": "query",
             "description": "Has player rankings",
-            "style": "form",
             "schema": {
               "type": "boolean"
             }
@@ -5794,7 +5643,6 @@
             "name": "HasTeamRankings",
             "in": "query",
             "description": "Has team rankings",
-            "style": "form",
             "schema": {
               "type": "boolean"
             }
@@ -5802,7 +5650,6 @@
           {
             "name": "PageNo",
             "in": "query",
-            "style": "form",
             "schema": {
               "maximum": 2147483647,
               "minimum": 1,
@@ -5813,7 +5660,6 @@
           {
             "name": "PageSize",
             "in": "query",
-            "style": "form",
             "schema": {
               "maximum": 100,
               "minimum": 1,
@@ -5972,7 +5818,6 @@
             "in": "path",
             "description": "Game id",
             "required": true,
-            "style": "simple",
             "schema": {
               "type": "integer",
               "format": "int32"
@@ -6003,7 +5848,6 @@
             "in": "path",
             "description": "Game id",
             "required": true,
-            "style": "simple",
             "schema": {
               "type": "integer",
               "format": "int32"
@@ -6151,7 +5995,6 @@
             "in": "path",
             "description": "Game id",
             "required": true,
-            "style": "simple",
             "schema": {
               "type": "integer",
               "format": "int32"
@@ -6184,7 +6027,6 @@
             "in": "path",
             "description": "Game id",
             "required": true,
-            "style": "simple",
             "schema": {
               "type": "integer",
               "format": "int32"
@@ -6235,7 +6077,6 @@
             "in": "path",
             "description": "Game id",
             "required": true,
-            "style": "simple",
             "schema": {
               "type": "integer",
               "format": "int32"
@@ -6268,7 +6109,6 @@
             "in": "path",
             "description": "Game id",
             "required": true,
-            "style": "simple",
             "schema": {
               "type": "integer",
               "format": "int32"
@@ -6320,7 +6160,6 @@
             "name": "FuzzyPrefix",
             "in": "query",
             "description": "if FuzzyPrefix = null will get list of all games",
-            "style": "form",
             "schema": {
               "maxLength": 20,
               "minLength": 1,
@@ -6330,7 +6169,6 @@
           {
             "name": "MaxCount",
             "in": "query",
-            "style": "form",
             "schema": {
               "maximum": 100,
               "minimum": 10,
@@ -6364,7 +6202,6 @@
             "name": "Id",
             "in": "query",
             "description": "Side Id",
-            "style": "form",
             "schema": {
               "maximum": 32767,
               "minimum": 1,
@@ -6376,7 +6213,6 @@
             "name": "Name",
             "in": "query",
             "description": "Side Name",
-            "style": "form",
             "schema": {
               "maxLength": 20,
               "minLength": 0,
@@ -6387,7 +6223,6 @@
             "name": "GameId",
             "in": "query",
             "description": "Side Game Id",
-            "style": "form",
             "schema": {
               "maximum": 32767,
               "minimum": 1,
@@ -6398,7 +6233,6 @@
           {
             "name": "PageNo",
             "in": "query",
-            "style": "form",
             "schema": {
               "maximum": 2147483647,
               "minimum": 1,
@@ -6409,7 +6243,6 @@
           {
             "name": "PageSize",
             "in": "query",
-            "style": "form",
             "schema": {
               "maximum": 100,
               "minimum": 1,
@@ -6506,7 +6339,6 @@
             "in": "path",
             "description": "Sides id",
             "required": true,
-            "style": "simple",
             "schema": {
               "maximum": 32767,
               "minimum": 1,
@@ -6539,7 +6371,6 @@
             "in": "path",
             "description": "Game side Id",
             "required": true,
-            "style": "simple",
             "schema": {
               "maximum": 2147483647,
               "minimum": 1,
@@ -6627,7 +6458,6 @@
             "in": "path",
             "description": "Game side Id",
             "required": true,
-            "style": "simple",
             "schema": {
               "maximum": 32767,
               "minimum": 1,
@@ -6662,7 +6492,6 @@
             "in": "path",
             "description": "Sides Id",
             "required": true,
-            "style": "simple",
             "schema": {
               "maximum": 32767,
               "minimum": 1,
@@ -6695,7 +6524,6 @@
             "in": "path",
             "description": "Game side Id",
             "required": true,
-            "style": "simple",
             "schema": {
               "maximum": 2147483647,
               "minimum": 1,
@@ -6789,7 +6617,6 @@
             "name": "GroupIds",
             "in": "query",
             "description": "Group ids",
-            "style": "form",
             "schema": {
               "type": "array",
               "items": {
@@ -6802,7 +6629,6 @@
             "name": "Remark",
             "in": "query",
             "description": "Group remark",
-            "style": "form",
             "schema": {
               "maxLength": 20,
               "minLength": 3,
@@ -6813,7 +6639,6 @@
             "name": "FrontendIds",
             "in": "query",
             "description": "Frontend ids",
-            "style": "form",
             "schema": {
               "type": "array",
               "items": {
@@ -6825,7 +6650,6 @@
           {
             "name": "PageNo",
             "in": "query",
-            "style": "form",
             "schema": {
               "maximum": 2147483647,
               "minimum": 1,
@@ -6836,7 +6660,6 @@
           {
             "name": "PageSize",
             "in": "query",
-            "style": "form",
             "schema": {
               "maximum": 100,
               "minimum": 1,
@@ -6909,7 +6732,6 @@
             "in": "path",
             "description": "GroupId",
             "required": true,
-            "style": "simple",
             "schema": {
               "type": "integer",
               "format": "int32"
@@ -6940,7 +6762,6 @@
             "in": "path",
             "description": "GroupId",
             "required": true,
-            "style": "simple",
             "schema": {
               "type": "integer",
               "format": "int32"
@@ -6991,7 +6812,6 @@
             "in": "path",
             "description": "GroupId",
             "required": true,
-            "style": "simple",
             "schema": {
               "type": "integer",
               "format": "int32"
@@ -7144,7 +6964,6 @@
             "in": "path",
             "description": "Group id",
             "required": true,
-            "style": "simple",
             "schema": {
               "type": "integer",
               "format": "int32"
@@ -7177,7 +6996,6 @@
             "in": "path",
             "description": "Group id",
             "required": true,
-            "style": "simple",
             "schema": {
               "type": "integer",
               "format": "int32"
@@ -7188,7 +7006,6 @@
             "in": "query",
             "description": "Fuzzy prefix",
             "required": true,
-            "style": "form",
             "schema": {
               "maxLength": 30,
               "minLength": 1,
@@ -7199,7 +7016,6 @@
             "name": "MaxCount",
             "in": "query",
             "description": "Max count",
-            "style": "form",
             "schema": {
               "maximum": 100,
               "minimum": 10,
@@ -7233,7 +7049,6 @@
             "name": "Id",
             "in": "query",
             "description": "Game hero id",
-            "style": "form",
             "schema": {
               "maximum": 32767,
               "minimum": 1,
@@ -7245,7 +7060,6 @@
             "name": "Name",
             "in": "query",
             "description": "Hero Name",
-            "style": "form",
             "schema": {
               "maxLength": 25,
               "minLength": 1,
@@ -7256,7 +7070,6 @@
             "name": "Title",
             "in": "query",
             "description": "Hero Title",
-            "style": "form",
             "schema": {
               "maxLength": 25,
               "minLength": 1,
@@ -7267,7 +7080,6 @@
             "name": "GameId",
             "in": "query",
             "description": "Hero Game Id",
-            "style": "form",
             "schema": {
               "maximum": 32767,
               "minimum": 1,
@@ -7278,7 +7090,6 @@
           {
             "name": "PageNo",
             "in": "query",
-            "style": "form",
             "schema": {
               "maximum": 2147483647,
               "minimum": 1,
@@ -7289,7 +7100,6 @@
           {
             "name": "PageSize",
             "in": "query",
-            "style": "form",
             "schema": {
               "maximum": 100,
               "minimum": 1,
@@ -7402,7 +7212,6 @@
             "in": "path",
             "description": "Game hero id",
             "required": true,
-            "style": "simple",
             "schema": {
               "maximum": 32767,
               "minimum": 1,
@@ -7435,7 +7244,6 @@
             "in": "path",
             "description": "game Hero Id",
             "required": true,
-            "style": "simple",
             "schema": {
               "maximum": 2147483647,
               "minimum": 1,
@@ -7539,7 +7347,6 @@
             "in": "path",
             "description": "game Hero Id",
             "required": true,
-            "style": "simple",
             "schema": {
               "maximum": 32767,
               "minimum": 1,
@@ -7574,7 +7381,6 @@
             "in": "path",
             "description": "heroes Id",
             "required": true,
-            "style": "simple",
             "schema": {
               "maximum": 32767,
               "minimum": 1,
@@ -7607,7 +7413,6 @@
             "in": "path",
             "description": "game Hero Id",
             "required": true,
-            "style": "simple",
             "schema": {
               "maximum": 2147483647,
               "minimum": 1,
@@ -7681,7 +7486,6 @@
             "name": "From",
             "in": "query",
             "description": "From",
-            "style": "form",
             "schema": {
               "minimum": 0,
               "type": "integer",
@@ -7692,7 +7496,6 @@
             "name": "To",
             "in": "query",
             "description": "To",
-            "style": "form",
             "schema": {
               "minimum": 0,
               "type": "integer",
@@ -7703,7 +7506,6 @@
             "name": "Prefix",
             "in": "query",
             "description": "Prefix",
-            "style": "form",
             "schema": {
               "maxLength": 128,
               "minLength": 0,
@@ -7714,7 +7516,6 @@
             "name": "HttpStatusCode",
             "in": "query",
             "description": "Http Status Code",
-            "style": "form",
             "schema": {
               "maximum": 2147483647,
               "minimum": 0,
@@ -7726,7 +7527,6 @@
             "name": "Ip",
             "in": "query",
             "description": "IP Address",
-            "style": "form",
             "schema": {
               "maxLength": 50,
               "minLength": 0,
@@ -7737,7 +7537,6 @@
             "name": "Path",
             "in": "query",
             "description": "Path",
-            "style": "form",
             "schema": {
               "maxLength": 512,
               "minLength": 0,
@@ -7748,7 +7547,6 @@
             "name": "Content",
             "in": "query",
             "description": "Content",
-            "style": "form",
             "schema": {
               "maxLength": 512,
               "minLength": 0,
@@ -7759,7 +7557,6 @@
             "name": "ServerName",
             "in": "query",
             "description": "Server Name",
-            "style": "form",
             "schema": {
               "maxLength": 128,
               "minLength": 0,
@@ -7770,7 +7567,6 @@
             "name": "TraceId",
             "in": "query",
             "description": "Trace Id",
-            "style": "form",
             "schema": {
               "maxLength": 128,
               "minLength": 0,
@@ -7781,7 +7577,6 @@
             "name": "UpdatedUserId",
             "in": "query",
             "description": "Updated user id",
-            "style": "form",
             "schema": {
               "maximum": 2147483647,
               "minimum": 1,
@@ -7793,7 +7588,6 @@
             "name": "Method",
             "in": "query",
             "description": "Http method",
-            "style": "form",
             "schema": {
               "maxLength": 8,
               "minLength": 0,
@@ -7804,7 +7598,6 @@
             "name": "Host",
             "in": "query",
             "description": "Host",
-            "style": "form",
             "schema": {
               "maxLength": 100,
               "minLength": 0,
@@ -7814,7 +7607,6 @@
           {
             "name": "PageNo",
             "in": "query",
-            "style": "form",
             "schema": {
               "maximum": 2147483647,
               "minimum": 1,
@@ -7825,7 +7617,6 @@
           {
             "name": "PageSize",
             "in": "query",
-            "style": "form",
             "schema": {
               "maximum": 100,
               "minimum": 1,
@@ -7860,7 +7651,6 @@
             "in": "path",
             "description": "Log Id",
             "required": true,
-            "style": "simple",
             "schema": {
               "type": "integer",
               "format": "int64"
@@ -7892,7 +7682,6 @@
             "name": "From",
             "in": "query",
             "description": "From",
-            "style": "form",
             "schema": {
               "minimum": 0,
               "type": "integer",
@@ -7903,7 +7692,6 @@
             "name": "To",
             "in": "query",
             "description": "To",
-            "style": "form",
             "schema": {
               "minimum": 0,
               "type": "integer",
@@ -7914,7 +7702,6 @@
             "name": "Prefix",
             "in": "query",
             "description": "Prefix",
-            "style": "form",
             "schema": {
               "maxLength": 128,
               "minLength": 0,
@@ -7925,7 +7712,6 @@
             "name": "ServerName",
             "in": "query",
             "description": "Server Name",
-            "style": "form",
             "schema": {
               "maxLength": 128,
               "minLength": 0,
@@ -7936,7 +7722,6 @@
             "name": "Logger",
             "in": "query",
             "description": "Logger",
-            "style": "form",
             "schema": {
               "maxLength": 128,
               "minLength": 0,
@@ -7947,7 +7732,6 @@
             "name": "Method",
             "in": "query",
             "description": "Method",
-            "style": "form",
             "schema": {
               "maxLength": 128,
               "minLength": 0,
@@ -7958,7 +7742,6 @@
             "name": "LogLevel",
             "in": "query",
             "description": "Log Level",
-            "style": "form",
             "schema": {
               "$ref": "#/components/schemas/LogLevel"
             }
@@ -7967,7 +7750,6 @@
             "name": "TraceId",
             "in": "query",
             "description": "Trace Id",
-            "style": "form",
             "schema": {
               "maxLength": 128,
               "minLength": 0,
@@ -7978,7 +7760,6 @@
             "name": "Keyword",
             "in": "query",
             "description": "Keyword",
-            "style": "form",
             "schema": {
               "maxLength": 128,
               "minLength": 0,
@@ -7988,7 +7769,6 @@
           {
             "name": "PageNo",
             "in": "query",
-            "style": "form",
             "schema": {
               "maximum": 2147483647,
               "minimum": 1,
@@ -7999,7 +7779,6 @@
           {
             "name": "PageSize",
             "in": "query",
-            "style": "form",
             "schema": {
               "maximum": 100,
               "minimum": 1,
@@ -8034,7 +7813,6 @@
             "in": "path",
             "description": "Log Id",
             "required": true,
-            "style": "simple",
             "schema": {
               "type": "integer",
               "format": "int64"
@@ -8106,7 +7884,6 @@
             "name": "Id",
             "in": "query",
             "description": "Map Id",
-            "style": "form",
             "schema": {
               "maximum": 32767,
               "minimum": 1,
@@ -8118,7 +7895,6 @@
             "name": "Name",
             "in": "query",
             "description": "Maps Name",
-            "style": "form",
             "schema": {
               "maxLength": 50,
               "minLength": 0,
@@ -8129,7 +7905,6 @@
             "name": "GameId",
             "in": "query",
             "description": "Maps Game Id",
-            "style": "form",
             "schema": {
               "maximum": 32767,
               "minimum": 1,
@@ -8140,7 +7915,6 @@
           {
             "name": "PageNo",
             "in": "query",
-            "style": "form",
             "schema": {
               "maximum": 2147483647,
               "minimum": 1,
@@ -8151,7 +7925,6 @@
           {
             "name": "PageSize",
             "in": "query",
-            "style": "form",
             "schema": {
               "maximum": 100,
               "minimum": 1,
@@ -8248,7 +8021,6 @@
             "in": "path",
             "description": "Maps Id",
             "required": true,
-            "style": "simple",
             "schema": {
               "maximum": 32767,
               "minimum": 1,
@@ -8281,7 +8053,6 @@
             "in": "path",
             "description": "game map Id",
             "required": true,
-            "style": "simple",
             "schema": {
               "maximum": 2147483647,
               "minimum": 1,
@@ -8369,7 +8140,6 @@
             "in": "path",
             "description": "game map Id",
             "required": true,
-            "style": "simple",
             "schema": {
               "maximum": 32767,
               "minimum": 1,
@@ -8404,7 +8174,6 @@
             "in": "path",
             "description": "Maps Id",
             "required": true,
-            "style": "simple",
             "schema": {
               "maximum": 32767,
               "minimum": 1,
@@ -8437,7 +8206,6 @@
             "in": "path",
             "description": "game map Id",
             "required": true,
-            "style": "simple",
             "schema": {
               "maximum": 2147483647,
               "minimum": 1,
@@ -8491,7 +8259,6 @@
             "name": "GameId",
             "in": "query",
             "description": "Game id",
-            "style": "form",
             "schema": {
               "maximum": 32767,
               "minimum": 1,
@@ -8504,7 +8271,6 @@
             "in": "query",
             "description": "Fuzzy prefix",
             "required": true,
-            "style": "form",
             "schema": {
               "maxLength": 50,
               "minLength": 1,
@@ -8515,7 +8281,6 @@
             "name": "MaxCount",
             "in": "query",
             "description": "Max count",
-            "style": "form",
             "schema": {
               "maximum": 100,
               "minimum": 10,
@@ -8549,7 +8314,6 @@
             "name": "Id",
             "in": "query",
             "description": "Media item Id",
-            "style": "form",
             "schema": {
               "maximum": 2147483647,
               "minimum": 1,
@@ -8561,7 +8325,6 @@
             "name": "Title",
             "in": "query",
             "description": "Title",
-            "style": "form",
             "schema": {
               "maxLength": 60,
               "minLength": 0,
@@ -8572,7 +8335,6 @@
             "name": "CreatedUserId",
             "in": "query",
             "description": "Created user id",
-            "style": "form",
             "schema": {
               "maximum": 2147483647,
               "minimum": -2147483648,
@@ -8584,7 +8346,6 @@
             "name": "PlatformId",
             "in": "query",
             "description": "Platform Id (TwitchTV = 1,Youtube_Channel = 10,Youtube_Stream = 11 Facebook = 12,Other = 99)",
-            "style": "form",
             "schema": {
               "$ref": "#/components/schemas/EnumPlatform"
             }
@@ -8593,7 +8354,6 @@
             "name": "StreamId",
             "in": "query",
             "description": "Stream Id",
-            "style": "form",
             "schema": {
               "maxLength": 25,
               "minLength": 0,
@@ -8604,7 +8364,6 @@
             "name": "GameId",
             "in": "query",
             "description": "Game Id",
-            "style": "form",
             "schema": {
               "maximum": 32767,
               "minimum": 1,
@@ -8616,7 +8375,6 @@
             "name": "IsLive",
             "in": "query",
             "description": "Is Live",
-            "style": "form",
             "schema": {
               "type": "boolean"
             }
@@ -8625,7 +8383,6 @@
             "name": "CreatedFrom",
             "in": "query",
             "description": "Created From",
-            "style": "form",
             "schema": {
               "type": "integer",
               "format": "int64"
@@ -8635,7 +8392,6 @@
             "name": "CreatedTo",
             "in": "query",
             "description": "Created To",
-            "style": "form",
             "schema": {
               "type": "integer",
               "format": "int64"
@@ -8644,7 +8400,6 @@
           {
             "name": "PageNo",
             "in": "query",
-            "style": "form",
             "schema": {
               "maximum": 2147483647,
               "minimum": 1,
@@ -8655,7 +8410,6 @@
           {
             "name": "PageSize",
             "in": "query",
-            "style": "form",
             "schema": {
               "maximum": 100,
               "minimum": 1,
@@ -8848,7 +8602,6 @@
             "in": "path",
             "description": "media item Id",
             "required": true,
-            "style": "simple",
             "schema": {
               "maximum": 2147483647,
               "minimum": 1,
@@ -8881,7 +8634,6 @@
             "in": "path",
             "description": "Stream media item Id",
             "required": true,
-            "style": "simple",
             "schema": {
               "maximum": 2147483647,
               "minimum": 1,
@@ -9065,7 +8817,6 @@
             "in": "path",
             "description": "media stream Id",
             "required": true,
-            "style": "simple",
             "schema": {
               "maximum": 2147483647,
               "minimum": 1,
@@ -9099,7 +8850,6 @@
             "name": "FuzzyPrefix",
             "in": "query",
             "description": "FuzzyPrefix",
-            "style": "form",
             "schema": {
               "maxLength": 60,
               "minLength": 0,
@@ -9109,7 +8859,6 @@
           {
             "name": "MaxCount",
             "in": "query",
-            "style": "form",
             "schema": {
               "maximum": 100,
               "minimum": 10,
@@ -9143,7 +8892,6 @@
             "name": "FuzzyPrefix",
             "in": "query",
             "description": "FuzzyPrefix",
-            "style": "form",
             "schema": {
               "maxLength": 60,
               "minLength": 0,
@@ -9153,7 +8901,6 @@
           {
             "name": "MaxCount",
             "in": "query",
-            "style": "form",
             "schema": {
               "maximum": 100,
               "minimum": 10,
@@ -9252,7 +8999,6 @@
             "name": "VodId",
             "in": "query",
             "description": "Vod id",
-            "style": "form",
             "schema": {
               "maximum": 2147483647,
               "minimum": 1,
@@ -9264,7 +9010,6 @@
             "name": "Title",
             "in": "query",
             "description": "vod title",
-            "style": "form",
             "schema": {
               "maxLength": 30,
               "minLength": 3,
@@ -9275,7 +9020,6 @@
             "name": "HostId",
             "in": "query",
             "description": "Host id",
-            "style": "form",
             "schema": {
               "maximum": 32767,
               "minimum": 0,
@@ -9287,7 +9031,6 @@
             "name": "HostVideoId",
             "in": "query",
             "description": "Host video id",
-            "style": "form",
             "schema": {
               "maxLength": 40,
               "minLength": 1,
@@ -9298,7 +9041,6 @@
             "name": "SiteSectionIds",
             "in": "query",
             "description": "Site section ids",
-            "style": "form",
             "schema": {
               "type": "array",
               "items": {
@@ -9311,7 +9053,6 @@
             "name": "CreatedFrom",
             "in": "query",
             "description": "Created From",
-            "style": "form",
             "schema": {
               "type": "integer",
               "format": "int64"
@@ -9321,7 +9062,6 @@
             "name": "CreatedTo",
             "in": "query",
             "description": "Created To",
-            "style": "form",
             "schema": {
               "type": "integer",
               "format": "int64"
@@ -9331,7 +9071,6 @@
             "name": "CreatedUserId",
             "in": "query",
             "description": "Created user id",
-            "style": "form",
             "schema": {
               "maximum": 2147483647,
               "minimum": -2147483648,
@@ -9343,7 +9082,6 @@
             "name": "IsFeatured",
             "in": "query",
             "description": "Is Featured",
-            "style": "form",
             "schema": {
               "type": "boolean"
             }
@@ -9351,7 +9089,6 @@
           {
             "name": "PageNo",
             "in": "query",
-            "style": "form",
             "schema": {
               "maximum": 2147483647,
               "minimum": 1,
@@ -9362,7 +9099,6 @@
           {
             "name": "PageSize",
             "in": "query",
-            "style": "form",
             "schema": {
               "maximum": 100,
               "minimum": 1,
@@ -9435,7 +9171,6 @@
             "in": "path",
             "description": "Vod media id",
             "required": true,
-            "style": "simple",
             "schema": {
               "type": "integer",
               "format": "int32"
@@ -9466,7 +9201,6 @@
             "in": "path",
             "description": "Vod media id",
             "required": true,
-            "style": "simple",
             "schema": {
               "type": "integer",
               "format": "int32"
@@ -9517,7 +9251,6 @@
             "in": "path",
             "description": "Vod media id",
             "required": true,
-            "style": "simple",
             "schema": {
               "type": "integer",
               "format": "int32"
@@ -9549,7 +9282,6 @@
             "name": "SiteSectionIdsStr",
             "in": "query",
             "description": "Site section ids\r\nFormat=1,2,3,4,5,6",
-            "style": "form",
             "schema": {
               "type": "string"
             }
@@ -9558,7 +9290,6 @@
             "name": "PageSize",
             "in": "query",
             "description": "Page size",
-            "style": "form",
             "schema": {
               "maximum": 10000,
               "minimum": 1,
@@ -9570,7 +9301,6 @@
             "name": "VodId",
             "in": "query",
             "description": "Vod id",
-            "style": "form",
             "schema": {
               "maximum": 2147483647,
               "minimum": 1,
@@ -9582,7 +9312,6 @@
             "name": "Title",
             "in": "query",
             "description": "vod title",
-            "style": "form",
             "schema": {
               "maxLength": 30,
               "minLength": 3,
@@ -9593,7 +9322,6 @@
             "name": "HostId",
             "in": "query",
             "description": "Host id",
-            "style": "form",
             "schema": {
               "maximum": 32767,
               "minimum": 0,
@@ -9605,7 +9333,6 @@
             "name": "HostVideoId",
             "in": "query",
             "description": "Host video id",
-            "style": "form",
             "schema": {
               "maxLength": 40,
               "minLength": 1,
@@ -9616,7 +9343,6 @@
             "name": "CreatedFrom",
             "in": "query",
             "description": "Created From",
-            "style": "form",
             "schema": {
               "type": "integer",
               "format": "int64"
@@ -9626,7 +9352,6 @@
             "name": "CreatedTo",
             "in": "query",
             "description": "Created To",
-            "style": "form",
             "schema": {
               "type": "integer",
               "format": "int64"
@@ -9636,7 +9361,6 @@
             "name": "CreatedUserId",
             "in": "query",
             "description": "Created user id",
-            "style": "form",
             "schema": {
               "maximum": 2147483647,
               "minimum": -2147483648,
@@ -9648,7 +9372,6 @@
             "name": "IsFeatured",
             "in": "query",
             "description": "Is Featured",
-            "style": "form",
             "schema": {
               "type": "boolean"
             }
@@ -9656,7 +9379,6 @@
           {
             "name": "PageNo",
             "in": "query",
-            "style": "form",
             "schema": {
               "maximum": 2147483647,
               "minimum": 1,
@@ -9667,7 +9389,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           }
         }
       }
@@ -9682,7 +9404,6 @@
           {
             "name": "Id",
             "in": "query",
-            "style": "form",
             "schema": {
               "maximum": 2147483647,
               "minimum": 1,
@@ -9694,7 +9415,6 @@
             "name": "EquipmentName",
             "in": "query",
             "description": "Equipment En Name",
-            "style": "form",
             "schema": {
               "maxLength": 100,
               "minLength": 1,
@@ -9704,7 +9424,6 @@
           {
             "name": "PageNo",
             "in": "query",
-            "style": "form",
             "schema": {
               "maximum": 2147483647,
               "minimum": 1,
@@ -9715,7 +9434,6 @@
           {
             "name": "PageSize",
             "in": "query",
-            "style": "form",
             "schema": {
               "maximum": 100,
               "minimum": 1,
@@ -9809,7 +9527,6 @@
             "in": "path",
             "description": "equipment id",
             "required": true,
-            "style": "simple",
             "schema": {
               "type": "integer",
               "format": "int32"
@@ -9840,7 +9557,6 @@
             "in": "path",
             "description": "equipment id",
             "required": true,
-            "style": "simple",
             "schema": {
               "type": "integer",
               "format": "int32"
@@ -9912,7 +9628,6 @@
             "in": "path",
             "description": "equipment id",
             "required": true,
-            "style": "simple",
             "schema": {
               "type": "integer",
               "format": "int32"
@@ -9943,7 +9658,6 @@
           {
             "name": "Id",
             "in": "query",
-            "style": "form",
             "schema": {
               "maximum": 2147483647,
               "minimum": 1,
@@ -9955,7 +9669,6 @@
             "name": "BattleSpellName",
             "in": "query",
             "description": "Battle Spell En Name",
-            "style": "form",
             "schema": {
               "maxLength": 100,
               "minLength": 1,
@@ -9965,7 +9678,6 @@
           {
             "name": "PageNo",
             "in": "query",
-            "style": "form",
             "schema": {
               "maximum": 2147483647,
               "minimum": 1,
@@ -9976,7 +9688,6 @@
           {
             "name": "PageSize",
             "in": "query",
-            "style": "form",
             "schema": {
               "maximum": 100,
               "minimum": 1,
@@ -10049,7 +9760,6 @@
             "in": "path",
             "description": "battle spell id",
             "required": true,
-            "style": "simple",
             "schema": {
               "type": "integer",
               "format": "int32"
@@ -10080,7 +9790,6 @@
             "in": "path",
             "description": "battle spell id",
             "required": true,
-            "style": "simple",
             "schema": {
               "type": "integer",
               "format": "int32"
@@ -10131,7 +9840,6 @@
             "in": "path",
             "description": "battle spell id",
             "required": true,
-            "style": "simple",
             "schema": {
               "type": "integer",
               "format": "int32"
@@ -10162,7 +9870,6 @@
           {
             "name": "Id",
             "in": "query",
-            "style": "form",
             "schema": {
               "maximum": 2147483647,
               "minimum": 1,
@@ -10174,7 +9881,6 @@
             "name": "EmblemName",
             "in": "query",
             "description": "Emblem En Name",
-            "style": "form",
             "schema": {
               "maxLength": 100,
               "minLength": 1,
@@ -10185,7 +9891,6 @@
             "name": "EmblemType",
             "in": "query",
             "description": "Emblem type",
-            "style": "form",
             "schema": {
               "type": "integer",
               "format": "int32"
@@ -10194,7 +9899,6 @@
           {
             "name": "PageNo",
             "in": "query",
-            "style": "form",
             "schema": {
               "maximum": 2147483647,
               "minimum": 1,
@@ -10205,7 +9909,6 @@
           {
             "name": "PageSize",
             "in": "query",
-            "style": "form",
             "schema": {
               "maximum": 100,
               "minimum": 1,
@@ -10278,7 +9981,6 @@
             "in": "path",
             "description": "emblem id",
             "required": true,
-            "style": "simple",
             "schema": {
               "type": "integer",
               "format": "int32"
@@ -10309,7 +10011,6 @@
             "in": "path",
             "description": "emblem id",
             "required": true,
-            "style": "simple",
             "schema": {
               "type": "integer",
               "format": "int32"
@@ -10360,7 +10061,6 @@
             "in": "path",
             "description": "emblem id",
             "required": true,
-            "style": "simple",
             "schema": {
               "type": "integer",
               "format": "int32"
@@ -10392,7 +10092,6 @@
             "name": "Id",
             "in": "query",
             "description": "Modes Id",
-            "style": "form",
             "schema": {
               "maximum": 32767,
               "minimum": 1,
@@ -10404,7 +10103,6 @@
             "name": "Name",
             "in": "query",
             "description": "Modes Name",
-            "style": "form",
             "schema": {
               "maxLength": 255,
               "minLength": 0,
@@ -10415,7 +10113,6 @@
             "name": "Abbreviation",
             "in": "query",
             "description": "Modes Abbreviation",
-            "style": "form",
             "schema": {
               "maxLength": 5,
               "minLength": 0,
@@ -10426,7 +10123,6 @@
             "name": "GameId",
             "in": "query",
             "description": "Modes Game Id",
-            "style": "form",
             "schema": {
               "maximum": 32767,
               "minimum": 1,
@@ -10437,7 +10133,6 @@
           {
             "name": "PageNo",
             "in": "query",
-            "style": "form",
             "schema": {
               "maximum": 2147483647,
               "minimum": 1,
@@ -10448,7 +10143,6 @@
           {
             "name": "PageSize",
             "in": "query",
-            "style": "form",
             "schema": {
               "maximum": 100,
               "minimum": 1,
@@ -10521,7 +10215,6 @@
             "in": "path",
             "description": "Modes Id",
             "required": true,
-            "style": "simple",
             "schema": {
               "maximum": 32767,
               "minimum": 1,
@@ -10554,7 +10247,6 @@
             "in": "path",
             "description": "Game mode id",
             "required": true,
-            "style": "simple",
             "schema": {
               "maximum": 2147483647,
               "minimum": 1,
@@ -10607,7 +10299,6 @@
             "in": "path",
             "description": "Game mode id",
             "required": true,
-            "style": "simple",
             "schema": {
               "maximum": 32767,
               "minimum": 1,
@@ -10642,7 +10333,6 @@
             "in": "path",
             "description": "Game modes Id",
             "required": true,
-            "style": "simple",
             "schema": {
               "maximum": 32767,
               "minimum": 1,
@@ -10675,7 +10365,6 @@
             "in": "path",
             "description": "Game mode id",
             "required": true,
-            "style": "simple",
             "schema": {
               "maximum": 2147483647,
               "minimum": 1,
@@ -10730,7 +10419,6 @@
             "in": "query",
             "description": "Game id",
             "required": true,
-            "style": "form",
             "schema": {
               "maximum": 32767,
               "minimum": 1,
@@ -10764,7 +10452,6 @@
             "name": "FrontendId",
             "in": "query",
             "description": "Frontend id\r\nnull: All",
-            "style": "form",
             "schema": {
               "maximum": 32767,
               "minimum": 1,
@@ -10776,7 +10463,6 @@
             "name": "NotificationTemplateType",
             "in": "query",
             "description": "",
-            "style": "form",
             "schema": {
               "type": "integer",
               "format": "int32"
@@ -10785,7 +10471,6 @@
           {
             "name": "PageNo",
             "in": "query",
-            "style": "form",
             "schema": {
               "maximum": 2147483647,
               "minimum": 1,
@@ -10796,7 +10481,6 @@
           {
             "name": "PageSize",
             "in": "query",
-            "style": "form",
             "schema": {
               "maximum": 100,
               "minimum": 1,
@@ -10869,7 +10553,6 @@
             "in": "path",
             "description": "Notification template id",
             "required": true,
-            "style": "simple",
             "schema": {
               "type": "integer",
               "format": "int32"
@@ -10900,7 +10583,6 @@
             "in": "path",
             "description": "",
             "required": true,
-            "style": "simple",
             "schema": {
               "type": "integer",
               "format": "int32"
@@ -10951,7 +10633,6 @@
             "in": "path",
             "description": "",
             "required": true,
-            "style": "simple",
             "schema": {
               "type": "integer",
               "format": "int32"
@@ -10982,7 +10663,6 @@
           {
             "name": "PageNo",
             "in": "query",
-            "style": "form",
             "schema": {
               "maximum": 2147483647,
               "minimum": 1,
@@ -10993,7 +10673,6 @@
           {
             "name": "PageSize",
             "in": "query",
-            "style": "form",
             "schema": {
               "maximum": 100,
               "minimum": 1,
@@ -11066,7 +10745,6 @@
             "in": "path",
             "description": "One signal app id",
             "required": true,
-            "style": "simple",
             "schema": {
               "type": "integer",
               "format": "int32"
@@ -11097,7 +10775,6 @@
             "in": "path",
             "description": "One signal app id",
             "required": true,
-            "style": "simple",
             "schema": {
               "type": "integer",
               "format": "int32"
@@ -11148,7 +10825,6 @@
             "in": "path",
             "description": "One signal app",
             "required": true,
-            "style": "simple",
             "schema": {
               "type": "integer",
               "format": "int32"
@@ -11220,7 +10896,6 @@
             "name": "IncludeAll",
             "in": "query",
             "description": "Include all options",
-            "style": "form",
             "schema": {
               "type": "boolean"
             }
@@ -11251,7 +10926,6 @@
             "name": "IncludeAll",
             "in": "query",
             "description": "Include all options",
-            "style": "form",
             "schema": {
               "type": "boolean"
             }
@@ -11321,7 +10995,6 @@
           {
             "name": "frontendId",
             "in": "query",
-            "style": "form",
             "schema": {
               "maximum": 32767,
               "minimum": 1,
@@ -11434,7 +11107,6 @@
           {
             "name": "includeLegacy",
             "in": "query",
-            "style": "form",
             "schema": {
               "type": "boolean",
               "default": false
@@ -11466,7 +11138,6 @@
             "name": "frontendId",
             "in": "query",
             "required": true,
-            "style": "form",
             "schema": {
               "maximum": 32767,
               "minimum": 0,
@@ -11519,7 +11190,6 @@
           {
             "name": "gameId",
             "in": "query",
-            "style": "form",
             "schema": {
               "type": "integer",
               "format": "int32"
@@ -11631,7 +11301,6 @@
             "name": "childTournamentId",
             "in": "query",
             "description": "Child tournament id",
-            "style": "form",
             "schema": {
               "type": "integer",
               "format": "int32"
@@ -11683,7 +11352,6 @@
             "name": "GameId",
             "in": "query",
             "required": true,
-            "style": "form",
             "schema": {
               "maximum": 32767,
               "minimum": 1,
@@ -11774,7 +11442,7 @@
         "summary": "Get api actions",
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           }
         }
       }
@@ -11830,7 +11498,6 @@
             "name": "Title",
             "in": "query",
             "description": "Title",
-            "style": "form",
             "schema": {
               "maxLength": 20,
               "minLength": 1,
@@ -11841,7 +11508,6 @@
             "name": "FrontendId",
             "in": "query",
             "description": "Frontend id",
-            "style": "form",
             "schema": {
               "maximum": 32767,
               "minimum": 1,
@@ -11853,7 +11519,6 @@
             "name": "Author",
             "in": "query",
             "description": "Create user name",
-            "style": "form",
             "schema": {
               "maxLength": 20,
               "minLength": 1,
@@ -11864,7 +11529,6 @@
             "name": "PageId",
             "in": "query",
             "description": "Page id",
-            "style": "form",
             "schema": {
               "maximum": 2147483647,
               "minimum": 1,
@@ -11876,7 +11540,6 @@
             "name": "UpdatedFrom",
             "in": "query",
             "description": "Updated from",
-            "style": "form",
             "schema": {
               "minimum": 0,
               "type": "integer",
@@ -11887,7 +11550,6 @@
             "name": "UpdatedTo",
             "in": "query",
             "description": "Updated to",
-            "style": "form",
             "schema": {
               "minimum": 0,
               "type": "integer",
@@ -11897,7 +11559,6 @@
           {
             "name": "PageNo",
             "in": "query",
-            "style": "form",
             "schema": {
               "maximum": 2147483647,
               "minimum": 1,
@@ -11908,7 +11569,6 @@
           {
             "name": "PageSize",
             "in": "query",
-            "style": "form",
             "schema": {
               "maximum": 100,
               "minimum": 1,
@@ -12019,7 +11679,6 @@
             "in": "path",
             "description": "Page id",
             "required": true,
-            "style": "simple",
             "schema": {
               "maximum": 2147483647,
               "minimum": 1,
@@ -12052,7 +11711,6 @@
             "in": "path",
             "description": "PageId",
             "required": true,
-            "style": "simple",
             "schema": {
               "type": "integer",
               "format": "int32"
@@ -12105,7 +11763,6 @@
             "in": "query",
             "description": "Fuzzy prefix",
             "required": true,
-            "style": "form",
             "schema": {
               "maxLength": 30,
               "minLength": 0,
@@ -12116,7 +11773,6 @@
             "name": "MaxCount",
             "in": "query",
             "description": "Max count",
-            "style": "form",
             "schema": {
               "maximum": 100,
               "minimum": 10,
@@ -12150,7 +11806,6 @@
             "name": "Id",
             "in": "query",
             "description": "Player Id",
-            "style": "form",
             "schema": {
               "maximum": 2147483647,
               "minimum": 1,
@@ -12162,7 +11817,6 @@
             "name": "NickName",
             "in": "query",
             "description": "Player Name",
-            "style": "form",
             "schema": {
               "maxLength": 30,
               "minLength": 0,
@@ -12173,7 +11827,6 @@
             "name": "FirstName",
             "in": "query",
             "description": "First Name",
-            "style": "form",
             "schema": {
               "maxLength": 50,
               "minLength": 0,
@@ -12184,7 +11837,6 @@
             "name": "LastName",
             "in": "query",
             "description": "Last Name",
-            "style": "form",
             "schema": {
               "maxLength": 50,
               "minLength": 0,
@@ -12195,7 +11847,6 @@
             "name": "PrimaryGameId",
             "in": "query",
             "description": "Primary Game Id",
-            "style": "form",
             "schema": {
               "maximum": 32767,
               "minimum": 1,
@@ -12207,7 +11858,6 @@
             "name": "CountryId",
             "in": "query",
             "description": "CountryId",
-            "style": "form",
             "schema": {
               "maximum": 32767,
               "minimum": 1,
@@ -12219,7 +11869,6 @@
             "name": "CreatedAtFrom",
             "in": "query",
             "description": "Created at from",
-            "style": "form",
             "schema": {
               "type": "integer",
               "format": "int64"
@@ -12229,7 +11878,6 @@
             "name": "CreatedAtTo",
             "in": "query",
             "description": "Created at to",
-            "style": "form",
             "schema": {
               "type": "integer",
               "format": "int64"
@@ -12239,7 +11887,6 @@
             "name": "GameAccount",
             "in": "query",
             "description": "Game Account",
-            "style": "form",
             "schema": {
               "maxLength": 50,
               "minLength": 0,
@@ -12250,7 +11897,6 @@
             "name": "GridState",
             "in": "query",
             "description": "Grid state\r\n1: With GRID linked\r\n2: Without GRID linked",
-            "style": "form",
             "schema": {
               "$ref": "#/components/schemas/EnumGridStateOption"
             }
@@ -12258,7 +11904,6 @@
           {
             "name": "PageNo",
             "in": "query",
-            "style": "form",
             "schema": {
               "maximum": 2147483647,
               "minimum": 1,
@@ -12269,7 +11914,6 @@
           {
             "name": "PageSize",
             "in": "query",
-            "style": "form",
             "schema": {
               "maximum": 100,
               "minimum": 1,
@@ -12482,7 +12126,6 @@
             "in": "path",
             "description": "Player id",
             "required": true,
-            "style": "simple",
             "schema": {
               "type": "integer",
               "format": "int32"
@@ -12513,7 +12156,6 @@
             "in": "path",
             "description": "PlayerId",
             "required": true,
-            "style": "simple",
             "schema": {
               "type": "integer",
               "format": "int32"
@@ -12712,7 +12354,6 @@
             "in": "path",
             "description": "PlayerId",
             "required": true,
-            "style": "simple",
             "schema": {
               "type": "integer",
               "format": "int32"
@@ -12745,7 +12386,6 @@
             "in": "query",
             "description": "Fuzzy prefix",
             "required": true,
-            "style": "form",
             "schema": {
               "maxLength": 30,
               "minLength": 0,
@@ -12756,10 +12396,18 @@
             "name": "MaxCount",
             "in": "query",
             "description": "Max count",
-            "style": "form",
             "schema": {
               "maximum": 100,
               "minimum": 10,
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "GameId",
+            "in": "query",
+            "description": "Game Id used for sorting",
+            "schema": {
               "type": "integer",
               "format": "int32"
             }
@@ -12791,7 +12439,6 @@
             "in": "path",
             "description": "UserId",
             "required": true,
-            "style": "simple",
             "schema": {
               "type": "integer",
               "format": "int32"
@@ -12824,7 +12471,6 @@
             "in": "path",
             "description": "Player id",
             "required": true,
-            "style": "simple",
             "schema": {
               "maximum": 2147483647,
               "minimum": -2147483648,
@@ -12835,7 +12481,6 @@
           {
             "name": "PageNo",
             "in": "query",
-            "style": "form",
             "schema": {
               "maximum": 2147483647,
               "minimum": 1,
@@ -12846,7 +12491,6 @@
           {
             "name": "PageSize",
             "in": "query",
-            "style": "form",
             "schema": {
               "maximum": 100,
               "minimum": 1,
@@ -12879,7 +12523,6 @@
             "in": "path",
             "description": "",
             "required": true,
-            "style": "simple",
             "schema": {
               "maximum": 2147483647,
               "minimum": -2147483648,
@@ -12892,7 +12535,6 @@
             "in": "query",
             "description": "Media item Ids",
             "required": true,
-            "style": "form",
             "schema": {
               "type": "array",
               "items": {
@@ -12928,7 +12570,6 @@
             "in": "path",
             "description": "Player Id",
             "required": true,
-            "style": "simple",
             "schema": {
               "maximum": 2147483647,
               "minimum": -2147483648,
@@ -12941,7 +12582,6 @@
             "in": "path",
             "description": "Media Item Id",
             "required": true,
-            "style": "simple",
             "schema": {
               "maximum": 2147483647,
               "minimum": -2147483648,
@@ -12975,7 +12615,6 @@
             "name": "FuzzyPrefix",
             "in": "query",
             "required": true,
-            "style": "form",
             "schema": {
               "maxLength": 50,
               "minLength": 0,
@@ -12986,7 +12625,6 @@
             "name": "MaxCount",
             "in": "query",
             "description": "default: 20",
-            "style": "form",
             "schema": {
               "maximum": 50,
               "minimum": 20,
@@ -13020,7 +12658,6 @@
             "name": "From",
             "in": "query",
             "required": true,
-            "style": "form",
             "schema": {
               "type": "integer",
               "format": "int64"
@@ -13030,7 +12667,6 @@
             "name": "To",
             "in": "query",
             "required": true,
-            "style": "form",
             "schema": {
               "type": "integer",
               "format": "int64"
@@ -13040,7 +12676,6 @@
             "name": "Locale",
             "in": "query",
             "description": "LocaleId",
-            "style": "form",
             "schema": {
               "maximum": 32767,
               "minimum": 1,
@@ -13052,7 +12687,6 @@
             "name": "SiteSections",
             "in": "query",
             "description": "Site section id",
-            "style": "form",
             "schema": {
               "type": "array",
               "items": {
@@ -13065,7 +12699,6 @@
             "name": "Tournaments",
             "in": "query",
             "description": "Parent tournament name",
-            "style": "form",
             "schema": {
               "maxLength": 80,
               "minLength": 0,
@@ -13076,7 +12709,6 @@
             "name": "Proofreader",
             "in": "query",
             "description": "Proofreader (fuzzy search)",
-            "style": "form",
             "schema": {
               "maxLength": 20,
               "minLength": 0,
@@ -13087,7 +12719,6 @@
             "name": "Author",
             "in": "query",
             "description": "Author (fuzzy search)",
-            "style": "form",
             "schema": {
               "maxLength": 20,
               "minLength": 0,
@@ -13120,7 +12751,6 @@
             "name": "From",
             "in": "query",
             "required": true,
-            "style": "form",
             "schema": {
               "type": "integer",
               "format": "int64"
@@ -13130,7 +12760,6 @@
             "name": "To",
             "in": "query",
             "required": true,
-            "style": "form",
             "schema": {
               "type": "integer",
               "format": "int64"
@@ -13140,7 +12769,6 @@
             "name": "Locale",
             "in": "query",
             "description": "LocaleId",
-            "style": "form",
             "schema": {
               "maximum": 32767,
               "minimum": 1,
@@ -13152,7 +12780,6 @@
             "name": "SiteSections",
             "in": "query",
             "description": "Site section id",
-            "style": "form",
             "schema": {
               "type": "array",
               "items": {
@@ -13165,7 +12792,6 @@
             "name": "Tournaments",
             "in": "query",
             "description": "Parent tournament name",
-            "style": "form",
             "schema": {
               "maxLength": 80,
               "minLength": 0,
@@ -13176,7 +12802,6 @@
             "name": "Proofreader",
             "in": "query",
             "description": "Proofreader (fuzzy search)",
-            "style": "form",
             "schema": {
               "maxLength": 20,
               "minLength": 0,
@@ -13187,7 +12812,6 @@
             "name": "Author",
             "in": "query",
             "description": "Author (fuzzy search)",
-            "style": "form",
             "schema": {
               "maxLength": 20,
               "minLength": 0,
@@ -13197,7 +12821,6 @@
           {
             "name": "PageNo",
             "in": "query",
-            "style": "form",
             "schema": {
               "maximum": 2147483647,
               "minimum": 1,
@@ -13208,7 +12831,6 @@
           {
             "name": "PageSize",
             "in": "query",
-            "style": "form",
             "schema": {
               "maximum": 100,
               "minimum": 1,
@@ -13242,7 +12864,6 @@
             "name": "From",
             "in": "query",
             "required": true,
-            "style": "form",
             "schema": {
               "minimum": 1,
               "type": "integer",
@@ -13253,7 +12874,6 @@
             "name": "To",
             "in": "query",
             "required": true,
-            "style": "form",
             "schema": {
               "minimum": 1,
               "type": "integer",
@@ -13263,7 +12883,6 @@
           {
             "name": "PageNo",
             "in": "query",
-            "style": "form",
             "schema": {
               "maximum": 2147483647,
               "minimum": 1,
@@ -13274,7 +12893,6 @@
           {
             "name": "PageSize",
             "in": "query",
-            "style": "form",
             "schema": {
               "maximum": 100,
               "minimum": 1,
@@ -13308,7 +12926,6 @@
             "name": "From",
             "in": "query",
             "required": true,
-            "style": "form",
             "schema": {
               "minimum": 1,
               "type": "integer",
@@ -13319,7 +12936,6 @@
             "name": "To",
             "in": "query",
             "required": true,
-            "style": "form",
             "schema": {
               "minimum": 1,
               "type": "integer",
@@ -13330,7 +12946,6 @@
             "name": "TimeZone",
             "in": "query",
             "required": true,
-            "style": "form",
             "schema": {
               "maximum": 14,
               "minimum": -12,
@@ -13341,7 +12956,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           }
         }
       }
@@ -13356,7 +12971,6 @@
           {
             "name": "ParentTournamentId",
             "in": "query",
-            "style": "form",
             "schema": {
               "maximum": 2147483647,
               "minimum": 1,
@@ -13367,7 +12981,6 @@
           {
             "name": "TournamentName",
             "in": "query",
-            "style": "form",
             "schema": {
               "maxLength": 80,
               "minLength": 0,
@@ -13377,7 +12990,6 @@
           {
             "name": "GameId",
             "in": "query",
-            "style": "form",
             "schema": {
               "maximum": 32767,
               "minimum": 1,
@@ -13388,7 +13000,6 @@
           {
             "name": "FrontEndId",
             "in": "query",
-            "style": "form",
             "schema": {
               "maximum": 32767,
               "minimum": 1,
@@ -13399,7 +13010,6 @@
           {
             "name": "IsHidden",
             "in": "query",
-            "style": "form",
             "schema": {
               "type": "boolean"
             }
@@ -13407,7 +13017,6 @@
           {
             "name": "IsLan",
             "in": "query",
-            "style": "form",
             "schema": {
               "type": "boolean"
             }
@@ -13415,7 +13024,6 @@
           {
             "name": "CountryId",
             "in": "query",
-            "style": "form",
             "schema": {
               "maximum": 32767,
               "minimum": 1,
@@ -13426,7 +13034,6 @@
           {
             "name": "VenueId",
             "in": "query",
-            "style": "form",
             "schema": {
               "maximum": 2147483647,
               "minimum": 1,
@@ -13437,7 +13044,6 @@
           {
             "name": "CreatedAtFrom",
             "in": "query",
-            "style": "form",
             "schema": {
               "minimum": 1,
               "type": "integer",
@@ -13447,7 +13053,6 @@
           {
             "name": "CreatedAtTo",
             "in": "query",
-            "style": "form",
             "schema": {
               "minimum": 1,
               "type": "integer",
@@ -13457,7 +13062,6 @@
           {
             "name": "StartingAtFrom",
             "in": "query",
-            "style": "form",
             "schema": {
               "minimum": 1,
               "type": "integer",
@@ -13467,7 +13071,6 @@
           {
             "name": "StartingAtTo",
             "in": "query",
-            "style": "form",
             "schema": {
               "minimum": 1,
               "type": "integer",
@@ -13477,7 +13080,6 @@
           {
             "name": "CreatedBy",
             "in": "query",
-            "style": "form",
             "schema": {
               "maximum": 2147483647,
               "minimum": 1,
@@ -13488,7 +13090,6 @@
           {
             "name": "MapId",
             "in": "query",
-            "style": "form",
             "schema": {
               "maximum": 32767,
               "minimum": 1,
@@ -13499,7 +13100,6 @@
           {
             "name": "SponsorId",
             "in": "query",
-            "style": "form",
             "schema": {
               "maximum": 2147483647,
               "minimum": 1,
@@ -13510,7 +13110,6 @@
           {
             "name": "PageNo",
             "in": "query",
-            "style": "form",
             "schema": {
               "maximum": 2147483647,
               "minimum": 1,
@@ -13521,7 +13120,6 @@
           {
             "name": "PageSize",
             "in": "query",
-            "style": "form",
             "schema": {
               "maximum": 100,
               "minimum": 1,
@@ -13575,7 +13173,6 @@
             "name": "From",
             "in": "query",
             "required": true,
-            "style": "form",
             "schema": {
               "minimum": 1,
               "type": "integer",
@@ -13586,7 +13183,6 @@
             "name": "To",
             "in": "query",
             "required": true,
-            "style": "form",
             "schema": {
               "minimum": 1,
               "type": "integer",
@@ -13597,7 +13193,6 @@
             "name": "UserId",
             "in": "query",
             "required": true,
-            "style": "form",
             "schema": {
               "maximum": 2147483647,
               "minimum": 1,
@@ -13631,7 +13226,6 @@
             "name": "From",
             "in": "query",
             "required": true,
-            "style": "form",
             "schema": {
               "minimum": 1,
               "type": "integer",
@@ -13642,7 +13236,6 @@
             "name": "To",
             "in": "query",
             "required": true,
-            "style": "form",
             "schema": {
               "minimum": 1,
               "type": "integer",
@@ -13652,7 +13245,6 @@
           {
             "name": "ResultedBy",
             "in": "query",
-            "style": "form",
             "schema": {
               "maximum": 2147483647,
               "minimum": 1,
@@ -13663,7 +13255,6 @@
           {
             "name": "UpdatedBy",
             "in": "query",
-            "style": "form",
             "schema": {
               "maximum": 2147483647,
               "minimum": 1,
@@ -13674,7 +13265,6 @@
           {
             "name": "DraftedBy",
             "in": "query",
-            "style": "form",
             "schema": {
               "maximum": 2147483647,
               "minimum": 1,
@@ -13685,7 +13275,6 @@
           {
             "name": "MapBy",
             "in": "query",
-            "style": "form",
             "schema": {
               "maximum": 2147483647,
               "minimum": 1,
@@ -13696,7 +13285,6 @@
           {
             "name": "RoundSetBy",
             "in": "query",
-            "style": "form",
             "schema": {
               "maximum": 2147483647,
               "minimum": 1,
@@ -13707,7 +13295,6 @@
           {
             "name": "PageNo",
             "in": "query",
-            "style": "form",
             "schema": {
               "maximum": 2147483647,
               "minimum": 1,
@@ -13718,7 +13305,6 @@
           {
             "name": "PageSize",
             "in": "query",
-            "style": "form",
             "schema": {
               "maximum": 100,
               "minimum": 1,
@@ -13752,7 +13338,6 @@
             "name": "From",
             "in": "query",
             "required": true,
-            "style": "form",
             "schema": {
               "minimum": 1,
               "type": "integer",
@@ -13763,7 +13348,6 @@
             "name": "To",
             "in": "query",
             "required": true,
-            "style": "form",
             "schema": {
               "minimum": 1,
               "type": "integer",
@@ -13773,7 +13357,6 @@
           {
             "name": "PageNo",
             "in": "query",
-            "style": "form",
             "schema": {
               "maximum": 2147483647,
               "minimum": 1,
@@ -13784,7 +13367,6 @@
           {
             "name": "PageSize",
             "in": "query",
-            "style": "form",
             "schema": {
               "maximum": 100,
               "minimum": 1,
@@ -13818,7 +13400,6 @@
             "name": "From",
             "in": "query",
             "required": true,
-            "style": "form",
             "schema": {
               "minimum": 1,
               "type": "integer",
@@ -13829,7 +13410,6 @@
             "name": "To",
             "in": "query",
             "required": true,
-            "style": "form",
             "schema": {
               "minimum": 1,
               "type": "integer",
@@ -13840,7 +13420,6 @@
             "name": "TimeZone",
             "in": "query",
             "required": true,
-            "style": "form",
             "schema": {
               "maximum": 14,
               "minimum": -12,
@@ -13851,7 +13430,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           }
         }
       }
@@ -13888,7 +13467,6 @@
             "in": "path",
             "description": "RoleId",
             "required": true,
-            "style": "simple",
             "schema": {
               "type": "integer",
               "format": "int32"
@@ -13920,7 +13498,6 @@
             "name": "RoleIds",
             "in": "query",
             "description": "Role ids",
-            "style": "form",
             "schema": {
               "type": "array",
               "items": {
@@ -13933,7 +13510,6 @@
             "name": "GroupIds",
             "in": "query",
             "description": "Group ids",
-            "style": "form",
             "schema": {
               "type": "array",
               "items": {
@@ -13946,7 +13522,6 @@
             "name": "FrontendIds",
             "in": "query",
             "description": "Frontend ids",
-            "style": "form",
             "schema": {
               "type": "array",
               "items": {
@@ -13959,7 +13534,6 @@
             "name": "Remark",
             "in": "query",
             "description": "Group remark",
-            "style": "form",
             "schema": {
               "maxLength": 20,
               "minLength": 3,
@@ -13969,7 +13543,6 @@
           {
             "name": "PageNo",
             "in": "query",
-            "style": "form",
             "schema": {
               "maximum": 2147483647,
               "minimum": 1,
@@ -13980,7 +13553,6 @@
           {
             "name": "PageSize",
             "in": "query",
-            "style": "form",
             "schema": {
               "maximum": 100,
               "minimum": 1,
@@ -14053,7 +13625,6 @@
             "in": "path",
             "description": "RoleId",
             "required": true,
-            "style": "simple",
             "schema": {
               "type": "integer",
               "format": "int32"
@@ -14084,7 +13655,6 @@
             "in": "path",
             "description": "RoleId",
             "required": true,
-            "style": "simple",
             "schema": {
               "type": "integer",
               "format": "int32"
@@ -14135,7 +13705,6 @@
             "in": "path",
             "description": "RoleId",
             "required": true,
-            "style": "simple",
             "schema": {
               "type": "integer",
               "format": "int32"
@@ -14267,7 +13836,6 @@
             "name": "id",
             "in": "path",
             "required": true,
-            "style": "simple",
             "schema": {
               "type": "integer",
               "format": "int32"
@@ -14299,7 +13867,6 @@
             "name": "Id",
             "in": "query",
             "description": "Servers Id",
-            "style": "form",
             "schema": {
               "maximum": 2147483647,
               "minimum": 1,
@@ -14311,7 +13878,6 @@
             "name": "Name",
             "in": "query",
             "description": "Server Name",
-            "style": "form",
             "schema": {
               "maxLength": 50,
               "minLength": 0,
@@ -14322,7 +13888,6 @@
             "name": "GameId",
             "in": "query",
             "description": "Game Id",
-            "style": "form",
             "schema": {
               "maximum": 32767,
               "minimum": 1,
@@ -14333,7 +13898,6 @@
           {
             "name": "PageNo",
             "in": "query",
-            "style": "form",
             "schema": {
               "maximum": 2147483647,
               "minimum": 1,
@@ -14344,7 +13908,6 @@
           {
             "name": "PageSize",
             "in": "query",
-            "style": "form",
             "schema": {
               "maximum": 100,
               "minimum": 1,
@@ -14417,7 +13980,6 @@
             "in": "path",
             "description": "Server id",
             "required": true,
-            "style": "simple",
             "schema": {
               "maximum": 2147483647,
               "minimum": 1,
@@ -14450,7 +14012,6 @@
             "in": "path",
             "description": "tournaments server id",
             "required": true,
-            "style": "simple",
             "schema": {
               "maximum": 2147483647,
               "minimum": 1,
@@ -14503,7 +14064,6 @@
             "in": "path",
             "description": "tournaments Server Id",
             "required": true,
-            "style": "simple",
             "schema": {
               "maximum": 2147483647,
               "minimum": 1,
@@ -14536,7 +14096,6 @@
           {
             "name": "Id",
             "in": "query",
-            "style": "form",
             "schema": {
               "maximum": 32767,
               "minimum": 1,
@@ -14547,7 +14106,6 @@
           {
             "name": "Name",
             "in": "query",
-            "style": "form",
             "schema": {
               "maxLength": 40,
               "minLength": 1,
@@ -14557,7 +14115,6 @@
           {
             "name": "GameId",
             "in": "query",
-            "style": "form",
             "schema": {
               "maximum": 32767,
               "minimum": 1,
@@ -14568,7 +14125,6 @@
           {
             "name": "Hidden",
             "in": "query",
-            "style": "form",
             "schema": {
               "type": "boolean"
             }
@@ -14576,7 +14132,6 @@
           {
             "name": "PageNo",
             "in": "query",
-            "style": "form",
             "schema": {
               "maximum": 2147483647,
               "minimum": 1,
@@ -14587,7 +14142,6 @@
           {
             "name": "PageSize",
             "in": "query",
-            "style": "form",
             "schema": {
               "maximum": 100,
               "minimum": 1,
@@ -14660,7 +14214,6 @@
             "in": "path",
             "description": "SiteSectionId",
             "required": true,
-            "style": "simple",
             "schema": {
               "type": "integer",
               "format": "int32"
@@ -14691,7 +14244,6 @@
             "in": "path",
             "description": "SiteSectionId",
             "required": true,
-            "style": "simple",
             "schema": {
               "type": "integer",
               "format": "int32"
@@ -14742,7 +14294,6 @@
             "in": "path",
             "description": "SiteSectionId",
             "required": true,
-            "style": "simple",
             "schema": {
               "type": "integer",
               "format": "int32"
@@ -14774,7 +14325,6 @@
             "name": "Id",
             "in": "query",
             "description": "Sponsors Id",
-            "style": "form",
             "schema": {
               "maximum": 2147483647,
               "minimum": 1,
@@ -14786,7 +14336,6 @@
             "name": "Name",
             "in": "query",
             "description": "Sponsor Name",
-            "style": "form",
             "schema": {
               "maxLength": 30,
               "minLength": 0,
@@ -14797,7 +14346,6 @@
             "name": "Website",
             "in": "query",
             "description": "Sponsor Url",
-            "style": "form",
             "schema": {
               "maxLength": 60,
               "minLength": 0,
@@ -14808,7 +14356,6 @@
             "name": "Creator",
             "in": "query",
             "description": "Creator",
-            "style": "form",
             "schema": {
               "maxLength": 20,
               "minLength": 0,
@@ -14819,7 +14366,6 @@
             "name": "UpdatedFrom",
             "in": "query",
             "description": "Last Updated From",
-            "style": "form",
             "schema": {
               "type": "integer",
               "format": "int64"
@@ -14829,7 +14375,6 @@
             "name": "UpdatedTo",
             "in": "query",
             "description": "Last Updated To",
-            "style": "form",
             "schema": {
               "type": "integer",
               "format": "int64"
@@ -14838,7 +14383,6 @@
           {
             "name": "PageNo",
             "in": "query",
-            "style": "form",
             "schema": {
               "maximum": 2147483647,
               "minimum": 1,
@@ -14849,7 +14393,6 @@
           {
             "name": "PageSize",
             "in": "query",
-            "style": "form",
             "schema": {
               "maximum": 100,
               "minimum": 1,
@@ -14964,7 +14507,6 @@
             "in": "path",
             "description": "Sponsors Id",
             "required": true,
-            "style": "simple",
             "schema": {
               "maximum": 32767,
               "minimum": 1,
@@ -14997,7 +14539,6 @@
             "in": "path",
             "description": "Tournaments Sponsor Id",
             "required": true,
-            "style": "simple",
             "schema": {
               "maximum": 2147483647,
               "minimum": 1,
@@ -15103,7 +14644,6 @@
             "in": "path",
             "description": "Tournaments Sponsor Id",
             "required": true,
-            "style": "simple",
             "schema": {
               "maximum": 32767,
               "minimum": 1,
@@ -15138,7 +14678,6 @@
             "in": "query",
             "description": "Fuzzy prefix",
             "required": true,
-            "style": "form",
             "schema": {
               "maxLength": 30,
               "minLength": 0,
@@ -15149,7 +14688,6 @@
             "name": "MaxCount",
             "in": "query",
             "description": "Max count",
-            "style": "form",
             "schema": {
               "maximum": 100,
               "minimum": 10,
@@ -15183,7 +14721,6 @@
             "name": "TeamName",
             "in": "query",
             "description": "TeamName",
-            "style": "form",
             "schema": {
               "maxLength": 50,
               "minLength": 1,
@@ -15194,7 +14731,6 @@
             "name": "TeamTag",
             "in": "query",
             "description": "TeamTag",
-            "style": "form",
             "schema": {
               "maxLength": 20,
               "minLength": 1,
@@ -15205,7 +14741,6 @@
             "name": "TeamId",
             "in": "query",
             "description": "Team Id",
-            "style": "form",
             "schema": {
               "maximum": 2147483647,
               "minimum": 1,
@@ -15217,7 +14752,6 @@
             "name": "PlayerId",
             "in": "query",
             "description": "Player Id",
-            "style": "form",
             "schema": {
               "maximum": 2147483647,
               "minimum": 1,
@@ -15229,7 +14763,6 @@
             "name": "GameId",
             "in": "query",
             "description": "Game Id",
-            "style": "form",
             "schema": {
               "maximum": 32767,
               "minimum": 1,
@@ -15241,7 +14774,6 @@
             "name": "CountryId",
             "in": "query",
             "description": "Country Id",
-            "style": "form",
             "schema": {
               "maximum": 32767,
               "minimum": 1,
@@ -15253,7 +14785,6 @@
             "name": "UpdatedAtFrom",
             "in": "query",
             "description": "Created at from",
-            "style": "form",
             "schema": {
               "type": "integer",
               "format": "int64"
@@ -15263,7 +14794,6 @@
             "name": "UpdatedAtTo",
             "in": "query",
             "description": "Created at to",
-            "style": "form",
             "schema": {
               "type": "integer",
               "format": "int64"
@@ -15273,7 +14803,6 @@
             "name": "GridState",
             "in": "query",
             "description": "Grid state\r\n1: With GRID linked\r\n2: Without GRID linked",
-            "style": "form",
             "schema": {
               "$ref": "#/components/schemas/EnumGridStateOption"
             }
@@ -15282,7 +14811,6 @@
             "name": "SortBy",
             "in": "query",
             "description": "Sort by\r\n1: Rankings, from high to low (1st - 9999th)\r\n2: Rankings, from low to high (9999th - 1st)",
-            "style": "form",
             "schema": {
               "$ref": "#/components/schemas/EnumTeamSortOption"
             }
@@ -15290,7 +14818,6 @@
           {
             "name": "PageNo",
             "in": "query",
-            "style": "form",
             "schema": {
               "maximum": 2147483647,
               "minimum": 1,
@@ -15301,7 +14828,6 @@
           {
             "name": "PageSize",
             "in": "query",
-            "style": "form",
             "schema": {
               "maximum": 100,
               "minimum": 1,
@@ -15470,7 +14996,6 @@
             "in": "path",
             "description": "TeamId",
             "required": true,
-            "style": "simple",
             "schema": {
               "type": "integer",
               "format": "int32"
@@ -15501,7 +15026,6 @@
             "in": "path",
             "description": "TeamId",
             "required": true,
-            "style": "simple",
             "schema": {
               "type": "integer",
               "format": "int32"
@@ -15686,7 +15210,6 @@
             "in": "path",
             "description": "TeamId",
             "required": true,
-            "style": "simple",
             "schema": {
               "type": "integer",
               "format": "int32"
@@ -15719,7 +15242,6 @@
             "in": "path",
             "description": "Team id",
             "required": true,
-            "style": "simple",
             "schema": {
               "maximum": 2147483647,
               "minimum": -2147483648,
@@ -15730,7 +15252,6 @@
           {
             "name": "PageNo",
             "in": "query",
-            "style": "form",
             "schema": {
               "maximum": 2147483647,
               "minimum": 1,
@@ -15741,7 +15262,6 @@
           {
             "name": "PageSize",
             "in": "query",
-            "style": "form",
             "schema": {
               "maximum": 100,
               "minimum": 1,
@@ -15774,7 +15294,6 @@
             "in": "path",
             "description": "Team id",
             "required": true,
-            "style": "simple",
             "schema": {
               "maximum": 2147483647,
               "minimum": -2147483648,
@@ -15829,7 +15348,6 @@
             "in": "path",
             "description": "Team id",
             "required": true,
-            "style": "simple",
             "schema": {
               "maximum": 2147483647,
               "minimum": -2147483648,
@@ -15842,7 +15360,6 @@
             "in": "path",
             "description": "Team player id",
             "required": true,
-            "style": "simple",
             "schema": {
               "maximum": 2147483647,
               "minimum": -2147483648,
@@ -15875,7 +15392,6 @@
             "in": "path",
             "description": "Team id",
             "required": true,
-            "style": "simple",
             "schema": {
               "maximum": 2147483647,
               "minimum": -2147483648,
@@ -15888,7 +15404,6 @@
             "in": "path",
             "description": "Team player id",
             "required": true,
-            "style": "simple",
             "schema": {
               "maximum": 2147483647,
               "minimum": -2147483648,
@@ -15941,7 +15456,6 @@
             "in": "path",
             "description": "Team id",
             "required": true,
-            "style": "simple",
             "schema": {
               "maximum": 2147483647,
               "minimum": -2147483648,
@@ -15954,7 +15468,6 @@
             "in": "path",
             "description": "Team player id",
             "required": true,
-            "style": "simple",
             "schema": {
               "maximum": 2147483647,
               "minimum": -2147483648,
@@ -15988,7 +15501,6 @@
             "name": "FuzzyPrefix",
             "in": "query",
             "required": true,
-            "style": "form",
             "schema": {
               "maxLength": 50,
               "minLength": 0,
@@ -15998,7 +15510,6 @@
           {
             "name": "MaxCount",
             "in": "query",
-            "style": "form",
             "schema": {
               "maximum": 100,
               "minimum": 10,
@@ -16010,7 +15521,6 @@
             "name": "GameId",
             "in": "query",
             "description": "Game id",
-            "style": "form",
             "schema": {
               "type": "integer",
               "format": "int32"
@@ -16043,7 +15553,6 @@
             "in": "path",
             "description": "Team id",
             "required": true,
-            "style": "simple",
             "schema": {
               "type": "integer",
               "format": "int32"
@@ -16075,7 +15584,6 @@
             "name": "FuzzyPrefix",
             "in": "query",
             "required": true,
-            "style": "form",
             "schema": {
               "maxLength": 50,
               "minLength": 0,
@@ -16086,7 +15594,6 @@
             "name": "MaxCount",
             "in": "query",
             "description": "default: 20",
-            "style": "form",
             "schema": {
               "maximum": 50,
               "minimum": 20,
@@ -16121,7 +15628,6 @@
             "in": "path",
             "description": "",
             "required": true,
-            "style": "simple",
             "schema": {
               "type": "integer",
               "format": "int32"
@@ -16131,7 +15637,6 @@
             "name": "TeamId",
             "in": "query",
             "required": true,
-            "style": "form",
             "schema": {
               "maximum": 2147483647,
               "minimum": 1,
@@ -16142,7 +15647,6 @@
           {
             "name": "PageNo",
             "in": "query",
-            "style": "form",
             "schema": {
               "maximum": 2147483647,
               "minimum": 1,
@@ -16153,7 +15657,6 @@
           {
             "name": "PageSize",
             "in": "query",
-            "style": "form",
             "schema": {
               "maximum": 100,
               "minimum": 1,
@@ -16188,7 +15691,6 @@
             "in": "path",
             "description": "",
             "required": true,
-            "style": "simple",
             "schema": {
               "type": "integer",
               "format": "int32"
@@ -16240,7 +15742,6 @@
             "name": "teamId",
             "in": "path",
             "required": true,
-            "style": "simple",
             "schema": {
               "type": "integer",
               "format": "int32"
@@ -16271,7 +15772,6 @@
           {
             "name": "Type",
             "in": "query",
-            "style": "form",
             "schema": {
               "$ref": "#/components/schemas/EnumTgMsgType"
             }
@@ -16279,7 +15779,6 @@
           {
             "name": "SourceId",
             "in": "query",
-            "style": "form",
             "schema": {
               "maximum": 2147483647,
               "minimum": 1,
@@ -16290,7 +15789,6 @@
           {
             "name": "PageNo",
             "in": "query",
-            "style": "form",
             "schema": {
               "maximum": 2147483647,
               "minimum": 1,
@@ -16301,7 +15799,6 @@
           {
             "name": "PageSize",
             "in": "query",
-            "style": "form",
             "schema": {
               "maximum": 100,
               "minimum": 1,
@@ -16336,7 +15833,6 @@
             "in": "query",
             "description": "Fuzzy prefix",
             "required": true,
-            "style": "form",
             "schema": {
               "maxLength": 80,
               "minLength": 0,
@@ -16347,7 +15843,6 @@
             "name": "MaxCount",
             "in": "query",
             "description": "Max count",
-            "style": "form",
             "schema": {
               "maximum": 100,
               "minimum": 10,
@@ -16382,7 +15877,6 @@
             "in": "query",
             "description": "Article = 1,Sponsor = 2,Video = 3",
             "required": true,
-            "style": "form",
             "schema": {
               "$ref": "#/components/schemas/EnumTournamentRelatedType"
             }
@@ -16392,7 +15886,6 @@
             "in": "query",
             "description": "Parent tournament id",
             "required": true,
-            "style": "form",
             "schema": {
               "maximum": 2147483647,
               "minimum": 1,
@@ -16447,7 +15940,6 @@
             "in": "path",
             "description": "Parent tournament id",
             "required": true,
-            "style": "simple",
             "schema": {
               "type": "integer",
               "format": "int32"
@@ -16456,7 +15948,6 @@
           {
             "name": "PageNo",
             "in": "query",
-            "style": "form",
             "schema": {
               "maximum": 2147483647,
               "minimum": 1,
@@ -16467,7 +15958,6 @@
           {
             "name": "PageSize",
             "in": "query",
-            "style": "form",
             "schema": {
               "maximum": 100,
               "minimum": 1,
@@ -16500,7 +15990,6 @@
             "in": "path",
             "description": "Parent tournament id",
             "required": true,
-            "style": "simple",
             "schema": {
               "type": "integer",
               "format": "int32"
@@ -16553,7 +16042,6 @@
             "in": "path",
             "description": "Parent tournament id",
             "required": true,
-            "style": "simple",
             "schema": {
               "type": "integer",
               "format": "int32"
@@ -16564,7 +16052,6 @@
             "in": "path",
             "description": "Broadcast talent id",
             "required": true,
-            "style": "simple",
             "schema": {
               "type": "integer",
               "format": "int32"
@@ -16597,7 +16084,6 @@
             "in": "path",
             "description": "Parent tournament id",
             "required": true,
-            "style": "simple",
             "schema": {
               "type": "integer",
               "format": "int32"
@@ -16608,7 +16094,6 @@
             "in": "path",
             "description": "Stage id",
             "required": true,
-            "style": "simple",
             "schema": {
               "type": "integer",
               "format": "int32"
@@ -16661,7 +16146,6 @@
             "in": "path",
             "description": "Parent tournament id",
             "required": true,
-            "style": "simple",
             "schema": {
               "type": "integer",
               "format": "int32"
@@ -16672,7 +16156,6 @@
             "in": "path",
             "description": "Stage id",
             "required": true,
-            "style": "simple",
             "schema": {
               "type": "integer",
               "format": "int32"
@@ -16734,7 +16217,6 @@
             "in": "path",
             "description": "Parent tournament id",
             "required": true,
-            "style": "simple",
             "schema": {
               "type": "integer",
               "format": "int32"
@@ -16745,7 +16227,6 @@
             "in": "path",
             "description": "Child tournament id",
             "required": true,
-            "style": "simple",
             "schema": {
               "type": "integer",
               "format": "int32"
@@ -16776,7 +16257,6 @@
             "in": "path",
             "description": "Parent tournament id",
             "required": true,
-            "style": "simple",
             "schema": {
               "type": "integer",
               "format": "int32"
@@ -16787,7 +16267,6 @@
             "in": "path",
             "description": "Child tournament id",
             "required": true,
-            "style": "simple",
             "schema": {
               "type": "integer",
               "format": "int32"
@@ -16838,7 +16317,6 @@
             "in": "path",
             "description": "Parent tournament id",
             "required": true,
-            "style": "simple",
             "schema": {
               "type": "integer",
               "format": "int32"
@@ -16849,7 +16327,6 @@
             "in": "path",
             "description": "Child tournament id",
             "required": true,
-            "style": "simple",
             "schema": {
               "type": "integer",
               "format": "int32"
@@ -16902,7 +16379,6 @@
             "in": "path",
             "description": "Parent tournament id",
             "required": true,
-            "style": "simple",
             "schema": {
               "type": "integer",
               "format": "int32"
@@ -16913,7 +16389,6 @@
             "in": "path",
             "description": "Child tournament id",
             "required": true,
-            "style": "simple",
             "schema": {
               "type": "integer",
               "format": "int32"
@@ -16946,7 +16421,6 @@
             "in": "path",
             "description": "Parent tournament id",
             "required": true,
-            "style": "simple",
             "schema": {
               "type": "integer",
               "format": "int32"
@@ -16957,7 +16431,6 @@
             "in": "path",
             "description": "Child tournament id",
             "required": true,
-            "style": "simple",
             "schema": {
               "type": "integer",
               "format": "int32"
@@ -16990,7 +16463,6 @@
             "in": "path",
             "description": "Parent tournament id",
             "required": true,
-            "style": "simple",
             "schema": {
               "type": "integer",
               "format": "int32"
@@ -17001,7 +16473,6 @@
             "in": "path",
             "description": "Child tournament id",
             "required": true,
-            "style": "simple",
             "schema": {
               "type": "integer",
               "format": "int32"
@@ -17034,7 +16505,6 @@
             "in": "path",
             "description": "Parent tournament id",
             "required": true,
-            "style": "simple",
             "schema": {
               "type": "integer",
               "format": "int32"
@@ -17045,7 +16515,6 @@
             "in": "path",
             "description": "Child tournament id",
             "required": true,
-            "style": "simple",
             "schema": {
               "type": "integer",
               "format": "int32"
@@ -17078,7 +16547,6 @@
             "in": "path",
             "description": "Parent tournament id",
             "required": true,
-            "style": "simple",
             "schema": {
               "type": "integer",
               "format": "int32"
@@ -17089,7 +16557,6 @@
             "in": "path",
             "description": "Child tournament id",
             "required": true,
-            "style": "simple",
             "schema": {
               "type": "integer",
               "format": "int32"
@@ -17122,7 +16589,6 @@
             "in": "path",
             "description": "Parent tournament id",
             "required": true,
-            "style": "simple",
             "schema": {
               "type": "integer",
               "format": "int32"
@@ -17133,7 +16599,6 @@
             "in": "path",
             "description": "Child tournament id",
             "required": true,
-            "style": "simple",
             "schema": {
               "type": "integer",
               "format": "int32"
@@ -17165,7 +16630,6 @@
             "name": "GameId",
             "in": "query",
             "description": "Game Id",
-            "style": "form",
             "schema": {
               "maximum": 32767,
               "minimum": 1,
@@ -17178,7 +16642,6 @@
             "in": "query",
             "description": "Prefix can be name or id",
             "required": true,
-            "style": "form",
             "schema": {
               "maxLength": 30,
               "minLength": 0,
@@ -17212,7 +16675,6 @@
             "in": "query",
             "description": "Child Tournament Id",
             "required": true,
-            "style": "form",
             "schema": {
               "maximum": 2147483647,
               "minimum": 1,
@@ -17225,7 +16687,6 @@
             "in": "query",
             "description": "Date from",
             "required": true,
-            "style": "form",
             "schema": {
               "minimum": 0,
               "type": "integer",
@@ -17237,7 +16698,6 @@
             "in": "query",
             "description": "Date to",
             "required": true,
-            "style": "form",
             "schema": {
               "minimum": 0,
               "type": "integer",
@@ -17271,7 +16731,6 @@
             "in": "path",
             "description": "Parent tournament id",
             "required": true,
-            "style": "simple",
             "schema": {
               "type": "integer",
               "format": "int32"
@@ -17282,7 +16741,6 @@
             "in": "path",
             "description": "Child tournament id",
             "required": true,
-            "style": "simple",
             "schema": {
               "type": "integer",
               "format": "int32"
@@ -17291,7 +16749,6 @@
           {
             "name": "PageNo",
             "in": "query",
-            "style": "form",
             "schema": {
               "maximum": 2147483647,
               "minimum": 1,
@@ -17302,7 +16759,6 @@
           {
             "name": "PageSize",
             "in": "query",
-            "style": "form",
             "schema": {
               "maximum": 100,
               "minimum": 1,
@@ -17335,7 +16791,6 @@
             "in": "path",
             "description": "Parent tournament id",
             "required": true,
-            "style": "simple",
             "schema": {
               "type": "integer",
               "format": "int32"
@@ -17346,7 +16801,6 @@
             "in": "path",
             "description": "Child tournament id",
             "required": true,
-            "style": "simple",
             "schema": {
               "type": "integer",
               "format": "int32"
@@ -17399,7 +16853,6 @@
             "in": "path",
             "description": "",
             "required": true,
-            "style": "simple",
             "schema": {
               "type": "integer",
               "format": "int32"
@@ -17410,7 +16863,6 @@
             "in": "path",
             "description": "",
             "required": true,
-            "style": "simple",
             "schema": {
               "type": "integer",
               "format": "int32"
@@ -17421,7 +16873,6 @@
             "in": "path",
             "description": "",
             "required": true,
-            "style": "simple",
             "schema": {
               "type": "integer",
               "format": "int32"
@@ -17452,7 +16903,6 @@
           {
             "name": "RoomName",
             "in": "query",
-            "style": "form",
             "schema": {
               "maxLength": 30,
               "minLength": 0,
@@ -17462,7 +16912,6 @@
           {
             "name": "JudgeId",
             "in": "query",
-            "style": "form",
             "schema": {
               "maximum": 2147483647,
               "minimum": 1,
@@ -17496,7 +16945,6 @@
             "name": "BattleId",
             "in": "query",
             "required": true,
-            "style": "form",
             "schema": {
               "maxLength": 30,
               "minLength": 0,
@@ -17530,7 +16978,6 @@
             "in": "query",
             "description": "PlayerId",
             "required": true,
-            "style": "form",
             "schema": {
               "maximum": 2147483647,
               "minimum": 1,
@@ -17541,7 +16988,6 @@
           {
             "name": "PageNo",
             "in": "query",
-            "style": "form",
             "schema": {
               "maximum": 2147483647,
               "minimum": 1,
@@ -17552,7 +16998,6 @@
           {
             "name": "PageSize",
             "in": "query",
-            "style": "form",
             "schema": {
               "maximum": 100,
               "minimum": 1,
@@ -17662,7 +17107,6 @@
             "in": "path",
             "description": "GameAccountId",
             "required": true,
-            "style": "simple",
             "schema": {
               "type": "integer",
               "format": "int32"
@@ -17693,7 +17137,6 @@
             "in": "path",
             "description": "PlayerId",
             "required": true,
-            "style": "simple",
             "schema": {
               "type": "integer",
               "format": "int32"
@@ -17744,7 +17187,6 @@
             "in": "path",
             "description": "GameAccountId",
             "required": true,
-            "style": "simple",
             "schema": {
               "type": "integer",
               "format": "int32"
@@ -17777,7 +17219,6 @@
             "in": "path",
             "description": "Round id",
             "required": true,
-            "style": "simple",
             "schema": {
               "type": "integer",
               "format": "int32"
@@ -17810,7 +17251,6 @@
             "in": "path",
             "description": "Round id",
             "required": true,
-            "style": "simple",
             "schema": {
               "type": "integer",
               "format": "int32"
@@ -17821,7 +17261,6 @@
             "in": "path",
             "description": "Match game id",
             "required": true,
-            "style": "simple",
             "schema": {
               "type": "integer",
               "format": "int32"
@@ -17852,7 +17291,6 @@
             "in": "path",
             "description": "Round id",
             "required": true,
-            "style": "simple",
             "schema": {
               "type": "integer",
               "format": "int32"
@@ -17863,7 +17301,6 @@
             "in": "path",
             "description": "Match game id",
             "required": true,
-            "style": "simple",
             "schema": {
               "type": "integer",
               "format": "int32"
@@ -17916,7 +17353,6 @@
             "in": "path",
             "description": "Round id",
             "required": true,
-            "style": "simple",
             "schema": {
               "type": "integer",
               "format": "int32"
@@ -17927,7 +17363,6 @@
             "in": "path",
             "description": "Match game id",
             "required": true,
-            "style": "simple",
             "schema": {
               "type": "integer",
               "format": "int32"
@@ -17958,7 +17393,6 @@
             "in": "path",
             "description": "Round id",
             "required": true,
-            "style": "simple",
             "schema": {
               "type": "integer",
               "format": "int32"
@@ -17969,7 +17403,6 @@
             "in": "path",
             "description": "Match game id",
             "required": true,
-            "style": "simple",
             "schema": {
               "type": "integer",
               "format": "int32"
@@ -18022,7 +17455,6 @@
             "in": "path",
             "description": "Round id",
             "required": true,
-            "style": "simple",
             "schema": {
               "type": "integer",
               "format": "int32"
@@ -18033,7 +17465,6 @@
             "in": "path",
             "description": "Match game id",
             "required": true,
-            "style": "simple",
             "schema": {
               "type": "integer",
               "format": "int32"
@@ -18064,7 +17495,6 @@
             "in": "path",
             "description": "Round id",
             "required": true,
-            "style": "simple",
             "schema": {
               "type": "integer",
               "format": "int32"
@@ -18075,7 +17505,6 @@
             "in": "path",
             "description": "Match game id",
             "required": true,
-            "style": "simple",
             "schema": {
               "type": "integer",
               "format": "int32"
@@ -18128,7 +17557,6 @@
             "in": "path",
             "description": "Round id",
             "required": true,
-            "style": "simple",
             "schema": {
               "type": "integer",
               "format": "int32"
@@ -18139,7 +17567,6 @@
             "in": "path",
             "description": "Match game id",
             "required": true,
-            "style": "simple",
             "schema": {
               "type": "integer",
               "format": "int32"
@@ -18149,7 +17576,6 @@
             "name": "RegistrationId",
             "in": "query",
             "required": true,
-            "style": "form",
             "schema": {
               "maximum": 2147483647,
               "minimum": 1,
@@ -18182,7 +17608,6 @@
             "in": "path",
             "description": "Round id",
             "required": true,
-            "style": "simple",
             "schema": {
               "type": "integer",
               "format": "int32"
@@ -18193,7 +17618,6 @@
             "in": "path",
             "description": "Match game id",
             "required": true,
-            "style": "simple",
             "schema": {
               "type": "integer",
               "format": "int32"
@@ -18246,7 +17670,6 @@
             "in": "query",
             "description": "Tournament game Id",
             "required": true,
-            "style": "form",
             "schema": {
               "maximum": 2147483647,
               "minimum": 1,
@@ -18281,7 +17704,6 @@
             "in": "query",
             "description": "Tournament game Id",
             "required": true,
-            "style": "form",
             "schema": {
               "maximum": 2147483647,
               "minimum": 1,
@@ -18316,7 +17738,6 @@
             "in": "path",
             "description": "Round id",
             "required": true,
-            "style": "simple",
             "schema": {
               "type": "integer",
               "format": "int32"
@@ -18326,7 +17747,6 @@
             "name": "isArchived",
             "in": "query",
             "description": "Is archived",
-            "style": "form",
             "schema": {
               "type": "boolean",
               "default": false
@@ -18336,7 +17756,6 @@
             "name": "matchId",
             "in": "query",
             "description": "",
-            "style": "form",
             "schema": {
               "maximum": 2147483647,
               "minimum": 1,
@@ -18369,7 +17788,6 @@
             "in": "path",
             "description": "Round id",
             "required": true,
-            "style": "simple",
             "schema": {
               "type": "integer",
               "format": "int32"
@@ -18420,7 +17838,6 @@
             "in": "path",
             "description": "Round id",
             "required": true,
-            "style": "simple",
             "schema": {
               "type": "integer",
               "format": "int32"
@@ -18473,7 +17890,6 @@
             "in": "path",
             "description": "Round id",
             "required": true,
-            "style": "simple",
             "schema": {
               "type": "integer",
               "format": "int32"
@@ -18484,7 +17900,6 @@
             "in": "path",
             "description": "Match id",
             "required": true,
-            "style": "simple",
             "schema": {
               "type": "integer",
               "format": "int32"
@@ -18515,7 +17930,6 @@
             "in": "path",
             "description": "Round id",
             "required": true,
-            "style": "simple",
             "schema": {
               "type": "integer",
               "format": "int32"
@@ -18526,7 +17940,6 @@
             "in": "path",
             "description": "Request",
             "required": true,
-            "style": "simple",
             "schema": {
               "type": "integer",
               "format": "int32"
@@ -18559,7 +17972,6 @@
             "in": "path",
             "description": "Child tournament id",
             "required": true,
-            "style": "simple",
             "schema": {
               "type": "integer",
               "format": "int32"
@@ -18590,7 +18002,6 @@
             "in": "path",
             "description": "Child tournament id",
             "required": true,
-            "style": "simple",
             "schema": {
               "type": "integer",
               "format": "int32"
@@ -18643,7 +18054,6 @@
             "in": "path",
             "description": "Child tournament id",
             "required": true,
-            "style": "simple",
             "schema": {
               "type": "integer",
               "format": "int32"
@@ -18654,7 +18064,6 @@
             "in": "path",
             "description": "Replace opponent id",
             "required": true,
-            "style": "simple",
             "schema": {
               "type": "integer",
               "format": "int32"
@@ -18687,7 +18096,6 @@
             "in": "path",
             "description": "Round id",
             "required": true,
-            "style": "simple",
             "schema": {
               "type": "integer",
               "format": "int32"
@@ -18698,7 +18106,6 @@
             "in": "path",
             "description": "Match id",
             "required": true,
-            "style": "simple",
             "schema": {
               "type": "integer",
               "format": "int32"
@@ -18729,7 +18136,6 @@
             "in": "path",
             "description": "",
             "required": true,
-            "style": "simple",
             "schema": {
               "type": "integer",
               "format": "int32"
@@ -18740,7 +18146,6 @@
             "in": "path",
             "description": "",
             "required": true,
-            "style": "simple",
             "schema": {
               "type": "integer",
               "format": "int32"
@@ -18793,7 +18198,6 @@
             "in": "path",
             "description": "Round id",
             "required": true,
-            "style": "simple",
             "schema": {
               "type": "integer",
               "format": "int32"
@@ -18804,7 +18208,6 @@
             "in": "path",
             "description": "Request",
             "required": true,
-            "style": "simple",
             "schema": {
               "type": "integer",
               "format": "int32"
@@ -18877,7 +18280,6 @@
             "in": "path",
             "description": "Parent tournament id",
             "required": true,
-            "style": "simple",
             "schema": {
               "type": "integer",
               "format": "int32"
@@ -18888,7 +18290,6 @@
             "in": "path",
             "description": "Child tournament id",
             "required": true,
-            "style": "simple",
             "schema": {
               "type": "integer",
               "format": "int32"
@@ -18919,7 +18320,6 @@
             "in": "path",
             "description": "Parent tournament id",
             "required": true,
-            "style": "simple",
             "schema": {
               "type": "integer",
               "format": "int32"
@@ -18930,7 +18330,6 @@
             "in": "path",
             "description": "Child tournament id",
             "required": true,
-            "style": "simple",
             "schema": {
               "type": "integer",
               "format": "int32"
@@ -18983,7 +18382,6 @@
             "in": "path",
             "description": "Parent tournament id",
             "required": true,
-            "style": "simple",
             "schema": {
               "type": "integer",
               "format": "int32"
@@ -19016,7 +18414,6 @@
             "in": "path",
             "description": "Parent tournament id",
             "required": true,
-            "style": "simple",
             "schema": {
               "type": "integer",
               "format": "int32"
@@ -19027,7 +18424,6 @@
             "in": "query",
             "description": "Fuzzy prefix",
             "required": true,
-            "style": "form",
             "schema": {
               "maxLength": 50,
               "minLength": 1,
@@ -19038,7 +18434,6 @@
             "name": "MaxCount",
             "in": "query",
             "description": "Max count",
-            "style": "form",
             "schema": {
               "maximum": 100,
               "minimum": 10,
@@ -19072,7 +18467,6 @@
             "name": "RegistrationId",
             "in": "query",
             "required": true,
-            "style": "form",
             "schema": {
               "maximum": 2147483647,
               "minimum": 1,
@@ -19106,7 +18500,6 @@
             "name": "parentid",
             "in": "path",
             "required": true,
-            "style": "simple",
             "schema": {
               "type": "integer",
               "format": "int32"
@@ -19116,7 +18509,6 @@
             "name": "childid",
             "in": "path",
             "required": true,
-            "style": "simple",
             "schema": {
               "type": "integer",
               "format": "int32"
@@ -19148,7 +18540,6 @@
             "name": "Name",
             "in": "query",
             "description": "Parent tournament name",
-            "style": "form",
             "schema": {
               "maxLength": 80,
               "minLength": 1,
@@ -19159,7 +18550,6 @@
             "name": "GameId",
             "in": "query",
             "description": "Game id",
-            "style": "form",
             "schema": {
               "maximum": 32767,
               "minimum": 1,
@@ -19171,7 +18561,6 @@
             "name": "FrontendId",
             "in": "query",
             "description": "Frontend id",
-            "style": "form",
             "schema": {
               "maximum": 32767,
               "minimum": 0,
@@ -19183,7 +18572,6 @@
             "name": "IsHidden",
             "in": "query",
             "description": "Is hidden",
-            "style": "form",
             "schema": {
               "type": "boolean"
             }
@@ -19192,7 +18580,6 @@
             "name": "IsLan",
             "in": "query",
             "description": "Is lan",
-            "style": "form",
             "schema": {
               "type": "boolean"
             }
@@ -19201,7 +18588,6 @@
             "name": "VenueCountryId",
             "in": "query",
             "description": "Venue country id",
-            "style": "form",
             "schema": {
               "type": "integer",
               "format": "int32"
@@ -19211,7 +18597,6 @@
             "name": "VenueId",
             "in": "query",
             "description": "Venue id",
-            "style": "form",
             "schema": {
               "maximum": 2147483647,
               "minimum": 1,
@@ -19223,7 +18608,6 @@
             "name": "ParentId",
             "in": "query",
             "description": "Parent tournament id",
-            "style": "form",
             "schema": {
               "maximum": 2147483647,
               "minimum": 1,
@@ -19235,7 +18619,6 @@
             "name": "CreatedFrom",
             "in": "query",
             "description": "Created from",
-            "style": "form",
             "schema": {
               "minimum": 1,
               "type": "integer",
@@ -19246,7 +18629,6 @@
             "name": "CreatedTo",
             "in": "query",
             "description": "Created to",
-            "style": "form",
             "schema": {
               "minimum": 1,
               "type": "integer",
@@ -19257,7 +18639,6 @@
             "name": "StartingFrom",
             "in": "query",
             "description": "Starting from",
-            "style": "form",
             "schema": {
               "minimum": 1,
               "type": "integer",
@@ -19268,7 +18649,6 @@
             "name": "StartingTo",
             "in": "query",
             "description": "Starting to",
-            "style": "form",
             "schema": {
               "minimum": 1,
               "type": "integer",
@@ -19279,7 +18659,6 @@
             "name": "CreatedUserId",
             "in": "query",
             "description": "Created user id",
-            "style": "form",
             "schema": {
               "maximum": 2147483647,
               "minimum": 1,
@@ -19291,7 +18670,6 @@
             "name": "MapId",
             "in": "query",
             "description": "Map id",
-            "style": "form",
             "schema": {
               "maximum": 32767,
               "minimum": 1,
@@ -19303,7 +18681,6 @@
             "name": "SponsorId",
             "in": "query",
             "description": "Sponsor id",
-            "style": "form",
             "schema": {
               "maximum": 32767,
               "minimum": 1,
@@ -19315,7 +18692,6 @@
             "name": "State",
             "in": "query",
             "description": "State\r\nAll = 0\r\nLive = 1\r\nUpcoming = 2\r\nCompleted = 3\r\nCanceled = 4\r\nFeatured = 5",
-            "style": "form",
             "schema": {
               "$ref": "#/components/schemas/EnumParentTournamentState"
             }
@@ -19323,7 +18699,6 @@
           {
             "name": "PageNo",
             "in": "query",
-            "style": "form",
             "schema": {
               "maximum": 2147483647,
               "minimum": 1,
@@ -19334,7 +18709,6 @@
           {
             "name": "PageSize",
             "in": "query",
-            "style": "form",
             "schema": {
               "maximum": 100,
               "minimum": 1,
@@ -19530,7 +18904,6 @@
             "in": "path",
             "description": "Parent tournament id",
             "required": true,
-            "style": "simple",
             "schema": {
               "type": "integer",
               "format": "int32"
@@ -19561,7 +18934,6 @@
             "in": "path",
             "description": "Parent tournament id",
             "required": true,
-            "style": "simple",
             "schema": {
               "type": "integer",
               "format": "int32"
@@ -19723,7 +19095,6 @@
             "in": "path",
             "description": "Parent tournament id",
             "required": true,
-            "style": "simple",
             "schema": {
               "type": "integer",
               "format": "int32"
@@ -19776,7 +19147,6 @@
             "in": "path",
             "description": "Parent tournament id",
             "required": true,
-            "style": "simple",
             "schema": {
               "type": "integer",
               "format": "int32"
@@ -19809,7 +19179,6 @@
             "in": "path",
             "description": "Parent tournament id",
             "required": true,
-            "style": "simple",
             "schema": {
               "type": "integer",
               "format": "int32"
@@ -19862,7 +19231,6 @@
             "in": "path",
             "description": "Parent tournament id",
             "required": true,
-            "style": "simple",
             "schema": {
               "maximum": 2147483647,
               "minimum": 1,
@@ -19917,7 +19285,6 @@
             "in": "path",
             "description": "Parent tournament id",
             "required": true,
-            "style": "simple",
             "schema": {
               "type": "integer",
               "format": "int32"
@@ -19928,7 +19295,6 @@
             "in": "path",
             "description": "Child tournament id",
             "required": true,
-            "style": "simple",
             "schema": {
               "type": "integer",
               "format": "int32"
@@ -19959,7 +19325,6 @@
             "in": "path",
             "description": "Parent tournament id",
             "required": true,
-            "style": "simple",
             "schema": {
               "type": "integer",
               "format": "int32"
@@ -19970,7 +19335,6 @@
             "in": "path",
             "description": "Child tournament id",
             "required": true,
-            "style": "simple",
             "schema": {
               "type": "integer",
               "format": "int32"
@@ -20023,7 +19387,6 @@
             "in": "path",
             "description": "Parent tournament id",
             "required": true,
-            "style": "simple",
             "schema": {
               "type": "integer",
               "format": "int32"
@@ -20034,7 +19397,6 @@
             "in": "path",
             "description": "Child tournament id",
             "required": true,
-            "style": "simple",
             "schema": {
               "type": "integer",
               "format": "int32"
@@ -20045,7 +19407,6 @@
             "in": "path",
             "description": "Registered id",
             "required": true,
-            "style": "simple",
             "schema": {
               "type": "integer",
               "format": "int32"
@@ -20076,7 +19437,6 @@
             "in": "path",
             "description": "Parent tournament id",
             "required": true,
-            "style": "simple",
             "schema": {
               "type": "integer",
               "format": "int32"
@@ -20087,7 +19447,6 @@
             "in": "path",
             "description": "Child tournament id",
             "required": true,
-            "style": "simple",
             "schema": {
               "type": "integer",
               "format": "int32"
@@ -20098,7 +19457,6 @@
             "in": "path",
             "description": "Registered id",
             "required": true,
-            "style": "simple",
             "schema": {
               "type": "integer",
               "format": "int32"
@@ -20149,7 +19507,6 @@
             "in": "path",
             "description": "Parent tournament id",
             "required": true,
-            "style": "simple",
             "schema": {
               "type": "integer",
               "format": "int32"
@@ -20160,7 +19517,6 @@
             "in": "path",
             "description": "Child tournament id",
             "required": true,
-            "style": "simple",
             "schema": {
               "type": "integer",
               "format": "int32"
@@ -20171,7 +19527,6 @@
             "in": "path",
             "description": "Registered id",
             "required": true,
-            "style": "simple",
             "schema": {
               "type": "integer",
               "format": "int32"
@@ -20204,7 +19559,6 @@
             "in": "path",
             "description": "Parent tournament id",
             "required": true,
-            "style": "simple",
             "schema": {
               "type": "integer",
               "format": "int32"
@@ -20215,7 +19569,6 @@
             "in": "path",
             "description": "Child tournament id",
             "required": true,
-            "style": "simple",
             "schema": {
               "type": "integer",
               "format": "int32"
@@ -20246,7 +19599,6 @@
             "in": "path",
             "description": "Parent tournament id",
             "required": true,
-            "style": "simple",
             "schema": {
               "type": "integer",
               "format": "int32"
@@ -20257,7 +19609,6 @@
             "in": "path",
             "description": "Child tournament id",
             "required": true,
-            "style": "simple",
             "schema": {
               "type": "integer",
               "format": "int32"
@@ -20310,7 +19661,6 @@
             "in": "path",
             "description": "Parent tournament id",
             "required": true,
-            "style": "simple",
             "schema": {
               "type": "integer",
               "format": "int32"
@@ -20321,7 +19671,6 @@
             "in": "path",
             "description": "Child tournament id",
             "required": true,
-            "style": "simple",
             "schema": {
               "type": "integer",
               "format": "int32"
@@ -20332,7 +19681,6 @@
             "in": "path",
             "description": "Registered id",
             "required": true,
-            "style": "simple",
             "schema": {
               "type": "integer",
               "format": "int32"
@@ -20383,7 +19731,6 @@
             "in": "path",
             "description": "Parent tournament id",
             "required": true,
-            "style": "simple",
             "schema": {
               "type": "integer",
               "format": "int32"
@@ -20394,7 +19741,6 @@
             "in": "path",
             "description": "Child tournament id",
             "required": true,
-            "style": "simple",
             "schema": {
               "type": "integer",
               "format": "int32"
@@ -20405,7 +19751,6 @@
             "in": "path",
             "description": "Registered id",
             "required": true,
-            "style": "simple",
             "schema": {
               "type": "integer",
               "format": "int32"
@@ -20438,7 +19783,6 @@
             "in": "path",
             "description": "Parent tournament id",
             "required": true,
-            "style": "simple",
             "schema": {
               "type": "integer",
               "format": "int32"
@@ -20449,7 +19793,6 @@
             "in": "path",
             "description": "Child tournament id",
             "required": true,
-            "style": "simple",
             "schema": {
               "type": "integer",
               "format": "int32"
@@ -20460,7 +19803,6 @@
             "in": "path",
             "description": "Registered id",
             "required": true,
-            "style": "simple",
             "schema": {
               "type": "integer",
               "format": "int32"
@@ -20493,7 +19835,6 @@
             "in": "path",
             "description": "Parent tournament id",
             "required": true,
-            "style": "simple",
             "schema": {
               "type": "integer",
               "format": "int32"
@@ -20504,7 +19845,6 @@
             "in": "path",
             "description": "Child tournament id",
             "required": true,
-            "style": "simple",
             "schema": {
               "type": "integer",
               "format": "int32"
@@ -20535,7 +19875,6 @@
             "in": "path",
             "description": "Parent tournament id",
             "required": true,
-            "style": "simple",
             "schema": {
               "type": "integer",
               "format": "int32"
@@ -20546,7 +19885,6 @@
             "in": "path",
             "description": "Child tournament id",
             "required": true,
-            "style": "simple",
             "schema": {
               "type": "integer",
               "format": "int32"
@@ -20599,7 +19937,6 @@
             "in": "path",
             "description": "Parent tournament id",
             "required": true,
-            "style": "simple",
             "schema": {
               "type": "integer",
               "format": "int32"
@@ -20610,7 +19947,6 @@
             "in": "path",
             "description": "Child tournament id",
             "required": true,
-            "style": "simple",
             "schema": {
               "type": "integer",
               "format": "int32"
@@ -20621,7 +19957,6 @@
             "in": "path",
             "description": "Request",
             "required": true,
-            "style": "simple",
             "schema": {
               "type": "integer",
               "format": "int32"
@@ -20652,7 +19987,6 @@
             "in": "path",
             "description": "Parent tournament id",
             "required": true,
-            "style": "simple",
             "schema": {
               "type": "integer",
               "format": "int32"
@@ -20663,7 +19997,6 @@
             "in": "path",
             "description": "Child tournament id",
             "required": true,
-            "style": "simple",
             "schema": {
               "type": "integer",
               "format": "int32"
@@ -20674,7 +20007,6 @@
             "in": "path",
             "description": "Round id",
             "required": true,
-            "style": "simple",
             "schema": {
               "type": "integer",
               "format": "int32"
@@ -20725,7 +20057,6 @@
             "in": "path",
             "description": "Parent tournament id",
             "required": true,
-            "style": "simple",
             "schema": {
               "type": "integer",
               "format": "int32"
@@ -20736,7 +20067,6 @@
             "in": "path",
             "description": "Child tournament id",
             "required": true,
-            "style": "simple",
             "schema": {
               "type": "integer",
               "format": "int32"
@@ -20747,7 +20077,6 @@
             "in": "path",
             "description": "Round id",
             "required": true,
-            "style": "simple",
             "schema": {
               "type": "integer",
               "format": "int32"
@@ -20780,7 +20109,6 @@
             "in": "path",
             "description": "Parent tournament id",
             "required": true,
-            "style": "simple",
             "schema": {
               "type": "integer",
               "format": "int32"
@@ -20811,7 +20139,6 @@
             "in": "path",
             "description": "Parent tournament id",
             "required": true,
-            "style": "simple",
             "schema": {
               "type": "integer",
               "format": "int32"
@@ -20864,7 +20191,6 @@
             "in": "path",
             "description": "Parent tournament id",
             "required": true,
-            "style": "simple",
             "schema": {
               "type": "integer",
               "format": "int32"
@@ -20875,7 +20201,6 @@
             "in": "path",
             "description": "Child tournament id",
             "required": true,
-            "style": "simple",
             "schema": {
               "type": "integer",
               "format": "int32"
@@ -20906,7 +20231,6 @@
             "in": "path",
             "description": "Parent tournament id",
             "required": true,
-            "style": "simple",
             "schema": {
               "type": "integer",
               "format": "int32"
@@ -20917,7 +20241,6 @@
             "in": "path",
             "description": "Child tournament id",
             "required": true,
-            "style": "simple",
             "schema": {
               "type": "integer",
               "format": "int32"
@@ -20970,7 +20293,6 @@
             "in": "path",
             "description": "Parent tournament id",
             "required": true,
-            "style": "simple",
             "schema": {
               "type": "integer",
               "format": "int32"
@@ -21003,7 +20325,6 @@
             "in": "path",
             "description": "Parent tournament id",
             "required": true,
-            "style": "simple",
             "schema": {
               "type": "integer",
               "format": "int32"
@@ -21014,7 +20335,6 @@
             "in": "path",
             "description": "Stage id",
             "required": true,
-            "style": "simple",
             "schema": {
               "type": "integer",
               "format": "int32"
@@ -21065,7 +20385,6 @@
             "in": "path",
             "description": "Parent tournament id",
             "required": true,
-            "style": "simple",
             "schema": {
               "type": "integer",
               "format": "int32"
@@ -21076,7 +20395,6 @@
             "in": "path",
             "description": "Stage id",
             "required": true,
-            "style": "simple",
             "schema": {
               "type": "integer",
               "format": "int32"
@@ -21108,7 +20426,6 @@
             "name": "UserName",
             "in": "query",
             "description": "Username",
-            "style": "form",
             "schema": {
               "maxLength": 20,
               "minLength": 1,
@@ -21119,7 +20436,6 @@
             "name": "UserId",
             "in": "query",
             "description": "User id",
-            "style": "form",
             "schema": {
               "maximum": 2147483647,
               "minimum": 1,
@@ -21131,7 +20447,6 @@
             "name": "Email",
             "in": "query",
             "description": "Email",
-            "style": "form",
             "schema": {
               "maxLength": 60,
               "minLength": 1,
@@ -21142,7 +20457,6 @@
             "name": "IsCrew",
             "in": "query",
             "description": "Is crew",
-            "style": "form",
             "schema": {
               "type": "boolean"
             }
@@ -21150,7 +20464,6 @@
           {
             "name": "PageNo",
             "in": "query",
-            "style": "form",
             "schema": {
               "maximum": 2147483647,
               "minimum": 1,
@@ -21161,7 +20474,6 @@
           {
             "name": "PageSize",
             "in": "query",
-            "style": "form",
             "schema": {
               "maximum": 100,
               "minimum": 1,
@@ -21196,7 +20508,6 @@
             "in": "path",
             "description": "User id",
             "required": true,
-            "style": "simple",
             "schema": {
               "type": "integer",
               "format": "int32"
@@ -21227,7 +20538,6 @@
             "in": "path",
             "description": "UserId",
             "required": true,
-            "style": "simple",
             "schema": {
               "type": "integer",
               "format": "int32"
@@ -21380,7 +20690,6 @@
             "in": "path",
             "description": "UserId",
             "required": true,
-            "style": "simple",
             "schema": {
               "type": "integer",
               "format": "int32"
@@ -21413,7 +20722,6 @@
             "in": "path",
             "description": "UserId",
             "required": true,
-            "style": "simple",
             "schema": {
               "type": "integer",
               "format": "int32"
@@ -21445,7 +20753,6 @@
             "name": "FuzzyPrefix",
             "in": "query",
             "required": true,
-            "style": "form",
             "schema": {
               "maxLength": 20,
               "minLength": 1,
@@ -21455,7 +20762,6 @@
           {
             "name": "MaxCount",
             "in": "query",
-            "style": "form",
             "schema": {
               "maximum": 100,
               "minimum": 10,
@@ -21490,7 +20796,6 @@
             "in": "path",
             "description": "UserId",
             "required": true,
-            "style": "simple",
             "schema": {
               "type": "integer",
               "format": "int32"
@@ -21543,7 +20848,6 @@
             "in": "path",
             "description": "UserId",
             "required": true,
-            "style": "simple",
             "schema": {
               "type": "integer",
               "format": "int32"
@@ -21596,7 +20900,6 @@
             "in": "path",
             "description": "UserId",
             "required": true,
-            "style": "simple",
             "schema": {
               "type": "integer",
               "format": "int32"
@@ -21729,7 +21032,6 @@
             "in": "path",
             "description": "UserId",
             "required": true,
-            "style": "simple",
             "schema": {
               "type": "integer",
               "format": "int32"
@@ -21781,7 +21083,6 @@
             "name": "Id",
             "in": "query",
             "description": "Venues Id",
-            "style": "form",
             "schema": {
               "maximum": 2147483647,
               "minimum": 1,
@@ -21793,7 +21094,6 @@
             "name": "Name",
             "in": "query",
             "description": "Venues Name",
-            "style": "form",
             "schema": {
               "maxLength": 100,
               "minLength": 0,
@@ -21804,7 +21104,6 @@
             "name": "CountryId",
             "in": "query",
             "description": "Venues Country Id",
-            "style": "form",
             "schema": {
               "maximum": 32767,
               "minimum": 1,
@@ -21815,7 +21114,6 @@
           {
             "name": "PageNo",
             "in": "query",
-            "style": "form",
             "schema": {
               "maximum": 2147483647,
               "minimum": 1,
@@ -21826,7 +21124,6 @@
           {
             "name": "PageSize",
             "in": "query",
-            "style": "form",
             "schema": {
               "maximum": 100,
               "minimum": 1,
@@ -21951,7 +21248,6 @@
             "in": "path",
             "description": "venue Id",
             "required": true,
-            "style": "simple",
             "schema": {
               "maximum": 2147483647,
               "minimum": 1,
@@ -21984,7 +21280,6 @@
             "in": "path",
             "description": "tournaments venue Id",
             "required": true,
-            "style": "simple",
             "schema": {
               "maximum": 2147483647,
               "minimum": 1,
@@ -22100,7 +21395,6 @@
             "in": "path",
             "description": "tournaments venue Id",
             "required": true,
-            "style": "simple",
             "schema": {
               "maximum": 2147483647,
               "minimum": 1,
@@ -22135,7 +21429,6 @@
             "in": "query",
             "description": "Fuzzy prefix",
             "required": true,
-            "style": "form",
             "schema": {
               "maxLength": 30,
               "minLength": 0,
@@ -22146,7 +21439,6 @@
             "name": "MaxCount",
             "in": "query",
             "description": "Max count",
-            "style": "form",
             "schema": {
               "maximum": 100,
               "minimum": 10,
@@ -36034,6 +35326,12 @@
             "type": "string",
             "description": "Moonton battle id (On Mobile Legends needs to set)",
             "nullable": true
+          },
+          "mtDelaySeconds": {
+            "type": "integer",
+            "description": "Moonton delay seconds",
+            "format": "int32",
+            "nullable": true
           }
         },
         "additionalProperties": false
@@ -36422,6 +35720,7 @@
           "startTime",
           "tags",
           "teams",
+          "thumbnailUrl",
           "title",
           "vodId"
         ],
@@ -36498,6 +35797,11 @@
               "$ref": "#/components/schemas/Int32Item"
             },
             "description": "Related teams"
+          },
+          "thumbnailUrl": {
+            "minLength": 1,
+            "type": "string",
+            "description": "Thumbnail url"
           }
         },
         "additionalProperties": false
@@ -40064,6 +39368,7 @@
           "platform",
           "streamId",
           "tags",
+          "thumbnailUrl",
           "title"
         ],
         "type": "object",
@@ -40141,6 +39446,10 @@
               "$ref": "#/components/schemas/MediaTag"
             },
             "description": "Tags"
+          },
+          "thumbnailUrl": {
+            "minLength": 1,
+            "type": "string"
           }
         },
         "additionalProperties": false
@@ -40181,6 +39490,7 @@
           "isLive",
           "platform",
           "streamId",
+          "thumbnailUrl",
           "title",
           "userId",
           "userName"
@@ -40245,6 +39555,11 @@
             "minLength": 1,
             "type": "string",
             "description": "Username"
+          },
+          "thumbnailUrl": {
+            "minLength": 1,
+            "type": "string",
+            "description": "Thumbnail url"
           }
         },
         "additionalProperties": false
@@ -42593,6 +41908,7 @@
           "hostVideoId",
           "hostViewCount",
           "isInGame",
+          "thumbnailUrl",
           "title",
           "updateAt",
           "vodId"
@@ -42642,6 +41958,11 @@
             "type": "integer",
             "description": "Host view count",
             "format": "int32"
+          },
+          "thumbnailUrl": {
+            "minLength": 1,
+            "type": "string",
+            "description": "Thumbnail url"
           }
         },
         "additionalProperties": false
@@ -45108,8 +44429,18 @@
             "nullable": true
           },
           "mtBattleId": {
+            "maxLength": 30,
+            "minLength": 0,
             "type": "string",
             "description": "Moonton battle id (On Mobile Legends needs to set)",
+            "nullable": true
+          },
+          "mtDelaySeconds": {
+            "maximum": 2147483647,
+            "minimum": 0,
+            "type": "integer",
+            "description": "Moonton delay seconds",
+            "format": "int32",
             "nullable": true
           }
         },
