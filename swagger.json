@@ -13399,7 +13399,6 @@
           {
             "name": "From",
             "in": "query",
-            "required": true,
             "schema": {
               "minimum": 1,
               "type": "integer",
@@ -13409,7 +13408,6 @@
           {
             "name": "To",
             "in": "query",
-            "required": true,
             "schema": {
               "minimum": 1,
               "type": "integer",
@@ -15672,6 +15670,48 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/GetTeamRatingLogRespApiRespBase"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v5/teams/rating-logs": {
+      "get": {
+        "tags": [
+          "Teams"
+        ],
+        "summary": "Get all rating adjustment logs",
+        "parameters": [
+          {
+            "name": "PageNo",
+            "in": "query",
+            "schema": {
+              "maximum": 2147483647,
+              "minimum": 1,
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "PageSize",
+            "in": "query",
+            "schema": {
+              "maximum": 100,
+              "minimum": 1,
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetAllTeamRatingLogRespApiRespBase"
                 }
               }
             }
@@ -20573,12 +20613,6 @@
                     "description": "Email",
                     "format": "email"
                   },
-                  "Password": {
-                    "maxLength": 72,
-                    "minLength": 8,
-                    "type": "string",
-                    "description": "Password"
-                  },
                   "LastName": {
                     "maxLength": 50,
                     "minLength": 1,
@@ -20633,9 +20667,6 @@
                   "style": "form"
                 },
                 "Email": {
-                  "style": "form"
-                },
-                "Password": {
                   "style": "form"
                 },
                 "LastName": {
@@ -24198,6 +24229,69 @@
           },
           "data": {
             "$ref": "#/components/schemas/AdjustBoxesResp"
+          }
+        },
+        "additionalProperties": false
+      },
+      "AllTeamRatingLog": {
+        "required": [
+          "afterRating",
+          "beforeRating",
+          "createdAt",
+          "id",
+          "ratingChange",
+          "reason",
+          "settleDate",
+          "teamId",
+          "teamName",
+          "userId",
+          "userName"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "teamId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "teamName": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "settleDate": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "ratingChange": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "beforeRating": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "afterRating": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "reason": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "userId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "userName": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "createdAt": {
+            "type": "integer",
+            "format": "int64"
           }
         },
         "additionalProperties": false
@@ -28817,6 +28911,51 @@
           },
           "data": {
             "$ref": "#/components/schemas/GetAccountResp"
+          }
+        },
+        "additionalProperties": false
+      },
+      "GetAllTeamRatingLogResp": {
+        "required": [
+          "logs",
+          "paging"
+        ],
+        "type": "object",
+        "properties": {
+          "logs": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AllTeamRatingLog"
+            }
+          },
+          "paging": {
+            "$ref": "#/components/schemas/PagingRespBase"
+          }
+        },
+        "additionalProperties": false
+      },
+      "GetAllTeamRatingLogRespApiRespBase": {
+        "required": [
+          "msg",
+          "ret",
+          "traceId"
+        ],
+        "type": "object",
+        "properties": {
+          "ret": {
+            "$ref": "#/components/schemas/EnumRet"
+          },
+          "msg": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "traceId": {
+            "minLength": 1,
+            "type": "string",
+            "readOnly": true
+          },
+          "data": {
+            "$ref": "#/components/schemas/GetAllTeamRatingLogResp"
           }
         },
         "additionalProperties": false
@@ -48861,23 +49000,62 @@
         "properties": {
           "id": {
             "type": "integer",
+            "description": "User id",
             "format": "int32"
           },
           "username": {
             "type": "string",
+            "description": "Username",
             "nullable": true
           },
           "email": {
             "type": "string",
+            "description": "Email",
             "nullable": true
           },
-          "registerAt": {
+          "registeredAt": {
             "type": "integer",
+            "description": "Registered at",
             "format": "int64"
           },
           "registerCompletedAt": {
             "type": "integer",
+            "description": "RegisterCompletedAt",
             "format": "int64",
+            "nullable": true
+          },
+          "emailVerified": {
+            "type": "string",
+            "description": "Email verified"
+          },
+          "gender": {
+            "type": "string",
+            "description": "Gender",
+            "nullable": true
+          },
+          "dateOfBirth": {
+            "type": "string",
+            "description": "Date of birth",
+            "nullable": true
+          },
+          "country": {
+            "type": "string",
+            "description": "Country",
+            "nullable": true
+          },
+          "city": {
+            "type": "string",
+            "description": "City",
+            "nullable": true
+          },
+          "followingTeams": {
+            "type": "string",
+            "description": "Following teams",
+            "nullable": true
+          },
+          "followingPlayers": {
+            "type": "string",
+            "description": "Following players",
             "nullable": true
           }
         },

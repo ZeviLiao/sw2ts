@@ -1392,6 +1392,31 @@ export interface AdjustBoxesRespApiRespBase {
   data?: AdjustBoxesResp;
 }
 
+export interface AllTeamRatingLog {
+  /** @format int32 */
+  id: number;
+  /** @format int32 */
+  teamId: number;
+  /** @minLength 1 */
+  teamName: string;
+  /** @format int64 */
+  settleDate: number;
+  /** @format int32 */
+  ratingChange: number;
+  /** @format int32 */
+  beforeRating: number;
+  /** @format int32 */
+  afterRating: number;
+  /** @minLength 1 */
+  reason: string;
+  /** @format int32 */
+  userId: number;
+  /** @minLength 1 */
+  userName: string;
+  /** @format int64 */
+  createdAt: number;
+}
+
 export interface ApiLogDetail {
   /**
    * Id
@@ -3653,6 +3678,20 @@ export interface GetAccountRespApiRespBase {
   /** @minLength 1 */
   traceId: string;
   data?: GetAccountResp;
+}
+
+export interface GetAllTeamRatingLogResp {
+  logs: AllTeamRatingLog[];
+  paging: PagingRespBase;
+}
+
+export interface GetAllTeamRatingLogRespApiRespBase {
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
+  data?: GetAllTeamRatingLogResp;
 }
 
 export interface GetApiLogResp {
@@ -13109,14 +13148,39 @@ export interface UserProfile {
 }
 
 export interface UserRegistration {
-  /** @format int32 */
+  /**
+   * User id
+   * @format int32
+   */
   id?: number;
+  /** Username */
   username?: string | null;
+  /** Email */
   email?: string | null;
-  /** @format int64 */
-  registerAt?: number;
-  /** @format int64 */
+  /**
+   * Registered at
+   * @format int64
+   */
+  registeredAt?: number;
+  /**
+   * RegisterCompletedAt
+   * @format int64
+   */
   registerCompletedAt?: number | null;
+  /** Email verified */
+  emailVerified?: string;
+  /** Gender */
+  gender?: string | null;
+  /** Date of birth */
+  dateOfBirth?: string | null;
+  /** Country */
+  country?: string | null;
+  /** City */
+  city?: string | null;
+  /** Following teams */
+  followingTeams?: string | null;
+  /** Following players */
+  followingPlayers?: string | null;
 }
 
 export interface Viewership {
@@ -21353,12 +21417,12 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
          * @format int64
          * @min 1
          */
-        From: number;
+        From?: number;
         /**
          * @format int64
          * @min 1
          */
-        To: number;
+        To?: number;
         /**
          * @format int32
          * @min -12
@@ -22652,6 +22716,40 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     ) =>
       this.request<any, GetTeamRatingLogRespApiRespBase>({
         path: `/api/v5/teams/${teamId}/rating-logs`,
+        method: "GET",
+        query: query,
+        secure: true,
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Teams
+     * @name V5TeamsRatingLogsList
+     * @summary Get all rating adjustment logs
+     * @request GET:/api/v5/teams/rating-logs
+     * @secure
+     */
+    v5TeamsRatingLogsList: (
+      query?: {
+        /**
+         * @format int32
+         * @min 1
+         * @max 2147483647
+         */
+        PageNo?: number;
+        /**
+         * @format int32
+         * @min 1
+         * @max 100
+         */
+        PageSize?: number;
+      },
+      params: RequestParams = {},
+    ) =>
+      this.request<any, GetAllTeamRatingLogRespApiRespBase>({
+        path: `/api/v5/teams/rating-logs`,
         method: "GET",
         query: query,
         secure: true,
@@ -25103,12 +25201,6 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
          * @maxLength 60
          */
         Email?: string;
-        /**
-         * Password
-         * @minLength 8
-         * @maxLength 72
-         */
-        Password?: string;
         /**
          * Lastname
          * @minLength 1
