@@ -944,6 +944,82 @@
         }
       }
     },
+    "/api/v5/articles/{id}/urlsafetitle": {
+      "patch": {
+        "tags": [
+          "Articles"
+        ],
+        "summary": "Modify article urlSafeTitle",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ArticleId",
+            "required": true,
+            "schema": {
+              "maximum": 2147483647,
+              "minimum": -2147483648,
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "required": [
+                  "Id",
+                  "IsManualEntry"
+                ],
+                "type": "object",
+                "properties": {
+                  "Id": {
+                    "maximum": 2147483647,
+                    "minimum": 1,
+                    "type": "integer",
+                    "description": "Article Id",
+                    "format": "int32"
+                  },
+                  "IsManualEntry": {
+                    "type": "boolean",
+                    "description": "Is Manual Entry true: Manual entry, false: Synchronize title"
+                  },
+                  "UrlSafeTitle": {
+                    "maxLength": 100,
+                    "minLength": 0,
+                    "type": "string"
+                  }
+                }
+              },
+              "encoding": {
+                "Id": {
+                  "style": "form"
+                },
+                "IsManualEntry": {
+                  "style": "form"
+                },
+                "UrlSafeTitle": {
+                  "style": "form"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "default": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ModArticleUrlSafeTitleRespApiRespBase"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/v5/articles/fuzzy": {
       "get": {
         "tags": [
@@ -23804,7 +23880,7 @@
             "format": "int32"
           },
           "gamesPerMatch": {
-            "maximum": 32767,
+            "maximum": 100,
             "minimum": 1,
             "type": "integer",
             "description": "Games per match",
@@ -42365,6 +42441,36 @@
         },
         "additionalProperties": false
       },
+      "ModArticleUrlSafeTitleResp": {
+        "type": "object",
+        "additionalProperties": false
+      },
+      "ModArticleUrlSafeTitleRespApiRespBase": {
+        "required": [
+          "msg",
+          "ret",
+          "traceId"
+        ],
+        "type": "object",
+        "properties": {
+          "ret": {
+            "$ref": "#/components/schemas/EnumRet"
+          },
+          "msg": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "traceId": {
+            "minLength": 1,
+            "type": "string",
+            "readOnly": true
+          },
+          "data": {
+            "$ref": "#/components/schemas/ModArticleUrlSafeTitleResp"
+          }
+        },
+        "additionalProperties": false
+      },
       "ModBannerResp": {
         "type": "object",
         "additionalProperties": false
@@ -44738,7 +44844,7 @@
             "nullable": true
           },
           "gamesPerMatch": {
-            "maximum": 32767,
+            "maximum": 100,
             "minimum": 0,
             "type": "integer",
             "description": "Game per match",
@@ -46077,7 +46183,7 @@
             "format": "int32"
           },
           "gamesPerMatch": {
-            "maximum": 32767,
+            "maximum": 100,
             "minimum": 1,
             "type": "integer",
             "description": "Games per match",

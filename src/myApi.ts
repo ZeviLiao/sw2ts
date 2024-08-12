@@ -1211,7 +1211,7 @@ export interface AddRoundReq {
    * Games per match
    * @format int32
    * @min 1
-   * @max 32767
+   * @max 100
    */
   gamesPerMatch: number;
   /** Is hidden */
@@ -9626,6 +9626,17 @@ export interface ModArticleRespApiRespBase {
   data?: ModArticleResp;
 }
 
+export type ModArticleUrlSafeTitleResp = object;
+
+export interface ModArticleUrlSafeTitleRespApiRespBase {
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
+  data?: ModArticleUrlSafeTitleResp;
+}
+
 export type ModBannerResp = object;
 
 export interface ModBannerRespApiRespBase {
@@ -10910,7 +10921,7 @@ export interface ModMatches {
    * Game per match
    * @format int32
    * @min 0
-   * @max 32767
+   * @max 100
    */
   gamesPerMatch?: number | null;
   /**
@@ -11643,7 +11654,7 @@ export interface ModRoundReq {
    * Games per match
    * @format int32
    * @min 1
-   * @max 32767
+   * @max 100
    */
   gamesPerMatch: number;
   /** Is hidden */
@@ -13306,9 +13317,9 @@ export class HttpClient<SecurityDataType = unknown> {
     [ContentType.Json]: (input: any) =>
       input !== null && (typeof input === "object" || typeof input === "string") ? JSON.stringify(input) : input,
     [ContentType.Text]: (input: any) => (input !== null && typeof input !== "string" ? JSON.stringify(input) : input),
-    [ContentType.FormData]: (input: FormData) =>
-      (Array.from(input.keys()) || []).reduce((formData, key) => {
-        const property = input.get(key);
+    [ContentType.FormData]: (input: any) =>
+      Object.keys(input || {}).reduce((formData, key) => {
+        const property = input[key];
         formData.append(
           key,
           property instanceof Blob
@@ -13920,6 +13931,44 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
         path: `/api/v5/articles/${id}`,
         method: "DELETE",
         secure: true,
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Articles
+     * @name V5ArticlesUrlsafetitlePartialUpdate
+     * @summary Modify article urlSafeTitle
+     * @request PATCH:/api/v5/articles/{id}/urlsafetitle
+     * @secure
+     */
+    v5ArticlesUrlsafetitlePartialUpdate: (
+      id: number,
+      data: {
+        /**
+         * Article Id
+         * @format int32
+         * @min 1
+         * @max 2147483647
+         */
+        Id: number;
+        /** Is Manual Entry true: Manual entry, false: Synchronize title */
+        IsManualEntry: boolean;
+        /**
+         * @minLength 0
+         * @maxLength 100
+         */
+        UrlSafeTitle?: string;
+      },
+      params: RequestParams = {},
+    ) =>
+      this.request<any, ModArticleUrlSafeTitleRespApiRespBase>({
+        path: `/api/v5/articles/${id}/urlsafetitle`,
+        method: "PATCH",
+        body: data,
+        secure: true,
+        type: ContentType.FormData,
         ...params,
       }),
 
