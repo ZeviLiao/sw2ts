@@ -1631,8 +1631,6 @@ export interface ArticleDetail {
   headlineImagePath?: string | null;
   /** Headline image text */
   headlineImageText?: string | null;
-  /** Square image url */
-  squareHeadlineImageUrl?: string | null;
   /** Is published */
   isPublished: boolean;
   /**
@@ -9626,6 +9624,23 @@ export interface ModArticleRespApiRespBase {
   data?: ModArticleResp;
 }
 
+export interface ModArticleUrlSafeTitleReq {
+  /**
+   * Article Id
+   * @format int32
+   * @min 1
+   * @max 2147483647
+   */
+  id: number;
+  /** Is Manual Entry true: Manual entry, false: Synchronize title */
+  isManualEntry: boolean;
+  /**
+   * @minLength 0
+   * @maxLength 100
+   */
+  urlSafeTitle?: string | null;
+}
+
 export type ModArticleUrlSafeTitleResp = object;
 
 export interface ModArticleUrlSafeTitleRespApiRespBase {
@@ -13708,11 +13723,6 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
          * @maxLength 125
          */
         HeadlineImageText?: string;
-        /**
-         * Square headline image file
-         * @format binary
-         */
-        SquareHeadlineImgFile?: File;
         /** Is published */
         IsPublished?: boolean;
         /**
@@ -13849,11 +13859,6 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
          * @maxLength 125
          */
         HeadlineImageText?: string;
-        /**
-         * Square headline image file
-         * @format binary
-         */
-        SquareHeadlineImgFile?: File;
         /** Is published */
         IsPublished?: boolean;
         /**
@@ -13943,32 +13948,13 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request PATCH:/api/v5/articles/{id}/urlsafetitle
      * @secure
      */
-    v5ArticlesUrlsafetitlePartialUpdate: (
-      id: number,
-      data: {
-        /**
-         * Article Id
-         * @format int32
-         * @min 1
-         * @max 2147483647
-         */
-        Id: number;
-        /** Is Manual Entry true: Manual entry, false: Synchronize title */
-        IsManualEntry: boolean;
-        /**
-         * @minLength 0
-         * @maxLength 100
-         */
-        UrlSafeTitle?: string;
-      },
-      params: RequestParams = {},
-    ) =>
+    v5ArticlesUrlsafetitlePartialUpdate: (id: number, data: ModArticleUrlSafeTitleReq, params: RequestParams = {}) =>
       this.request<any, ModArticleUrlSafeTitleRespApiRespBase>({
         path: `/api/v5/articles/${id}/urlsafetitle`,
         method: "PATCH",
         body: data,
         secure: true,
-        type: ContentType.FormData,
+        type: ContentType.Json,
         ...params,
       }),
 

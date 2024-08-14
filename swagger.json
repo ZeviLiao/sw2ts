@@ -423,11 +423,6 @@
                     "type": "string",
                     "description": "Headline image text"
                   },
-                  "SquareHeadlineImgFile": {
-                    "type": "string",
-                    "description": "Square headline image file",
-                    "format": "binary"
-                  },
                   "IsPublished": {
                     "type": "boolean",
                     "description": "Is published"
@@ -525,9 +520,6 @@
                   "style": "form"
                 },
                 "HeadlineImageText": {
-                  "style": "form"
-                },
-                "SquareHeadlineImgFile": {
                   "style": "form"
                 },
                 "IsPublished": {
@@ -710,11 +702,6 @@
                     "type": "string",
                     "description": "Headline image text"
                   },
-                  "SquareHeadlineImgFile": {
-                    "type": "string",
-                    "description": "Square headline image file",
-                    "format": "binary"
-                  },
                   "IsPublished": {
                     "type": "boolean",
                     "description": "Is published"
@@ -840,9 +827,6 @@
                 "HeadlineImageText": {
                   "style": "form"
                 },
-                "SquareHeadlineImgFile": {
-                  "style": "form"
-                },
                 "IsPublished": {
                   "style": "form"
                 },
@@ -965,43 +949,21 @@
           }
         ],
         "requestBody": {
+          "description": "Request",
           "content": {
-            "multipart/form-data": {
+            "application/json": {
               "schema": {
-                "required": [
-                  "Id",
-                  "IsManualEntry"
-                ],
-                "type": "object",
-                "properties": {
-                  "Id": {
-                    "maximum": 2147483647,
-                    "minimum": 1,
-                    "type": "integer",
-                    "description": "Article Id",
-                    "format": "int32"
-                  },
-                  "IsManualEntry": {
-                    "type": "boolean",
-                    "description": "Is Manual Entry true: Manual entry, false: Synchronize title"
-                  },
-                  "UrlSafeTitle": {
-                    "maxLength": 100,
-                    "minLength": 0,
-                    "type": "string"
-                  }
-                }
-              },
-              "encoding": {
-                "Id": {
-                  "style": "form"
-                },
-                "IsManualEntry": {
-                  "style": "form"
-                },
-                "UrlSafeTitle": {
-                  "style": "form"
-                }
+                "$ref": "#/components/schemas/ModArticleUrlSafeTitleReq"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ModArticleUrlSafeTitleReq"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ModArticleUrlSafeTitleReq"
               }
             }
           }
@@ -24684,11 +24646,6 @@
             "description": "Headline image text",
             "nullable": true
           },
-          "squareHeadlineImageUrl": {
-            "type": "string",
-            "description": "Square image url",
-            "nullable": true
-          },
           "isPublished": {
             "type": "boolean",
             "description": "Is published"
@@ -42437,6 +42394,33 @@
           },
           "data": {
             "$ref": "#/components/schemas/ModArticleResp"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ModArticleUrlSafeTitleReq": {
+        "required": [
+          "id",
+          "isManualEntry"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "maximum": 2147483647,
+            "minimum": 1,
+            "type": "integer",
+            "description": "Article Id",
+            "format": "int32"
+          },
+          "isManualEntry": {
+            "type": "boolean",
+            "description": "Is Manual Entry true: Manual entry, false: Synchronize title"
+          },
+          "urlSafeTitle": {
+            "maxLength": 100,
+            "minLength": 0,
+            "type": "string",
+            "nullable": true
           }
         },
         "additionalProperties": false
