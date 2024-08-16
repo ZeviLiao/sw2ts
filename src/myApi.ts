@@ -7373,6 +7373,8 @@ export interface GetPlayerResp {
   youtube?: string | null;
   /** Grid Player Id */
   gridId?: string | null;
+  /** Player Is Hidden */
+  isHidden: boolean;
 }
 
 export interface GetPlayerRespApiRespBase {
@@ -20622,6 +20624,8 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
          * @maxLength 12
          */
         GridId?: string;
+        /** Player Is Hidden */
+        IsHidden: boolean;
       },
       params: RequestParams = {},
     ) =>
@@ -20758,6 +20762,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
          * @maxLength 12
          */
         GridId?: string;
+        IsHidden: boolean;
       },
       params: RequestParams = {},
     ) =>

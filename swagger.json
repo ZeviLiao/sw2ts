@@ -11986,6 +11986,7 @@
                   "CountryId",
                   "Gender",
                   "IsActive",
+                  "IsHidden",
                   "NickName"
                 ],
                 "type": "object",
@@ -12082,6 +12083,10 @@
                     "minLength": 0,
                     "type": "string",
                     "description": "Grid Player Id"
+                  },
+                  "IsHidden": {
+                    "type": "boolean",
+                    "description": "Player Is Hidden"
                   }
                 }
               },
@@ -12132,6 +12137,9 @@
                   "style": "form"
                 },
                 "GridId": {
+                  "style": "form"
+                },
+                "IsHidden": {
                   "style": "form"
                 }
               }
@@ -12208,6 +12216,7 @@
                   "CountryId",
                   "Gender",
                   "IsActive",
+                  "IsHidden",
                   "NickName",
                   "PlayerId"
                 ],
@@ -12309,6 +12318,9 @@
                     "minLength": 0,
                     "type": "string",
                     "description": "Grid Player Id"
+                  },
+                  "IsHidden": {
+                    "type": "boolean"
                   }
                 }
               },
@@ -12362,6 +12374,9 @@
                   "style": "form"
                 },
                 "GridId": {
+                  "style": "form"
+                },
+                "IsHidden": {
                   "style": "form"
                 }
               }
@@ -37408,6 +37423,7 @@
           "gender",
           "genderName",
           "isActive",
+          "isHidden",
           "nickName",
           "playerId"
         ],
@@ -37514,6 +37530,10 @@
             "type": "string",
             "description": "Grid Player Id",
             "nullable": true
+          },
+          "isHidden": {
+            "type": "boolean",
+            "description": "Player Is Hidden"
           }
         },
         "additionalProperties": false
