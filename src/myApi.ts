@@ -1085,6 +1085,8 @@ export interface AddPageReq {
    * @maxLength 2147483647
    */
   extraCss?: string | null;
+  /** Metadata */
+  metadata?: string | null;
 }
 
 export interface AddPageResp {
@@ -3168,6 +3170,7 @@ export enum EnumRet {
   InvalidAuthorizationToken = 10003,
   AuthorizationTokenExpired = 10004,
   InvalidApiKey = 10005,
+  MovedPermanently = 10006,
   InvalidParamsErrorStart = 20000,
   InvalidParams = 20001,
   NameRepeated = 20002,
@@ -6982,6 +6985,8 @@ export interface GetPageResp {
   timeSpent: number;
   /** Comments enabled */
   commentsEnabled: boolean;
+  /** Meta data */
+  metadata?: SeoMetadata[] | null;
 }
 
 export interface GetPageRespApiRespBase {
@@ -7373,6 +7378,8 @@ export interface GetPlayerResp {
   youtube?: string | null;
   /** Grid Player Id */
   gridId?: string | null;
+  /** Player Is Hidden */
+  isHidden: boolean;
 }
 
 export interface GetPlayerRespApiRespBase {
@@ -7444,6 +7451,8 @@ export interface GetPlayersDetail {
   gridId?: string | null;
   /** With grid linked */
   withGridLinked: boolean;
+  /** Is Hidden */
+  isHidden: boolean;
 }
 
 export interface GetPlayersResp {
@@ -11364,6 +11373,8 @@ export interface ModPageReq {
    * @maxLength 2147483647
    */
   extraCss?: string | null;
+  /** Metadata */
+  metadata?: string | null;
 }
 
 export interface ModPageResp {
@@ -12726,6 +12737,7 @@ export interface SeoMetaDataOptionListApiRespBase {
 export interface SeoMetadata {
   /** @format int32 */
   id?: number;
+  name?: string | null;
   content?: string | null;
 }
 
@@ -20622,6 +20634,8 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
          * @maxLength 12
          */
         GridId?: string;
+        /** Player Is Hidden */
+        IsHidden: boolean;
       },
       params: RequestParams = {},
     ) =>
@@ -20758,6 +20772,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
          * @maxLength 12
          */
         GridId?: string;
+        IsHidden: boolean;
       },
       params: RequestParams = {},
     ) =>

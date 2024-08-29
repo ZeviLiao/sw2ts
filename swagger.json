@@ -11986,6 +11986,7 @@
                   "CountryId",
                   "Gender",
                   "IsActive",
+                  "IsHidden",
                   "NickName"
                 ],
                 "type": "object",
@@ -12082,6 +12083,10 @@
                     "minLength": 0,
                     "type": "string",
                     "description": "Grid Player Id"
+                  },
+                  "IsHidden": {
+                    "type": "boolean",
+                    "description": "Player Is Hidden"
                   }
                 }
               },
@@ -12132,6 +12137,9 @@
                   "style": "form"
                 },
                 "GridId": {
+                  "style": "form"
+                },
+                "IsHidden": {
                   "style": "form"
                 }
               }
@@ -12208,6 +12216,7 @@
                   "CountryId",
                   "Gender",
                   "IsActive",
+                  "IsHidden",
                   "NickName",
                   "PlayerId"
                 ],
@@ -12309,6 +12318,9 @@
                     "minLength": 0,
                     "type": "string",
                     "description": "Grid Player Id"
+                  },
+                  "IsHidden": {
+                    "type": "boolean"
                   }
                 }
               },
@@ -12362,6 +12374,9 @@
                   "style": "form"
                 },
                 "GridId": {
+                  "style": "form"
+                },
+                "IsHidden": {
                   "style": "form"
                 }
               }
@@ -23573,6 +23588,11 @@
             "type": "string",
             "description": "Extra css",
             "nullable": true
+          },
+          "metadata": {
+            "type": "string",
+            "description": "Metadata",
+            "nullable": true
           }
         },
         "additionalProperties": false
@@ -27960,6 +27980,7 @@
           10003,
           10004,
           10005,
+          10006,
           20000,
           20001,
           20002,
@@ -28037,6 +28058,7 @@
           "InvalidAuthorizationToken",
           "AuthorizationTokenExpired",
           "InvalidApiKey",
+          "MovedPermanently",
           "InvalidParamsErrorStart",
           "InvalidParams",
           "NameRepeated",
@@ -36703,6 +36725,14 @@
           "commentsEnabled": {
             "type": "boolean",
             "description": "Comments enabled"
+          },
+          "metadata": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SeoMetadata"
+            },
+            "description": "Meta data",
+            "nullable": true
           }
         },
         "additionalProperties": false
@@ -37408,6 +37438,7 @@
           "gender",
           "genderName",
           "isActive",
+          "isHidden",
           "nickName",
           "playerId"
         ],
@@ -37514,6 +37545,10 @@
             "type": "string",
             "description": "Grid Player Id",
             "nullable": true
+          },
+          "isHidden": {
+            "type": "boolean",
+            "description": "Player Is Hidden"
           }
         },
         "additionalProperties": false
@@ -37550,6 +37585,7 @@
           "gender",
           "genderName",
           "isActive",
+          "isHidden",
           "name",
           "nickName",
           "playerId",
@@ -37650,6 +37686,10 @@
             "type": "boolean",
             "description": "With grid linked",
             "readOnly": true
+          },
+          "isHidden": {
+            "type": "boolean",
+            "description": "Is Hidden"
           }
         },
         "additionalProperties": false
@@ -45582,6 +45622,11 @@
             "type": "string",
             "description": "Extra css",
             "nullable": true
+          },
+          "metadata": {
+            "type": "string",
+            "description": "Metadata",
+            "nullable": true
           }
         },
         "additionalProperties": false
@@ -48150,6 +48195,10 @@
           "id": {
             "type": "integer",
             "format": "int32"
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
           },
           "content": {
             "type": "string",
