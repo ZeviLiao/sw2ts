@@ -20709,6 +20709,9 @@
                     "type": "string",
                     "description": "Avatar image",
                     "format": "binary"
+                  },
+                  "IsHiddenUsername": {
+                    "type": "boolean"
                   }
                 }
               },
@@ -20744,6 +20747,9 @@
                   "style": "form"
                 },
                 "AvatarImage": {
+                  "style": "form"
+                },
+                "IsHiddenUsername": {
                   "style": "form"
                 }
               }
@@ -40795,6 +40801,9 @@
             "nullable": true
           },
           "isCrew": {
+            "type": "boolean"
+          },
+          "isHiddenUsername": {
             "type": "boolean"
           }
         },

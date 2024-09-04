@@ -8875,6 +8875,7 @@ export interface GetUserResp {
   /** Avatar image path */
   avatarImagePath?: string | null;
   isCrew?: boolean;
+  isHiddenUsername?: boolean;
 }
 
 export interface GetUserRespApiRespBase {
@@ -25293,6 +25294,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
          * @format binary
          */
         AvatarImage?: File;
+        IsHiddenUsername?: boolean;
       },
       params: RequestParams = {},
     ) =>
