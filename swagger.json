@@ -356,6 +356,7 @@
             "multipart/form-data": {
               "schema": {
                 "required": [
+                  "Authors",
                   "Content",
                   "FrontendId",
                   "IsFeatured",
@@ -491,6 +492,26 @@
                   "IsTgPush": {
                     "type": "boolean",
                     "description": "Is telegram push"
+                  },
+                  "Ratings": {
+                    "maximum": 10,
+                    "minimum": 0,
+                    "type": "number",
+                    "description": "Ratings 0~10",
+                    "format": "float"
+                  },
+                  "Recommendation": {
+                    "maxLength": 150,
+                    "minLength": 0,
+                    "type": "string",
+                    "description": "Ratings recommendation"
+                  },
+                  "Authors": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/AddAuthor"
+                    },
+                    "description": "Authors"
                   }
                 }
               },
@@ -556,6 +577,15 @@
                   "style": "form"
                 },
                 "IsTgPush": {
+                  "style": "form"
+                },
+                "Ratings": {
+                  "style": "form"
+                },
+                "Recommendation": {
+                  "style": "form"
+                },
+                "Authors": {
                   "style": "form"
                 }
               }
@@ -793,6 +823,26 @@
                   "IsTgPush": {
                     "type": "boolean",
                     "description": "Is telegram push"
+                  },
+                  "Ratings": {
+                    "maximum": 10,
+                    "minimum": 0,
+                    "type": "number",
+                    "description": "Ratings 0~10",
+                    "format": "float"
+                  },
+                  "Recommendation": {
+                    "maxLength": 150,
+                    "minLength": 0,
+                    "type": "string",
+                    "description": "Ratings recommendation"
+                  },
+                  "Authors": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/AddAuthor"
+                    },
+                    "description": "Authors"
                   }
                 }
               },
@@ -876,6 +926,15 @@
                   "style": "form"
                 },
                 "IsTgPush": {
+                  "style": "form"
+                },
+                "Ratings": {
+                  "style": "form"
+                },
+                "Recommendation": {
+                  "style": "form"
+                },
+                "Authors": {
                   "style": "form"
                 }
               }
@@ -20555,6 +20614,14 @@
             }
           },
           {
+            "name": "IsAuthor",
+            "in": "query",
+            "description": "Is author",
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
             "name": "PageNo",
             "in": "query",
             "schema": {
@@ -20712,6 +20779,9 @@
                   },
                   "IsHiddenUsername": {
                     "type": "boolean"
+                  },
+                  "IsAuthor": {
+                    "type": "boolean"
                   }
                 }
               },
@@ -20750,6 +20820,9 @@
                   "style": "form"
                 },
                 "IsHiddenUsername": {
+                  "style": "form"
+                },
+                "IsAuthor": {
                   "style": "form"
                 }
               }
@@ -21135,6 +21208,47 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ApiRespBase"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v5/users/authors": {
+      "get": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "Get author options",
+        "parameters": [
+          {
+            "name": "FuzzyPrefix",
+            "in": "query",
+            "schema": {
+              "maxLength": 20,
+              "minLength": 1,
+              "type": "string"
+            }
+          },
+          {
+            "name": "MaxCount",
+            "in": "query",
+            "schema": {
+              "maximum": 100,
+              "minimum": 10,
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetAuthorsRespListApiRespBase"
                 }
               }
             }
@@ -21590,6 +21704,24 @@
           },
           "data": {
             "$ref": "#/components/schemas/AddArticleResp"
+          }
+        },
+        "additionalProperties": false
+      },
+      "AddAuthor": {
+        "required": [
+          "order",
+          "userId"
+        ],
+        "type": "object",
+        "properties": {
+          "userId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "order": {
+            "type": "integer",
+            "format": "int32"
           }
         },
         "additionalProperties": false
@@ -24714,6 +24846,17 @@
             "type": "boolean",
             "description": "Is telegram push"
           },
+          "ratings": {
+            "type": "number",
+            "description": "Ratings 0~10",
+            "format": "float",
+            "nullable": true
+          },
+          "recommendation": {
+            "type": "string",
+            "description": "Ratings recommendation",
+            "nullable": true
+          },
           "metadata": {
             "type": "array",
             "items": {
@@ -24936,6 +25079,32 @@
           },
           "data": {
             "$ref": "#/components/schemas/AssignRoleResp"
+          }
+        },
+        "additionalProperties": false
+      },
+      "Author": {
+        "type": "object",
+        "properties": {
+          "userId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "username": {
+            "type": "string",
+            "nullable": true
+          },
+          "firstName": {
+            "type": "string",
+            "nullable": true
+          },
+          "lastName": {
+            "type": "string",
+            "nullable": true
+          },
+          "order": {
+            "type": "integer",
+            "format": "int32"
           }
         },
         "additionalProperties": false
@@ -29108,6 +29277,7 @@
       "GetArticleResp": {
         "required": [
           "articleDetail",
+          "authors",
           "players",
           "quickPoll",
           "siteSections",
@@ -29149,6 +29319,13 @@
               "$ref": "#/components/schemas/Int16Item"
             },
             "description": "Site sections"
+          },
+          "authors": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Author"
+            },
+            "description": "Authors"
           }
         },
         "additionalProperties": false
@@ -29263,6 +29440,58 @@
           },
           "data": {
             "$ref": "#/components/schemas/GetArticlesResp"
+          }
+        },
+        "additionalProperties": false
+      },
+      "GetAuthorsResp": {
+        "type": "object",
+        "properties": {
+          "userId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "username": {
+            "type": "string",
+            "nullable": true
+          },
+          "firstName": {
+            "type": "string",
+            "nullable": true
+          },
+          "lastName": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "GetAuthorsRespListApiRespBase": {
+        "required": [
+          "msg",
+          "ret",
+          "traceId"
+        ],
+        "type": "object",
+        "properties": {
+          "ret": {
+            "$ref": "#/components/schemas/EnumRet"
+          },
+          "msg": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "traceId": {
+            "minLength": 1,
+            "type": "string",
+            "readOnly": true
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/GetAuthorsResp"
+            },
+            "nullable": true
           }
         },
         "additionalProperties": false
@@ -40804,6 +41033,9 @@
             "type": "boolean"
           },
           "isHiddenUsername": {
+            "type": "boolean"
+          },
+          "isAuthor": {
             "type": "boolean"
           }
         },

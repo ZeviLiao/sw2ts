@@ -26,6 +26,13 @@ export interface AddArticleRespApiRespBase {
   data?: AddArticleResp;
 }
 
+export interface AddAuthor {
+  /** @format int32 */
+  userId: number;
+  /** @format int32 */
+  order: number;
+}
+
 export type AddBannerResp = object;
 
 export interface AddBannerRespApiRespBase {
@@ -1663,6 +1670,13 @@ export interface ArticleDetail {
   proofreadAt?: number | null;
   /** Is telegram push */
   isTgPush: boolean;
+  /**
+   * Ratings 0~10
+   * @format float
+   */
+  ratings?: number | null;
+  /** Ratings recommendation */
+  recommendation?: string | null;
   /** Meta data */
   metadata?: SeoMetadata[] | null;
 }
@@ -1772,6 +1786,16 @@ export interface AssignRoleRespApiRespBase {
   /** @minLength 1 */
   traceId: string;
   data?: AssignRoleResp;
+}
+
+export interface Author {
+  /** @format int32 */
+  userId?: number;
+  username?: string | null;
+  firstName?: string | null;
+  lastName?: string | null;
+  /** @format int32 */
+  order?: number;
 }
 
 export interface BoxPosition {
@@ -3734,6 +3758,8 @@ export interface GetArticleResp {
   quickPoll: RelatedQuickPoll;
   /** Site sections */
   siteSections: Int16Item[];
+  /** Authors */
+  authors: Author[];
 }
 
 export interface GetArticleRespApiRespBase {
@@ -3772,6 +3798,23 @@ export interface GetArticlesRespApiRespBase {
   /** @minLength 1 */
   traceId: string;
   data?: GetArticlesResp;
+}
+
+export interface GetAuthorsResp {
+  /** @format int32 */
+  userId?: number;
+  username?: string | null;
+  firstName?: string | null;
+  lastName?: string | null;
+}
+
+export interface GetAuthorsRespListApiRespBase {
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
+  data?: GetAuthorsResp[] | null;
 }
 
 export interface GetBannerDetailResp {
@@ -8876,6 +8919,7 @@ export interface GetUserResp {
   avatarImagePath?: string | null;
   isCrew?: boolean;
   isHiddenUsername?: boolean;
+  isAuthor?: boolean;
 }
 
 export interface GetUserRespApiRespBase {
@@ -13772,6 +13816,21 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
         Metadata?: string;
         /** Is telegram push */
         IsTgPush?: boolean;
+        /**
+         * Ratings 0~10
+         * @format float
+         * @min 0
+         * @max 10
+         */
+        Ratings?: number;
+        /**
+         * Ratings recommendation
+         * @minLength 0
+         * @maxLength 150
+         */
+        Recommendation?: string;
+        /** Authors */
+        Authors: AddAuthor[];
       },
       params: RequestParams = {},
     ) =>
@@ -13923,6 +13982,21 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
         Metadata?: string;
         /** Is telegram push */
         IsTgPush?: boolean;
+        /**
+         * Ratings 0~10
+         * @format float
+         * @min 0
+         * @max 10
+         */
+        Ratings?: number;
+        /**
+         * Ratings recommendation
+         * @minLength 0
+         * @maxLength 150
+         */
+        Recommendation?: string;
+        /** Authors */
+        Authors?: AddAuthor[];
       },
       params: RequestParams = {},
     ) =>
@@ -25180,6 +25254,8 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
         Email?: string;
         /** Is crew */
         IsCrew?: boolean;
+        /** Is author */
+        IsAuthor?: boolean;
         /**
          * @format int32
          * @min 1
@@ -25295,6 +25371,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
          */
         AvatarImage?: File;
         IsHiddenUsername?: boolean;
+        IsAuthor?: boolean;
       },
       params: RequestParams = {},
     ) =>
@@ -25482,6 +25559,39 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       this.request<any, ApiRespBase>({
         path: `/api/v5/users/${id}/resend-setup-password-email`,
         method: "POST",
+        secure: true,
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Users
+     * @name V5UsersAuthorsList
+     * @summary Get author options
+     * @request GET:/api/v5/users/authors
+     * @secure
+     */
+    v5UsersAuthorsList: (
+      query?: {
+        /**
+         * @minLength 1
+         * @maxLength 20
+         */
+        FuzzyPrefix?: string;
+        /**
+         * @format int32
+         * @min 10
+         * @max 100
+         */
+        MaxCount?: number;
+      },
+      params: RequestParams = {},
+    ) =>
+      this.request<any, GetAuthorsRespListApiRespBase>({
+        path: `/api/v5/users/authors`,
+        method: "GET",
+        query: query,
         secure: true,
         ...params,
       }),
