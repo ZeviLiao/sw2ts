@@ -1364,6 +1364,47 @@ export interface AddTeamPlayerRespApiRespBase {
   data?: AddTeamPlayerResp;
 }
 
+export interface AddTeamPlayers {
+  /**
+   * Player Id
+   * @format int32
+   * @min 1
+   * @max 2147483647
+   */
+  playerId?: number;
+  /**
+   * Joined At
+   * @format int64
+   * @min 0
+   */
+  joinedAt?: number;
+  /** IsHidden */
+  isHidden?: boolean;
+}
+
+export interface AddTeamPlayersReq {
+  /**
+   * Team Id
+   * @format int32
+   * @min 1
+   * @max 2147483647
+   */
+  teamId: number;
+  /** Team players */
+  players?: AddTeamPlayers[] | null;
+}
+
+export type AddTeamPlayersResp = object;
+
+export interface AddTeamPlayersRespApiRespBase {
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
+  data?: AddTeamPlayersResp;
+}
+
 export type AddTeamResp = object;
 
 export interface AddTeamRespApiRespBase {
@@ -3239,6 +3280,7 @@ export enum EnumRet {
   UsernameExist = 20041,
   NoCalculation = 20042,
   NoJob = 20043,
+  InvalidHost = 20044,
   InvalidParamsErrorEnd = 29999,
   NotFoundErrorsStart = 30000,
   NotExist = 30001,
@@ -22714,6 +22756,25 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
         path: `/api/v5/teams/${teamid}/team-players/${teamplayerid}`,
         method: "DELETE",
         secure: true,
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Teams
+     * @name V5TeamsBatchPlayersCreate
+     * @summary Add team players
+     * @request POST:/api/v5/teams/{teamid}/batch-players
+     * @secure
+     */
+    v5TeamsBatchPlayersCreate: (teamid: number, data: AddTeamPlayersReq, params: RequestParams = {}) =>
+      this.request<any, AddTeamPlayersRespApiRespBase>({
+        path: `/api/v5/teams/${teamid}/batch-players`,
+        method: "POST",
+        body: data,
+        secure: true,
+        type: ContentType.Json,
         ...params,
       }),
 

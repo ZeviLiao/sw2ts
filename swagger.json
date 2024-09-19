@@ -15600,6 +15600,60 @@
         }
       }
     },
+    "/api/v5/teams/{teamid}/batch-players": {
+      "post": {
+        "tags": [
+          "Teams"
+        ],
+        "summary": "Add team players",
+        "parameters": [
+          {
+            "name": "teamid",
+            "in": "path",
+            "description": "Team id",
+            "required": true,
+            "schema": {
+              "maximum": 2147483647,
+              "minimum": -2147483648,
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Request",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AddTeamPlayersReq"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AddTeamPlayersReq"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/AddTeamPlayersReq"
+              }
+            }
+          }
+        },
+        "responses": {
+          "default": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AddTeamPlayersRespApiRespBase"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/v5/teams/fuzzy": {
       "get": {
         "tags": [
@@ -24324,6 +24378,83 @@
         },
         "additionalProperties": false
       },
+      "AddTeamPlayers": {
+        "type": "object",
+        "properties": {
+          "playerId": {
+            "maximum": 2147483647,
+            "minimum": 1,
+            "type": "integer",
+            "description": "Player Id",
+            "format": "int32"
+          },
+          "joinedAt": {
+            "minimum": 0,
+            "type": "integer",
+            "description": "Joined At",
+            "format": "int64"
+          },
+          "isHidden": {
+            "type": "boolean",
+            "description": "IsHidden"
+          }
+        },
+        "additionalProperties": false
+      },
+      "AddTeamPlayersReq": {
+        "required": [
+          "teamId"
+        ],
+        "type": "object",
+        "properties": {
+          "teamId": {
+            "maximum": 2147483647,
+            "minimum": 1,
+            "type": "integer",
+            "description": "Team Id",
+            "format": "int32"
+          },
+          "players": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AddTeamPlayers"
+            },
+            "description": "Team players",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "AddTeamPlayersResp": {
+        "type": "object",
+        "additionalProperties": false
+      },
+      "AddTeamPlayersRespApiRespBase": {
+        "required": [
+          "msg",
+          "ret",
+          "traceId"
+        ],
+        "type": "object",
+        "properties": {
+          "ret": {
+            "$ref": "#/components/schemas/EnumRet"
+          },
+          "msg": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "traceId": {
+            "minLength": 1,
+            "type": "string",
+            "readOnly": true
+          },
+          "data": {
+            "$ref": "#/components/schemas/AddTeamPlayersResp"
+          }
+        },
+        "additionalProperties": false
+      },
       "AddTeamResp": {
         "type": "object",
         "additionalProperties": false
@@ -28200,6 +28331,7 @@
           20041,
           20042,
           20043,
+          20044,
           29999,
           30000,
           30001,
@@ -28278,6 +28410,7 @@
           "UsernameExist",
           "NoCalculation",
           "NoJob",
+          "InvalidHost",
           "InvalidParamsErrorEnd",
           "NotFoundErrorsStart",
           "NotExist",
