@@ -18474,6 +18474,68 @@
         }
       }
     },
+    "/api/v5/tournaments/rounds/{roundid}/matches/{matchid}/next-match": {
+      "patch": {
+        "tags": [
+          "Tournaments"
+        ],
+        "summary": "Modify child tournament match nextMatchId",
+        "parameters": [
+          {
+            "name": "roundid",
+            "in": "path",
+            "description": "Round id",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "matchid",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Request",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ModNextMatchIdReq"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ModNextMatchIdReq"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ModNextMatchIdReq"
+              }
+            }
+          }
+        },
+        "responses": {
+          "default": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ModNextMatchIdRespApiRespBase"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/v5/tournaments/parents/{parentid}/children/{childid}/opponents": {
       "get": {
         "tags": [
@@ -21303,6 +21365,37 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/GetAuthorsRespListApiRespBase"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v5/users/clear-session/{id}": {
+      "post": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "Clear portal frontend user session redis cache",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ClearPortalUserSessionRespApiRespBase"
                 }
               }
             }
@@ -25940,6 +26033,36 @@
           },
           "data": {
             "$ref": "#/components/schemas/ClearMatchesResp"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ClearPortalUserSessionResp": {
+        "type": "object",
+        "additionalProperties": false
+      },
+      "ClearPortalUserSessionRespApiRespBase": {
+        "required": [
+          "msg",
+          "ret",
+          "traceId"
+        ],
+        "type": "object",
+        "properties": {
+          "ret": {
+            "$ref": "#/components/schemas/EnumRet"
+          },
+          "msg": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "traceId": {
+            "minLength": 1,
+            "type": "string",
+            "readOnly": true
+          },
+          "data": {
+            "$ref": "#/components/schemas/ClearPortalUserSessionResp"
           }
         },
         "additionalProperties": false
@@ -45665,6 +45788,58 @@
           },
           "data": {
             "$ref": "#/components/schemas/ModModeTranslationsResp"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ModNextMatchIdReq": {
+        "required": [
+          "matchId"
+        ],
+        "type": "object",
+        "properties": {
+          "matchId": {
+            "maximum": 2147483647,
+            "minimum": 1,
+            "type": "integer",
+            "format": "int32"
+          },
+          "nextMatchId": {
+            "maximum": 2147483647,
+            "minimum": 1,
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ModNextMatchIdResp": {
+        "type": "object",
+        "additionalProperties": false
+      },
+      "ModNextMatchIdRespApiRespBase": {
+        "required": [
+          "msg",
+          "ret",
+          "traceId"
+        ],
+        "type": "object",
+        "properties": {
+          "ret": {
+            "$ref": "#/components/schemas/EnumRet"
+          },
+          "msg": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "traceId": {
+            "minLength": 1,
+            "type": "string",
+            "readOnly": true
+          },
+          "data": {
+            "$ref": "#/components/schemas/ModNextMatchIdResp"
           }
         },
         "additionalProperties": false

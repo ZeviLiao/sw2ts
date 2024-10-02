@@ -2200,6 +2200,17 @@ export interface ClearMatchesRespApiRespBase {
   data?: ClearMatchesResp;
 }
 
+export type ClearPortalUserSessionResp = object;
+
+export interface ClearPortalUserSessionRespApiRespBase {
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
+  data?: ClearPortalUserSessionResp;
+}
+
 export type ClearTeamDetailCacheResp = object;
 
 export interface ClearTeamDetailCacheRespApiRespBase {
@@ -11252,6 +11263,32 @@ export interface ModModeTranslationsRespApiRespBase {
   /** @minLength 1 */
   traceId: string;
   data?: ModModeTranslationsResp;
+}
+
+export interface ModNextMatchIdReq {
+  /**
+   * @format int32
+   * @min 1
+   * @max 2147483647
+   */
+  matchId: number;
+  /**
+   * @format int32
+   * @min 1
+   * @max 2147483647
+   */
+  nextMatchId?: number | null;
+}
+
+export type ModNextMatchIdResp = object;
+
+export interface ModNextMatchIdRespApiRespBase {
+  ret: EnumRet;
+  /** @minLength 1 */
+  msg: string;
+  /** @minLength 1 */
+  traceId: string;
+  data?: ModNextMatchIdResp;
 }
 
 export interface ModNotificationTemplateReq {
@@ -24279,6 +24316,30 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Tournaments
+     * @name V5TournamentsRoundsMatchesNextMatchPartialUpdate
+     * @summary Modify child tournament match nextMatchId
+     * @request PATCH:/api/v5/tournaments/rounds/{roundid}/matches/{matchid}/next-match
+     * @secure
+     */
+    v5TournamentsRoundsMatchesNextMatchPartialUpdate: (
+      roundid: number,
+      matchid: number,
+      data: ModNextMatchIdReq,
+      params: RequestParams = {},
+    ) =>
+      this.request<any, ModNextMatchIdRespApiRespBase>({
+        path: `/api/v5/tournaments/rounds/${roundid}/matches/${matchid}/next-match`,
+        method: "PATCH",
+        body: data,
+        secure: true,
+        type: ContentType.Json,
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Tournaments
      * @name V5TournamentsParentsChildrenOpponentsDetail
      * @summary Get child tournament opponents
      * @request GET:/api/v5/tournaments/parents/{parentid}/children/{childid}/opponents
@@ -25653,6 +25714,23 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
         path: `/api/v5/users/authors`,
         method: "GET",
         query: query,
+        secure: true,
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Users
+     * @name V5UsersClearSessionCreate
+     * @summary Clear portal frontend user session redis cache
+     * @request POST:/api/v5/users/clear-session/{id}
+     * @secure
+     */
+    v5UsersClearSessionCreate: (id: number, params: RequestParams = {}) =>
+      this.request<any, ClearPortalUserSessionRespApiRespBase>({
+        path: `/api/v5/users/clear-session/${id}`,
+        method: "POST",
         secure: true,
         ...params,
       }),
