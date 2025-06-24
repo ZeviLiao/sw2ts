@@ -847,6 +847,20 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Auth
+     * @name GetAuth
+     * @request GET:/auth/me
+     */
+    getAuth: (params: RequestParams = {}) =>
+      this.request<void, any>({
+        path: `/auth/me`,
+        method: "GET",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Auth
      * @name LogoutCreate
      * @request POST:/auth/logout
      */

@@ -1,3 +1,4 @@
+
 {
   "openapi": "3.0.4",
   "info": {
@@ -249,6 +250,18 @@
             }
           }
         },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/auth/me": {
+      "get": {
+        "tags": [
+          "Auth"
+        ],
         "responses": {
           "200": {
             "description": "OK"
