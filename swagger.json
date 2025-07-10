@@ -1,4 +1,3 @@
-
 {
   "openapi": "3.0.4",
   "info": {
@@ -11,25 +10,47 @@
         "tags": [
           "Agent"
         ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/GetAgentsRequest"
-              }
-            },
-            "text/json": {
-              "schema": {
-                "$ref": "#/components/schemas/GetAgentsRequest"
-              }
-            },
-            "application/*+json": {
-              "schema": {
-                "$ref": "#/components/schemas/GetAgentsRequest"
-              }
+        "summary": "Get all agents",
+        "parameters": [
+          {
+            "name": "Agent",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Status",
+            "in": "query",
+            "description": "0 = Disabled, 1 = Enabled",
+            "schema": {
+              "$ref": "#/components/schemas/BoStatus"
+            }
+          },
+          {
+            "name": "SortBy",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Page",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "PageSize",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
             }
           }
-        },
+        ],
         "responses": {
           "200": {
             "description": "OK"
@@ -40,6 +61,7 @@
         "tags": [
           "Agent"
         ],
+        "summary": "Create new agent",
         "requestBody": {
           "content": {
             "application/json": {
@@ -69,6 +91,7 @@
         "tags": [
           "Agent"
         ],
+        "summary": "Update agent",
         "requestBody": {
           "content": {
             "application/json": {
@@ -100,6 +123,7 @@
         "tags": [
           "Agent"
         ],
+        "summary": "Get agents by operator",
         "parameters": [
           {
             "name": "operatorId",
@@ -123,6 +147,7 @@
         "tags": [
           "Agent"
         ],
+        "summary": "Get agent by id",
         "parameters": [
           {
             "name": "id",
@@ -146,6 +171,7 @@
         "tags": [
           "Agent"
         ],
+        "summary": "Change status",
         "requestBody": {
           "content": {
             "application/json": {
@@ -172,30 +198,215 @@
         }
       }
     },
-    "/audit": {
+    "/appConfig": {
       "get": {
         "tags": [
-          "Audit"
+          "AppConfigurations"
         ],
         "requestBody": {
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/GetAuditsRequest"
+                "$ref": "#/components/schemas/GetAppConfigsRequest"
               }
             },
             "text/json": {
               "schema": {
-                "$ref": "#/components/schemas/GetAuditsRequest"
+                "$ref": "#/components/schemas/GetAppConfigsRequest"
               }
             },
             "application/*+json": {
               "schema": {
-                "$ref": "#/components/schemas/GetAuditsRequest"
+                "$ref": "#/components/schemas/GetAppConfigsRequest"
               }
             }
           }
         },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "AppConfigurations"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateAppConfigRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateAppConfigRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateAppConfigRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "AppConfigurations"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateAppConfigRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateAppConfigRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateAppConfigRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "AppConfigurations"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DeleteAppConfigRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DeleteAppConfigRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/DeleteAppConfigRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/appConfig/{key}": {
+      "get": {
+        "tags": [
+          "AppConfigurations"
+        ],
+        "parameters": [
+          {
+            "name": "key",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/audit": {
+      "get": {
+        "tags": [
+          "Audit"
+        ],
+        "parameters": [
+          {
+            "name": "Object",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "StartTime",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          },
+          {
+            "name": "EndTime",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          },
+          {
+            "name": "Module",
+            "in": "query",
+            "description": "1 = Operator, 2 = OperatorUser, 3 = Agent, 4 = Role, 5 = User, 6 = SourceGame, 7 = Tournament, 8 = Maintenance",
+            "schema": {
+              "$ref": "#/components/schemas/AuditModule"
+            }
+          },
+          {
+            "name": "Action",
+            "in": "query",
+            "description": "1 = Add, 2 = Edit, 3 = Remove, 4 = Disable, 5 = Enable, 6 = Revoke, 7 = ChangePassword",
+            "schema": {
+              "$ref": "#/components/schemas/AuditAction"
+            }
+          },
+          {
+            "name": "SortBy",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Page",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "PageSize",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
         "responses": {
           "200": {
             "description": "OK"
@@ -427,25 +638,54 @@
         "tags": [
           "Operator"
         ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/GetOperatorsRequest"
-              }
-            },
-            "text/json": {
-              "schema": {
-                "$ref": "#/components/schemas/GetOperatorsRequest"
-              }
-            },
-            "application/*+json": {
-              "schema": {
-                "$ref": "#/components/schemas/GetOperatorsRequest"
-              }
+        "parameters": [
+          {
+            "name": "Operator",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "AgentId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "Status",
+            "in": "query",
+            "description": "0 = Disabled, 1 = Enabled",
+            "schema": {
+              "$ref": "#/components/schemas/BoStatus"
+            }
+          },
+          {
+            "name": "SortBy",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Page",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "PageSize",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
             }
           }
-        },
+        ],
         "responses": {
           "200": {
             "description": "OK"
@@ -570,25 +810,39 @@
         "tags": [
           "OperatorUser"
         ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/GetOperatorUsersRequest"
-              }
-            },
-            "text/json": {
-              "schema": {
-                "$ref": "#/components/schemas/GetOperatorUsersRequest"
-              }
-            },
-            "application/*+json": {
-              "schema": {
-                "$ref": "#/components/schemas/GetOperatorUsersRequest"
-              }
+        "parameters": [
+          {
+            "name": "OperatorId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "SortBy",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Page",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "PageSize",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
             }
           }
-        },
+        ],
         "responses": {
           "200": {
             "description": "OK"
@@ -775,25 +1029,46 @@
         "tags": [
           "Role"
         ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/GetRolesRequest"
-              }
-            },
-            "text/json": {
-              "schema": {
-                "$ref": "#/components/schemas/GetRolesRequest"
-              }
-            },
-            "application/*+json": {
-              "schema": {
-                "$ref": "#/components/schemas/GetRolesRequest"
-              }
+        "parameters": [
+          {
+            "name": "Role",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Status",
+            "in": "query",
+            "description": "0 = Disabled, 1 = Enabled",
+            "schema": {
+              "$ref": "#/components/schemas/BoStatus"
+            }
+          },
+          {
+            "name": "SortBy",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Page",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "PageSize",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
             }
           }
-        },
+        ],
         "responses": {
           "200": {
             "description": "OK"
@@ -961,25 +1236,53 @@
         "tags": [
           "SourceGame"
         ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/GetSourceGamesRequest"
-              }
-            },
-            "text/json": {
-              "schema": {
-                "$ref": "#/components/schemas/GetSourceGamesRequest"
-              }
-            },
-            "application/*+json": {
-              "schema": {
-                "$ref": "#/components/schemas/GetSourceGamesRequest"
-              }
+        "parameters": [
+          {
+            "name": "Source",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Game",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Status",
+            "in": "query",
+            "description": "0 = Disabled, 1 = Enabled",
+            "schema": {
+              "$ref": "#/components/schemas/BoStatus"
+            }
+          },
+          {
+            "name": "SortBy",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Page",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "PageSize",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
             }
           }
-        },
+        ],
         "responses": {
           "200": {
             "description": "OK"
@@ -1141,25 +1444,90 @@
         "tags": [
           "Tournament"
         ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/GetTournamentsRequest"
-              }
-            },
-            "text/json": {
-              "schema": {
-                "$ref": "#/components/schemas/GetTournamentsRequest"
-              }
-            },
-            "application/*+json": {
-              "schema": {
-                "$ref": "#/components/schemas/GetTournamentsRequest"
-              }
+        "parameters": [
+          {
+            "name": "Operator",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Agent",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Game",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Currency",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Tournament",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Status",
+            "in": "query",
+            "description": "0 = Drafted, 1 = Enabled, 2 = Disabled, 3 = Finished",
+            "schema": {
+              "$ref": "#/components/schemas/TournamentStatus"
+            }
+          },
+          {
+            "name": "StartTime",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          },
+          {
+            "name": "EndTime",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          },
+          {
+            "name": "SortBy",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Page",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "PageSize",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
             }
           }
-        },
+        ],
         "responses": {
           "200": {
             "description": "OK"
@@ -1279,30 +1647,128 @@
         }
       }
     },
-    "/user": {
-      "get": {
+    "/tournament/payment/approve": {
+      "put": {
         "tags": [
-          "User"
+          "Tournament"
         ],
         "requestBody": {
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/GetUsersRequest"
+                "$ref": "#/components/schemas/ApproveTournamentPaymentRequest"
               }
             },
             "text/json": {
               "schema": {
-                "$ref": "#/components/schemas/GetUsersRequest"
+                "$ref": "#/components/schemas/ApproveTournamentPaymentRequest"
               }
             },
             "application/*+json": {
               "schema": {
-                "$ref": "#/components/schemas/GetUsersRequest"
+                "$ref": "#/components/schemas/ApproveTournamentPaymentRequest"
               }
             }
           }
         },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/tournament/payment/process": {
+      "post": {
+        "tags": [
+          "Tournament"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProcessTournamentPaymentRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProcessTournamentPaymentRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProcessTournamentPaymentRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/user": {
+      "get": {
+        "tags": [
+          "User"
+        ],
+        "parameters": [
+          {
+            "name": "Username",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "AgentId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "RoleName",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Status",
+            "in": "query",
+            "description": "0 = Disabled, 1 = Enabled",
+            "schema": {
+              "$ref": "#/components/schemas/BoStatus"
+            }
+          },
+          {
+            "name": "SortBy",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Page",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "PageSize",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
         "responses": {
           "200": {
             "description": "OK"
@@ -1444,6 +1910,68 @@
           }
         }
       }
+    },
+    "/user/password/change": {
+      "put": {
+        "tags": [
+          "User"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ChangePasswordRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ChangePasswordRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ChangePasswordRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/user/password/forceUpdate": {
+      "put": {
+        "tags": [
+          "User"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ForceUpdatePasswordRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ForceUpdatePasswordRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ForceUpdatePasswordRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
     }
   },
   "components": {
@@ -1474,6 +2002,16 @@
         },
         "additionalProperties": false
       },
+      "ApproveTournamentPaymentRequest": {
+        "type": "object",
+        "properties": {
+          "leaderboardCycleId": {
+            "type": "string",
+            "format": "uuid"
+          }
+        },
+        "additionalProperties": false
+      },
       "AuditAction": {
         "enum": [
           1,
@@ -1481,9 +2019,11 @@
           3,
           4,
           5,
-          6
+          6,
+          7
         ],
         "type": "integer",
+        "description": "1 = Add, 2 = Edit, 3 = Remove, 4 = Disable, 5 = Enable, 6 = Revoke, 7 = ChangePassword",
         "format": "int32"
       },
       "AuditModule": {
@@ -1498,6 +2038,7 @@
           8
         ],
         "type": "integer",
+        "description": "1 = Operator, 2 = OperatorUser, 3 = Agent, 4 = Role, 5 = User, 6 = SourceGame, 7 = Tournament, 8 = Maintenance",
         "format": "int32"
       },
       "BoPermission": {
@@ -1515,6 +2056,7 @@
           90000
         ],
         "type": "integer",
+        "description": "10000 = Role, 10100 = User, 20000 = Operator, 20100 = OperatorUser, 30000 = Agent, 40000 = Audit, 50000 = Source, 50100 = SourceGame, 60000 = Maintenance, 80000 = Tournament, 90000 = ApplicationConfiguration",
         "format": "int32"
       },
       "BoStatus": {
@@ -1523,7 +2065,30 @@
           1
         ],
         "type": "integer",
+        "description": "0 = Disabled, 1 = Enabled",
         "format": "int32"
+      },
+      "ChangePasswordRequest": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "newPassword": {
+            "type": "string",
+            "nullable": true
+          },
+          "confirmPassword": {
+            "type": "string",
+            "nullable": true
+          },
+          "oldPassword": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
       },
       "ChangeSourceGameStatusRequest": {
         "type": "object",
@@ -1598,6 +2163,34 @@
             "format": "int32"
           },
           "description": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "CreateAppConfigRequest": {
+        "required": [
+          "key",
+          "value"
+        ],
+        "type": "object",
+        "properties": {
+          "key": {
+            "maxLength": 64,
+            "minLength": 0,
+            "type": "string",
+            "nullable": true
+          },
+          "value": {
+            "maxLength": 2048,
+            "minLength": 0,
+            "type": "string",
+            "nullable": true
+          },
+          "description": {
+            "maxLength": 256,
+            "minLength": 0,
             "type": "string",
             "nullable": true
           }
@@ -1797,15 +2390,49 @@
         },
         "additionalProperties": false
       },
+      "DeleteAppConfigRequest": {
+        "required": [
+          "key"
+        ],
+        "type": "object",
+        "properties": {
+          "key": {
+            "maxLength": 64,
+            "minLength": 0,
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ForceUpdatePasswordRequest": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "newPassword": {
+            "type": "string",
+            "nullable": true
+          },
+          "confirmPassword": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
       "GamificationModule": {
         "enum": [
           0,
           1
         ],
         "type": "integer",
+        "description": "0 = All, 1 = Tournament",
         "format": "int32"
       },
-      "GetAgentsRequest": {
+      "GetAppConfigsRequest": {
         "type": "object",
         "properties": {
           "page": {
@@ -1822,52 +2449,11 @@
             "type": "string",
             "nullable": true
           },
-          "agent": {
+          "key": {
+            "maxLength": 64,
+            "minLength": 0,
             "type": "string",
             "nullable": true
-          },
-          "status": {
-            "$ref": "#/components/schemas/BoStatus"
-          }
-        },
-        "additionalProperties": false
-      },
-      "GetAuditsRequest": {
-        "type": "object",
-        "properties": {
-          "page": {
-            "type": "integer",
-            "format": "int32",
-            "nullable": true
-          },
-          "pageSize": {
-            "type": "integer",
-            "format": "int32",
-            "nullable": true
-          },
-          "sortBy": {
-            "type": "string",
-            "nullable": true
-          },
-          "object": {
-            "type": "string",
-            "nullable": true
-          },
-          "startTime": {
-            "type": "string",
-            "format": "date-time",
-            "nullable": true
-          },
-          "endTime": {
-            "type": "string",
-            "format": "date-time",
-            "nullable": true
-          },
-          "module": {
-            "$ref": "#/components/schemas/AuditModule"
-          },
-          "action": {
-            "$ref": "#/components/schemas/AuditAction"
           }
         },
         "additionalProperties": false
@@ -1934,62 +2520,6 @@
         },
         "additionalProperties": false
       },
-      "GetOperatorUsersRequest": {
-        "type": "object",
-        "properties": {
-          "page": {
-            "type": "integer",
-            "format": "int32",
-            "nullable": true
-          },
-          "pageSize": {
-            "type": "integer",
-            "format": "int32",
-            "nullable": true
-          },
-          "sortBy": {
-            "type": "string",
-            "nullable": true
-          },
-          "operatorId": {
-            "type": "integer",
-            "format": "int32"
-          }
-        },
-        "additionalProperties": false
-      },
-      "GetOperatorsRequest": {
-        "type": "object",
-        "properties": {
-          "page": {
-            "type": "integer",
-            "format": "int32",
-            "nullable": true
-          },
-          "pageSize": {
-            "type": "integer",
-            "format": "int32",
-            "nullable": true
-          },
-          "sortBy": {
-            "type": "string",
-            "nullable": true
-          },
-          "operator": {
-            "type": "string",
-            "nullable": true
-          },
-          "agentId": {
-            "type": "integer",
-            "format": "int32",
-            "nullable": true
-          },
-          "status": {
-            "$ref": "#/components/schemas/BoStatus"
-          }
-        },
-        "additionalProperties": false
-      },
       "GetPermissionsResponse": {
         "type": "object",
         "properties": {
@@ -1999,64 +2529,6 @@
               "$ref": "#/components/schemas/PermissionModel"
             },
             "nullable": true
-          }
-        },
-        "additionalProperties": false
-      },
-      "GetRolesRequest": {
-        "type": "object",
-        "properties": {
-          "page": {
-            "type": "integer",
-            "format": "int32",
-            "nullable": true
-          },
-          "pageSize": {
-            "type": "integer",
-            "format": "int32",
-            "nullable": true
-          },
-          "sortBy": {
-            "type": "string",
-            "nullable": true
-          },
-          "role": {
-            "type": "string",
-            "nullable": true
-          },
-          "status": {
-            "$ref": "#/components/schemas/BoStatus"
-          }
-        },
-        "additionalProperties": false
-      },
-      "GetSourceGamesRequest": {
-        "type": "object",
-        "properties": {
-          "page": {
-            "type": "integer",
-            "format": "int32",
-            "nullable": true
-          },
-          "pageSize": {
-            "type": "integer",
-            "format": "int32",
-            "nullable": true
-          },
-          "sortBy": {
-            "type": "string",
-            "nullable": true
-          },
-          "source": {
-            "type": "string",
-            "nullable": true
-          },
-          "game": {
-            "type": "string",
-            "nullable": true
-          },
-          "status": {
-            "$ref": "#/components/schemas/BoStatus"
           }
         },
         "additionalProperties": false
@@ -2074,95 +2546,6 @@
               "$ref": "#/components/schemas/TimeZoneModel"
             },
             "nullable": true
-          }
-        },
-        "additionalProperties": false
-      },
-      "GetTournamentsRequest": {
-        "type": "object",
-        "properties": {
-          "page": {
-            "type": "integer",
-            "format": "int32",
-            "nullable": true
-          },
-          "pageSize": {
-            "type": "integer",
-            "format": "int32",
-            "nullable": true
-          },
-          "sortBy": {
-            "type": "string",
-            "nullable": true
-          },
-          "operator": {
-            "type": "string",
-            "nullable": true
-          },
-          "agent": {
-            "type": "string",
-            "nullable": true
-          },
-          "game": {
-            "type": "string",
-            "nullable": true
-          },
-          "currency": {
-            "type": "string",
-            "nullable": true
-          },
-          "tournament": {
-            "type": "string",
-            "nullable": true
-          },
-          "status": {
-            "$ref": "#/components/schemas/TournamentStatus"
-          },
-          "startTime": {
-            "type": "string",
-            "format": "date-time",
-            "nullable": true
-          },
-          "endTime": {
-            "type": "string",
-            "format": "date-time",
-            "nullable": true
-          }
-        },
-        "additionalProperties": false
-      },
-      "GetUsersRequest": {
-        "type": "object",
-        "properties": {
-          "page": {
-            "type": "integer",
-            "format": "int32",
-            "nullable": true
-          },
-          "pageSize": {
-            "type": "integer",
-            "format": "int32",
-            "nullable": true
-          },
-          "sortBy": {
-            "type": "string",
-            "nullable": true
-          },
-          "username": {
-            "type": "string",
-            "nullable": true
-          },
-          "agentId": {
-            "type": "integer",
-            "format": "int32",
-            "nullable": true
-          },
-          "roleName": {
-            "type": "string",
-            "nullable": true
-          },
-          "status": {
-            "$ref": "#/components/schemas/BoStatus"
           }
         },
         "additionalProperties": false
@@ -2206,6 +2589,7 @@
           7
         ],
         "type": "integer",
+        "description": "1 = List, 2 = View, 3 = Create, 4 = Update, 5 = ChangeStatus, 6 = Remove, 7 = ViewRolePermission",
         "format": "int32"
       },
       "PermissionModel": {
@@ -2226,6 +2610,16 @@
           "name": {
             "type": "string",
             "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ProcessTournamentPaymentRequest": {
+        "type": "object",
+        "properties": {
+          "leaderboardCycleId": {
+            "type": "string",
+            "format": "uuid"
           }
         },
         "additionalProperties": false
@@ -2296,6 +2690,7 @@
           3
         ],
         "type": "integer",
+        "description": "0 = Turnover, 1 = TotalWinningAmount, 2 = BiggestWinningAmount, 3 = TurnoverAndTotalWinningAmount",
         "format": "int32"
       },
       "TournamentStatus": {
@@ -2306,11 +2701,16 @@
           3
         ],
         "type": "integer",
+        "description": "0 = Drafted, 1 = Enabled, 2 = Disabled, 3 = Finished",
         "format": "int32"
       },
       "UpdateAgentRequest": {
         "type": "object",
         "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
           "code": {
             "type": "string",
             "nullable": true
@@ -2340,10 +2740,34 @@
           "description": {
             "type": "string",
             "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "UpdateAppConfigRequest": {
+        "required": [
+          "key",
+          "value"
+        ],
+        "type": "object",
+        "properties": {
+          "key": {
+            "maxLength": 64,
+            "minLength": 0,
+            "type": "string",
+            "nullable": true
           },
-          "id": {
-            "type": "integer",
-            "format": "int32"
+          "value": {
+            "maxLength": 2048,
+            "minLength": 0,
+            "type": "string",
+            "nullable": true
+          },
+          "description": {
+            "maxLength": 256,
+            "minLength": 0,
+            "type": "string",
+            "nullable": true
           }
         },
         "additionalProperties": false

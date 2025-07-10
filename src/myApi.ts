@@ -10,6 +10,7 @@
  */
 
 export interface AddPermissionRequest {
+  /** 10000 = Role, 10100 = User, 20000 = Operator, 20100 = OperatorUser, 30000 = Agent, 40000 = Audit, 50000 = Source, 50100 = SourceGame, 60000 = Maintenance, 80000 = Tournament, 90000 = ApplicationConfiguration */
   module?: BoPermission;
   actions?: PermissionAction[] | null;
 }
@@ -18,7 +19,15 @@ export interface ApiResponse {
   message?: string | null;
 }
 
-/** @format int32 */
+export interface ApproveTournamentPaymentRequest {
+  /** @format uuid */
+  leaderboardCycleId?: string;
+}
+
+/**
+ * 1 = Add, 2 = Edit, 3 = Remove, 4 = Disable, 5 = Enable, 6 = Revoke, 7 = ChangePassword
+ * @format int32
+ */
 export enum AuditAction {
   Value1 = 1,
   Value2 = 2,
@@ -26,9 +35,13 @@ export enum AuditAction {
   Value4 = 4,
   Value5 = 5,
   Value6 = 6,
+  Value7 = 7,
 }
 
-/** @format int32 */
+/**
+ * 1 = Operator, 2 = OperatorUser, 3 = Agent, 4 = Role, 5 = User, 6 = SourceGame, 7 = Tournament, 8 = Maintenance
+ * @format int32
+ */
 export enum AuditModule {
   Value1 = 1,
   Value2 = 2,
@@ -40,7 +53,10 @@ export enum AuditModule {
   Value8 = 8,
 }
 
-/** @format int32 */
+/**
+ * 10000 = Role, 10100 = User, 20000 = Operator, 20100 = OperatorUser, 30000 = Agent, 40000 = Audit, 50000 = Source, 50100 = SourceGame, 60000 = Maintenance, 80000 = Tournament, 90000 = ApplicationConfiguration
+ * @format int32
+ */
 export enum BoPermission {
   Value10000 = 10000,
   Value10100 = 10100,
@@ -55,28 +71,42 @@ export enum BoPermission {
   Value90000 = 90000,
 }
 
-/** @format int32 */
+/**
+ * 0 = Disabled, 1 = Enabled
+ * @format int32
+ */
 export enum BoStatus {
   Value0 = 0,
   Value1 = 1,
+}
+
+export interface ChangePasswordRequest {
+  /** @format int32 */
+  id?: number;
+  newPassword?: string | null;
+  confirmPassword?: string | null;
+  oldPassword?: string | null;
 }
 
 export interface ChangeSourceGameStatusRequest {
   /** @format int32 */
   sourceId?: number;
   gameId?: string | null;
+  /** 0 = Disabled, 1 = Enabled */
   status?: BoStatus;
 }
 
 export interface ChangeStatusRequest {
   /** @format int32 */
   id?: number;
+  /** 0 = Disabled, 1 = Enabled */
   status?: BoStatus;
 }
 
 export interface ChangeTournamentStatusRequest {
   /** @format int32 */
   id?: number;
+  /** 0 = Drafted, 1 = Enabled, 2 = Disabled, 3 = Finished */
   status?: TournamentStatus;
 }
 
@@ -87,6 +117,24 @@ export interface CreateAgentRequest {
   languages?: string[] | null;
   /** @format int32 */
   timezone?: number;
+  description?: string | null;
+}
+
+export interface CreateAppConfigRequest {
+  /**
+   * @minLength 0
+   * @maxLength 64
+   */
+  key: string | null;
+  /**
+   * @minLength 0
+   * @maxLength 2048
+   */
+  value: string | null;
+  /**
+   * @minLength 0
+   * @maxLength 256
+   */
   description?: string | null;
 }
 
@@ -115,6 +163,7 @@ export interface CreateSourceGameRequest {
 export interface CreateTournamentRequest {
   code?: string | null;
   name?: string | null;
+  /** 0 = Turnover, 1 = TotalWinningAmount, 2 = BiggestWinningAmount, 3 = TurnoverAndTotalWinningAmount */
   mode?: TournamentMode;
   sourceCode?: string | null;
   operatorCode?: string | null;
@@ -148,35 +197,41 @@ export interface CurrencyModel {
   name?: string | null;
 }
 
-/** @format int32 */
+export interface DeleteAppConfigRequest {
+  /**
+   * @minLength 0
+   * @maxLength 64
+   */
+  key: string | null;
+}
+
+export interface ForceUpdatePasswordRequest {
+  /** @format int32 */
+  id?: number;
+  newPassword?: string | null;
+  confirmPassword?: string | null;
+}
+
+/**
+ * 0 = All, 1 = Tournament
+ * @format int32
+ */
 export enum GamificationModule {
   Value0 = 0,
   Value1 = 1,
 }
 
-export interface GetAgentsRequest {
+export interface GetAppConfigsRequest {
   /** @format int32 */
   page?: number | null;
   /** @format int32 */
   pageSize?: number | null;
   sortBy?: string | null;
-  agent?: string | null;
-  status?: BoStatus;
-}
-
-export interface GetAuditsRequest {
-  /** @format int32 */
-  page?: number | null;
-  /** @format int32 */
-  pageSize?: number | null;
-  sortBy?: string | null;
-  object?: string | null;
-  /** @format date-time */
-  startTime?: string | null;
-  /** @format date-time */
-  endTime?: string | null;
-  module?: AuditModule;
-  action?: AuditAction;
+  /**
+   * @minLength 0
+   * @maxLength 64
+   */
+  key?: string | null;
 }
 
 export interface GetCurrenciesResponse {
@@ -210,87 +265,13 @@ export interface GetLanguagesResponse {
   items?: LanguageModel[] | null;
 }
 
-export interface GetOperatorUsersRequest {
-  /** @format int32 */
-  page?: number | null;
-  /** @format int32 */
-  pageSize?: number | null;
-  sortBy?: string | null;
-  /** @format int32 */
-  operatorId?: number;
-}
-
-export interface GetOperatorsRequest {
-  /** @format int32 */
-  page?: number | null;
-  /** @format int32 */
-  pageSize?: number | null;
-  sortBy?: string | null;
-  operator?: string | null;
-  /** @format int32 */
-  agentId?: number | null;
-  status?: BoStatus;
-}
-
 export interface GetPermissionsResponse {
   items?: PermissionModel[] | null;
-}
-
-export interface GetRolesRequest {
-  /** @format int32 */
-  page?: number | null;
-  /** @format int32 */
-  pageSize?: number | null;
-  sortBy?: string | null;
-  role?: string | null;
-  status?: BoStatus;
-}
-
-export interface GetSourceGamesRequest {
-  /** @format int32 */
-  page?: number | null;
-  /** @format int32 */
-  pageSize?: number | null;
-  sortBy?: string | null;
-  source?: string | null;
-  game?: string | null;
-  status?: BoStatus;
 }
 
 export interface GetTimeZonesResponse {
   message?: string | null;
   timeZones?: TimeZoneModel[] | null;
-}
-
-export interface GetTournamentsRequest {
-  /** @format int32 */
-  page?: number | null;
-  /** @format int32 */
-  pageSize?: number | null;
-  sortBy?: string | null;
-  operator?: string | null;
-  agent?: string | null;
-  game?: string | null;
-  currency?: string | null;
-  tournament?: string | null;
-  status?: TournamentStatus;
-  /** @format date-time */
-  startTime?: string | null;
-  /** @format date-time */
-  endTime?: string | null;
-}
-
-export interface GetUsersRequest {
-  /** @format int32 */
-  page?: number | null;
-  /** @format int32 */
-  pageSize?: number | null;
-  sortBy?: string | null;
-  username?: string | null;
-  /** @format int32 */
-  agentId?: number | null;
-  roleName?: string | null;
-  status?: BoStatus;
 }
 
 export interface LanguageModel {
@@ -303,7 +284,10 @@ export interface LoginRequest {
   password?: string | null;
 }
 
-/** @format int32 */
+/**
+ * 1 = List, 2 = View, 3 = Create, 4 = Update, 5 = ChangeStatus, 6 = Remove, 7 = ViewRolePermission
+ * @format int32
+ */
 export enum PermissionAction {
   Value1 = 1,
   Value2 = 2,
@@ -322,6 +306,11 @@ export interface PermissionModel {
   name?: string | null;
 }
 
+export interface ProcessTournamentPaymentRequest {
+  /** @format uuid */
+  leaderboardCycleId?: string;
+}
+
 export interface RemoveOperatorUserRequest {
   /** @format int32 */
   operatorId?: number | null;
@@ -330,11 +319,14 @@ export interface RemoveOperatorUserRequest {
 }
 
 export interface RemovePermissionRequest {
+  /** 10000 = Role, 10100 = User, 20000 = Operator, 20100 = OperatorUser, 30000 = Agent, 40000 = Audit, 50000 = Source, 50100 = SourceGame, 60000 = Maintenance, 80000 = Tournament, 90000 = ApplicationConfiguration */
   module?: BoPermission;
+  /** 1 = List, 2 = View, 3 = Create, 4 = Update, 5 = ChangeStatus, 6 = Remove, 7 = ViewRolePermission */
   action?: PermissionAction;
 }
 
 export interface SwitchMaintenanceRequest {
+  /** 0 = All, 1 = Tournament */
   module: GamificationModule;
   isMaintenance: boolean;
 }
@@ -345,7 +337,10 @@ export interface TimeZoneModel {
   timeZoneOffsetHours?: number;
 }
 
-/** @format int32 */
+/**
+ * 0 = Turnover, 1 = TotalWinningAmount, 2 = BiggestWinningAmount, 3 = TurnoverAndTotalWinningAmount
+ * @format int32
+ */
 export enum TournamentMode {
   Value0 = 0,
   Value1 = 1,
@@ -353,7 +348,10 @@ export enum TournamentMode {
   Value3 = 3,
 }
 
-/** @format int32 */
+/**
+ * 0 = Drafted, 1 = Enabled, 2 = Disabled, 3 = Finished
+ * @format int32
+ */
 export enum TournamentStatus {
   Value0 = 0,
   Value1 = 1,
@@ -362,6 +360,8 @@ export enum TournamentStatus {
 }
 
 export interface UpdateAgentRequest {
+  /** @format int32 */
+  id?: number;
   code?: string | null;
   name?: string | null;
   currencies?: string[] | null;
@@ -369,8 +369,24 @@ export interface UpdateAgentRequest {
   /** @format int32 */
   timezone?: number;
   description?: string | null;
-  /** @format int32 */
-  id?: number;
+}
+
+export interface UpdateAppConfigRequest {
+  /**
+   * @minLength 0
+   * @maxLength 64
+   */
+  key: string | null;
+  /**
+   * @minLength 0
+   * @maxLength 2048
+   */
+  value: string | null;
+  /**
+   * @minLength 0
+   * @maxLength 256
+   */
+  description?: string | null;
 }
 
 export interface UpdateOperatorRequest {
@@ -402,6 +418,7 @@ export interface UpdateSourceGameRequest {
 export interface UpdateTournamentRequest {
   code?: string | null;
   name?: string | null;
+  /** 0 = Turnover, 1 = TotalWinningAmount, 2 = BiggestWinningAmount, 3 = TurnoverAndTotalWinningAmount */
   mode?: TournamentMode;
   sourceCode?: string | null;
   operatorCode?: string | null;
@@ -708,14 +725,26 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      *
      * @tags Agent
      * @name AgentList
+     * @summary Get all agents
      * @request GET:/agent
      */
-    agentList: (data: GetAgentsRequest, params: RequestParams = {}) =>
+    agentList: (
+      query?: {
+        Agent?: string;
+        /** 0 = Disabled, 1 = Enabled */
+        Status?: BoStatus;
+        SortBy?: string;
+        /** @format int32 */
+        Page?: number;
+        /** @format int32 */
+        PageSize?: number;
+      },
+      params: RequestParams = {},
+    ) =>
       this.request<void, any>({
         path: `/agent`,
         method: "GET",
-        body: data,
-        type: ContentType.Json,
+        query: query,
         ...params,
       }),
 
@@ -724,6 +753,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      *
      * @tags Agent
      * @name AgentCreate
+     * @summary Create new agent
      * @request POST:/agent
      */
     agentCreate: (data: CreateAgentRequest, params: RequestParams = {}) =>
@@ -740,6 +770,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      *
      * @tags Agent
      * @name AgentUpdate
+     * @summary Update agent
      * @request PUT:/agent
      */
     agentUpdate: (data: UpdateAgentRequest, params: RequestParams = {}) =>
@@ -756,6 +787,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      *
      * @tags Agent
      * @name OperatorDetail
+     * @summary Get agents by operator
      * @request GET:/agent/operator/{operatorId}
      */
     operatorDetail: (operatorId: number, params: RequestParams = {}) =>
@@ -770,6 +802,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      *
      * @tags Agent
      * @name AgentDetail
+     * @summary Get agent by id
      * @request GET:/agent/{id}
      */
     agentDetail: (id: number, params: RequestParams = {}) =>
@@ -784,6 +817,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      *
      * @tags Agent
      * @name ChangeStatusCreate
+     * @summary Change status
      * @request POST:/agent/changeStatus
      */
     changeStatusCreate: (data: ChangeStatusRequest, params: RequestParams = {}) =>
@@ -795,6 +829,85 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
         ...params,
       }),
   };
+  appConfig = {
+    /**
+     * No description
+     *
+     * @tags AppConfigurations
+     * @name AppConfigList
+     * @request GET:/appConfig
+     */
+    appConfigList: (data: GetAppConfigsRequest, params: RequestParams = {}) =>
+      this.request<void, any>({
+        path: `/appConfig`,
+        method: "GET",
+        body: data,
+        type: ContentType.Json,
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags AppConfigurations
+     * @name AppConfigCreate
+     * @request POST:/appConfig
+     */
+    appConfigCreate: (data: CreateAppConfigRequest, params: RequestParams = {}) =>
+      this.request<void, any>({
+        path: `/appConfig`,
+        method: "POST",
+        body: data,
+        type: ContentType.Json,
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags AppConfigurations
+     * @name AppConfigUpdate
+     * @request PUT:/appConfig
+     */
+    appConfigUpdate: (data: UpdateAppConfigRequest, params: RequestParams = {}) =>
+      this.request<void, any>({
+        path: `/appConfig`,
+        method: "PUT",
+        body: data,
+        type: ContentType.Json,
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags AppConfigurations
+     * @name AppConfigDelete
+     * @request DELETE:/appConfig
+     */
+    appConfigDelete: (data: DeleteAppConfigRequest, params: RequestParams = {}) =>
+      this.request<void, any>({
+        path: `/appConfig`,
+        method: "DELETE",
+        body: data,
+        type: ContentType.Json,
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags AppConfigurations
+     * @name AppConfigDetail
+     * @request GET:/appConfig/{key}
+     */
+    appConfigDetail: (key: string, params: RequestParams = {}) =>
+      this.request<void, any>({
+        path: `/appConfig/${key}`,
+        method: "GET",
+        ...params,
+      }),
+  };
   audit = {
     /**
      * No description
@@ -803,12 +916,29 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @name AuditList
      * @request GET:/audit
      */
-    auditList: (data: GetAuditsRequest, params: RequestParams = {}) =>
+    auditList: (
+      query?: {
+        Object?: string;
+        /** @format date-time */
+        StartTime?: string;
+        /** @format date-time */
+        EndTime?: string;
+        /** 1 = Operator, 2 = OperatorUser, 3 = Agent, 4 = Role, 5 = User, 6 = SourceGame, 7 = Tournament, 8 = Maintenance */
+        Module?: AuditModule;
+        /** 1 = Add, 2 = Edit, 3 = Remove, 4 = Disable, 5 = Enable, 6 = Revoke, 7 = ChangePassword */
+        Action?: AuditAction;
+        SortBy?: string;
+        /** @format int32 */
+        Page?: number;
+        /** @format int32 */
+        PageSize?: number;
+      },
+      params: RequestParams = {},
+    ) =>
       this.request<void, any>({
         path: `/audit`,
         method: "GET",
-        body: data,
-        type: ContentType.Json,
+        query: query,
         ...params,
       }),
 
@@ -957,12 +1087,25 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @name OperatorList
      * @request GET:/operator
      */
-    operatorList: (data: GetOperatorsRequest, params: RequestParams = {}) =>
+    operatorList: (
+      query?: {
+        Operator?: string;
+        /** @format int32 */
+        AgentId?: number;
+        /** 0 = Disabled, 1 = Enabled */
+        Status?: BoStatus;
+        SortBy?: string;
+        /** @format int32 */
+        Page?: number;
+        /** @format int32 */
+        PageSize?: number;
+      },
+      params: RequestParams = {},
+    ) =>
       this.request<void, any>({
         path: `/operator`,
         method: "GET",
-        body: data,
-        type: ContentType.Json,
+        query: query,
         ...params,
       }),
 
@@ -1035,12 +1178,22 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @name UserList
      * @request GET:/operator/user
      */
-    userList: (data: GetOperatorUsersRequest, params: RequestParams = {}) =>
+    userList: (
+      query?: {
+        /** @format int32 */
+        OperatorId?: number;
+        SortBy?: string;
+        /** @format int32 */
+        Page?: number;
+        /** @format int32 */
+        PageSize?: number;
+      },
+      params: RequestParams = {},
+    ) =>
       this.request<void, any>({
         path: `/operator/user`,
         method: "GET",
-        body: data,
-        type: ContentType.Json,
+        query: query,
         ...params,
       }),
 
@@ -1148,12 +1301,23 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @name RoleList
      * @request GET:/role
      */
-    roleList: (data: GetRolesRequest, params: RequestParams = {}) =>
+    roleList: (
+      query?: {
+        Role?: string;
+        /** 0 = Disabled, 1 = Enabled */
+        Status?: BoStatus;
+        SortBy?: string;
+        /** @format int32 */
+        Page?: number;
+        /** @format int32 */
+        PageSize?: number;
+      },
+      params: RequestParams = {},
+    ) =>
       this.request<void, any>({
         path: `/role`,
         method: "GET",
-        body: data,
-        type: ContentType.Json,
+        query: query,
         ...params,
       }),
 
@@ -1258,12 +1422,24 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @name SourceGameList
      * @request GET:/sourceGame
      */
-    sourceGameList: (data: GetSourceGamesRequest, params: RequestParams = {}) =>
+    sourceGameList: (
+      query?: {
+        Source?: string;
+        Game?: string;
+        /** 0 = Disabled, 1 = Enabled */
+        Status?: BoStatus;
+        SortBy?: string;
+        /** @format int32 */
+        Page?: number;
+        /** @format int32 */
+        PageSize?: number;
+      },
+      params: RequestParams = {},
+    ) =>
       this.request<void, any>({
         path: `/sourceGame`,
         method: "GET",
-        body: data,
-        type: ContentType.Json,
+        query: query,
         ...params,
       }),
 
@@ -1353,12 +1529,31 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @name TournamentList
      * @request GET:/tournament
      */
-    tournamentList: (data: GetTournamentsRequest, params: RequestParams = {}) =>
+    tournamentList: (
+      query?: {
+        Operator?: string;
+        Agent?: string;
+        Game?: string;
+        Currency?: string;
+        Tournament?: string;
+        /** 0 = Drafted, 1 = Enabled, 2 = Disabled, 3 = Finished */
+        Status?: TournamentStatus;
+        /** @format date-time */
+        StartTime?: string;
+        /** @format date-time */
+        EndTime?: string;
+        SortBy?: string;
+        /** @format int32 */
+        Page?: number;
+        /** @format int32 */
+        PageSize?: number;
+      },
+      params: RequestParams = {},
+    ) =>
       this.request<void, any>({
         path: `/tournament`,
         method: "GET",
-        body: data,
-        type: ContentType.Json,
+        query: query,
         ...params,
       }),
 
@@ -1423,6 +1618,38 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
         type: ContentType.Json,
         ...params,
       }),
+
+    /**
+     * No description
+     *
+     * @tags Tournament
+     * @name PaymentApproveUpdate
+     * @request PUT:/tournament/payment/approve
+     */
+    paymentApproveUpdate: (data: ApproveTournamentPaymentRequest, params: RequestParams = {}) =>
+      this.request<void, any>({
+        path: `/tournament/payment/approve`,
+        method: "PUT",
+        body: data,
+        type: ContentType.Json,
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Tournament
+     * @name PaymentProcessCreate
+     * @request POST:/tournament/payment/process
+     */
+    paymentProcessCreate: (data: ProcessTournamentPaymentRequest, params: RequestParams = {}) =>
+      this.request<void, any>({
+        path: `/tournament/payment/process`,
+        method: "POST",
+        body: data,
+        type: ContentType.Json,
+        ...params,
+      }),
   };
   user = {
     /**
@@ -1432,12 +1659,26 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @name UserList
      * @request GET:/user
      */
-    userList: (data: GetUsersRequest, params: RequestParams = {}) =>
+    userList: (
+      query?: {
+        Username?: string;
+        /** @format int32 */
+        AgentId?: number;
+        RoleName?: string;
+        /** 0 = Disabled, 1 = Enabled */
+        Status?: BoStatus;
+        SortBy?: string;
+        /** @format int32 */
+        Page?: number;
+        /** @format int32 */
+        PageSize?: number;
+      },
+      params: RequestParams = {},
+    ) =>
       this.request<void, any>({
         path: `/user`,
         method: "GET",
-        body: data,
-        type: ContentType.Json,
+        query: query,
         ...params,
       }),
 
@@ -1512,6 +1753,38 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       this.request<void, any>({
         path: `/user/changeStatus`,
         method: "POST",
+        body: data,
+        type: ContentType.Json,
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags User
+     * @name PasswordChangeUpdate
+     * @request PUT:/user/password/change
+     */
+    passwordChangeUpdate: (data: ChangePasswordRequest, params: RequestParams = {}) =>
+      this.request<void, any>({
+        path: `/user/password/change`,
+        method: "PUT",
+        body: data,
+        type: ContentType.Json,
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags User
+     * @name PasswordForceUpdateUpdate
+     * @request PUT:/user/password/forceUpdate
+     */
+    passwordForceUpdateUpdate: (data: ForceUpdatePasswordRequest, params: RequestParams = {}) =>
+      this.request<void, any>({
+        path: `/user/password/forceUpdate`,
+        method: "PUT",
         body: data,
         type: ContentType.Json,
         ...params,
