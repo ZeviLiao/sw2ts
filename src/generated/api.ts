@@ -22,7 +22,7 @@ export enum TournamentStatus {
 }
 
 /**
- * 0 = Turnover, 1 = TotalWinningAmount, 2 = BiggestWinningAmount, 3 = TurnoverAndTotalWinningAmount
+ * 0 = Turnover, 1 = TotalWinningAmount, 2 = BiggestWinningAmount, 3 = TurnoverAndActualWinningAmount
  * @format int32
  */
 export enum TournamentMode {
@@ -127,8 +127,6 @@ export interface ApproveTournamentPaymentRequest {
 }
 
 export interface ChangePasswordRequest {
-  /** @format int32 */
-  id?: number;
   newPassword?: string | null;
   confirmPassword?: string | null;
   oldPassword?: string | null;
@@ -209,7 +207,7 @@ export interface CreateSourceGameRequest {
 export interface CreateTournamentRequest {
   code?: string | null;
   name?: string | null;
-  /** 0 = Turnover, 1 = TotalWinningAmount, 2 = BiggestWinningAmount, 3 = TurnoverAndTotalWinningAmount */
+  /** 0 = Turnover, 1 = TotalWinningAmount, 2 = BiggestWinningAmount, 3 = TurnoverAndActualWinningAmount */
   mode?: TournamentMode;
   sourceCode?: string | null;
   operatorCode?: string | null;
@@ -231,10 +229,10 @@ export interface CreateTournamentRequest {
 }
 
 export interface CreateUserRequest {
-  username?: string | null;
   password?: string | null;
+  username?: string | null;
   /** @format int32 */
-  roleId?: number | null;
+  roleId?: number;
   description?: string | null;
 }
 
@@ -419,7 +417,7 @@ export interface UpdateSourceGameRequest {
 export interface UpdateTournamentRequest {
   code?: string | null;
   name?: string | null;
-  /** 0 = Turnover, 1 = TotalWinningAmount, 2 = BiggestWinningAmount, 3 = TurnoverAndTotalWinningAmount */
+  /** 0 = Turnover, 1 = TotalWinningAmount, 2 = BiggestWinningAmount, 3 = TurnoverAndActualWinningAmount */
   mode?: TournamentMode;
   sourceCode?: string | null;
   operatorCode?: string | null;
@@ -443,13 +441,12 @@ export interface UpdateTournamentRequest {
 }
 
 export interface UpdateUserRequest {
-  username?: string | null;
-  password?: string | null;
-  /** @format int32 */
-  roleId?: number | null;
-  description?: string | null;
   /** @format int32 */
   id?: number;
+  username?: string | null;
+  /** @format int32 */
+  roleId?: number;
+  description?: string | null;
 }
 
 export interface UpsertExchangeRateModel {
@@ -1286,6 +1283,7 @@ export class Api<
    *
    * @tags User
    * @name UserList
+   * @summary Get all users
    * @request GET:/user
    */
   userList = (
@@ -1316,6 +1314,7 @@ export class Api<
    *
    * @tags User
    * @name UserCreate
+   * @summary Create new user
    * @request POST:/user
    */
   userCreate = (data: CreateUserRequest, params: RequestParams = {}) =>
@@ -1332,6 +1331,7 @@ export class Api<
    *
    * @tags User
    * @name UserUpdate
+   * @summary Update user
    * @request PUT:/user
    */
   userUpdate = (data: UpdateUserRequest, params: RequestParams = {}) =>
@@ -1450,6 +1450,7 @@ export class Api<
      *
      * @tags User
      * @name UserDetail
+     * @summary Get user by id
      * @request GET:/user/{id}
      */
     userDetail: (id: number, params: RequestParams = {}) =>
@@ -1569,6 +1570,7 @@ export class Api<
      *
      * @tags User
      * @name ChangeStatusCreate6
+     * @summary Change status
      * @request POST:/user/changeStatus
      * @originalName changeStatusCreate
      * @duplicate
@@ -1857,6 +1859,7 @@ export class Api<
      *
      * @tags User
      * @name RolePermissionDetail
+     * @summary Get user by id
      * @request GET:/user/rolePermission/{id}
      */
     rolePermissionDetail: (id: number, params: RequestParams = {}) =>
@@ -1872,6 +1875,7 @@ export class Api<
      *
      * @tags User
      * @name PasswordChangeUpdate
+     * @summary Change password
      * @request PUT:/user/password/change
      */
     passwordChangeUpdate: (
@@ -1891,6 +1895,7 @@ export class Api<
      *
      * @tags User
      * @name PasswordForceUpdateUpdate
+     * @summary Force update password
      * @request PUT:/user/password/forceUpdate
      */
     passwordForceUpdateUpdate: (

@@ -6,7 +6,8 @@ await generateApi({
   fileName: 'api.ts',
   output: resolve(process.cwd(), './src/generated'),
   input: resolve(process.cwd(), './swagger.json'),
-  httpClientType: 'axios',
+  httpClientType: 'fetch',
+  // httpClientType: 'axios',
   moduleNameIndex: 1,
   cleanOutput: true,
 });
