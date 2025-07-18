@@ -47,12 +47,13 @@ export enum PermissionAction {
 }
 
 /**
- * 0 = All, 1 = Tournament
+ * 0 = All, 1 = Tournament, 255 = IntegrationTest
  * @format int32
  */
 export enum GamificationModule {
   Value0 = 0,
   Value1 = 1,
+  Value255 = 255,
 }
 
 /**
@@ -117,6 +118,21 @@ export interface AddPermissionRequest {
   actions?: PermissionAction[] | null;
 }
 
+export interface AgentModel {
+  updatedBy?: string | null;
+  updatedAt?: string | null;
+  /** @format int32 */
+  id?: number;
+  code?: string | null;
+  name?: string | null;
+  currencies?: string | null;
+  languages?: string | null;
+  timezone?: string | null;
+  /** 0 = Disabled, 1 = Enabled */
+  status?: BoStatus;
+  description?: string | null;
+}
+
 export interface ApiResponse {
   message?: string | null;
 }
@@ -124,6 +140,17 @@ export interface ApiResponse {
 export interface ApproveTournamentPaymentRequest {
   /** @format uuid */
   leaderboardCycleId?: string;
+}
+
+export interface AuditModel {
+  updatedBy?: string | null;
+  updatedAt?: string | null;
+  /** @format uuid */
+  id?: string;
+  object?: string | null;
+  module?: string | null;
+  action?: string | null;
+  detail?: string | null;
 }
 
 export interface ChangePasswordRequest {
@@ -249,11 +276,53 @@ export interface DeleteAppConfigRequest {
   key: string | null;
 }
 
+export interface ExchangeRateModel {
+  currency?: string | null;
+  /** @format double */
+  rate?: number;
+}
+
 export interface ForceUpdatePasswordRequest {
   /** @format int32 */
   id?: number;
   newPassword?: string | null;
   confirmPassword?: string | null;
+}
+
+export interface GameRoomDto {
+  roomId?: string | null;
+  roomName?: string | null;
+  currency?: string | null;
+  /** @format double */
+  minBet?: number;
+  /** @format double */
+  maxBet?: number;
+}
+
+export interface GetAgentOptionsResponse {
+  options?: StringItem[] | null;
+}
+
+export interface GetAgentResponse {
+  model?: AgentModel;
+}
+
+export interface GetAgentsResponse {
+  /** @format int32 */
+  totalRows?: number | null;
+  /** @format int32 */
+  page?: number | null;
+  /** @format int32 */
+  pageSize?: number | null;
+  results?: AgentModel[] | null;
+}
+
+export interface GetAllAgentsResponse {
+  models?: AgentModel[] | null;
+}
+
+export interface GetAllMaintenanceStatusesResponse {
+  modules?: MaintenanceStatusDto[] | null;
 }
 
 export interface GetAppConfigsRequest {
@@ -267,6 +336,16 @@ export interface GetAppConfigsRequest {
    * @maxLength 64
    */
   key?: string | null;
+}
+
+export interface GetAuditsResponse {
+  /** @format int32 */
+  totalRows?: number | null;
+  /** @format int32 */
+  page?: number | null;
+  /** @format int32 */
+  pageSize?: number | null;
+  results?: AuditModel[] | null;
 }
 
 export interface GetCurrenciesResponse {
@@ -296,12 +375,88 @@ export interface GetGameRoomsRequest {
   currency: string | null;
 }
 
+export interface GetGameRoomsResponse {
+  rooms: GameRoomDto[] | null;
+}
+
 export interface GetLanguagesResponse {
   items?: LanguageModel[] | null;
 }
 
+export interface GetMeResponse {
+  message?: string | null;
+  forceUpdatePassword?: boolean;
+  /** @uniqueItems true */
+  rolePermissions?: number[] | null;
+  /** @format date-time */
+  expiryTime?: string;
+  username?: string | null;
+  /** @format int32 */
+  userId?: number;
+}
+
+export interface GetOperatorOptionsResponse {
+  options?: StringItem[] | null;
+}
+
+export interface GetOperatorResponse {
+  model?: OperatorModel;
+}
+
+export interface GetOperatorsResponse {
+  /** @format int32 */
+  totalRows?: number | null;
+  /** @format int32 */
+  page?: number | null;
+  /** @format int32 */
+  pageSize?: number | null;
+  results?: OperatorModel[] | null;
+}
+
 export interface GetPermissionsResponse {
   items?: PermissionModel[] | null;
+}
+
+export interface GetRoleResponse {
+  model?: RoleModel;
+}
+
+export interface GetRolesResponse {
+  /** @format int32 */
+  totalRows?: number | null;
+  /** @format int32 */
+  page?: number | null;
+  /** @format int32 */
+  pageSize?: number | null;
+  results?: RoleModel[] | null;
+}
+
+export interface GetSourceGameOptionsResponse {
+  options?: StringItem[] | null;
+}
+
+export interface GetSourceGameResponse {
+  model?: SourceGameModel;
+}
+
+export interface GetSourceGamesResponse {
+  /** @format int32 */
+  totalRows?: number | null;
+  /** @format int32 */
+  page?: number | null;
+  /** @format int32 */
+  pageSize?: number | null;
+  results?: SourceGameModel[] | null;
+}
+
+export interface GetSourcesResponse {
+  /** @format int32 */
+  totalRows?: number | null;
+  /** @format int32 */
+  page?: number | null;
+  /** @format int32 */
+  pageSize?: number | null;
+  results?: SourceModel[] | null;
 }
 
 export interface GetTimeZonesResponse {
@@ -309,14 +464,121 @@ export interface GetTimeZonesResponse {
   timeZones?: TimeZoneModel[] | null;
 }
 
+export interface GetTournamentResponse {
+  model?: TournamentModel;
+}
+
+export interface GetTournamentsResponse {
+  /** @format int32 */
+  totalRows?: number | null;
+  /** @format int32 */
+  page?: number | null;
+  /** @format int32 */
+  pageSize?: number | null;
+  results?: TournamentModel[] | null;
+}
+
+export interface GetUserResponse {
+  model?: UserModel;
+}
+
+export interface GetUserRolePermissionResponse {
+  model?: UserRolePermissionModel;
+}
+
+export interface GetUsersResponse {
+  /** @format int32 */
+  totalRows?: number | null;
+  /** @format int32 */
+  page?: number | null;
+  /** @format int32 */
+  pageSize?: number | null;
+  results?: UserModel[] | null;
+}
+
 export interface LanguageModel {
   code?: string | null;
   name?: string | null;
 }
 
+export interface LeaderboardCycleModel {
+  /** @format uuid */
+  id?: string;
+  /** @format date-time */
+  startDate?: string;
+  /** @format date-time */
+  endDate?: string;
+}
+
+export interface LeaderboardGameRoomModel {
+  gameId?: string | null;
+  roomId?: string | null;
+  name?: string | null;
+  currency?: string | null;
+}
+
+export interface LeaderboardModel {
+  /** @format int32 */
+  id?: number;
+  names?: LeaderboardNameModel[] | null;
+  gameRooms?: LeaderboardGameRoomModel[] | null;
+  rewards?: LeaderboardPrizeModel[] | null;
+}
+
+export interface LeaderboardNameModel {
+  language?: string | null;
+  name?: string | null;
+}
+
+export interface LeaderboardPrizeModel {
+  /** @format int32 */
+  rank?: number;
+  /** @format double */
+  amount?: number;
+  description?: string | null;
+}
+
 export interface LoginRequest {
   username?: string | null;
   password?: string | null;
+}
+
+export interface LoginResponse {
+  message?: string | null;
+  forceUpdatePassword?: boolean;
+  /** @uniqueItems true */
+  rolePermissions?: number[] | null;
+  /** @format date-time */
+  expiryTime?: string;
+  /** @format int32 */
+  userId?: number;
+}
+
+export interface MaintenanceStatusDto {
+  /** 0 = All, 1 = Tournament, 255 = IntegrationTest */
+  id?: GamificationModule;
+  name?: string | null;
+  isMaintenance?: boolean;
+  /** @format date-time */
+  createdAt?: string | null;
+  createdBy?: string | null;
+  /** @format date-time */
+  updatedAt?: string | null;
+  updatedBy?: string | null;
+}
+
+export interface OperatorModel {
+  updatedBy?: string | null;
+  updatedAt?: string | null;
+  /** @format int32 */
+  id?: number;
+  code?: string | null;
+  name?: string | null;
+  /** 0 = Disabled, 1 = Enabled */
+  status?: BoStatus;
+  clientId?: string | null;
+  clientSecret?: string | null;
+  description?: string | null;
 }
 
 export interface PermissionModel {
@@ -346,8 +608,50 @@ export interface RemovePermissionRequest {
   action?: PermissionAction;
 }
 
+export interface RoleModel {
+  updatedBy?: string | null;
+  updatedAt?: string | null;
+  /** @format int32 */
+  id?: number;
+  name?: string | null;
+  /** 0 = Disabled, 1 = Enabled */
+  status?: BoStatus;
+  description?: string | null;
+  /** @uniqueItems true */
+  permissions?: number[] | null;
+}
+
+export interface SourceGameModel {
+  updatedBy?: string | null;
+  updatedAt?: string | null;
+  /** @format int32 */
+  sourceId?: number;
+  sourceCode?: string | null;
+  sourceName?: string | null;
+  gameId?: string | null;
+  gameName?: string | null;
+  /** 0 = Disabled, 1 = Enabled */
+  status?: BoStatus;
+}
+
+export interface SourceModel {
+  updatedBy?: string | null;
+  updatedAt?: string | null;
+  /** @format int32 */
+  id?: number;
+  code?: string | null;
+  name?: string | null;
+  /** 0 = Disabled, 1 = Enabled */
+  status?: BoStatus;
+}
+
+export interface StringItem {
+  val: string | null;
+  name: string | null;
+}
+
 export interface SwitchMaintenanceRequest {
-  /** 0 = All, 1 = Tournament */
+  /** 0 = All, 1 = Tournament, 255 = IntegrationTest */
   module: GamificationModule;
   isMaintenance: boolean;
 }
@@ -356,6 +660,27 @@ export interface TimeZoneModel {
   id?: string | null;
   /** @format int32 */
   timeZoneOffsetHours?: number;
+}
+
+export interface TournamentModel {
+  updatedBy?: string | null;
+  updatedAt?: string | null;
+  /** @format int32 */
+  id?: number;
+  code?: string | null;
+  name?: string | null;
+  operator?: string | null;
+  agent?: string | null;
+  games?: string | null;
+  currency?: string | null;
+  /** 0 = Drafted, 1 = Enabled, 2 = Disabled, 3 = Finished */
+  status?: TournamentStatus;
+  description?: string | null;
+  leaderboards?: LeaderboardModel[] | null;
+  leaderboardCycles?: LeaderboardCycleModel[] | null;
+  exchangeRates?: ExchangeRateModel[] | null;
+  startDate?: string | null;
+  endDate?: string | null;
 }
 
 export interface UpdateAgentRequest {
@@ -499,6 +824,35 @@ export interface UpsertPrizeModel {
   rank?: number;
   /** @format double */
   amount?: number;
+  description?: string | null;
+}
+
+export interface UserModel {
+  updatedBy?: string | null;
+  updatedAt?: string | null;
+  /** @format int32 */
+  userId?: number;
+  username?: string | null;
+  /** @format int32 */
+  roleId?: number | null;
+  roleName?: string | null;
+  isActive?: boolean;
+  description?: string | null;
+  forceUpdatePassword?: boolean;
+}
+
+export interface UserRolePermissionModel {
+  /** @format int32 */
+  userId?: number;
+  username?: string | null;
+  /** @format int32 */
+  roleId?: number | null;
+  roleName?: string | null;
+  operatorName?: string | null;
+  agents?: string[] | null;
+  /** @uniqueItems true */
+  permissions?: number[] | null;
+  isActive?: boolean;
   description?: string | null;
 }
 
@@ -758,592 +1112,70 @@ export class HttpClient<SecurityDataType = unknown> {
 export class Api<
   SecurityDataType extends unknown,
 > extends HttpClient<SecurityDataType> {
-  /**
-   * No description
-   *
-   * @tags Agent
-   * @name AgentList
-   * @summary Get all agents
-   * @request GET:/agent
-   */
-  agentList = (
-    query?: {
-      Agent?: string;
-      /** 0 = Disabled, 1 = Enabled */
-      Status?: BoStatus;
-      SortBy?: string;
-      /** @format int32 */
-      Page?: number;
-      /** @format int32 */
-      PageSize?: number;
-    },
-    params: RequestParams = {},
-  ) =>
-    this.request<void, any>({
-      path: `/agent`,
-      method: "GET",
-      query: query,
-      ...params,
-    });
+  agent = {
+    /**
+     * No description
+     *
+     * @tags Agent
+     * @name AgentList
+     * @summary Get all agents
+     * @request GET:/agent
+     */
+    agentList: (
+      query?: {
+        Agent?: string;
+        /** 0 = Disabled, 1 = Enabled */
+        Status?: BoStatus;
+        SortBy?: string;
+        /** @format int32 */
+        Page?: number;
+        /** @format int32 */
+        PageSize?: number;
+      },
+      params: RequestParams = {},
+    ) =>
+      this.request<GetAgentsResponse, ApiResponse>({
+        path: `/agent`,
+        method: "GET",
+        query: query,
+        format: "json",
+        ...params,
+      }),
 
-  /**
-   * No description
-   *
-   * @tags Agent
-   * @name AgentCreate
-   * @summary Create new agent
-   * @request POST:/agent
-   */
-  agentCreate = (data: CreateAgentRequest, params: RequestParams = {}) =>
-    this.request<void, any>({
-      path: `/agent`,
-      method: "POST",
-      body: data,
-      type: ContentType.Json,
-      ...params,
-    });
+    /**
+     * No description
+     *
+     * @tags Agent
+     * @name AgentCreate
+     * @summary Create new agent
+     * @request POST:/agent
+     */
+    agentCreate: (data: CreateAgentRequest, params: RequestParams = {}) =>
+      this.request<any, ApiResponse>({
+        path: `/agent`,
+        method: "POST",
+        body: data,
+        type: ContentType.Json,
+        ...params,
+      }),
 
-  /**
-   * No description
-   *
-   * @tags Agent
-   * @name AgentUpdate
-   * @summary Update agent
-   * @request PUT:/agent
-   */
-  agentUpdate = (data: UpdateAgentRequest, params: RequestParams = {}) =>
-    this.request<void, any>({
-      path: `/agent`,
-      method: "PUT",
-      body: data,
-      type: ContentType.Json,
-      ...params,
-    });
+    /**
+     * No description
+     *
+     * @tags Agent
+     * @name AgentUpdate
+     * @summary Update agent
+     * @request PUT:/agent
+     */
+    agentUpdate: (data: UpdateAgentRequest, params: RequestParams = {}) =>
+      this.request<any, ApiResponse>({
+        path: `/agent`,
+        method: "PUT",
+        body: data,
+        type: ContentType.Json,
+        ...params,
+      }),
 
-  /**
-   * No description
-   *
-   * @tags AppConfigurations
-   * @name AppConfigList
-   * @request GET:/appConfig
-   */
-  appConfigList = (data: GetAppConfigsRequest, params: RequestParams = {}) =>
-    this.request<void, any>({
-      path: `/appConfig`,
-      method: "GET",
-      body: data,
-      type: ContentType.Json,
-      ...params,
-    });
-
-  /**
-   * No description
-   *
-   * @tags AppConfigurations
-   * @name AppConfigCreate
-   * @request POST:/appConfig
-   */
-  appConfigCreate = (
-    data: CreateAppConfigRequest,
-    params: RequestParams = {},
-  ) =>
-    this.request<void, any>({
-      path: `/appConfig`,
-      method: "POST",
-      body: data,
-      type: ContentType.Json,
-      ...params,
-    });
-
-  /**
-   * No description
-   *
-   * @tags AppConfigurations
-   * @name AppConfigUpdate
-   * @request PUT:/appConfig
-   */
-  appConfigUpdate = (
-    data: UpdateAppConfigRequest,
-    params: RequestParams = {},
-  ) =>
-    this.request<void, any>({
-      path: `/appConfig`,
-      method: "PUT",
-      body: data,
-      type: ContentType.Json,
-      ...params,
-    });
-
-  /**
-   * No description
-   *
-   * @tags AppConfigurations
-   * @name AppConfigDelete
-   * @request DELETE:/appConfig
-   */
-  appConfigDelete = (
-    data: DeleteAppConfigRequest,
-    params: RequestParams = {},
-  ) =>
-    this.request<void, any>({
-      path: `/appConfig`,
-      method: "DELETE",
-      body: data,
-      type: ContentType.Json,
-      ...params,
-    });
-
-  /**
-   * No description
-   *
-   * @tags Audit
-   * @name AuditList
-   * @request GET:/audit
-   */
-  auditList = (
-    query?: {
-      Object?: string;
-      /** @format date-time */
-      StartTime?: string;
-      /** @format date-time */
-      EndTime?: string;
-      /** 1 = Operator, 2 = OperatorUser, 3 = Agent, 4 = Role, 5 = User, 6 = SourceGame, 7 = Tournament, 8 = Maintenance */
-      Module?: AuditModule;
-      /** 1 = Add, 2 = Edit, 3 = Remove, 4 = Disable, 5 = Enable, 6 = Revoke, 7 = ChangePassword */
-      Action?: AuditAction;
-      SortBy?: string;
-      /** @format int32 */
-      Page?: number;
-      /** @format int32 */
-      PageSize?: number;
-    },
-    params: RequestParams = {},
-  ) =>
-    this.request<void, any>({
-      path: `/audit`,
-      method: "GET",
-      query: query,
-      ...params,
-    });
-
-  /**
-   * No description
-   *
-   * @tags Maintenance
-   * @name MaintenanceList
-   * @request GET:/maintenance
-   */
-  maintenanceList = (params: RequestParams = {}) =>
-    this.request<void, any>({
-      path: `/maintenance`,
-      method: "GET",
-      ...params,
-    });
-
-  /**
-   * No description
-   *
-   * @tags Operator
-   * @name OperatorList
-   * @request GET:/operator
-   */
-  operatorList = (
-    query?: {
-      Operator?: string;
-      /** @format int32 */
-      AgentId?: number;
-      /** 0 = Disabled, 1 = Enabled */
-      Status?: BoStatus;
-      SortBy?: string;
-      /** @format int32 */
-      Page?: number;
-      /** @format int32 */
-      PageSize?: number;
-    },
-    params: RequestParams = {},
-  ) =>
-    this.request<void, any>({
-      path: `/operator`,
-      method: "GET",
-      query: query,
-      ...params,
-    });
-
-  /**
-   * No description
-   *
-   * @tags Operator
-   * @name OperatorCreate
-   * @request POST:/operator
-   */
-  operatorCreate = (data: CreateOperatorRequest, params: RequestParams = {}) =>
-    this.request<void, any>({
-      path: `/operator`,
-      method: "POST",
-      body: data,
-      type: ContentType.Json,
-      ...params,
-    });
-
-  /**
-   * No description
-   *
-   * @tags Operator
-   * @name OperatorUpdate
-   * @request PUT:/operator
-   */
-  operatorUpdate = (data: UpdateOperatorRequest, params: RequestParams = {}) =>
-    this.request<void, any>({
-      path: `/operator`,
-      method: "PUT",
-      body: data,
-      type: ContentType.Json,
-      ...params,
-    });
-
-  /**
-   * No description
-   *
-   * @tags Permission
-   * @name PermissionList
-   * @request GET:/permission
-   */
-  permissionList = (params: RequestParams = {}) =>
-    this.request<GetPermissionsResponse, any>({
-      path: `/permission`,
-      method: "GET",
-      format: "json",
-      ...params,
-    });
-
-  /**
-   * No description
-   *
-   * @tags Permission
-   * @name PermissionCreate
-   * @request POST:/permission
-   */
-  permissionCreate = (data: AddPermissionRequest, params: RequestParams = {}) =>
-    this.request<void, any>({
-      path: `/permission`,
-      method: "POST",
-      body: data,
-      type: ContentType.Json,
-      ...params,
-    });
-
-  /**
-   * No description
-   *
-   * @tags Permission
-   * @name PermissionDelete
-   * @request DELETE:/permission
-   */
-  permissionDelete = (
-    data: RemovePermissionRequest,
-    params: RequestParams = {},
-  ) =>
-    this.request<void, any>({
-      path: `/permission`,
-      method: "DELETE",
-      body: data,
-      type: ContentType.Json,
-      ...params,
-    });
-
-  /**
-   * No description
-   *
-   * @tags Role
-   * @name RoleList
-   * @request GET:/role
-   */
-  roleList = (
-    query?: {
-      Role?: string;
-      /** 0 = Disabled, 1 = Enabled */
-      Status?: BoStatus;
-      SortBy?: string;
-      /** @format int32 */
-      Page?: number;
-      /** @format int32 */
-      PageSize?: number;
-    },
-    params: RequestParams = {},
-  ) =>
-    this.request<void, any>({
-      path: `/role`,
-      method: "GET",
-      query: query,
-      ...params,
-    });
-
-  /**
-   * No description
-   *
-   * @tags Role
-   * @name RoleCreate
-   * @request POST:/role
-   */
-  roleCreate = (data: CreateRoleRequest, params: RequestParams = {}) =>
-    this.request<void, any>({
-      path: `/role`,
-      method: "POST",
-      body: data,
-      type: ContentType.Json,
-      ...params,
-    });
-
-  /**
-   * No description
-   *
-   * @tags Role
-   * @name RoleUpdate
-   * @request PUT:/role
-   */
-  roleUpdate = (data: UpdateRoleRequest, params: RequestParams = {}) =>
-    this.request<void, any>({
-      path: `/role`,
-      method: "PUT",
-      body: data,
-      type: ContentType.Json,
-      ...params,
-    });
-
-  /**
-   * No description
-   *
-   * @tags Source
-   * @name SourceList
-   * @request GET:/source
-   */
-  sourceList = (params: RequestParams = {}) =>
-    this.request<void, any>({
-      path: `/source`,
-      method: "GET",
-      ...params,
-    });
-
-  /**
-   * No description
-   *
-   * @tags SourceGame
-   * @name SourceGameList
-   * @request GET:/sourceGame
-   */
-  sourceGameList = (
-    query?: {
-      Source?: string;
-      Game?: string;
-      /** 0 = Disabled, 1 = Enabled */
-      Status?: BoStatus;
-      SortBy?: string;
-      /** @format int32 */
-      Page?: number;
-      /** @format int32 */
-      PageSize?: number;
-    },
-    params: RequestParams = {},
-  ) =>
-    this.request<void, any>({
-      path: `/sourceGame`,
-      method: "GET",
-      query: query,
-      ...params,
-    });
-
-  /**
-   * No description
-   *
-   * @tags SourceGame
-   * @name SourceGameCreate
-   * @request POST:/sourceGame
-   */
-  sourceGameCreate = (
-    data: CreateSourceGameRequest,
-    params: RequestParams = {},
-  ) =>
-    this.request<void, any>({
-      path: `/sourceGame`,
-      method: "POST",
-      body: data,
-      type: ContentType.Json,
-      ...params,
-    });
-
-  /**
-   * No description
-   *
-   * @tags SourceGame
-   * @name SourceGameUpdate
-   * @request PUT:/sourceGame
-   */
-  sourceGameUpdate = (
-    data: UpdateSourceGameRequest,
-    params: RequestParams = {},
-  ) =>
-    this.request<void, any>({
-      path: `/sourceGame`,
-      method: "PUT",
-      body: data,
-      type: ContentType.Json,
-      ...params,
-    });
-
-  /**
-   * No description
-   *
-   * @tags TimeZone
-   * @name TimeZonesList
-   * @request GET:/timeZones
-   */
-  timeZonesList = (params: RequestParams = {}) =>
-    this.request<GetTimeZonesResponse, any>({
-      path: `/timeZones`,
-      method: "GET",
-      format: "json",
-      ...params,
-    });
-
-  /**
-   * No description
-   *
-   * @tags Tournament
-   * @name TournamentList
-   * @request GET:/tournament
-   */
-  tournamentList = (
-    query?: {
-      Operator?: string;
-      Agent?: string;
-      Game?: string;
-      Currency?: string;
-      Tournament?: string;
-      /** 0 = Drafted, 1 = Enabled, 2 = Disabled, 3 = Finished */
-      Status?: TournamentStatus;
-      /** @format date-time */
-      StartTime?: string;
-      /** @format date-time */
-      EndTime?: string;
-      SortBy?: string;
-      /** @format int32 */
-      Page?: number;
-      /** @format int32 */
-      PageSize?: number;
-    },
-    params: RequestParams = {},
-  ) =>
-    this.request<void, any>({
-      path: `/tournament`,
-      method: "GET",
-      query: query,
-      ...params,
-    });
-
-  /**
-   * No description
-   *
-   * @tags Tournament
-   * @name TournamentCreate
-   * @request POST:/tournament
-   */
-  tournamentCreate = (
-    data: CreateTournamentRequest,
-    params: RequestParams = {},
-  ) =>
-    this.request<void, any>({
-      path: `/tournament`,
-      method: "POST",
-      body: data,
-      type: ContentType.Json,
-      ...params,
-    });
-
-  /**
-   * No description
-   *
-   * @tags Tournament
-   * @name TournamentUpdate
-   * @request PUT:/tournament
-   */
-  tournamentUpdate = (
-    data: UpdateTournamentRequest,
-    params: RequestParams = {},
-  ) =>
-    this.request<void, any>({
-      path: `/tournament`,
-      method: "PUT",
-      body: data,
-      type: ContentType.Json,
-      ...params,
-    });
-
-  /**
-   * No description
-   *
-   * @tags User
-   * @name UserList
-   * @summary Get all users
-   * @request GET:/user
-   */
-  userList = (
-    query?: {
-      Username?: string;
-      /** @format int32 */
-      AgentId?: number;
-      RoleName?: string;
-      /** 0 = Disabled, 1 = Enabled */
-      Status?: BoStatus;
-      SortBy?: string;
-      /** @format int32 */
-      Page?: number;
-      /** @format int32 */
-      PageSize?: number;
-    },
-    params: RequestParams = {},
-  ) =>
-    this.request<void, any>({
-      path: `/user`,
-      method: "GET",
-      query: query,
-      ...params,
-    });
-
-  /**
-   * No description
-   *
-   * @tags User
-   * @name UserCreate
-   * @summary Create new user
-   * @request POST:/user
-   */
-  userCreate = (data: CreateUserRequest, params: RequestParams = {}) =>
-    this.request<void, any>({
-      path: `/user`,
-      method: "POST",
-      body: data,
-      type: ContentType.Json,
-      ...params,
-    });
-
-  /**
-   * No description
-   *
-   * @tags User
-   * @name UserUpdate
-   * @summary Update user
-   * @request PUT:/user
-   */
-  userUpdate = (data: UpdateUserRequest, params: RequestParams = {}) =>
-    this.request<void, any>({
-      path: `/user`,
-      method: "PUT",
-      body: data,
-      type: ContentType.Json,
-      ...params,
-    });
-
-  operator = {
     /**
      * No description
      *
@@ -1353,13 +1185,13 @@ export class Api<
      * @request GET:/agent/operator/{operatorId}
      */
     operatorDetail: (operatorId: number, params: RequestParams = {}) =>
-      this.request<void, any>({
+      this.request<GetAllAgentsResponse, ApiResponse>({
         path: `/agent/operator/${operatorId}`,
         method: "GET",
+        format: "json",
         ...params,
       }),
-  };
-  id = {
+
     /**
      * No description
      *
@@ -1369,98 +1201,13 @@ export class Api<
      * @request GET:/agent/{id}
      */
     agentDetail: (id: number, params: RequestParams = {}) =>
-      this.request<void, any>({
+      this.request<GetAgentResponse, ApiResponse>({
         path: `/agent/${id}`,
         method: "GET",
+        format: "json",
         ...params,
       }),
 
-    /**
-     * No description
-     *
-     * @tags Audit
-     * @name AuditDetail
-     * @request GET:/audit/{id}
-     */
-    auditDetail: (id: string, params: RequestParams = {}) =>
-      this.request<void, any>({
-        path: `/audit/${id}`,
-        method: "GET",
-        ...params,
-      }),
-
-    /**
-     * No description
-     *
-     * @tags Maintenance
-     * @name MaintenanceDetail
-     * @request GET:/maintenance/{id}
-     */
-    maintenanceDetail: (id: number, params: RequestParams = {}) =>
-      this.request<void, any>({
-        path: `/maintenance/${id}`,
-        method: "GET",
-        ...params,
-      }),
-
-    /**
-     * No description
-     *
-     * @tags Operator
-     * @name OperatorDetail
-     * @request GET:/operator/{id}
-     */
-    operatorDetail: (id: number, params: RequestParams = {}) =>
-      this.request<void, any>({
-        path: `/operator/${id}`,
-        method: "GET",
-        ...params,
-      }),
-
-    /**
-     * No description
-     *
-     * @tags Role
-     * @name RoleDetail
-     * @request GET:/role/{id}
-     */
-    roleDetail: (id: number, params: RequestParams = {}) =>
-      this.request<void, any>({
-        path: `/role/${id}`,
-        method: "GET",
-        ...params,
-      }),
-
-    /**
-     * No description
-     *
-     * @tags Tournament
-     * @name TournamentDetail
-     * @request GET:/tournament/{id}
-     */
-    tournamentDetail: (id: number, params: RequestParams = {}) =>
-      this.request<void, any>({
-        path: `/tournament/${id}`,
-        method: "GET",
-        ...params,
-      }),
-
-    /**
-     * No description
-     *
-     * @tags User
-     * @name UserDetail
-     * @summary Get user by id
-     * @request GET:/user/{id}
-     */
-    userDetail: (id: number, params: RequestParams = {}) =>
-      this.request<void, any>({
-        path: `/user/${id}`,
-        method: "GET",
-        ...params,
-      }),
-  };
-  changeStatus = {
     /**
      * No description
      *
@@ -1473,7 +1220,7 @@ export class Api<
       data: ChangeStatusRequest,
       params: RequestParams = {},
     ) =>
-      this.request<void, any>({
+      this.request<any, ApiResponse>({
         path: `/agent/changeStatus`,
         method: "POST",
         body: data,
@@ -1484,110 +1231,102 @@ export class Api<
     /**
      * No description
      *
-     * @tags Operator
-     * @name ChangeStatusCreate2
-     * @request POST:/operator/changeStatus
-     * @originalName changeStatusCreate
-     * @duplicate
+     * @tags Agent
+     * @name OptionsList
+     * @summary Get agent options
+     * @request GET:/agent/options
      */
-    changeStatusCreate2: (
-      data: ChangeStatusRequest,
+    optionsList: (
+      query?: {
+        Keyword?: string;
+        IsActive?: boolean;
+        /** @format int32 */
+        MaxCount?: number;
+      },
       params: RequestParams = {},
     ) =>
-      this.request<void, any>({
-        path: `/operator/changeStatus`,
-        method: "POST",
-        body: data,
-        type: ContentType.Json,
-        ...params,
-      }),
-
-    /**
-     * No description
-     *
-     * @tags Role
-     * @name ChangeStatusCreate3
-     * @request POST:/role/changeStatus
-     * @originalName changeStatusCreate
-     * @duplicate
-     */
-    changeStatusCreate3: (
-      data: ChangeStatusRequest,
-      params: RequestParams = {},
-    ) =>
-      this.request<void, any>({
-        path: `/role/changeStatus`,
-        method: "POST",
-        body: data,
-        type: ContentType.Json,
-        ...params,
-      }),
-
-    /**
-     * No description
-     *
-     * @tags SourceGame
-     * @name ChangeStatusCreate4
-     * @request POST:/sourceGame/changeStatus
-     * @originalName changeStatusCreate
-     * @duplicate
-     */
-    changeStatusCreate4: (
-      data: ChangeSourceGameStatusRequest,
-      params: RequestParams = {},
-    ) =>
-      this.request<void, any>({
-        path: `/sourceGame/changeStatus`,
-        method: "POST",
-        body: data,
-        type: ContentType.Json,
-        ...params,
-      }),
-
-    /**
-     * No description
-     *
-     * @tags Tournament
-     * @name ChangeStatusCreate5
-     * @request POST:/tournament/changeStatus
-     * @originalName changeStatusCreate
-     * @duplicate
-     */
-    changeStatusCreate5: (
-      data: ChangeTournamentStatusRequest,
-      params: RequestParams = {},
-    ) =>
-      this.request<void, any>({
-        path: `/tournament/changeStatus`,
-        method: "POST",
-        body: data,
-        type: ContentType.Json,
-        ...params,
-      }),
-
-    /**
-     * No description
-     *
-     * @tags User
-     * @name ChangeStatusCreate6
-     * @summary Change status
-     * @request POST:/user/changeStatus
-     * @originalName changeStatusCreate
-     * @duplicate
-     */
-    changeStatusCreate6: (
-      data: ChangeStatusRequest,
-      params: RequestParams = {},
-    ) =>
-      this.request<void, any>({
-        path: `/user/changeStatus`,
-        method: "POST",
-        body: data,
-        type: ContentType.Json,
+      this.request<GetAgentOptionsResponse, ApiResponse>({
+        path: `/agent/options`,
+        method: "GET",
+        query: query,
+        format: "json",
         ...params,
       }),
   };
-  key = {
+  appConfig = {
+    /**
+     * No description
+     *
+     * @tags AppConfigurations
+     * @name AppConfigList
+     * @request GET:/appConfig
+     */
+    appConfigList: (data: GetAppConfigsRequest, params: RequestParams = {}) =>
+      this.request<void, any>({
+        path: `/appConfig`,
+        method: "GET",
+        body: data,
+        type: ContentType.Json,
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags AppConfigurations
+     * @name AppConfigCreate
+     * @request POST:/appConfig
+     */
+    appConfigCreate: (
+      data: CreateAppConfigRequest,
+      params: RequestParams = {},
+    ) =>
+      this.request<void, any>({
+        path: `/appConfig`,
+        method: "POST",
+        body: data,
+        type: ContentType.Json,
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags AppConfigurations
+     * @name AppConfigUpdate
+     * @request PUT:/appConfig
+     */
+    appConfigUpdate: (
+      data: UpdateAppConfigRequest,
+      params: RequestParams = {},
+    ) =>
+      this.request<void, any>({
+        path: `/appConfig`,
+        method: "PUT",
+        body: data,
+        type: ContentType.Json,
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags AppConfigurations
+     * @name AppConfigDelete
+     * @request DELETE:/appConfig
+     */
+    appConfigDelete: (
+      data: DeleteAppConfigRequest,
+      params: RequestParams = {},
+    ) =>
+      this.request<void, any>({
+        path: `/appConfig`,
+        method: "DELETE",
+        body: data,
+        type: ContentType.Json,
+        ...params,
+      }),
+
     /**
      * No description
      *
@@ -1602,65 +1341,88 @@ export class Api<
         ...params,
       }),
   };
-  login = {
+  audit = {
+    /**
+     * No description
+     *
+     * @tags Audit
+     * @name AuditList
+     * @summary Get all audits
+     * @request GET:/audit
+     */
+    auditList: (
+      query?: {
+        Object?: string;
+        /** @format date-time */
+        StartTime?: string;
+        /** @format date-time */
+        EndTime?: string;
+        /** 1 = Operator, 2 = OperatorUser, 3 = Agent, 4 = Role, 5 = User, 6 = SourceGame, 7 = Tournament, 8 = Maintenance */
+        Module?: AuditModule;
+        /** 1 = Add, 2 = Edit, 3 = Remove, 4 = Disable, 5 = Enable, 6 = Revoke, 7 = ChangePassword */
+        Action?: AuditAction;
+        SortBy?: string;
+        /** @format int32 */
+        Page?: number;
+        /** @format int32 */
+        PageSize?: number;
+      },
+      params: RequestParams = {},
+    ) =>
+      this.request<GetAuditsResponse, ApiResponse>({
+        path: `/audit`,
+        method: "GET",
+        query: query,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Audit
+     * @name AuditDetail
+     * @summary Get audit by id
+     * @request GET:/audit/{id}
+     */
+    auditDetail: (id: string, params: RequestParams = {}) =>
+      this.request<GetAuditsResponse, ApiResponse>({
+        path: `/audit/${id}`,
+        method: "GET",
+        format: "json",
+        ...params,
+      }),
+  };
+  auth = {
     /**
      * No description
      *
      * @tags Auth
      * @name LoginCreate
+     * @summary Login
      * @request POST:/auth/login
      */
     loginCreate: (data: LoginRequest, params: RequestParams = {}) =>
-      this.request<void, any>({
+      this.request<LoginResponse, ApiResponse>({
         path: `/auth/login`,
         method: "POST",
         body: data,
         type: ContentType.Json,
-        ...params,
-      }),
-  };
-  me = {
-    /**
-     * No description
-     *
-     * @tags Auth
-     * @name GetMe
-     * @request GET:/auth/me
-     */
-    getMe: (params: RequestParams = {}) =>
-      this.request<void, any>({
-        path: `/auth/me`,
-        method: "GET",
-        ...params,
-      }),
-  };
-  logout = {
-    /**
-     * No description
-     *
-     * @tags Auth
-     * @name LogoutCreate
-     * @request POST:/auth/logout
-     */
-    logoutCreate: (params: RequestParams = {}) =>
-      this.request<ApiResponse, any>({
-        path: `/auth/logout`,
-        method: "POST",
         format: "json",
         ...params,
       }),
-  };
-  all = {
+
     /**
      * No description
      *
-     * @tags Currency
-     * @name GetAll
-     * @request GET:/currencies/all
+     * @tags Auth
+     * @name GetAuth
+     * @summary Get Me
+     * @request GET:/auth/me
      */
-    getAll: (params: RequestParams = {}) =>
-      this.request<GetCurrenciesResponse, any>({
-        path: `/currencies/all`,
+    getAuth: (params: RequestParams = {}) =>
+      this.request<GetMeResponse, ApiResponse>({
+        path: `/auth/me`,
         method: "GET",
         format: "json",
         ...params,
@@ -1669,46 +1431,222 @@ export class Api<
     /**
      * No description
      *
-     * @tags Language
-     * @name GetAll2
-     * @request GET:/languages/all
-     * @originalName getAll
-     * @duplicate
+     * @tags Auth
+     * @name LogoutCreate
+     * @summary Logout
+     * @request POST:/auth/logout
      */
-    getAll2: (params: RequestParams = {}) =>
-      this.request<GetLanguagesResponse, any>({
+    logoutCreate: (params: RequestParams = {}) =>
+      this.request<any, ApiResponse>({
+        path: `/auth/logout`,
+        method: "POST",
+        ...params,
+      }),
+  };
+  currencies = {
+    /**
+     * No description
+     *
+     * @tags Currency
+     * @name GetCurrencies
+     * @summary Get currencies
+     * @request GET:/currencies/all
+     */
+    getCurrencies: (params: RequestParams = {}) =>
+      this.request<GetCurrenciesResponse, ApiResponse>({
+        path: `/currencies/all`,
+        method: "GET",
+        format: "json",
+        ...params,
+      }),
+  };
+  languages = {
+    /**
+     * No description
+     *
+     * @tags Language
+     * @name GetLanguages
+     * @summary Get all languages
+     * @request GET:/languages/all
+     */
+    getLanguages: (params: RequestParams = {}) =>
+      this.request<GetLanguagesResponse, ApiResponse>({
         path: `/languages/all`,
         method: "GET",
         format: "json",
         ...params,
       }),
   };
-  switch = {
+  maintenance = {
     /**
      * No description
      *
      * @tags Maintenance
      * @name SwitchUpdate
+     * @summary Switching maintenance status.
      * @request PUT:/maintenance/switch
      */
     switchUpdate: (
       data: SwitchMaintenanceRequest,
       params: RequestParams = {},
     ) =>
-      this.request<void, any>({
+      this.request<any, ApiResponse>({
         path: `/maintenance/switch`,
         method: "PUT",
         body: data,
         type: ContentType.Json,
         ...params,
       }),
+
+    /**
+     * No description
+     *
+     * @tags Maintenance
+     * @name MaintenanceList
+     * @summary To list the current maintenance status of all gamification tools.
+     * @request GET:/maintenance
+     */
+    maintenanceList: (params: RequestParams = {}) =>
+      this.request<GetAllMaintenanceStatusesResponse, ApiResponse>({
+        path: `/maintenance`,
+        method: "GET",
+        format: "json",
+        ...params,
+      }),
   };
-  user = {
+  operator = {
+    /**
+     * No description
+     *
+     * @tags Operator
+     * @name OperatorList
+     * @summary Get all operators
+     * @request GET:/operator
+     */
+    operatorList: (
+      query?: {
+        Operator?: string;
+        /** @format int32 */
+        AgentId?: number;
+        /** 0 = Disabled, 1 = Enabled */
+        Status?: BoStatus;
+        SortBy?: string;
+        /** @format int32 */
+        Page?: number;
+        /** @format int32 */
+        PageSize?: number;
+      },
+      params: RequestParams = {},
+    ) =>
+      this.request<GetOperatorsResponse, ApiResponse>({
+        path: `/operator`,
+        method: "GET",
+        query: query,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Operator
+     * @name OperatorCreate
+     * @summary Create new operator
+     * @request POST:/operator
+     */
+    operatorCreate: (data: CreateOperatorRequest, params: RequestParams = {}) =>
+      this.request<any, ApiResponse>({
+        path: `/operator`,
+        method: "POST",
+        body: data,
+        type: ContentType.Json,
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Operator
+     * @name OperatorUpdate
+     * @summary Update operator
+     * @request PUT:/operator
+     */
+    operatorUpdate: (data: UpdateOperatorRequest, params: RequestParams = {}) =>
+      this.request<any, ApiResponse>({
+        path: `/operator`,
+        method: "PUT",
+        body: data,
+        type: ContentType.Json,
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Operator
+     * @name OperatorDetail
+     * @summary Get operator by id
+     * @request GET:/operator/{id}
+     */
+    operatorDetail: (id: number, params: RequestParams = {}) =>
+      this.request<GetOperatorResponse, ApiResponse>({
+        path: `/operator/${id}`,
+        method: "GET",
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Operator
+     * @name ChangeStatusCreate
+     * @summary Change status
+     * @request POST:/operator/changeStatus
+     */
+    changeStatusCreate: (
+      data: ChangeStatusRequest,
+      params: RequestParams = {},
+    ) =>
+      this.request<any, ApiResponse>({
+        path: `/operator/changeStatus`,
+        method: "POST",
+        body: data,
+        type: ContentType.Json,
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Operator
+     * @name OptionsList
+     * @summary Get operator options
+     * @request GET:/operator/options
+     */
+    optionsList: (
+      query?: {
+        Keyword?: string;
+        IsActive?: boolean;
+        /** @format int32 */
+        MaxCount?: number;
+      },
+      params: RequestParams = {},
+    ) =>
+      this.request<GetOperatorOptionsResponse, ApiResponse>({
+        path: `/operator/options`,
+        method: "GET",
+        query: query,
+        format: "json",
+        ...params,
+      }),
+
     /**
      * No description
      *
      * @tags OperatorUser
      * @name UserList
+     * @summary Get users
      * @request GET:/operator/user
      */
     userList: (
@@ -1723,10 +1661,11 @@ export class Api<
       },
       params: RequestParams = {},
     ) =>
-      this.request<void, any>({
+      this.request<GetUsersResponse, ApiResponse>({
         path: `/operator/user`,
         method: "GET",
         query: query,
+        format: "json",
         ...params,
       }),
 
@@ -1735,10 +1674,11 @@ export class Api<
      *
      * @tags OperatorUser
      * @name UserCreate
+     * @summary Add user
      * @request POST:/operator/user
      */
     userCreate: (data: UpsertOperatorUserRequest, params: RequestParams = {}) =>
-      this.request<void, any>({
+      this.request<any, ApiResponse>({
         path: `/operator/user`,
         method: "POST",
         body: data,
@@ -1751,10 +1691,11 @@ export class Api<
      *
      * @tags OperatorUser
      * @name UserUpdate
+     * @summary Update user
      * @request PUT:/operator/user
      */
     userUpdate: (data: UpsertOperatorUserRequest, params: RequestParams = {}) =>
-      this.request<void, any>({
+      this.request<any, ApiResponse>({
         path: `/operator/user`,
         method: "PUT",
         body: data,
@@ -1767,10 +1708,11 @@ export class Api<
      *
      * @tags OperatorUser
      * @name UserDelete
+     * @summary Delete user
      * @request DELETE:/operator/user
      */
     userDelete: (data: RemoveOperatorUserRequest, params: RequestParams = {}) =>
-      this.request<void, any>({
+      this.request<any, ApiResponse>({
         path: `/operator/user`,
         method: "DELETE",
         body: data,
@@ -1778,29 +1720,275 @@ export class Api<
         ...params,
       }),
   };
-  game = {
+  permission = {
     /**
      * No description
      *
-     * @tags Source
-     * @name GameRoomsList
-     * @request GET:/source/game/rooms
+     * @tags Permission
+     * @name PermissionList
+     * @summary Get all permissions
+     * @request GET:/permission
      */
-    gameRoomsList: (data: GetGameRoomsRequest, params: RequestParams = {}) =>
-      this.request<void, any>({
-        path: `/source/game/rooms`,
+    permissionList: (params: RequestParams = {}) =>
+      this.request<GetPermissionsResponse, ApiResponse>({
+        path: `/permission`,
         method: "GET",
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Permission
+     * @name PermissionCreate
+     * @summary Add permission
+     * @request POST:/permission
+     */
+    permissionCreate: (
+      data: AddPermissionRequest,
+      params: RequestParams = {},
+    ) =>
+      this.request<any, ApiResponse>({
+        path: `/permission`,
+        method: "POST",
+        body: data,
+        type: ContentType.Json,
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Permission
+     * @name PermissionDelete
+     * @summary Remove permission
+     * @request DELETE:/permission
+     */
+    permissionDelete: (
+      data: RemovePermissionRequest,
+      params: RequestParams = {},
+    ) =>
+      this.request<any, ApiResponse>({
+        path: `/permission`,
+        method: "DELETE",
         body: data,
         type: ContentType.Json,
         ...params,
       }),
   };
-  sourceId = {
+  role = {
+    /**
+     * No description
+     *
+     * @tags Role
+     * @name RoleList
+     * @summary Get all roles
+     * @request GET:/role
+     */
+    roleList: (
+      query?: {
+        Role?: string;
+        /** 0 = Disabled, 1 = Enabled */
+        Status?: BoStatus;
+        SortBy?: string;
+        /** @format int32 */
+        Page?: number;
+        /** @format int32 */
+        PageSize?: number;
+      },
+      params: RequestParams = {},
+    ) =>
+      this.request<GetRolesResponse, ApiResponse>({
+        path: `/role`,
+        method: "GET",
+        query: query,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Role
+     * @name RoleCreate
+     * @summary Create new role
+     * @request POST:/role
+     */
+    roleCreate: (data: CreateRoleRequest, params: RequestParams = {}) =>
+      this.request<any, ApiResponse>({
+        path: `/role`,
+        method: "POST",
+        body: data,
+        type: ContentType.Json,
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Role
+     * @name RoleUpdate
+     * @summary Update role
+     * @request PUT:/role
+     */
+    roleUpdate: (data: UpdateRoleRequest, params: RequestParams = {}) =>
+      this.request<any, ApiResponse>({
+        path: `/role`,
+        method: "PUT",
+        body: data,
+        type: ContentType.Json,
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Role
+     * @name RoleDetail
+     * @summary Get role by id
+     * @request GET:/role/{id}
+     */
+    roleDetail: (id: number, params: RequestParams = {}) =>
+      this.request<GetRoleResponse, ApiResponse>({
+        path: `/role/${id}`,
+        method: "GET",
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Role
+     * @name ChangeStatusCreate
+     * @summary Change status
+     * @request POST:/role/changeStatus
+     */
+    changeStatusCreate: (
+      data: ChangeStatusRequest,
+      params: RequestParams = {},
+    ) =>
+      this.request<any, ApiResponse>({
+        path: `/role/changeStatus`,
+        method: "POST",
+        body: data,
+        type: ContentType.Json,
+        ...params,
+      }),
+  };
+  source = {
+    /**
+     * No description
+     *
+     * @tags Source
+     * @name SourceList
+     * @summary Get all sources
+     * @request GET:/source
+     */
+    sourceList: (params: RequestParams = {}) =>
+      this.request<GetSourcesResponse, ApiResponse>({
+        path: `/source`,
+        method: "GET",
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Source
+     * @name GameRoomsList
+     * @summary Get game rooms
+     * @request GET:/source/game/rooms
+     */
+    gameRoomsList: (data: GetGameRoomsRequest, params: RequestParams = {}) =>
+      this.request<GetGameRoomsResponse, ApiResponse>({
+        path: `/source/game/rooms`,
+        method: "GET",
+        body: data,
+        type: ContentType.Json,
+        format: "json",
+        ...params,
+      }),
+  };
+  sourceGame = {
+    /**
+     * No description
+     *
+     * @tags SourceGame
+     * @name SourceGameList
+     * @summary Get all source games
+     * @request GET:/sourceGame
+     */
+    sourceGameList: (
+      query?: {
+        Source?: string;
+        Game?: string;
+        /** 0 = Disabled, 1 = Enabled */
+        Status?: BoStatus;
+        SortBy?: string;
+        /** @format int32 */
+        Page?: number;
+        /** @format int32 */
+        PageSize?: number;
+      },
+      params: RequestParams = {},
+    ) =>
+      this.request<GetSourceGamesResponse, ApiResponse>({
+        path: `/sourceGame`,
+        method: "GET",
+        query: query,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags SourceGame
+     * @name SourceGameCreate
+     * @summary Create new source game
+     * @request POST:/sourceGame
+     */
+    sourceGameCreate: (
+      data: CreateSourceGameRequest,
+      params: RequestParams = {},
+    ) =>
+      this.request<any, ApiResponse>({
+        path: `/sourceGame`,
+        method: "POST",
+        body: data,
+        type: ContentType.Json,
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags SourceGame
+     * @name SourceGameUpdate
+     * @summary Update source game
+     * @request PUT:/sourceGame
+     */
+    sourceGameUpdate: (
+      data: UpdateSourceGameRequest,
+      params: RequestParams = {},
+    ) =>
+      this.request<any, ApiResponse>({
+        path: `/sourceGame`,
+        method: "PUT",
+        body: data,
+        type: ContentType.Json,
+        ...params,
+      }),
+
     /**
      * No description
      *
      * @tags SourceGame
      * @name SourceGameDetail
+     * @summary Get source game by id
      * @request GET:/sourceGame/{sourceId}/{gameId}
      */
     sourceGameDetail: (
@@ -1808,25 +1996,202 @@ export class Api<
       gameId: string,
       params: RequestParams = {},
     ) =>
-      this.request<void, any>({
+      this.request<GetSourceGameResponse, ApiResponse>({
         path: `/sourceGame/${sourceId}/${gameId}`,
         method: "GET",
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags SourceGame
+     * @name ChangeStatusCreate
+     * @summary Change status
+     * @request POST:/sourceGame/changeStatus
+     */
+    changeStatusCreate: (
+      data: ChangeSourceGameStatusRequest,
+      params: RequestParams = {},
+    ) =>
+      this.request<any, ApiResponse>({
+        path: `/sourceGame/changeStatus`,
+        method: "POST",
+        body: data,
+        type: ContentType.Json,
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags SourceGame
+     * @name OptionsList
+     * @summary Get source game options
+     * @request GET:/sourceGame/options
+     */
+    optionsList: (
+      query?: {
+        Keyword?: string;
+        IsActive?: boolean;
+        /** @format int32 */
+        MaxCount?: number;
+      },
+      params: RequestParams = {},
+    ) =>
+      this.request<GetSourceGameOptionsResponse, ApiResponse>({
+        path: `/sourceGame/options`,
+        method: "GET",
+        query: query,
+        format: "json",
         ...params,
       }),
   };
-  payment = {
+  timeZones = {
+    /**
+     * No description
+     *
+     * @tags TimeZone
+     * @name TimeZonesList
+     * @summary Get time zones
+     * @request GET:/timeZones
+     */
+    timeZonesList: (params: RequestParams = {}) =>
+      this.request<GetTimeZonesResponse, ApiResponse>({
+        path: `/timeZones`,
+        method: "GET",
+        format: "json",
+        ...params,
+      }),
+  };
+  tournament = {
+    /**
+     * No description
+     *
+     * @tags Tournament
+     * @name TournamentList
+     * @summary Get all tournaments
+     * @request GET:/tournament
+     */
+    tournamentList: (
+      query?: {
+        Operator?: string;
+        Agent?: string;
+        Game?: string;
+        Currency?: string;
+        Tournament?: string;
+        /** 0 = Drafted, 1 = Enabled, 2 = Disabled, 3 = Finished */
+        Status?: TournamentStatus;
+        /** @format date-time */
+        StartTime?: string;
+        /** @format date-time */
+        EndTime?: string;
+        SortBy?: string;
+        /** @format int32 */
+        Page?: number;
+        /** @format int32 */
+        PageSize?: number;
+      },
+      params: RequestParams = {},
+    ) =>
+      this.request<GetTournamentsResponse, ApiResponse>({
+        path: `/tournament`,
+        method: "GET",
+        query: query,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Tournament
+     * @name TournamentCreate
+     * @summary Create new tournament
+     * @request POST:/tournament
+     */
+    tournamentCreate: (
+      data: CreateTournamentRequest,
+      params: RequestParams = {},
+    ) =>
+      this.request<any, ApiResponse>({
+        path: `/tournament`,
+        method: "POST",
+        body: data,
+        type: ContentType.Json,
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Tournament
+     * @name TournamentUpdate
+     * @summary Update tournament
+     * @request PUT:/tournament
+     */
+    tournamentUpdate: (
+      data: UpdateTournamentRequest,
+      params: RequestParams = {},
+    ) =>
+      this.request<any, ApiResponse>({
+        path: `/tournament`,
+        method: "PUT",
+        body: data,
+        type: ContentType.Json,
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Tournament
+     * @name TournamentDetail
+     * @summary Get tournament by id
+     * @request GET:/tournament/{id}
+     */
+    tournamentDetail: (id: number, params: RequestParams = {}) =>
+      this.request<GetTournamentResponse, ApiResponse>({
+        path: `/tournament/${id}`,
+        method: "GET",
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Tournament
+     * @name ChangeStatusCreate
+     * @summary Change status
+     * @request POST:/tournament/changeStatus
+     */
+    changeStatusCreate: (
+      data: ChangeTournamentStatusRequest,
+      params: RequestParams = {},
+    ) =>
+      this.request<any, ApiResponse>({
+        path: `/tournament/changeStatus`,
+        method: "POST",
+        body: data,
+        type: ContentType.Json,
+        ...params,
+      }),
+
     /**
      * No description
      *
      * @tags Tournament
      * @name PaymentApproveUpdate
+     * @summary Approve payment
      * @request PUT:/tournament/payment/approve
      */
     paymentApproveUpdate: (
       data: ApproveTournamentPaymentRequest,
       params: RequestParams = {},
     ) =>
-      this.request<void, any>({
+      this.request<any, ApiResponse>({
         path: `/tournament/payment/approve`,
         method: "PUT",
         body: data,
@@ -1839,21 +2204,138 @@ export class Api<
      *
      * @tags Tournament
      * @name PaymentProcessCreate
+     * @summary Process payment
      * @request POST:/tournament/payment/process
      */
     paymentProcessCreate: (
       data: ProcessTournamentPaymentRequest,
       params: RequestParams = {},
     ) =>
-      this.request<void, any>({
+      this.request<any, ApiResponse>({
         path: `/tournament/payment/process`,
         method: "POST",
         body: data,
         type: ContentType.Json,
         ...params,
       }),
+
+    /**
+     * No description
+     *
+     * @tags Tournament
+     * @name CyclesList
+     * @summary Get tournament cycles
+     * @request GET:/tournament/cycles
+     */
+    cyclesList: (
+      query: {
+        /** @format date-time */
+        TournamentStartDate: string;
+        /** @format date-time */
+        TournamentEndDate: string;
+        /** @format int32 */
+        CycleLength: number;
+        /** @format date-time */
+        CyclePeriodStartDate: string;
+        /** @format date-time */
+        CyclePeriodEndDate: string;
+        /** @format int32 */
+        PayoutDay: number;
+        /** @format date-span */
+        PayoutTime: string;
+      },
+      params: RequestParams = {},
+    ) =>
+      this.request<void, any>({
+        path: `/tournament/cycles`,
+        method: "GET",
+        query: query,
+        ...params,
+      }),
   };
-  rolePermission = {
+  user = {
+    /**
+     * No description
+     *
+     * @tags User
+     * @name UserList
+     * @summary Get all users
+     * @request GET:/user
+     */
+    userList: (
+      query?: {
+        Username?: string;
+        /** @format int32 */
+        AgentId?: number;
+        RoleName?: string;
+        /** 0 = Disabled, 1 = Enabled */
+        Status?: BoStatus;
+        SortBy?: string;
+        /** @format int32 */
+        Page?: number;
+        /** @format int32 */
+        PageSize?: number;
+      },
+      params: RequestParams = {},
+    ) =>
+      this.request<GetUsersResponse, ApiResponse>({
+        path: `/user`,
+        method: "GET",
+        query: query,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags User
+     * @name UserCreate
+     * @summary Create new user
+     * @request POST:/user
+     */
+    userCreate: (data: CreateUserRequest, params: RequestParams = {}) =>
+      this.request<any, ApiResponse>({
+        path: `/user`,
+        method: "POST",
+        body: data,
+        type: ContentType.Json,
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags User
+     * @name UserUpdate
+     * @summary Update user
+     * @request PUT:/user
+     */
+    userUpdate: (data: UpdateUserRequest, params: RequestParams = {}) =>
+      this.request<any, ApiResponse>({
+        path: `/user`,
+        method: "PUT",
+        body: data,
+        type: ContentType.Json,
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags User
+     * @name UserDetail
+     * @summary Get user by id
+     * @request GET:/user/{id}
+     */
+    userDetail: (id: number, params: RequestParams = {}) =>
+      this.request<GetUserResponse, ApiResponse>({
+        path: `/user/${id}`,
+        method: "GET",
+        format: "json",
+        ...params,
+      }),
+
     /**
      * No description
      *
@@ -1863,13 +2345,33 @@ export class Api<
      * @request GET:/user/rolePermission/{id}
      */
     rolePermissionDetail: (id: number, params: RequestParams = {}) =>
-      this.request<void, any>({
+      this.request<GetUserRolePermissionResponse, ApiResponse>({
         path: `/user/rolePermission/${id}`,
         method: "GET",
+        format: "json",
         ...params,
       }),
-  };
-  password = {
+
+    /**
+     * No description
+     *
+     * @tags User
+     * @name ChangeStatusCreate
+     * @summary Change status
+     * @request POST:/user/changeStatus
+     */
+    changeStatusCreate: (
+      data: ChangeStatusRequest,
+      params: RequestParams = {},
+    ) =>
+      this.request<any, ApiResponse>({
+        path: `/user/changeStatus`,
+        method: "POST",
+        body: data,
+        type: ContentType.Json,
+        ...params,
+      }),
+
     /**
      * No description
      *
@@ -1882,7 +2384,7 @@ export class Api<
       data: ChangePasswordRequest,
       params: RequestParams = {},
     ) =>
-      this.request<void, any>({
+      this.request<any, ApiResponse>({
         path: `/user/password/change`,
         method: "PUT",
         body: data,
@@ -1902,7 +2404,7 @@ export class Api<
       data: ForceUpdatePasswordRequest,
       params: RequestParams = {},
     ) =>
-      this.request<void, any>({
+      this.request<any, ApiResponse>({
         path: `/user/password/forceUpdate`,
         method: "PUT",
         body: data,
