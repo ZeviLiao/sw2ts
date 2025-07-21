@@ -2254,6 +2254,80 @@
         }
       }
     },
+    "/source/options": {
+      "get": {
+        "tags": [
+          "Source"
+        ],
+        "summary": "Get source options",
+        "parameters": [
+          {
+            "name": "Keyword",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "IsActive",
+            "in": "query",
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "MaxCount",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetSourceOptionsResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetSourceOptionsResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetSourceOptionsResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/sourceGame": {
       "get": {
         "tags": [
@@ -3195,8 +3269,45 @@
           }
         ],
         "responses": {
+          "default": {
+            "description": "Error",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse"
+                }
+              }
+            }
+          },
           "200": {
-            "description": "OK"
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetTournamentCyclesResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetTournamentCyclesResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetTournamentCyclesResponse"
+                }
+              }
+            }
           }
         }
       }
@@ -4080,10 +4191,6 @@
             "type": "string",
             "nullable": true
           },
-          "timezone": {
-            "type": "integer",
-            "format": "int32"
-          },
           "cycleLength": {
             "type": "integer",
             "format": "int32"
@@ -4118,6 +4225,22 @@
             "format": "date-time"
           },
           "endDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "payoutDay": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "payoutTime": {
+            "type": "string",
+            "format": "date-span"
+          },
+          "cyclePeriodStartDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "cyclePeriodEndDate": {
             "type": "string",
             "format": "date-time"
           }
@@ -4635,6 +4758,19 @@
         },
         "additionalProperties": false
       },
+      "GetSourceOptionsResponse": {
+        "type": "object",
+        "properties": {
+          "options": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/StringItem"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
       "GetSourcesResponse": {
         "type": "object",
         "properties": {
@@ -4676,6 +4812,27 @@
               "$ref": "#/components/schemas/TimeZoneModel"
             },
             "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "GetTournamentCyclesResponse": {
+        "required": [
+          "results"
+        ],
+        "type": "object",
+        "properties": {
+          "results": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TournamentCycleDto"
+            },
+            "nullable": true
+          },
+          "totalCycles": {
+            "type": "integer",
+            "format": "int32",
+            "readOnly": true
           }
         },
         "additionalProperties": false
@@ -5225,6 +5382,34 @@
         },
         "additionalProperties": false
       },
+      "TournamentCycleDto": {
+        "required": [
+          "endDate",
+          "id",
+          "payoutDate",
+          "startDate"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "startDate": {
+            "type": "string",
+            "nullable": true
+          },
+          "endDate": {
+            "type": "string",
+            "nullable": true
+          },
+          "payoutDate": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
       "TournamentMode": {
         "enum": [
           0,
@@ -5512,10 +5697,6 @@
           "currency": {
             "type": "string",
             "nullable": true
-          },
-          "timezone": {
-            "type": "integer",
-            "format": "int32"
           },
           "cycleLength": {
             "type": "integer",
