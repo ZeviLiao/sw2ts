@@ -1,0 +1,52 @@
+import { useEffect, useState, useRef, PropsWithChildren } from "react";
+
+interface ImageWithVWProps {}
+
+export function ImageWithVW({ children }: PropsWithChildren<ImageWithVWProps>) {
+  const imgRef = useRef<HTMLDivElement>(null);
+  const [vwWidth, setVwWidth] = useState(0);
+  const [pxWidth, setPxWidth] = useState(0);
+
+  useEffect(() => {
+    const updateSizes = () => {
+      if (imgRef.current) {
+        const imgWidth = imgRef.current.clientWidth;
+        const viewportWidth = window.innerWidth;
+        const vwValue = ((imgWidth / viewportWidth) * 100).toFixed(2);
+        setVwWidth(parseFloat(vwValue));
+        setPxWidth(parseFloat(imgWidth.toFixed(2)));
+      }
+    };
+
+    updateSizes();
+    window.addEventListener("resize", updateSizes);
+    return () => window.removeEventListener("resize", updateSizes);
+  }, []);
+
+  return (
+    <div ref={imgRef} style={{ width: "100%" }}>
+      {children}
+      {/* 顯示 pxWidth 和 vwWidth */}
+      <div
+        style={{
+          position: "absolute",
+          top: 10,
+          left: 10,
+          background: "rgba(0,0,0,0.6)",
+          color: "white",
+          padding: "5px 10px",
+          borderRadius: "5px",
+          fontSize: "14px",
+          zIndex: 10,
+          whiteSpace: "nowrap",
+        }}
+      >
+        {pxWidth}px | {vwWidth}vw
+      </div>
+    </div>
+  );
+}
+
+
+//
+/Users/zeviliao/GosuProjs/portal-v6/src/components/common/image-with-vw.tsx

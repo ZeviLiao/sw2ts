@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "@apidevtools/json-schema-ref-parser": "^14.1.1",
     "@tanstack/react-query": "^4.29.7",
     "axios": "^1.4.0",
     "react": "^18.2.0",
@@ -7,6 +8,8 @@
     "swagger-js-codegen": "^1.13.0"
   },
   "devDependencies": {
-    "openapi-typescript-codegen": "^0.24.0"
+    "@types/node": "^24.0.12",
+    "openapi-typescript-codegen": "^0.24.0",
+    "swagger-typescript-api": "^13.2.7"
   }
 }
