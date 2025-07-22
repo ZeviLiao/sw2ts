@@ -125,6 +125,8 @@ export interface AgentModel {
   id?: number;
   code?: string | null;
   name?: string | null;
+  clientId?: string | null;
+  clientSecret?: string | null;
   currencies?: string | null;
   languages?: string | null;
   timezone?: string | null;
@@ -212,9 +214,9 @@ export interface CreateAppConfigRequest {
 export interface CreateOperatorRequest {
   code?: string | null;
   name?: string | null;
+  /** @format int32 */
+  sourceId?: number;
   agentIds?: number[] | null;
-  clientId?: string | null;
-  clientSecret?: string | null;
   description?: string | null;
 }
 
@@ -232,33 +234,33 @@ export interface CreateSourceGameRequest {
 }
 
 export interface CreateTournamentRequest {
-  code?: string | null;
-  name?: string | null;
-  /** 0 = Turnover, 1 = TotalWinningAmount, 2 = BiggestWinningAmount, 3 = TurnoverAndActualWinningAmount */
-  mode?: TournamentMode;
   sourceCode?: string | null;
-  operatorCode?: string | null;
   agentCode?: string | null;
-  gameIds?: string[] | null;
-  currency?: string | null;
-  /** @format int32 */
-  cycleLength?: number;
-  description?: string | null;
-  leaderboards?: UpsertLeaderboardModel[] | null;
-  leaderboardCycles?: UpsertLeaderboardCycleModel[] | null;
-  exchangeRates?: UpsertExchangeRateModel[] | null;
+  operatorCode?: string | null;
   /** @format date-time */
   startDate?: string;
   /** @format date-time */
   endDate?: string;
-  /** @format int32 */
-  payoutDay?: number;
-  /** @format date-span */
-  payoutTime?: string;
+  gameIds?: string[] | null;
+  currency?: string | null;
+  name?: string | null;
+  code?: string | null;
+  /** 0 = Turnover, 1 = TotalWinningAmount, 2 = BiggestWinningAmount, 3 = TurnoverAndActualWinningAmount */
+  mode?: TournamentMode;
+  description?: string | null;
   /** @format date-time */
   cyclePeriodStartDate?: string;
   /** @format date-time */
   cyclePeriodEndDate?: string;
+  /** @format int32 */
+  cycleLength?: number;
+  /** @format int32 */
+  payoutDay?: number;
+  /** @format date-span */
+  payoutTime?: string;
+  leaderboards?: UpsertLeaderboardModel[] | null;
+  leaderboardCycles?: UpsertLeaderboardCycleModel[] | null;
+  exchangeRates?: UpsertExchangeRateModel[] | null;
 }
 
 export interface CreateUserRequest {
@@ -306,11 +308,15 @@ export interface GameRoomDto {
 }
 
 export interface GetAgentOptionsResponse {
-  options?: StringItem[] | null;
+  options?: Int32ItemDto[] | null;
 }
 
 export interface GetAgentResponse {
   model?: AgentModel;
+}
+
+export interface GetAgentsByOperatorResponse {
+  agents?: Int32ItemDto[] | null;
 }
 
 export interface GetAgentsResponse {
@@ -358,29 +364,6 @@ export interface GetCurrenciesResponse {
   items?: CurrencyModel[] | null;
 }
 
-export interface GetGameRoomsRequest {
-  /**
-   * @minLength 0
-   * @maxLength 10
-   */
-  source: string | null;
-  /**
-   * @minLength 0
-   * @maxLength 36
-   */
-  agent: string | null;
-  /**
-   * @minLength 0
-   * @maxLength 32
-   */
-  gameId: string | null;
-  /**
-   * @minLength 0
-   * @maxLength 8
-   */
-  currency: string | null;
-}
-
 export interface GetGameRoomsResponse {
   rooms: GameRoomDto[] | null;
 }
@@ -402,11 +385,11 @@ export interface GetMeResponse {
 }
 
 export interface GetOperatorOptionsResponse {
-  options?: StringItem[] | null;
+  options?: Int32ItemDto[] | null;
 }
 
 export interface GetOperatorResponse {
-  model?: OperatorModel;
+  model?: OperatorDetailDto;
 }
 
 export interface GetOperatorsResponse {
@@ -416,7 +399,7 @@ export interface GetOperatorsResponse {
   page?: number | null;
   /** @format int32 */
   pageSize?: number | null;
-  results?: OperatorModel[] | null;
+  results?: OperatorDto[] | null;
 }
 
 export interface GetPermissionsResponse {
@@ -438,7 +421,7 @@ export interface GetRolesResponse {
 }
 
 export interface GetSourceGameOptionsResponse {
-  options?: StringItem[] | null;
+  options?: StringItemDto[] | null;
 }
 
 export interface GetSourceGameResponse {
@@ -456,7 +439,7 @@ export interface GetSourceGamesResponse {
 }
 
 export interface GetSourceOptionsResponse {
-  options?: StringItem[] | null;
+  options?: Int32ItemDto[] | null;
 }
 
 export interface GetSourcesResponse {
@@ -481,7 +464,7 @@ export interface GetTournamentCyclesResponse {
 }
 
 export interface GetTournamentResponse {
-  model?: TournamentModel;
+  detailDto?: TournamentDetailDto;
 }
 
 export interface GetTournamentsResponse {
@@ -491,7 +474,7 @@ export interface GetTournamentsResponse {
   page?: number | null;
   /** @format int32 */
   pageSize?: number | null;
-  results?: TournamentModel[] | null;
+  results?: TournamentListDto[] | null;
 }
 
 export interface GetUserResponse {
@@ -510,6 +493,13 @@ export interface GetUsersResponse {
   /** @format int32 */
   pageSize?: number | null;
   results?: UserModel[] | null;
+}
+
+export interface Int32ItemDto {
+  name: string | null;
+  /** @format int32 */
+  id: number;
+  code: string | null;
 }
 
 export interface LanguageModel {
@@ -583,7 +573,18 @@ export interface MaintenanceStatusDto {
   updatedBy?: string | null;
 }
 
-export interface OperatorModel {
+export interface OperatorDetailDto {
+  /** @format int32 */
+  id?: number;
+  code?: string | null;
+  name?: string | null;
+  /** 0 = Disabled, 1 = Enabled */
+  status?: BoStatus;
+  description?: string | null;
+  agents?: Int32ItemDto[] | null;
+}
+
+export interface OperatorDto {
   updatedBy?: string | null;
   updatedAt?: string | null;
   /** @format int32 */
@@ -592,8 +593,6 @@ export interface OperatorModel {
   name?: string | null;
   /** 0 = Disabled, 1 = Enabled */
   status?: BoStatus;
-  clientId?: string | null;
-  clientSecret?: string | null;
   description?: string | null;
 }
 
@@ -661,9 +660,10 @@ export interface SourceModel {
   status?: BoStatus;
 }
 
-export interface StringItem {
-  val: string | null;
+export interface StringItemDto {
   name: string | null;
+  id: string | null;
+  code: string | null;
 }
 
 export interface SwitchMaintenanceRequest {
@@ -686,25 +686,54 @@ export interface TournamentCycleDto {
   payoutDate: string | null;
 }
 
-export interface TournamentModel {
-  updatedBy?: string | null;
-  updatedAt?: string | null;
+export interface TournamentDetailDto {
   /** @format int32 */
   id?: number;
+  sourceCode?: string | null;
+  operatorCode?: string | null;
+  agentCode?: string | null;
+  startDate?: string | null;
+  endDate?: string | null;
   code?: string | null;
   name?: string | null;
-  operator?: string | null;
-  agent?: string | null;
-  games?: string | null;
+  gameIds?: string[] | null;
   currency?: string | null;
   /** 0 = Drafted, 1 = Enabled, 2 = Disabled, 3 = Finished */
   status?: TournamentStatus;
   description?: string | null;
+  /** 0 = Turnover, 1 = TotalWinningAmount, 2 = BiggestWinningAmount, 3 = TurnoverAndActualWinningAmount */
+  mode?: TournamentMode;
+  cyclePeriodStartDate?: string | null;
+  cyclePeriodEndDate?: string | null;
+  /** @format int32 */
+  cycleLength?: number;
+  /** @format int32 */
+  payoutDay?: number;
+  payoutTime?: string | null;
   leaderboards?: LeaderboardModel[] | null;
   leaderboardCycles?: LeaderboardCycleModel[] | null;
   exchangeRates?: ExchangeRateModel[] | null;
+  updatedBy?: string | null;
+  updatedAt?: string | null;
+}
+
+export interface TournamentListDto {
+  /** @format int32 */
+  id?: number;
+  sourceCode?: string | null;
+  operatorCode?: string | null;
+  agentCode?: string | null;
   startDate?: string | null;
   endDate?: string | null;
+  code?: string | null;
+  name?: string | null;
+  gameIds?: string[] | null;
+  currency?: string | null;
+  /** 0 = Drafted, 1 = Enabled, 2 = Disabled, 3 = Finished */
+  status?: TournamentStatus;
+  description?: string | null;
+  updatedBy?: string | null;
+  updatedAt?: string | null;
 }
 
 export interface UpdateAgentRequest {
@@ -738,14 +767,14 @@ export interface UpdateAppConfigRequest {
 }
 
 export interface UpdateOperatorRequest {
-  code?: string | null;
-  name?: string | null;
-  agentIds?: number[] | null;
-  clientId?: string | null;
-  clientSecret?: string | null;
-  description?: string | null;
   /** @format int32 */
   id?: number;
+  code?: string | null;
+  name?: string | null;
+  /** @format int32 */
+  sourceId?: number;
+  agentIds?: number[] | null;
+  description?: string | null;
 }
 
 export interface UpdateRoleRequest {
@@ -800,6 +829,8 @@ export interface UpsertExchangeRateModel {
   currency?: string | null;
   /** @format double */
   rate?: number;
+  /** @format double */
+  totalPrizeDisplay?: number;
 }
 
 export interface UpsertLeaderboardCycleModel {
