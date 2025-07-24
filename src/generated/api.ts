@@ -392,6 +392,10 @@ export interface GetOperatorResponse {
   model?: OperatorDetailDto;
 }
 
+export interface GetOperatorUserResponse {
+  operatorUser?: OperatorUserDto;
+}
+
 export interface GetOperatorsResponse {
   /** @format int32 */
   totalRows?: number | null;
@@ -529,6 +533,8 @@ export interface LeaderboardModel {
   names?: LeaderboardNameModel[] | null;
   gameRooms?: LeaderboardGameRoomModel[] | null;
   rewards?: LeaderboardPrizeModel[] | null;
+  /** @format int32 */
+  order?: number;
 }
 
 export interface LeaderboardNameModel {
@@ -576,6 +582,8 @@ export interface MaintenanceStatusDto {
 export interface OperatorDetailDto {
   /** @format int32 */
   id?: number;
+  /** @format int32 */
+  sourceId?: number;
   code?: string | null;
   name?: string | null;
   /** 0 = Disabled, 1 = Enabled */
@@ -594,6 +602,17 @@ export interface OperatorDto {
   /** 0 = Disabled, 1 = Enabled */
   status?: BoStatus;
   description?: string | null;
+}
+
+export interface OperatorUserDto {
+  /** @format int32 */
+  operatorId?: number | null;
+  /** @format int32 */
+  userId?: number;
+  agents?: Int32ItemDto[] | null;
+  /** @format int32 */
+  roleId?: number;
+  roleName?: string | null;
 }
 
 export interface PermissionModel {
@@ -793,27 +812,35 @@ export interface UpdateSourceGameRequest {
 }
 
 export interface UpdateTournamentRequest {
-  code?: string | null;
-  name?: string | null;
-  /** 0 = Turnover, 1 = TotalWinningAmount, 2 = BiggestWinningAmount, 3 = TurnoverAndActualWinningAmount */
-  mode?: TournamentMode;
-  sourceCode?: string | null;
-  operatorCode?: string | null;
-  agentCode?: string | null;
-  gameIds?: string[] | null;
-  currency?: string | null;
   /** @format int32 */
-  cycleLength?: number;
-  description?: string | null;
-  leaderboards?: UpsertLeaderboardModel[] | null;
-  leaderboardCycles?: UpsertLeaderboardCycleModel[] | null;
-  exchangeRates?: UpsertExchangeRateModel[] | null;
+  id?: number;
+  sourceCode?: string | null;
+  agentCode?: string | null;
+  operatorCode?: string | null;
   /** @format date-time */
   startDate?: string;
   /** @format date-time */
   endDate?: string;
+  gameIds?: string[] | null;
+  currency?: string | null;
+  name?: string | null;
+  code?: string | null;
+  /** 0 = Turnover, 1 = TotalWinningAmount, 2 = BiggestWinningAmount, 3 = TurnoverAndActualWinningAmount */
+  mode?: TournamentMode;
+  description?: string | null;
+  /** @format date-time */
+  cyclePeriodStartDate?: string;
+  /** @format date-time */
+  cyclePeriodEndDate?: string;
   /** @format int32 */
-  id?: number;
+  cycleLength?: number;
+  /** @format int32 */
+  payoutDay?: number;
+  /** @format date-span */
+  payoutTime?: string;
+  leaderboards?: UpsertLeaderboardModel[] | null;
+  leaderboardCycles?: UpsertLeaderboardCycleModel[] | null;
+  exchangeRates?: UpsertExchangeRateModel[] | null;
 }
 
 export interface UpdateUserRequest {
@@ -855,6 +882,8 @@ export interface UpsertLeaderboardModel {
   names?: UpsertLeaderboardNameModel[] | null;
   gameRooms?: UpsertLeaderboardGameRoomModel[] | null;
   rewards?: UpsertPrizeModel[] | null;
+  /** @format int32 */
+  order?: number;
 }
 
 export interface UpsertLeaderboardNameModel {
