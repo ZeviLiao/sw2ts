@@ -6,4 +6,9 @@ npx react-query-swagger /tanstack /input:swagger.json /output:src/api/axios-clie
 
 ```
 npx tsx src/generate.mts
+
+# 使用遠端 URL
+npx tsx src/generate.mts https://api.example.com/swagger.json
+
+npx tsx src/generate.mts https://gmft-int-bo-api.kmgamesdev.net/swagger/v1/swagger.json
 ```
