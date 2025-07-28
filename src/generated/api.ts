@@ -288,6 +288,8 @@ export interface ExchangeRateModel {
   currency?: string | null;
   /** @format double */
   rate?: number;
+  /** @format double */
+  totalPrizeDisplay?: number;
 }
 
 export interface ForceUpdatePasswordRequest {
