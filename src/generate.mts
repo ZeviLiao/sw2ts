@@ -54,7 +54,10 @@ await generateApi({
 if (url && url.startsWith('http')) {
   const tempFile = resolve(process.cwd(), './temp-swagger.json');
   if (existsSync(tempFile)) {
-    execSync(`rm "${tempFile}"`);
+    // 根據作業系統選擇適當的刪除命令
+    const isWindows = process.platform === 'win32';
+    const deleteCommand = isWindows ? `del "${tempFile}"` : `rm "${tempFile}"`;
+    execSync(deleteCommand);
     console.log('暫存檔案已清理');
   }
 }
