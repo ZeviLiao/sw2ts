@@ -547,6 +547,8 @@ export interface LeaderboardCycleModel {
   startDate?: string;
   /** @format date-time */
   endDate?: string;
+  /** @format date-time */
+  payoutDate?: string;
 }
 
 export interface LeaderboardGameRoomModel {
@@ -564,6 +566,8 @@ export interface LeaderboardModel {
   rewards?: LeaderboardPrizeModel[] | null;
   /** @format int32 */
   order?: number;
+  /** @format double */
+  totalRewardAmount?: number;
 }
 
 export interface LeaderboardNameModel {
