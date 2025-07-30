@@ -139,6 +139,15 @@ export interface ApiResponse {
   message?: string | null;
 }
 
+export interface AppConfigModel {
+  key?: string | null;
+  value?: string | null;
+  oldValue?: string | null;
+  description?: string | null;
+  updatedBy?: string | null;
+  updatedAt?: string | null;
+}
+
 export interface ApproveTournamentPaymentRequest {
   /** @format uuid */
   leaderboardCycleId?: string;
@@ -352,17 +361,18 @@ export interface GetAllMaintenanceStatusesResponse {
   modules?: MaintenanceStatusDto[] | null;
 }
 
-export interface GetAppConfigsRequest {
+export interface GetAppConfigResponse {
+  model?: AppConfigModel;
+}
+
+export interface GetAppConfigsResponse {
+  /** @format int32 */
+  totalRows?: number | null;
   /** @format int32 */
   page?: number | null;
   /** @format int32 */
   pageSize?: number | null;
-  sortBy?: string | null;
-  /**
-   * @minLength 0
-   * @maxLength 64
-   */
-  key?: string | null;
+  results?: AppConfigModel[] | null;
 }
 
 export interface GetAuditsResponse {
