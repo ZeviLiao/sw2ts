@@ -1,4 +1,7 @@
 {
+  "scripts": {
+    "go": "npx tsx src/generate.mts https://gmft-int-bo-api.kmgamesdev.net/swagger/v1/swagger.json"
+  },
   "dependencies": {
     "@apidevtools/json-schema-ref-parser": "^14.1.1",
     "@tanstack/react-query": "^4.29.7",
