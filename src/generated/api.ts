@@ -47,6 +47,28 @@ export enum PermissionAction {
 }
 
 /**
+ * 0 = Cycle, 1 = OverAll, 2 = LuckyDraw
+ * @format int32
+ */
+export enum PayoutType {
+  Value0 = 0,
+  Value1 = 1,
+  Value2 = 2,
+}
+
+/**
+ * 0 = ApprovalPending, 1 = Approved, 2 = Processing, 3 = PayoutFailed, 4 = PayoutCompleted
+ * @format int32
+ */
+export enum PaymentStatus {
+  Value0 = 0,
+  Value1 = 1,
+  Value2 = 2,
+  Value3 = 3,
+  Value4 = 4,
+}
+
+/**
  * 0 = All, 1 = Tournament, 255 = IntegrationTest
  * @format int32
  */
@@ -66,7 +88,7 @@ export enum BoStatus {
 }
 
 /**
- * 10000 = Role, 10100 = User, 20000 = Operator, 20100 = OperatorUser, 30000 = Agent, 40000 = Audit, 50000 = Source, 50100 = SourceGame, 60000 = Maintenance, 80000 = Tournament, 90000 = ApplicationConfiguration
+ * 10000 = Role, 10100 = User, 20000 = Operator, 20100 = OperatorUser, 30000 = Agent, 40000 = Audit, 50000 = Source, 50100 = SourceGame, 60000 = Maintenance, 80000 = Tournament, 90000 = ApplicationConfiguration, 100000 = TournamentPayout
  * @format int32
  */
 export enum BoPermission {
@@ -81,6 +103,7 @@ export enum BoPermission {
   Value60000 = 60000,
   Value80000 = 80000,
   Value90000 = 90000,
+  Value100000 = 100000,
 }
 
 /**
@@ -113,7 +136,7 @@ export enum AuditAction {
 }
 
 export interface AddPermissionRequest {
-  /** 10000 = Role, 10100 = User, 20000 = Operator, 20100 = OperatorUser, 30000 = Agent, 40000 = Audit, 50000 = Source, 50100 = SourceGame, 60000 = Maintenance, 80000 = Tournament, 90000 = ApplicationConfiguration */
+  /** 10000 = Role, 10100 = User, 20000 = Operator, 20100 = OperatorUser, 30000 = Agent, 40000 = Audit, 50000 = Source, 50100 = SourceGame, 60000 = Maintenance, 80000 = Tournament, 90000 = ApplicationConfiguration, 100000 = TournamentPayout */
   module?: BoPermission;
   actions?: PermissionAction[] | null;
 }
@@ -148,7 +171,7 @@ export interface AppConfigModel {
   updatedAt?: string | null;
 }
 
-export interface ApproveTournamentPaymentRequest {
+export interface ApproveTournamentPayoutRequest {
   /** @format uuid */
   leaderboardCycleId?: string;
 }
@@ -162,6 +185,11 @@ export interface AuditModel {
   module?: string | null;
   action?: string | null;
   detail?: string | null;
+}
+
+export interface CancelTournamentPayoutRequest {
+  /** @format uuid */
+  leaderboardCycleId?: string;
 }
 
 export interface ChangeSourceGameStatusRequest {
@@ -435,6 +463,10 @@ export interface GetOperatorsResponse {
   results?: OperatorDto[] | null;
 }
 
+export interface GetPayoutStatusOptionsResponse {
+  options?: Int16ItemDto[] | null;
+}
+
 export interface GetPermissionsResponse {
   items?: PermissionModel[] | null;
 }
@@ -490,10 +522,24 @@ export interface GetTimeZonesResponse {
   timeZones?: TimeZoneModel[] | null;
 }
 
+export interface GetTournamentCyclePayoutResponse {
+  detailDto?: TournamentCyclePayoutDetailDto;
+}
+
 export interface GetTournamentCyclesResponse {
   results: TournamentCycleDto[] | null;
   /** @format int32 */
   totalCycles?: number;
+}
+
+export interface GetTournamentPayoutsResponse {
+  /** @format int32 */
+  totalRows?: number | null;
+  /** @format int32 */
+  page?: number | null;
+  /** @format int32 */
+  pageSize?: number | null;
+  results?: TournamentCyclePayoutListDto[] | null;
 }
 
 export interface GetTournamentResponse {
@@ -526,6 +572,13 @@ export interface GetUsersResponse {
   /** @format int32 */
   pageSize?: number | null;
   results?: UserModel[] | null;
+}
+
+export interface Int16ItemDto {
+  name: string | null;
+  /** @format int32 */
+  id: number;
+  code: string | null;
 }
 
 export interface Int32ItemDto {
@@ -660,7 +713,7 @@ export interface PermissionModel {
   name?: string | null;
 }
 
-export interface ProcessTournamentPaymentRequest {
+export interface ProcessTournamentPayoutRequest {
   /** @format uuid */
   leaderboardCycleId?: string;
 }
@@ -673,7 +726,7 @@ export interface RemoveOperatorUserRequest {
 }
 
 export interface RemovePermissionRequest {
-  /** 10000 = Role, 10100 = User, 20000 = Operator, 20100 = OperatorUser, 30000 = Agent, 40000 = Audit, 50000 = Source, 50100 = SourceGame, 60000 = Maintenance, 80000 = Tournament, 90000 = ApplicationConfiguration */
+  /** 10000 = Role, 10100 = User, 20000 = Operator, 20100 = OperatorUser, 30000 = Agent, 40000 = Audit, 50000 = Source, 50100 = SourceGame, 60000 = Maintenance, 80000 = Tournament, 90000 = ApplicationConfiguration, 100000 = TournamentPayout */
   module?: BoPermission;
   /** 1 = List, 2 = View, 3 = Create, 4 = Update, 5 = ChangeStatus, 6 = Remove, 7 = ViewRolePermission */
   action?: PermissionAction;
@@ -740,6 +793,67 @@ export interface TournamentCycleDto {
   startDate: string | null;
   endDate: string | null;
   payoutDate: string | null;
+}
+
+export interface TournamentCyclePayoutDetailDto {
+  /** @format uuid */
+  leaderboardCycleId?: string;
+  /** @format int32 */
+  leaderboardId?: number;
+  /** @format int32 */
+  tournamentId?: number;
+  tournamentName?: string | null;
+  operatorCode?: string | null;
+  agentCode?: string | null;
+  /** 0 = Cycle, 1 = OverAll, 2 = LuckyDraw */
+  payoutType?: PayoutType;
+  payoutTypeName?: string | null;
+  cycleStartDate?: string | null;
+  cycleEndDate?: string | null;
+  leaderboardName?: string | null;
+  /** 0 = ApprovalPending, 1 = Approved, 2 = Processing, 3 = PayoutFailed, 4 = PayoutCompleted */
+  payoutStatus?: PaymentStatus;
+  payoutStatusName?: string | null;
+  approvedAt?: string | null;
+  approvedBy?: string | null;
+  payoutAt?: string | null;
+  payoutCompletedAt?: string | null;
+  failMessage?: string | null;
+  results?: TournamentCyclePayoutResultModel[] | null;
+}
+
+export interface TournamentCyclePayoutListDto {
+  /** @format uuid */
+  leaderboardCycleId?: string;
+  /** @format int32 */
+  leaderboardId?: number;
+  /** @format int32 */
+  tournamentId?: number;
+  tournamentName?: string | null;
+  operatorCode?: string | null;
+  agentCode?: string | null;
+  /** 0 = Cycle, 1 = OverAll, 2 = LuckyDraw */
+  payoutType?: PayoutType;
+  payoutTypeName?: string | null;
+  cycleStartDate?: string | null;
+  cycleEndDate?: string | null;
+  leaderboardName?: string | null;
+  /** 0 = ApprovalPending, 1 = Approved, 2 = Processing, 3 = PayoutFailed, 4 = PayoutCompleted */
+  payoutStatus?: PaymentStatus;
+  payoutStatusName?: string | null;
+  updatedBy?: string | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+
+export interface TournamentCyclePayoutResultModel {
+  playerId?: string | null;
+  /** @format int32 */
+  rank?: number;
+  /** @format double */
+  score?: number;
+  /** @format double */
+  amount?: number;
 }
 
 export interface TournamentDetailDto {
