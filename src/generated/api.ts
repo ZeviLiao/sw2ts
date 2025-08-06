@@ -107,7 +107,7 @@ export enum BoPermission {
 }
 
 /**
- * 1 = Operator, 2 = OperatorUser, 3 = Agent, 4 = Role, 5 = User, 6 = SourceGame, 7 = Tournament, 8 = Maintenance
+ * 1 = Operator, 2 = OperatorUser, 3 = Agent, 4 = Role, 5 = User, 6 = SourceGame, 7 = Tournament, 8 = Maintenance, 9 = TournamentPayout
  * @format int32
  */
 export enum AuditModule {
@@ -119,6 +119,7 @@ export enum AuditModule {
   Value6 = 6,
   Value7 = 7,
   Value8 = 8,
+  Value9 = 9,
 }
 
 /**
@@ -818,6 +819,7 @@ export interface TournamentCyclePayoutDetailDto {
   approvedBy?: string | null;
   payoutAt?: string | null;
   payoutCompletedAt?: string | null;
+  payoutBy?: string | null;
   failMessage?: string | null;
   results?: TournamentCyclePayoutResultModel[] | null;
 }
