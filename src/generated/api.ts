@@ -174,7 +174,7 @@ export interface AppConfigModel {
 
 export interface ApproveTournamentPayoutRequest {
   /** @format uuid */
-  leaderboardCycleId?: string;
+  id?: string;
 }
 
 export interface AuditModel {
@@ -190,7 +190,7 @@ export interface AuditModel {
 
 export interface CancelTournamentPayoutRequest {
   /** @format uuid */
-  leaderboardCycleId?: string;
+  id?: string;
 }
 
 export interface ChangeSourceGameStatusRequest {
@@ -239,7 +239,7 @@ export interface CreateAppConfigRequest {
   key: string | null;
   /**
    * @minLength 0
-   * @maxLength 2048
+   * @maxLength 4096
    */
   value: string | null;
   /**
@@ -716,7 +716,7 @@ export interface PermissionModel {
 
 export interface ProcessTournamentPayoutRequest {
   /** @format uuid */
-  leaderboardCycleId?: string;
+  id?: string;
 }
 
 export interface RemoveOperatorUserRequest {
@@ -826,7 +826,9 @@ export interface TournamentCyclePayoutDetailDto {
 
 export interface TournamentCyclePayoutListDto {
   /** @format uuid */
-  leaderboardCycleId?: string;
+  id?: string;
+  /** @format uuid */
+  leaderboardCycleId?: string | null;
   /** @format int32 */
   leaderboardId?: number;
   /** @format int32 */
@@ -928,7 +930,7 @@ export interface UpdateAppConfigRequest {
   key: string | null;
   /**
    * @minLength 0
-   * @maxLength 2048
+   * @maxLength 4096
    */
   value: string | null;
   /**
