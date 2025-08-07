@@ -798,6 +798,8 @@ export interface TournamentCycleDto {
 
 export interface TournamentCyclePayoutDetailDto {
   /** @format uuid */
+  id?: string;
+  /** @format uuid */
   leaderboardCycleId?: string;
   /** @format int32 */
   leaderboardId?: number;
