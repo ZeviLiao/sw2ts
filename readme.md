@@ -11,7 +11,7 @@ npx tsx src/generate.mts
 npx tsx src/generate.mts https://api.example.com/swagger.json
 
 # 使用 npm script (推薦)
-npm run go
+npm run gen
 
 # 或直接執行
 npx tsx src/generate.mts https://gmft-int-bo-api.kmgamesdev.net/swagger/v1/swagger.json
